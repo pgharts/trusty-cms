@@ -17,3 +17,5 @@ rerun.txt
 radiant-*.gem
 .rvmrc
 .bundle
+.ruby-version
+.ruby-gemset
