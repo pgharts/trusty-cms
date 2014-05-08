@@ -11,7 +11,7 @@ source 'https://rubygems.org'
 
 gem "rails",   "2.3.18"
 gem "mysql"
-gemspec :development_group => :test
+gemspec
 
 # When radiant is installed as a gem you can run all of
 # its tests and specs from an instance. If you're working

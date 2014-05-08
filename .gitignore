@@ -19,3 +19,5 @@ radiant-*.gem
 .bundle
 .ruby-version
 .ruby-gemset
+*.rails2
+vendor/plugins/rails_upgrade
