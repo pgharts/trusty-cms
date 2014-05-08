@@ -1,4 +1,6 @@
-## Welcome to Radiant
+## Welcome to TrustyCMS
+
+Trusty is a branch of the venerable Radiant CMS. Its goal is to pull the Radiant framework into Rails 3 with minimal changes to its infrastructure. Everything below this is from the Radiant readme.
 
 Radiant is a no-fluff, open source content management system designed for
 small teams. It is similar to Textpattern or MovableType, but is a general
