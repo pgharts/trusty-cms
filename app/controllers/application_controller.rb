@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   
   def initialize
     super
-    @config = Radiant::Config
+    @config = TrustyCms::Config
   end
   
   # helpers to include additional assets from actions or views
@@ -67,11 +67,11 @@ class ApplicationController < ActionController::Base
     end  
         
     def set_user_locale      
-      I18n.locale = current_user && !current_user.locale.blank? ? current_user.locale : Radiant::Config['default_locale']
+      I18n.locale = current_user && !current_user.locale.blank? ? current_user.locale : TrustyCms::Config['default_locale']
     end
 
     def set_timezone
-      Time.zone = Radiant::Config['local.timezone'] || Time.zone_default
+      Time.zone = TrustyCms::Config['local.timezone'] || Time.zone_default
     end
   
     def set_javascripts_and_stylesheets
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
       @body_classes.concat(%w(reversed))
     end
     
-    # When using Radiant with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
+    # When using TrustyCms with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
     # That causes problems, especially when using special chars and with certain DBs, like DB2
     # That's why we force the encoding of the params to UTF-8
     # That's what's happening in Rails 3, too: https://github.com/rails/rails/commit/25215d7285db10e2c04d903f251b791342e4dd6a

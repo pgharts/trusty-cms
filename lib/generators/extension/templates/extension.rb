@@ -2,15 +2,15 @@
 # require_dependency "application_controller"
 require "radiant-<%= file_name %>-extension"
 
-class <%= class_name %> < Radiant::Extension
-  version     Radiant<%= class_name %>::VERSION
-  description Radiant<%= class_name %>::DESCRIPTION
-  url         Radiant<%= class_name %>::URL
+class <%= class_name %> < TrustyCms::Extension
+  version     TrustyCms<%= class_name %>::VERSION
+  description TrustyCms<%= class_name %>::DESCRIPTION
+  url         TrustyCms<%= class_name %>::URL
 
   # See your config/routes.rb file in this extension to define custom routes
 
   extension_config do |config|
-    # config is the Radiant.configuration object
+    # config is the TrustyCms.configuration object
   end
 
   def activate

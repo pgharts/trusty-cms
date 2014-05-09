@@ -1,14 +1,14 @@
 class SiteController < ApplicationController
-  include Radiant::Pagination::Controller
+  include TrustyCms::Pagination::Controller
 
   skip_before_filter :verify_authenticity_token
   no_login_required
 
   def self.cache_timeout=(val)
-    Radiant::PageResponseCacheDirector.cache_timeout=(val)
+    TrustyCms::PageResponseCacheDirector.cache_timeout=(val)
   end
   def self.cache_timeout
-    Radiant::PageResponseCacheDirector.cache_timeout
+    TrustyCms::PageResponseCacheDirector.cache_timeout
   end
 
   def show_page
@@ -65,11 +65,11 @@ class SiteController < ApplicationController
     end
 
     def response_cache_director(page)
-      klass_name = "Radiant::#{page.class}ResponseCacheDirector"
+      klass_name = "TrustyCms::#{page.class}ResponseCacheDirector"
       begin
         klass = klass_name.constantize
       rescue NameError, LoadError
-        director_klass = "Radiant::PageResponseCacheDirector"
+        director_klass = "TrustyCms::PageResponseCacheDirector"
         eval(%Q{class #{klass_name} < #{director_klass}; end}, TOPLEVEL_BINDING)
         klass = director_klass.constantize
       end

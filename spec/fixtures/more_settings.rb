@@ -1,4 +1,4 @@
-Radiant.config do |config|
+TrustyCms.config do |config|
   config.namespace('testing', :allow_change => true) do |testing|
     testing.define 'defaulted', :label => 'Has a default', :default => "this default string"
     testing.define 'protected', :label => 'Cannot change', :default => "something", :allow_change => false

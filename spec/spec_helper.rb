@@ -37,7 +37,7 @@ unless defined? SPEC_ROOT
   class ActiveSupport::TestCase
     include Dataset
     datasets_directory "#{RADIANT_ROOT}/spec/datasets"
-    Dataset::ContextClassMethods.datasets_database_dump_path = File.expand_path(RAILS_ROOT + '/tmp/dataset')
+    Dataset::ContextClassMethods.datasets_database_dump_path = File.expand_path(Rails.root + '/tmp/dataset')
 
     class << self
       # Class method for test helpers
@@ -70,7 +70,7 @@ unless defined? SPEC_ROOT
     module Application
       module ExampleExtensions
         def rails_log
-          log = IO.read(RAILS_ROOT + '/log/test.log')
+          log = IO.read(Rails.root + '/log/test.log')
           log.should_not be_nil
           log
         end
@@ -83,6 +83,6 @@ unless defined? SPEC_ROOT
 
     config.use_transactional_fixtures = true
     config.use_instantiated_fixtures  = false
-    config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+    config.fixture_path = Rails.root + '/spec/fixtures/'
   end
 end

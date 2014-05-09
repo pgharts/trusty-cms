@@ -270,7 +270,7 @@ en:
       *Usage:*
       
       <pre><code><r:if_content [part=\"part_name, other_part\"] [inherit=\"true\"] [find=\"any\"]>...</r:if_content></code></pre>"
-    if_dev: "Renders the containing elements only if Radiant in is development mode.
+    if_dev: "Renders the containing elements only if TrustyCms in is development mode.
 
       *Usage:*
 

@@ -97,7 +97,7 @@ describe 'Login System:', :type => :controller do
     describe ".login_from_cookie" do
       before do
         Time.zone = 'UTC'
-        Radiant::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
+        TrustyCms::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
       end
 
       it "should not login user if no cookie found" do

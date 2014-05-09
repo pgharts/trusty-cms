@@ -1,4 +1,4 @@
-class LocaleExtension < Radiant::Extension
+class LocaleExtension < TrustyCms::Extension
   def activate
     
   end

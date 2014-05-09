@@ -13,7 +13,7 @@ require "#{RADIANT_ROOT}/spec/spec_helper"
 
 Dataset::Resolver.default << (File.dirname(__FILE__) + "/datasets")
 # Include any datasets from loaded extensions
-Radiant::Extension.descendants.each do |extension|
+TrustyCms::Extension.descendants.each do |extension|
   if File.directory?(extension.root + "/spec/datasets")
     Dataset::Resolver.default << (extension.root + "/spec/datasets")
   end
@@ -26,7 +26,7 @@ end
 Spec::Runner.configure do |config|
   # config.use_transactional_fixtures = true
   # config.use_instantiated_fixtures  = false
-  # config.fixture_path = RAILS_ROOT + '/spec/fixtures'
+  # config.fixture_path = Rails.root + '/spec/fixtures'
 
   # You can declare fixtures for each behaviour like this:
   #   describe "...." do

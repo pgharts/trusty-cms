@@ -10,7 +10,7 @@ begin
   require 'spec/rake/spectask'
   require 'cucumber/rake/task'
 
-  spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db:test:prepare" : :noop
+  spec_prereq = File.exist?(File.join(Rails.root, 'config', 'database.yml')) ? "db:test:prepare" : :noop
   task :noop do
   end
 
@@ -148,7 +148,7 @@ begin
     end
 
     namespace :server do
-      daemonized_server_pid = File.expand_path("spec_server.pid", RAILS_ROOT + "/tmp")
+      daemonized_server_pid = File.expand_path("spec_server.pid", Rails.root + "/tmp")
 
       desc "start spec_server."
       task :start do

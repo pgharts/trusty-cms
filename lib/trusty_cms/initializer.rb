@@ -2,25 +2,25 @@ require 'initializer'
 require 'radiant/admin_ui'
 require 'radiant/extension_loader'
 
-module Radiant
+module TrustyCms
   autoload :Cache, 'radiant/cache'
   
   class << self
-    # Returns the Radiant::Config eigenclass object, so it can be used wherever you would use Radiant::Config.
+    # Returns the TrustyCms::Config eigenclass object, so it can be used wherever you would use TrustyCms::Config.
     #
-    #   Radiant.config['site.title']
-    #   Radiant.config['site.url'] = 'example.com'
+    #   TrustyCms.config['site.title']
+    #   TrustyCms.config['site.url'] = 'example.com'
     #
     # but it will also yield itself to a block:
     #
-    #   Radiant.config do |config|
+    #   TrustyCms.config do |config|
     #     config.define 'something', default => 'something'
     #     config['other.thing'] = 'nothing'
     #   end
     #    
     def config  # method must be defined before any initializers run
-      yield Radiant::Config if block_given?
-      Radiant::Config
+      yield TrustyCms::Config if block_given?
+      TrustyCms::Config
     end
     
     # Returns the configuration object with which this application was initialized.
@@ -39,13 +39,13 @@ module Radiant
     end
   end
   
-  # NB. Radiant::Configuration (aka Radiant.configuration) is our extension-aware subclass of Rails::Configuration 
-  #     Radiant::Config (aka Radiant.config) is the application-configuration model class.
+  # NB. TrustyCms::Configuration (aka TrustyCms.configuration) is our extension-aware subclass of Rails::Configuration
+  #     TrustyCms::Config (aka TrustyCms.config) is the application-configuration model class.
 
   class Configuration < Rails::Configuration
     
-    # The Radiant::Configuration class extends Rails::Configuration with three purposes:
-    # * to reset some rails defaults so that files are found in RADIANT_ROOT instead of RAILS_ROOT
+    # The TrustyCms::Configuration class extends Rails::Configuration with three purposes:
+    # * to reset some rails defaults so that files are found in RADIANT_ROOT instead of Rails.root
     # * to notice that some gems and plugins are in fact radiant extensions 
     # * to notice that some radiant extensions add load paths (for plugins, controllers, metal, etc)
     
@@ -59,15 +59,15 @@ module Radiant
 
     # Sets the locations in which we look for vendored extensions. Normally:
     #   Rails.root/vendor/extensions
-    #   Radiant.root/vendor/extensions        
+    #   TrustyCms.root/vendor/extensions
     # There are no vendor/* directories in +RADIANT_ROOT+ any more but the possibility remains for compatibility reasons.
     # In test mode we also add a fixtures path for testing the extension loader.
     #
     def default_extension_paths
       env = ENV["RAILS_ENV"] || RAILS_ENV
       paths = [Rails.root + 'vendor/extensions']
-      paths.unshift(Radiant.root + "vendor/extensions") unless Rails.root == Radiant.root
-      paths.unshift(Radiant.root + "test/fixtures/extensions") if env =~ /test|cucumber/
+      paths.unshift(TrustyCms.root + "vendor/extensions") unless Rails.root == TrustyCms.root
+      paths.unshift(TrustyCms.root + "test/fixtures/extensions") if env =~ /test|cucumber/
       paths
     end
     
@@ -75,7 +75,7 @@ module Radiant
     # configuration directives. These are the extensions that will actually be loaded or migrated, 
     # and for most purposes this is the list you want to refer to.
     # 
-    #   Radiant.configuration.enabled_extensions  # => [:name, :name, :name, :name]
+    #   TrustyCms.configuration.enabled_extensions  # => [:name, :name, :name, :name]
     #
     # Note that an extension enabled is not the same as an extension activated or even loaded: it just means
     # that the application is configured to load that extension.
@@ -88,7 +88,7 @@ module Radiant
     # (it is here that the :all entry is expanded to mean 'everything else'), or will default to an alphabetical list
     # of every extension found among gems and vendor/extensions directories.
     #
-    #   Radiant.configuration.expanded_extension_list  # => [:name, :name, :name, :name]
+    #   TrustyCms.configuration.expanded_extension_list  # => [:name, :name, :name, :name]
     #
     # If an extension in the configurted list is not found, a LoadError will be thrown from here.
     #
@@ -112,7 +112,7 @@ module Radiant
     # Without such a call, we default to the alphabetical list of all well-formed vendor and gem extensions 
     # returned by +available_extensions+.
     # 
-    #   Radiant.configuration.extensions  # => [:name, :all, :name]
+    #   TrustyCms.configuration.extensions  # => [:name, :all, :name]
     #
     def extensions
       @requested_extensions ||= available_extensions
@@ -133,7 +133,7 @@ module Radiant
     # This is a configurable list of extension that should not be loaded.
     #   config.ignore_extensions = [:experimental, :broken]
     # You can also retrieve the list with +ignored_extensions+:
-    #   Radiant.configuration.ignored_extensions  # => [:experimental, :broken]
+    #   TrustyCms.configuration.ignored_extensions  # => [:experimental, :broken]
     # These exclusions are applied regardless of dependencies and extension locations. A configuration that bundles
     # required extensions then ignores them will not boot and is likely to fail with errors about unitialized constants.
     #
@@ -144,7 +144,7 @@ module Radiant
     # Returns an alphabetical list of every extension found among all the load paths and bundled gems. Any plugin or 
     # gem whose path ends in the form +radiant-something-extension+ is considered to be an extension.
     #
-    #   Radiant.configuration.available_extensions  # => [:name, :name, :name, :name]
+    #   TrustyCms.configuration.available_extensions  # => [:name, :name, :name, :name]
     #
     # This method is always called during initialization, either as a default or to check that specified extensions are
     # available. One of its side effects is to populate the ExtensionLoader's list of extension root locations, later 
@@ -156,7 +156,7 @@ module Radiant
     
     # Searches the defined extension_paths for subdirectories and returns a list of names as symbols.
     #
-    #   Radiant.configuration.vendored_extensions  # => [:name, :name]
+    #   TrustyCms.configuration.vendored_extensions  # => [:name, :name]
     #
     def vendored_extensions
       extension_paths.each_with_object([]) do |load_path, found|
@@ -172,7 +172,7 @@ module Radiant
     # Scans the bundled gems for any whose name match the +radiant-something-extension+ format
     # and returns a list of their names as symbols.
     #
-    #   Radiant.configuration.gem_extensions  # => [:name, :name]
+    #   TrustyCms.configuration.gem_extensions  # => [:name, :name]
     #
     def gem_extensions
       Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), found|
@@ -212,7 +212,7 @@ module Radiant
   private
 
     # Overrides the Rails::Initializer default so that autoload paths for models, controllers etc point to 
-    # directories in RADIANT_ROOT rather than in RAILS_ROOT.
+    # directories in RADIANT_ROOT rather than in Rails.root.
     #
     def default_autoload_paths
       paths = ["#{RADIANT_ROOT}/test/mocks/#{environment}"]
@@ -235,19 +235,19 @@ module Radiant
       paths.concat builtin_directories
     end
 
-    # Overrides the Rails::Initializer default to add plugin paths in RADIANT_ROOT as well as RAILS_ROOT.
+    # Overrides the Rails::Initializer default to add plugin paths in RADIANT_ROOT as well as Rails.root.
     #
     def default_plugin_paths
       super + ["#{RADIANT_ROOT}/lib/plugins", "#{RADIANT_ROOT}/vendor/plugins"]
     end
     
-    # Overrides the Rails::Initializer default to look for views in RADIANT_ROOT rather than RAILS_ROOT.
+    # Overrides the Rails::Initializer default to look for views in RADIANT_ROOT rather than Rails.root.
     #
     def default_view_path
       File.join(RADIANT_ROOT, 'app', 'views')
     end
 
-    # Overrides the Rails::Initializer default to look for controllers in RADIANT_ROOT rather than RAILS_ROOT.
+    # Overrides the Rails::Initializer default to look for controllers in RADIANT_ROOT rather than Rails.root.
     #
     def default_controller_paths
       [File.join(RADIANT_ROOT, 'app', 'controllers')]
@@ -271,7 +271,7 @@ module Radiant
     # that extensions are not sufficient.
     #
     def deployed_as_app?
-      RADIANT_ROOT == RAILS_ROOT
+      RADIANT_ROOT == Rails.root
     end
     
     # Extends the Rails::Initializer default to add extension paths to the autoload list.
@@ -332,7 +332,7 @@ module Radiant
     
     # Extends the Rails initializer to run initializers from radiant and from extensions. The load order will be:
     # 1. RADIANT_ROOT/config/intializers/*.rb
-    # 2. RAILS_ROOT/config/intializers/*.rb
+    # 2. Rails.root/config/intializers/*.rb
     # 3. config/initializers/*.rb found in extensions, in extension load order.
     #
     # In the now rare case where radiant is deployed as an ordinary rails application, step 1 is skipped 
@@ -405,7 +405,7 @@ module Radiant
       super
     end
 
-    # Returns the Radiant::AdminUI singleton so that the initializer can set up the admin interface.
+    # Returns the TrustyCms::AdminUI singleton so that the initializer can set up the admin interface.
     #
     def admin
       configuration.admin

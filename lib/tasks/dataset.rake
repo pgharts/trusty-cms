@@ -8,8 +8,8 @@ namespace :db do
       context = Class.new do
         extend Dataset::ContextClassMethods
         datasets_directory [
-          "#{RAILS_ROOT}/spec/datasets",
-          "#{RAILS_ROOT}/test/datasets"
+          "#{Rails.root}/spec/datasets",
+          "#{Rails.root}/test/datasets"
         ].detect {|path| File.directory?(path)}
         add_dataset *dataset_names
         dataset_session.load_datasets_for self

@@ -1,2 +1,2 @@
-class UpgradingExtension < Radiant::Extension
+class UpgradingExtension < TrustyCms::Extension
 end

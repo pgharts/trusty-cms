@@ -1,4 +1,4 @@
-class OverridingExtension < Radiant::Extension
+class OverridingExtension < TrustyCms::Extension
   version "1.2"
   description "overrides a view from basic extension"
   url "http://test.com"

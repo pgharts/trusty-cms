@@ -49,7 +49,7 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
     end
   end
 
-  # Set RAILS_ROOT appropriately fixture generation
+  # Set Rails.root appropriately fixture generation
   tmp_dir = File.expand_path(File.join(Dir.tmpdir, 'radiant'))
   $stdout << "#{tmp_dir}\n\n"
   FileUtils.mkdir_p tmp_dir
@@ -60,10 +60,10 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
     RADIANT_ROOT = tmp_dir.dup
   end
 
-  if defined? RAILS_ROOT
-    RAILS_ROOT.replace tmp_dir.dup
+  if defined? Rails.root
+    Rails.root.replace tmp_dir.dup
   else
-    RAILS_ROOT = tmp_dir.dup
+    Rails.root = tmp_dir.dup
   end
 
   require 'initializer'

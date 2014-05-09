@@ -14,7 +14,7 @@ class PagePart < ActiveRecord::Base
   object_id_attr :filter, TextFilter
 
   def after_initialize
-    self.filter_id ||= Radiant::Config['defaults.page.filter'] if new_record?
+    self.filter_id ||= TrustyCms::Config['defaults.page.filter'] if new_record?
   end
 
 end

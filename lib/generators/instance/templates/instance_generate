@@ -2,5 +2,5 @@
 require File.expand_path('../../config/boot',  __FILE__)
 require 'generators/generator_base_extension'
 
-Rails::Generator::Base.prepend_sources(Rails::Generator::PathSource.new(:builtin, "#{Radiant.root}/lib/generators"))
+Rails::Generator::Base.prepend_sources(Rails::Generator::PathSource.new(:builtin, "#{TrustyCms.root}/lib/generators"))
 require 'commands/generate'

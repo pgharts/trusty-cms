@@ -1,2 +1,2 @@
-class UnroutedExtension < Radiant::Extension
+class UnroutedExtension < TrustyCms::Extension
 end

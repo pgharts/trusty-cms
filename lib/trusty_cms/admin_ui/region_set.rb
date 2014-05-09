@@ -1,4 +1,4 @@
-class Radiant::AdminUI::RegionSet
+class TrustyCms::AdminUI::RegionSet
 
   def initialize
     @regions = Hash.new do |h,k|

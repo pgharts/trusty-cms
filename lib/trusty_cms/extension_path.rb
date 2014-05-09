@@ -1,4 +1,4 @@
-module Radiant
+module TrustyCms
   class ExtensionPath
     # This class holds information about extensions that may be loaded. It has two roles: to remember the 
     # location of the extension so that we don't have to search for it again, and to look within that path
@@ -165,7 +165,7 @@ module Radiant
       # are being passed around as symbols.
       #
       def enabled
-        enabled_extensions = Radiant.configuration.enabled_extensions
+        enabled_extensions = TrustyCms.configuration.enabled_extensions
         @@known_paths.values_at(*enabled_extensions).compact
       end
       

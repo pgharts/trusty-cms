@@ -9,7 +9,7 @@ Signal.trap("INT") { puts; exit }
 
 require 'radiant'
 if ARGV.any? { |arg| %w(--version -v).any? { |flag| arg == flag } }
-  puts "Radiant #{Radiant::Version}"
+  puts "TrustyCms #{TrustyCms::Version}"
   exit 0
 end
 
@@ -27,8 +27,8 @@ class Rails::Generator::Base
 
   def add_general_options!(opt)
     opt.separator ''
-    opt.separator 'Radiant Info:'
-    opt.on('-v', '--version', 'Show the Radiant version number and quit.')
+    opt.separator 'TrustyCms Info:'
+    opt.on('-v', '--version', 'Show the TrustyCms version number and quit.')
     opt.on('-h', '--help', 'Show this help message and quit.') { |v| options[:help] = v }
 
     opt.separator ''

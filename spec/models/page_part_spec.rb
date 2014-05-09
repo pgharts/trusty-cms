@@ -6,16 +6,16 @@ describe PagePart do
   test_helper :validations
   
   before do
-    @original_filter = Radiant::Config['defaults.page.filter']
+    @original_filter = TrustyCms::Config['defaults.page.filter']
     @part = @model = PagePart.new(page_part_params)
   end
 
   after do
-    Radiant::Config['defaults.page.filter'] = @original_filter
+    TrustyCms::Config['defaults.page.filter'] = @original_filter
   end
   
   it "should take the filter from the default filter" do
-    Radiant::Config['defaults.page.filter'] = "Pseudo Textile"
+    TrustyCms::Config['defaults.page.filter'] = "Pseudo Textile"
     part = PagePart.new :name => 'new-part'
     part.filter_id.should == "Pseudo Textile"
   end
@@ -23,7 +23,7 @@ describe PagePart do
   it "shouldn't override existing page_parts filters with the default filter" do
     part = PagePart.find(:first, :conditions => {:filter_id => nil})
     selected_filter_name = TextFilter.descendants.first.filter_name
-    Radiant::Config['defaults.page.filter'] = selected_filter_name
+    TrustyCms::Config['defaults.page.filter'] = selected_filter_name
     part.reload
     part.filter_id.should_not == selected_filter_name
   end

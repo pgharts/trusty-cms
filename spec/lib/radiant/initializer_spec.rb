@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::Configuration do
+describe TrustyCms::Configuration do
   before :each do
-    @configuration = Radiant::Configuration.new
+    @configuration = TrustyCms::Configuration.new
   end
   
   it "should be a Rails configuration" do
@@ -19,7 +19,7 @@ describe Radiant::Configuration do
   it "should initialize the extension paths" do
     @configuration.extension_paths.should_not be_nil
     @configuration.extension_paths.should be_kind_of(Array)
-    @configuration.extension_paths.should include(Radiant.root + "vendor/extensions") 
+    @configuration.extension_paths.should include(TrustyCms.root + "vendor/extensions")
   end
   
   it "should initialize the extensions" do
@@ -48,7 +48,7 @@ describe Radiant::Configuration do
   end  
   
   it "should have access to the AdminUI" do
-    @configuration.admin.should == Radiant::AdminUI.instance
+    @configuration.admin.should == TrustyCms::AdminUI.instance
   end
 
   it "should deprecate the declaration of extension dependencies" do
@@ -94,11 +94,11 @@ describe Radiant::Configuration do
   end
 end
 
-describe Radiant::Initializer do
+describe TrustyCms::Initializer do
 
   before :each do
-    @initializer = Radiant::Initializer.new(Radiant::Configuration.new)
-    @loader = Radiant::ExtensionLoader.instance
+    @initializer = TrustyCms::Initializer.new(TrustyCms::Configuration.new)
+    @loader = TrustyCms::ExtensionLoader.instance
   end
   
   it "should be a Rails initializer" do
@@ -132,12 +132,12 @@ describe Radiant::Initializer do
   end
   
   it "should initialize admin tabs" do
-    Radiant::AdminUI.instance.should_receive(:load_default_nav)
+    TrustyCms::AdminUI.instance.should_receive(:load_default_nav)
     @initializer.initialize_default_admin_tabs
   end
   
   it "should have access to the AdminUI" do
-    @initializer.admin.should == Radiant::AdminUI.instance
+    @initializer.admin.should == TrustyCms::AdminUI.instance
   end
 
   it "should load metal from RADIANT_ROOT and exensions" do

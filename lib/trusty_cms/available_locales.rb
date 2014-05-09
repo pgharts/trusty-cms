@@ -1,10 +1,10 @@
-module Radiant::AvailableLocales
+module TrustyCms::AvailableLocales
   
   # Returns the list of available locale files in options_for_select format.
   #
   def self.locales
     available_locales = {}
-    Radiant.configuration.i18n.load_path.each do |path|
+    TrustyCms.configuration.i18n.load_path.each do |path|
       if File.exists?(path) && path !~ /_available_tags/
         locale_yaml = YAML.load_file(path)
         stem = File.basename(path, '.yml')

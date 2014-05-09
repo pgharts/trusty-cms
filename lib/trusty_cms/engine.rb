@@ -1,6 +1,6 @@
-module Radiant
+module TrustyCms
   class Engine < Rails::Engine
-    isolate_namespace Radiant
+    isolate_namespace TrustyCms
 
     config.generators do |g|
       g.test_framework :rspec

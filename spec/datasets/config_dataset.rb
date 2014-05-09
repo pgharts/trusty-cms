@@ -1,14 +1,14 @@
 class ConfigDataset < Dataset::Base
   def load
-    # Simulates the defaults on bootstrapped Radiant instances
-    Radiant::Config['admin.title'] = 'Radiant CMS' 
-    Radiant::Config['admin.subtitle'] = 'Publishing for Small Teams'
-    Radiant::Config['defaults.page.parts'] = 'body, extended'
-    Radiant::Config['defaults.page.status'] = 'Draft'
-    Radiant::Config['defaults.page.filter'] = nil
-    Radiant::Config['defaults.page.fields'] = 'Keywords, Description'
-    Radiant::Config['defaults.snippet.filter'] = nil
-    Radiant::Config['session_timeout'] = 2.weeks
-    Radiant::Config['default_locale'] = 'en'
+    # Simulates the defaults on bootstrapped TrustyCms instances
+    TrustyCms::Config['admin.title'] = 'TrustyCms CMS'
+    TrustyCms::Config['admin.subtitle'] = 'Publishing for Small Teams'
+    TrustyCms::Config['defaults.page.parts'] = 'body, extended'
+    TrustyCms::Config['defaults.page.status'] = 'Draft'
+    TrustyCms::Config['defaults.page.filter'] = nil
+    TrustyCms::Config['defaults.page.fields'] = 'Keywords, Description'
+    TrustyCms::Config['defaults.snippet.filter'] = nil
+    TrustyCms::Config['session_timeout'] = 2.weeks
+    TrustyCms::Config['default_locale'] = 'en'
   end
 end

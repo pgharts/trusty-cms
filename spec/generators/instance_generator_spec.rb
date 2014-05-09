@@ -93,13 +93,13 @@ end
 describe "IntanceGenerator" do
   include FileUtils
   include GeneratorSpecHelperMethods
-  Rails::Generator::Base.prepend_sources(Rails::Generator::PathSource.new(:radiant, File.join(BASE_ROOT, 'lib', 'generators')))
+  Rails::Generator::Base.prepend_sources(Rails::Generator::PathSource.new(:trusty_cms, File.join(BASE_ROOT, 'lib', 'generators')))
 
   describe('with no options') do
     it_should_behave_like "all instance generators"
 
     before(:all) do
-      @generator_output = with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', [RAILS_ROOT]) } }
+      @generator_output = with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', [Rails.root]) } }
     end
 
     after(:all) do
@@ -117,7 +117,7 @@ describe "IntanceGenerator" do
       it_should_behave_like "all instance generators"
 
       before(:all) do
-        with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', ['-d', db, RAILS_ROOT]) } }
+        with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', ['-d', db, Rails.root]) } }
       end
 
       it "should generate database.yml with adapter #{adapter} for #{db}" do
@@ -137,7 +137,7 @@ describe "IntanceGenerator" do
 
     before(:all) do
       @shebang = '/my/path/to/ruby'
-      with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', ['-r', @shebang, RAILS_ROOT]) } }
+      with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', ['-r', @shebang, Rails.root]) } }
       @files = Dir.glob("#{RADIANT_ROOT}/script/**/*") + Dir.glob("#{RADIANT_ROOT}/public/dispatch*")
       @files.collect! {|i| [i, i.gsub(/\A#{Regexp.escape(RADIANT_ROOT)}\//, '')] }
     end

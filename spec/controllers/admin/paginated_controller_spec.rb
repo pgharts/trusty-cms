@@ -11,7 +11,7 @@ describe Admin::UsersController do
   # 
   # describe "with pagination settings from paginate_models" do
   #   it "should override defaults" do
-  #     Radiant.config['admin.pagination.per_page'] = ""
+  #     TrustyCms.config['admin.pagination.per_page'] = ""
   #     Admin::UsersController.send :paginate_models, {:per_page => 5, :inner_window => 12}
   #     controller.pagination_parameters.should == {:page => 1, :per_page => 5}
   #     controller.will_paginate_options.should == {:inner_window => 12, :param_name => :p}
@@ -20,14 +20,14 @@ describe Admin::UsersController do
   # 
   # describe "with configured pagination settings" do
   #   it "should override defaults" do
-  #     Radiant.config['admin.pagination.per_page'] = 23
+  #     TrustyCms.config['admin.pagination.per_page'] = 23
   #     controller.pagination_parameters.should == {:page => 1, :per_page => 23}
   #   end
   # end
   # 
   describe "without configuration" do
     it "should have pagination defaults" do
-      Radiant.config['admin.pagination.per_page'] = nil
+      TrustyCms.config['admin.pagination.per_page'] = nil
       controller.pagination_parameters.should == {:page => 1, :per_page => 50}
       controller.will_paginate_options.should == {:param_name => :p}
     end

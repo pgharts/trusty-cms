@@ -1,4 +1,4 @@
-module Radiant
+module TrustyCms
 
   class << self
     def config_definitions
@@ -12,16 +12,16 @@ module Radiant
 
   class Config < ActiveRecord::Base
     #
-    # The Radiant.config model class is stored in the database (and cached) but emulates a hash 
+    # The TrustyCms.config model class is stored in the database (and cached) but emulates a hash
     # with simple bracket methods that allow you to get and set values like so:
     #
-    #   Radiant.config['setting.name'] = 'value'
-    #   Radiant.config['setting.name'] #=> "value"
+    #   TrustyCms.config['setting.name'] = 'value'
+    #   TrustyCms.config['setting.name'] #=> "value"
     #
     # Config entries can be used freely as general-purpose global variables unless a definition
     # has been given for that key, in which case restrictions and defaults may apply. The restrictions  
     # can take the form of validations, requirements, permissions or permitted options. They are 
-    # declared by calling Radiant::Config#define:
+    # declared by calling TrustyCms::Config#define:
     # 
     #   # setting must be either 'foo', 'bar' or 'blank'
     #   define('admin.name', :select_from => ['foo', 'bar'])
@@ -34,14 +34,14 @@ module Radiant
     #
     # Which almost always happens in a block like this:
     #
-    #   Radiant.config do |config|
+    #   TrustyCms.config do |config|
     #     config.namespace('user', :allow_change => true) do |user|
     #       user.define 'allow_password_reset?', :default => true
     #     end
     #   end
     #
     # and usually in a config/radiant_config.rb file either in radiant itself, in the application directory
-    # or in an extension. Radiant currently defines the following settings and makes them editable by 
+    # or in an extension. TrustyCms currently defines the following settings and makes them editable by
     # admin users on the site configuration page:
     #
     # admin.title               :: the title of the admin system
@@ -76,12 +76,12 @@ module Radiant
     class << self
       def [](key)
         if table_exists?
-          unless Radiant::Config.cache_file_exists?
-            Radiant::Config.ensure_cache_file
-            Radiant::Config.initialize_cache
+          unless TrustyCms::Config.cache_file_exists?
+            TrustyCms::Config.ensure_cache_file
+            TrustyCms::Config.initialize_cache
           end
-          Radiant::Config.initialize_cache if Radiant::Config.stale_cache?
-          Rails.cache.read('Radiant::Config')[key]
+          TrustyCms::Config.initialize_cache if TrustyCms::Config.stale_cache?
+          Rails.cache.read('TrustyCms::Config')[key]
         end
       end
 
@@ -97,9 +97,9 @@ module Radiant
       end
       
       def initialize_cache
-        Radiant::Config.ensure_cache_file
-        Rails.cache.write('Radiant::Config',Radiant::Config.to_hash)
-        Rails.cache.write('Radiant.cache_mtime', File.mtime(cache_file))
+        TrustyCms::Config.ensure_cache_file
+        Rails.cache.write('TrustyCms::Config',TrustyCms::Config.to_hash)
+        Rails.cache.write('TrustyCms.cache_mtime', File.mtime(cache_file))
         Rails.cache.silence!
       end
       
@@ -108,8 +108,8 @@ module Radiant
       end
       
       def stale_cache?
-        return true unless Radiant::Config.cache_file_exists?
-        Rails.cache.read('Radiant.cache_mtime') != File.mtime(cache_file)
+        return true unless TrustyCms::Config.cache_file_exists?
+        Rails.cache.read('TrustyCms.cache_mtime') != File.mtime(cache_file)
       end
       
       def ensure_cache_file
@@ -139,7 +139,7 @@ module Radiant
       
       # A convenient drying method for specifying a prefix and options common to several settings.
       # 
-      #   Radiant.config do |config| 
+      #   TrustyCms.config do |config|
       #     config.namespace('secret', :allow_display => false) do |secret|
       #       secret.define('identity', :default => 'batman')      # defines 'secret.identity'
       #       secret.define('lair', :default => 'batcave')         # defines 'secret.lair'
@@ -167,15 +167,15 @@ module Radiant
       #
       # From the main radiant config/initializers/radiant_config.rb:
       #
-      #   Radiant.config do |config|
-      #     config.define 'defaults.locale', :select_from => lambda { Radiant::AvailableLocales.locales }, :allow_blank => true
+      #   TrustyCms.config do |config|
+      #     config.define 'defaults.locale', :select_from => lambda { TrustyCms::AvailableLocales.locales }, :allow_blank => true
       #     config.define 'defaults.page.parts', :default => "Body,Extended"
       #     ...
       #   end
       #
       # It's also possible to reuse a definition by passing it to define:
       #
-      #   choose_layout = Radiant::Config::Definition.new(:select_from => lambda {Layout.all.map{|l| [l.name, l.d]}})
+      #   choose_layout = TrustyCms::Config::Definition.new(:select_from => lambda {Layout.all.map{|l| [l.name, l.d]}})
       #   define "my.layout", choose_layout
       #   define "your.layout", choose_layout
       #
@@ -183,7 +183,7 @@ module Radiant
       #
       def define(key, options={})
         called_from = caller.grep(/\/initializers\//).first
-        if options.is_a? Radiant::Config::Definition
+        if options.is_a? TrustyCms::Config::Definition
           definition = options
         else
           key = [options[:prefix], key].join('.') if options[:prefix]
@@ -195,7 +195,7 @@ Config definition error: '#{key}' is defined twice:
 2. #{definitions[key].definer}
         } unless definitions[key].nil? || definitions[key].empty?
 
-        definition ||= Radiant::Config::Definition.new(options.merge(:definer => called_from))
+        definition ||= TrustyCms::Config::Definition.new(options.merge(:definer => called_from))
         definitions[key] = definition
 
         if self[key].nil? && !definition.default.nil?
@@ -208,26 +208,26 @@ Config definition error: '#{key}' is defined twice:
       end
       
       def definitions
-        Radiant.config_definitions
+        TrustyCms.config_definitions
       end
       
       def definition_for(key)
-        definitions[key] ||= Radiant::Config::Definition.new(:empty => true)
+        definitions[key] ||= TrustyCms::Config::Definition.new(:empty => true)
       end
       
       def clear_definitions!
-        Radiant.config_definitions = {}
+        TrustyCms.config_definitions = {}
       end
       
     end
     
     # The usual way to use a config item:
     #
-    #    Radiant.config['key'] = value
+    #    TrustyCms.config['key'] = value
     #
     # is equivalent to this:
     #
-    #   Radiant::Config.find_or_create_by_key('key').value = value
+    #   TrustyCms::Config.find_or_create_by_key('key').value = value
     #
     # Calling value= also applies any validations and restrictions that are found in the associated definition.
     # so this will raise a ConfigError if you try to change a protected config entry or a RecordInvalid if you 
@@ -249,11 +249,11 @@ Config definition error: '#{key}' is defined twice:
 
     # Requesting a config item:
     #
-    #    key = Radiant.config['key']
+    #    key = TrustyCms.config['key']
     #
     # is equivalent to this:
     #
-    #   key = Radiant::Config.find_or_create_by_key('key').value
+    #   key = TrustyCms::Config.find_or_create_by_key('key').value
     #
     # If the config item is boolean the response will be true or false. For items with :type => :integer it will be an integer, 
     # for everything else a string.
@@ -299,7 +299,7 @@ Config definition error: '#{key}' is defined twice:
     end
     
     def update_cache
-      Radiant::Config.initialize_cache
+      TrustyCms::Config.initialize_cache
     end
 
     delegate :default, :type, :allow_blank?, :hidden?, :visible?, :settable?, :selection, :notes, :units, :to => :definition

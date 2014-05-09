@@ -1,4 +1,4 @@
-namespace :radiant do
+namespace :trusty_cms do
   namespace :extensions do
     namespace :example do
       
@@ -19,8 +19,8 @@ namespace :radiant do
         Dir[ExampleExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
           path = file.sub(ExampleExtension.root, '')
           directory = File.dirname(path)
-          mkdir_p RAILS_ROOT + directory
-          cp file, RAILS_ROOT + path
+          mkdir_p Rails.root + directory
+          cp file, Rails.root + path
         end
       end  
     end

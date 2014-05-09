@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe "Radiant::ResourceResponses" do
+describe "TrustyCms::ResourceResponses" do
   before :each do
     @klass = Class.new(ApplicationController)
-    @klass.extend Radiant::ResourceResponses
+    @klass.extend TrustyCms::ResourceResponses
   end
   
   describe "extending the controller" do
@@ -12,11 +12,11 @@ describe "Radiant::ResourceResponses" do
     end
     
     it "should return a response collector" do
-      @klass.responses.should be_kind_of(Radiant::ResourceResponses::Collector)
+      @klass.responses.should be_kind_of(TrustyCms::ResourceResponses::Collector)
     end
     
     it "should yield the collector to the passed block" do
-      @klass.responses {|r| r.should be_kind_of(Radiant::ResourceResponses::Collector) }
+      @klass.responses {|r| r.should be_kind_of(TrustyCms::ResourceResponses::Collector) }
     end
     
     it "should add a response_for instance method" do
@@ -98,13 +98,13 @@ describe "Radiant::ResourceResponses" do
   end
 end
 
-describe Radiant::ResourceResponses::Collector do
+describe TrustyCms::ResourceResponses::Collector do
   before :each do
-    @collector = Radiant::ResourceResponses::Collector.new
+    @collector = TrustyCms::ResourceResponses::Collector.new
   end
   
   it "should provide a Response object as the default property" do
-    @collector.plural.should be_kind_of(Radiant::ResourceResponses::Response)
+    @collector.plural.should be_kind_of(TrustyCms::ResourceResponses::Response)
   end
   
   it "should be duplicable" do
@@ -118,9 +118,9 @@ describe Radiant::ResourceResponses::Collector do
   end
 end
 
-describe Radiant::ResourceResponses::Response do
+describe TrustyCms::ResourceResponses::Response do
   before :each do
-    @response = Radiant::ResourceResponses::Response.new
+    @response = TrustyCms::ResourceResponses::Response.new
   end
   
   it "should duplicate its elements when duplicating" do

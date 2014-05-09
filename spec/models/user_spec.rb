@@ -132,7 +132,7 @@ describe User do
 
   describe ".remember_me" do
     before do
-      Radiant::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
+      TrustyCms::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
       @user.save
       @user.remember_me
       @user.reload
@@ -146,7 +146,7 @@ describe User do
   describe ".forget_me" do
 
     before do
-      Radiant::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
+      TrustyCms::Config.stub!(:[]).with('session_timeout').and_return(2.weeks)
       @user.save
       @user.remember_me
     end

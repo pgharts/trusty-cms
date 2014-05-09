@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
-describe Radiant::AdminUI::RegionSet do
+describe TrustyCms::AdminUI::RegionSet do
   before :each do
-    @region_set = Radiant::AdminUI::RegionSet.new
+    @region_set = TrustyCms::AdminUI::RegionSet.new
   end
 
   it "should create empty regions on first access" do
@@ -18,7 +18,7 @@ describe Radiant::AdminUI::RegionSet do
   end
 
   it "should yield itself to a passed block when initializing" do
-    @set = Radiant::AdminUI::RegionSet.new do |s|
+    @set = TrustyCms::AdminUI::RegionSet.new do |s|
       @yielded = s
     end
     @set.should === @yielded

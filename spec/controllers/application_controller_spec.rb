@@ -9,7 +9,7 @@ describe ApplicationController do
   end
 
   it 'should initialize config' do
-    controller.config.should == Radiant::Config
+    controller.config.should == TrustyCms::Config
   end
 
   it 'should set the current user for the UserActionObserver' do
@@ -73,14 +73,14 @@ describe ApplicationController do
   end
 
   describe "set_timezone" do
-    it "should use Radiant::Config['local.timezone']" do
-      Radiant::Config['local.timezone'] = 'Kuala Lumpur'
+    it "should use TrustyCms::Config['local.timezone']" do
+      TrustyCms::Config['local.timezone'] = 'Kuala Lumpur'
       controller.send(:set_timezone)
       Time.zone.name.should == 'Kuala Lumpur'
     end
 
     it "should default to config.time_zone" do
-      Radiant::Config.initialize_cache # to clear out setting from previous tests
+      TrustyCms::Config.initialize_cache # to clear out setting from previous tests
       controller.send(:set_timezone)
       Time.zone.name.should == 'UTC'
     end

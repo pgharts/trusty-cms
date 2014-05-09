@@ -1,18 +1,18 @@
 # Don't change this file!
 # Configure your app in config/environment.rb and config/environments/*.rb
 
-RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
+Rails.root = "#{File.dirname(__FILE__)}/.." unless defined?(Rails.root)
 RAILS_ENV = (ENV['RAILS_ENV'] || 'development').dup unless defined?(RAILS_ENV)
 
 module Rails
   class << self
     def vendor_rails?
-      File.exist?("#{RAILS_ROOT}/vendor/rails")
+      File.exist?("#{Rails.root}/vendor/rails")
     end
   end
 end
 
-module Radiant
+module TrustyCms
   class << self
     def boot!
       unless booted?
@@ -22,7 +22,7 @@ module Radiant
     end
 
     def booted?
-      defined? Radiant::Initializer
+      defined? TrustyCms::Initializer
     end
 
     def pick_boot
@@ -37,11 +37,11 @@ module Radiant
     end
 
     def vendor?
-      File.exist?("#{RAILS_ROOT}/vendor/radiant")
+      File.exist?("#{Rails.root}/vendor/radiant")
     end
     
     def app?
-      File.exist?("#{RAILS_ROOT}/lib/radiant.rb")
+      File.exist?("#{Rails.root}/lib/radiant.rb")
     end
 
     def preinitialize
@@ -53,7 +53,7 @@ module Radiant
     end
 
     def preinitializer_path
-      "#{RAILS_ROOT}/config/preinitializer.rb"
+      "#{Rails.root}/config/preinitializer.rb"
     end
   end
 
@@ -79,34 +79,34 @@ module Radiant
         require 'radiant'
         require 'radiant/initializer'
       rescue LoadError => e
-        $stderr.puts %(Radiant could not be initialized. #{load_error_message})
+        $stderr.puts %(TrustyCms could not be initialized. #{load_error_message})
         exit 1
       end
-      Radiant::Initializer.run(:set_load_path)
-      Radiant::Initializer.run(:install_gem_spec_stubs)
+      TrustyCms::Initializer.run(:set_load_path)
+      TrustyCms::Initializer.run(:install_gem_spec_stubs)
       Rails::GemDependency.add_frozen_gem_path
     end
   end
 
   class VendorBoot < Boot
     def load_initializer
-      $LOAD_PATH.unshift "#{RAILS_ROOT}/vendor/radiant/lib" 
+      $LOAD_PATH.unshift "#{Rails.root}/vendor/radiant/lib"
       super
     end
         
     def load_error_message
-      "Please verify that vendor/radiant contains a complete copy of the Radiant sources."
+      "Please verify that vendor/radiant contains a complete copy of the TrustyCms sources."
     end
   end
 
   class AppBoot < Boot
     def load_initializer
-      $LOAD_PATH.unshift "#{RAILS_ROOT}/lib" 
+      $LOAD_PATH.unshift "#{Rails.root}/lib"
       super
     end
 
     def load_error_message
-      "Please verify that you have a complete copy of the Radiant sources."
+      "Please verify that you have a complete copy of the TrustyCms sources."
     end
   end
 
@@ -119,4 +119,4 @@ module Radiant
 end
 
 # All that for this:
-Radiant.boot!
+TrustyCms.boot!

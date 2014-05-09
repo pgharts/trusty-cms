@@ -1,5 +1,5 @@
 module DeprecatedTags
-  include Radiant::Taggable
+  include TrustyCms::Taggable
 
   deprecated_tag "comment", :substitute => "hide", :deadline => '2.0'
 

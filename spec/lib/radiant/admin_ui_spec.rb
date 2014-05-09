@@ -1,25 +1,25 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::AdminUI do
+describe TrustyCms::AdminUI do
   before :each do
-    @admin = Radiant::AdminUI.new
+    @admin = TrustyCms::AdminUI.new
   end
 
   it "should be a Simpleton" do
-    Radiant::AdminUI.included_modules.should include(Simpleton)
-    Radiant::AdminUI.should respond_to(:instance)
+    TrustyCms::AdminUI.included_modules.should include(Simpleton)
+    TrustyCms::AdminUI.should respond_to(:instance)
   end
 
   it "should have a nav structure" do
-    @admin.nav.should be_kind_of(Radiant::AdminUI::NavTab)
+    @admin.nav.should be_kind_of(TrustyCms::AdminUI::NavTab)
   end
 
   it "should create a new nav tab" do
-    @admin.nav_tab("Content").should be_kind_of(Radiant::AdminUI::NavTab)
+    @admin.nav_tab("Content").should be_kind_of(TrustyCms::AdminUI::NavTab)
   end
   
   it "should create a new nav item" do
-    @admin.nav_item("Foo", "/admin/foo").should be_kind_of(Radiant::AdminUI::NavSubItem)
+    @admin.nav_item("Foo", "/admin/foo").should be_kind_of(TrustyCms::AdminUI::NavSubItem)
   end
   
   it "should load the default navigation tabs and sub-items" do
@@ -43,7 +43,7 @@ describe Radiant::AdminUI do
     page = @admin.page
     %w{edit remove children index}.each do |action|
       page.send(action).should_not be_nil
-      page.send(action).should be_kind_of(Radiant::AdminUI::RegionSet)
+      page.send(action).should be_kind_of(TrustyCms::AdminUI::RegionSet)
     end
     page.edit.main.should == %w{edit_header edit_form edit_popups}
     page.edit.form.should == %w{edit_title edit_extended_metadata

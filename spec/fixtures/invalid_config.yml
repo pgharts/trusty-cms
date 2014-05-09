@@ -2,7 +2,7 @@
  --- 
  defaults.page.parts: body, extended
  test: passes
- admin.title: RadiantCMS
+ admin.title: TrustyCmsCMS
  defaults.page.status: Nonexistent
  admin.subtitle: Publishing for Small Teams
  this: that

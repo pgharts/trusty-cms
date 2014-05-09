@@ -1,2 +1,2 @@
-class GemExtExtension < Radiant::Extension
+class GemExtExtension < TrustyCms::Extension
 end

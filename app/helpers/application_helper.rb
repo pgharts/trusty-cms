@@ -3,7 +3,7 @@ module ApplicationHelper
   include Admin::RegionsHelper
   
   def config
-    Radiant::Config
+    TrustyCms::Config
   end
   
   def default_page_title
@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def title
-    config['admin.title'] || 'Radiant CMS'
+    config['admin.title'] || 'TrustyCms CMS'
   end
   
   def subtitle
@@ -141,7 +141,7 @@ module ApplicationHelper
   end
   
   def admin
-    Radiant::AdminUI.instance
+    TrustyCms::AdminUI.instance
   end
   
   def filter_options_for_select(selected=nil)
@@ -161,7 +161,7 @@ module ApplicationHelper
   end
   
   def available_locales_select
-    [[t('select.default'),'']] + Radiant::AvailableLocales.locales
+    [[t('select.default'),'']] + TrustyCms::AvailableLocales.locales
   end
   
   def stylesheet_and_javascript_overrides

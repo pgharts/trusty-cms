@@ -1,14 +1,14 @@
 ## Welcome to TrustyCMS
 
-Trusty is a branch of the venerable Radiant CMS. Its goal is to pull the Radiant framework into Rails 3 with minimal changes to its infrastructure. Everything below this is from the Radiant readme.
+Trusty is a branch of the venerable TrustyCms CMS. Its goal is to pull the TrustyCms framework into Rails 3 with minimal changes to its infrastructure. Everything below this is from the TrustyCms readme.
 
-Radiant is a no-fluff, open source content management system designed for
+TrustyCms is a no-fluff, open source content management system designed for
 small teams. It is similar to Textpattern or MovableType, but is a general
 purpose content management system (not just a blogging engine).
 
 [![Build Status](https://secure.travis-ci.org/pgharts/trusty-cms.png?branch=master)](https://travis-ci.org/pgharts/trusty-cms/)
 
-Radiant features:
+TrustyCms features:
 
 * An elegant user interface
 * The ability to arrange pages in a hierarchy
@@ -25,20 +25,20 @@ Radiant features:
 
 ## License
 
-Radiant is released under the MIT license and is copyright (c) 2006-2009
+TrustyCms is released under the MIT license and is copyright (c) 2006-2009
 John W. Long and Sean Cribbs. A copy of the MIT license can be found in the
 LICENSE file.
 
 ## Installation and Setup
 
-Radiant is a traditional Ruby on Rails application, meaning that you can
+TrustyCms is a traditional Ruby on Rails application, meaning that you can
 configure and run it the way you would a normal Rails application.
 
 See the INSTALL file for more details.
 
 ### Installation of a Prerelease
 
-As Radiant nears newer releases, you can experiment with any prerelease version.
+As TrustyCms nears newer releases, you can experiment with any prerelease version.
 
 Install the prerelease gem with the following command:
 
@@ -48,7 +48,7 @@ This will install the gem with the prerelease name, for example: ‘radiant-0.9.
 
 ### Upgrading an Existing Project to a newer version
 
-1. Update the Radiant assets from in your project:
+1. Update the TrustyCms assets from in your project:
 
     $ rake radiant:update
 
@@ -70,7 +70,7 @@ The best place to get support is on the mailing list:
 
 http://radiantcms.org/mailing-list/
 
-Most of the development for Radiant happens on Github:
+Most of the development for TrustyCms happens on Github:
 
 http://github.com/radiant/radiant/
 
@@ -82,5 +82,5 @@ http://wiki.github.com/radiant/radiant/
 Enjoy!
 
 --
-The Radiant Dev Team
+The TrustyCms Dev Team
 http://radiantcms.org

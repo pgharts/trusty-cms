@@ -1,4 +1,4 @@
-class LoadOrderRedExtension < Radiant::Extension
+class LoadOrderRedExtension < TrustyCms::Extension
   version "1.2"
   description "for load order tests"
   url "http://test.com"

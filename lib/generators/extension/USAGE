@@ -1,5 +1,5 @@
 Description:
-    The extension generator creates stubs for a new Radiant extension.
+    The extension generator creates stubs for a new TrustyCms extension.
 
     The generator takes an extension name as its argument.  The extension name may be
     given in CamelCase or under_score and should not be suffixed with 'Extension'.

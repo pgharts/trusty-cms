@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def remember_me
-    update_attribute(:session_token, sha1(Time.now + Radiant::Config['session_timeout'].to_i)) unless self.session_token?
+    update_attribute(:session_token, sha1(Time.now + TrustyCms::Config['session_timeout'].to_i)) unless self.session_token?
   end
 
   def forget_me

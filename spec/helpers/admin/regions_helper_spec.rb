@@ -7,9 +7,9 @@ describe Admin::RegionsHelper do
     @controller.stub!(:controller_name).and_return(@controller_name)
     @controller.stub!(:template_name).and_return('edit')
     assigns[:controller_name] = @controller_name
-    @admin = Radiant::AdminUI.instance
+    @admin = TrustyCms::AdminUI.instance
     helper.stub!(:admin).and_return(@admin)
-    @region_set_mock = Radiant::AdminUI::RegionSet.new
+    @region_set_mock = TrustyCms::AdminUI::RegionSet.new
     @admin.stub!(:page).and_return(OpenStruct.new(:edit => @region_set_mock))
   end
   
@@ -37,7 +37,7 @@ describe Admin::RegionsHelper do
       helper.should_receive(:concat).with("foo")
       helper.should_receive(:capture).and_return("foo")
       helper.render_region(:main)  do |main|
-        main.should be_kind_of(Radiant::AdminUI::RegionPartials)
+        main.should be_kind_of(TrustyCms::AdminUI::RegionPartials)
         main.test do
           "foo"
         end

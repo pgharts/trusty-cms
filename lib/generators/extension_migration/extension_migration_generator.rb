@@ -20,6 +20,6 @@ class ExtensionMigrationGenerator < MigrationGenerator
   end
   
   def destination_root
-    File.join(RAILS_ROOT, extension_path)
+    File.join(Rails.root, extension_path)
   end
 end

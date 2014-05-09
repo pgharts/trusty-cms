@@ -20,5 +20,5 @@ Feature: Proper content negotiation
     When I send an "Accept" header of "text/javascript, text/html, application/xml, text/xml, */*"
     And I send an "X-Requested-With" header of "XMLHttpRequest"
     And I request the children of page "home"
-    Then I should not see "Radiant CMS"
+    Then I should not see "TrustyCms CMS"
     And I should see "<tr>" tags in the page source

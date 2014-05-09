@@ -5,7 +5,7 @@ require 'rubygems/package_task'
 require 'radiant'
 
 PKG_NAME = 'radiant'
-PKG_VERSION = Radiant::Version.to_s
+PKG_VERSION = TrustyCms::Version.to_s
 PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
 RUBY_FORGE_PROJECT = PKG_NAME
 RUBY_FORGE_USER = ENV['RUBY_FORGE_USER'] || 'jlong'
@@ -16,17 +16,17 @@ RELEASE_CHANGES = ENV['RELEASE_CHANGES'] ? " -a #{ENV['RELEASE_CHANGES']}" : ''
 RUBY_FORGE_GROUPID = '1337'
 RUBY_FORGE_PACKAGEID = '1638'
 
-RDOC_TITLE = "Radiant -- Publishing for Small Teams"
+RDOC_TITLE = "TrustyCms -- Publishing for Small Teams"
 RDOC_EXTRAS = ["README.md", "CONTRIBUTORS.md", "CHANGELOG.md", "INSTALL.md", "LICENSE.md"]
 
 namespace 'radiant' do
   spec = Gem::Specification.new do |s|
     s.name = PKG_NAME
     s.version = PKG_VERSION
-    s.author = "Radiant CMS dev team"
+    s.author = "TrustyCms CMS dev team"
     s.email = "radiant@radiantcms.org"
     s.summary = 'A no-fluff content management system designed for small teams.'
-    s.description = "Radiant is a simple and powerful publishing system designed for small teams.\nIt is built with Rails and is similar to Textpattern or MovableType, but is\na general purpose content managment system--not merely a blogging engine."
+    s.description = "TrustyCms is a simple and powerful publishing system designed for small teams.\nIt is built with Rails and is similar to Textpattern or MovableType, but is\na general purpose content managment system--not merely a blogging engine."
     s.homepage = 'http://radiantcms.org'
     s.rubyforge_project = RUBY_FORGE_PROJECT
     s.platform = Gem::Platform::RUBY
@@ -103,7 +103,7 @@ namespace 'radiant' do
 
   desc "Generates cached assets from source files"
   task :generate_cached_assets do
-    Radiant::TaskSupport.cache_admin_js
+    TrustyCms::TaskSupport.cache_admin_js
   end
 
   desc "Publish the release files to RubyForge."

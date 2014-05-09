@@ -1,4 +1,4 @@
-class BasicExtension < Radiant::Extension
+class BasicExtension < TrustyCms::Extension
   version "1.1"
   description "just a test"
   url "http://test.com"

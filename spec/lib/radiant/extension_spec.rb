@@ -1,27 +1,27 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::Extension do
+describe TrustyCms::Extension do
 
   it "should be a Simpleton" do
-    Radiant::Extension.included_modules.should include(Simpleton)
-    Radiant::Extension.should respond_to(:instance)
+    TrustyCms::Extension.included_modules.should include(Simpleton)
+    TrustyCms::Extension.should respond_to(:instance)
   end
   
   it "should annotate version, description, url, path and extension_name" do
-    Radiant::Extension.included_modules.should include(Annotatable)
+    TrustyCms::Extension.included_modules.should include(Annotatable)
     %w{version description url path extension_name}.each do |attribute|
-      Radiant::Extension.should respond_to(attribute)
+      TrustyCms::Extension.should respond_to(attribute)
     end
   end
 
-  it "should have access to the Radiant::AdminUI instance" do
+  it "should have access to the TrustyCms::AdminUI instance" do
     BasicExtension.instance.should respond_to(:admin)
-    BasicExtension.admin.should == Radiant::AdminUI.instance
+    BasicExtension.admin.should == TrustyCms::AdminUI.instance
   end
   
   it "should have a migrator" do
     BasicExtension.instance.should respond_to(:migrator)
-    BasicExtension.migrator.superclass.should == Radiant::ExtensionMigrator
+    BasicExtension.migrator.superclass.should == TrustyCms::ExtensionMigrator
   end
   
   it "should have a migrations path" do
@@ -42,7 +42,7 @@ describe Radiant::Extension do
   end
   
   it "should set the extension_name in subclasses" do
-    Kernel.module_eval { class SuperExtension < Radiant::Extension; end }
+    Kernel.module_eval { class SuperExtension < TrustyCms::Extension; end }
     SuperExtension.extension_name.should == "Super"
   end
   
@@ -114,11 +114,11 @@ describe Radiant::Extension do
   end
 end
 
-describe Radiant::Extension, "when inactive" do
+describe TrustyCms::Extension, "when inactive" do
 
   before :each do
     BasicExtension.deactivate
-    Radiant::AdminUI.instance.initialize_nav
+    TrustyCms::AdminUI.instance.initialize_nav
   end
 
   it "should become active when activated" do
@@ -128,7 +128,7 @@ describe Radiant::Extension, "when inactive" do
   
 end
 
-describe Radiant::Extension, "when active" do
+describe TrustyCms::Extension, "when active" do
 
   it "should become deactive when deactivated" do
     BasicExtension.deactivate

@@ -3,8 +3,8 @@ namespace :radiant do
     
     desc "Syncs all available translations to the English master"
     task :sync => :environment do
-      # All places Radiant can store locales 
-      locale_paths = Radiant::AvailableLocales.locale_paths
+      # All places TrustyCms can store locales
+      locale_paths = TrustyCms::AvailableLocales.locale_paths
       # The main translation root, basically where English is kept
       language_root = "#{RADIANT_ROOT}/config/locales"
       words = TranslationSupport.get_translation_keys(language_root)
@@ -37,8 +37,8 @@ namespace :radiant do
     
     desc "Syncs all translations available_tags to the English master"
     task :sync_available_tags => :environment do
-      # All places Radiant can store locales 
-      locale_paths = Radiant::AvailableLocales.locale_paths
+      # All places TrustyCms can store locales
+      locale_paths = TrustyCms::AvailableLocales.locale_paths
       # The main translation root, basically where English is kept
       language_root = "#{RADIANT_ROOT}/config/locales"
       words = TranslationSupport.open_available_tags("#{language_root}/en_available_tags.yml")

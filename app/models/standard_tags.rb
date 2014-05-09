@@ -1,6 +1,6 @@
 module StandardTags
 
-  include Radiant::Taggable
+  include TrustyCms::Taggable
   include LocalTime
 
   require "will_paginate/view_helpers"
@@ -1034,7 +1034,7 @@ module StandardTags
   end
 
   desc %{
-    Renders the containing elements only if Radiant in is development mode.
+    Renders the containing elements only if TrustyCms in is development mode.
 
     *Usage:*
 
@@ -1128,22 +1128,22 @@ module StandardTags
     tag.expand
   end
   desc %{
-    Returns Radiant::Config['site.title'] as configured under the Settings tab.
+    Returns TrustyCms::Config['site.title'] as configured under the Settings tab.
   }
   tag "site:title" do |tag|
-    Radiant::Config["site.title"]
+    TrustyCms::Config["site.title"]
   end
   desc %{
-    Returns Radiant::Config['site.host'] as configured under the Settings tab.
+    Returns TrustyCms::Config['site.host'] as configured under the Settings tab.
   }
   tag "site:host" do |tag|
-    Radiant::Config["site.host"]
+    TrustyCms::Config["site.host"]
   end
   desc %{
-    Returns Radiant::Config['dev.host'] as configured under the Settings tab.
+    Returns TrustyCms::Config['dev.host'] as configured under the Settings tab.
   }
   tag "site:dev_host" do |tag|
-    Radiant::Config["dev.host"]
+    TrustyCms::Config["dev.host"]
   end
   
   private
@@ -1239,7 +1239,7 @@ module StandardTags
     def will_paginate_options(tag)
       attr = tag.attr.symbolize_keys
       if attr[:paginated] == 'true'
-        attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :per_page).merge({:renderer => Radiant::Pagination::LinkRenderer.new(tag.globals.page.path)})
+        attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :per_page).merge({:renderer => TrustyCms::Pagination::LinkRenderer.new(tag.globals.page.path)})
       else
         {}
       end
@@ -1301,7 +1301,7 @@ module StandardTags
 
     def dev?(request)
       return false if request.nil?
-      if dev_host = Radiant::Config['dev.host']
+      if dev_host = TrustyCms::Config['dev.host']
         dev_host == request.host
       else
         request.host =~ /^dev\./

@@ -4,7 +4,7 @@ require 'rack/cache/storage'
 require 'rack/cache/metastore'
 require 'rack/cache/entitystore'
 
-module Radiant
+module TrustyCms
   module Cache
     mattr_accessor :meta_stores, :entity_stores, :use_x_sendfile, :use_x_accel_redirect
     self.meta_stores ||= []
@@ -32,7 +32,7 @@ module Radiant
     class EntityStore < Rack::Cache::EntityStore::Disk
       def initialize(root="#{Rails.root}/tmp/cache/entity")
         super
-        Radiant::Cache.entity_stores << self
+        TrustyCms::Cache.entity_stores << self
       end
 
       def clear
@@ -49,7 +49,7 @@ module Radiant
     class MetaStore < Rack::Cache::MetaStore::Disk
       def initialize(root="#{Rails.root}/tmp/cache/meta")
         super
-        Radiant::Cache.meta_stores << self
+        TrustyCms::Cache.meta_stores << self
       end
 
       def clear
@@ -69,12 +69,12 @@ module Radiant
         response = Rack::Cache::Response.new(status, hash, body)
 
         # Add acceleration headers
-        if Radiant::Cache.use_x_sendfile
+        if TrustyCms::Cache.use_x_sendfile
           accelerate(response, 'X-Sendfile', File.expand_path(body.path))
-        elsif Radiant::Cache.use_x_accel_redirect
+        elsif TrustyCms::Cache.use_x_accel_redirect
           virtual_path = File.expand_path(body.path)
-          entity_path = File.expand_path(Radiant::Cache.entity_stores.first.root)
-          virtual_path[entity_path] = Radiant::Cache.use_x_accel_redirect
+          entity_path = File.expand_path(TrustyCms::Cache.entity_stores.first.root)
+          virtual_path[entity_path] = TrustyCms::Cache.use_x_accel_redirect
           accelerate(response,'X-Accel-Redirect', virtual_path)
         end
         response
@@ -92,9 +92,9 @@ end
 # Rack::Cache will look for a constant matching the uri scheme given to the :metastore and :entitystore options
 # when initialising the Middleware
 class Rack::Cache::EntityStore
-  RADIANT = Radiant::Cache::EntityStore
+  RADIANT = TrustyCms::Cache::EntityStore
 end
 
 class Rack::Cache::MetaStore
-  RADIANT = Radiant::Cache::MetaStore
+  RADIANT = TrustyCms::Cache::MetaStore
 end

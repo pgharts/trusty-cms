@@ -2,7 +2,7 @@ require 'radiant/extension'
 require 'radiant/extension_path'
 require 'method_observer'
 
-module Radiant
+module TrustyCms
   class ExtensionLoader
     # The ExtensionLoader is reponsible for the loading, activation and reactivation of extensions. 
     # The noticing of important subdirectories is now handled by the ExtensionPath class.
@@ -121,7 +121,7 @@ module Radiant
           paths(type)
         end
         define_method("add_#{type}_paths".to_sym) do |additional_paths|
-          ::ActiveSupport::Deprecation.warn("ExtensionLoader.add_#{type}_paths is has been moved and is deprecated. Please use Radiant.configuration.add_#{type}_paths", caller)
+          ::ActiveSupport::Deprecation.warn("ExtensionLoader.add_#{type}_paths is has been moved and is deprecated. Please use TrustyCms.configuration.add_#{type}_paths", caller)
           initializer.configuration.send("add_#{type}_paths".to_sym, additional_paths)
         end
       end

@@ -4,13 +4,13 @@ require "radiant-<%= file_name %>-extension"
 
 Gem::Specification.new do |s|
   s.name        = "radiant-<%= file_name %>-extension"
-  s.version     = Radiant<%= class_name %>::VERSION
+  s.version     = TrustyCms<%= class_name %>::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = Radiant<%= class_name %>::AUTHORS
-  s.email       = Radiant<%= class_name %>::EMAIL
-  s.homepage    = Radiant<%= class_name %>::URL
-  s.summary     = Radiant<%= class_name %>::SUMMARY
-  s.description = Radiant<%= class_name %>::DESCRIPTION
+  s.authors     = TrustyCms<%= class_name %>::AUTHORS
+  s.email       = TrustyCms<%= class_name %>::EMAIL
+  s.homepage    = TrustyCms<%= class_name %>::URL
+  s.summary     = TrustyCms<%= class_name %>::SUMMARY
+  s.description = TrustyCms<%= class_name %>::DESCRIPTION
 
   # Define gem dependencies here.
   # Don't include a dependency on radiant itself: it causes problems when radiant is in vendor/radiant.

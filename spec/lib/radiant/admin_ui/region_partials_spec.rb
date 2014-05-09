@@ -7,10 +7,10 @@ class TemplateStub
   end
 end
 
-describe Radiant::AdminUI::RegionPartials do
+describe TrustyCms::AdminUI::RegionPartials do
   before :each do
     @template = TemplateStub.new
-    @rp = Radiant::AdminUI::RegionPartials.new(@template)
+    @rp = TrustyCms::AdminUI::RegionPartials.new(@template)
   end
   
   it "should return a string when the specified partial does not exist" do

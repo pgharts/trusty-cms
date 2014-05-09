@@ -1,4 +1,4 @@
-module Radiant::Taggable
+module TrustyCms::Taggable
   mattr_accessor :last_description, :tag_descriptions, :tag_deprecations
   @@tag_descriptions = {}
   @@tag_deprecations = {}
@@ -62,17 +62,17 @@ module Radiant::Taggable
     end
     
     def tag_descriptions(hash = nil)
-      Radiant::Taggable.tag_descriptions[self.name] ||= (hash ||{})
+      TrustyCms::Taggable.tag_descriptions[self.name] ||= (hash ||{})
     end
 
     def desc(text)
-      Radiant::Taggable.last_description = text
-      # Radiant::Taggable.last_description = RedCloth.new(Util.strip_leading_whitespace(text)).to_html
+      TrustyCms::Taggable.last_description = text
+      # TrustyCms::Taggable.last_description = RedCloth.new(Util.strip_leading_whitespace(text)).to_html
     end
     
     def tag(name, &block)
-      self.tag_descriptions[name] = Radiant::Taggable.last_description if Radiant::Taggable.last_description
-      Radiant::Taggable.last_description = nil
+      self.tag_descriptions[name] = TrustyCms::Taggable.last_description if TrustyCms::Taggable.last_description
+      TrustyCms::Taggable.last_description = nil
       define_method("tag:#{name}", &block)
     end
     
@@ -99,7 +99,7 @@ module Radiant::Taggable
     # end
     #
     def deprecated_tag(name, options={}, &dblock)
-      Radiant::Taggable.tag_deprecations[name] = options.dup
+      TrustyCms::Taggable.tag_deprecations[name] = options.dup
       if dblock
         tag(name) do |tag|
           warn_of_tag_deprecation(name, options)

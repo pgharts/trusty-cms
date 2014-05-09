@@ -1,4 +1,4 @@
-module Radiant
+module TrustyCms
   class ExtensionMigrator < ActiveRecord::Migrator
     class << self
       attr_accessor :extension
@@ -8,7 +8,7 @@ module Radiant
       end
       
       def migrate_extensions
-        Radiant.configuration.enabled_extensions.each do |ext|
+        TrustyCms.configuration.enabled_extensions.each do |ext|
           to_migrate = Extension.descendants.detect{|descendant| descendant.name == "#{ext.to_s.camelize}Extension" }
           to_migrate.migrator.migrate
         end

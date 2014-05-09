@@ -1,4 +1,4 @@
-module Radiant
+module TrustyCms
   class Config
     class Definition
       
@@ -12,15 +12,15 @@ module Radiant
       # validate it when it changes. In the next update it will also allow you to declare that
       # a config item is global or site-specific.
       #
-      # The actual defining is done by Radiant::Config#define and usually in a block like this:
+      # The actual defining is done by TrustyCms::Config#define and usually in a block like this:
       #
-      #   Radiant::Config.prepare do |config|
+      #   TrustyCms::Config.prepare do |config|
       #     config.namespace('users', :allow_change => true) do |users|
       #       users.define 'allow_password_reset?', :label => 'Allow password reset?'
       #     end
       #   end
       #
-      # See the method documentation in Radiant::Config for options and conventions.
+      # See the method documentation in TrustyCms::Config for options and conventions.
       #
       def initialize(options={})
         [:empty, :default, :type, :notes, :validate_with, :select_from, :allow_blank, :allow_change, :allow_display, :units, :definer].each do |attribute|

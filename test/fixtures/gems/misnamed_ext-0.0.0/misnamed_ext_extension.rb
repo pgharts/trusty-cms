@@ -1,2 +1,2 @@
-class MisnamedExtExtension < Radiant::Extension
+class MisnamedExtExtension < TrustyCms::Extension
 end

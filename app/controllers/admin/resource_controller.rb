@@ -1,6 +1,6 @@
 require 'will_paginate'
 class Admin::ResourceController < ApplicationController
-  extend Radiant::ResourceResponses
+  extend TrustyCms::ResourceResponses
   
   helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
   before_filter :populate_format
@@ -107,7 +107,7 @@ class Admin::ResourceController < ApplicationController
   # the per_page figure can be set in several ways:
   # request parameter > declared by paginate_models > default set in config entry @admin.pagination.per_page@ > overall default of 50
   def pagination_parameters
-    pp = params[:pp] || Radiant.config['admin.pagination.per_page']
+    pp = params[:pp] || TrustyCms.config['admin.pagination.per_page']
     pp = (self.class.default_per_page || 50) if pp.blank?
     {
       :page => (params[:p] || 1).to_i, 
@@ -203,7 +203,7 @@ class Admin::ResourceController < ApplicationController
     end
 
     def announce_removed
-      ActiveSupport::Deprecation.warn("announce_removed is no longer encouraged in Radiant 0.9.x.", caller)
+      ActiveSupport::Deprecation.warn("announce_removed is no longer encouraged in TrustyCms 0.9.x.", caller)
       flash[:notice] = t("resource_controller.removed", :humanized_model_name => humanized_model_name)    
     end
     
@@ -216,7 +216,7 @@ class Admin::ResourceController < ApplicationController
     end
 
     def clear_model_cache
-      Radiant::Cache.clear if defined?(Radiant::Cache)
+      TrustyCms::Cache.clear if defined?(TrustyCms::Cache)
     end
 
     def format_symbol

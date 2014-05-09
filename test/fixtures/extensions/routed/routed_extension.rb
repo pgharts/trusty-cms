@@ -1,2 +1,2 @@
-class RoutedExtension < Radiant::Extension
+class RoutedExtension < TrustyCms::Extension
 end

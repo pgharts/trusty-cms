@@ -1,11 +1,11 @@
 Before do
-  Radiant::Cache.use_x_sendfile = false
-  Radiant::Cache.use_x_accel_redirect = nil
+  TrustyCms::Cache.use_x_sendfile = false
+  TrustyCms::Cache.use_x_accel_redirect = nil
 end
 
 Given /^the page cache is clear$/ do
   # No-op until we have Rack::Cache installed
-  Radiant::Cache.clear if defined?(Radiant::Cache)
+  TrustyCms::Cache.clear if defined?(TrustyCms::Cache)
 end
 
 Then /^I should get a (\d+) response code$/ do |code|
@@ -13,7 +13,7 @@ Then /^I should get a (\d+) response code$/ do |code|
 end
 
 Given /^I have turned on X\-Sendfile headers$/ do
-  Radiant::Cache.use_x_sendfile = true
+  TrustyCms::Cache.use_x_sendfile = true
 end
 
 Then /^I should( not)? get an "([^\"]*)" header in the response$/ do |status, header_key|
@@ -25,7 +25,7 @@ Then /^I should( not)? get an "([^\"]*)" header in the response$/ do |status, he
 end
 
 Given /^I have turned on X\-Accel\-Redirect headers$/ do
-  Radiant::Cache.use_x_accel_redirect = "/cache"
+  TrustyCms::Cache.use_x_accel_redirect = "/cache"
 end
 
 Given /^I have page caching (on|off)$/ do |status|

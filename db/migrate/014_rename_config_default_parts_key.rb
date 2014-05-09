@@ -9,7 +9,7 @@ class RenameConfigDefaultPartsKey < ActiveRecord::Migration
   end
   
   def self.rename_config_key(from, to)
-    return unless setting = Radiant::Config.find_by_key(from)
+    return unless setting = TrustyCms::Config.find_by_key(from)
     setting.key = to
     setting.save!
   end

@@ -78,8 +78,8 @@ describe "Standard Tags" do
       page.should render('<r:children:each by="slug"><r:slug /> </r:children:each>').as('a b c d draft e f g h i j ').on('dev.site.com')
     end
 
-    it 'should not list draft pages on dev.site.com when Radiant::Config["dev.host"] is set to something else' do
-      Radiant::Config['dev.host'] = 'preview.site.com'
+    it 'should not list draft pages on dev.site.com when TrustyCms::Config["dev.host"] is set to something else' do
+      TrustyCms::Config['dev.host'] = 'preview.site.com'
       page.should render('<r:children:each by="title"><r:slug /> </r:children:each>').as('a b c d e f g h i j ').on('dev.site.com')
     end
 

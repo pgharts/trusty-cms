@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Radiant::ExtensionMigrator do
+describe TrustyCms::ExtensionMigrator do
   
   class Person < ActiveRecord::Base; end
   class Place < ActiveRecord::Base; end
@@ -57,7 +57,7 @@ describe Radiant::ExtensionMigrator do
       BasicExtension.migrator.should_receive(:migrate).once
       UpgradingExtension.migrator.should_receive(:migrate).once
       Rails.configuration.stub!(:enabled_extensions).and_return([:basic, :upgrading])
-      Radiant::ExtensionMigrator.migrate_extensions
+      TrustyCms::ExtensionMigrator.migrate_extensions
     end
   end
 end

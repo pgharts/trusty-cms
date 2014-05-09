@@ -18,9 +18,9 @@ def with_sandboxed_options
 end
 
 $LOAD_PATH << SPEC_ROOT
-RAILS_ROOT = "#{SPEC_ROOT}/.."
-$LOAD_PATH << "#{RAILS_ROOT}/lib"
-RAILS_LOG_FILE = "#{RAILS_ROOT}/log/test.log"
+Rails.root = "#{SPEC_ROOT}/.."
+$LOAD_PATH << "#{Rails.root}/lib"
+RAILS_LOG_FILE = "#{Rails.root}/log/test.log"
 SQLITE_DATABASE = "#{SPEC_ROOT}/sqlite3.db"
 
 require 'fileutils'

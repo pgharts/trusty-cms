@@ -24,7 +24,7 @@ Author:         #{author.name} <#{author.email}>
 Source code:    #{repository_url}
 Download:       #{download_url}
 Install type:   #{install_type}
-Supports:       Radiant #{supports_radiant_version}
+Supports:       TrustyCms #{supports_radiant_version}
 }.strip
     end
   end
@@ -43,7 +43,7 @@ Supports:       Radiant #{supports_radiant_version}
       else
         extension = task = command[0]
       end
-      rake_file = File.join(RAILS_ROOT, 'vendor', 'extensions', extension) + '/lib/tasks/' + extension + '_extension_tasks.rake'
+      rake_file = File.join(Rails.root, 'vendor', 'extensions', extension) + '/lib/tasks/' + extension + '_extension_tasks.rake'
       load rake_file if File.exist? rake_file
       tasks = Rake.application.tasks.map(&:name)
       tasks.include? task
@@ -69,7 +69,7 @@ Supports:       Radiant #{supports_radiant_version}
     end
 
     def copy_to_vendor_extensions
-      cp_r(self.path, File.expand_path(File.join(RAILS_ROOT, 'vendor', 'extensions', name)))
+      cp_r(self.path, File.expand_path(File.join(Rails.root, 'vendor', 'extensions', name)))
       rm_r(self.path)
     end
 
@@ -98,7 +98,7 @@ Supports:       Radiant #{supports_radiant_version}
     end
 
     def remove_extension_directory
-      rm_r(File.join(RAILS_ROOT, 'vendor', 'extensions', name))
+      rm_r(File.join(Rails.root, 'vendor', 'extensions', name))
     end
   end
 
@@ -251,7 +251,7 @@ Supports:       Radiant #{supports_radiant_version}
   end
 end
 
-module Radiant
+module TrustyCms
   class Extension
     module Script
       class << self
@@ -283,7 +283,7 @@ module Radiant
         end
 
         def extension_paths
-          paths = [RAILS_ROOT, RADIANT_ROOT].uniq.map { |p| Dir["#{p}/vendor/extensions/*"] }
+          paths = [Rails.root, RADIANT_ROOT].uniq.map { |p| Dir["#{p}/vendor/extensions/*"] }
           paths.unshift Dir["#{RADIANT_ROOT}/test/fixtures/extensions/*"] if RAILS_ENV == 'test'    #nasty
           paths.flatten
         end
@@ -387,7 +387,7 @@ module Radiant
 
         private
           def command_names
-            (Radiant::Extension::Script.constants - ['Util']).sort.map {|n| n.to_s.underscore }.join(", ")
+            (TrustyCms::Extension::Script.constants - ['Util']).sort.map {|n| n.to_s.underscore }.join(", ")
           end
       end
     end

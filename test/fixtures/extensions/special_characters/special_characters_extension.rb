@@ -1,3 +1,3 @@
-class SpecialCharactersExtension < Radiant::Extension
+class SpecialCharactersExtension < TrustyCms::Extension
   extension_name "Special Characters 'n' Such"
 end

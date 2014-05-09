@@ -31,7 +31,7 @@ class Page < ActiveRecord::Base
 
   validate :valid_class_name
 
-  include Radiant::Taggable
+  include TrustyCms::Taggable
   include StandardTags
   include DeprecatedTags
   include Annotatable
@@ -266,7 +266,7 @@ class Page < ActiveRecord::Base
     end
 
     def load_subclasses
-      ([RADIANT_ROOT] + Radiant::Extension.descendants.map(&:root)).each do |path|
+      ([RADIANT_ROOT] + TrustyCms::Extension.descendants.map(&:root)).each do |path|
         Dir["#{path}/app/models/*_page.rb"].each do |page|
           $1.camelize.constantize if page =~ %r{/([^/]+)\.rb}
         end
@@ -282,7 +282,7 @@ class Page < ActiveRecord::Base
       end
     end
 
-    def new_with_defaults(config = Radiant::Config)
+    def new_with_defaults(config = TrustyCms::Config)
       page = new
       page.parts.concat default_page_parts(config)
       page.fields.concat default_page_fields(config)
@@ -310,14 +310,14 @@ class Page < ActiveRecord::Base
 
     private
 
-      def default_page_parts(config = Radiant::Config)
+      def default_page_parts(config = TrustyCms::Config)
         default_parts = config['defaults.page.parts'].to_s.strip.split(/\s*,\s*/)
         default_parts.map do |name|
           PagePart.new(:name => name, :filter_id => config['defaults.page.filter'])
         end
       end
 
-      def default_page_fields(config = Radiant::Config)
+      def default_page_fields(config = TrustyCms::Config)
         default_fields = config['defaults.page.fields'].to_s.strip.split(/\s*,\s*/)
         default_fields.map do |name|
           PageField.new(:name => name)

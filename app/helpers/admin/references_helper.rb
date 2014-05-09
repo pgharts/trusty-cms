@@ -7,7 +7,7 @@ module Admin::ReferencesHelper
         value = t("desc.#{tag_name.gsub(':','-')}").match('desc') ? description : t("desc.#{tag_name.gsub(':','-')}")
         output << render(:partial => "admin/references/tag_reference.haml",
             :locals => {:tag_name => tag_name,
-                        :description =>  RedCloth.new(Radiant::Taggable::Util.strip_leading_whitespace(value)).to_html
+                        :description =>  RedCloth.new(TrustyCms::Taggable::Util.strip_leading_whitespace(value)).to_html
                        })
       end
     end

@@ -64,7 +64,7 @@ require 'dataset/record/model'
 #    require 'dataset'
 #    class Test::Unit::TestCase
 #      include Dataset
-#      datasets_directory "#{RAILS_ROOT}/test/datasets"
+#      datasets_directory "#{Rails.root}/test/datasets"
 #    end
 #
 # Note that should you desire your Dataset::Base subclasses be
@@ -97,7 +97,7 @@ module Dataset
     end
     
     mattr_accessor :datasets_database_dump_path
-    self.datasets_database_dump_path = File.expand_path(RAILS_ROOT + '/tmp/dataset') if defined?(RAILS_ROOT)
+    self.datasets_database_dump_path = File.expand_path(Rails.root + '/tmp/dataset') if defined?(Rails.root)
     
     # Replaces the default Dataset::Resolver with one that will look for
     # dataset class definitions in the specified directory. Captures of the

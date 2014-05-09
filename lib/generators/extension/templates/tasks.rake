@@ -21,8 +21,8 @@ namespace :radiant do
         Dir[<%= class_name %>.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
           path = file.sub(<%= class_name %>.root, '')
           directory = File.dirname(path)
-          mkdir_p RAILS_ROOT + directory, :verbose => false
-          cp file, RAILS_ROOT + path, :verbose => false
+          mkdir_p Rails.root + directory, :verbose => false
+          cp file, Rails.root + path, :verbose => false
         end
       end  
       

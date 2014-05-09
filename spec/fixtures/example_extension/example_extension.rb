@@ -1,7 +1,7 @@
 # Uncomment this if you reference any of your controllers in activate
 # require_dependency 'application'
 
-class ExampleExtension < Radiant::Extension
+class ExampleExtension < TrustyCms::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://example.com/example"

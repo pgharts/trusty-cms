@@ -1,5 +1,5 @@
 Description:
-    The language_extension generator creates stubs for a new Radiant translation.
+    The language_extension generator creates stubs for a new TrustyCms translation.
 
     The generator takes an language abbreviation as its argument.  The extension name may be
     given as a language abbreviation 'en' or a localized abbreviation 'en-GB' and should not 

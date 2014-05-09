@@ -1,6 +1,6 @@
 # Installation and Setup
 
-From within the directory containing your Radiant instance:
+From within the directory containing your TrustyCms instance:
 
 1. Decide which database you want to use. SQLite is configured by default and
    the easiest way to get started. If you want to use another database:

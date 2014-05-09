@@ -4,7 +4,7 @@ module Admin::ConfigurationHelper
   # Renders the setting as label and value:
   #
   #   show_config("admin.title")
-  #   => <label for="admin_title">Admin title<label><span id="admin_title">Radiant CMS</span>
+  #   => <label for="admin_title">Admin title<label><span id="admin_title">TrustyCms CMS</span>
   #
   def show_config(key, options={})
     setting = setting_for(key)
@@ -27,7 +27,7 @@ module Admin::ConfigurationHelper
   # Renders the setting as label and appropriate input field:
   #
   #   edit_setting("admin.title")
-  #   => <label for="admin_title">Admin title<label><input type="text" name="config['admin.title']" id="admin_title" value="Radiant CMS" />
+  #   => <label for="admin_title">Admin title<label><input type="text" name="config['admin.title']" id="admin_title" value="TrustyCms CMS" />
   #
   #   edit_config("defaults.page.status")
   #   => 
@@ -68,7 +68,7 @@ module Admin::ConfigurationHelper
   
   def setting_for(key)
     @config ||= {}    # normally initialized in Admin::ConfigurationController
-    @config[key] ||= Radiant.config.find_or_create_by_key(key)
+    @config[key] ||= TrustyCms.config.find_or_create_by_key(key)
   end
   
   def definition_for(key)

@@ -3,7 +3,7 @@
  *  
  *  depends on: prototype.js and lowpro.js
  *  
- *  Used by Radiant to create the expandable sitemap.
+ *  Used by TrustyCms to create the expandable sitemap.
  *  
  *  To use, simply add the following lines to application.js:
  *  

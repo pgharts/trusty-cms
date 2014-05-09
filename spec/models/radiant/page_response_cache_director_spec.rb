@@ -2,7 +2,7 @@ require 'ostruct'
 
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::PageResponseCacheDirector do
+describe TrustyCms::PageResponseCacheDirector do
   it 'initializes with a page and a listener' do
     lambda { described_class.new(Object.new, Object.new) }.should_not raise_error
   end

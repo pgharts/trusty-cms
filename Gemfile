@@ -9,7 +9,7 @@ source 'https://rubygems.org'
 # requires radiant and therefore pulls in every
 # dependency mentioned in radiant.gemspec.
 
-gem "rails",   "2.3.18"
+gem "rails",   "3.2.18"
 gem "mysql"
 gemspec
 

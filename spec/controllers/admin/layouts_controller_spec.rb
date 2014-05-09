@@ -95,7 +95,7 @@ describe Admin::LayoutsController do
   end
 
   it "should clear the page cache when saved" do
-    Radiant::Cache.should_receive(:clear)
+    TrustyCms::Cache.should_receive(:clear)
     put :update, :id => layout_id(:utf8), :layout => {:content_type => "application/xhtml+xml;charset=utf8"}
   end
 

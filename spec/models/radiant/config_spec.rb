@@ -1,14 +1,14 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::Config do
+describe TrustyCms::Config do
   before :each do
-    Radiant.config.initialize_cache
-    @config = Radiant.config
+    TrustyCms.config.initialize_cache
+    @config = TrustyCms.config
     set('test', 'cool')
     set('foo', 'bar')
   end
   after :each do 
-    Radiant::Cache.clear
+    TrustyCms::Cache.clear
   end
 
   describe "before the table exists, as in case of before bootstrap" do
@@ -27,41 +27,41 @@ describe Radiant::Config do
     end
   end
   
-  it "should create a cache of all records in a hash with Radiant::Config.initialize_cache" do
-    Rails.cache.read('Radiant::Config').should == Radiant::Config.to_hash
+  it "should create a cache of all records in a hash with TrustyCms::Config.initialize_cache" do
+    Rails.cache.read('TrustyCms::Config').should == TrustyCms::Config.to_hash
   end
   
   it "should recreate the cache after a record is saved" do
-    Radiant::Config.create!(:key => 'cache', :value => 'true')
-    Rails.cache.read('Radiant::Config').should == Radiant::Config.to_hash
+    TrustyCms::Config.create!(:key => 'cache', :value => 'true')
+    Rails.cache.read('TrustyCms::Config').should == TrustyCms::Config.to_hash
   end
   
   it "should update the mtime on the cache file after a record is saved" do
     FileUtils.should_receive(:mkpath).with("#{Rails.root}/tmp").at_least(:once)
-    FileUtils.should_receive(:touch).with(Radiant::Config.cache_file)
-    Radiant::Config['mtime'] = 'now'
+    FileUtils.should_receive(:touch).with(TrustyCms::Config.cache_file)
+    TrustyCms::Config['mtime'] = 'now'
   end
   
   it "should record the cache file mtime when the cache is initialized" do
-    Radiant::Config.initialize_cache
-    Rails.cache.read('Radiant.cache_mtime').should == File.mtime(Radiant::Config.cache_file)
+    TrustyCms::Config.initialize_cache
+    Rails.cache.read('TrustyCms.cache_mtime').should == File.mtime(TrustyCms::Config.cache_file)
   end
   
   it "should create a cache file when initializing the cache" do
-    Radiant::Cache.clear
+    TrustyCms::Cache.clear
     cache_file = File.join(Rails.root,'tmp','radiant_config_cache.txt')
     FileUtils.rm_rf(cache_file) if File.exist?(cache_file)
-    Radiant::Config.initialize_cache
+    TrustyCms::Config.initialize_cache
     File.file?(cache_file).should be_true
   end
   
   it "should find the value in the cache with []" do
-    Radiant::Config['test'].should === Rails.cache.read('Radiant::Config')['test']
+    TrustyCms::Config['test'].should === Rails.cache.read('TrustyCms::Config')['test']
   end
   
   it "should set the value in the database with []=" do
-    Radiant::Config['new-db-key'] = 'db-value'
-    Radiant::Config.find_by_key('new-db-key').value.should == 'db-value'
+    TrustyCms::Config['new-db-key'] = 'db-value'
+    TrustyCms::Config.find_by_key('new-db-key').value.should == 'db-value'
   end
 
   it "should return the value of a key with the bracket accessor" do
@@ -108,7 +108,7 @@ describe Radiant::Config do
     
   describe "where no definition exists" do
     it "should create a blank definition" do
-      get_config("ad.hoc.setting").definition.should be_kind_of(Radiant::Config::Definition)
+      get_config("ad.hoc.setting").definition.should be_kind_of(TrustyCms::Config::Definition)
     end
     
     it "should not protect or constrain" do
@@ -133,17 +133,17 @@ describe Radiant::Config do
     it "should protect when the definition requires it" do
       definition = get_config('testing.protected')
       definition.settable?.should be_false
-      lambda { definition.value = "something else" }.should raise_error(Radiant::Config::ConfigError)
+      lambda { definition.value = "something else" }.should raise_error(TrustyCms::Config::ConfigError)
     end
   end
     
   def get_config(key)
-    setting = Radiant::Config.find_or_create_by_key(key)
+    setting = TrustyCms::Config.find_or_create_by_key(key)
   end
 
   def set(key, value)
     setting = get_config(key)
     setting.destroy if setting
-    Radiant::Config.create!(:key => key, :value => value)
+    TrustyCms::Config.create!(:key => key, :value => value)
   end
 end

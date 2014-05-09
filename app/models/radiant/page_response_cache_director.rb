@@ -1,4 +1,4 @@
-module Radiant
+module TrustyCms
   class PageResponseCacheDirector
     def initialize(page, listener)
       @page = page

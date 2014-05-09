@@ -4,16 +4,16 @@ describe ApplicationHelper do
   dataset :users
 
   before :each do
-    Radiant::Initializer.run :initialize_default_admin_tabs
+    TrustyCms::Initializer.run :initialize_default_admin_tabs
     helper.stub!(:request).and_return(ActionController::TestRequest.new)
   end
   
-  it "should have the Radiant::Config" do
-    helper.config.should == Radiant::Config
+  it "should have the TrustyCms::Config" do
+    helper.config.should == TrustyCms::Config
   end
   
   it "should use the default title if not configured" do
-    helper.title.should == "Radiant CMS"
+    helper.title.should == "TrustyCms CMS"
   end
   
   it "should use the stored title if configured" do
@@ -169,7 +169,7 @@ describe ApplicationHelper do
   end
   
   it "should provide the admin object" do
-    helper.admin.should == Radiant::AdminUI.instance
+    helper.admin.should == TrustyCms::AdminUI.instance
   end
 
   it "should return filter options for select" do
@@ -242,12 +242,12 @@ describe ApplicationHelper do
   #   end
   # 
   #   it "should use the max_list_length config item when no other value is specified" do
-  #     Radiant::Config['pagination.max_list_length'] = 50
+  #     TrustyCms::Config['pagination.max_list_length'] = 50
   #     helper.pagination_for(@collection).should_not have_tag('div.depaginate')
   #   end
   # 
   #   it "should disregard list length when max_list_length is false" do
-  #     Radiant::Config['pagination.max_list_length'] = 50
+  #     TrustyCms::Config['pagination.max_list_length'] = 50
   #     helper.pagination_for(@collection, :max_list_length => false).should_not have_tag('div.depaginate')
   #   end
   #   

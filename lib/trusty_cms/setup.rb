@@ -1,7 +1,7 @@
 require "highline"
 require "forwardable"
 
-module Radiant
+module TrustyCms
   class Setup
   
     class << self
@@ -45,14 +45,14 @@ module Radiant
     
     def load_default_configuration
       feedback "\nInitializing configuration" do
-        step { Radiant::Config['admin.title'   ] = 'Radiant CMS' }
-        step { Radiant::Config['admin.subtitle'] = 'Publishing for Small Teams' }
-        step { Radiant::Config['defaults.page.parts' ] = 'body, extended' }
-        step { Radiant::Config['defaults.page.status' ] = 'Draft' }
-        step { Radiant::Config['defaults.page.filter' ] = nil }
-        step { Radiant::Config['defaults.page.fields'] = 'Keywords, Description' }
-        step { Radiant::Config['session_timeout'] = 2.weeks }
-        step { Radiant::Config['default_locale'] = 'en' }
+        step { TrustyCms::Config['admin.title'   ] = 'TrustyCms CMS' }
+        step { TrustyCms::Config['admin.subtitle'] = 'Publishing for Small Teams' }
+        step { TrustyCms::Config['defaults.page.parts' ] = 'body, extended' }
+        step { TrustyCms::Config['defaults.page.status' ] = 'Draft' }
+        step { TrustyCms::Config['defaults.page.filter' ] = nil }
+        step { TrustyCms::Config['defaults.page.fields'] = 'Keywords, Description' }
+        step { TrustyCms::Config['session_timeout'] = 2.weeks }
+        step { TrustyCms::Config['default_locale'] = 'en' }
       end
     end
     
@@ -70,7 +70,7 @@ module Radiant
       unless filename
         templates = find_and_load_templates("#{RADIANT_ROOT}/db/templates/*.yml")
         templates.concat find_and_load_templates("#{RADIANT_ROOT}/vendor/extensions/**/db/templates/*.yml")
-        Radiant::Extension.descendants.each do |d|
+        TrustyCms::Extension.descendants.each do |d|
           templates.concat find_and_load_templates(d.root + '/db/templates/*.yml')
         end
         templates.concat find_and_load_templates("#{Rails.root}/vendor/extensions/**/db/templates/*.yml")
@@ -132,7 +132,7 @@ module Radiant
           ] +
           Dir.glob("#{RADIANT_ROOT}/vendor/extensions/**/db/templates/#{filename}") + 
           Dir.glob("#{Rails.root}/vendor/extensions/**/db/templates/#{filename}") +
-          Radiant::Extension.descendants.inject([]) do |r, d|
+          TrustyCms::Extension.descendants.inject([]) do |r, d|
             r << "#{d.root}/db/templates/#{filename}"
           end
         ).find { |name| File.file?(name) }

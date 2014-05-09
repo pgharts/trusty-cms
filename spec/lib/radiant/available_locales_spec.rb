@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe Radiant::AvailableLocales do
+describe TrustyCms::AvailableLocales do
 
   before :each do
-    @locales = Radiant::AvailableLocales.locales
+    @locales = TrustyCms::AvailableLocales.locales
   end
   
   it "should load the default locales" do

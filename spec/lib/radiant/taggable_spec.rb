@@ -1,14 +1,14 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 require 'ostruct'
 
-describe Radiant::Taggable, "when included in a class or module" do
+describe TrustyCms::Taggable, "when included in a class or module" do
 
   class TaggedClass
-    include Radiant::Taggable
+    include TrustyCms::Taggable
   end
   
   module TaggedModule
-    include Radiant::Taggable
+    include TrustyCms::Taggable
   end
   
   it "should add tag definition methods to the class" do
@@ -31,7 +31,7 @@ describe Radiant::Taggable, "when included in a class or module" do
   it "should store tag descriptions filtered without Textile, so that translations can be applied" do
     [TaggedClass, TaggedModule].each do |c|
       c.desc "A simple tag."
-      Radiant::Taggable.last_description.should == "A simple tag."
+      TrustyCms::Taggable.last_description.should == "A simple tag."
     end
   end
   
@@ -42,24 +42,24 @@ describe Radiant::Taggable, "when included in a class or module" do
         "hello world"
       end
       c.tag_descriptions['hello'].should =~ /Bonjour!/
-      Radiant::Taggable.last_description.should be_nil
+      TrustyCms::Taggable.last_description.should be_nil
     end
   end
   
   # This has been moved to the admin/references_helper
   #
   # it "should normalize leading whitespace in a tag description" do
-  #   Radiant::Taggable::Util.should_receive(:strip_leading_whitespace).twice.with("   Blah blah\n blah blah").and_return("blah")
+  #   TrustyCms::Taggable::Util.should_receive(:strip_leading_whitespace).twice.with("   Blah blah\n blah blah").and_return("blah")
   #   [TaggedClass, TaggedModule].each do |c|
   #     c.desc "   Blah blah\n blah blah"
   #   end
   # end
 end
 
-describe Radiant::Taggable, "when included in a module with defined tags" do
+describe TrustyCms::Taggable, "when included in a module with defined tags" do
 
   module MyTags
-    include Radiant::Taggable
+    include TrustyCms::Taggable
     
     desc %{This tag renders the text "just a test".}
     tag "test" do
@@ -77,7 +77,7 @@ describe Radiant::Taggable, "when included in a module with defined tags" do
   end
 
   class TestObject
-    include Radiant::Taggable
+    include TrustyCms::Taggable
     
     desc %{Yet another test}
     tag "test" do
@@ -121,11 +121,11 @@ describe Radiant::Taggable, "when included in a module with defined tags" do
 
 end
 
-describe Radiant::Taggable, "when included in a module with defined tags which is included in the Page model" do
+describe TrustyCms::Taggable, "when included in a module with defined tags which is included in the Page model" do
   dataset :users_and_pages, :file_not_found
   
   module CustomTags
-    include Radiant::Taggable
+    include TrustyCms::Taggable
     
     tag "param_value" do |tag|
       params[:sample_param]
@@ -149,10 +149,10 @@ describe Radiant::Taggable, "when included in a module with defined tags which i
     end
 end
 
-describe Radiant::Taggable, "when included in a module with deprecated tags" do
+describe TrustyCms::Taggable, "when included in a module with deprecated tags" do
 
   class OldTestObject
-    include Radiant::Taggable
+    include TrustyCms::Taggable
     
     desc %{This is an exciting new tag}
     tag "new_hotness" do "Dreadful film."; end
@@ -204,7 +204,7 @@ describe Radiant::Taggable, "when included in a module with deprecated tags" do
   end
 end
 
-describe Radiant::Taggable::Util do
+describe TrustyCms::Taggable::Util do
   it "should normalize leading whitespace" do
         markup = %{  
   
@@ -238,6 +238,6 @@ Let's try a small code example:
 
 Nice job! It really, really, really
 works.}
-    Radiant::Taggable::Util.strip_leading_whitespace(markup).should == result
+    TrustyCms::Taggable::Util.strip_leading_whitespace(markup).should == result
   end
 end

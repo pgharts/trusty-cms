@@ -1,6 +1,6 @@
 class Admin::ConfigurationController < ApplicationController
 
-  # Admin::ConfigurationController handles the batch-updating of Radiant::Config entries.
+  # Admin::ConfigurationController handles the batch-updating of TrustyCms::Config entries.
   # It accepts any set of config name-value pairs but is accessible only to administrators.
   # Note that configuration is routed as a singular resource so we only deal with show/edit/update
   # and the show and edit views determine what set of config values is shown and made editable.
@@ -24,9 +24,9 @@ class Admin::ConfigurationController < ApplicationController
   def update
     if params[:config]
       begin
-        Radiant.config.transaction do
+        TrustyCms.config.transaction do
           params["config"].each_pair do |key, value|
-            @config[key] = Radiant::Config.find_or_create_by_key(key)
+            @config[key] = TrustyCms::Config.find_or_create_by_key(key)
             @config[key].value = value      # validation sets errors on @config['key'] that the helper methods will pick up
           end
           redirect_to :action => :show
@@ -34,7 +34,7 @@ class Admin::ConfigurationController < ApplicationController
       rescue ActiveRecord::RecordInvalid => e
         flash[:error] = "Configuration error: please check the form"
         render :action => :edit
-      rescue Radiant::Config::ConfigError => e
+      rescue TrustyCms::Config::ConfigError => e
         flash[:error] = "Configuration error: #{e}"
         render :action => :edit
       end

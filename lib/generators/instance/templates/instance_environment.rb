@@ -11,7 +11,7 @@ require 'radius'
 
 YAML::ENGINE.yamler = 'syck' if RUBY_VERSION =~ /1.9/
 
-Radiant::Initializer.run do |config|
+TrustyCms::Initializer.run do |config|
   # Skip frameworks you're not going to use (only works if using vendor/rails).
   # To use Rails without a database, you must remove the Active Record framework
   # config.frameworks -= [ :action_mailer ]
@@ -35,7 +35,7 @@ Radiant::Initializer.run do |config|
 
   # Comment out this line if you want to turn off all caching, or
   # add options to modify the behavior. In the majority of deployment
-  # scenarios it is desirable to leave Radiant's cache enabled and in
+  # scenarios it is desirable to leave TrustyCms's cache enabled and in
   # the default configuration.
   #
   # Additional options:
@@ -52,7 +52,7 @@ Radiant::Initializer.run do |config|
   #  :metastore => "radiant:tmp/cache/meta"
   #    Sets the meta store type and storage location.  We recommend you use
   #    radiant: since this will enable manual expiration and acceleration headers.
-  config.middleware.use ::Radiant::Cache
+  config.middleware.use ::TrustyCms::Cache
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information

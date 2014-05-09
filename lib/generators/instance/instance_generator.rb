@@ -43,7 +43,7 @@ class InstanceGenerator < Rails::Generator::Base
   end
 
   def manifest
-    # The absolute location of the Radiant files
+    # The absolute location of the TrustyCms files
     root = File.expand_path(RADIANT_ROOT) 
     
     # Use /usr/bin/env if no special shebang was specified
@@ -92,7 +92,7 @@ class InstanceGenerator < Rails::Generator::Base
 
       # Instance Gemfile
       m.template "instance_gemfile", "Gemfile", :assigns => {
-        :radiant_version => Radiant::Version.to_s,
+        :radiant_version => TrustyCms::Version.to_s,
         :db => options[:db]
       }
 

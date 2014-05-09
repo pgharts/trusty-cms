@@ -1,5 +1,5 @@
 require 'ostruct'
-module Radiant
+module TrustyCms
   module ResourceResponses
     def self.extended(base)
       base.send :class_inheritable_writer, :responses

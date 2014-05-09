@@ -2,4 +2,4 @@
 require File.dirname(__FILE__) + '/../config/boot'
 require "#{RADIANT_ROOT}/lib/radiant"
 
-puts "Radiant #{Radiant::Version}"
+puts "TrustyCms #{TrustyCms::Version}"

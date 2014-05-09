@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
-describe Radiant::AdminUI::NavTab do
+describe TrustyCms::AdminUI::NavTab do
   before :each do
-    @tab = Radiant::AdminUI::NavTab.new("Content")
+    @tab = TrustyCms::AdminUI::NavTab.new("Content")
   end
 
   it "should have a name" do
@@ -15,23 +15,23 @@ describe Radiant::AdminUI::NavTab do
   end
 
   it "should find contained items by name" do
-    subtab = Radiant::AdminUI::NavTab.new("The Pages")
+    subtab = TrustyCms::AdminUI::NavTab.new("The Pages")
     @tab << subtab
     @tab[:the_pages].should == subtab
     @tab['the pages'].should == subtab
   end
 
   it "should assign the tab on the sub-item when adding" do
-    subtab = Radiant::AdminUI::NavSubItem.new("Pages", "/admin/pages")
+    subtab = TrustyCms::AdminUI::NavSubItem.new("Pages", "/admin/pages")
     @tab << subtab
     subtab.tab.should == @tab
   end
 
   describe "inserting sub-items in specific places" do
     before :each do
-      @pages    = Radiant::AdminUI::NavSubItem.new("Pages",    "/admin/pages")
-      @things   = Radiant::AdminUI::NavSubItem.new("Things",   "/admin/things")
-      @comments = Radiant::AdminUI::NavSubItem.new("Comments", "/admin/comments")
+      @pages    = TrustyCms::AdminUI::NavSubItem.new("Pages",    "/admin/pages")
+      @things   = TrustyCms::AdminUI::NavSubItem.new("Things",   "/admin/things")
+      @comments = TrustyCms::AdminUI::NavSubItem.new("Comments", "/admin/comments")
       @tab << @pages
       @tab << @things
     end
@@ -53,7 +53,7 @@ describe Radiant::AdminUI::NavTab do
     
     it "should raise an error if a sub-item of the same name already exists" do
       @tab << @comments
-      lambda { @tab << @comments.dup }.should raise_error(Radiant::AdminUI::DuplicateTabNameError)
+      lambda { @tab << @comments.dup }.should raise_error(TrustyCms::AdminUI::DuplicateTabNameError)
     end
   end
 
@@ -73,10 +73,10 @@ describe Radiant::AdminUI::NavTab do
   end
 end
 
-describe Radiant::AdminUI::NavSubItem do
+describe TrustyCms::AdminUI::NavSubItem do
   before :each do
-    @tab = Radiant::AdminUI::NavTab.new("Content")
-    @subitem = Radiant::AdminUI::NavSubItem.new("Pages", "/admin/pages")
+    @tab = TrustyCms::AdminUI::NavTab.new("Content")
+    @subitem = TrustyCms::AdminUI::NavSubItem.new("Pages", "/admin/pages")
     @tab << @subitem
   end
 

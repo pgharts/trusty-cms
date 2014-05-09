@@ -2,7 +2,7 @@ require 'annotatable'
 require 'simpleton'
 require 'radiant/admin_ui'
 
-module Radiant
+module TrustyCms
   class Extension
     include Simpleton
     include Annotatable
@@ -65,7 +65,7 @@ module Radiant
     def tab(name, options={}, &block)
       @the_tab = admin.nav[name]
       unless @the_tab
-        @the_tab = Radiant::AdminUI::NavTab.new(name)
+        @the_tab = TrustyCms::AdminUI::NavTab.new(name)
         before = options.delete(:before)
         after = options.delete(:after)
         tab_name = before || after

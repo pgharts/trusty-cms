@@ -296,7 +296,7 @@ describe Admin::PagesController do
     
     if RUBY_VERSION =~ /1\.9/
       it 'should convert form input to UTF-8' do
-        # When using Radiant with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
+        # When using TrustyCms with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
         # That causes problems, especially when using special chars and with certain DBs, like DB2
         #
         # See http://stackoverflow.com/questions/8268778/rails-2-3-9-encoding-of-query-parameters
@@ -318,7 +318,7 @@ describe Admin::PagesController do
   end
 
   it "should clear the page cache when saved" do
-    Radiant::Cache.should_receive(:clear)
+    TrustyCms::Cache.should_receive(:clear)
     put :update, :id => page_id(:home), :page => {:breadcrumb => 'Homepage'}
   end
 

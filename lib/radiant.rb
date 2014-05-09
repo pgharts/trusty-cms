@@ -1,7 +1,7 @@
 RADIANT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "..")) unless defined? RADIANT_ROOT
 
-unless defined? Radiant::Version
-  module Radiant
+unless defined? TrustyCms::Version
+  module TrustyCms
     module Version
       Major = '1'
       Minor = '1'

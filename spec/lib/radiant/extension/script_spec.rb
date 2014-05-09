@@ -1,36 +1,36 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 require 'radiant/extension/script'
 
-describe "Radiant::Extension::Script" do
+describe "TrustyCms::Extension::Script" do
   it "should determine which subscript to run" do
-    Radiant::Extension::Script::Install.should_receive(:new)
-    Radiant::Extension::Script.execute ['install']
+    TrustyCms::Extension::Script::Install.should_receive(:new)
+    TrustyCms::Extension::Script.execute ['install']
 
-    Radiant::Extension::Script::Uninstall.should_receive(:new)
-    Radiant::Extension::Script.execute ['uninstall']
+    TrustyCms::Extension::Script::Uninstall.should_receive(:new)
+    TrustyCms::Extension::Script.execute ['uninstall']
   end
 
   it "should pass the command-line args to the subscript" do
-    Radiant::Extension::Script::Install.should_receive(:new).with(['page_attachments'])
-    Radiant::Extension::Script.execute ['install', 'page_attachments']
+    TrustyCms::Extension::Script::Install.should_receive(:new).with(['page_attachments'])
+    TrustyCms::Extension::Script.execute ['install', 'page_attachments']
   end
 
   it "should run the help command when no arguments are given" do
-    Radiant::Extension::Script::Help.should_receive(:new)
-    Radiant::Extension::Script.execute []
+    TrustyCms::Extension::Script::Help.should_receive(:new)
+    TrustyCms::Extension::Script.execute []
   end
 
   it "should run the help for a given command when it fails" do
     error_message = "You must specify an extension to install."
-    Radiant::Extension::Script::Install.should_receive(:new).and_raise(ArgumentError.new(error_message))
-    Radiant::Extension::Script.should_receive(:puts).with(error_message)
-    Radiant::Extension::Script::Help.should_receive(:new).with(['install'])
-    Radiant::Extension::Script.execute ['install']
+    TrustyCms::Extension::Script::Install.should_receive(:new).and_raise(ArgumentError.new(error_message))
+    TrustyCms::Extension::Script.should_receive(:puts).with(error_message)
+    TrustyCms::Extension::Script::Help.should_receive(:new).with(['install'])
+    TrustyCms::Extension::Script.execute ['install']
   end
 end
 
-describe "Radiant::Extension::Script::Util" do
-  include Radiant::Extension::Script::Util
+describe "TrustyCms::Extension::Script::Util" do
+  include TrustyCms::Extension::Script::Util
 
   it "should determine an extension name from a camelized string" do
     to_extension_name("PageAttachments").should == 'page_attachments'
@@ -53,35 +53,35 @@ describe "Radiant::Extension::Script::Util" do
   it "should determine whether an extension is installed" do
     # Bad coupling, but will work by default
     @script = mock('script action')
-    @script.extend Radiant::Extension::Script::Util
+    @script.extend TrustyCms::Extension::Script::Util
     @script.extension_name = 'basic'
     @script.should be_installed
   end
 
   it "should determine whether an extension is not installed" do
     @script = mock('script action',:extension_paths => ['/path/to/extension/html_tags'])
-    @script.extend Radiant::Extension::Script::Util
+    @script.extend TrustyCms::Extension::Script::Util
     @script.extension_name = 'tags'
     @script.should_not be_installed
   end
 
   it "should determine whether an extension is installed" do
     @script = mock('script action',:extension_paths => ['tags'])
-    @script.extend Radiant::Extension::Script::Util
+    @script.extend TrustyCms::Extension::Script::Util
     @script.extension_name = 'tags'
     @script.should be_installed
   end
 
   it "should determine whether an extension is installed" do
     @script = mock('script action',:extension_paths => ['/path/to/extension/tags'])
-    @script.extend Radiant::Extension::Script::Util
+    @script.extend TrustyCms::Extension::Script::Util
     @script.extension_name = 'tags'
     @script.should be_installed
   end
 
   it "should determine whether an extension is installed on windows system" do
     @script = mock('script action',:extension_paths => ['c:\path\to\extension\tags'])
-    @script.extend Radiant::Extension::Script::Util
+    @script.extend TrustyCms::Extension::Script::Util
     @script.extension_name = 'tags'
     @script.should be_installed
   end
@@ -99,7 +99,7 @@ describe "Radiant::Extension::Script::Util" do
   end
 end
 
-describe "Radiant::Extension::Script::Install" do
+describe "TrustyCms::Extension::Script::Install" do
 
   before :each do
     @extension = mock('Extension', :install => true, :name => 'page_attachments')
@@ -107,95 +107,95 @@ describe "Radiant::Extension::Script::Install" do
   end
 
   it "should read the extension name from the command line" do
-    @install = Radiant::Extension::Script::Install.new ['page_attachments']
+    @install = TrustyCms::Extension::Script::Install.new ['page_attachments']
     @install.extension_name.should == 'page_attachments'
   end
 
   it "should attempt to find the extension and install it" do
     @extension.should_receive(:install).and_return(true)
-    @install = Radiant::Extension::Script::Install.new ['page_attachments']
+    @install = TrustyCms::Extension::Script::Install.new ['page_attachments']
   end
 
   it "should fail if the extension is not found" do
-    lambda { Radiant::Extension::Script::Install.new ['non_existent_extension'] }.should raise_error
+    lambda { TrustyCms::Extension::Script::Install.new ['non_existent_extension'] }.should raise_error
   end
 
   it "should fail if an extension name is not given" do
-    lambda { Radiant::Extension::Script::Install.new []}.should raise_error
+    lambda { TrustyCms::Extension::Script::Install.new []}.should raise_error
   end
 end
 
-describe "Radiant::Extension::Script::Uninstall" do
+describe "TrustyCms::Extension::Script::Uninstall" do
   before :each do
     @extension = mock('Extension', :uninstall => true, :name => 'basic')
     Registry::Extension.stub!(:find).and_return([@extension])
   end
 
   it "should read the extension name from the command line" do
-    @uninstall = Radiant::Extension::Script::Uninstall.new ['basic']
+    @uninstall = TrustyCms::Extension::Script::Uninstall.new ['basic']
     @uninstall.extension_name.should == 'basic'
   end
 
   it "should attempt to find the extension and uninstall it" do
     @extension.should_receive(:uninstall).and_return(true)
-    @uninstall = Radiant::Extension::Script::Uninstall.new ['basic']
+    @uninstall = TrustyCms::Extension::Script::Uninstall.new ['basic']
   end
 
   it "should fail if an extension name is not given" do
-    lambda { Radiant::Extension::Script::Uninstall.new []}.should raise_error
+    lambda { TrustyCms::Extension::Script::Uninstall.new []}.should raise_error
   end
 end
 
-describe "Radiant::Extension::Script::Info" do
+describe "TrustyCms::Extension::Script::Info" do
   before :each do
     @extension = mock('Extension', :uninstall => true, :name => 'archive', :inspect => '')
     Registry::Extension.stub!(:find).and_return([@extension])
   end
 
   it "should read the extension name from the command line" do
-    @info = Radiant::Extension::Script::Info.new ['archive']
+    @info = TrustyCms::Extension::Script::Info.new ['archive']
     @info.extension_name.should == 'archive'
   end
 
   it "should attempt to find the extension and display its info" do
     @extension.should_receive(:inspect).and_return('')
-    @info = Radiant::Extension::Script::Info.new ['archive']
+    @info = TrustyCms::Extension::Script::Info.new ['archive']
   end
 
   it "should fail if an extension name is not given" do
-    lambda { Radiant::Extension::Script::Info.new []}.should raise_error
+    lambda { TrustyCms::Extension::Script::Info.new []}.should raise_error
   end
 end
 
-describe "Radiant::Extension::Script::Help" do
+describe "TrustyCms::Extension::Script::Help" do
   it "should display the general help message when no arguments are given" do
     $stdout.should_receive(:puts).with(%r{Usage:   script/extension command \[arguments\]})
-    Radiant::Extension::Script::Help.new
+    TrustyCms::Extension::Script::Help.new
   end
 
   it "should display the general help message when the 'help' command is specified" do
     $stdout.should_receive(:puts).with(%r{Usage:   script/extension command \[arguments\]})
-    Radiant::Extension::Script::Help.new ['help']
+    TrustyCms::Extension::Script::Help.new ['help']
   end
 
   it "should display the general help message when an invalid command is given" do
     $stdout.should_receive(:puts).with(%r{Usage:   script/extension command \[arguments\]})
-    Radiant::Extension::Script::Help.new ['foo']
+    TrustyCms::Extension::Script::Help.new ['foo']
   end
 
   it "should display the install help message" do
     $stdout.should_receive(:puts).with(%r{Usage:    script/extension install extension_name})
-    Radiant::Extension::Script::Help.new ['install']
+    TrustyCms::Extension::Script::Help.new ['install']
   end
 
   it "should display the uninstall help message" do
     $stdout.should_receive(:puts).with(%r{Usage:    script/extension uninstall extension_name})
-    Radiant::Extension::Script::Help.new ['uninstall']
+    TrustyCms::Extension::Script::Help.new ['uninstall']
   end
 
   it "should display the info help message" do
     $stdout.should_receive(:puts).with(%r{Usage:    script/extension info extension_name})
-    Radiant::Extension::Script::Help.new ['info']
+    TrustyCms::Extension::Script::Help.new ['info']
   end
 end
 
@@ -237,7 +237,7 @@ describe "Registry::Installer" do
 
   it "should copy the extension to vendor/extensions" do
     @installer.path = "/tmp"
-    FileUtils.should_receive(:cp_r).with('/tmp', "#{RAILS_ROOT}/vendor/extensions/example")
+    FileUtils.should_receive(:cp_r).with('/tmp', "#{Rails.root}/vendor/extensions/example")
     FileUtils.should_receive(:rm_r).with('/tmp')
     @installer.copy_to_vendor_extensions
   end
@@ -265,7 +265,7 @@ describe "Registry::Uninstaller" do
   end
 
   it "should remove the extension directory" do
-    FileUtils.should_receive(:rm_r).with("#{RAILS_ROOT}/vendor/extensions/example")
+    FileUtils.should_receive(:rm_r).with("#{Rails.root}/vendor/extensions/example")
     @uninstaller.remove_extension_directory
   end
 
@@ -357,7 +357,7 @@ describe "Registry::Git" do
     @git.stub!(:cd).and_yield
   end
 
-  describe "when the Radiant project is not stored in git" do
+  describe "when the TrustyCms project is not stored in git" do
     before :each do
       File.stub!(:directory?).with(".git").and_return(false)
     end
@@ -377,13 +377,13 @@ describe "Registry::Git" do
 
     it "should copy the extension to vendor/extensions" do
       @git.path = "/tmp"
-      @git.should_receive(:cp_r).with('/tmp', "#{RAILS_ROOT}/vendor/extensions/example")
+      @git.should_receive(:cp_r).with('/tmp', "#{Rails.root}/vendor/extensions/example")
       @git.should_receive(:rm_r).with('/tmp')
       @git.copy_to_vendor_extensions
     end
   end
 
-  describe "when the Radiant project is stored in git" do
+  describe "when the TrustyCms project is stored in git" do
     before :each do
       File.stub!(:directory?).with(".git").and_return(true)
     end
