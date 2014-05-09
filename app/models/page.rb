@@ -195,7 +195,7 @@ class Page < ActiveRecord::Base
       file_not_found_names = file_not_found_types.collect { |x| x.name }
       condition = (['class_name = ?'] * file_not_found_names.length).join(' or ')
       condition = "status_id = #{Status[:published].id} and (#{condition})" if live
-      children.where(:conditions => [condition] + file_not_found_names).first
+      children.where([condition] + file_not_found_names).first
     end
   end
   alias_method :find_by_url, :find_by_path

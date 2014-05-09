@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(login_or_email, password)
-    user = find(:first, :conditions => ["login = ? OR email = ?", login_or_email, login_or_email])
+    user = where(["login = ? OR email = ?", login_or_email, login_or_email]).first
     user if user && user.authenticated?(password)
   end
 
