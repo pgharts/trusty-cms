@@ -55,6 +55,8 @@ class Application < Rails::Application
   config.middleware.use "TrustyCms::Cache"
 
 
+  config.filter_parameters += [:password, :password_confirmation]
+
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with 'rake db:sessions:create')
