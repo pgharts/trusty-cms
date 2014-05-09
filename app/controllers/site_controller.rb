@@ -48,7 +48,7 @@ class SiteController < ApplicationController
   private
     def batch_page_status_refresh
       @changed_pages = []
-      @pages = Page.find(:all, :conditions => {:status_id => Status[:scheduled].id})
+      @pages = Page.where({:status_id => Status[:scheduled].id})
       @pages.each do |page|
         if page.published_at <= Time.now
            page.status_id = Status[:published].id
