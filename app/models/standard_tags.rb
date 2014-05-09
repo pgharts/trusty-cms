@@ -69,7 +69,7 @@ module StandardTags
   }
   tag 'children:first' do |tag|
     options = children_find_options(tag)
-    children = tag.locals.children.find(:all, options)
+    children = tag.locals.children.where(options)
     if first = children.first
       tag.locals.page = first
       tag.expand
@@ -86,7 +86,7 @@ module StandardTags
   }
   tag 'children:last' do |tag|
     options = children_find_options(tag)
-    children = tag.locals.children.find(:all, options)
+    children = tag.locals.children.where(options)
     if last = children.last
       tag.locals.page = last
       tag.expand
@@ -313,7 +313,7 @@ module StandardTags
     <pre><code><r:if_children [status="published"]>...</r:if_children></code></pre>
   }
   tag "if_children" do |tag|
-    children = tag.locals.page.children.count(:conditions => children_find_options(tag)[:conditions])
+    children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
     tag.expand if children > 0
   end
 
@@ -328,7 +328,7 @@ module StandardTags
     <pre><code><r:unless_children [status="published"]>...</r:unless_children></code></pre>
   }
   tag "unless_children" do |tag|
-    children = tag.locals.page.children.count(:conditions => children_find_options(tag)[:conditions])
+    children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
     tag.expand unless children > 0
   end
   
@@ -377,7 +377,7 @@ module StandardTags
     result = []
     children = tag.locals.children
     tag.locals.previous_headers = {}
-    children.find(:all, options).each do |item|
+    children.where(options).each do |item|
       tag.locals.child = item
       tag.locals.page = item
       result << tag.expand
@@ -403,9 +403,9 @@ module StandardTags
     options = aggregate_children(tag)
     if ActiveRecord::Base.connection.adapter_name.downcase == 'postgresql'
       options[:group] = Page.columns.map {|c| c.name}.join(', ')
-      Page.find(:all, options).size
+      Page.where(options).size
     else
-      Page.count(options)
+      Page.where(options).count
     end
   end
   desc %{
@@ -438,7 +438,9 @@ module StandardTags
   }
   tag "aggregate:children:first" do |tag|
     options = aggregate_children(tag)
-    children = Page.find(:all, options)
+    children = Page.where(options)
+
+    # TODO: What is this nonsnese?
     if first = children.first
       tag.locals.page = first
       tag.expand
@@ -459,7 +461,9 @@ module StandardTags
   }
   tag "aggregate:children:last" do |tag|
     options = aggregate_children(tag)
-    children = Page.find(:all, options)
+    children = Page.where(options)
+
+    # TODO: More nonsense
     if last = children.last
       tag.locals.page = last
       tag.expand
@@ -1301,6 +1305,7 @@ module StandardTags
 
     def dev?(request)
       return false if request.nil?
+      # TODO: More nonsense!
       if dev_host = TrustyCms::Config['dev.host']
         dev_host == request.host
       else
