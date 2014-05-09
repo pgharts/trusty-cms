@@ -12,7 +12,7 @@ unless defined? TEST_ROOT
       require File.expand_path(TEST_ROOT + "/../config/environment")
     end
   end
-  require 'test_help'
+  require 'rails/test_help'
   
   class ActiveSupport::TestCase
     # Transactional fixtures accelerate your tests by wrapping each test method
