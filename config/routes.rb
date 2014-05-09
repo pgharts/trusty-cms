@@ -1,41 +1,30 @@
-ActionController::Routing::Routes.draw do |map|
+TrustyCms::Application.routes.draw do
+  namespace :admin, :member => { :remove => :get } do
+    resources :pages do
 
-  # Admin RESTful Routes
-  map.namespace :admin, :member => { :remove => :get } do |admin|
-    admin.resources :pages do |pages|
-      pages.resources :children, :controller => "pages"
+
+      resources :children
     end
-    admin.resources :layouts
-    admin.resources :users
-  end
-  map.preview 'admin/preview', :controller => 'admin/pages', :action => 'preview', :conditions => {:method => [:post, :put]}
-
-  map.namespace :admin do |admin|
-    admin.resource :preferences
-    admin.resource :configuration, :controller => 'configuration'
-    # admin.resources :settings
-    admin.resources :extensions, :only => :index
-    admin.resources :page_parts
-    admin.resources :page_fields
-    admin.reference '/reference/:type.:format', :controller => 'references', :action => 'show', :conditions => {:method => :get}
+    resources :layouts
+    resources :users
   end
 
-  # Admin Routes
-  map.with_options(:controller => 'admin/welcome') do |welcome|
-    welcome.admin          'admin',                              :action => 'index'
-    welcome.welcome        'admin/welcome',                      :action => 'index'
-    welcome.login          'admin/login',                        :action => 'login'
-    welcome.logout         'admin/logout',                       :action => 'logout'
+  match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
+  namespace :admin do
+    resource :preferences
+    resource :configuration
+    resources :extensions, :only => :index
+    resources :page_parts
+    resources :page_fields
+    match '/reference/:type.:format' => 'references#show', :as => :reference, :via => :get
   end
 
-  # Site URLs
-  map.with_options(:controller => 'site') do |site|
-    site.root                                                    :action => 'show_page', :url => '/'
-    site.not_found         'error/404',                          :action => 'not_found'
-    site.error             'error/500',                          :action => 'error'
-
-    # Everything else
-    site.connect           '*url',                               :action => 'show_page'
-  end
-
+  match 'admin' => 'admin/welcome#index', :as => :admin
+  match 'admin/welcome' => 'admin/welcome#index', :as => :welcome
+  match 'admin/login' => 'admin/welcome#login', :as => :login
+  match 'admin/logout' => 'admin/welcome#logout', :as => :logout
+  match '/' => 'site#show_page', :url => '/'
+  match 'error/404' => 'site#not_found', :as => :not_found
+  match 'error/500' => 'site#error', :as => :error
+  match '*url' => 'site#show_page'
 end
