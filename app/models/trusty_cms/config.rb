@@ -93,7 +93,7 @@ module TrustyCms
       end
       
       def to_hash
-        Hash[ *find(:all).map { |pair| [pair.key, pair.value] }.flatten ]
+        Hash[ *all.map { |pair| [pair.key, pair.value] }.flatten ]
       end
       
       def initialize_cache
