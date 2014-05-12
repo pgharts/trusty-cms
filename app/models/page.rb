@@ -38,7 +38,7 @@ class Page < ActiveRecord::Base
 
   annotate :description
   attr_accessor :request, :response, :pagination_parameters
-  class_inheritable_accessor :default_child
+  class_attribute :default_child
   self.default_child = self
 
   set_inheritance_column :class_name
