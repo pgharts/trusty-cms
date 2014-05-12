@@ -1,5 +1,5 @@
-require 'radiant/extension'
-require 'radiant/extension_path'
+require 'trusty_cms/extension'
+require 'trusty_cms/extension_path'
 require 'method_observer'
 
 module TrustyCms

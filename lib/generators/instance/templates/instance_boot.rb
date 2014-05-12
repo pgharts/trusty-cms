@@ -76,8 +76,8 @@ module TrustyCms
     
     def load_initializer
       begin
-        require 'radiant'
-        require 'radiant/initializer'
+        require 'trusty_cms'
+        require 'trusty_cms/initializer'
       rescue LoadError => e
         $stderr.puts %(TrustyCms could not be initialized. #{load_error_message})
         exit 1
@@ -90,7 +90,7 @@ module TrustyCms
 
   class VendorBoot < Boot
     def load_initializer
-      $LOAD_PATH.unshift "#{Rails.root}/vendor/radiant/lib"
+      $LOAD_PATH.unshift "#{Rails.root}/vendor/trusty_cms/lib"
       super
     end
         

@@ -6,7 +6,7 @@ unless defined? SPEC_ROOT
   case
   when ENV["RADIANT_ENV_FILE"]
     require ENV["RADIANT_ENV_FILE"]
-  when File.dirname(__FILE__) =~ %r{vendor/radiant/vendor/extensions}
+  when File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
     env = "#{File.expand_path(File.dirname(__FILE__) + "/../../../")}/config/environment"
     puts "requiring #{env}"
     require env

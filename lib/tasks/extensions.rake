@@ -4,7 +4,7 @@ namespace :db do
   namespace :migrate do
     desc "Run all TrustyCms extension migrations"
     task :extensions => :environment do
-      require 'radiant/extension_migrator'
+      require 'trusty_cms/extension_migrator'
       TrustyCms::ExtensionMigrator.migrate_extensions
       Rake::Task['db:schema:dump'].invoke
     end
@@ -14,7 +14,7 @@ namespace :db do
     task :extensions => :environment do
       require 'highline/import'
       if agree("This task will destroy any data stored by extensions in the database. Are you sure you want to \ncontinue? [yn] ")
-        require 'radiant/extension_migrator'
+        require 'trusty_cms/extension_migrator'
         TrustyCms::Extension.descendants.each {|ext| ext.migrator.migrate(0) }
         Rake::Task['db:migrate:extensions'].invoke
         Rake::Task['db:schema:dump'].invoke

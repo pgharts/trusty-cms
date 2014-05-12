@@ -4,7 +4,7 @@ namespace :trusty_cms do
       
       desc "Runs the migration of the Example extension"
       task :migrate => :environment do
-        require 'radiant/extension_migrator'
+        require 'trusty_cms/extension_migrator'
         if ENV["VERSION"]
           ExampleExtension.migrator.migrate(ENV["VERSION"].to_i)
         else

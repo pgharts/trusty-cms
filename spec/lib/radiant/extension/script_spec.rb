@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
-require 'radiant/extension/script'
+require 'trusty_cms/extension/script'
 
 describe "TrustyCms::Extension::Script" do
   it "should determine which subscript to run" do

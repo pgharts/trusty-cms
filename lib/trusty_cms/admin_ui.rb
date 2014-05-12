@@ -4,7 +4,7 @@ require 'ostruct'
 module TrustyCms
   class AdminUI
     # This may be loaded before ActiveSupport, so do an explicit require
-    require 'radiant/admin_ui/region_set'
+    require 'trusty_cms/admin_ui/region_set'
     
     class DuplicateTabNameError < StandardError; end
     

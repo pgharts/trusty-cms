@@ -35,9 +35,9 @@ unless File.directory? "#{Rails.root}/app"
           exit 1
         end
 
-        radiant_git = "git://github.com/radiant/radiant.git"
+        radiant_git = "git://github.com/pgharts/trusty-cms.git"
 
-        if File.exist?("vendor/radiant/.git/HEAD")
+        if File.exist?("vendor/trusty_cms/.git/HEAD")
           cd("vendor/radiant") { system "git checkout master"; system "git pull origin master"}        
         else
           system "git clone #{radiant_git} vendor/radiant"

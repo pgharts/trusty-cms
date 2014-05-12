@@ -1,9 +1,9 @@
 require 'initializer'
-require 'radiant/admin_ui'
-require 'radiant/extension_loader'
+require 'trusty_cms/admin_ui'
+require 'trusty_cms/extension_loader'
 
 module TrustyCms
-  autoload :Cache, 'radiant/cache'
+  autoload :Cache, 'trusty_cms/cache'
   
   class << self
     # Returns the TrustyCms::Config eigenclass object, so it can be used wherever you would use TrustyCms::Config.

@@ -4,7 +4,7 @@ namespace :radiant do
       
       desc "Runs the migration of the <%= localization_name %> language pack"
       task :migrate => :environment do
-        require 'radiant/extension_migrator'
+        require 'trusty_cms/extension_migrator'
         if ENV["VERSION"]
           <%= class_name %>.migrator.migrate(ENV["VERSION"].to_i)
         else

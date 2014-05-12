@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require File.expand_path('../../config/boot',  __FILE__)
-require 'radiant/extension/script'
+require 'trusty_cms/extension/script'
 
 TrustyCms::Extension::Script.execute ARGV

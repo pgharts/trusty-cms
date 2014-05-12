@@ -1,6 +1,6 @@
 require 'annotatable'
 require 'simpleton'
-require 'radiant/admin_ui'
+require 'trusty_cms/admin_ui'
 
 module TrustyCms
   class Extension

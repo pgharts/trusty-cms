@@ -121,7 +121,7 @@ class InstanceGenerator < Rails::Generator::Base
   protected
 
     def banner
-      "Usage: #{$0} /path/to/radiant/app [options]"
+      "Usage: #{$0} /path/to/trusty_cms/app [options]"
     end
 
     def add_options!(opt)

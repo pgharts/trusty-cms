@@ -4,7 +4,7 @@ namespace :radiant do
       
       desc "Runs the migration of the <%= extension_name %> extension"
       task :migrate => :environment do
-        require 'radiant/extension_migrator'
+        require 'trusty_cms/extension_migrator'
         if ENV["VERSION"]
           <%= class_name %>.migrator.migrate(ENV["VERSION"].to_i)
           Rake::Task['db:schema:dump'].invoke

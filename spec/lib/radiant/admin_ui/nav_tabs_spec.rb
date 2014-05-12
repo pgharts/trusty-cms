@@ -95,7 +95,7 @@ describe TrustyCms::AdminUI::NavSubItem do
     
     it "should make the url relative to the relative_url_root when set" do
       ActionController::Base.relative_url_root = '/radiant'
-      @subitem.relative_url.should == "/radiant/admin/pages"
+      @subitem.relative_url.should == "/trusty_cms/admin/pages"
     end
     
     after :each do

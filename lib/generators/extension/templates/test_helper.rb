@@ -5,7 +5,7 @@ unless defined? RADIANT_ROOT
   case
   when ENV["RADIANT_ENV_FILE"]
     require ENV["RADIANT_ENV_FILE"]
-  when File.dirname(__FILE__) =~ %r{vendor/radiant/vendor/extensions}
+  when File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
     require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../../../")}/config/environment"
   else
     require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../")}/config/environment"

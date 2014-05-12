@@ -7,7 +7,7 @@ gem "radiant", "~> <%= radiant_version %>"
 gem "compass-rails", "~> 1.0.3"
 
 # alternatively, in development
-# gem "radiant", :path => "/path/to/radiant/root"
+# gem "trusty_cms", :path => "/path/to/trusty_cms/root"
 
 # Uncomment to support CoffeeScript with a JS runtime (used in the Sheets extension)
 # gem "execjs"

@@ -39,7 +39,7 @@ namespace :db do
   
   desc "Bootstrap your database for TrustyCms."
   task :bootstrap => :initialize do
-    require 'radiant/setup'
+    require 'trusty_cms/setup'
     TrustyCms::Setup.bootstrap(
       :admin_name => ENV['ADMIN_NAME'],
       :admin_username => ENV['ADMIN_USERNAME'],
