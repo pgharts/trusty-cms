@@ -8,7 +8,7 @@ TrustyCms.config do |config|
 
   # you can also use this file to set config values (by environment, for example):
   
-  # if RAILS_ENV == 'production'
+  # if Rails.env == 'production'
   #   config['cache.duration'] = 86400
   # else
   #   config['cache.duration'] = 0

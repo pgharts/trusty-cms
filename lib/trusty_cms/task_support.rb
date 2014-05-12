@@ -4,7 +4,7 @@ module TrustyCms
       def establish_connection
         unless ActiveRecord::Base.connected?
           connection_hash = YAML.load_file("#{Rails.root}/config/database.yml").to_hash
-          env_connection = connection_hash[RAILS_ENV]
+          env_connection = connection_hash[Rails.env]
           ActiveRecord::Base.establish_connection(env_connection)
         end
       end

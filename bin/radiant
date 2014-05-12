@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-ENV['RAILS_ENV'] ||= 'production'
+ENV['Rails.env'] ||= 'production'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..')
 

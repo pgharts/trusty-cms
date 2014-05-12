@@ -1,11 +1,11 @@
-desc "Set the environment variable RAILS_ENV='development'."
+desc "Set the environment variable Rails.env='development'."
 task :development do
-  ENV['RAILS_ENV'] = RAILS_ENV = 'development'
+  ENV['Rails.env'] = Rails.env = 'development'
   Rake::Task[:environment].invoke
 end
 
-desc "Set the environment variable RAILS_ENV='production'."
+desc "Set the environment variable Rails.env='production'."
 task :production do
-  ENV['RAILS_ENV'] = RAILS_ENV = 'production'
+  ENV['Rails.env'] = Rails.env = 'production'
   Rake::Task[:environment].invoke
 end

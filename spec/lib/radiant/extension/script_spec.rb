@@ -208,12 +208,12 @@ describe "Registry::Action" do
     rails_gemspec = Bundler.load.specs.find{|s| s.name == 'rails' }
     rake_file = File.join(rails_gemspec.full_gem_path, 'lib', 'tasks', 'misc.rake')
     load rake_file
-    @action.should_receive(:`).with("rake secret RAILS_ENV=#{RAILS_ENV}")
+    @action.should_receive(:`).with("rake secret Rails.env=#{Rails.env}")
     @action.rake('secret')
   end
 
   it "should not shell out with the specified rake task if it does not exist" do
-    @action.should_not_receive(:`).with("rake non_existant_task RAILS_ENV=#{RAILS_ENV}")
+    @action.should_not_receive(:`).with("rake non_existant_task Rails.env=#{Rails.env}")
     @action.rake('non_existant_task')
   end
 end

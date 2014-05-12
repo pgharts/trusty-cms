@@ -1,5 +1,5 @@
 unless defined? RADIANT_ROOT
-  ENV["RAILS_ENV"] = "test"
+  ENV["Rails.env"] = "test"
   case
   when ENV["RADIANT_ENV_FILE"]
     require ENV["RADIANT_ENV_FILE"]

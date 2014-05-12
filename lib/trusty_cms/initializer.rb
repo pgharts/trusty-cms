@@ -64,7 +64,7 @@ module TrustyCms
     # In test mode we also add a fixtures path for testing the extension loader.
     #
     def default_extension_paths
-      env = ENV["RAILS_ENV"] || RAILS_ENV
+      env = ENV["Rails.env"] || Rails.env
       paths = [Rails.root + 'vendor/extensions']
       paths.unshift(TrustyCms.root + "vendor/extensions") unless Rails.root == TrustyCms.root
       paths.unshift(TrustyCms.root + "test/fixtures/extensions") if env =~ /test|cucumber/

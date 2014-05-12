@@ -1,5 +1,5 @@
 unless defined? TEST_ROOT
-  ENV["RAILS_ENV"] = "test"
+  ENV["Rails.env"] = "test"
   
   require 'test/unit'
   

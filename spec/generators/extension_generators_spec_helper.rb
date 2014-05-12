@@ -1,5 +1,5 @@
-ENV["RAILS_ENV"] = 'test'
-RAILS_ENV = 'test'
+ENV["Rails.env"] = 'test'
+Rails.env = 'test'
 BASE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '../../'))
 require 'fileutils'
 require 'tempfile'

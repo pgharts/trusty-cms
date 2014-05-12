@@ -32,7 +32,7 @@ Supports:       TrustyCms #{supports_radiant_version}
   class Action
     def rake(command)
       puts "rake #{command}"
-      puts `rake #{command} RAILS_ENV=#{RAILS_ENV}` if tasks_include? command
+      puts `rake #{command} Rails.env=#{Rails.env}` if tasks_include? command
     end
 
     def tasks_include?(command)
@@ -284,7 +284,7 @@ module TrustyCms
 
         def extension_paths
           paths = [Rails.root, RADIANT_ROOT].uniq.map { |p| Dir["#{p}/vendor/extensions/*"] }
-          paths.unshift Dir["#{RADIANT_ROOT}/test/fixtures/extensions/*"] if RAILS_ENV == 'test'    #nasty
+          paths.unshift Dir["#{RADIANT_ROOT}/test/fixtures/extensions/*"] if Rails.env == 'test'    #nasty
           paths.flatten
         end
 

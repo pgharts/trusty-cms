@@ -1,5 +1,5 @@
 unless defined? SPEC_ROOT
-  ENV["RAILS_ENV"] = "test"
+  ENV["Rails.env"] = "test"
 
   SPEC_ROOT = File.expand_path(File.dirname(__FILE__))
 

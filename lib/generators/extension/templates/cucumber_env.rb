@@ -1,5 +1,5 @@
 # Sets up the Rails environment for Cucumber
-ENV["RAILS_ENV"] = "test"
+ENV["Rails.env"] = "test"
 # Extension root
 extension_env = File.expand_path(File.dirname(__FILE__) + '/../../../../../config/environment')
 require extension_env+'.rb'
