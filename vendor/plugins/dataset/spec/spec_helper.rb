@@ -31,8 +31,8 @@ FileUtils.rm_rf("#{SPEC_ROOT}/tmp/*")
 FileUtils.rm_f(SQLITE_DATABASE)
 
 require 'logger'
-RAILS_DEFAULT_LOGGER = Logger.new(RAILS_LOG_FILE)
-RAILS_DEFAULT_LOGGER.level = Logger::DEBUG
+Rails.logger = Logger.new(RAILS_LOG_FILE)
+Rails.logger.level = Logger::DEBUG
 
 ActiveRecord::Base.silence do
   ActiveRecord::Base.configurations = {'test' => {
