@@ -2,7 +2,7 @@
 # Configure your app in config/environment.rb and config/environments/*.rb
 
 Rails.root = "#{File.dirname(__FILE__)}/.." unless defined?(Rails.root)
-Rails.env = (ENV['Rails.env'] || 'development').dup unless defined?(Rails.env)
+Rails.env = (ENV['RAILS_ENV'] || 'development').dup unless defined?(Rails.env)
 
 module Rails
   class << self
