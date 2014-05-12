@@ -23,7 +23,7 @@ unless defined? SPEC_ROOT
   #     require File.expand_path(SPEC_ROOT + "/../config/environment")
   #   end
   # end
-  
+
   require 'spec'
   require 'spec/rails'
   require 'dataset'
