@@ -18,6 +18,7 @@ script: "bundle exec rake spec --trace"
 notifications:
   recipients:
     - sipple@trustarts.org
+    - ferguson@trustarts.org
   irc: "irc.freenode.org#pghtrustarts"
 
 env:
