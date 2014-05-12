@@ -7,7 +7,7 @@ raise "To avoid rake task loading problems: run 'rake clobber' in vendor/plugins
 rspec_base = File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/rspec/lib')
 $LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base)
 begin
-  require 'spec/rake/spectask'
+  require "rspec/core/rake_task"
   require 'cucumber/rake/task'
 
   spec_prereq = File.exist?(File.join(Rails.root, 'config', 'database.yml')) ? "db:test:prepare" : :noop
@@ -39,7 +39,7 @@ begin
 
   namespace :spec do
     desc "Run all specs in spec directory with RCov (excluding plugin & generator specs)"
-    Spec::Rake::SpecTask.new(:rcov) do |t|
+    RSpec::Core::RakeTask.new(:rcov) do |t|
       t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList.new('spec/**/*_spec.rb') do |fl|
         fl.exclude(/generator/)
@@ -51,7 +51,7 @@ begin
     end
   
     desc "Print Specdoc for all specs (excluding plugin & generator specs)"
-    Spec::Rake::SpecTask.new(:doc) do |t|
+    RSpec::Core::RakeTask.new(:doc) do |t|
       t.spec_opts = ["--format", "specdoc", "--dry-run"]
       t.spec_files = FileList.new('spec/**/*_spec.rb') do |fl|
         fl.exclude(/generator/)
@@ -59,16 +59,16 @@ begin
     end
 
     desc "Print Specdoc for all plugin specs"
-    Spec::Rake::SpecTask.new(:plugin_doc) do |t|
+    RSpec::Core::RakeTask.new(:plugin_doc) do |t|
       t.spec_opts = ["--format", "specdoc", "--dry-run"]
       t.spec_files = FileList['vendor/plugins/**/spec/**/*_spec.rb'].exclude('vendor/plugins/rspec/*')
     end
 
     [:models, :controllers, :views, :helpers, :lib].each do |sub|
       desc "Run the specs under spec/#{sub}"
-      Spec::Rake::SpecTask.new(sub => spec_prereq) do |t|
-        t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
-        t.spec_files = FileList["#{RADIANT_ROOT}/spec/#{sub}/**/*_spec.rb"]
+      RSpec::Core::RakeTask.new(sub => spec_prereq) do |t|
+        t.rspec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
+        t.pattern = "#{RADIANT_ROOT}/spec/#{sub}/**/*_spec.rb"
       end
     end
     Cucumber::Rake::Task.new(:integration)# do |t|
@@ -94,7 +94,7 @@ begin
     namespace :generators do
       [:extension_controller, :extension_mailer, :extension_migration, :extension_model, :extension, :instance].each do |generator|
         desc "Run the spec at spec/geneartors/#{generator}_generator_spec.rb"
-        Spec::Rake::SpecTask.new(generator => spec_prereq) do |t|
+        RSpec::Core::RakeTask.new(generator => spec_prereq) do |t|
           t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
           t.spec_files = [File.join(RADIANT_ROOT, "spec/generators/#{generator}_generator_spec.rb")]
         end
@@ -102,14 +102,14 @@ begin
     end
   
     desc "Run the specs under vendor/plugins (except RSpec's own)"
-    Spec::Rake::SpecTask.new(:plugins => spec_prereq) do |t|
+    RSpec::Core::RakeTask.new(:plugins => spec_prereq) do |t|
       t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList['vendor/plugins/**/spec/**/*_spec.rb'].exclude('vendor/plugins/rspec/*').exclude("vendor/plugins/rspec-rails/*")
     end
   
     namespace :plugins do
       desc "Runs the examples for rspec_on_rails"
-      Spec::Rake::SpecTask.new(:rspec_on_rails) do |t|
+      RSpec::Core::RakeTask.new(:rspec_on_rails) do |t|
         t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
         t.spec_files = FileList['vendor/plugins/rspec-rails/spec/**/*_spec.rb']
       end
@@ -186,7 +186,7 @@ rescue LoadError
   task :spec_prereq do
     puts "Required dependencies RSpec, RSpec-Rails or Cucumber are missing.\nRun 'rake gems:install Rails.env=test'"
   end
-  
+
   task :spec => :spec_prereq
   namespace :spec do
     %w(integration models controllers views helpers lib generators).each do |t|

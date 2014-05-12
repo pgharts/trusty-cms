@@ -24,8 +24,7 @@ unless defined? SPEC_ROOT
   #   end
   # end
 
-  require 'spec'
-  require 'spec/rails'
+  require 'rspec/rails'
   require 'dataset'
 
   module Kernel
@@ -78,7 +77,7 @@ unless defined? SPEC_ROOT
     end
   end
 
-  Spec::Runner.configure do |config|
+  Rspec.configure do |config|
     config.include Spec::Application::ExampleExtensions
 
     config.use_transactional_fixtures = true
