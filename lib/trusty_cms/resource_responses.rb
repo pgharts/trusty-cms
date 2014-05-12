@@ -2,7 +2,7 @@ require 'ostruct'
 module TrustyCms
   module ResourceResponses
     def self.extended(base)
-      base.send :class_inheritable_writer, :responses
+      base.send :class_attribute, :responses
       base.send :include, InstanceMethods
     end
     
