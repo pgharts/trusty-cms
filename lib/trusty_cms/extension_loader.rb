@@ -61,7 +61,7 @@ module TrustyCms
     # and startup will halt.
     #
     def load_extensions
-      configuration = initializer.configuration
+      configuration = TrustyCms::Application.config
       @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Dependencies)
       self.extensions = configuration.enabled_extensions.map { |ext| load_extension(ext) }.compact
     end

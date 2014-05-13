@@ -194,12 +194,12 @@ class Rails::Application::Configuration
   # More commonly accessed in the initializer via its call to +configuration.admin+.
   #
   def admin
-    AdminUI.instance
+    TrustyCms::AdminUI.instance
   end
 
   %w{controller model view metal plugin load eager_load}.each do |type|
     define_method("add_#{type}_paths".to_sym) do |paths|
-      self.send("#{type}_paths".to_sym).concat(paths)
+      self.paths["app/#{type}s"].concat(paths)
     end
   end
 

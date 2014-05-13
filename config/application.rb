@@ -1,13 +1,33 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'configuration_extensions/configuration_extensions'
 require 'radius'
+require 'trusty_cms/extension_loader'
+require 'trusty_cms/initializer'
+
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module TrustyCms
 class Application < Rails::Application
+
+  include TrustyCms::Initializer
+
   config.autoload_paths += %W(#{config.root}/lib)
+
+
+  # Initialize extension paths
+  config.initialize_extension_paths
+  extension_loader = ExtensionLoader.instance {|l| l.initializer = self }
+  extension_loader.paths(:load).reverse_each do |path|
+    config.autoload_paths.unshift path
+    $LOAD_PATH.unshift path
+  end
+  # config.add_plugin_paths(extension_loader.paths(:plugin))
+  radiant_locale_paths = Dir[File.join(RADIANT_ROOT, 'config', 'locales', '*.{rb,yml}')]
+  config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
+
   config.encoding = 'utf-8'
   # Skip frameworks you're not going to use (only works if using vendor/rails).
   # To use Rails without a database, you must remove the Active Record framework
@@ -83,8 +103,18 @@ class Application < Rails::Application
   end
 
   config.after_initialize do
-    # Initialize extension paths
-    config.initialize_extension_paths
+    extension_loader.load_extensions
+    extension_loader.load_extension_initalizers
+
+
+    Dir["#{RADIANT_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
+      load(initializer)
+    end
+
+    extension_loader.activate_extensions  # also calls initialize_views
+    config.add_controller_paths(extension_loader.paths(:controller))
+    #config.add_eager_load_paths(extension_loader.paths(:eager_load))
+
     # Add new inflection rules using the following format:
     ActiveSupport::Inflector.inflections do |inflect|
       inflect.uncountable 'config'

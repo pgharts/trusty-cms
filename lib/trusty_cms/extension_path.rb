@@ -165,7 +165,7 @@ module TrustyCms
       # are being passed around as symbols.
       #
       def enabled
-        enabled_extensions = TrustyCms.configuration.enabled_extensions
+        enabled_extensions = TrustyCms::Application.config.enabled_extensions
         @@known_paths.values_at(*enabled_extensions).compact
       end
       

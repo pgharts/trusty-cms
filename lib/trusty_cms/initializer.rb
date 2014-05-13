@@ -1,20 +1,15 @@
-require 'initializer'
 require 'trusty_cms/admin_ui'
 require 'trusty_cms/extension_loader'
 
 module TrustyCms
 
-  class Initializer < Rails::Initializer
+  module Initializer
   
     # Rails::Initializer is essentially a list of startup steps and we extend it here by:
     # * overriding or extending some of those steps so that they use radiant and extension paths
     #   as well as (or instead of) the rails defaults.
     # * appending some extra steps to set up the admin UI and activate extensions
-    
-    def self.run(command = :process, configuration = Configuration.new) #:nodoc
-      Rails.configuration = configuration
-      super
-    end
+
 
     # Returns true in the very unusual case where radiant has been deployed as a rails app itself, rather than 
     # loaded as a gem or from vendor/. This is only likely in situations where radiant is customised so heavily
@@ -27,11 +22,7 @@ module TrustyCms
     # Extends the Rails::Initializer default to add extension paths to the autoload list.
     # Note that +default_autoload_paths+ is also overridden to point to RADIANT_ROOT.
     # 
-    def set_autoload_paths
-      extension_loader.paths(:load).reverse_each do |path|
-        configuration.autoload_paths.unshift path
-        $LOAD_PATH.unshift path
-      end
+    def set_autoload_patnd
       super
     end
     
@@ -48,7 +39,7 @@ module TrustyCms
         :"ActionController::ParamsParser",
         Rails::Rack::Metal, :if => Rails::Rack::Metal.metals.any?)
     end
-    
+
     # Extends the Rails initializer to add locale paths from RADIANT_ROOT and from radiant extensions.
     #
     def initialize_i18n
@@ -113,8 +104,8 @@ module TrustyCms
     def after_initialize
       super
       extension_loader.activate_extensions  # also calls initialize_views
-      configuration.add_controller_paths(extension_loader.paths(:controller))
-      configuration.add_eager_load_paths(extension_loader.paths(:eager_load))
+      TrustyCms::Application.config.add_controller_paths(extension_loader.paths(:controller))
+      TrustyCms::Application.config.add_eager_load_paths(extension_loader.paths(:eager_load))
     end
     
     # Initializes all the admin interface elements and views. Separate here so that it can be called
@@ -137,12 +128,12 @@ module TrustyCms
     # so that new extension paths are noticed without a restart.
     #
     def initialize_framework_views
-      view_paths = extension_loader.paths(:view).push(configuration.view_path)
-      if ActionController::Base.view_paths.blank? || !ActionView::Base.cache_template_loading?
+      view_paths = extension_loader.paths(:view) #.push(TrustyCms::Application.config.view_path)
+      if ActionController::Base.view_paths.blank? || !ActionView::Base.cache_template_loading
         ActionController::Base.view_paths = ActionView::Base.process_view_paths(view_paths)
       end
-      if configuration.frameworks.include?(:action_mailer) && ActionMailer::Base.view_paths.blank? || !ActionView::Base.cache_template_loading?
-        ActionMailer::Base.view_paths = ActionView::Base.process_view_paths(view_paths) if configuration.frameworks.include?(:action_mailer)
+      if ActionMailer::Base.view_paths.blank? || !ActionView::Base.cache_template_loading
+        ActionMailer::Base.view_paths = ActionView::Base.process_view_paths(view_paths)
       end
     end 
 
@@ -158,7 +149,7 @@ module TrustyCms
     # Returns the TrustyCms::AdminUI singleton so that the initializer can set up the admin interface.
     #
     def admin
-      configuration.admin
+      TrustyCms::Application.config.admin
     end
 
     # Returns the ExtensionLoader singleton that will eventually load extensions.
