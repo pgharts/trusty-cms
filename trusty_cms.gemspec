@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require File.expand_path(__FILE__ + '/../lib/radiant.rb')
 Gem::Specification.new do |s|
-  s.name = %q{trusty-cms}
+  s.name = %q{trusty-cms }
   s.version = TrustyCms::Version.to_s
   s.platform = Gem::Platform::RUBY
 
@@ -26,7 +26,7 @@ a general purpose content managment system--not merely a blogging engine.}
 
   s.add_dependency "tzinfo",        "~> 0.3.31"
   s.add_dependency "rails",         "~> 3.2.18"
-  s.add_dependency "rdoc",          "~> 3.9.2"
+  s.add_dependency "rdoc",          "~> 3.9"
   s.add_dependency "acts_as_tree",  "~> 0.1.1"
   s.add_dependency "bundler",       ">= 1.0.0"
   s.add_dependency "compass",       "~> 0.12.2"
