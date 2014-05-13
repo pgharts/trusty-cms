@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require File.expand_path(__FILE__ + '/../lib/radiant.rb')
 Gem::Specification.new do |s|
-  s.name = %q{radiant}
+  s.name = %q{trusty-cms}
   s.version = TrustyCms::Version.to_s
   s.platform = Gem::Platform::RUBY
 
