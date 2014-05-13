@@ -83,6 +83,8 @@ class Application < Rails::Application
   end
 
   config.after_initialize do
+    # Initialize extension paths
+    config.initialize_extension_paths
     # Add new inflection rules using the following format:
     ActiveSupport::Inflector.inflections do |inflect|
       inflect.uncountable 'config'

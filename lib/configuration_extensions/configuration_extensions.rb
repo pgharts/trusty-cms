@@ -46,10 +46,9 @@ class Rails::Application::Configuration
 
   attr_accessor :extension_paths, :ignored_extensions
 
-  def initialize #:nodoc:
+  def initialize_extension_paths
     self.extension_paths = default_extension_paths
     self.ignored_extensions = []
-    super
   end
 
   # Sets the locations in which we look for vendored extensions. Normally:
