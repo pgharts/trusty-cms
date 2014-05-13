@@ -156,7 +156,7 @@ class Rails::Application::Configuration
     extension_paths.each_with_object([]) do |load_path, found|
       Dir["#{load_path}/*"].each do |path|
         if File.directory?(path)
-          ep = ExtensionLoader.record_path(path)
+          ep = TrustyCms::ExtensionLoader.record_path(path)
           found << ep.name
         end
       end
@@ -171,7 +171,7 @@ class Rails::Application::Configuration
   def gem_extensions
     Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), found|
       if gemname =~ /radiant-.*-extension$/
-        ep = ExtensionLoader.record_path(gemspec.full_gem_path, gemname)
+        ep = TrustyCms::ExtensionLoader.record_path(gemspec.full_gem_path, gemname)
         found << ep.name
       end
     end
