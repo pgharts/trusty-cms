@@ -112,7 +112,6 @@ module TrustyCms
     # to reset the interface before extension (re)activation.
     #
     def initialize_views
-      puts "I AM HERE"
       initialize_default_admin_tabs
       initialize_framework_views
       admin.load_default_regions
