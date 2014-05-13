@@ -1,4 +1,4 @@
-class CreateTrustyCmsTables < ActiveRecord::Migration
+class CreateRadiantTables < ActiveRecord::Migration
   def self.up
     create_table "config", :force => true do |t|
       t.column "key", :string, :limit => 40, :default => "", :null => false
