@@ -16,21 +16,21 @@ module TrustyCms
     # that extensions are not sufficient.
     #
     def deployed_as_app?
-      RADIANT_ROOT == Rails.root
+      TRUSTY_CMS_ROOT == Rails.root
     end
     
     # Extends the Rails::Initializer default to add extension paths to the autoload list.
-    # Note that +default_autoload_paths+ is also overridden to point to RADIANT_ROOT.
+    # Note that +default_autoload_paths+ is also overridden to point to TRUSTY_CMS_ROOT.
     # 
     def set_autoload_patnd
       super
     end
     
-    # Overrides the Rails initializer to load metal from RADIANT_ROOT and from radiant extensions.
+    # Overrides the Rails initializer to load metal from TRUSTY_CMS_ROOT and from radiant extensions.
     #
     def initialize_metal
       Rails::Rack::Metal.requested_metals = configuration.metals
-      Rails::Rack::Metal.metal_paths = ["#{RADIANT_ROOT}/app/metal"] # reset Rails default to RADIANT_ROOT
+      Rails::Rack::Metal.metal_paths = ["#{TRUSTY_CMS_ROOT}/app/metal"] # reset Rails default to TRUSTY_CMS_ROOT
       Rails::Rack::Metal.metal_paths += plugin_loader.engine_metal_paths
       Rails::Rack::Metal.metal_paths += extension_loader.paths(:metal)
       Rails::Rack::Metal.metal_paths.uniq!
@@ -40,10 +40,10 @@ module TrustyCms
         Rails::Rack::Metal, :if => Rails::Rack::Metal.metals.any?)
     end
 
-    # Extends the Rails initializer to add locale paths from RADIANT_ROOT and from radiant extensions.
+    # Extends the Rails initializer to add locale paths from TRUSTY_CMS_ROOT and from radiant extensions.
     #
     def initialize_i18n
-      radiant_locale_paths = Dir[File.join(RADIANT_ROOT, 'config', 'locales', '*.{rb,yml}')]
+      radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
       configuration.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
       super
     end
@@ -72,7 +72,7 @@ module TrustyCms
     end
     
     # Extends the Rails initializer to run initializers from radiant and from extensions. The load order will be:
-    # 1. RADIANT_ROOT/config/intializers/*.rb
+    # 1. TRUSTY_CMS_ROOT/config/intializers/*.rb
     # 2. Rails.root/config/intializers/*.rb
     # 3. config/initializers/*.rb found in extensions, in extension load order.
     #
@@ -85,10 +85,10 @@ module TrustyCms
       extension_loader.load_extension_initalizers
     end
 
-    # Loads initializers found in RADIANT_ROOT/config/initializers.
+    # Loads initializers found in TRUSTY_CMS_ROOT/config/initializers.
     #
     def load_radiant_initializers
-      Dir["#{RADIANT_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
+      Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
         load(initializer)
       end
     end

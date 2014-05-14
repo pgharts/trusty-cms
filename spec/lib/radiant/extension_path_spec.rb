@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 describe TrustyCms::ExtensionPath do
   
-  let(:ep) { TrustyCms::ExtensionPath.from_path(File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic")) }
+  let(:ep) { TrustyCms::ExtensionPath.from_path(File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")) }
   let(:gem_ep) { TrustyCms::ExtensionPath.from_path("/imaginary/test/path/gems/radiant-gem_ext-extension-0.0.0") }
   let(:git_ep) { TrustyCms::ExtensionPath.from_path("/imaginary/test/path/vendor/extensions/radiant-git_ext-extension-61e0ad14a3ae") }
 
@@ -12,17 +12,17 @@ describe TrustyCms::ExtensionPath do
     end
     
     it "should return the basename of the extension file that should be required" do
-      ep.required.should == File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic/basic_extension")
+      ep.required.should == File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic/basic_extension")
     end
     
     it "should return the extension path" do
-      ep.path.should == File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic")
-      ep.to_s.should == File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic")
+      ep.path.should == File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")
+      ep.to_s.should == File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")
     end
     
     it "should store the extension path object" do
       TrustyCms::ExtensionPath.find(:basic).path.should == ep.path
-      TrustyCms::ExtensionPath.for(:basic).should == File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic")
+      TrustyCms::ExtensionPath.for(:basic).should == File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")
     end
   end
 
@@ -73,7 +73,7 @@ describe TrustyCms::ExtensionPath do
       TrustyCms.stub!(:configuration).and_return(@configuration)
       @extensions = %w{basic overriding}
       @extensions.each do |ext|
-        TrustyCms::ExtensionPath.from_path(File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/#{ext}"))
+        TrustyCms::ExtensionPath.from_path(File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/#{ext}"))
       end
       @configuration.stub!(:enabled_extensions).and_return(@extensions.map(&:to_sym))
     end
@@ -114,15 +114,15 @@ describe TrustyCms::ExtensionPath do
 
       it "should return view_paths in inverse load order" do
         TrustyCms::ExtensionPath.view_paths.should == [
-         "#{RADIANT_ROOT}/test/fixtures/extensions/overriding/app/views",
-         "#{RADIANT_ROOT}/test/fixtures/extensions/basic/app/views"
+         "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/overriding/app/views",
+         "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic/app/views"
         ]
       end
 
       it "should return metal_paths in inverse load order" do
         TrustyCms::ExtensionPath.metal_paths.should == [
-         "#{RADIANT_ROOT}/test/fixtures/extensions/overriding/app/metal",
-         "#{RADIANT_ROOT}/test/fixtures/extensions/basic/app/metal"
+         "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/overriding/app/metal",
+         "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic/app/metal"
         ]
       end
     end

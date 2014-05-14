@@ -242,7 +242,7 @@ the new files: #{warning}"
           FileUtils.mkpath(project_dir)
           FileUtils.cp(sass_files, project_dir)
         end
-        sass_dir = "#{RADIANT_ROOT}/public/stylesheets/sass/admin"
+        sass_dir = "#{TRUSTY_CMS_ROOT}/public/stylesheets/sass/admin"
         copy_sass[Rails.root + '/public/stylesheets/sass/admin/', Dir["#{sass_dir}/*"]]
         Dir["#{sass_dir}/*"].each do |d|
           if File.directory?(d)

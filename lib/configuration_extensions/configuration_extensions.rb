@@ -31,7 +31,7 @@ module TrustyCms
     # This is not the same as Rails.root, which is the instance directory and tends to contain only site-delivery material.
     #
     def root
-      Pathname.new(RADIANT_ROOT) if defined?(RADIANT_ROOT)
+      Pathname.new(TRUSTY_CMS_ROOT) if defined?(TRUSTY_CMS_ROOT)
     end
   end
 end
@@ -40,7 +40,7 @@ end
 class Rails::Application::Configuration
 
   # The TrustyCms::Configuration class extends Rails::Configuration with three purposes:
-  # * to reset some rails defaults so that files are found in RADIANT_ROOT instead of Rails.root
+  # * to reset some rails defaults so that files are found in TRUSTY_CMS_ROOT instead of Rails.root
   # * to notice that some gems and plugins are in fact radiant extensions
   # * to notice that some radiant extensions add load paths (for plugins, controllers, metal, etc)
 
@@ -54,14 +54,14 @@ class Rails::Application::Configuration
   # Sets the locations in which we look for vendored extensions. Normally:
   #   Rails.root/vendor/extensions
   #   TrustyCms.root/vendor/extensions
-  # There are no vendor/* directories in +RADIANT_ROOT+ any more but the possibility remains for compatibility reasons.
+  # There are no vendor/* directories in +TRUSTY_CMS_ROOT+ any more but the possibility remains for compatibility reasons.
   # In test mode we also add a fixtures path for testing the extension loader.
   #
   def default_extension_paths
     env = ENV["Rails.env"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
-    paths.unshift(TrustyCms.root + "vendor/extensions") unless Rails.root == TrustyCms.root
-    paths.unshift(TrustyCms.root + "test/fixtures/extensions") if env =~ /test|cucumber/
+    paths.unshift(TRUSTY_CMS_ROOT + "vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
+    paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test|cucumber/
     paths
   end
 
@@ -206,13 +206,13 @@ class Rails::Application::Configuration
   private
 
   # Overrides the Rails::Initializer default so that autoload paths for models, controllers etc point to
-  # directories in RADIANT_ROOT rather than in Rails.root.
+  # directories in TRUSTY_CMS_ROOT rather than in Rails.root.
   #
   def default_autoload_paths
-    paths = ["#{RADIANT_ROOT}/test/mocks/#{environment}"]
+    paths = ["#{TRUSTY_CMS_ROOT}/test/mocks/#{environment}"]
 
     # Add the app's controller directory
-    paths.concat(Dir["#{RADIANT_ROOT}/app/controllers/"])
+    paths.concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
 
     # Followed by the standard includes.
     paths.concat %w(
@@ -224,26 +224,26 @@ class Rails::Application::Configuration
         config
         lib
         vendor
-      ).map { |dir| "#{RADIANT_ROOT}/#{dir}" }.select { |dir| File.directory?(dir) }
+      ).map { |dir| "#{TRUSTY_CMS_ROOT}/#{dir}" }.select { |dir| File.directory?(dir) }
 
     paths.concat builtin_directories
   end
 
-  # Overrides the Rails::Initializer default to add plugin paths in RADIANT_ROOT as well as Rails.root.
+  # Overrides the Rails::Initializer default to add plugin paths in TRUSTY_CMS_ROOT as well as Rails.root.
   #
   def default_plugin_paths
-    super + ["#{RADIANT_ROOT}/lib/plugins", "#{RADIANT_ROOT}/vendor/plugins"]
+    super + ["#{TRUSTY_CMS_ROOT}/lib/plugins", "#{TRUSTY_CMS_ROOT}/vendor/plugins"]
   end
 
-  # Overrides the Rails::Initializer default to look for views in RADIANT_ROOT rather than Rails.root.
+  # Overrides the Rails::Initializer default to look for views in TRUSTY_CMS_ROOT rather than Rails.root.
   #
   def default_view_path
-    File.join(RADIANT_ROOT, 'app', 'views')
+    File.join(TRUSTY_CMS_ROOT, 'app', 'views')
   end
 
-  # Overrides the Rails::Initializer default to look for controllers in RADIANT_ROOT rather than Rails.root.
+  # Overrides the Rails::Initializer default to look for controllers in TRUSTY_CMS_ROOT rather than Rails.root.
   #
   def default_controller_paths
-    [File.join(RADIANT_ROOT, 'app', 'controllers')]
+    [File.join(TRUSTY_CMS_ROOT, 'app', 'controllers')]
   end
 end

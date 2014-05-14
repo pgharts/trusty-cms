@@ -66,6 +66,6 @@ class LanguageExtensionGenerator < Rails::Generator::NamedBase
   end
   
   def copy_files
-    FileUtils.cp("#{RADIANT_ROOT}/config/locales/en_available_tags.yml","#{RADIANT_ROOT}/#{extension_path}/config/locales/#{localization_name}_available_tags.yml")
+    FileUtils.cp("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml","#{TRUSTY_CMS_ROOT}/#{extension_path}/config/locales/#{localization_name}_available_tags.yml")
   end
 end

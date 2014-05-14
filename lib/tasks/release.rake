@@ -91,7 +91,7 @@ namespace 'radiant' do
 
     desc "Build and install Gem from source"
     task :install => [:gemspec, :package, :uninstall] do
-      chdir("#{RADIANT_ROOT}/pkg") do
+      chdir("#{TRUSTY_CMS_ROOT}/pkg") do
         latest = Dir["#{PKG_NAME}-*.gem"].last
         sudo = "sudo " if ENV['SUDO'] == 'true'
         sh "#{sudo}gem install #{latest}"

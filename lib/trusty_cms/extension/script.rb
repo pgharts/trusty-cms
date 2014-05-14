@@ -283,8 +283,8 @@ module TrustyCms
         end
 
         def extension_paths
-          paths = [Rails.root, RADIANT_ROOT].uniq.map { |p| Dir["#{p}/vendor/extensions/*"] }
-          paths.unshift Dir["#{RADIANT_ROOT}/test/fixtures/extensions/*"] if Rails.env == 'test'    #nasty
+          paths = [Rails.root, TRUSTY_CMS_ROOT].uniq.map { |p| Dir["#{p}/vendor/extensions/*"] }
+          paths.unshift Dir["#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/*"] if Rails.env == 'test'    #nasty
           paths.flatten
         end
 

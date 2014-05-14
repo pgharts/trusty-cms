@@ -15,9 +15,9 @@ describe TrustyCms::ExtensionLoader do
     @loader.initializer = @initializer
     @extensions = %w{basic overriding load_order_blue load_order_green load_order_red}
     @extension_paths = @extensions.each_with_object({}) do |ext, paths|
-      paths[ext.to_sym] = File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/#{ext}")
+      paths[ext.to_sym] = File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/#{ext}")
     end
-    @extension_paths[:git_ext] = File.expand_path("#{RADIANT_ROOT}/test/fixtures/gems/radiant-gem_ext-extension-61e0ad14a3ae")
+    @extension_paths[:git_ext] = File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/gems/radiant-gem_ext-extension-61e0ad14a3ae")
     @loader.stub!(:known_extension_paths).and_return(@extension_paths)
     TrustyCms::AdminUI.instance.initialize_nav
   end
@@ -28,12 +28,12 @@ describe TrustyCms::ExtensionLoader do
 
   it "should only load extensions specified in the configuration" do
     @configuration.should_receive(:enabled_extensions).at_least(:once).and_return([:basic])
-    @loader.enabled_extension_paths.should == [File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/basic")]
+    @loader.enabled_extension_paths.should == [File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")]
   end
 
   it "should select extensions in an explicit order from the configuration" do
     extensions = [:load_order_red, :load_order_blue, :load_order_green]
-    extension_roots = extensions.map {|ext| File.expand_path("#{RADIANT_ROOT}/test/fixtures/extensions/#{ext}") }
+    extension_roots = extensions.map {|ext| File.expand_path("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/#{ext}") }
     extension_roots.each { |ext| @loader.class.record_path(ext) }
     @configuration.should_receive(:enabled_extensions).at_least(:once).and_return(extensions)
     @loader.enabled_extension_paths.should == extension_roots

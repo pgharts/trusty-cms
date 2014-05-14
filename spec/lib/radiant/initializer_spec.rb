@@ -61,7 +61,7 @@ describe TrustyCms::Configuration do
   describe "discovering gem extensions" do
     before do
       @spec = mock(Gem::Specification)
-      @spec.stub!(:full_gem_path).and_return(File.join(RADIANT_ROOT, %w(test fixtures gems radiant-gem_ext-extension-0.0.0)))
+      @spec.stub!(:full_gem_path).and_return(File.join(TRUSTY_CMS_ROOT, %w(test fixtures gems radiant-gem_ext-extension-0.0.0)))
       Gem.stub!(:loaded_specs).and_return({
         'radiant-extension_gem-extension' => @spec,
         'ordinary_gem' => @spec
@@ -140,12 +140,12 @@ describe TrustyCms::Initializer do
     @initializer.admin.should == TrustyCms::AdminUI.instance
   end
 
-  it "should load metal from RADIANT_ROOT and exensions" do
-    Rails::Rack::Metal.metal_paths.should == ["#{RADIANT_ROOT}/app/metal", "#{RADIANT_ROOT}/test/fixtures/extensions/overriding/app/metal", "#{RADIANT_ROOT}/test/fixtures/extensions/basic/app/metal"]
+  it "should load metal from TRUSTY_CMS_ROOT and exensions" do
+    Rails::Rack::Metal.metal_paths.should == ["#{TRUSTY_CMS_ROOT}/app/metal", "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/overriding/app/metal", "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic/app/metal"]
   end
 
   it "should remove extension gem paths from ActiveSupport::Dependencies" do
-    load_paths = [File.join(RADIANT_ROOT, %w(test fixtures gems radiant-gem_ext-extension-0.0.0 lib))]
+    load_paths = [File.join(TRUSTY_CMS_ROOT, %w(test fixtures gems radiant-gem_ext-extension-0.0.0 lib))]
     @loader.should_receive(:paths).with(:plugin).and_return([])
     @loader.should_receive(:paths).with(:load).and_return(load_paths)
     ActiveSupport::Dependencies.load_once_paths.should_receive(:-).with(load_paths)

@@ -75,7 +75,7 @@ shared_examples_for "all instance generators" do
   end
 
   # Check for initializers
-  # initializers are now run from RADIANT_ROOT before the instance,
+  # initializers are now run from TRUSTY_CMS_ROOT before the instance,
   # so most of those are should no longer be copied across
   %w(radiant_config.rb).each do |file|
     it "should have a #{file} initializer" do
@@ -103,7 +103,7 @@ describe "IntanceGenerator" do
     end
 
     after(:all) do
-      FileUtils.rm_rf Dir["#{RADIANT_ROOT}"]
+      FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}"]
     end
 
     it "should have run bundle install" do
@@ -127,7 +127,7 @@ describe "IntanceGenerator" do
       end
 
       after(:all) do
-        FileUtils.rm_rf Dir["#{RADIANT_ROOT}"]
+        FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}"]
       end
     end
   end
@@ -138,8 +138,8 @@ describe "IntanceGenerator" do
     before(:all) do
       @shebang = '/my/path/to/ruby'
       with_radiant_root_as_base_root { suppress_stdout { run_generator('instance', ['-r', @shebang, Rails.root]) } }
-      @files = Dir.glob("#{RADIANT_ROOT}/script/**/*") + Dir.glob("#{RADIANT_ROOT}/public/dispatch*")
-      @files.collect! {|i| [i, i.gsub(/\A#{Regexp.escape(RADIANT_ROOT)}\//, '')] }
+      @files = Dir.glob("#{TRUSTY_CMS_ROOT}/script/**/*") + Dir.glob("#{TRUSTY_CMS_ROOT}/public/dispatch*")
+      @files.collect! {|i| [i, i.gsub(/\A#{Regexp.escape(TRUSTY_CMS_ROOT)}\//, '')] }
     end
 
     it 'should set shebang for scripts & dispatchers' do
@@ -152,7 +152,7 @@ describe "IntanceGenerator" do
     end
 
     after(:all) do
-      FileUtils.rm_rf Dir["#{RADIANT_ROOT}"]
+      FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}"]
     end
   end
 end

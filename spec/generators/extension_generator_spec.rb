@@ -5,7 +5,7 @@ describe "ExtensionGenerator with normal options" do
   it_should_behave_like "all generators"
 
   before(:each) do
-    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension'),  File.join(RADIANT_ROOT, 'vendor/generators')
+    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension'),  File.join(TRUSTY_CMS_ROOT, 'vendor/generators')
     git_config = {'user.name' => 'Ext Author', 'user.email' => 'ext@radiantcms.org', 'github.user' => 'extauthor'}
     Git.stub!(:global_config).and_return git_config
     run_generator('extension', %w(Sample))
@@ -151,8 +151,8 @@ describe "ExtensionGenerator with normal options" do
   end
   
   after(:each) do
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/extensions/*"]
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/generators/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/extensions/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/generators/*"]
   end
 end
 
@@ -162,7 +162,7 @@ describe "ExtensionGenerator with test-unit option" do
   
   before(:each) do
     Git.stub!(:global_config).and_return({})
-    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension'),  File.join(RADIANT_ROOT, 'vendor/generators')
+    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension'),  File.join(TRUSTY_CMS_ROOT, 'vendor/generators')
     run_generator('extension', %w(Sample --with-test-unit))
   end
   
@@ -244,7 +244,7 @@ describe "ExtensionGenerator with test-unit option" do
   end
   
   after(:each) do
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/extensions/*"]
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/generators/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/extensions/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/generators/*"]
   end
 end

@@ -1,6 +1,6 @@
 TrustyCms.config do |config|
   # this file can be used to set defaults, options and validation rules for local configuration settings.
-  # core settings are defined in RADIANT_ROOT/config/initializers/radiant_config.rb and by the corresponding 
+  # core settings are defined in TRUSTY_CMS_ROOT/config/initializers/radiant_config.rb and by the corresponding
   # file in each radiant extension. You probably don't need to add anything here, but in case you do:
 
   # config.define 'site.show_footer?', :default => "true"

@@ -25,7 +25,7 @@ class Application < Rails::Application
     $LOAD_PATH.unshift path
   end
   # config.add_plugin_paths(extension_loader.paths(:plugin))
-  radiant_locale_paths = Dir[File.join(RADIANT_ROOT, 'config', 'locales', '*.{rb,yml}')]
+  radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
   config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
 
   config.encoding = 'utf-8'
@@ -107,7 +107,7 @@ class Application < Rails::Application
     extension_loader.load_extension_initalizers
 
 
-    Dir["#{RADIANT_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
+    Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
       load(initializer)
     end
 

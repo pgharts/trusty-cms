@@ -266,7 +266,7 @@ class Page < ActiveRecord::Base
     end
 
     def load_subclasses
-      ([RADIANT_ROOT] + TrustyCms::Extension.descendants.map(&:root)).each do |path|
+      ([TRUSTY_CMS_ROOT] + TrustyCms::Extension.descendants.map(&:root)).each do |path|
         Dir["#{path}/app/models/*_page.rb"].each do |page|
           $1.camelize.constantize if page =~ %r{/([^/]+)\.rb}
         end

@@ -6,7 +6,7 @@ describe "ExtensionMigrationGenerator with normal options" do
   it_should_behave_like "all extension generators"
   
   before(:each) do
-    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_migration'),  File.join(RADIANT_ROOT, 'vendor/generators')
+    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_migration'),  File.join(TRUSTY_CMS_ROOT, 'vendor/generators')
     run_generator('extension_migration', %w(example ChangeColumnsInSomeTable))
   end
   
@@ -15,8 +15,8 @@ describe "ExtensionMigrationGenerator with normal options" do
   end
   
   after(:each) do
-    extension_dir = File.join(RADIANT_ROOT, 'vendor/extensions/example')
+    extension_dir = File.join(TRUSTY_CMS_ROOT, 'vendor/extensions/example')
     FileUtils.rm_rf Dir["#{extension_dir}/db/migrate/*"]
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/generators/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/generators/*"]
   end
 end

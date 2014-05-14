@@ -8,7 +8,7 @@ TrustyCms::Application.configure do
   config.cache_classes = true
 
   # ensure test extensions are loaded
-  # test_extension_dir = File.join(File.expand_path(RADIANT_ROOT), 'test', 'fixtures', 'extensions')
+  # test_extension_dir = File.join(File.expand_path(TRUSTY_CMS_ROOT), 'test', 'fixtures', 'extensions')
   # config.extension_paths.unshift test_extension_dir
   # config.extension_paths.uniq!
   # if !config.extensions.include?(:all)

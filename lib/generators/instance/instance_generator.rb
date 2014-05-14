@@ -44,7 +44,7 @@ class InstanceGenerator < Rails::Generator::Base
 
   def manifest
     # The absolute location of the TrustyCms files
-    root = File.expand_path(RADIANT_ROOT) 
+    root = File.expand_path(TRUSTY_CMS_ROOT)
     
     # Use /usr/bin/env if no special shebang was specified
     script_options     = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }

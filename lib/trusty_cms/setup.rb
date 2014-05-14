@@ -68,8 +68,8 @@ module TrustyCms
         end
       end
       unless filename
-        templates = find_and_load_templates("#{RADIANT_ROOT}/db/templates/*.yml")
-        templates.concat find_and_load_templates("#{RADIANT_ROOT}/vendor/extensions/**/db/templates/*.yml")
+        templates = find_and_load_templates("#{TRUSTY_CMS_ROOT}/db/templates/*.yml")
+        templates.concat find_and_load_templates("#{TRUSTY_CMS_ROOT}/vendor/extensions/**/db/templates/*.yml")
         TrustyCms::Extension.descendants.each do |d|
           templates.concat find_and_load_templates(d.root + '/db/templates/*.yml')
         end
@@ -123,14 +123,14 @@ module TrustyCms
         (
           [
             filename,
-            "#{RADIANT_ROOT}/#{filename}",
-            "#{RADIANT_ROOT}/db/templates/#{filename}",
+            "#{TRUSTY_CMS_ROOT}/#{filename}",
+            "#{TRUSTY_CMS_ROOT}/db/templates/#{filename}",
             "#{Rails.root}/#{filename}",
             "#{Rails.root}/db/templates/#{filename}",
             "#{Dir.pwd}/#{filename}",
             "#{Dir.pwd}/db/templates/#{filename}"
           ] +
-          Dir.glob("#{RADIANT_ROOT}/vendor/extensions/**/db/templates/#{filename}") + 
+          Dir.glob("#{TRUSTY_CMS_ROOT}/vendor/extensions/**/db/templates/#{filename}") +
           Dir.glob("#{Rails.root}/vendor/extensions/**/db/templates/#{filename}") +
           TrustyCms::Extension.descendants.inject([]) do |r, d|
             r << "#{d.root}/db/templates/#{filename}"

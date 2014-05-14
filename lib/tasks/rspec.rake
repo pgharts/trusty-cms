@@ -40,13 +40,13 @@ begin
   namespace :spec do
     desc "Run all specs in spec directory with RCov (excluding plugin & generator specs)"
     RSpec::Core::RakeTask.new(:rcov) do |t|
-      t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
+      t.spec_opts = ['--options', "\"#{TRUSTY_CMS_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList.new('spec/**/*_spec.rb') do |fl|
         fl.exclude(/generator/)
       end
       t.rcov = true
       t.rcov_opts = lambda do
-        IO.readlines("#{RADIANT_ROOT}/spec/rcov.opts").map {|l| l.chomp.split " "}.flatten
+        IO.readlines("#{TRUSTY_CMS_ROOT}/spec/rcov.opts").map {|l| l.chomp.split " "}.flatten
       end
     end
   
@@ -67,13 +67,13 @@ begin
     [:models, :controllers, :views, :helpers, :lib].each do |sub|
       desc "Run the specs under spec/#{sub}"
       RSpec::Core::RakeTask.new(sub => spec_prereq) do |t|
-        t.rspec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
-        t.pattern = "#{RADIANT_ROOT}/spec/#{sub}/**/*_spec.rb"
+        t.rspec_opts = ['--options', "\"#{TRUSTY_CMS_ROOT}/spec/spec.opts\""]
+        t.pattern = "#{TRUSTY_CMS_ROOT}/spec/#{sub}/**/*_spec.rb"
       end
     end
     Cucumber::Rake::Task.new(:integration)# do |t|
     #   t.cucumber_opts = ["--format","progress"]
-    #   t.feature_pattern = "#{RADIANT_ROOT}/features/**/*.feature"
+    #   t.feature_pattern = "#{TRUSTY_CMS_ROOT}/features/**/*.feature"
     # end
   
     desc 'Run all specs in spec/generators directory'
@@ -95,22 +95,22 @@ begin
       [:extension_controller, :extension_mailer, :extension_migration, :extension_model, :extension, :instance].each do |generator|
         desc "Run the spec at spec/geneartors/#{generator}_generator_spec.rb"
         RSpec::Core::RakeTask.new(generator => spec_prereq) do |t|
-          t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
-          t.spec_files = [File.join(RADIANT_ROOT, "spec/generators/#{generator}_generator_spec.rb")]
+          t.spec_opts = ['--options', "\"#{TRUSTY_CMS_ROOT}/spec/spec.opts\""]
+          t.spec_files = [File.join(TRUSTY_CMS_ROOT, "spec/generators/#{generator}_generator_spec.rb")]
         end
       end
     end
   
     desc "Run the specs under vendor/plugins (except RSpec's own)"
     RSpec::Core::RakeTask.new(:plugins => spec_prereq) do |t|
-      t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
+      t.spec_opts = ['--options', "\"#{TRUSTY_CMS_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList['vendor/plugins/**/spec/**/*_spec.rb'].exclude('vendor/plugins/rspec/*').exclude("vendor/plugins/rspec-rails/*")
     end
   
     namespace :plugins do
       desc "Runs the examples for rspec_on_rails"
       RSpec::Core::RakeTask.new(:rspec_on_rails) do |t|
-        t.spec_opts = ['--options', "\"#{RADIANT_ROOT}/spec/spec.opts\""]
+        t.spec_opts = ['--options', "\"#{TRUSTY_CMS_ROOT}/spec/spec.opts\""]
         t.spec_files = FileList['vendor/plugins/rspec-rails/spec/**/*_spec.rb']
       end
     end
@@ -140,7 +140,7 @@ begin
         task :load => :environment do
           require 'active_record/fixtures'
           ActiveRecord::Base.establish_connection(Rails.env.to_sym)
-          (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/) : Dir.glob(File.join(RADIANT_ROOT, 'spec', 'fixtures', '*.{yml,csv}'))).each do |fixture_file|
+          (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/) : Dir.glob(File.join(TRUSTY_CMS_ROOT, 'spec', 'fixtures', '*.{yml,csv}'))).each do |fixture_file|
             Fixtures.create_fixtures('spec/fixtures', File.basename(fixture_file, '.*'))
           end
         end

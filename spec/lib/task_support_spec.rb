@@ -19,8 +19,8 @@ describe TrustyCms::TaskSupport do
   end
   describe "self.config_import" do
     before do
-      @yaml_file = "#{RADIANT_ROOT}/spec/fixtures/radiant_config.yml"
-      @bad_yaml_file = "#{RADIANT_ROOT}/spec/fixtures/invalid_config.yml"
+      @yaml_file = "#{TRUSTY_CMS_ROOT}/spec/fixtures/radiant_config.yml"
+      @bad_yaml_file = "#{TRUSTY_CMS_ROOT}/spec/fixtures/invalid_config.yml"
     end
     it "should delete all TrustyCms::Config when the clear parameter is set to true" do
       TrustyCms::Config['testing_clear'] = 'true'

@@ -25,7 +25,7 @@ describe TrustyCms::Extension do
   end
   
   it "should have a migrations path" do
-    BasicExtension.migrations_path.should == "#{RADIANT_ROOT}/test/fixtures/extensions/basic/db/migrate"
+    BasicExtension.migrations_path.should == "#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic/db/migrate"
   end
   
   describe BasicExtension do

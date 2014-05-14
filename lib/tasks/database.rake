@@ -5,7 +5,7 @@ namespace :db do
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
       
       # Migrate downward
-      ActiveRecord::Migrator.migrate("#{RADIANT_ROOT}/db/migrate/", 0)
+      ActiveRecord::Migrator.migrate("#{TRUSTY_CMS_ROOT}/db/migrate/", 0)
     
       # Migrate upward 
       Rake::Task["db:migrate"].invoke

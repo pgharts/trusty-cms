@@ -54,10 +54,10 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
   $stdout << "#{tmp_dir}\n\n"
   FileUtils.mkdir_p tmp_dir
 
-  if defined? RADIANT_ROOT
-    RADIANT_ROOT.replace tmp_dir.dup
+  if defined? TRUSTY_CMS_ROOT
+    TRUSTY_CMS_ROOT.replace tmp_dir.dup
   else
-    RADIANT_ROOT = tmp_dir.dup
+    TRUSTY_CMS_ROOT = tmp_dir.dup
   end
 
   if defined? Rails.root
@@ -100,14 +100,14 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
       myout.string
     end
     
-    # Run the block with RADIANT_ROOT replaced with BASE_ROOT
+    # Run the block with TRUSTY_CMS_ROOT replaced with BASE_ROOT
     def with_radiant_root_as_base_root
-      prev_radiant_root = RADIANT_ROOT.dup
-      RADIANT_ROOT.replace BASE_ROOT.dup
+      prev_radiant_root = TRUSTY_CMS_ROOT.dup
+      TRUSTY_CMS_ROOT.replace BASE_ROOT.dup
       begin
         yield
       ensure
-        RADIANT_ROOT.replace prev_radiant_root
+        TRUSTY_CMS_ROOT.replace prev_radiant_root
       end
     end
      
@@ -128,28 +128,28 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
     before(:all) do
       ActiveRecord::Base.pluralize_table_names = true
     
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/app"
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/config"
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/db"
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/vendor/generators"
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/vendor/extensions"
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/app"
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/config"
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/db"
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/vendor/generators"
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/vendor/extensions"
 
-      File.open("#{RADIANT_ROOT}/config/routes.rb", 'w') do |f|
+      File.open("#{TRUSTY_CMS_ROOT}/config/routes.rb", 'w') do |f|
         f << "ActionController::Routing::Routes.draw do |map|\n\nend"
       end
     end
   
     after(:all) do
       %w(app db config vendor).each do |dir|
-        FileUtils.rm_rf File.join(RADIANT_ROOT, dir)
+        FileUtils.rm_rf File.join(TRUSTY_CMS_ROOT, dir)
       end
     end
   end
   
   shared_examples_for "all extension generators" do
     before(:all) do
-      FileUtils.mkdir_p "#{RADIANT_ROOT}/vendor/extensions"
-      FileUtils.cp_r File.join(BASE_ROOT, 'spec/fixtures/example_extension'), File.join(RADIANT_ROOT, 'vendor/extensions/example')
+      FileUtils.mkdir_p "#{TRUSTY_CMS_ROOT}/vendor/extensions"
+      FileUtils.cp_r File.join(BASE_ROOT, 'spec/fixtures/example_extension'), File.join(TRUSTY_CMS_ROOT, 'vendor/extensions/example')
     end
   end
 

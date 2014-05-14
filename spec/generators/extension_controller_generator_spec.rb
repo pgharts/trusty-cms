@@ -6,7 +6,7 @@ describe "ExtensionControllerGenerator with normal options" do
   it_should_behave_like "all extension generators"
   
   before(:each) do
-    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_controller'), File.join(RADIANT_ROOT, 'vendor/generators')
+    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_controller'), File.join(TRUSTY_CMS_ROOT, 'vendor/generators')
     run_generator('extension_controller', %w(example Events show new index))
   end
   
@@ -43,14 +43,14 @@ describe "ExtensionControllerGenerator with normal options" do
   end
   
   after(:each) do
-    extension_dir = File.join(RADIANT_ROOT, 'vendor/extensions/example')
+    extension_dir = File.join(TRUSTY_CMS_ROOT, 'vendor/extensions/example')
     FileUtils.rm_rf Dir["#{extension_dir}/app/controllers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/app/helpers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/app/views/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/spec/controllers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/spec/helpers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/spec/views/*"]
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/generators/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/generators/*"]
   end
 end
 
@@ -60,7 +60,7 @@ describe "ExtensionControllerGenerator with test unit" do
   it_should_behave_like "all extension generators"
   
   before(:each) do
-    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_controller'), File.join(RADIANT_ROOT, 'vendor/generators')
+    FileUtils.cp_r File.join(BASE_ROOT, 'lib/generators/extension_controller'), File.join(TRUSTY_CMS_ROOT, 'vendor/generators')
     run_generator('extension_controller', %w(example Events show new index --with-test-unit))
   end
   
@@ -87,11 +87,11 @@ describe "ExtensionControllerGenerator with test unit" do
   end
   
   after(:each) do
-    extension_dir = File.join(RADIANT_ROOT, 'vendor/extensions/example')
+    extension_dir = File.join(TRUSTY_CMS_ROOT, 'vendor/extensions/example')
     FileUtils.rm_rf Dir["#{extension_dir}/app/controllers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/app/helpers/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/app/views/*"]
     FileUtils.rm_rf Dir["#{extension_dir}/test/*"]
-    FileUtils.rm_rf Dir["#{RADIANT_ROOT}/vendor/generators/*"]
+    FileUtils.rm_rf Dir["#{TRUSTY_CMS_ROOT}/vendor/generators/*"]
   end
 end

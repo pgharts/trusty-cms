@@ -8,7 +8,7 @@ module Spec
       
         def matches?(base)
           @base = base
-          @path = File.join(RADIANT_ROOT, @base, @dir)
+          @path = File.join(TRUSTY_CMS_ROOT, @base, @dir)
           File.exist?(@path) && File.directory?(@path)
         end
       end
@@ -20,7 +20,7 @@ module Spec
       
         def matches?(base)
           @base = base
-          @path = File.join(RADIANT_ROOT, @base, @file)
+          @path = File.join(TRUSTY_CMS_ROOT, @base, @file)
           if (exists = File.exist?(@path)) && block_given?  
             File.open(@path) { |f| yield(f.read) }
           end
@@ -124,7 +124,7 @@ module Spec
         def negative_failure_message()                          "expected no file, but file '#{@path}.rb' was found" end
         
         def matches?(base)
-          root_path = File.expand_path(File.join(RADIANT_ROOT, base))
+          root_path = File.expand_path(File.join(TRUSTY_CMS_ROOT, base))
           @path = Dir.glob("#{root_path}/db/migrate/*_#{@name.to_s.underscore}.rb").first
           return false if @path.nil?
           @path = @path.match(/db\/migrate\/[0-9]+_\w+/).to_s

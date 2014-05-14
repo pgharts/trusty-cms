@@ -3,7 +3,7 @@ require 'dataset'
 
 Cucumber::Rails::World.class_eval do
   include Dataset
-  radiant_dataset_path = "#{RADIANT_ROOT}/spec/datasets"
+  radiant_dataset_path = "#{TRUSTY_CMS_ROOT}/spec/datasets"
   local_extension_paths = $LOAD_PATH.select{|p| p =~ /vendor\/extensions\/\w+[^\/]$/ }
   gem_extension_paths = $LOAD_PATH.select{|p| p =~ /gems\/trusty_cms/ }
   dataset_paths = (local_extension_paths + gem_extension_paths).map{|p| p << '/spec/datasets' } << radiant_dataset_path

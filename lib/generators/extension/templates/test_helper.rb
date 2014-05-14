@@ -1,6 +1,6 @@
 require 'test/unit'
 # Load the environment
-unless defined? RADIANT_ROOT
+unless defined? TRUSTY_CMS_ROOT
   ENV["Rails.env"] = "test"
   case
   when ENV["RADIANT_ENV_FILE"]
@@ -11,7 +11,7 @@ unless defined? RADIANT_ROOT
     require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../")}/config/environment"
   end
 end
-require "#{RADIANT_ROOT}/test/test_helper"
+require "#{TRUSTY_CMS_ROOT}/test/test_helper"
 
 class ActiveSupport::TestCase
   

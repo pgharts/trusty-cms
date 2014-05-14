@@ -16,7 +16,7 @@ unless defined? SPEC_ROOT
     require env
   end
 
-  # unless defined? RADIANT_ROOT
+  # unless defined? TRUSTY_CMS_ROOT
   #   if env_file = ENV["RADIANT_ENV_FILE"]
   #     require env_file
   #   else
@@ -35,7 +35,7 @@ unless defined? SPEC_ROOT
 
   class ActiveSupport::TestCase
     include Dataset
-    datasets_directory "#{RADIANT_ROOT}/spec/datasets"
+    datasets_directory "#{TRUSTY_CMS_ROOT}/spec/datasets"
     Dataset::ContextClassMethods.datasets_database_dump_path = File.expand_path(Rails.root + '/tmp/dataset')
 
     class << self
@@ -61,7 +61,7 @@ unless defined? SPEC_ROOT
     end
   end
 
-  Dir[RADIANT_ROOT + '/spec/matchers/*_matcher.rb'].each do |matcher|
+  Dir[TRUSTY_CMS_ROOT + '/spec/matchers/*_matcher.rb'].each do |matcher|
     require matcher
   end
 

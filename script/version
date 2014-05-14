@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/boot'
-require "#{RADIANT_ROOT}/lib/radiant"
+require "#{TRUSTY_CMS_ROOT}/lib/radiant"
 
 puts "TrustyCms #{TrustyCms::Version}"

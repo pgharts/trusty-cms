@@ -47,7 +47,7 @@ describe "TrustyCms::Extension::Script::Util" do
   it "should determine extension paths" do
     # Bad coupling, but will work by default
     extension_paths.should be_kind_of(Array)
-    extension_paths.should include("#{RADIANT_ROOT}/test/fixtures/extensions/basic")
+    extension_paths.should include("#{TRUSTY_CMS_ROOT}/test/fixtures/extensions/basic")
   end
 
   it "should determine whether an extension is installed" do

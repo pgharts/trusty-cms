@@ -5,7 +5,7 @@ unless defined? TEST_ROOT
   
   TEST_ROOT = File.expand_path(File.dirname(__FILE__))
   
-  unless defined? RADIANT_ROOT
+  unless defined? TRUSTY_CMS_ROOT
     if env_file = ENV["RADIANT_ENV_FILE"]
       require env_file
     else
