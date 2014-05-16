@@ -66,8 +66,6 @@ class Rails::Application::Configuration
       paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
     end
 
-    paths.each {|path| puts path}
-
     #paths.concat builtin_directories
   end
 
@@ -83,7 +81,7 @@ class Rails::Application::Configuration
   # In test mode we also add a fixtures path for testing the extension loader.
   #
   def default_extension_paths
-    env = ENV["Rails.env"] || Rails.env
+    env = ENV["RAILS_ENV"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
     paths.unshift(TRUSTY_CMS_ROOT + "vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
     paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test|cucumber/
@@ -100,6 +98,7 @@ class Rails::Application::Configuration
   # that the application is configured to load that extension.
   #
   def enabled_extensions
+    puts "REMOVING EXTENSIONS"
     @enabled_extensions ||= expanded_extension_list - ignored_extensions
   end
 
@@ -195,7 +194,7 @@ class Rails::Application::Configuration
   #
   def gem_extensions
     Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), found|
-      if gemname =~ /radiant-.*-extension$/
+      if gemname =~ /trusty-.*-extension$/
         ep = TrustyCms::ExtensionLoader.record_path(gemspec.full_gem_path, gemname)
         found << ep.name
       end

@@ -45,7 +45,7 @@ module TrustyCms
     #
     def self.from_path(path, name=nil)
       name = path if name.blank?
-      name = File.basename(name).gsub(/^radiant-|-extension(-[\d\.a-z]+|-[a-z\d]+)*$/, '')
+      name = File.basename(name).gsub(/^trusty-|-extension(-[\d\.a-z]+|-[a-z\d]+)*$/, '')
       new(:name => name, :path => path)
     end
     
