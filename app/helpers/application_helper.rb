@@ -1,5 +1,4 @@
 module ApplicationHelper
-  include LocalTime
   include Admin::RegionsHelper
   
   def config

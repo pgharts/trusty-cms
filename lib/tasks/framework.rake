@@ -8,8 +8,8 @@ unless File.directory? "#{Rails.root}/app"
         require 'rubygems/gem_runner'
 
         radiant = (version = ENV['VERSION']) ?
-          Gem.cache.search('radiant', "= #{version}").first :
-          Gem.cache.search('radiant').sort_by { |g| g.version }.last
+          Gem.cache.search('trusty-cms', "= #{version}").first :
+          Gem.cache.search('trusty-cms').sort_by { |g| g.version }.last
 
         version ||= radiant.version
 

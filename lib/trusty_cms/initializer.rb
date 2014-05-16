@@ -22,7 +22,7 @@ module TrustyCms
     # Extends the Rails::Initializer default to add extension paths to the autoload list.
     # Note that +default_autoload_paths+ is also overridden to point to TRUSTY_CMS_ROOT.
     # 
-    def set_autoload_patnd
+    def set_autoload_patf
       super
     end
     

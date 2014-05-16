@@ -1,3 +1,4 @@
+require 'trusty_cms/pagination/controller'
 class SiteController < ApplicationController
   include TrustyCms::Pagination::Controller
 

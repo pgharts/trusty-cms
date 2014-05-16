@@ -2,9 +2,9 @@ require 'rubygems'
 require 'rake/testtask'
 require 'rdoc/task'
 require 'rubygems/package_task'
-require 'radiant'
+require 'trusty_cms'
 
-PKG_NAME = 'radiant'
+PKG_NAME = 'trusty-cms'
 PKG_VERSION = TrustyCms::Version.to_s
 PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
 RUBY_FORGE_PROJECT = PKG_NAME
@@ -19,7 +19,7 @@ RUBY_FORGE_PACKAGEID = '1638'
 RDOC_TITLE = "TrustyCms -- Publishing for Small Teams"
 RDOC_EXTRAS = ["README.md", "CONTRIBUTORS.md", "CHANGELOG.md", "INSTALL.md", "LICENSE.md"]
 
-namespace 'radiant' do
+namespace 'trusty_cms' do
   spec = Gem::Specification.new do |s|
     s.name = PKG_NAME
     s.version = PKG_VERSION

@@ -50,7 +50,7 @@ unless defined?(::GENERATOR_SUPPORT_LOADED) && ::GENERATOR_SUPPORT_LOADED
   end
 
   # Set Rails.root appropriately fixture generation
-  tmp_dir = File.expand_path(File.join(Dir.tmpdir, 'radiant'))
+  tmp_dir = File.expand_path(File.join(Dir.tmpdir, 'trusty_cms'))
   $stdout << "#{tmp_dir}\n\n"
   FileUtils.mkdir_p tmp_dir
 

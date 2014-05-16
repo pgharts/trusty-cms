@@ -1,3 +1,4 @@
+require 'trusty_cms/taggable'
 module DeprecatedTags
   include TrustyCms::Taggable
 

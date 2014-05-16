@@ -1,4 +1,5 @@
-require_dependency 'radiant'
+require_dependency 'trusty_cms'
+require 'login_system'
 
 class ApplicationController < ActionController::Base
   include LoginSystem

@@ -46,6 +46,31 @@ class Rails::Application::Configuration
 
   attr_accessor :extension_paths, :ignored_extensions
 
+
+  def load_trusty_paths
+    #paths << ["#{TRUSTY_CMS_ROOT}/test/mocks/#{environment}"]
+
+    # Add the app's controller directory
+    paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
+
+    # Followed by the standard includes.
+    %w(
+        app
+        app/models
+        app/controllers
+        app/helpers
+        config
+        lib
+        vendor
+      ).each  do |dir|
+      paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
+    end
+
+    paths.each {|path| puts path}
+
+    #paths.concat builtin_directories
+  end
+
   def initialize_extension_paths
     self.extension_paths = default_extension_paths
     self.ignored_extensions = []
@@ -204,30 +229,6 @@ class Rails::Application::Configuration
   end
 
   private
-
-  # Overrides the Rails::Initializer default so that autoload paths for models, controllers etc point to
-  # directories in TRUSTY_CMS_ROOT rather than in Rails.root.
-  #
-  def default_autoload_paths
-    paths = ["#{TRUSTY_CMS_ROOT}/test/mocks/#{environment}"]
-
-    # Add the app's controller directory
-    paths.concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
-
-    # Followed by the standard includes.
-    paths.concat %w(
-        app
-        app/metal
-        app/models
-        app/controllers
-        app/helpers
-        config
-        lib
-        vendor
-      ).map { |dir| "#{TRUSTY_CMS_ROOT}/#{dir}" }.select { |dir| File.directory?(dir) }
-
-    paths.concat builtin_directories
-  end
 
   # Overrides the Rails::Initializer default to add plugin paths in TRUSTY_CMS_ROOT as well as Rails.root.
   #

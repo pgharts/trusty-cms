@@ -1,3 +1,4 @@
+require 'trusty_cms/resource_responses'
 require 'will_paginate'
 class Admin::ResourceController < ApplicationController
   extend TrustyCms::ResourceResponses
