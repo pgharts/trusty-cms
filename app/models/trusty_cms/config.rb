@@ -11,6 +11,7 @@ module TrustyCms
   end
 
   class Config < ActiveRecord::Base
+    require 'trusty_cms/config/definition'
     #
     # The TrustyCms.config model class is stored in the database (and cached) but emulates a hash
     # with simple bracket methods that allow you to get and set values like so:
