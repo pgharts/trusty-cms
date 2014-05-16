@@ -1,3 +1,5 @@
+require 'trusty_cms/taggable'
+require 'local_time'
 module StandardTags
 
   include TrustyCms::Taggable
