@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_timezone
-      Time.zone = TrustyCms::Config['local.timezone'] || Time.zone_default
+      Time.zone = TrustyCms::Config['local.timezone'].empty? ? Time.zone_default : TrustyCms::Config['local.timezone']
     end
   
     def set_javascripts_and_stylesheets
