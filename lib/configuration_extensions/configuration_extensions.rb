@@ -98,7 +98,6 @@ class Rails::Application::Configuration
   # that the application is configured to load that extension.
   #
   def enabled_extensions
-    puts "REMOVING EXTENSIONS"
     @enabled_extensions ||= expanded_extension_list - ignored_extensions
   end
 
