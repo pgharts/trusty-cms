@@ -11,7 +11,7 @@ module Admin::ConfigurationHelper
     setting.valid?
     domkey = key.gsub(/\W/, '_')
     html = ""
-    html << content_tag(:label, t("config.#{key}").titlecase, :for => domkey)
+    html << content_tag(:label, t("trusty_config.#{key}").titlecase, :for => domkey)
     if setting.boolean?
       value = setting.checked? ? t('yes') : t('no')
       html << content_tag(:span, value, :id => domkey, :class => "#{value} #{options[:class]}")
@@ -43,8 +43,8 @@ module Admin::ConfigurationHelper
   def edit_config(key, options={})
     setting = setting_for(key)
     domkey = key.gsub(/\W/, '_')
-    name = "config[#{key}]"
-    title = t("config.#{key}").titlecase
+    name = "trusty_config[#{key}]"
+    title = t("trusty_config.#{key}").titlecase
     title << content_tag(:span, " (#{t("units.#{setting.units}")})", :class => 'units') if setting.units
     value = params[key.to_sym].nil? ? setting.value : params[key.to_sym]
     html = ""

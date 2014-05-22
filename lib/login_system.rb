@@ -30,7 +30,7 @@ module LoginSystem
         session['user_id'] = current_user.id
         true
       else
-        session[:return_to] = request.request_uri
+        session[:return_to] = request.original_url
         respond_to do |format|
           format.html { redirect_to login_url }
           format.any(:xml,:json) { request_http_basic_authentication }
@@ -84,8 +84,7 @@ module LoginSystem
 
   module ClassMethods
     def no_login_required
-      skip_before_filter :authenticate
-      skip_before_filter :authorize
+      skip_filter :authenticate, :authorize
     end
 
     def login_required?

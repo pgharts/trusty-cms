@@ -26,8 +26,8 @@ class Admin::ConfigurationController < ApplicationController
       begin
         TrustyCms.config.transaction do
           params["config"].each_pair do |key, value|
-            @config[key] = TrustyCms::Config.find_or_create_by_key(key)
-            @config[key].value = value      # validation sets errors on @config['key'] that the helper methods will pick up
+            @trusty_config[key] = TrustyCms::Config.find_or_create_by_key(key)
+            @trusty_config[key].value = value      # validation sets errors on @trusty_config['key'] that the helper methods will pick up
           end
           redirect_to :action => :show
         end
@@ -44,7 +44,7 @@ class Admin::ConfigurationController < ApplicationController
 protected
 
   def initialize_config
-    @config = {}
+    @trusty_config = {}
   end
   
 end

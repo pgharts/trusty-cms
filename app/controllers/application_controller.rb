@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include LoginSystem
   
   protect_from_forgery
-  
+
   before_filter :set_current_user
   before_filter :set_timezone
   before_filter :set_user_locale
@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
   before_filter :force_utf8_params if RUBY_VERSION =~ /1\.9/
   before_filter :set_standard_body_style, :only => [:new, :edit, :update, :create]
   
-  attr_accessor :config, :cache
+  attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
   helper_method :pagination_parameters
   
   def initialize
     super
-    @config = TrustyCms::Config
+    @trusty_config = TrustyCms::Config
   end
   
   # helpers to include additional assets from actions or views
