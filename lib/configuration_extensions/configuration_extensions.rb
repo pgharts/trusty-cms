@@ -51,7 +51,7 @@ class Rails::Application::Configuration
     #paths << ["#{TRUSTY_CMS_ROOT}/test/mocks/#{environment}"]
 
     # Add the app's controller directory
-    paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
+    #paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
 
     # Followed by the standard includes.
     %w(
@@ -63,7 +63,9 @@ class Rails::Application::Configuration
         lib
         vendor
       ).each  do |dir|
-      paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
+      autoload_paths.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
+      $LOAD_PATH.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
+      #paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
     end
 
     #paths.concat builtin_directories

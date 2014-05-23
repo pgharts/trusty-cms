@@ -2,7 +2,6 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-      prepend_before_filter :authenticate, :authorize
       helper_method :current_user
     end
   end
@@ -25,6 +24,7 @@ module LoginSystem
     end
     
     def authenticate
+      puts _process_action_callbacks.map(&:filter)
       action = params['action'].to_s.intern
       if current_user
         session['user_id'] = current_user.id
@@ -84,7 +84,9 @@ module LoginSystem
 
   module ClassMethods
     def no_login_required
-      skip_filter :authenticate, :authorize
+      Rails.logger.error "NO LOGIN REQUIRED"
+      require 'pry'; binding.pry
+      skip_before_filter :authenticate, :authorize
     end
 
     def login_required?

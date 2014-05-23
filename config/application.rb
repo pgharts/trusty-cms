@@ -112,7 +112,7 @@ class Application < Rails::Application
     end
 
     extension_loader.activate_extensions  # also calls initialize_views
-    config.add_controller_paths(extension_loader.paths(:controller))
+    #config.add_controller_paths(extension_loader.paths(:controller))
     #config.add_eager_load_paths(extension_loader.paths(:eager_load))
 
     # Add new inflection rules using the following format:

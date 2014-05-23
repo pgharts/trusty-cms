@@ -2,7 +2,7 @@ require 'trusty_cms/pagination/controller'
 class SiteController < ApplicationController
   include TrustyCms::Pagination::Controller
 
-  skip_before_filter :verify_authenticity_token
+  skip_filter :verify_authenticity_token
   no_login_required
 
   def self.cache_timeout=(val)

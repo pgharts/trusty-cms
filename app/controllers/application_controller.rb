@@ -1,8 +1,9 @@
-require_dependency 'trusty_cms'
+#require_dependency 'trusty_cms'
 require 'login_system'
 
 class ApplicationController < ActionController::Base
   include LoginSystem
+  prepend_before_filter :authenticate, :authorize
   
   protect_from_forgery
 
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_javascripts_and_stylesheets
   before_filter :force_utf8_params if RUBY_VERSION =~ /1\.9/
   before_filter :set_standard_body_style, :only => [:new, :edit, :update, :create]
-  
+
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
   helper_method :pagination_parameters
@@ -62,6 +63,7 @@ class ApplicationController < ActionController::Base
   private
   
     def set_current_user
+      Rails.logger.error "SETTING CURRENT USER"
       UserActionObserver.instance.current_user = current_user
     end  
         
