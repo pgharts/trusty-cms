@@ -1,9 +1,9 @@
 module ApplicationHelper
   include Admin::RegionsHelper
   
-  def config
-    TrustyCms::Config
-  end
+  #def config
+  #  TrustyCms::Config
+  #end
   
   def default_page_title
     title + ' - ' + subtitle
