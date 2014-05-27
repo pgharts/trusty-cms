@@ -1,1 +1,1 @@
-require 'string_extensions/string_extensions'
+#require 'string_extensions/string_extensions'

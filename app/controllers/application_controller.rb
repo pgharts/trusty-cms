@@ -3,7 +3,6 @@ require 'login_system'
 
 class ApplicationController < ActionController::Base
   include LoginSystem
-  prepend_before_filter :authenticate, :authorize
   
   protect_from_forgery
 
@@ -63,7 +62,6 @@ class ApplicationController < ActionController::Base
   private
   
     def set_current_user
-      Rails.logger.error "SETTING CURRENT USER"
       UserActionObserver.instance.current_user = current_user
     end  
         
@@ -72,7 +70,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_timezone
-      Time.zone = TrustyCms::Config['local.timezone'].empty? ? Time.zone_default : TrustyCms::Config['local.timezone']
+      Time.zone = TrustyCms::Config['local.timezone'] != nil && TrustyCms::Config['local.timezone'].empty? ? Time.zone_default : TrustyCms::Config['local.timezone']
     end
   
     def set_javascripts_and_stylesheets
