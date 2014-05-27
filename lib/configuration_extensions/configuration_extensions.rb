@@ -53,19 +53,23 @@ class Rails::Application::Configuration
     # Add the app's controller directory
     #paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
 
+
+
     # Followed by the standard includes.
     %w(
         app
         app/models
         app/controllers
         app/helpers
+        app/views
         config
         lib
         vendor
       ).each  do |dir|
       autoload_paths.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
       $LOAD_PATH.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
-      #paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
+      puts dir
+      paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
     end
 
     #paths.concat builtin_directories
@@ -224,6 +228,7 @@ class Rails::Application::Configuration
 
   %w{controller model view metal plugin load eager_load}.each do |type|
     define_method("add_#{type}_paths".to_sym) do |paths|
+      puts "paths"
       self.paths["app/#{type}s"].concat(paths)
     end
   end
