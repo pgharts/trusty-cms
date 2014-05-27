@@ -10,11 +10,11 @@ module ApplicationHelper
   end
   
   def title
-    trusty_config['admin.title'] || 'TrustyCms CMS'
+    @trusty_config['admin.title'] || 'TrustyCms CMS'
   end
   
   def subtitle
-    trusty_config['admin.subtitle'] || 'Publishing for Small Teams'
+    @trusty_config['admin.subtitle'] || 'Publishing for Small Teams'
   end
   
   def logged_in?
@@ -213,7 +213,7 @@ module ApplicationHelper
   def pagination_for(list, options={})
     if list.respond_to? :total_pages
       options = {
-        :max_per_page => trusty_config['pagination.max_per_page'] || 500,
+        :max_per_page => @trusty_config['pagination.max_per_page'] || 500,
         :depaginate => true
       }.merge(options.symbolize_keys)
       depaginate = options.delete(:depaginate)                                     # supply :depaginate => false to omit the 'show all' link
