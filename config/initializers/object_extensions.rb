@@ -1,1 +1,1 @@
-require 'object_extensions'
+require 'object_extensions/object_extensions'
