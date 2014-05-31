@@ -25,9 +25,10 @@ TrustyCms features:
 
 ## License
 
-TrustyCms is released under the MIT license and is copyright (c) 2006-2009
-John W. Long and Sean Cribbs. A copy of the MIT license can be found in the
-LICENSE file.
+TrustyCms is released under the MIT license. The Radiant portions of the
+codebase are copyright (c) John W. Long and Sean Cribbs; anything after the
+fork is copyright (c) Pittsburgh Cultural Trust. A copy of the MIT license can
+be found in the LICENSE file.
 
 ## Installation and Setup
 
@@ -72,15 +73,9 @@ http://radiantcms.org/mailing-list/
 
 Most of the development for TrustyCms happens on Github:
 
-http://github.com/radiant/radiant/
-
-The project wiki is here:
-
-http://wiki.github.com/radiant/radiant/
-
+https://github.com/pgharts/trusty-cms
 
 Enjoy!
 
 --
 The TrustyCms Dev Team
-http://radiantcms.org
