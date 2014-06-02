@@ -11,12 +11,12 @@ Gem::Specification.new do |s|
   s.description = %q{TrustyCms is a simple and powerful publishing system designed for small teams.
 It is built with Rails and is similar to Textpattern or MovableType, but is
 a general purpose content managment system--not merely a blogging engine.}
-  s.email = %q{radiant@radiantcms.org}
+  s.email = %q{saalon@gmail.com}
   s.executables = ["trusty_cms"]
   s.extra_rdoc_files = ["README.md", "CONTRIBUTORS.md", "CHANGELOG.md", "INSTALL.md", "LICENSE.md"]
   ignores = File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
   s.files = Dir['**/*','.gitignore', 'public/.htaccess', 'log/.keep', 'vendor/extensions/.keep'] - ignores
-  s.homepage = %q{http://radiantcms.org}
+  s.homepage = %q{https://github.com/pgharts/trusty-cms}
   s.rdoc_options = ["--title", "TrustyCms -- Publishing for Small Teams", "--line-numbers", "--main", "README", "--exclude", "app", "--exclude", "bin", "--exclude", "config", "--exclude", "db", "--exclude", "features", "--exclude", "lib", "--exclude", "log", "--exclude", "pkg", "--exclude", "public", "--exclude", "script", "--exclude", "spec", "--exclude", "test", "--exclude", "tmp", "--exclude", "vendor"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{radiant}
