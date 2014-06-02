@@ -2,6 +2,3 @@ test: &TEST
   adapter: postgresql
   database: radiant_test
   username: postgres
-
-cucumber:
-  <<: *TEST

@@ -6,7 +6,7 @@
 development:
   adapter: sqlite3
   database: db/radiant_dev.db
-  
+
 test: &TEST
   adapter: sqlite3
   database: db/radiant_test.db
@@ -14,6 +14,3 @@ test: &TEST
 production:
   adapter: sqlite3
   database: db/radiant_live.db
-
-cucumber:
-  <<: *TEST

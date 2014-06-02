@@ -131,7 +131,6 @@ class Rails::Application::Configuration
     env = ENV["RAILS_ENV"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
     paths.unshift(TRUSTY_CMS_ROOT + "vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
-    paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test|cucumber/
     paths
   end
 

@@ -18,6 +18,3 @@ production:
   username:
   password:
   host:
-    
-cucumber:
-  <<: *TEST
