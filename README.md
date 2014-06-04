@@ -1,12 +1,15 @@
 ## Welcome to TrustyCMS
 
-Trusty is a branch of the venerable TrustyCms CMS. Its goal is to pull the TrustyCms framework into Rails 3 with minimal changes to its infrastructure. Everything below this is from the TrustyCms readme.
+Trusty is a branch of the venerable Radiant CMS. Its goal is to pull the Radiant framework into Rails 3 with minimal changes to its infrastructure. Everything below this is from the TrustyCms readme.
 
 TrustyCms is a no-fluff, open source content management system designed for
 small teams. It is similar to Textpattern or MovableType, but is a general
 purpose content management system (not just a blogging engine).
 
 [![Build Status](https://secure.travis-ci.org/pgharts/trusty-cms.png?branch=master)](https://travis-ci.org/pgharts/trusty-cms/)
+
+Currently, TrustyCMS is not functional. We're managing the outstanding problems in [Github Issues](https://github.com/pgharts/trusty-cms/issues?state=open), so if you'd like to help out, that's a great place to start. Also, if you find anything wrong, let us know there so we can get to work fixing it.
+
 
 TrustyCms features:
 
