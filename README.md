@@ -25,62 +25,64 @@ TrustyCms features:
 
 ## License
 
-TrustyCms is released under the MIT license and is copyright (c) 2006-2009
-John W. Long and Sean Cribbs. A copy of the MIT license can be found in the
-LICENSE file.
+TrustyCms is released under the MIT license. The Radiant portions of the
+codebase are copyright (c) John W. Long and Sean Cribbs; anything after the
+fork is copyright (c) Pittsburgh Cultural Trust. A copy of the MIT license can
+be found in the LICENSE file.
 
-## Installation and Setup
+## Installation and Setup for Use
 
 TrustyCms is a traditional Ruby on Rails application, meaning that you can
 configure and run it the way you would a normal Rails application.
 
 See the INSTALL file for more details.
 
-### Installation of a Prerelease
+### Installation and Setup for Contributing to TrustyCms
 
-As TrustyCms nears newer releases, you can experiment with any prerelease version.
+Prerequisites:
 
-Install the prerelease gem with the following command:
+* A github account and Git ([Github has some really good instructons](https://help.github.com/articles/set-up-git))
+* Ruby 1.9.3
+* The bundler gem
+* Mysql
 
-    $ gem install radiant --prerelease
+1. Fork this repository to your github account.
+1. Clone your fork to your machine.
+1. Install the gems with bundler: `bundle`
+1. Create a database configuration: `cp config/database.mysql.yml config/database.yml`. You probably don't need to make any further changes.
+1. Set up your database:
 
-This will install the gem with the prerelease name, for example: ‘radiant-0.9.0.rc2’.
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+        bundle exec rake db:migrate:extensions
+1. Run the tests to make sure they pass (If they don't, file a bug!):
 
-### Upgrading an Existing Project to a newer version
+        rspec
 
-1. Update the TrustyCms assets from in your project:
 
-    $ rake radiant:update
+When you're ready to make a change:
 
-2. Migrate the database:
+1. Add the pgharts fork as a git remote called "upstream": `git remote add upstream https://github.com/pgharts/trusty-cms.git` so that you can keep up with changes that other people make.
+1. Fetch the remote you just added: `git fetch upstream`
+1. Start a new branch for the change you're going to make. Name it something having to do with the changes, like "fix-queries" if you are going to try to fix some queries. Base this branch on `upstream/master` by running `git checkout -b fix-queries upstream/master`
+1. Make your changes and commit them. Please include tests!
+1. Run the tests and make sure they pass.
+1. Push your changes to your github fork: `git push origin fix-queries`
+1. Send a pull request to the pgharts fork
+1. High five the nearest person!
 
-    $ rake production db:migrate
-
-3. Restart the web server
-
-## Development Requirements
-
-To run tests you will need to have the following gems installed:
-
-  gem install ZenTest rspec rspec-rails cucumber webrat nokogiri sqlite3-ruby
 
 ## Support
 
-The best place to get support is on the mailing list:
+The best place to get support is on the Pittsburgh Ruby mailing list:
 
-http://radiantcms.org/mailing-list/
+https://groups.google.com/forum/#!forum/rubypgh
 
 Most of the development for TrustyCms happens on Github:
 
-http://github.com/radiant/radiant/
-
-The project wiki is here:
-
-http://wiki.github.com/radiant/radiant/
-
+https://github.com/pgharts/trusty-cms
 
 Enjoy!
 
 --
 The TrustyCms Dev Team
-http://radiantcms.org
