@@ -14,7 +14,10 @@
     - if @content_for_page_css
       %style{:type => "text/css"}= @content_for_page_css
     = yield :meta
-    = stylesheet_and_javascript_overrides
+    - stylesheet_overrides.each do |stylesheet|
+      = stylesheet_link_tag stylesheet
+    - javascript_overrides.each do |javascript|
+      = javascript_include_tag javascript
   %body{:class=>body_classes.join(" ")}
     #page
       #header
