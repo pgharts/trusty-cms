@@ -24,7 +24,6 @@ describe 'Configuration of a site' do
     it 'is a valid site' do
       visit '/'
       expect(page).to have_no_content "Template is missing"
-      sa
     end
   end
 end
