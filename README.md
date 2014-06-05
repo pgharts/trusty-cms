@@ -42,26 +42,61 @@ See the INSTALL file for more details.
 
 ### Installation and Setup for Contributing to TrustyCms
 
+#### Part A of setup, common to both kinds of installations
+
 Prerequisites:
 
 * A github account and Git ([Github has some really good instructons](https://help.github.com/articles/set-up-git))
+
+Steps:
+
+1. Fork this repository to your github account.
+1. Clone your fork to your machine.
+1. `cd` into the directory you just cloned into.
+
+#### Part B, the Vagrant install way
+
+To get a development environment up and running quickly, we have a vagrant box with the dependencies you'll need! Just follow these steps:
+
+1. Download and install [Vagrant](http://www.vagrantup.com/)
+1. Download and install [Virtualbox](https://www.virtualbox.org/)
+1. Download [this box](https://dl.dropboxusercontent.com/u/27379052/trusty-cms.box) into the directory with your code and make sure the file is named "trusty-cms.box".
+1. Run `vagrant up` to start the virutal environment
+1. Run `vagrant ssh` to ssh into the virtual environment
+1. `cd /vagrant` to get to the directory with the rails code that's shared with your computer.
+
+You can edit the files in this directory with your favorite editor on your
+machine. The files are shared into the `/vagrant` directory in the virtual
+machine.
+
+When you're done using the vagrant environment, you can run `vagrant destroy`
+to stop the vm and remove all guest hard disks. Next time you want to use it,
+just start from the `vagrant up` step again!
+
+#### Part B, the native install way to set up
+
+Prerequisites:
+
 * Ruby 1.9.3
 * The bundler gem
 * Mysql
 
-1. Fork this repository to your github account.
-1. Clone your fork to your machine.
 1. Install the gems with bundler: `bundle`
+
+#### Part C of setup, common to both kinds of installations
+
 1. Create a database configuration: `cp config/database.mysql.yml config/database.yml`. You probably don't need to make any further changes.
-1. Set up your database:
+1. Set up your databases:
 
         bundle exec rake db:create
         bundle exec rake db:migrate
         bundle exec rake db:migrate:extensions
+        bundle exec rake db:test:prepare
+
 1. Run the tests to make sure they pass (If they don't, file a bug!):
+1. Run `rails s` to start the server. Visit the site in your browser at http://localhost:3000.
 
         rspec
-
 
 When you're ready to make a change:
 

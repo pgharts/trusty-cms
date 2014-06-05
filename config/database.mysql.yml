@@ -5,21 +5,18 @@
 
 development:
   adapter: mysql
-  database: radiant_dev
+  database: trusty_cms_dev
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 test: &TEST
   adapter: mysql
-  database: radiant_test
+  database: trusty_cms_test
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 production:
   adapter: mysql
-  database: radiant_live
+  database: trusty_cms_live
   username: root
   password:
-  socket: /tmp/mysql.sock
