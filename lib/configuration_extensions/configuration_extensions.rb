@@ -94,7 +94,7 @@ class Rails::Application::Configuration
     # Add the app's controller directory
     #paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
 
-
+    Dir["#{TRUSTY_CMS_ROOT}/lib/tasks/**/*.rake"].each { |ext| load ext } if defined?(Rake)
 
     # Followed by the standard includes.
     %w(
@@ -109,7 +109,7 @@ class Rails::Application::Configuration
       ).each  do |dir|
       autoload_paths.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
       $LOAD_PATH.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
-      puts dir
+
       paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
     end
 

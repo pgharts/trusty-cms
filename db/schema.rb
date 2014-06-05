@@ -77,12 +77,6 @@ ActiveRecord::Schema.define(:version => 20120209231801) do
   add_index "pages", ["slug", "parent_id"], :name => "pages_child_slug"
   add_index "pages", ["virtual", "status_id"], :name => "pages_published"
 
-  create_table "people", :force => true do |t|
-  end
-
-  create_table "places", :force => true do |t|
-  end
-
   create_table "sessions", :force => true do |t|
     t.string   "session_id"
     t.text     "data"

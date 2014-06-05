@@ -19,7 +19,7 @@ module TrustyCms
       @admin = create_admin_user(config[:admin_name], config[:admin_username], config[:admin_password])
       UserActionObserver.current_user = @admin
       load_default_configuration
-      load_database_template(config[:database_template])
+      # load_database_template(config[:database_template])
       announce "Finished."
     end
     
