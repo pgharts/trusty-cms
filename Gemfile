@@ -11,6 +11,7 @@ source 'https://rubygems.org'
 
 gem "rails",   "3.2.18"
 gem "mysql"
+gem "haml-rails"
 gemspec
 
 # When radiant is installed as a gem you can run all of
