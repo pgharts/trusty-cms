@@ -163,13 +163,18 @@ module ApplicationHelper
     [[t('select.default'),'']] + TrustyCms::AvailableLocales.locales
   end
   
-  def stylesheet_and_javascript_overrides
-    overrides = ''
+  def stylesheet_overrides
+    overrides = []
     if File.exist?("#{Rails.root}/public/stylesheets/admin/overrides.css") || File.exist?("#{Rails.root}/public/stylesheets/sass/admin/overrides.sass")
-      overrides << stylesheet_link_tag('admin/overrides')
+      overrides << 'admin/overrides'
     end
+    overrides
+  end
+
+  def javascript_overrides
+    overrides = []
     if File.exist?("#{Rails.root}/public/javascripts/admin/overrides.js")
-      overrides << javascript_include_tag('admin/overrides')
+      overrides << 'admin/overrides'
     end
     overrides
   end
