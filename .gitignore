@@ -21,4 +21,5 @@ radiant-*.gem
 .ruby-gemset
 *.rails2
 vendor/plugins/rails_upgrade
+trusty-cms.box
 .vagrant
