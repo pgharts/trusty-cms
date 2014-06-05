@@ -1,5 +1,5 @@
 require 'trusty_cms/task_support'
-namespace :radiant do
+namespace :trusty_cms do
   namespace :config do
     desc "Export TrustyCms::Config to Rails.root/config/radiant_config.yml. Specify a path with RADIANT_CONFIG_PATH - defaults to Rails.root/config/radiant_config.yml"
     task :export => :environment do
