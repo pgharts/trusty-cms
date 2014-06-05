@@ -42,6 +42,37 @@ See the INSTALL file for more details.
 
 ### Installation and Setup for Contributing to TrustyCms
 
+#### Vagrant install
+
+To get a development environment up and running quickly, we have a vagrant box with the dependencies you'll need! Just follow these steps:
+
+1. Download and install [Vagrant](http://www.vagrantup.com/)
+1. Download and install [Virtualbox](https://www.virtualbox.org/)
+1. Download this box
+1. Run `vagrant up` to start the virutal environment
+1. Run `vagrant ssh` to ssh into the virtual environment
+1. In the virtual environment, run the following commands to set up your database:
+
+        cd /vagrant
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+        bundle exec rake db:migrate:extensions
+
+1. Run the tests to make sure they pass (If they don't, file a bug!):
+1. In the virtual environment, run `rails s` to start the server. Visit the site in your browser at http://localhost:3000.
+
+You can edit the files in this directory with your favorite editor on your
+machine. The files are shared into the `/vagrant` directory in the virtual
+machine. If you don't have git installed on your machine, the virtual machine
+has git installed, but you will need to configure and use git while sshed into
+the virtual machine.
+
+When you're done using the vagrant environment, you can run `vagrant destroy`
+to stop the vm and remove all guest hard disks. Next time you want to use it,
+just start from the `vagrant up` step again!
+
+#### Native install
+
 Prerequisites:
 
 * A github account and Git ([Github has some really good instructons](https://help.github.com/articles/set-up-git))
@@ -58,7 +89,9 @@ Prerequisites:
         bundle exec rake db:create
         bundle exec rake db:migrate
         bundle exec rake db:migrate:extensions
+
 1. Run the tests to make sure they pass (If they don't, file a bug!):
+1. Run `rails s` to start the server. Visit the site in your browser at http://localhost:3000.
 
         rspec
 
