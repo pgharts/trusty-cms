@@ -1,4 +1,4 @@
-namespace :radiant do
+namespace :trusty_cms do
   namespace :import do
     namespace :prototype do
       

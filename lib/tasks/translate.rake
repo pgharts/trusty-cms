@@ -1,4 +1,4 @@
-namespace :radiant do
+namespace :trusty_cms do
   namespace :i18n do
     
     desc "Syncs all available translations to the English master"

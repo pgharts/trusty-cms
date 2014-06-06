@@ -1,6 +1,6 @@
 # Only define freeze and unfreeze tasks in instance mode
 unless File.directory? "#{Rails.root}/app"
-  namespace :radiant do
+  namespace :trusty_cms do
     namespace :freeze do
       desc "Lock this application to the current gems (by unpacking them into vendor/radiant)"
       task :gems do
@@ -69,7 +69,7 @@ unless File.directory? "#{Rails.root}/app"
 
       tasks.each do |task| 
         puts "* Updating #{task}"
-        Rake::Task["radiant:update:#{task}"].invoke
+        Rake::Task["trusty_cms:update:#{task}"].invoke
       end
     end
 
