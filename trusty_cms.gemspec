@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["TrustyCms CMS dev team"]
-  s.default_executable = %q{radiant}
+  s.default_executable = %q{trusty_cms}
   s.description = %q{TrustyCms is a simple and powerful publishing system designed for small teams.
 It is built with Rails and is similar to Textpattern or MovableType, but is
 a general purpose content managment system--not merely a blogging engine.}
@@ -19,7 +19,6 @@ a general purpose content managment system--not merely a blogging engine.}
   s.homepage = %q{https://github.com/pgharts/trusty-cms}
   s.rdoc_options = ["--title", "TrustyCms -- Publishing for Small Teams", "--line-numbers", "--main", "README", "--exclude", "app", "--exclude", "bin", "--exclude", "config", "--exclude", "db", "--exclude", "features", "--exclude", "lib", "--exclude", "log", "--exclude", "pkg", "--exclude", "public", "--exclude", "script", "--exclude", "spec", "--exclude", "test", "--exclude", "tmp", "--exclude", "vendor"]
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{radiant}
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A no-fluff content management system designed for small teams.}
   s.license = %q{MIT}
