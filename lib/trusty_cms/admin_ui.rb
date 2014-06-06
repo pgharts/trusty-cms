@@ -93,7 +93,7 @@ module TrustyCms
       
       private
       def visible_by_controller?(user)
-        params = ActionController::Routing::Routes.recognize_path(url, :method => :get)
+        params = TrustyCms::Application.routes.recognize_path(url, :method => :get)
         if params && params[:controller]
           klass = "#{params[:controller].camelize}Controller".constantize
           klass.user_has_access_to_action?(user, params[:action])
