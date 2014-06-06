@@ -13,7 +13,7 @@ class Admin::ResourceController < ApplicationController
   cattr_reader :paginated
   cattr_accessor :default_per_page, :will_paginate_options
   
-  responses do |r|
+  create_responses do |r|
     # Equivalent respond_to block for :plural responses:
     # respond_to do |wants|
     #   wants.xml { render :xml => models }
