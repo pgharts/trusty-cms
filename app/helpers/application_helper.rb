@@ -60,8 +60,9 @@ module ApplicationHelper
       url_for options
     else
       options.to_s
-    end
-    request.request_uri =~ Regexp.new('^' + Regexp.quote(clean(url)))
+          end
+    #TODO: look for other instances of request_uri
+    request.original_url =~ Regexp.new('^' + Regexp.quote(clean(url)))
   end
   
   def clean(url)
