@@ -6,8 +6,8 @@ module TrustyCms
       base.send :include, InstanceMethods
     end
     
-    def responses
-      r = (self.responses = read_inheritable_attribute(:responses) || Collector.new)
+    def create_responses
+      r = (self.responses ||= Collector.new)
       yield r if block_given?
       r
     end
