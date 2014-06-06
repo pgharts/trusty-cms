@@ -42,11 +42,4 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "RedCloth",      "~> 4.2.0"
   s.add_dependency "will_paginate", "~> 3.0"
   s.add_dependency "stringex",      "~> 1.3.0"
-
-  s.add_development_dependency "cucumber-rails",    "~> 1.4.1"
-  s.add_development_dependency "database_cleaner",  "~> 0.6.5"
-  s.add_development_dependency "nokogiri",          "~> 1.5.10"
-  s.add_development_dependency "rspec-rails",       '~> 3.0.0'
-  s.add_development_dependency "launchy",           '~> 2.4.2'
-  s.add_development_dependency "test-unit",         '~> 2.5.5'
 end
