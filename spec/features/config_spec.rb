@@ -25,5 +25,21 @@ describe 'Configuration of a site' do
       visit '/'
       expect(page).to have_no_content "Template is missing"
     end
+
+    context 'after login' do
+      before(:each) do
+        User.create name: 'Test User', login: 'user', password: 'password', password_confirmation: 'password', admin: true
+
+        visit '/'
+        fill_in 'username_or_email', with: 'user'
+        fill_in 'password', with: 'password'
+        click_on 'Login'
+      end
+
+      it 'is a valid site' do
+        expect(User.all.count).to equal 1
+        expect(page).to have_content "Logged in as"
+      end
+    end
   end
 end
