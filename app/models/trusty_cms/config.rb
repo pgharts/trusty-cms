@@ -123,7 +123,7 @@ module TrustyCms
       end
       
       def cache_file
-        cache_file = File.join(cache_path,'radiant_config_cache.txt')
+        File.join(cache_path,'radiant_config_cache.txt')
       end
       
       def site_settings
