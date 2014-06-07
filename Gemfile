@@ -42,8 +42,3 @@ group :development do
   gem "launchy",           '~> 2.4.2'
   gem "test-unit",         '~> 2.5.5'
 end
-
-if ENV['TRAVIS']
-  gem "mysql"
-  gem "pg"
-end
