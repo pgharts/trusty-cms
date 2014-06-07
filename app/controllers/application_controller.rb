@@ -4,8 +4,8 @@ require 'login_system'
 class ApplicationController < ActionController::Base
   include LoginSystem
   # TODO: Add an ActionView::PathSet.new([paths]) for all extension view paths
-  prepend_view_path ("#{TRUSTY_CMS_ROOT}/app/views")
-  
+  prepend_view_path("#{TRUSTY_CMS_ROOT}/app/views")
+
   protect_from_forgery
 
   before_filter :set_current_user
