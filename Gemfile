@@ -40,5 +40,4 @@ group :development do
   gem "nokogiri",          "~> 1.5.10"
   gem "rspec-rails",       '~> 3.0.0'
   gem "launchy",           '~> 2.4.2'
-  gem "test-unit",         '~> 2.5.5'
 end
