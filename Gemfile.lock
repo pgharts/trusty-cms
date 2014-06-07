@@ -170,7 +170,6 @@ PLATFORMS
 DEPENDENCIES
   capybara (~> 2.3.0)
   database_cleaner (~> 0.6.5)
-  haml-rails
   launchy (~> 2.4.2)
   mysql
   rails (= 3.2.18)

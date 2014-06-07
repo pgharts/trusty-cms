@@ -17,3 +17,5 @@ unless defined? TrustyCms::Version
     end
   end
 end
+
+require 'haml-rails'
