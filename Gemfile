@@ -35,7 +35,7 @@ gemspec
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
 group :development do
-  gem "capybara",          "~> 2.2.1"
+  gem "capybara",          "~> 2.3.0"
   gem "database_cleaner",  "~> 0.6.5"
   gem "nokogiri",          "~> 1.5.10"
   gem "rspec-rails",       '~> 3.0.0'
