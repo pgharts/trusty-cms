@@ -37,7 +37,6 @@ gemspec
 group :development do
   gem "capybara",          "~> 2.3.0"
   gem "database_cleaner",  "~> 0.6.5"
-  gem "nokogiri",          "~> 1.5.10"
   gem "rspec-rails",       '~> 3.0.0'
   gem "launchy",           '~> 2.4.2'
 end

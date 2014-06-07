@@ -173,7 +173,6 @@ DEPENDENCIES
   haml-rails
   launchy (~> 2.4.2)
   mysql
-  nokogiri (~> 1.5.10)
   rails (= 3.2.18)
   rspec-rails (~> 3.0.0)
   trusty-cms!
