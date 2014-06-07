@@ -18,4 +18,6 @@ unless defined? TrustyCms::Version
   end
 end
 
+require 'rails'
+require 'mysql'
 require 'haml-rails'
