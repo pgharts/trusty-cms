@@ -44,7 +44,6 @@ group :development do
 end
 
 if ENV['TRAVIS']
-  gemspec :development_group => :test
   gem "mysql"
   gem "pg"
 end
