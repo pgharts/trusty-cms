@@ -1,9 +1,7 @@
 TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
-  namespace :admin, :member => { :remove => :get } do
+  namespace :admin do
     resources :pages do
-
-
       resources :children
     end
     resources :layouts
