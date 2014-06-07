@@ -67,8 +67,8 @@ module TrustyCms
     #   # to display an appropriate checkbox, text field or select box with label as above:
     #   edit_setting('admin.name)
     #
-    
-    set_table_name "config"
+
+    self.table_name = "config"
     after_save :update_cache
     attr_reader :definition
     
