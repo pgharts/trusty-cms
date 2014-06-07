@@ -32,7 +32,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "compass-rails", "~> 1.0.3"
   s.add_dependency "delocalize",    "~> 0.2.3"
   s.add_dependency "haml",          "~> 3.1.1"
-  s.add_dependency "haml-rails",    "~> 0.4"
+  s.add_dependency "haml-rails",    ">= 0.4", "< 0.5" # 0.5 is rails 4+ only
   s.add_dependency "highline",      "~> 1.6.10"
   s.add_dependency "rack",          "~> 1.4.5"
   s.add_dependency "rack-cache",    "~> 1.2"
