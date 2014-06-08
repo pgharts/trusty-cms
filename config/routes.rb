@@ -17,7 +17,7 @@ TrustyCms::Application.routes.draw do
     resources :extensions, :only => :index
     resources :page_parts
     resources :page_fields
-    match '/reference/:type.:format' => 'references#show', :as => :reference, :via => :get
+    match '/reference/:type(.:format)' => 'references#show', :as => :reference, :via => :get
   end
 
   match 'admin' => 'admin/welcome#index', :as => :admin
