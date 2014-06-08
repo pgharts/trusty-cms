@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Configuration of a site' do
-  describe 'valid configuration' do
+  describe 'when the config is valid' do
     before(:each) do
       configs = [
         ['admin.title', 'TrustyCms CMS'],
@@ -38,7 +38,7 @@ describe 'Configuration of a site' do
         click_on 'Login'
       end
 
-      it 'is a valid site' do
+      it 'shows the admin interface' do
         expect(User.all.count).to equal 1
         expect(page).to have_content "Logged in as"
       end
