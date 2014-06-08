@@ -40,6 +40,12 @@ describe 'Configuration of a site' do
         expect(User.all.count).to equal 1
         expect(page).to have_content "Logged in as"
       end
+
+      it 'has correct links in header' do
+        expect(page).to have_link 'Test User', href: '/admin/preferences/edit'
+        expect(page).to have_link 'Logout', href: '/admin/logout'
+        expect(page).to have_link 'View Site', href: '/'
+      end
     end
   end
 end
