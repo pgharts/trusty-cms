@@ -40,6 +40,11 @@ describe 'Configuration of a site' do
         expect(User.all.count).to equal 1
         expect(page).to have_content "Logged in as"
       end
+
+      it 'can navigate to create new page' do
+        visit '/admin/pages/new'
+        expect(page).to have_selector "h1", text: "New Page"
+      end
     end
   end
 end
