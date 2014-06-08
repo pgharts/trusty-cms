@@ -40,6 +40,10 @@ describe 'Configuration of a site' do
         expect(User.all.count).to equal 1
         expect(page).to have_content "Logged in as"
       end
+
+      it 'outputs table header as html' do
+        expect(page).to have_selector "table#pages th.name"
+      end
     end
   end
 end
