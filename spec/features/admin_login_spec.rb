@@ -45,5 +45,14 @@ describe 'Admin Login' do
         expect(page).to have_selector "h1", text: "New Page"
       end
     end
+
+    it 'gets an error if the password is wrong' do
+      visit '/'
+      fill_in 'username_or_email', with: @admin_username
+      fill_in 'password', with: @admin_password + 'whoops'
+      click_on 'Login'
+
+      expect(find('#error')).to have_content "Invalid username, e-mail address, or password."
+    end
   end
 end
