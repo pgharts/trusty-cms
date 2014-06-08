@@ -21,9 +21,11 @@ describe 'Configuration of a site' do
       end
     end
 
-    it 'is a valid site' do
+    it 'shows a login page' do
       visit '/'
-      expect(page).to have_no_content "Template is missing"
+      expect(page).to have_field 'Username or E-mail Address'
+      expect(page).to have_field 'Password'
+      expect(page).to have_button 'Login'
     end
 
     context 'after login' do
