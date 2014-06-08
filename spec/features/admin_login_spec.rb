@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin Login' do
+describe 'Administration Interface Login' do
   describe 'a valid Admin User' do
     before(:each) do
       @admin_username = 'user'
@@ -53,6 +53,23 @@ describe 'Admin Login' do
       click_on 'Login'
 
       expect(find('#error')).to have_content "Invalid username, e-mail address, or password."
+    end
+  end
+
+  describe 'a valid non-admin user' do
+    before(:each) do
+      @username = 'notanadminuser'
+      @password = 'password'
+      User.create! name: 'Test User', login: @username, password: @password, password_confirmation: @password, admin: false
+    end
+
+    it 'can log in to the admin interface' do
+      visit '/'
+      fill_in 'username_or_email', with: @username
+      fill_in 'password', with: @password
+      click_on 'Login'
+
+      expect(page).to have_content "Logged in as"
     end
   end
 end
