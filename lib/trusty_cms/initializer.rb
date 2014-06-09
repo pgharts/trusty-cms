@@ -1,3 +1,4 @@
+require 'will_paginate'
 require 'rails'
 require 'haml-rails'
 require 'haml'
