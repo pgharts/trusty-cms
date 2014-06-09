@@ -12,6 +12,9 @@ before_script:
   - bundle exec rake db:migrate:extensions
 
 
+script:
+  - bundle exec rake spec
+
 branches:
   only:
     - master
