@@ -3,17 +3,26 @@ require 'rails_helper'
 describe 'Administration Interface Login' do
   fixtures :users
 
+  it 'shows a login page' do
+    visit '/'
+
+    expect(page).to have_field 'Username or E-mail Address'
+    expect(page).to have_field 'Password'
+    expect(page).to have_button 'Login'
+  end
+
+  it 'shows an error if the username is wrong' do
+    visit '/'
+    fill_in 'username_or_email', with: 'nonexistent_username'
+    fill_in 'password', with: 'password'
+    click_on 'Login'
+
+    expect(find('#error')).to have_content "Invalid username, e-mail address, or password."
+  end
+
   describe 'as an admin user' do
     before(:each) do
       @admin = users(:captain_janeway)
-    end
-
-    it 'shows a login page' do
-      visit '/'
-
-      expect(page).to have_field 'Username or E-mail Address'
-      expect(page).to have_field 'Password'
-      expect(page).to have_button 'Login'
     end
 
     context 'after login' do
@@ -45,7 +54,7 @@ describe 'Administration Interface Login' do
       end
     end
 
-    it 'gets an error if the password is wrong' do
+    it 'shows an error if the password is wrong' do
       visit '/'
       fill_in 'username_or_email', with: @admin.login
       fill_in 'password', with: 'passwordwhoops'
