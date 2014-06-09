@@ -36,10 +36,6 @@ group :development do
   gem "rspec-rails",       '~> 3.0.0'
   gem "launchy",           '~> 2.4.2'
   gem "test-unit",         '~> 2.5.5'
-end
-
-if ENV['TRAVIS']
-  gemspec :development_group => :test
   gem "mysql"
   gem "pg"
 end
