@@ -4,7 +4,6 @@ rvm:
   - 1.9.3
 
 services: mysql
-cache: bundler
 
 before_script:
   - cp spec/ci/database.mysql.yml config/database.yml;
