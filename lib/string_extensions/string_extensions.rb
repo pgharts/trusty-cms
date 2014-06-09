@@ -6,7 +6,7 @@ class String
   end
   
   def titlecase
-    self.gsub(/((?:^|\s)[a-z])/) { $1.upcase }
+    self.gsub(/((?:^|\s)[a-z])/) { $1.to_s.upcase }
   end
   
   def to_name(last_part = '')
