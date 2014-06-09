@@ -1,24 +1,11 @@
 require 'rails_helper'
 
-describe 'Configuration of a site' do
-  describe 'when the config is valid' do
+describe 'Admin Login' do
+  describe 'a valid Admin User' do
     before(:each) do
-      configs = [
-        ['admin.title', 'TrustyCms CMS'],
-        ['admin.subtitle', 'Publishing for Small Teams'],
-        ['defaults.page.parts', 'body, extended'],
-        ['defaults.page.status', 'Draft'],
-        ['defaults.page.filter', nil],
-        ['defaults.page.fields', 'Keywords, Description'],
-        ['defaults.snippet.filter', nil],
-        ['session_timeout', '1209600'], # 2.weeks.to_s ????
-        ['default_locale', 'en'],
-      ]
-      configs.each do |key, value|
-        c = TrustyCms::Config.find_or_initialize_by_key(key)
-        c.value = value
-        c.save
-      end
+      @admin_username = 'user'
+      @admin_password = 'password'
+      User.create name: 'Test User', login: @admin_username, password: @admin_password, password_confirmation: @admin_password, admin: true
     end
 
     it 'shows a login page' do
@@ -39,7 +26,6 @@ describe 'Configuration of a site' do
       end
 
       it 'shows the admin interface' do
-        expect(User.all.count).to equal 1
         expect(page).to have_content "Logged in as"
       end
 
