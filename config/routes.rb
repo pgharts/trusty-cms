@@ -2,10 +2,17 @@ TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
   namespace :admin do
     resources :pages do
-      resources :children
+      resources :children do
+        get 'remove', on: :member
+      end
+      get 'remove', on: :member
     end
-    resources :layouts
-    resources :users
+    resources :layouts do
+      get 'remove', on: :member
+    end
+    resources :users do
+      get 'remove', on: :member
+    end
   end
 
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
