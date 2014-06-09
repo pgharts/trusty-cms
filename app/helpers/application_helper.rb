@@ -1,20 +1,20 @@
 module ApplicationHelper
   include Admin::RegionsHelper
   
-  #def config
-  #  TrustyCms::Config
-  #end
+  def trusty_config
+    TrustyCms::Config
+  end
   
   def default_page_title
     title + ' - ' + subtitle
   end
   
   def title
-    @trusty_config['admin.title'] || 'TrustyCms CMS'
+    trusty_config['admin.title'] || 'Trusty CMS'
   end
   
   def subtitle
-    @trusty_config['admin.subtitle'] || 'Publishing for Small Teams'
+    trusty_config['admin.subtitle'] || 'Publishing for Small Teams'
   end
   
   def logged_in?
