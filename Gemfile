@@ -37,5 +37,4 @@ group :development, :test do
   gem "launchy",           '~> 2.4.2'
   gem "test-unit",         '~> 2.5.5'
   gem "mysql"
-  gem "pg"
 end
