@@ -30,8 +30,16 @@ gemspec
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
 group :development do
-  gem "capybara",          "~> 2.3.0"
+  gem "cucumber-rails",    "~> 1.4.1", :require => false
   gem "database_cleaner",  "~> 0.6.5"
+  gem "nokogiri",          "~> 1.5.10"
   gem "rspec-rails",       '~> 3.0.0'
   gem "launchy",           '~> 2.4.2'
+  gem "test-unit",         '~> 2.5.5'
+end
+
+if ENV['TRAVIS']
+  gemspec :development_group => :test
+  gem "mysql"
+  gem "pg"
 end
