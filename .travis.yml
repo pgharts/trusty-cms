@@ -5,7 +5,10 @@ rvm:
 
 services: mysql
 cache: bundler
-before_script: "./bin/ci/before_script"
+
+before_script:
+  - cp spec/ci/database.mysql.yml config/database.yml;
+
 
 branches:
   only:
