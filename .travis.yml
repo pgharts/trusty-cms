@@ -8,8 +8,8 @@ services: mysql
 before_script:
   - cp spec/ci/database.mysql.yml config/database.yml;
   - mysql -e 'create database radiant_test;'
-  - rake db:migrate
-  - rake db:migrate:extensions
+  - bundle exec rake db:migrate
+  - bundle exec rake db:migrate:extensions
 
 
 branches:
