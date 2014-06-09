@@ -49,6 +49,8 @@ describe 'Configuration of a site' do
 
       it 'outputs table header as html' do
         expect(page).to have_selector "table#pages th.name"
+      end
+
 
       it 'can navigate to create new page' do
         visit '/admin/pages/new'
