@@ -7,6 +7,7 @@ services: mysql
 
 before_script:
   - cp spec/ci/database.mysql.yml config/database.yml;
+  - mysql -e 'create database radiant_test;'
 
 
 branches:
