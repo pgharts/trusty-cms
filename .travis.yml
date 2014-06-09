@@ -1,25 +1,18 @@
+---
+language: ruby
 rvm:
   - 1.9.3
+
+services: mysql
+cache: bundler
+before_script: "./bin/ci/before_script"
 
 branches:
   only:
     - master
-
-before_install:
-  - gem install rubygems-update --version 1.8.26
-  - update_rubygems --version=1.8.26
-
-before_script: "./bin/ci/before_script"
-
-bundler_args: ''
-
-script: "bundle exec rake spec --trace RAILS_ENV=TRAVIS"
 
 notifications:
   recipients:
     - sipple@trustarts.org
     - ferguson@trustarts.org
   irc: "irc.freenode.org#pghtrustarts"
-
-env:
-  - DB=mysql
