@@ -43,6 +43,14 @@ describe 'Administration Interface Login' do
         expect(page).to have_link 'View Site', href: '/'
       end
 
+      it 'has correct links in navigation' do
+        within '#navigation' do
+          expect(page).to have_link "Content", href: '/admin/pages'
+          expect(page).to have_link "Design", href: '/admin/layouts'
+          expect(page).to have_link "Settings", href: '/admin/configuration'
+        end
+      end
+
       it 'outputs table header as html' do
         expect(page).to have_selector "table#pages th.name"
       end
@@ -64,18 +72,25 @@ describe 'Administration Interface Login' do
     end
   end
 
-  describe 'as a regular user' do
+  describe 'as a regular user after login' do
     before(:each) do
       @user = users(:neelix)
-    end
-
-    it 'can log in to the admin interface' do
       visit '/'
       fill_in 'username_or_email', with: @user.login
       fill_in 'password', with: 'password'
       click_on 'Login'
+    end
 
+    it 'can log in to the admin interface' do
       expect(page).to have_content "Logged in as"
+    end
+
+    it 'has correct links in navigation' do
+      within '#navigation' do
+        expect(page).to have_link "Content", href: '/admin/pages'
+        expect(page).not_to have_link "Design"
+        expect(page).to have_link "Settings", href: '/admin/configuration'
+      end
     end
   end
 end
