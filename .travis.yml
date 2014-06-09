@@ -13,6 +13,8 @@ before_script: "./bin/ci/before_script"
 
 bundler_args: ''
 
+script: "bundle exec rake spec --trace RAILS_ENV=TRAVIS"
+
 notifications:
   recipients:
     - sipple@trustarts.org
