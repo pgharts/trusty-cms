@@ -46,6 +46,10 @@ describe 'Configuration of a site' do
         expect(page).to have_link 'Logout', href: '/admin/logout'
         expect(page).to have_link 'View Site', href: '/'
       end
+
+      it 'outputs table header as html' do
+        expect(page).to have_selector "table#pages th.name"
+      end
     end
   end
 end
