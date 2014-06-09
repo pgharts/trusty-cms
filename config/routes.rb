@@ -11,7 +11,7 @@ TrustyCms::Application.routes.draw do
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
   namespace :admin do
     resource :preferences
-    resource :configuration
+    resource :configuration, :controller => 'configuration'
     resources :extensions, :only => :index
     resources :page_parts
     resources :page_fields
