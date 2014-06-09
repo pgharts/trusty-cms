@@ -18,7 +18,7 @@ class Admin::WelcomeController < ApplicationController
         current_user.remember_me
         set_session_cookie
       end
-      redirect_to (session[:return_to] || welcome_url)
+      redirect_to(session[:return_to] || welcome_url)
       session[:return_to] = nil
     end
   end

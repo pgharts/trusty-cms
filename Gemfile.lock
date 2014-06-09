@@ -8,9 +8,10 @@ PATH
       compass (~> 0.12.2)
       compass-rails (~> 1.0.3)
       delocalize (~> 0.2.3)
-      haml (~> 3.1.1)
-      haml-rails (~> 0.4)
+      haml (~> 4.0.5)
+      haml-rails (>= 0.4, < 0.5)
       highline (~> 1.6.10)
+      mysql (~> 2.9.1)
       rack (~> 1.4.5)
       rack-cache (~> 1.2)
       radius (~> 0.7.3)
@@ -76,7 +77,8 @@ GEM
     erubis (2.7.0)
     ffi (1.9.3-java)
     fssm (0.2.10)
-    haml (3.1.8)
+    haml (4.0.5)
+      tilt
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
       activesupport (>= 3.1, < 4.1)
@@ -101,7 +103,7 @@ GEM
     mysql (2.9.1)
     nokogiri (1.5.11)
     nokogiri (1.5.11-java)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -170,9 +172,6 @@ PLATFORMS
 DEPENDENCIES
   capybara (~> 2.3.0)
   database_cleaner (~> 0.6.5)
-  haml-rails
   launchy (~> 2.4.2)
-  mysql
-  rails (= 3.2.18)
   rspec-rails (~> 3.0.0)
   trusty-cms!

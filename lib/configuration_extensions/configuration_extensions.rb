@@ -131,6 +131,7 @@ class Rails::Application::Configuration
     env = ENV["RAILS_ENV"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
     paths.unshift(TRUSTY_CMS_ROOT + "vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
+    paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test/
     paths
   end
 
@@ -307,7 +308,7 @@ class Boot
   def load_mutex
     begin
       require "thread" unless defined?(Mutex)
-    rescue LoadError => e
+    rescue LoadError => _
       $stderr.puts %(Mutex could not be initialized. #{load_error_message})
       exit 1
     end
@@ -317,7 +318,7 @@ class Boot
     begin
       require 'trusty_cms'
       require 'trusty_cms/initializer'
-    rescue LoadError => e
+    rescue LoadError => _
       $stderr.puts %(TrustyCms could not be initialized. #{load_error_message})
       exit 1
     end

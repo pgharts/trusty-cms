@@ -31,6 +31,7 @@ class Application < Rails::Application
   # config.add_plugin_paths(extension_loader.paths(:plugin))
   radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
   config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
+  I18n.enforce_available_locales = true
 
   config.encoding = 'utf-8'
   # Skip frameworks you're not going to use (only works if using vendor/rails).

@@ -81,17 +81,17 @@ module TrustyCms
         nil
       end
     end
-    
+
     # Loads all the initializers defined in enabled extensions, in the configured order.
     #
     def load_extension_initalizers
-      extensions.each &:load_initializers
+      extensions.each(&:load_initializers)
     end
 
     # Deactivates all enabled extensions.
     #
     def deactivate_extensions
-      extensions.each &:deactivate
+      extensions.each(&:deactivate)
     end
 
     # Activates all enabled extensions and makes sure that any newly declared subclasses of Page are recognised.
@@ -99,7 +99,7 @@ module TrustyCms
     #
     def activate_extensions
       initializer.initialize_views
-      extensions.each &:activate
+      extensions.each(&:activate)
       Page.load_subclasses
     end
     alias :reactivate :activate_extensions

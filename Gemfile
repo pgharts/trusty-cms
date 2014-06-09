@@ -1,5 +1,3 @@
-
-
 source 'https://rubygems.org'
 
 # This is the minimum of dependency required to run
@@ -9,9 +7,6 @@ source 'https://rubygems.org'
 # requires radiant and therefore pulls in every
 # dependency mentioned in radiant.gemspec.
 
-gem "rails",   "3.2.18"
-gem "mysql"
-gem "haml-rails"
 gemspec
 
 # When radiant is installed as a gem you can run all of

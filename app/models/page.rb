@@ -41,7 +41,7 @@ class Page < ActiveRecord::Base
   class_attribute :default_child
   self.default_child = self
 
-  set_inheritance_column :class_name
+  self.inheritance_column = 'class_name'
 
   def layout_with_inheritance
     unless layout_without_inheritance

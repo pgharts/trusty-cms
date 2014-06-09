@@ -38,7 +38,7 @@ module MenuRenderer
     (allowed_children_cache.to_s.split(',') - Array(excluded_class_names)).map do |name|
       begin
         name.constantize
-      rescue LoadError, NameError => e
+      rescue LoadError, NameError => _
         nil
       end
     end.compact

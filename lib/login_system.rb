@@ -27,7 +27,6 @@ module LoginSystem
     
     def authenticate
       #puts _process_action_callbacks.map(&:filter)
-      action = params['action'].to_s.intern
       if current_user
         session['user_id'] = current_user.id
         true
@@ -89,7 +88,7 @@ module LoginSystem
     def no_login_required
       skip_before_filter :authenticate
       skip_before_filter :authorize
-      puts _process_action_callbacks.map(&:filter)
+      # puts _process_action_callbacks.map(&:filter)
     end
 
     def login_required?
