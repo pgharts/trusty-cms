@@ -29,7 +29,7 @@ gemspec
 # gem "radiant-smarty_pants_filter-extension", "~> 1.0.2"
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
-group :development do
+group :development, :test do
   gem "cucumber-rails",    "~> 1.4.1", :require => false
   gem "database_cleaner",  "~> 0.6.5"
   gem "nokogiri",          "~> 1.5.10"
