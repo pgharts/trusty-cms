@@ -60,6 +60,14 @@ describe 'Administration Interface Login' do
         visit '/admin/pages/new'
         expect(page).to have_selector "h1", text: "New Page"
       end
+
+      it 'can log out' do
+        click_link "Logout"
+        expect(page).to have_content "You are now logged out."
+
+        visit '/admin/pages/new'
+        expect(page).to have_content "Please Login"
+      end
     end
 
     it 'shows an error if the password is wrong' do
