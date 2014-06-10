@@ -96,12 +96,12 @@ class Rails::Application::Configuration
 
     Dir["#{TRUSTY_CMS_ROOT}/lib/tasks/**/*.rake"].each { |ext| load ext } if defined?(Rake)
 
+    # TODO: I pulled 'app/helpers' out of this because it was causing all helpers to be loaded at all times. Not sure if this will break helper loading in some other way, though.
     # Followed by the standard includes.
     %w(
         app
         app/models
         app/controllers
-        app/helpers
         app/views
         config
         lib
