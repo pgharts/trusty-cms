@@ -30,7 +30,8 @@ gemspec
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
 group :development, :test do
-  gem "capybara",          "~> 2.3.0"
-  gem "rspec-rails",       '~> 3.0.0'
-  gem "launchy",           '~> 2.4.2'
+  gem 'pry',         '~> 0.10.0'
+  gem 'capybara',    '~> 2.3.0'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'launchy',     '~> 2.4.2'
 end
