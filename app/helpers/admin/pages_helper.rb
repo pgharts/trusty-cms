@@ -7,7 +7,7 @@ module Admin::PagesHelper
   end
   
   def filter
-    @page.parts.empty? ? nil : @page.parts.first.filter
+    @page.parts.first.filter if @page.parts.respond_to?(:any?) && @page.parts.any?
   end
   
   def meta_errors?
