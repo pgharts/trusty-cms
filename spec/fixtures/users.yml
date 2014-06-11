@@ -1,0 +1,16 @@
+# Digest::SHA1.hexdigest("--nacl--password--")
+# => "c4c53733c893f09e30d685322a00ed2394f8b65e"
+
+captain_janeway:
+  name: 'Kathryn Janeway'
+  login: 'captain'
+  salt: 'nacl'
+  password: 'c4c53733c893f09e30d685322a00ed2394f8b65e' # => 'password'
+  admin: true
+
+neelix:
+  name: 'Neelix'
+  login: 'neelix'
+  salt: 'nacl'
+  password: 'c4c53733c893f09e30d685322a00ed2394f8b65e' # => 'password'
+  admin: false
