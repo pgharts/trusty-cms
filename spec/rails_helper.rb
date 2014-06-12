@@ -36,4 +36,25 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.before(:suite) do
+    TrustyCms::Config.initialize_cache
+
+    configs = [
+      ['admin.title', 'TrustyCms CMS'],
+      ['admin.subtitle', 'Publishing for Small Teams'],
+      ['defaults.page.parts', 'body, extended'],
+      ['defaults.page.status', 'Draft'],
+      ['defaults.page.filter', nil],
+      ['defaults.page.fields', 'Keywords, Description'],
+      ['defaults.snippet.filter', nil],
+      ['session_timeout', '1209600'], # 2.weeks.to_s ????
+      ['default_locale', 'en'],
+    ]
+    configs.each do |key, value|
+      c = TrustyCms::Config.find_or_initialize_by_key(key)
+      c.value = value
+      c.save
+    end
+  end
 end
