@@ -12,10 +12,7 @@ describe 'Administration Interface Login' do
   end
 
   it 'shows an error if the username is wrong' do
-    visit '/'
-    fill_in 'username_or_email', with: 'nonexistent_username'
-    fill_in 'password', with: 'password'
-    click_on 'Login'
+    log_in_as 'nonexistent_username'
 
     expect(find('#error')).to have_content "Invalid username, e-mail address, or password."
   end
@@ -27,10 +24,7 @@ describe 'Administration Interface Login' do
 
     context 'after login' do
       before(:each) do
-        visit '/'
-        fill_in 'username_or_email', with: @admin.login
-        fill_in 'password', with: 'password'
-        click_on 'Login'
+        log_in_as @admin.login
       end
 
       it 'shows the admin interface' do
@@ -71,10 +65,7 @@ describe 'Administration Interface Login' do
     end
 
     it 'shows an error if the password is wrong' do
-      visit '/'
-      fill_in 'username_or_email', with: @admin.login
-      fill_in 'password', with: 'passwordwhoops'
-      click_on 'Login'
+      log_in_as @admin.login, 'passwordwhoops'
 
       expect(find('#error')).to have_content "Invalid username, e-mail address, or password."
     end
@@ -83,10 +74,7 @@ describe 'Administration Interface Login' do
   describe 'as a regular user after login' do
     before(:each) do
       @user = users(:neelix)
-      visit '/'
-      fill_in 'username_or_email', with: @user.login
-      fill_in 'password', with: 'password'
-      click_on 'Login'
+      log_in_as @user.login
     end
 
     it 'can log in to the admin interface' do

@@ -5,10 +5,7 @@ describe 'Pages' do
 
   before(:each) do
     @admin = users(:captain_janeway)
-    visit '/'
-    fill_in 'username_or_email', with: @admin.login
-    fill_in 'password', with: 'password'
-    click_on 'Login'
+    log_in_as @admin.login
   end
 
   context 'without any pages' do
