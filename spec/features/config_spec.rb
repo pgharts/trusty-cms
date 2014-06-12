@@ -1,0 +1,30 @@
+require 'rails_helper'
+
+describe 'Configuration (Settings)' do
+  fixtures :users
+
+  before(:each) do
+    @admin = users(:captain_janeway)
+    log_in_as @admin.login
+    click_link 'Settings'
+  end
+
+  it 'has personal and site preferences' do
+    expect(page).to have_content 'Personal Preferences'
+    expect(page).to have_content 'Configuration'
+  end
+
+  it 'lets you edit your personal preferences' do
+    click_button 'Edit Preferences'
+    fill_in 'Name', with: 'Captain Kathryn Janeway'
+    click_button 'Save Changes'
+
+    expect(page).to have_content 'Name Captain Kathryn Janeway'
+  end
+
+  it 'lets you edit your password' do
+    skip 'until we get javascript working and pick a javascript driver'
+    click_button 'Edit Preferences'
+    click_link 'Change'
+  end
+end

@@ -217,12 +217,12 @@ module TrustyCms
         layout.new = layout.edit
       end
     end
-    
+
     def load_default_configuration_regions
       OpenStruct.new.tap do |configuration|
         configuration.show = RegionSet.new do |show|
           show.user.concat %w{preferences}
-          show.config.concat %w{site defaults users}
+          show.trusty_config.concat %w{site defaults users}
         end
         configuration.edit = RegionSet.new do |edit|
           edit.main.concat %w{edit_header edit_form}
