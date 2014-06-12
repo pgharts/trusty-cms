@@ -41,7 +41,7 @@ RSpec.configure do |config|
     TrustyCms::Config.initialize_cache
 
     configs = [
-      ['admin.title', 'TrustyCms CMS'],
+      ['admin.title', 'TrustyCMS'],
       ['admin.subtitle', 'Publishing for Small Teams'],
       ['defaults.page.parts', 'body, extended'],
       ['defaults.page.status', 'Draft'],
