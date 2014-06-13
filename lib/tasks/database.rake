@@ -22,9 +22,9 @@ namespace :db do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
 
-      # We need to erase and remove all existing radiant tables, but we don't want to
+      # We need to erase and remove all existing trusty-cms tables, but we don't want to
       # assume that the administrator has access to drop and create the database.
-      # Ideally we should also allow for the presence of non-radiant tables, though
+      # Ideally we should also allow for the presence of non-trusty-cms tables, though
       # that's not a setup anyone would recommend.
       #
       ActiveRecord::Base.connection.tables.each do |table|
@@ -49,7 +49,7 @@ namespace :db do
     Rake::Task['db:migrate:extensions'].invoke
     Rake::Task['trusty_cms:extensions:update_all'].invoke
     puts %{
-Your TrustyCms application is ready to use. Run `script/server -e production` to
+Your TrustyCms application is ready to use. Run `rails s -e production` to
 start the server. Your site will then be running at http://localhost:3000
 
 You can access the administrative interface at http://localhost:3000/admin
@@ -58,14 +58,11 @@ You may also need to set permissions on the public and cache directories so that
 your Web server can access those directories with the user that it runs under.
 
 To add more extensions just add them to your Gemfile and run `bundle install`.
-If an extension is not available as a gem use `script/extension install name`.
-
-Visit http://ext.radiantcms.org to find more extensions.
 
 }
   end
 
-  desc "Migrate the database through all available migration scripts (looks for db/migrate/* in radiant, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
+  desc "Migrate the database through all available migration scripts (looks for db/migrate/* in trusty-cms, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
   task :migrate => :environment do
     Rake::Task['db:migrate:trusty_cms'].invoke
     Rake::Task['db:migrate:extensions'].invoke
@@ -75,7 +72,7 @@ Visit http://ext.radiantcms.org to find more extensions.
   end
 
   namespace :migrate do
-    desc "Migrates the database through steps defined in the core radiant distribution. Usual db:migrate options can apply."
+    desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
     task :trusty_cms => :environment do
       ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
       ActiveRecord::Migrator.migrate(File.join(TrustyCms.root, 'db', 'migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
