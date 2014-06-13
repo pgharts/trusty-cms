@@ -16,13 +16,13 @@
 #     If prompted, select the mswin32 option
 #
 # For more details on the installation and the available connection parameters refer to:
-# http://rubyforge.org/docman/?group_id=2361    
+# http://rubyforge.org/docman/?group_id=2361
 
 development:
   adapter: ibm_db
   database: <%= app_name[0,4] %>_dev
   username: db2inst1
-  password: 
+  password:
 
 # Warning: The database defined as 'test' will be erased and
 # re-generated from your development database when you run 'rake'.
@@ -37,4 +37,4 @@ production:
   adapter: ibm_db
   database: <%= app_name[0,4] %>_prd
   username: db2inst1
-  password: 
+  password:

@@ -13,18 +13,18 @@ module LoginSystem
     def current_user
       @current_user ||= (login_from_session || login_from_cookie || login_from_http)
     end
-    
+
     def current_user=(value=nil)
       if value && value.is_a?(User)
         @current_user = value
-        session['user_id'] = value.id 
+        session['user_id'] = value.id
       else
         @current_user = nil
         session['user_id'] = nil
       end
       @current_user
     end
-    
+
     def authenticate
       #puts _process_action_callbacks.map(&:filter)
       if current_user
@@ -114,7 +114,7 @@ module LoginSystem
     def controller_permissions
       @controller_permissions ||= Hash.new { |h,k| h[k.to_s.intern] = Hash.new }
     end
-    
+
     def user_has_access_to_action?(user, action, instance=new)
       permissions = controller_permissions[action.to_s.intern]
       case

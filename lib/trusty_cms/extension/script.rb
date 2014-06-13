@@ -48,11 +48,11 @@ Supports:       TrustyCms #{supports_radiant_version}
       tasks = Rake.application.tasks.map(&:name)
       tasks.include? task
     end
-    
+
     def file_utils
       FileUtils
     end
-    
+
     delegate :cd, :cp_r, :rm_r, :to => :file_utils
   end
 
@@ -151,11 +151,11 @@ Supports:       TrustyCms #{supports_radiant_version}
     def project_in_git?
       @in_git ||= File.directory?(".git")
     end
-    
+
     def checkout_command
       "git clone #{url} #{name}"
     end
-    
+
     def checkout
       if project_in_git?
         system "git submodule add #{url} vendor/extensions/#{name}"
@@ -169,7 +169,7 @@ Supports:       TrustyCms #{supports_radiant_version}
         end
       end
     end
-    
+
     def copy_to_vendor_extensions
       super unless project_in_git?
     end
@@ -355,10 +355,10 @@ module TrustyCms
 
   For help on an individual command:
       script/extension help command
-      
+
   You may install extensions from another registry by setting the REGISTRY_URL
   By default the REGISTRY_URL is set to http://ext.radiantcms.org
-  
+
   Code for the registry application may be found at:
   http://github.com/radiant/radiant-extension-registry/
             }

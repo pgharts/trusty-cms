@@ -3,13 +3,13 @@ namespace :db do
   task :remigrate => :environment do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
-      
+
       # Migrate downward
       ActiveRecord::Migrator.migrate("#{TRUSTY_CMS_ROOT}/db/migrate/", 0)
-    
-      # Migrate upward 
+
+      # Migrate upward
       Rake::Task["db:migrate"].invoke
-      
+
       # Dump the schema
       Rake::Task["db:schema:dump"].invoke
     else
@@ -17,12 +17,12 @@ namespace :db do
       exit
     end
   end
-  
-  task :initialize => :environment do    
+
+  task :initialize => :environment do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
 
-      # We need to erase and remove all existing radiant tables, but we don't want to 
+      # We need to erase and remove all existing radiant tables, but we don't want to
       # assume that the administrator has access to drop and create the database.
       # Ideally we should also allow for the presence of non-radiant tables, though
       # that's not a setup anyone would recommend.
@@ -36,7 +36,7 @@ namespace :db do
       exit
     end
   end
-  
+
   desc "Bootstrap your database for TrustyCms."
   task :bootstrap => :initialize do
     require 'trusty_cms/setup'
@@ -64,7 +64,7 @@ Visit http://ext.radiantcms.org to find more extensions.
 
 }
   end
-  
+
   desc "Migrate the database through all available migration scripts (looks for db/migrate/* in radiant, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
   task :migrate => :environment do
     Rake::Task['db:migrate:trusty_cms'].invoke

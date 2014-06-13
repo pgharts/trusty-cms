@@ -1,6 +1,6 @@
 namespace :trusty_cms do
   namespace :i18n do
-    
+
     desc "Syncs all available translations to the English master"
     task :sync => :environment do
       # All places TrustyCms can store locales
@@ -19,10 +19,10 @@ namespace :trusty_cms do
             other.delete_if { |k,v| !words[k] }         # Remove if not defined in en.yml
             TranslationSupport.write_file(filename, basename, comments, other)
           end
-        end 
+        end
       end
     end
-    
+
     desc "Creates or updates the English available tag descriptions"
     task :available_tags => :environment do
       descriptions = Hash.new
@@ -30,11 +30,11 @@ namespace :trusty_cms do
         tag = '    ' + tag.gsub(':','-') + ':'
         desc = desc.gsub('    ','      ')
         descriptions[tag] = ' "' + desc.gsub('%','&#37;').gsub('"','\"').strip + '"'
-      end 
+      end
       comments = ''
       TranslationSupport.write_file("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml","---\nen:\n  desc",comments,descriptions)
-    end 
-    
+    end
+
     desc "Syncs all translations available_tags to the English master"
     task :sync_available_tags => :environment do
       # All places TrustyCms can store locales
@@ -51,9 +51,9 @@ namespace :trusty_cms do
             (comments, other) = TranslationSupport.open_available_tags(filename)
             puts other
           end
-        end 
+        end
       end
-    end         
-    
+    end
+
   end
 end

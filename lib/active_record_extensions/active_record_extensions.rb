@@ -1,7 +1,7 @@
 require 'active_record'
 
 class ActiveRecord::Base
-  
+
   def self.validates_path(*args)
     configuration = args.extract_options!
     validates_each(args, configuration) do |record, attr_name, value|
@@ -9,7 +9,7 @@ class ActiveRecord::Base
       record.errors.add(attr_name, :page_not_found, :default => configuration[:message]) if page.nil? || page.is_a?(FileNotFoundPage)
     end
   end
-  
+
   def self.object_id_attr(symbol, klass)
     module_eval %{
       def #{symbol}

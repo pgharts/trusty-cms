@@ -6,11 +6,11 @@ class Admin::UsersController < Admin::ResourceController
     :denied_message => 'You must have administrative privileges to perform this action.'
 
   before_filter :ensure_deletable, :only => [:remove, :destroy]
-  
+
   def show
     redirect_to edit_admin_user_path(params[:id])
   end
-  
+
   def update
     user_params = params[model_symbol]
     if user_params && user_params['admin'] == false && model == current_user
@@ -20,20 +20,20 @@ class Admin::UsersController < Admin::ResourceController
     model.update_attributes!(user_params)
     response_for :update
   end
-  
+
   def ensure_deletable
     if current_user.id.to_s == params[:id].to_s
       announce_cannot_delete_self
       redirect_to admin_users_url
     end
   end
-  
+
   private
-  
+
     def announce_cannot_delete_self
       flash[:error] = t('users_controller.cannot_delete_self')
-    end  
-    
+    end
+
     def annouce_cannot_remove_self_from_admin_role
       flash[:error] = 'You cannot remove yourself from the admin role.'
     end

@@ -4,7 +4,7 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "key", :string, :limit => 40, :default => "", :null => false
       t.column "value", :string, :default => ""
     end
-    add_index "config", ["key"], :name => "key", :unique => true 
+    add_index "config", ["key"], :name => "key", :unique => true
 
     create_table "pages", :force => true do |t|
       t.column "title", :string
@@ -47,7 +47,7 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "created_by", :integer
       t.column "updated_by", :integer
     end
-    
+
     create_table "users", :force => true do |t|
       t.column "name", :string, :limit => 100
       t.column "email", :string
@@ -61,7 +61,7 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "updated_by", :integer
     end
     add_index "users", ["login"], :name => "login", :unique => true
-  
+
   end
 
   def self.down

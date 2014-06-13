@@ -4,13 +4,13 @@ require 'method_observer'
 
 module TrustyCms
   class ExtensionLoader
-    # The ExtensionLoader is reponsible for the loading, activation and reactivation of extensions. 
+    # The ExtensionLoader is reponsible for the loading, activation and reactivation of extensions.
     # The noticing of important subdirectories is now handled by the ExtensionPath class.
 
     class DependenciesObserver < MethodObserver
       # Extends the reload mechanism in ActiveSupport so that extensions are deactivated and reactivated
       # when model classes are reloaded (in development mode, usually).
-      
+
       attr_accessor :config
 
       def initialize(rails_config) #:nodoc
@@ -49,13 +49,13 @@ module TrustyCms
     #   extension_loader.paths(:eager_load)    #=> ['extension/app/controllers', 'extension/app/models', 'extension/app/helpers']
     #
     # For compatibility with the old loader, there are corresponding +type_paths+ methods.
-    # There are also (deprecated) +add_type_paths+ methods. 
+    # There are also (deprecated) +add_type_paths+ methods.
     #
     def paths(type)
       ExtensionPath.send("#{type}_paths".to_sym)
     end
 
-    # Loads but does not activate all the extensions that have been enabled, in the configured order 
+    # Loads but does not activate all the extensions that have been enabled, in the configured order
     # (which defaults to alphabetically). If an extension fails to load an error will be logged
     # but application startup will continue. If an extension doesn't exist, a LoadError will be raised
     # and startup will halt.
@@ -65,7 +65,7 @@ module TrustyCms
       @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Dependencies)
       self.extensions = configuration.enabled_extensions.map { |ext| load_extension(ext) }.compact
     end
-    
+
     # Loads the specified extension.
     #
     def load_extension(name)
@@ -107,13 +107,13 @@ module TrustyCms
     class << self
       # Builds an ExtensionPath object from the supplied path, working out the name of the extension on the way.
       # The ExtensionPath object will later be used to scan and load the extension.
-      # An extension name can be supplied in addition to the path. It will be processed in the usual way to 
+      # An extension name can be supplied in addition to the path. It will be processed in the usual way to
       # remove radiant- and -extension and any verion numbering.
       #
       def record_path(path, name=nil)
         ExtensionPath.from_path(path, name)
       end
-    
+
       # For compatibility with old calls probably still to be found in some extensions.
       #
       %w{controller model view metal plugin load locale}.each do |type|

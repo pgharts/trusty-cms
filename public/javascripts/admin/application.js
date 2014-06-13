@@ -41,26 +41,26 @@ Event.addBehavior.reassignAfterAjax = true;
 // Wire in Behaviors
 Event.addBehavior({
   'body': ShortcutKeysBehavior(),
-  
+
   'a.popup': Popup.TriggerBehavior(),
-  
+
   'table#pages': SiteMapBehavior(),
-  
+
   'input#page_title': function() {
     var title = this;
     var slug = $('page_slug');
     var breadcrumb = $('page_breadcrumb');
     var oldTitle = title.value;
-    
+
     if (!slug || !breadcrumb) return;
-    
+
     new Form.Element.Observer(title, 0.15, function() {
       if (oldTitle.toSlug() == slug.value) slug.value = title.value.toSlug();
       if (oldTitle == breadcrumb.value) breadcrumb.value = title.value;
       oldTitle = title.value;
     });
   },
-  
+
   'a.toggle': Toggle.LinkBehavior({
     onLoad: function(link) {
       if (/less/i.match(link.innerHTML)) Toggle.toggle(this.toggleWrappers, this.effect);
@@ -72,23 +72,23 @@ Event.addBehavior({
       if (/less/i.match(link.innerHTML)) { link.innerHTML = 'More'; return; }
     }
   }),
-  
+
   'div#tab_control': TabControlBehavior(),
-  
+
   'table.index': RuledTableBehavior(),
-  
+
   'form': Status.FormBehavior(),
-  
+
   'form input.activate': function() {
     this.activate();
   },
-  
+
   'form textarea': CodeAreaBehavior(),
-  
+
   'input.date': DateInputBehavior(),
-  
+
   'select#page_status_id':  PageStatusBehavior(),
-  
+
   'span.error':  ValidationErrorBehavior()
-  
+
 });

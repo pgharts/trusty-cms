@@ -5,13 +5,13 @@ module TrustyCms
       base.send :class_attribute, :responses
       base.send :include, InstanceMethods
     end
-    
+
     def create_responses
       r = (self.responses ||= Collector.new)
       yield r if block_given?
       r
     end
-    
+
     module InstanceMethods
       def response_for(action)
         responses = self.class.responses.send(action)
@@ -33,7 +33,7 @@ module TrustyCms
           end
         end
       end
-      
+
       def wrap(proc)
         # Makes sure our response blocks get evaluated in the right context
         lambda do
@@ -42,18 +42,18 @@ module TrustyCms
           if RUBY_VERSION =~ /^1\.9/ and proc.lambda? and proc.arity != 1
             raise "You can only pass a proc ('Proc.new') or a lambda that takes exactly one arg (for self) to the wrap method."
           end
-          
+
           instance_eval(&proc)
         end
       end
     end
-    
+
     class Collector < OpenStruct
       def initialize
         super
         @table = Hash.new {|h,k| h[k] = Response.new }
       end
-      
+
       def initialize_copy(orig)
         super
         @table.keys.each do |key|
@@ -61,7 +61,7 @@ module TrustyCms
         end
       end
     end
-    
+
     class Response
       attr_reader :publish_formats, :publish_block, :blocks, :block_order
       def initialize
@@ -69,7 +69,7 @@ module TrustyCms
         @blocks = {}
         @block_order = []
       end
-      
+
       def initialize_copy(orig)
         @publish_formats = orig.publish_formats.dup
         @blocks = orig.blocks.dup
@@ -77,23 +77,23 @@ module TrustyCms
         @publish_block = orig.publish_block.dup if orig.publish_block
         @default = orig.default.dup if orig.default
       end
-      
+
       def default(&block)
         if block_given?
           @default = block
         end
         @default
       end
-      
+
       def publish(*formats, &block)
         @publish_formats.concat(formats)
         if block_given?
-          @publish_block = block 
+          @publish_block = block
         else
           raise ArgumentError, "Block required to publish" unless @publish_block
         end
       end
-      
+
       def each_published
         publish_formats.each do |format|
           yield format, publish_block if block_given?

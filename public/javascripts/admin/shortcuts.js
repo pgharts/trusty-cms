@@ -26,7 +26,7 @@ var ShortcutKeysBehavior = Behavior.create({
           var index = event.keyCode - 49;
           control.selectTabByIndex(index);
           event.stop();
-        } 
+        }
       }
     }
   }

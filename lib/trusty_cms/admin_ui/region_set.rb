@@ -6,11 +6,11 @@ class TrustyCms::AdminUI::RegionSet
     end
     yield self if block_given?
   end
-  
+
   def [](region)
     @regions[region.to_sym]
   end
-  
+
   def add(region=nil, partial=nil, options={})
     raise ArgumentError, "You must specify a region and a partial" unless region and partial
     if options[:before]
@@ -23,7 +23,7 @@ class TrustyCms::AdminUI::RegionSet
       self[region] << partial
     end
   end
-  
+
   def method_missing(method, *args, &block)
     if args.empty?
       self[method]
@@ -31,5 +31,5 @@ class TrustyCms::AdminUI::RegionSet
       super
     end
   end
-  
+
 end

@@ -38,5 +38,5 @@ module DeprecatedTags
       CGI.rfc1123_date(date.to_time)
     end
   end
-  
+
 end

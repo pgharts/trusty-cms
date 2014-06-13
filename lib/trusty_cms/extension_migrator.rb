@@ -6,7 +6,7 @@ module TrustyCms
       def migrate(target_version = nil)
         super extension.migrations_path, target_version
       end
-      
+
       def migrate_extensions
         TrustyCms::Application.config.enabled_extensions.each do |ext|
           to_migrate = Extension.descendants.detect{|descendant| descendant.name == "#{ext.to_s.camelize}Extension" }
@@ -20,30 +20,30 @@ module TrustyCms
           map { |version| version.sub("#{@extension.extension_name}-", '').to_i }.sort
       end
     end
-    
+
     def initialize(direction, migrations_path, target_version = nil)
       super
       initialize_extension_schema_migrations
       initialize_received_migrations
     end
-    
+
     private
       def quote(s)
         ActiveRecord::Base.connection.quote(s)
       end
-      
+
       def extension_name
         self.class.extension.extension_name
       end
-      
+
       def version_string(version)
         "#{extension_name}-#{version}"
       end
-      
+
       def initialize_extension_schema_migrations
         current_version = ActiveRecord::Base.connection.select_value("SELECT schema_version FROM extension_meta WHERE name = #{quote(extension_name)}")
         if current_version
-          assume_migrated_upto_version(current_version.to_i) 
+          assume_migrated_upto_version(current_version.to_i)
           ActiveRecord::Base.connection.delete("DELETE FROM extension_meta WHERE name = #{quote(extension_name)}")
         end
       end
@@ -57,7 +57,7 @@ module TrustyCms
           end
         end
       end
-      
+
       def assume_migrated_upto_version(version)
         version = version.to_i
         sm_table = self.class.schema_migrations_table_name
@@ -81,7 +81,7 @@ module TrustyCms
           end
         end
       end
-      
+
       def record_version_state_after_migrating(version)
         sm_table = self.class.schema_migrations_table_name
 

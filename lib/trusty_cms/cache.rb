@@ -38,7 +38,7 @@ module TrustyCms
       def clear
         Dir[File.join(self.root, "*")].each {|file| FileUtils.rm_rf(file) }
       end
-      
+
       def write(body)
         # Verify that the cache directory exists before attempting to write
         FileUtils.mkdir_p(self.root, :mode => 0755) unless File.directory?(self.root)

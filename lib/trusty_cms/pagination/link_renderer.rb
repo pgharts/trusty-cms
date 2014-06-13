@@ -8,7 +8,7 @@ module TrustyCms
       def initialize(url_stem)
         @url_stem = url_stem
       end
-  
+
       def to_html
         links = @options[:page_links] ? windowed_links : []
         links.unshift page_link_or_span(@collection.previous_page, 'disabled prev_page', @options[:previous_label])
@@ -16,7 +16,7 @@ module TrustyCms
         html = links.join(@options[:separator])
         @options[:container] ? %{<div class="pagination">#{html}</div>} : html
       end
-      
+
       # this is rather crude compared to the WillPaginate link-builder,
       # but it can get by without much context to draw on
       def page_link(page, text, attributes = {})

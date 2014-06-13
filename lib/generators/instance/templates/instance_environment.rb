@@ -20,7 +20,7 @@ TrustyCms::Initializer.run do |config|
   # extensions in vendor/extensions are loaded, in alphabetical order. :all
   # can be used as a placeholder for all extensions not explicitly named.
   # config.extensions = [ :all ]
-  
+
   # Unload the extensions named here.
   # config.ignore_extensions []
 

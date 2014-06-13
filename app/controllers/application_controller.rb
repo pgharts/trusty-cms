@@ -18,19 +18,19 @@ class ApplicationController < ActionController::Base
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
   helper_method :pagination_parameters
-  
+
   def initialize
     super
     @trusty_config = TrustyCms::Config
   end
-  
+
   # helpers to include additional assets from actions or views
   helper_method :include_stylesheet, :include_javascript
-  
+
   def include_stylesheet(sheet)
     @stylesheets << sheet
   end
-  
+
   def include_javascript(script)
     @javascripts << script
   end
@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
       self.action_name
     end
   end
-    
+
   def rescue_action_in_public(exception)
     case exception
       when ActiveRecord::RecordNotFound, ActionController::UnknownController, ActionController::UnknownAction, ActionController::RoutingError
@@ -60,21 +60,21 @@ class ApplicationController < ActionController::Base
         super
     end
   end
-  
+
   private
-  
+
     def set_current_user
       UserActionObserver.instance.current_user = current_user
-    end  
-        
-    def set_user_locale      
+    end
+
+    def set_user_locale
       I18n.locale = current_user && !current_user.locale.blank? ? current_user.locale : TrustyCms::Config['default_locale']
     end
 
     def set_timezone
       Time.zone = TrustyCms::Config['local.timezone'] != nil && TrustyCms::Config['local.timezone'].empty? ? Time.zone_default : TrustyCms::Config['local.timezone']
     end
-  
+
     def set_javascripts_and_stylesheets
       @stylesheets ||= []
       @stylesheets.concat %w(admin/main)
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
       @body_classes ||= []
       @body_classes.concat(%w(reversed))
     end
-    
+
     # When using TrustyCms with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
     # That causes problems, especially when using special chars and with certain DBs, like DB2
     # That's why we force the encoding of the params to UTF-8
@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
     # See http://stackoverflow.com/questions/8268778/rails-2-3-9-encoding-of-query-parameters
     # See https://rails.lighthouseapp.com/projects/8994/tickets/4807
     # See http://jasoncodes.com/posts/ruby19-rails2-encodings (thanks for the following code, Jason!)
-    def force_utf8_params      
+    def force_utf8_params
       traverse = lambda do |object, block|
         if object.kind_of?(Hash)
           object.each_value { |o| traverse.call(o, block) }
@@ -110,5 +110,5 @@ class ApplicationController < ActionController::Base
       end
       traverse.call(params, force_encoding)
     end
-    
+
 end

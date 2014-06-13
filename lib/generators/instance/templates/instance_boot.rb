@@ -39,7 +39,7 @@ module TrustyCms
     def vendor?
       File.exist?("#{Rails.root}/vendor/radiant")
     end
-    
+
     def app?
       File.exist?("#{Rails.root}/lib/radiant.rb")
     end
@@ -62,7 +62,7 @@ module TrustyCms
       load_mutex
       load_initializer
     end
-    
+
     # RubyGems from version 1.6 does not require thread but Rails depend on it
     # This should newer rails do automaticly
     def load_mutex
@@ -73,7 +73,7 @@ module TrustyCms
         exit 1
       end
     end
-    
+
     def load_initializer
       begin
         require 'trusty_cms'
@@ -93,7 +93,7 @@ module TrustyCms
       $LOAD_PATH.unshift "#{Rails.root}/vendor/trusty_cms/lib"
       super
     end
-        
+
     def load_error_message
       "Please verify that vendor/radiant contains a complete copy of the TrustyCms sources."
     end

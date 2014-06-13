@@ -3,11 +3,11 @@ class TrustyCms::AdminUI::RegionPartials
     @partials = Hash.new {|h,k| h[k] = "<strong>`#{k}' default partial not found!</strong>" }
     @template = template
   end
-  
+
   def [](key)
     @partials[key.to_s]
   end
-  
+
   def method_missing(method, *args, &block)
     if block_given?
       # Ruby 1.9.2 yields self in instance_eval... see https://gist.github.com/479572

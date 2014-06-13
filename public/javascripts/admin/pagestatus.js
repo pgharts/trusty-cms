@@ -2,15 +2,15 @@ PageStatusBehavior = Behavior.create({
   initialize: function(options){
     this.update();
   },
-  
+
   onchange: function(event) {
     this.update();
   },
-  
+
   update: function() {
-    if(this.element.value >= 90) { 
+    if(this.element.value >= 90) {
       $('published_at').show();
-    } else { 
+    } else {
       $('published_at').hide();
     }
   }

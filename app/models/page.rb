@@ -100,15 +100,15 @@ class Page < ActiveRecord::Base
   def published?
     status == Status[:published]
   end
-  
+
   def scheduled?
     status == Status[:scheduled]
   end
-  
+
   def status
    Status.find(self.status_id)
   end
-  
+
   def status=(value)
     self.status_id = value.id
   end
@@ -202,13 +202,13 @@ class Page < ActiveRecord::Base
 
   def update_status
     self.published_at = Time.zone.now if published? && self.published_at == nil
-    
+
     if self.published_at != nil && (published? || scheduled?)
       self[:status_id] = Status[:scheduled].id if self.published_at  > Time.zone.now
       self[:status_id] = Status[:published].id if self.published_at <= Time.zone.now
     end
 
-    true    
+    true
   end
 
   def to_xml(options={}, &block)
@@ -260,7 +260,7 @@ class Page < ActiveRecord::Base
       @display_name = @display_name + " - not installed" if missing? && @display_name !~ /not installed/
       @display_name
     end
-    
+
     def display_name=(string)
       display_name(string)
     end

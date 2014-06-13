@@ -3,7 +3,7 @@ require "forwardable"
 
 module TrustyCms
   class Setup
-  
+
     class << self
       def bootstrap(config)
         setup = new
@@ -11,9 +11,9 @@ module TrustyCms
         setup
       end
     end
-    
+
     attr_accessor :config
-    
+
     def bootstrap(config)
       @config = config
       @admin = create_admin_user(config[:admin_name], config[:admin_username], config[:admin_password])
@@ -22,7 +22,7 @@ module TrustyCms
       # load_database_template(config[:database_template])
       announce "Finished."
     end
-    
+
     def create_admin_user(name, username, password)
       unless name and username and password
         announce "Create the admin user (press enter for defaults)."
@@ -42,7 +42,7 @@ module TrustyCms
       admin.update_attributes(attributes)
       admin
     end
-    
+
     def load_default_configuration
       feedback "\nInitializing configuration" do
         step { TrustyCms::Config['admin.title'   ] = 'TrustyCms CMS' }
@@ -55,7 +55,7 @@ module TrustyCms
         step { TrustyCms::Config['default_locale'] = 'en' }
       end
     end
-    
+
     def load_database_template(filename)
       template = nil
       if filename
@@ -85,9 +85,9 @@ module TrustyCms
       end
       create_records(template)
     end
-        
+
     private
-      
+
       def prompt_for_admin_name
         username = ask('Name (Administrator): ', String) do |q|
           q.validate = /^.{0,100}$/
@@ -97,7 +97,7 @@ module TrustyCms
         username = "Administrator" if username.blank?
         username
       end
-      
+
       def prompt_for_admin_username
         username = ask('Username (admin): ', String) do |q|
           q.validate = /^(|.{3,40})$/
@@ -107,7 +107,7 @@ module TrustyCms
         username = "admin" if username.blank?
         username
       end
-      
+
       def prompt_for_admin_password
         password = ask('Password (radiant): ', String) do |q|
           q.echo = false unless defined?(::JRuby) # JRuby doesn't support stty interaction
@@ -118,7 +118,7 @@ module TrustyCms
         password = "radiant" if password.blank?
         password
       end
-      
+
       def find_template_in_path(filename)
         (
           [
@@ -137,17 +137,17 @@ module TrustyCms
           end
         ).find { |name| File.file?(name) }
       end
-      
+
       def find_and_load_templates(glob)
         templates = Dir[glob]
         templates.map! { |template| load_template_file(template) }
         templates.sort_by { |template| template['name'] }
       end
-      
+
       def load_template_file(filename)
         YAML.load_file(filename)
       end
-      
+
       def create_records(template)
         records = template['records']
         if records
@@ -166,44 +166,44 @@ module TrustyCms
           end
         end
       end
-      
+
       def model(model_name)
         model_name.to_s.singularize.constantize
       end
-      
+
       def order_by_id(records)
         records.map { |name, record| [record['id'], record] }.sort { |a, b| a[0] <=> b[0] }
       end
-      
+
       extend Forwardable
       def_delegators :terminal, :agree, :ask, :choose, :say
-  
+
       def terminal
         @terminal ||= HighLine.new
       end
-  
+
       def output
         terminal.instance_variable_get("@output")
       end
-  
+
       def wrap(string)
         string = terminal.send(:wrap, string) unless terminal.wrap_at.nil?
         string
       end
-  
+
       def print(string)
         output.print(wrap(string))
         output.flush
       end
-  
+
       def puts(string = "\n")
         say string
       end
-  
+
       def announce(string)
         puts "\n#{string}"
       end
-            
+
       def feedback(process, &block)
         print "#{process}..."
         if yield
@@ -217,11 +217,11 @@ module TrustyCms
         puts "FAILED"
         raise e
       end
-      
+
       def step
         yield if block_given?
         print '.'
       end
-      
+
   end
 end

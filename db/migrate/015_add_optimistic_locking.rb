@@ -1,5 +1,5 @@
 class AddOptimisticLocking < ActiveRecord::Migration
-  
+
   def self.up
     [:pages, :layouts, :snippets, :users].each do |table|
       add_column table, :lock_version, :integer, :default => 0
@@ -11,5 +11,5 @@ class AddOptimisticLocking < ActiveRecord::Migration
       remove_column table, :lock_version
     end
   end
-  
+
 end

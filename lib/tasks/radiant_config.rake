@@ -7,7 +7,7 @@ namespace :trusty_cms do
       clear = ENV['CLEAR_CONFIG'] || nil
       TrustyCms::TaskSupport.config_export(config_path)
     end
-    
+
     desc "Import TrustyCms::Config from Rails.root/config/radiant_config.yml. Specify a path with RADIANT_CONFIG_PATH - defaults to Rails.root/config/radiant_config.yml Set CLEAR_CONFIG=true to delete all existing settings before import"
     task :import => :environment do
       config_path = ENV['RADIANT_CONFIG_PATH'] || "#{Rails.root}/config/radiant_config.yml"

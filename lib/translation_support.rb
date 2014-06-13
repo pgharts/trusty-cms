@@ -1,18 +1,18 @@
 class TranslationSupport
   class << self
-    
+
     #Retrieve US word set
     def get_translation_keys(language_root, suffix=nil)
       (dummy_comments, words) = read_file("#{language_root}/en#{suffix}.yml", 'en')
       words
     end
-    
+
     #Retrieve comments, translation data in hash form
     def read_file(filename, basename)
       (comments, data) = IO.read(filename).split(/\n#{basename}:\s*\n/)   #Add error checking for failed file read?
       return comments, create_hash(data, basename)
     end
-    
+
     #Creates hash of translation data
     def create_hash(data, basename)
       words = Hash.new
@@ -32,12 +32,12 @@ class TranslationSupport
       end
       words
     end
-    
+
     def open_available_tags(filename)
       data = YAML::load(File.open("#{filename}"))
       data.to_s
     end
-    
+
     #Writes to file from translation data hash structure
     def write_file(filename,basename,comments,words)
       File.open(filename, "w") do |log|
@@ -49,6 +49,6 @@ class TranslationSupport
         end
       end
     end
-    
+
   end
 end

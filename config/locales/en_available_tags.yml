@@ -1,12 +1,12 @@
 
 ---
 en:
-  desc: 
+  desc:
     aggregate-children-count: "Renders the total count of children of the aggregated pages.  Accepts the
       same options as @<r:children:each />@.
 
       *Usage*:
-      
+
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\">
         <r:children:count />
       </r:aggregate></code></pre>"
@@ -14,7 +14,7 @@ en:
       same options as the plain @<r:children:each />@.
 
       *Usage*:
-      
+
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\">
         <r:children:each>
             ...
@@ -24,7 +24,7 @@ en:
       same options as @<r:children:each />@.
 
       *Usage*:
-      
+
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\">
         <r:children:first>
             ...
@@ -34,7 +34,7 @@ en:
       same options as @<r:children:each />@.
 
       *Usage*:
-      
+
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\">
         <r:children:last>
             ...
@@ -42,23 +42,23 @@ en:
       </r:aggregate></code></pre>"
     aggregate-each: "Sets the scope to the individual aggregated page allowing you to
       iterate through each of the listed paths.
-      
+
       *Usage*:
-      
+
       <pre><code><r:aggregate:each paths=\"/section1; /section2; /section3\"> ... </r:aggregate:each></code></pre>"
     aggregate: "Aggregates the children of multiple paths using the @paths@ attribute.
       Useful for combining many different sections/categories into a single
       feed or listing.
-      
+
       *Usage*:
-      
+
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\"> ... </r:aggregate></code></pre>"
     author: "Renders the name of the author of the current page."
     breadcrumb: "Renders the @breadcrumb@ attribute of the current page."
     breadcrumbs: "Renders a trail of breadcrumbs to the current page. The separator attribute
       specifies the HTML fragment that is inserted between each of the breadcrumbs. By
       default it is set to @>@. The boolean @nolinks@ attribute can be specified to render
-      breadcrumbs in plain text, without any links (useful when generating title tag). 
+      breadcrumbs in plain text, without any links (useful when generating title tag).
       Set the boolean @noself@ attribute to omit the present page (useful in page headers).
 
       *Usage:*
@@ -70,7 +70,7 @@ en:
       current child.
 
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:child>...</r:child>
       </r:children:each>
@@ -87,7 +87,7 @@ en:
       separated list.
 
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:header [name=\"header_name\"] [restart=\"name1[;name2;...]\"]>
             ...
@@ -96,9 +96,9 @@ en:
       </code></pre>"
     children-each-if_first: "Renders the tag contents only if the current page is the first child in the context of
       a children:each tag
-      
+
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:if_first >
             ...
@@ -107,9 +107,9 @@ en:
       </code></pre>"
     children-each-if_last: "Renders the tag contents only if the current page is the last child in the context of
       a children:each tag
-      
+
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:if_last >
             ...
@@ -118,9 +118,9 @@ en:
       </code></pre>"
     children-each-unless_first: "Renders the tag contents unless the current page is the first child in the context of
       a children:each tag
-      
+
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:unless_first >
             ...
@@ -129,9 +129,9 @@ en:
       </code></pre>"
     children-each-unless_last: "Renders the tag contents unless the current page is the last child in the context of
       a children:each tag
-      
+
       *Usage:*
-      
+
       <pre><code><r:children:each>
         <r:unless_last >
             ...
@@ -140,16 +140,16 @@ en:
       </code></pre>"
     children-each: "Cycles through each of the children. Inside this tag all page attribute tags
       are mapped to the current child page.
-      
+
       Supply @paginated=\"true\"@ to paginate the displayed list. will_paginate view helper
       options can also be specified, including @per_page@, @previous_label@, @next_label@,
       @class@, @separator@, @inner_window@ and @outer_window@.
 
       *Usage:*
-      
+
       <pre><code><r:children:each [offset=\"number\"] [limit=\"number\"]
        [by=\"published_at|updated_at|created_at|slug|title|keywords|description\"]
-       [order=\"asc|desc\"] 
+       [order=\"asc|desc\"]
        [status=\"draft|reviewed|published|hidden|all\"]
        [paginated=\"true\"]
        [per_page=\"number\"]
@@ -161,18 +161,18 @@ en:
       the first child. Takes the same ordering options as @<r:children:each>@.
 
       *Usage:*
-      
+
       <pre><code><r:children:first>...</r:children:first></code></pre>"
     children-last: "Returns the last child. Inside this tag all page attribute tags are mapped to
       the last child. Takes the same ordering options as @<r:children:each>@.
 
       *Usage:*
-      
+
       <pre><code><r:children:last>...</r:children:last></code></pre>"
     children: "Gives access to a page's children.
 
       *Usage:*
-      
+
       <pre><code><r:children>...</r:children></code></pre>"
     comment: "This is deprecated and will be removed. Plase use @<r:hide>@
       Nothing inside a set of comment tags is rendered.
@@ -189,17 +189,17 @@ en:
       is set to true.
 
       *Usage:*
-      
+
       <pre><code><r:content [part=\"part_name\"] [inherit=\"true|false\"] [contextual=\"true|false\"] /></code></pre>"
-    cycle: "Renders a counter value or one of the values given based on a global cycle counter. 
-      
+    cycle: "Renders a counter value or one of the values given based on a global cycle counter.
+
       To get a numeric counter just use the tag, or specify a start value with @start@.
       Use the @reset@ attribute to reset the cycle to the beginning. Using @reset@ on a
-      numbered cycle will begin at 0. Use the @name@  attribute to track multiple cycles; 
+      numbered cycle will begin at 0. Use the @name@  attribute to track multiple cycles;
       the default is @cycle@.
 
       *Usage:*
-      
+
       <pre><code><r:cycle [values=\"first, second, third\"] [reset=\"true|false\"] [name=\"cycle\"] [start=\"second\"] /></code></pre>
       <pre><code><r:cycle start=\"3\" /></code></pre>"
     date: "Renders the date based on the current page (by default when it was published or created).
@@ -248,7 +248,7 @@ en:
       This is typically used inside another tag (like &lt;r:children:each&gt;) to add conditional mark-up if the child element is or descends from the current page.
 
       *Usage:*
-      
+
       <pre><code><r:if_ancestor_or_self>...</r:if_ancestor_or_self></code></pre>"
     if_children: "Renders the contained elements only if the current contextual page has one or
       more child pages.  The @status@ attribute limits the status of found child pages
@@ -256,7 +256,7 @@ en:
       non-virtual pages regardless of status.
 
       *Usage:*
-      
+
       <pre><code><r:if_children [status=\"published\"]>...</r:if_children></code></pre>"
     if_content: "Renders the containing elements if all of the listed parts exist on a page.
       By default the @part@ attribute is set to @body@, but you may list more than one
@@ -268,7 +268,7 @@ en:
       By default the @find@ attribute is set to @all@.
 
       *Usage:*
-      
+
       <pre><code><r:if_content [part=\"part_name, other_part\"] [inherit=\"true\"] [find=\"any\"]>...</r:if_content></code></pre>"
     if_dev: "Renders the containing elements only if TrustyCms in is development mode.
 
@@ -287,24 +287,24 @@ en:
       is not the root page.
 
       *Usage:*
-      
+
       <pre><code><r:if_parent>...</r:if_parent></code></pre>"
     if_path: "Renders the containing elements only if the page's path matches the regular expression
       given in the @matches@ attribute. If the @ignore_case@ attribute is set to false, the
       match is case sensitive. By default, @ignore_case@ is set to true.
 
       *Usage:*
-      
+
       <pre><code><r:if_path matches=\"regexp\" [ignore_case=\"true|false\"]>...</r:if_path></code></pre>"
     if_self: "Renders the contained elements if the current contextual page is also the actual page.
 
       This is typically used inside another tag (like &lt;r:children:each&gt;) to add conditional mark-up if the child element is the current page.
 
       *Usage:*
-      
+
       <pre><code><r:if_self>...</r:if_self></code></pre>"
-    javascript: "Renders the content from or a reference to the javascript specified in the @slug@ 
-attribute. Additionally, the @as@ attribute can be used to make the tag render 
+    javascript: "Renders the content from or a reference to the javascript specified in the @slug@
+attribute. Additionally, the @as@ attribute can be used to make the tag render
 as one of the following:
 
 * with no @as@ value the javascript's content is rendered by default.
@@ -317,15 +317,15 @@ When rendering @as=\"inline\"@ or @as=\"link\"@, the (X)HTML @type@ attribute
 is automatically be set to the default javascript content-type.
 You can overrride this attribute or add additional ones by passing extra
 attributes to the @<r:javascript>@ tag.
-        
+
 *Usage:*
-        
-<pre><code><r:javascript slug=\"site.js\" as=\"inline\" 
+
+<pre><code><r:javascript slug=\"site.js\" as=\"inline\"
   type=\"text/custom\" id=\"my_id\" />
 <r:javascript slug=\"other.js\" as=\"link\" /></code></pre>
 
 The above example will produce the following:
-        
+
 <pre><code><script type=\"text/custom\" id=\"my_id\">
 //<![CDATA[
   var your_script = 'this content';
@@ -343,9 +343,9 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:link [anchor=\"name\"] [other attributes...] /></code></pre>
-      
+
       or
-      
+
       <pre><code><r:link [anchor=\"name\"] [other attributes...]>link text here</r:link></code></pre>"
     markdown: "Filters its contents with the Markdown filter.
 
@@ -430,13 +430,13 @@ The above example will produce the following:
     page: "Causes the tags referring to a page's attributes to refer to the current page.
 
       *Usage:*
-      
+
       <pre><code><r:page>...</r:page></code></pre>"
     pagination: "The pagination tag is not usually called directly. Supply paginated=\"true\" when you display a list and it will
       be automatically display only the current page of results, with pagination controls at the bottom.
 
       *Usage:*
-      
+
       <pre><code><r:children:each paginated=\"true\" per_page=\"50\" container=\"false\" previous_label=\"foo\" next_label=\"bar\">
         <r:child>...</r:child>
       </r:children:each>
@@ -444,7 +444,7 @@ The above example will produce the following:
     parent: "Page attribute tags inside this tag refer to the parent of the current page.
 
       *Usage:*
-      
+
       <pre><code><r:parent>...</r:parent></code></pre>"
     path: "Renders the @path@ attribute of the current page."
     random: "Randomly renders one of the options specified by the @option@ tags.
@@ -490,8 +490,8 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:status [downcase='true'] /></code></pre>"
-    stylesheet: "Renders the content from or a reference to the stylesheet specified in the @slug@ 
-attribute. Additionally, the @as@ attribute can be used to make the tag render 
+    stylesheet: "Renders the content from or a reference to the stylesheet specified in the @slug@
+attribute. Additionally, the @as@ attribute can be used to make the tag render
 as one of the following:
 
 * with no @as@ value the stylesheet's content is rendered by default.
@@ -504,22 +504,22 @@ When rendering @as=\"inline\"@ or @as=\"link\"@, the (X)HTML @type@ attribute
 is automatically be set to the default stylesheet content-type.
 You can overrride this attribute or add additional ones by passing extra
 attributes to the @<r:stylesheet>@ tag.
-        
+
 *Usage:*
-        
-<pre><code><r:stylesheet slug=\"site.css\" as=\"inline\" 
+
+<pre><code><r:stylesheet slug=\"site.css\" as=\"inline\"
   type=\"text/custom\" id=\"my_id\" />
-<r:stylesheet slug=\"other.css\" as=\"link\" 
+<r:stylesheet slug=\"other.css\" as=\"link\"
   rel=\"alternate stylesheet\" /></code></pre>
 
 The above example will produce the following:
-        
+
 <pre><code><style type=\"text/custom\" id=\"my_id\">
 /*<![CDATA[*/
   .your_stylesheet { content: 'here' }
 /*]]>*/
 </style>
-<link rel=\"alternate stylesheet\" type=\"text/css\" 
+<link rel=\"alternate stylesheet\" type=\"text/css\"
   href=\"/css/other.css\" /></code></pre>"
     textile: "Filters its contents with the Textile filter.
 
@@ -542,7 +542,7 @@ The above example will produce the following:
       This is typically used inside another tag (like &lt;r:children:each&gt;) to add conditional mark-up unless the child element is or descends from the current page.
 
       *Usage:*
-      
+
       <pre><code><r:unless_ancestor_or_self>...</r:unless_ancestor_or_self></code></pre>"
     unless_children: "Renders the contained elements only if the current contextual page has no children.
       The @status@ attribute limits the status of found child pages to the given status,
@@ -550,7 +550,7 @@ The above example will produce the following:
       regardless of status.
 
       *Usage:*
-      
+
       <pre><code><r:unless_children [status=\"published\"]>...</r:unless_children></code></pre>"
     unless_content: "The opposite of the @if_content@ tag. It renders the contained elements if all of the
       specified parts do not exist. Setting the optional @inherit@ to true will search
@@ -561,7 +561,7 @@ The above example will produce the following:
       By default the @find@ attribute is set to @all@.
 
       *Usage:*
-      
+
       <pre><code><r:unless_content [part=\"part_name, other_part\"] [inherit=\"false\"] [find=\"any\"]>...</r:unless_content></code></pre>"
     unless_dev: "The opposite of the @if_dev@ tag.
 
@@ -580,12 +580,12 @@ The above example will produce the following:
       is the root page.
 
       *Usage:*
-      
+
       <pre><code><r:unless_parent>...</r:unless_parent></code></pre>"
     unless_path: "The opposite of the @if_path@ tag.
 
       *Usage:*
-      
+
       <pre><code><r:unless_path matches=\"regexp\" [ignore_case=\"true|false\"]>...</r:unless_path></code></pre>"
     unless_self: "Renders the contained elements unless the current contextual page is also the actual page.
 
@@ -598,7 +598,7 @@ The above example will produce the following:
       the snippet is called as a double tag.
 
       *Usage (within a snippet):*
-      
+
       <pre><code>
       <div id=\"outer\">
         <p>before</p>

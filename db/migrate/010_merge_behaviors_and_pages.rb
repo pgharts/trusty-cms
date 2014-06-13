@@ -2,13 +2,13 @@ class MergeBehaviorsAndPages < ActiveRecord::Migration
   class OldPage < ActiveRecord::Base
     set_table_name 'pages'
   end
-  
+
   @@page_map = {
     "Page Missing" => "FileNotFoundPage"
   }
-  
+
   @@behavior_map = @@page_map.invert
-  
+
   def self.up
     announce "converting behavior names to class names"
     OldPage.find(:all).each do |page|
@@ -31,7 +31,7 @@ class MergeBehaviorsAndPages < ActiveRecord::Migration
       end
     end
   end
-  
+
   def self.page_name(behavior_name)
     if @@page_map.has_key?(behavior_name)
       @@page_map[behavior_name]
@@ -42,7 +42,7 @@ class MergeBehaviorsAndPages < ActiveRecord::Migration
       name
     end
   end
-  
+
   def self.behavior_name(page_name)
     if @@behavior_map.has_key?(page_name)
       @@behavior_map[page_name]
@@ -52,6 +52,6 @@ class MergeBehaviorsAndPages < ActiveRecord::Migration
       name
     end
   end
-  
+
 
 end

@@ -1,5 +1,5 @@
 class Layout < ActiveRecord::Base
-  
+
   # Default Order
   default_scope :order => "name"
 
