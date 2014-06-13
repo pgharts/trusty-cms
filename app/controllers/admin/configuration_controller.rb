@@ -4,9 +4,9 @@ class Admin::ConfigurationController < ApplicationController
   # It accepts any set of config name-value pairs but is accessible only to administrators.
   # Note that configuration is routed as a singular resource so we only deal with show/edit/update
   # and the show and edit views determine what set of config values is shown and made editable.
-  
+
   before_filter :initialize_config
-  
+
   only_allow_access_to :edit, :update,
     :when => [:admin],
     :denied_url => { :controller => 'admin/configuration', :action => 'show' },
@@ -16,11 +16,11 @@ class Admin::ConfigurationController < ApplicationController
     @user = current_user
     render
   end
-  
+
   def edit
     render
   end
-  
+
   def update
     if params[:config]
       begin
@@ -40,11 +40,11 @@ class Admin::ConfigurationController < ApplicationController
       end
     end
   end
-  
+
 protected
 
   def initialize_config
     @trusty_config = {}
   end
-  
+
 end

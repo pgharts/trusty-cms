@@ -7,11 +7,11 @@ Object.extend(String.prototype, {
   downcase: function() {
     return this.toLowerCase();
   },
-  
+
   toInteger: function() {
     return parseInt(this, 10);
   },
-  
+
   toSlug: function(allow_periods) {
     replacement_regex = allow_periods ? /[\s:;=+]+/g : /[\s\.:;=+]+/g;
     return this.strip().downcase().replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(replacement_regex, '-');
@@ -25,8 +25,8 @@ Element.addMethods({
     if (element.nodeType == Node.TEXT_NODE) {
       return element.nodeValue.include(word);
     } else {
-      return $A(element.childNodes).any(function(child) { 
-        return Element.hasWord(child, word); 
+      return $A(element.childNodes).any(function(child) {
+        return Element.hasWord(child, word);
       });
     }
   },

@@ -9,28 +9,28 @@
         = t('personal_preferences')
       = image_tag(gravatar_url(@user.email, :size=>"64px"), :class=>"avatar", :width=>64, :height=>64, :alt=>"")
       %p.ruled
-        %label 
-          = t('name') 
+        %label
+          = t('name')
         %span
           = current_user.name
       %p.ruled
-        %label 
-          = t('email_address') 
-        %span.uri 
+        %label
+          = t('email_address')
+        %span.uri
           = current_user.email
       %p.ruled
-        %label 
-          = t('login') 
+        %label
+          = t('login')
         %span
           = current_user.login
       %p.ruled
-        %label 
-          = t('password') 
+        %label
+          = t('password')
         %big &bull;&bull;&bull;&bull;&bull;
       %p.ruled
         %label
-          = t('language') 
-        %span 
+          = t('language')
+        %span
           = current_user.locale
 
 #config.box

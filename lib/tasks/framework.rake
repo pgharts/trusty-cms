@@ -38,21 +38,21 @@ unless File.directory? "#{Rails.root}/app"
         radiant_git = "git://github.com/pgharts/trusty-cms.git"
 
         if File.exist?("vendor/trusty_cms/.git/HEAD")
-          cd("vendor/radiant") { system "git checkout master"; system "git pull origin master"}        
+          cd("vendor/radiant") { system "git checkout master"; system "git pull origin master"}
         else
           system "git clone #{radiant_git} vendor/radiant"
         end
 
         case
         when ENV['TAG']
-          cd("vendor/radiant") { system "git checkout -b v#{ENV['TAG']} #{ENV['TAG']}"} 
+          cd("vendor/radiant") { system "git checkout -b v#{ENV['TAG']} #{ENV['TAG']}"}
         when ENV['BRANCH']
-          cd("vendor/radiant") { system "git checkout --track -b #{ENV['BRANCH']} origin/#{ENV['BRANCH']}"} 
+          cd("vendor/radiant") { system "git checkout --track -b #{ENV['BRANCH']} origin/#{ENV['BRANCH']}"}
         when ENV['REVISION']
-          cd("vendor/radiant") { system "git checkout -b REV_#{ENV['REVISION']} #{ENV['REVISION']}"} 
+          cd("vendor/radiant") { system "git checkout -b REV_#{ENV['REVISION']} #{ENV['REVISION']}"}
         end
 
-        cd("vendor/radiant") { system "git submodule update --init"}        
+        cd("vendor/radiant") { system "git submodule update --init"}
       end
     end
 
@@ -67,7 +67,7 @@ unless File.directory? "#{Rails.root}/app"
       tasks = tasks & ENV['ONLY'].split(',') if ENV['ONLY']
       tasks = tasks - ENV['EXCEPT'].split(',') if ENV['EXCEPT']
 
-      tasks.each do |task| 
+      tasks.each do |task|
         puts "* Updating #{task}"
         Rake::Task["trusty_cms:update:#{task}"].invoke
       end
@@ -117,7 +117,7 @@ unless File.directory? "#{Rails.root}/app"
         tmpfile = "#{Rails.root}/Gemfile.tmp"
         genfile = "#{File.dirname(__FILE__)}/../generators/instance/templates/instance_gemfile"
         backfile = "#{Rails.root}/Gemfile.bak"
-        
+
         db_gems = {
           'sqlite3' => 'sqlite3',
           'mysql' => 'mysql',
@@ -132,7 +132,7 @@ unless File.directory? "#{Rails.root}/app"
           db = db_gems[active_db_gem]
           f.write ERB.new(File.read(genfile)).result(binding)
         end
-        
+
         unless File.exist?(file) && FileUtils.compare_file(file, tmpfile)
           warning = ""
           if File.exist?(file)
@@ -180,7 +180,7 @@ A Gemfile has been created in your application directory. If you have config.gem
           :cucumber     => "#{Rails.root}/config/environments/cucumber.bak",
           :production   => "#{Rails.root}/config/environments/production.bak"
         }
-        
+
         FileUtils.cp("#{File.dirname(__FILE__)}/../generators/instance/templates/instance_boot.rb", Rails.root + '/config/boot.rb')
         FileUtils.cp("#{File.dirname(__FILE__)}/../../config/preinitializer.rb", Rails.root + '/config/preinitializer.rb')
         warning = ""
@@ -201,7 +201,7 @@ A Gemfile has been created in your application directory. If you have config.gem
         unless warning.blank?
           puts "** WARNING **
 The following files have been changed in TrustyCms. Your originals have
-been backed up with .bak extensions. Please copy your customizations to 
+been backed up with .bak extensions. Please copy your customizations to
 the new files: #{warning}"
         end
       end
@@ -226,7 +226,7 @@ the new files: #{warning}"
       desc "Update admin stylesheets from your current radiant install"
       task :stylesheets do
         project_dir = Rails.root + '/public/stylesheets/admin/'
-        
+
         copy_stylesheets = proc do |project_dir, styles|
           styles.reject!{|s| File.basename(s) == 'overrides.css'} if File.exists?(project_dir + 'overrides.css')
           FileUtils.cp(styles, project_dir)

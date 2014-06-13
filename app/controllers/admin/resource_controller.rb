@@ -1,7 +1,7 @@
 require 'trusty_cms/resource_responses'
 class Admin::ResourceController < ApplicationController
   extend TrustyCms::ResourceResponses
-  
+
   helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
   before_filter :populate_format
   before_filter :never_cache
@@ -11,7 +11,7 @@ class Admin::ResourceController < ApplicationController
 
   cattr_reader :paginated
   cattr_accessor :default_per_page, :will_paginate_options
-  
+
   create_responses do |r|
     # Equivalent respond_to block for :plural responses:
     # respond_to do |wants|
@@ -23,7 +23,7 @@ class Admin::ResourceController < ApplicationController
 
     r.singular.publish(:xml, :json) { render format_symbol => model }
     r.singular.default { redirect_to edit_model_path if action_name == "show" }
-    
+
     r.not_found.publish(:xml, :json) { head :not_found }
     r.not_found.default { announce_not_found; redirect_to :action => "index" }
 
@@ -68,7 +68,7 @@ class Admin::ResourceController < ApplicationController
     model.destroy
     response_for :destroy
   end
-  
+
   def self.model_class(model_class = nil)
     @model_class ||= (model_class || self.controller_name).to_s.singularize.camelize.constantize
   end
@@ -90,7 +90,7 @@ class Admin::ResourceController < ApplicationController
   # the @pagination_for@ helper method calls @will_paginate_options@ unless other options are supplied.
   #
   # pagination_for(@events)
-  
+
   def will_paginate_options
     self.class.will_paginate_options || {}
   end
@@ -110,7 +110,7 @@ class Admin::ResourceController < ApplicationController
     pp = params[:pp] || TrustyCms.config['admin.pagination.per_page']
     pp = (self.class.default_per_page || 50) if pp.blank?
     {
-      :page => (params[:p] || 1).to_i, 
+      :page => (params[:p] || 1).to_i,
       :per_page => pp.to_i
     }
   end
@@ -129,7 +129,7 @@ class Admin::ResourceController < ApplicationController
         super
       end
     end
-    
+
     def model_class
       self.class.model_class
     end
@@ -183,7 +183,7 @@ class Admin::ResourceController < ApplicationController
     def continue_url(options)
       options[:redirect_to] || (params[:continue] ? {:action => 'edit', :id => model.id} : index_page_for_model)
     end
-    
+
     def index_page_for_model
       parts = {:action => "index"}
       if paginated? && model && i = model_class.all.index(model)
@@ -204,15 +204,15 @@ class Admin::ResourceController < ApplicationController
 
     def announce_removed
       ActiveSupport::Deprecation.warn("announce_removed is no longer encouraged in TrustyCms 0.9.x.", caller)
-      flash[:notice] = t("resource_controller.removed", :humanized_model_name => humanized_model_name)    
+      flash[:notice] = t("resource_controller.removed", :humanized_model_name => humanized_model_name)
     end
-    
+
     def announce_not_found
-      flash[:notice] = t("resource_controller.not_found", :humanized_model_name => humanized_model_name)    
+      flash[:notice] = t("resource_controller.not_found", :humanized_model_name => humanized_model_name)
     end
 
     def announce_update_conflict
-      flash.now[:error] =  t("resource_controller.update_conflict", :humanized_model_name => humanized_model_name)  
+      flash.now[:error] =  t("resource_controller.update_conflict", :humanized_model_name => humanized_model_name)
     end
 
     def clear_model_cache
@@ -226,19 +226,19 @@ class Admin::ResourceController < ApplicationController
     def format
       params[:format] || 'html'
     end
-    
-    
+
+
     # I would like to set this to expires_in(1.minute, :private => true) to allow for more fluid navigation
     # but the annoyance for concurrent authors would be too great.
     def never_cache
       expires_now
     end
-    
+
     # Assist with user agents that cause improper content-negotiation
     # warn "Remove default HTML format, Accept header no longer used. (#{__FILE__}: #{__LINE__})" if Rails.version !~ /^2\.1/
     def populate_format
       params[:format] ||= 'html' unless request.xhr?
     end
-    
-    
+
+
 end

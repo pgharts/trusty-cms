@@ -4,35 +4,35 @@
  *  dependencies: prototype.js, effects.js, lowpro.js
  *
  *  --------------------------------------------------------------------------
- *  
+ *
  *  Allows you to easily create a dropdown menu item. Simply create a link
  *  with a class of "dropdown" that references the ID of the list that you
  *  would like to use as a dropdown menu.
- *  
+ *
  *  A link like this:
- *  
+ *
  *    <a class="dropdown" href="#dropdown">Menu</a>
- *  
+ *
  *  will dropdown a list of choices in the list with the ID of "dropdown".
- *  
+ *
  *  You will need to install the following hook:
- *  
+ *
  *    Event.addBehavior({'a.dropdown': Dropdown.TriggerBehavior()});
- *  
+ *
  *  --------------------------------------------------------------------------
- *  
+ *
  *  Copyright (c) 2010, John W. Long
- *  
+ *
  *  Permission is hereby granted, free of charge, to any person obtaining a
  *  copy of this software and associated documentation files (the "Software"),
  *  to deal in the Software without restriction, including without limitation
  *  the rights to use, copy, modify, merge, publish, distribute, sublicense,
  *  and/or sell copies of the Software, and to permit persons to whom the
  *  Software is furnished to do so, subject to the following conditions:
- *  
+ *
  *  The above copyright notice and this permission notice shall be included in
  *  all copies or substantial portions of the Software.
- *  
+ *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -40,22 +40,22 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
- *  
+ *
  */
 
 var Dropdown = {
-  
+
   DefaultPosition: 'bottom',
-  
+
   DefaultEffect: 'slide',
   DefaultEffectDuration: 0.1,
-  
+
   EffectPairs: {
     'slide' : ['SlideDown', 'SlideUp'],
     'blind' : ['BlindDown', 'BlindUp'],
     'appear': ['Appear', 'Fade']
   }
-  
+
 };
 
 Dropdown.TriggerBehavior = Behavior.create({
@@ -65,11 +65,11 @@ Dropdown.TriggerBehavior = Behavior.create({
     options.effect = (options.effect || Dropdown.DefaultEffect).toLowerCase();
     options.duration = (options.duration || Dropdown.DefaultEffectDuration);
     this.options = options;
-    
+
     var matches = this.element.href.match(/\#(.+)$/);
     this.menu = (matches ? Dropdown.Menu.findOrCreate(matches[1]) : new Dropdown.AjaxMenu(this.element.href));
   },
-  
+
   onclick: function(event) {
     event.stop();
     $$('a.dropdown').each(function(drop){ drop.removeClassName('selected') });
@@ -77,7 +77,7 @@ Dropdown.TriggerBehavior = Behavior.create({
     clicked = this;
     c.each(function(pair){
       menu = Dropdown.Menu.controls[pair.key];
-      if (menu && menu.visible()) { 
+      if (menu && menu.visible()) {
         menu.close(clicked.element,clicked.options);
       }
     })
@@ -86,14 +86,14 @@ Dropdown.TriggerBehavior = Behavior.create({
 });
 
 Dropdown.Menu = Class.create({
-  
+
   initialize: function(element) {
     element.remove();
     this.element = element;
     this.wrapper = $div({'class': 'dropdown_wrapper', 'style': 'position: absolute; display: none'}, element);
     document.body.insert(this.wrapper);
   },
-  
+
   open: function(trigger, options) {
     this.wrapper.hide();
     trigger.addClassName('selected');
@@ -102,14 +102,14 @@ Dropdown.Menu = Class.create({
     var effect = Effect[Dropdown.EffectPairs[name][0]];
     effect(this.wrapper, {duration: options.duration});
   },
-  
+
   close: function(trigger, options) {
     var name = options.effect;
     var effect = Effect[Dropdown.EffectPairs[name][1]];
     effect(this.wrapper, {duration: options.duration});
     trigger.removeClassName('selected');
   },
-  
+
   toggle: function(trigger, options) {
     if (this.lastTrigger == trigger) {
       if (this.wrapper.visible()) {
@@ -123,7 +123,7 @@ Dropdown.Menu = Class.create({
     }
     this.lastTrigger = trigger;
   },
-  
+
   position: function(trigger, options) {
     switch(options.position) {
       case 'top':     this.positionTop(trigger);     break;
@@ -132,7 +132,7 @@ Dropdown.Menu = Class.create({
     }
     this.lastOptions = options;
   },
-  
+
   positionTop: function(trigger) {
     var offset = trigger.cumulativeOffset();
     var height = this.wrapper.getHeight();
@@ -142,7 +142,7 @@ Dropdown.Menu = Class.create({
     });
     this.lastTrigger = trigger;
   },
-  
+
   positionBottom: function(trigger) {
     var offset = trigger.cumulativeOffset();
     var height = trigger.getHeight();
@@ -152,15 +152,15 @@ Dropdown.Menu = Class.create({
     });
     this.lastTrigger = trigger;
   },
-  
+
   reposition: function() {
     if (this.lastTrigger) this.position(this.lastTrigger, this.lastOptions);
   },
-  
+
   visible: function() {
     return this.wrapper.visible();
   }
-  
+
 });
 
 Dropdown.AjaxMenu = Class.create(Dropdown.Menu, {

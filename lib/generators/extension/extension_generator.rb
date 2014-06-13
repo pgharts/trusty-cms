@@ -5,15 +5,15 @@ end
 
 class ExtensionGenerator < Rails::Generator::NamedBase
   default_options :with_test_unit => false
-  
+
   attr_reader :extension_path, :extension_file_name
-  
+
   def initialize(runtime_args, runtime_options = {})
     super
     @extension_file_name = "#{file_name}_extension"
     @extension_path = "vendor/extensions/#{file_name}"
   end
-  
+
   def manifest
     record do |m|
       m.directory "#{extension_path}/app/controllers"
@@ -24,7 +24,7 @@ class ExtensionGenerator < Rails::Generator::NamedBase
       m.directory "#{extension_path}/config/initializers"
       m.directory "#{extension_path}/db/migrate"
       m.directory "#{extension_path}/lib/tasks"
-      
+
       m.template 'README.md',           "#{extension_path}/README.md"
       m.template 'extension.rb',        "#{extension_path}/#{extension_file_name}.rb"
       m.template 'tasks.rake',          "#{extension_path}/lib/tasks/#{extension_file_name}_tasks.rake"
@@ -33,7 +33,7 @@ class ExtensionGenerator < Rails::Generator::NamedBase
       m.template 'radiant_config.rb',   "#{extension_path}/config/initializers/radiant_config.rb"
       m.template 'lib.rb',              "#{extension_path}/lib/radiant-#{file_name}-extension.rb"
       m.template 'gemspec.rb',          "#{extension_path}/radiant-#{file_name}-extension.gemspec"
-      
+
       if options[:with_test_unit]
         m.directory "#{extension_path}/test/fixtures"
         m.directory "#{extension_path}/test/functional"
@@ -44,7 +44,7 @@ class ExtensionGenerator < Rails::Generator::NamedBase
         m.template 'functional_test.rb',  "#{extension_path}/test/functional/#{extension_file_name}_test.rb"
       else
         m.directory "#{extension_path}/spec/controllers"
-        m.directory "#{extension_path}/spec/models"        
+        m.directory "#{extension_path}/spec/models"
         m.directory "#{extension_path}/spec/views"
         m.directory "#{extension_path}/spec/helpers"
         m.directory "#{extension_path}/features/support"
@@ -59,11 +59,11 @@ class ExtensionGenerator < Rails::Generator::NamedBase
       end
     end
   end
-  
+
   def class_name
     super.to_name.gsub(' ', '') + 'Extension'
   end
-  
+
   def extension_name
     class_name.to_name('Extension')
   end
@@ -87,11 +87,11 @@ class ExtensionGenerator < Rails::Generator::NamedBase
   def author_name
     author_info['user.name'] || 'Your Name'
   end
-  
+
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
-    opt.on("--with-test-unit", 
+    opt.on("--with-test-unit",
            "Use Test::Unit for this extension instead of RSpec") { |v| options[:with_test_unit] = v }
   end
 end

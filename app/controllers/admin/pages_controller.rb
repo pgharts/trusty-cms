@@ -1,7 +1,7 @@
 class Admin::PagesController < Admin::ResourceController
   before_filter :initialize_meta_rows_and_buttons, :only => [:new, :edit, :create, :update]
   before_filter :count_deleted_pages, :only => [:destroy]
-  
+
   class PreviewStop < ActiveRecord::Rollback
     def message
       'Changes not saved!'
@@ -28,7 +28,7 @@ class Admin::PagesController < Admin::ResourceController
     assign_page_attributes
     response_for :new
   end
-  
+
   def preview
     render_preview
   rescue PreviewStop => exception
@@ -52,7 +52,7 @@ class Admin::PagesController < Admin::ResourceController
         Page
       end
     end
-      
+
     def render_preview
       Page.transaction do
         page_class = Page.descendants.include?(model_class) ? model_class : Page
@@ -69,7 +69,7 @@ class Admin::PagesController < Admin::ResourceController
         process_with_exception(page)
       end
     end
-    
+
     def process_with_exception(page)
       page.process(request, response)
       @performed_render = true

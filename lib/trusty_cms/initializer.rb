@@ -11,28 +11,28 @@ require 'string_extensions/string_extensions'
 module TrustyCms
 
   module Initializer
-  
+
     # Rails::Initializer is essentially a list of startup steps and we extend it here by:
     # * overriding or extending some of those steps so that they use radiant and extension paths
     #   as well as (or instead of) the rails defaults.
     # * appending some extra steps to set up the admin UI and activate extensions
 
 
-    # Returns true in the very unusual case where radiant has been deployed as a rails app itself, rather than 
+    # Returns true in the very unusual case where radiant has been deployed as a rails app itself, rather than
     # loaded as a gem or from vendor/. This is only likely in situations where radiant is customised so heavily
     # that extensions are not sufficient.
     #
     def deployed_as_app?
       TRUSTY_CMS_ROOT == Rails.root
     end
-    
+
     # Extends the Rails::Initializer default to add extension paths to the autoload list.
     # Note that +default_autoload_paths+ is also overridden to point to TRUSTY_CMS_ROOT.
-    # 
+    #
     def set_autoload_patf
       super
     end
-    
+
     # Overrides the Rails initializer to load metal from TRUSTY_CMS_ROOT and from radiant extensions.
     #
     def initialize_metal
@@ -41,7 +41,7 @@ module TrustyCms
       Rails::Rack::Metal.metal_paths += plugin_loader.engine_metal_paths
       Rails::Rack::Metal.metal_paths += extension_loader.paths(:metal)
       Rails::Rack::Metal.metal_paths.uniq!
-    
+
       configuration.middleware.insert_before(
         :"ActionController::ParamsParser",
         Rails::Rack::Metal, :if => Rails::Rack::Metal.metals.any?)
@@ -77,13 +77,13 @@ module TrustyCms
       super
       extension_loader.load_extensions
     end
-    
+
     # Extends the Rails initializer to run initializers from radiant and from extensions. The load order will be:
     # 1. TRUSTY_CMS_ROOT/config/intializers/*.rb
     # 2. Rails.root/config/intializers/*.rb
     # 3. config/initializers/*.rb found in extensions, in extension load order.
     #
-    # In the now rare case where radiant is deployed as an ordinary rails application, step 1 is skipped 
+    # In the now rare case where radiant is deployed as an ordinary rails application, step 1 is skipped
     # because it is equivalent to step 2.
     #
     def load_application_initializers
@@ -114,7 +114,7 @@ module TrustyCms
       TrustyCms::Application.config.add_controller_paths(extension_loader.paths(:controller))
       TrustyCms::Application.config.add_eager_load_paths(extension_loader.paths(:eager_load))
     end
-    
+
     # Initializes all the admin interface elements and views. Separate here so that it can be called
     # to reset the interface before extension (re)activation.
     #
@@ -123,15 +123,15 @@ module TrustyCms
       initialize_framework_views
       admin.load_default_regions
     end
-    
+
     # Initializes the core admin tabs. Separate so that it can be invoked by itself in tests.
     #
     def initialize_default_admin_tabs
       admin.initialize_nav
     end
-    
-    # This adds extension view paths to the standard Rails::Initializer method. 
-    # In environments that don't cache templates it reloads the path set on each request, 
+
+    # This adds extension view paths to the standard Rails::Initializer method.
+    # In environments that don't cache templates it reloads the path set on each request,
     # so that new extension paths are noticed without a restart.
     #
     def initialize_framework_views
@@ -142,9 +142,9 @@ module TrustyCms
       if ActionMailer::Base.view_paths.count == 0 || !ActionView::Base.cache_template_loading
         ActionMailer::Base.view_paths = ActionView::Base.process_view_paths(view_paths)
       end
-    end 
+    end
 
-    # Extends the Rails initializer to make sure that extension controller paths are available when routes 
+    # Extends the Rails initializer to make sure that extension controller paths are available when routes
     # are initialized.
     #
     def initialize_routing

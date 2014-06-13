@@ -23,14 +23,14 @@ module Admin::ConfigurationHelper
     html << content_tag(:span, " #{t('warning')}: #{[setting.errors.get(:value)].flatten.first}", :class => 'warning') if setting.errors.get(:value)
     html
   end
-  
+
   # Renders the setting as label and appropriate input field:
   #
   #   edit_setting("admin.title")
   #   => <label for="admin_title">Admin title<label><input type="text" name="config['admin.title']" id="admin_title" value="TrustyCms CMS" />
   #
   #   edit_config("defaults.page.status")
-  #   => 
+  #   =>
   #   <label for="defaults_page_status">Default page status<label>
   #   <select type="text" name="config['defaults.page.status']" id="defaults_page_status">
   #     <option value="Draft">Draft</option>
@@ -65,12 +65,12 @@ module Admin::ConfigurationHelper
     end
     html
   end
-  
+
   def setting_for(key)
     @config ||= {}    # normally initialized in Admin::ConfigurationController
     @config[key] ||= TrustyCms.config.find_or_create_by_key(key)
   end
-  
+
   def definition_for(key)
     if setting = setting_for(key)
       setting.definition

@@ -1,6 +1,6 @@
 class ConvertPageMetas < ActiveRecord::Migration
   def self.up
-    # following add and remove column enables running this migration 
+    # following add and remove column enables running this migration
     # when upgrading radiant with allowed_children_cache added to Page model
     add_column :pages, :allowed_children_cache, :text
     Page.all.each do |page|

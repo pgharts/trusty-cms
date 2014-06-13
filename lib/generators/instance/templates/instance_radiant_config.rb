@@ -7,10 +7,10 @@ TrustyCms.config do |config|
   # config.define 'S3.bucket', :default => "key", :allow_change => false
 
   # you can also use this file to set config values (by environment, for example):
-  
+
   # if Rails.env == 'production'
   #   config['cache.duration'] = 86400
   # else
   #   config['cache.duration'] = 0
   # end
-end 
+end

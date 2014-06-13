@@ -11,7 +11,7 @@ module Annotatable
         alias :inherited :inherited_with_annotatable
       end
     end
-    
+
     def annotate(*attrs)
       options = {}
       options = attrs.pop if attrs.last.kind_of?(Hash)
@@ -43,7 +43,7 @@ module Annotatable
     def inherited_with_annotatable(subclass)
       inherited_without_annotatable(subclass)
       (["inherited_annotations"] + (@inherited_annotations || [])).each do |t|
-        ivar = "@#{t}" 
+        ivar = "@#{t}"
         subclass.instance_variable_set(ivar, instance_variable_get(ivar))
       end
     end
