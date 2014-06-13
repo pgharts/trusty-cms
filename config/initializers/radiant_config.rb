@@ -1,4 +1,4 @@
-TrustyCms::Application.config do |config|
+TrustyCms.config do |config|
   config.define 'admin.title', :default => "TrustyCms CMS"
   config.define 'dev.host'
   config.define 'local.timezone', :allow_change => true, :select_from => lambda { ActiveSupport::TimeZone::MAPPING.keys.sort }
