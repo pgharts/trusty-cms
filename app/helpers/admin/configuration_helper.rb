@@ -11,7 +11,7 @@ module Admin::ConfigurationHelper
     setting.valid?
     domkey = key.gsub(/\W/, '_')
     html = ""
-    html << content_tag(:label, t("@trusty_config.#{key}").titlecase, :for => domkey)
+    html << content_tag(:label, t("trusty_config.#{key}").titlecase, :for => domkey)
     if setting.boolean?
       value = setting.checked? ? t('yes') : t('no')
       html << content_tag(:span, value, :id => domkey, :class => "#{value} #{options[:class]}")
@@ -21,7 +21,7 @@ module Admin::ConfigurationHelper
     end
     html << content_tag(:span, " #{t("units.#{setting.units}")}", :class => 'units') if setting.units
     html << content_tag(:span, " #{t('warning')}: #{[setting.errors.get(:value)].flatten.first}", :class => 'warning') if setting.errors.get(:value)
-    html
+    html.html_safe
   end
 
   # Renders the setting as label and appropriate input field:
@@ -44,7 +44,7 @@ module Admin::ConfigurationHelper
     setting = setting_for(key)
     domkey = key.gsub(/\W/, '_')
     name = "@trusty_config[#{key}]"
-    title = t("@trusty_config.#{key}").titlecase
+    title = t("trusty_config.#{key}").titlecase
     title << content_tag(:span, " (#{t("units.#{setting.units}")})", :class => 'units') if setting.units
     value = params[key.to_sym].nil? ? setting.value : params[key.to_sym]
     html = ""
