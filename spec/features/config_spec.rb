@@ -27,4 +27,14 @@ describe 'Configuration (Settings)' do
     click_button 'Edit Preferences'
     click_link 'Change'
   end
+
+  it 'lets you edit the site preferences' do
+    click_button 'Edit Configuration'
+    fill_in 'Site Title', with: 'My Special Site'
+    click_button 'Save Changes'
+
+    within '#site_title' do
+      expect(page).to have_content  'My Special Site'
+    end
+  end
 end

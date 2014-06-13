@@ -61,9 +61,9 @@ module Admin::ConfigurationHelper
     end
     if setting.errors[:value].present?
       html << content_tag(:span, [setting.errors[:value]].flatten.first, :class => 'error')
-      html = content_tag(:span, html, :class => "error-with-field")
+      html = content_tag(:span, html.html_safe, :class => "error-with-field")
     end
-    html
+    html.html_safe
   end
 
   def setting_for(key)
