@@ -59,8 +59,8 @@ module Admin::ConfigurationHelper
       html << content_tag(:label, title, :for => domkey)
       html << text_field_tag(name, value, :class => 'textbox', :id => domkey)
     end
-    if setting.errors.on(:value)
-      html << content_tag(:span, [setting.errors.on(:value)].flatten.first, :class => 'error')
+    if setting.errors[:value].present?
+      html << content_tag(:span, [setting.errors[:value]].flatten.first, :class => 'error')
       html = content_tag(:span, html, :class => "error-with-field")
     end
     html
