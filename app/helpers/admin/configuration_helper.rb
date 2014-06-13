@@ -11,7 +11,7 @@ module Admin::ConfigurationHelper
     setting.valid?
     domkey = key.gsub(/\W/, '_')
     html = ""
-    html << content_tag(:label, t("@trusty_config.#{key}").titlecase, :for => domkey)
+    html << content_tag(:label, t("trusty_config.#{key}").titlecase, :for => domkey)
     if setting.boolean?
       value = setting.checked? ? t('yes') : t('no')
       html << content_tag(:span, value, :id => domkey, :class => "#{value} #{options[:class]}")
@@ -21,7 +21,7 @@ module Admin::ConfigurationHelper
     end
     html << content_tag(:span, " #{t("units.#{setting.units}")}", :class => 'units') if setting.units
     html << content_tag(:span, " #{t('warning')}: #{[setting.errors.get(:value)].flatten.first}", :class => 'warning') if setting.errors.get(:value)
-    html
+    html.html_safe
   end
 
   # Renders the setting as label and appropriate input field:
@@ -43,8 +43,8 @@ module Admin::ConfigurationHelper
   def edit_config(key, options={})
     setting = setting_for(key)
     domkey = key.gsub(/\W/, '_')
-    name = "@trusty_config[#{key}]"
-    title = t("@trusty_config.#{key}").titlecase
+    name = "trusty_config[#{key}]"
+    title = t("trusty_config.#{key}").titlecase
     title << content_tag(:span, " (#{t("units.#{setting.units}")})", :class => 'units') if setting.units
     value = params[key.to_sym].nil? ? setting.value : params[key.to_sym]
     html = ""
@@ -59,16 +59,16 @@ module Admin::ConfigurationHelper
       html << content_tag(:label, title, :for => domkey)
       html << text_field_tag(name, value, :class => 'textbox', :id => domkey)
     end
-    if setting.errors.on(:value)
-      html << content_tag(:span, [setting.errors.on(:value)].flatten.first, :class => 'error')
-      html = content_tag(:span, html, :class => "error-with-field")
+    if setting.errors[:value].present?
+      html << content_tag(:span, [setting.errors[:value]].flatten.first, :class => 'error')
+      html = content_tag(:span, html.html_safe, :class => "error-with-field")
     end
-    html
+    html.html_safe
   end
 
   def setting_for(key)
-    @config ||= {}    # normally initialized in Admin::ConfigurationController
-    @config[key] ||= TrustyCms.config.find_or_create_by_key(key)
+    @trusty_config ||= {}    # normally initialized in Admin::ConfigurationController
+    @trusty_config[key] ||= TrustyCms.config.find_or_create_by_key(key)
   end
 
   def definition_for(key)

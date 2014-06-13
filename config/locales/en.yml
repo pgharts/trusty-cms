@@ -41,7 +41,7 @@ en:
   cancel: 'Cancel'
   change: 'Change'
   close: 'Close'
-  config:
+  trusty_config:
     admin:
       title: 'admin header title'
     defaults:

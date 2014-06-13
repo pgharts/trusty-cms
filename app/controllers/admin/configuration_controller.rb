@@ -22,10 +22,10 @@ class Admin::ConfigurationController < ApplicationController
   end
 
   def update
-    if params[:config]
+    if params[:trusty_config]
       begin
         TrustyCms.config.transaction do
-          params["config"].each_pair do |key, value|
+          params[:trusty_config].each_pair do |key, value|
             @trusty_config[key] = TrustyCms::Config.find_or_create_by_key(key)
             @trusty_config[key].value = value      # validation sets errors on @trusty_config['key'] that the helper methods will pick up
           end

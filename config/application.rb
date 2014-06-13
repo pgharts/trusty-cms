@@ -111,11 +111,6 @@ class Application < Rails::Application
     extension_loader.load_extensions
     extension_loader.load_extension_initalizers
 
-
-    Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
-      load(initializer)
-    end
-
     extension_loader.activate_extensions  # also calls initialize_views
     #config.add_controller_paths(extension_loader.paths(:controller))
     #config.add_eager_load_paths(extension_loader.paths(:eager_load))
