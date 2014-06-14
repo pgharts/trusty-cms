@@ -2,9 +2,8 @@ TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
   namespace :admin do
     resources :pages do
-      resources :children do
-        get 'remove', on: :member
-      end
+      resources :children, :controller => 'pages'
+      #TODO: put back the remove on children possibly
       get 'remove', on: :member
     end
     resources :layouts do
