@@ -76,7 +76,7 @@ module TrustyCms
 
 
     # TODO: We're not sure this is actually working, but we can't really test this until the app initializes.
-    config.middleware.use "TrustyCms::Cache"
+    # config.middleware.use "TrustyCms::Cache"
 
 
     config.filter_parameters += [:password, :password_confirmation]
