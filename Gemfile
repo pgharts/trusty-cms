@@ -29,6 +29,8 @@ gemspec
 # gem "radiant-smarty_pants_filter-extension", "~> 1.0.2"
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
+gem "sass-rails", github: 'guilleiguaran/sass-rails', branch: 'backport'
+
 group :development, :test do
   gem 'pry',         '~> 0.10.0'
   gem 'capybara',    '~> 2.3.0'
