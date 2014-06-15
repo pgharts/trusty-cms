@@ -5,6 +5,7 @@ require 'configuration_extensions/configuration_extensions'
 require 'radius'
 require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
+require 'compass'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -18,6 +19,7 @@ module TrustyCms
     include TrustyCms::Initializer
 
     config.autoload_paths += %W(#{config.root}/lib)
+    Sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
 
     # Enable the asset pipeline
     config.assets.enabled = true
