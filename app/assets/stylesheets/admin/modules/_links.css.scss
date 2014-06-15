@@ -1,18 +1,24 @@
-=default-link
-  color: $base-link-color
-  text-decoration: underline
-  &:hover
-    text-decoration: none
+@mixin default-link {
+  color: $base-link-color;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
-=alt-link
-  color: $alt-link-color
-  text-decoration: underline
-  &:hover
-    text-decoration: none
+@mixin alt-link {
+  color: $alt-link-color;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
-=plain-link
-  color: #333
-  text-decoration: none
-  &:hover
-    text-decoration: underline
-    color: $base-link-color
+@mixin plain-link {
+  color: #333333;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    color: $base-link-color;
+  }
+}

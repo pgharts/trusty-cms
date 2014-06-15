@@ -1,4 +1,5 @@
 // Reproduce the deprecated Compass linear-gradient mixin
 
-=linear-gradient($color-stops, $start: top, $image: false)
-  +background-image($image, linear-gradient($start, $color-stops))
+@mixin linear-gradient($color-stops, $start: top, $image: false) {
+  @include background-image($image, linear-gradient($start, $color-stops));
+}
