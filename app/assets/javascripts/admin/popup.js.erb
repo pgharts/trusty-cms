@@ -1,12 +1,15 @@
+// Ensure that relative_url_root is defined
+if(typeof(relative_url_root) === 'undefined'){ relative_url_root = '';}
+
 var Popup = {
 
   // Borders
   BorderThickness: 8,
-  BorderImage: '/images/popup_border_background.png',
-  BorderTopLeftImage: '/images/popup_border_top_left.png',
-  BorderTopRightImage: '/images/popup_border_top_right.png',
-  BorderBottomLeftImage: '/images/popup_border_bottom_left.png',
-  BorderBottomRightImage: '/images/popup_border_bottom_right.png',
+  BorderImage: relative_url_root + "<%= asset_path('admin/popup_border_background.png') %>",
+  BorderTopLeftImage: relative_url_root + "<%= asset_path('admin/popup_border_top_left.png') %>",
+  BorderTopRightImage: relative_url_root + "<%= asset_path('admin/popup_border_top_right.png') %>",
+  BorderBottomLeftImage: relative_url_root + "<%= asset_path('admin/popup_border_bottom_left.png') %>",
+  BorderBottomRightImage: relative_url_root + "<%= asset_path('admin/popup_border_bottom_right.png') %>",
 
   // CSS Classes
   PopupClass: 'popup',
