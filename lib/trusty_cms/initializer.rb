@@ -7,6 +7,7 @@ require 'mysql'
 require 'trusty_cms/admin_ui'
 require 'trusty_cms/extension_loader'
 require 'string_extensions/string_extensions'
+require 'trusty_cms/engine'
 
 module TrustyCms
 
