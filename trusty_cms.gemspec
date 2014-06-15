@@ -28,8 +28,9 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "rdoc",          "~> 3.9"
   s.add_dependency "acts_as_tree",  "~> 0.1.1"
   s.add_dependency "bundler",       ">= 1.0.0"
-  s.add_dependency "compass",       "~> 0.12.2"
-  s.add_dependency "compass-rails", "~> 1.0.3"
+  s.add_dependency "compass",       "~> 0.12.6"
+  s.add_dependency "compass-rails", "~> 1.1.7"
+  s.add_dependency "sass-rails",    "~> 3.2.6"
   s.add_dependency "delocalize",    "~> 0.2.3"
   s.add_dependency "haml",          "~> 4.0.5"
   s.add_dependency "haml-rails",    ">= 0.4", "< 0.5" # 0.5 is rails 4+ only
