@@ -32,6 +32,7 @@ gemspec
 gem "sass-rails", github: 'guilleiguaran/sass-rails', branch: 'backport'
 
 group :development, :test do
+  gem 'thin',        '~> 1.6.2'
   gem 'pry',         '~> 0.10.0'
   gem 'capybara',    '~> 2.3.0'
   gem 'rspec-rails', '~> 3.0.0'
