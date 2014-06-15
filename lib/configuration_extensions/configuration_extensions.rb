@@ -60,7 +60,7 @@ module TrustyCms
     end
 
     def app?
-      File.exist?("#{Rails.root}/lib/radiant.rb")
+      File.exist?("#{Rails.root}/lib/trusty_cms.rb")
     end
 
     def preinitialize
