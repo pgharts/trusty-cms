@@ -1,0 +1,118 @@
+@mixin button-shadow {
+  @include single-box-shadow(#555555, 1px, 2px, 3px);
+}
+
+@mixin no-button-shadow {
+  @include single-box-shadow(#555555, 0, 0, 0);
+}
+
+#actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #777777;
+  @include linear-gradient(color-stops(#555555, #666666, #777777, #777777));
+  ul {
+    padding: 14px 8px;
+  }
+  li {
+    display: inline;
+    margin-right: 5px;
+  }
+  .pagination {
+    position: relative;
+    overflow: hidden;
+    float: right;
+    margin-right: 24px;
+    padding: 0 5px 5px 0;
+    a, span.current, span.disabled {
+      display: block;
+      float: left;
+      padding: 6px 12px 6px 12px;
+      margin-right: 1px;
+      background: #dddddd;
+      @include linear-gradient(color-stops(#c5c5c5, #f0f0f0 20%, white 35%, white));
+      color: #999999;
+      font-size: 80%;
+      text-decoration: none;
+      @include border-bottom-radius(5px);
+      @include border-top-radius(0);
+    }
+    a {
+      text-shadow: 1px 1px 1px #eeeeee;
+      &:hover {
+        background: #d8d8d8;
+        @include linear-gradient(color-stops(white, white, #dddddd));
+        color: #0076a3;
+        @include button-shadow;
+      }
+      &:active {
+        color: black;
+        @include no-button-shadow;
+      }
+    }
+    span.disabled {
+      color: #666666;
+      background-color: #999999;
+      @include linear-gradient(color-stops(#888888, #999999, #999999, #999999));
+    }
+    span.current {
+      color: black;
+      background: white;
+      font-weight: bold;
+      background-image: none;
+      @include button-shadow;
+    }
+    span.gap {
+      display: block;
+      float: left;
+      padding: 6px;
+      color: #cccccc;
+    }
+  }
+  .depaginate {
+    float: right;
+    padding: 6px 12px;
+    a {
+      @include no-button-shadow;
+      background: none;
+      font-size: 80%;
+      color: #cccccc;
+      text-shadow: none;
+      text-decoration: none;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+.button_form {
+  display: inline;
+}
+
+.action_button {
+  display: inline;
+  background: #d8d8d8;
+  @include linear-gradient(color-stops(white, #cccccc));
+  color: #333333;
+  font-size: 80%;
+  padding: 8px 12px;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px #eeeeee;
+  @include border-radius(5px);
+  @include button-shadow;
+  &:hover {
+    color: #0076a3;
+    text-shadow: 1px 1px 1px white;
+  }
+  &:active {
+    background: white;
+    @include no-button-shadow;
+    color: black;
+  }
+  img {
+    vertical-align: -20%;
+  }
+}

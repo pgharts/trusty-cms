@@ -1,0 +1,7 @@
+@mixin alt-box {
+  background: #d8d8d8;
+  @include linear-gradient(color-stops(white, #cccccc));
+  @include border-radius(8px);
+  @include single-box-shadow(rgba(0, 0, 0, 0.15), 2px, 2px, 3px);
+  padding: 12px 10px;
+}
