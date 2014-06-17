@@ -1,10 +1,5 @@
 class Admin::PreferencesController < ApplicationController
-  before_filter :load_user
-
-  def initialize
-    @controller_name = 'user'
-    @template_name = 'preferences'
-  end
+  before_filter :initialize_variables
 
   def show
     set_standard_body_style
@@ -31,8 +26,10 @@ class Admin::PreferencesController < ApplicationController
 
   private
 
-  def load_user
-    @user = current_user
+  def initialize_variables
+    @user            = current_user
+    @controller_name = 'user'
+    @template_name   = 'preferences'
   end
 
   def valid_params?
