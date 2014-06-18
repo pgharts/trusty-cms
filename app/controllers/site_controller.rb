@@ -24,6 +24,7 @@ class SiteController < ApplicationController
       process_page(@page)
       set_cache_control
       @performed_render ||= true
+      render text: response.body, content_type: :html, stat: response.status
     else
       render :template => 'site/not_found', :status => 404
     end
