@@ -11,6 +11,7 @@ module TrustyCms
 
     class << self
       def cache_timeout
+        # TODO: This cache is caching even in development. That shouldn't be happening.
         @cache_timeout ||= 5.minutes
       end
 
