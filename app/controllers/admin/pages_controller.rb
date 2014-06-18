@@ -73,6 +73,7 @@ class Admin::PagesController < Admin::ResourceController
     def process_with_exception(page)
       page.process(request, response)
       @performed_render = true
+      render template: 'site/show_page', layout: false
       raise PreviewStop
     end
 
