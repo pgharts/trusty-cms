@@ -26,7 +26,7 @@ class SiteController < ApplicationController
       @performed_render ||= true
       render layout: false
     else
-      render :template => 'site/not_found', :status => 404
+      render :template => 'site/not_found', :status => 404, layout: false
     end
   rescue Page::MissingRootPageError
     redirect_to welcome_url
