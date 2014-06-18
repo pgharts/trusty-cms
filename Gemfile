@@ -29,7 +29,7 @@ gemspec
 # gem "radiant-smarty_pants_filter-extension", "~> 1.0.2"
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
-gem "sass-rails", github: 'guilleiguaran/sass-rails', branch: 'backport'
+  gem 'sass-rails3', '~> 4.0.1'
 
 group :development, :test do
   gem 'thin',        '~> 1.6.2'

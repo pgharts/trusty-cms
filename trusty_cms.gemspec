@@ -31,7 +31,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "compass-rails",   "~> 1.1.7"
   s.add_dependency "sprockets",       "= 2.2.2.backport2"
   s.add_dependency "sprockets-rails", "~> 2.0.0.backport1"
-  s.add_dependency "sass",            "= 3.2.7"
+  s.add_dependency "sass-rails3",            "= 4.0.1"
   s.add_dependency "delocalize",      "~> 0.2.3"
   s.add_dependency "haml",            "~> 4.0.5"
   s.add_dependency "haml-rails",      ">= 0.4", "< 0.5" # 0.5 is rails 4+ only
