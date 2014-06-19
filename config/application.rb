@@ -17,7 +17,7 @@ end
 module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
-
+    config.active_record.whitelist_attributes = true
     config.autoload_paths += %W(#{config.root}/lib)
     Sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
 
