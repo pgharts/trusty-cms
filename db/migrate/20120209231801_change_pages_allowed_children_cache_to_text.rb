@@ -1,6 +1,5 @@
 class ChangePagesAllowedChildrenCacheToText  < ActiveRecord::Migration
   def self.up
-    Page.columns_hash['status_id'].type
     unless Page.columns_hash['allowed_children_cache'].type == :text
       change_column :pages, :allowed_children_cache, :text
     end
