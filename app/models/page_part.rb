@@ -1,4 +1,5 @@
 class PagePart < ActiveRecord::Base
+  attr_accessible :name, :filter_id, :content
 
   # Default Order
   default_scope :order => 'name'
@@ -16,5 +17,4 @@ class PagePart < ActiveRecord::Base
   def after_initialize
     self.filter_id ||= TrustyCms::Config['defaults.page.filter'] if new_record?
   end
-
 end
