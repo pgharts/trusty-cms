@@ -10,6 +10,7 @@ PATH
       haml (~> 4.0.5)
       haml-rails (>= 0.4, < 0.5)
       highline (~> 1.6.10)
+      jquery-rails (~> 3.1.0)
       mysql (~> 2.9.1)
       rack (~> 1.4.5)
       rack-cache (~> 1.2)
@@ -28,7 +29,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
-    RedCloth (4.2.9-java)
     actionmailer (3.2.18)
       actionpack (= 3.2.18)
       mail (~> 2.5.4)
@@ -94,6 +94,9 @@ GEM
     hike (1.2.3)
     i18n (0.6.9)
     journey (1.0.4)
+    jquery-rails (3.1.0)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
     json (1.8.1)
     json (1.8.1-java)
     launchy (2.4.2)
