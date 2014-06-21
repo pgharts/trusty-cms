@@ -87,35 +87,6 @@ class Rails::Application::Configuration
 
   attr_accessor :extension_paths, :ignored_extensions
 
-
-  def load_trusty_paths
-    #paths << ["#{TRUSTY_CMS_ROOT}/test/mocks/#{environment}"]
-
-    # Add the app's controller directory
-    #paths['app/controllers'].concat(Dir["#{TRUSTY_CMS_ROOT}/app/controllers/"])
-
-    Dir["#{TRUSTY_CMS_ROOT}/lib/tasks/**/*.rake"].each { |ext| load ext } if defined?(Rake)
-
-    # TODO: I pulled 'app/helpers' out of this because it was causing all helpers to be loaded at all times. Not sure if this will break helper loading in some other way, though.
-    # Followed by the standard includes.
-    %w(
-        app
-        app/models
-        app/controllers
-        app/views
-        config
-        lib
-        vendor
-      ).each  do |dir|
-      autoload_paths.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
-      $LOAD_PATH.unshift "#{TRUSTY_CMS_ROOT}/#{dir}"
-
-      paths[dir] << "#{TRUSTY_CMS_ROOT}/#{dir}"
-    end
-
-    #paths.concat builtin_directories
-  end
-
   def initialize_extension_paths
     self.extension_paths = default_extension_paths
     self.ignored_extensions = []
@@ -265,13 +236,6 @@ class Rails::Application::Configuration
   #
   def admin
     TrustyCms::AdminUI.instance
-  end
-
-  %w{controller model view metal plugin load eager_load}.each do |type|
-    define_method("add_#{type}_paths".to_sym) do |paths|
-      puts "paths"
-      self.paths["app/#{type}s"].concat(paths)
-    end
   end
 
   private
