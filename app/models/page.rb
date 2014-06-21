@@ -1,7 +1,8 @@
 require 'acts_as_tree'
 
 class Page < ActiveRecord::Base
-  #attr_protected :created_at, :updated_at
+  attr_accessible :title, :breadcrumb, :slug, :lock_version, :parent_id, :class_name,
+                  :fields_attributes, :parts_attributes, :layout_id, :status_id, :published_at
 
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page'); super end

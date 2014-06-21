@@ -1,6 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  attr_accessible :name, :email, :login, :password, :password_confirmation, :locale
   has_many :pages, :foreign_key => :created_by_id
 
   # Default Order
@@ -26,15 +27,6 @@ class User < ActiveRecord::Base
   validates_length_of :email, :maximum => 255, :allow_nil => true
 
   attr_writer :confirm_password
-  class << self
-    def unprotected_attributes
-      @unprotected_attributes ||= [:name, :email, :login, :password, :password_confirmation, :locale]
-    end
-
-    def unprotected_attributes=(array)
-      @unprotected_attributes = array.map{|att| att.to_sym }
-    end
-  end
 
   def has_role?(role)
     respond_to?("#{role}?") && send("#{role}?")
