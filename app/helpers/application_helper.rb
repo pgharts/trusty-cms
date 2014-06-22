@@ -86,10 +86,6 @@ module ApplicationHelper
     current_user and (current_user.designer? or current_user.admin?)
   end
 
-  def focus(field_name)
-    javascript_tag "Field.activate('#{field_name}');"
-  end
-
   def updated_stamp(model)
     unless model.new_record?
       updated_by = (model.updated_by || model.created_by)
@@ -126,10 +122,6 @@ module ApplicationHelper
 
   def meta_label
     meta_errors? ? 'Less' : 'More'
-  end
-
-  def toggle_javascript_for(id)
-    "Element.toggle('#{id}'); Element.toggle('more-#{id}'); Element.toggle('less-#{id}'); return false;"
   end
 
   def image(name, options = {})
