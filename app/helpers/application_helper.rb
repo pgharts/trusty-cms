@@ -56,13 +56,13 @@ module ApplicationHelper
 
   def current_url?(options)
     url = case options
-    when Hash
-      url_for options
-    else
-      options.to_s
+          when Hash
+            url_for options
+          else
+            options.to_s
           end
     #TODO: look for other instances of request_uri
-    request.original_url =~ Regexp.new('^' + Regexp.quote(clean(url)))
+    request.original_fullpath =~ Regexp.new('^' + Regexp.quote(clean(url)))
   end
 
   def clean(url)
