@@ -15,3 +15,4 @@
 //= require 'admin/cookie'
 //= require 'admin/more-or-less'
 //= require 'admin/pagefield'
+//= require 'admin/tabcontrol'
