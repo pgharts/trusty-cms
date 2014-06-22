@@ -4,7 +4,6 @@ Removed Features
 * Fade in/fade out on drag/drop
 * Transparency while dragging
 * Dropdown slide down/up
-* Toggle slide down/up
 * Ability to drag/drop popups
 * Shortcut keys
   * s to save
@@ -22,7 +21,6 @@ TODO
 * Popups 'a.popup'
 * Add Child page button click should toggle dropdown
 * Load tag reference - "Available Tags" link
-* Less/more links
 * Published at field datepicker
 * Onsubmit statuses
 * When page status is set to Scheduled, Published, or Hidden (>=90), show the published_at field. Otherwise, hide the published_at field.
@@ -31,6 +29,7 @@ TODO
 * Validation errors that are in context and can be dismissed
 * Auto population of breadcrumb based on page title
 * Reimplement any undefined utility function calls
+* Get page_edit_javascripts and layout_edit_javascripts out of ruby
 
 Might work
 ==========
