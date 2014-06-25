@@ -3,21 +3,23 @@
     var $tabContainer = $('div#tab_control .tabs');
     var $pages = $('div#tab_control .pages .page');
 
-    $pages.each(function(){
-      TabControl.addTab($tabContainer, $(this).data('caption'));
-    });
+    if($pages.length > 0) {
+      $pages.each(function(){
+        TabControl.addTab($tabContainer, $(this).data('caption'));
+      });
 
-    $('div#tab_control .tabs .tab').on('click', function(event) {
-      event.preventDefault();
-      TabControl.selectTab($(this).attr('id'));
-    });
+      $('div#tab_control .tabs .tab').on('click', function(event) {
+        event.preventDefault();
+        TabControl.selectTab($(this).attr('id'));
+      });
 
-    $('div#tab_control .tabs .tab .close').on('click', function(event) {
-      event.stopPropagation();
-      TabControl.removeTab($(this).closest('.tab').attr('id'));
-    });
+      $('div#tab_control .tabs .tab .close').on('click', function(event) {
+        event.stopPropagation();
+        TabControl.removeTab($(this).closest('.tab').attr('id'));
+      });
 
-    TabControl.selectTab($pages.first().attr('id'));
+      TabControl.selectTab($pages.first().attr('id'));
+    }
   }
 
   TabControl.addTab = function(parent, tabText) {
