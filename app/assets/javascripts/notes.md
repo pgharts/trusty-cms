@@ -18,16 +18,16 @@ TODO
 ====
 
 * Popups 'a.popup'
-* Load tag reference - "Available Tags" link
-* Published at field datepicker
-* Onsubmit statuses
-* When page status is set to Scheduled, Published, or Hidden (>=90), show the published_at field. Otherwise, hide the published_at field.
 * Page preview
 * Adding tabs
+* Published at field datepicker
 * Validation errors that are in context and can be dismissed
-* Auto population of breadcrumb based on page title
-* Reimplement any undefined utility function calls
+* (ajax spinner) Onsubmit statuses
+
+* When page status is set to Scheduled, Published, or Hidden (>=90), show the published_at field. Otherwise, hide the published_at field.
 * Get page_edit_javascripts and layout_edit_javascripts out of ruby
+* Reimplement any undefined utility function calls
+* (docs) Load tag reference - "Available Tags" link
 
 Might work
 ==========

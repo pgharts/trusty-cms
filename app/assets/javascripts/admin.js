@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require 'admin/autopopulate-breadcrumb'
 //= require 'admin/cookie'
 //= require 'admin/dropdown'
 //= require 'admin/more-or-less'
 //= require 'admin/pagefield'
 //= require 'admin/tabcontrol'
+//= require 'admin/utilities'
