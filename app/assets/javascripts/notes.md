@@ -10,7 +10,6 @@ Removed Features
   * [ and ] to move between tabs
   * 1-9 to select tabs by number
 * Support for tabs in textareas
-* Adding a hover class to table.index rows when you hover over them
 * Tag search in available tags reference
 * Pretty popups
 * form activate - focus fields
@@ -19,13 +18,12 @@ TODO
 ====
 
 * Popups 'a.popup'
-* Add Child page button click should toggle dropdown
 * Load tag reference - "Available Tags" link
 * Published at field datepicker
 * Onsubmit statuses
 * When page status is set to Scheduled, Published, or Hidden (>=90), show the published_at field. Otherwise, hide the published_at field.
 * Page preview
-* A tab per page part in #tab_control
+* Adding tabs
 * Validation errors that are in context and can be dismissed
 * Auto population of breadcrumb based on page title
 * Reimplement any undefined utility function calls
