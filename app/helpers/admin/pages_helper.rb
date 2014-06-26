@@ -65,7 +65,7 @@ module Admin::PagesHelper
     }
     function validPartName() {
       var partNameField = $('part_name_field');
-      var name = partNameField.value.downcase();
+      var name = partNameField.value.toLowerCase();
       if (name.blank()) {
         alert('Part name cannot be empty.');
         return false;
