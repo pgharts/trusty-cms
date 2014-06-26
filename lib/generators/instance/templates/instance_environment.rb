@@ -52,7 +52,17 @@ TrustyCms::Initializer.run do |config|
   #  :metastore => "radiant:tmp/cache/meta"
   #    Sets the meta store type and storage location.  We recommend you use
   #    radiant: since this will enable manual expiration and acceleration headers.
-  config.middleware.use ::TrustyCms::Cache
+  config.middleware.use Rack::Cache,
+                        :private_headers => ['Authorization'],
+                        :entitystore => "radiant:tmp/cache/entity",
+                        :metastore => "radiant:tmp/cache/meta",
+                        :verbose => false,
+                        :allow_reload => false,
+                        :allow_revalidate => false
+  # TODO: There's got to be a better place for this, but in order for assets to work fornow, we need ConditionalGet
+  # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
+  config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
+  config.assets.enabled = true
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information

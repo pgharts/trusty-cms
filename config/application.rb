@@ -75,8 +75,17 @@ module TrustyCms
     #    radiant: since this will enable manual expiration and acceleration headers.
 
 
-    # TODO: We're not sure this is actually working, but we can't really test this until the app initializes.
-    # config.middleware.use "TrustyCms::Cache"
+    config.middleware.use Rack::Cache,
+                          :private_headers => ['Authorization'],
+                          :entitystore => "radiant:tmp/cache/entity",
+                          :metastore => "radiant:tmp/cache/meta",
+                          :verbose => false,
+                          :allow_reload => false,
+                          :allow_revalidate => false
+    # TODO: There's got to be a better place for this, but in order for assets to work fornow, we need ConditionalGet
+    # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
+    config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
+    config.assets.enabled = true
 
 
     config.filter_parameters += [:password, :password_confirmation]

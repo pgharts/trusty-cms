@@ -216,7 +216,7 @@ class Admin::ResourceController < ApplicationController
     end
 
     def clear_model_cache
-      TrustyCms::Cache.clear if defined?(TrustyCms::Cache)
+      Rack::Cache.clear if defined?(Rack::Cache)
     end
 
     def format_symbol
