@@ -6,6 +6,7 @@ require 'radius'
 require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
 require 'compass'
+require 'rack/cache'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
