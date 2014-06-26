@@ -1,5 +1,5 @@
 module TrustyCms
-  autoload :Cache, 'trusty_cms/cache'
+  autoload :Cache, 'rack/cache'
 
   class << self
     # Returns the TrustyCms::Config eigenclass object, so it can be used wherever you would use TrustyCms::Config.
