@@ -216,7 +216,7 @@ class Admin::ResourceController < ApplicationController
     end
 
     def clear_model_cache
-      Rack::Cache.clear if defined?(Rack::Cache)
+      Rails.cache.clear
     end
 
     def format_symbol
