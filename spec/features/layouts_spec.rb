@@ -28,24 +28,21 @@ describe 'Layouts (Design)' do
       visit '/admin/layouts'
     end
 
-    it 'lets you edit the homepage' do
+    it 'lets you edit the layout' do
       click_link 'Petunias'
-
-      expect(page).to have_content 'Edit Page'
-      expect(page).to have_field 'Page Title', with: 'Voyager Home'
+      expect(page).to have_content 'Edit Layout'
+      expect(page).to have_field 'Name', with: 'Petunia'
+      expect(page).to have_field 'Body', with: 'Wisteria'
       expect(page).to have_button 'Save Changes'
       expect(page).to have_content 'Last Updated by Kathryn Janeway'
     end
 
-    it 'lets you remove the homepage' do
+    it 'lets you remove the layout' do
       click_link 'Remove'
-
-      expect(page).to have_content 'Are you sure you want to permanently remove the following Page?'
-
-      click_button 'Delete Page'
-
-      expect(page).to have_content 'No Pages'
-      expect(page).to have_link 'New Homepage'
+      expect(page).to have_content 'Are you sure you want to permanently remove the following layout?'
+      click_button 'Delete Layout'
+      expect(page).to have_content 'No Layouts'
+      expect(page).to have_link 'New Layout'
     end
   end
 end
