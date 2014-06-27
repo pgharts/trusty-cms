@@ -35,6 +35,7 @@ module TrustyCms
       config.autoload_paths.unshift path
       $LOAD_PATH.unshift path
     end
+    paths["app/helpers"] = []
     # config.add_plugin_paths(extension_loader.paths(:plugin))
     radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
     config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
