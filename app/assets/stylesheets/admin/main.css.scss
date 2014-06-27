@@ -2,27 +2,27 @@
 
 // Common Variables and Modules
 @import "compass";
-@import "base";
+@import "base.css.scss";
 
 @import "compass/reset";
 
 // Partials
-@import "partials/typography";
-@import "partials/layout";
-@import "partials/header";
-@import "partials/avatars";
-@import "partials/dropdown";
-@import "partials/messages";
-@import "partials/forms";
-@import "partials/index";
-@import "partials/content";
-@import "partials/actions";
-@import "partials/footer";
-@import "partials/popup";
-@import "partials/tabcontrol";
-@import "partials/dateinput";
-@import "partials/toolbar";
-@import "partials/validations";
+@import "partials/typography.css.scss";
+@import "partials/layout.css.scss";
+@import "partials/header.css.scss";
+@import "partials/avatars.css.scss";
+@import "partials/dropdown.css.scss";
+@import "partials/messages.css.scss";
+@import "partials/forms.css.scss";
+@import "partials/index.css.scss";
+@import "partials/content.css.scss";
+@import "partials/actions.css.scss";
+@import "partials/footer.css.scss";
+@import "partials/popup.css.scss";
+@import "partials/tabcontrol.css.scss";
+@import "partials/dateinput.css.scss";
+@import "partials/toolbar.css.scss";
+@import "partials/validations.css.scss";
 
 // Deprecated
-@import "partials/deprecated";
+@import "partials/deprecated.css.scss";

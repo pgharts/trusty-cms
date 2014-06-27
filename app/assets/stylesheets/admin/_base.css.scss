@@ -12,6 +12,6 @@ $primary-tab: rgba(white, 0.3);
 $primary-tab-current: white;
 
 // Modules
-@import "modules/links";
-@import "modules/boxes";
-@import "modules/gradients";
+@import "modules/links.css.scss";
+@import "modules/boxes.css.scss";
+@import "modules/gradients.css.scss";
