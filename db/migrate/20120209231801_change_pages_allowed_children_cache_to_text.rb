@@ -1,8 +1,7 @@
 class ChangePagesAllowedChildrenCacheToText  < ActiveRecord::Migration
   def self.up
-    unless Page.columns_hash['allowed_children_cache'].type == :text
-      change_column :pages, :allowed_children_cache, :text
-    end
+    Page.reset_column_information
+    change_column :pages, :allowed_children_cache, :text
   end
 
   def self.down
