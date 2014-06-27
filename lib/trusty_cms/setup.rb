@@ -34,12 +34,13 @@ module TrustyCms
         :name => name,
         :login => username,
         :password => password,
-        :password_confirmation => password,
-        :admin => true
+        :password_confirmation => password
       }
       admin = User.find_by_login(username)
       admin = User.new unless admin
       admin.update_attributes(attributes)
+      admin.admin = true
+      admin.save
       admin
     end
 
