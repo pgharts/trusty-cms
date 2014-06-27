@@ -24,7 +24,7 @@ describe 'Layouts (Design)' do
 
   context 'with a layout' do
     before(:each) do
-      Layout.create!(name: 'Petunias', body: 'Wisteria')
+      Layout.create!(name: 'Petunias', content: 'Wisteria')
       visit '/admin/layouts'
     end
 
