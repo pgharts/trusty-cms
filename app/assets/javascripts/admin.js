@@ -16,6 +16,8 @@
 //= require 'admin/cookie'
 //= require 'admin/dropdown'
 //= require 'admin/more-or-less'
+//= require 'admin/page-edit'
 //= require 'admin/pagefield'
+//= require 'admin/popup'
 //= require 'admin/tabcontrol'
 //= require 'admin/utilities'

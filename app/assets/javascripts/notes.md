@@ -17,9 +17,8 @@ Removed Features
 TODO
 ====
 
-* Popups 'a.popup'
 * Page preview
-* Adding tabs
+* Page field addition/removal, make pagefield.js more like page-edit.js
 * Published at field datepicker
 * Validation errors that are in context and can be dismissed
 * (ajax spinner) Onsubmit statuses
@@ -28,6 +27,7 @@ TODO
 * Get page_edit_javascripts and layout_edit_javascripts out of ruby
 * Reimplement any undefined utility function calls
 * (docs) Load tag reference - "Available Tags" link
+* (docs) Filter reference - I don't know what this is supposed to do, when I click it on radiant's demo it says "no documentation for filter".
 
 Might work
 ==========

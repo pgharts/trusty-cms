@@ -1,19 +1,16 @@
 (function(TabControl, $) {
   TabControl.setupTabs = function() {
-    var $tabContainer = $('div#tab_control .tabs');
     var $pages = $('div#tab_control .pages .page');
 
     if($pages.length > 0) {
-      $pages.each(function(){
-        TabControl.addTab($tabContainer, $(this).data('caption'));
-      });
+      TabControl.updateTabsBasedOnPages();
 
-      $('div#tab_control .tabs .tab').on('click', function(event) {
+      $('div#tab_control .tabs').on('click', '.tab', function(event) {
         event.preventDefault();
         TabControl.selectTab($(this).attr('id'));
       });
 
-      $('div#tab_control .tabs .tab .close').on('click', function(event) {
+      $('div#tab_control .tabs').on('click', '.tab .close', function(event) {
         event.stopPropagation();
         TabControl.removeTab($(this).closest('.tab').attr('id'));
       });
@@ -22,8 +19,10 @@
     }
   }
 
-  TabControl.addTab = function(parent, tabText) {
-    $(parent).append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><img src='" + relative_url_root + "<%= asset_path('admin/tab_close.png') %>' class='close' alt='Remove part' title='Remove part' /></a>");
+  TabControl.addTab = function(tabText) {
+    $('div#tab_control .tabs').append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><img src='" + relative_url_root + "<%= asset_path('admin/tab_close.png') %>' class='close' alt='Remove part' title='Remove part' /></a>");
+    var $page_part_index = $('#page_part_index_field');
+    $page_part_index.val(parseInt($page_part_index.val()) + 1);
   }
 
   TabControl.selectTab = function(id) {
@@ -63,6 +62,16 @@
       $('div#tab_control').append(idInput).append(deleteInput);
       $page.remove();
     }
+  }
+
+  TabControl.updateTabsBasedOnPages = function() {
+    var $pages = $('div#tab_control .pages .page');
+    $pages.each(function(page) {
+      var tabName = $(this).data('caption');
+      if($('div#tab_control .tabs #tab_' + tabName).length == 0) {
+        TabControl.addTab($(this).data('caption'));
+      }
+    });
   }
 
 }(window.TabControl = window.TabControl || {}, jQuery));

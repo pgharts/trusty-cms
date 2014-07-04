@@ -17,7 +17,6 @@ div.popup {
     background: #c5dff5;
     @include linear-gradient(color_stops(#e5f5ff, #c5dff5));
     border-bottom: 1px solid #a7cdf0;
-    cursor: move;
     font-weight: bold;
     font-size: 100%;
     margin: -10px -20px 20px -20px;
@@ -245,5 +244,19 @@ div.popup.textured {
     margin: 20px -20px -10px;
     padding: 20px;
     @include single-box-shadow(#cccccc, 0, -1px, 0);
+  }
+}
+
+div#popup_window {
+  display: none;
+  position: absolute;
+  z-index: 10000;
+
+  .outer {
+    position: relative;
+  }
+
+  .content {
+    background-color: white;
   }
 }
