@@ -4,6 +4,9 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation, {except: %w[config]}
 
