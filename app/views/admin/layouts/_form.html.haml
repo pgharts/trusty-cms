@@ -12,14 +12,14 @@
           .drawer_contents#attributes
             %table.fieldset
               %tr
-                %th.label= f.label :content_type, t('content_type')
+                %th.label= f.label :content_type, t('content_type').html_safe
                 %td.field= f.text_field :content_type, :maxlength => 40, :class => "textbox"
               = render_region :extended_metadata, :locals => {:f => f}
           .drawer_handle
             %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
       - form.edit_content do
         %p.content
-          = f.label :layout_content, "Body"
+          = f.label :content, "Body"
           ~ f.text_area :content, :size => "40x20", :style => "width: 100%", :class => "textarea large"
   = javascript_tag "$('layout_name').activate()"
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|

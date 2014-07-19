@@ -19,6 +19,7 @@ describe 'Layouts (Design)' do
       fill_in 'Name', with: 'Petunias'
       fill_in 'Body', with: 'Wisteria'
       click_button 'Create Layout'
+      expect(page).to have_content 'Petunias'
     end
   end
 
@@ -31,7 +32,7 @@ describe 'Layouts (Design)' do
     it 'lets you edit the layout' do
       click_link 'Petunias'
       expect(page).to have_content 'Edit Layout'
-      expect(page).to have_field 'Name', with: 'Petunia'
+      expect(page).to have_field 'Name', with: 'Petunias'
       expect(page).to have_field 'Body', with: 'Wisteria'
       expect(page).to have_button 'Save Changes'
       expect(page).to have_content 'Last Updated by Kathryn Janeway'
