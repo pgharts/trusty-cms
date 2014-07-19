@@ -17,7 +17,6 @@ Removed Features
 TODO
 ====
 
-* Page preview
 * Page field addition/removal, make pagefield.js more like page-edit.js
 * Published at field datepicker
 * Validation errors that are in context and can be dismissed
