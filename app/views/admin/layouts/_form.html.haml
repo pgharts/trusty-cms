@@ -19,7 +19,7 @@
             %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
       - form.edit_content do
         %p.content
-          = f.label :layout_content, "Body"
+          = f.label :content, "Body"
           ~ f.text_area :content, :size => "40x20", :style => "width: 100%", :class => "textarea large"
   = javascript_tag "$('layout_name').activate()"
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
