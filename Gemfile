@@ -32,9 +32,10 @@ gemspec
   gem 'sass-rails3', '~> 4.0.1'
 
 group :development, :test do
-  gem 'thin',        '~> 1.6.2'
-  gem 'pry',         '~> 0.10.0'
-  gem 'capybara',    '~> 2.3.0'
-  gem 'rspec-rails', '~> 3.0.0'
-  gem 'launchy',     '~> 2.4.2'
+  gem 'thin',             '~> 1.6.2'
+  gem 'pry',              '~> 0.10.0'
+  gem 'capybara',         '~> 2.3.0'
+  gem 'rspec-rails',      '~> 3.0.0'
+  gem 'launchy',          '~> 2.4.2'
+  gem 'database_cleaner', '~> 1.3.0'
 end
