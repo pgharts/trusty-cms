@@ -22,12 +22,6 @@ describe 'Configuration (Settings)' do
     expect(page).to have_content 'Name Captain Kathryn Janeway'
   end
 
-  it 'lets you edit your password' do
-    skip 'until we get javascript working and pick a javascript driver'
-    click_button 'Edit Preferences'
-    click_link 'Change'
-  end
-
   it 'lets you edit the site preferences' do
     click_button 'Edit Configuration'
     fill_in 'Site Title', with: 'My Special Site'
