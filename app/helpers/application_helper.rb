@@ -56,13 +56,13 @@ module ApplicationHelper
 
   def current_url?(options)
     url = case options
-    when Hash
-      url_for options
-    else
-      options.to_s
+          when Hash
+            url_for options
+          else
+            options.to_s
           end
     #TODO: look for other instances of request_uri
-    request.original_url =~ Regexp.new('^' + Regexp.quote(clean(url)))
+    request.original_fullpath =~ Regexp.new('^' + Regexp.quote(clean(url)))
   end
 
   def clean(url)
@@ -84,10 +84,6 @@ module ApplicationHelper
 
   def designer?
     current_user and (current_user.designer? or current_user.admin?)
-  end
-
-  def focus(field_name)
-    javascript_tag "Field.activate('#{field_name}');"
   end
 
   def updated_stamp(model)
@@ -126,10 +122,6 @@ module ApplicationHelper
 
   def meta_label
     meta_errors? ? 'Less' : 'More'
-  end
-
-  def toggle_javascript_for(id)
-    "Element.toggle('#{id}'); Element.toggle('more-#{id}'); Element.toggle('less-#{id}'); return false;"
   end
 
   def image(name, options = {})

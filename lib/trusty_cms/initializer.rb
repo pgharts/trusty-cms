@@ -1,5 +1,6 @@
 require 'will_paginate'
 require 'rails'
+require 'jquery-rails'
 require 'haml-rails'
 require 'haml'
 require 'mysql'

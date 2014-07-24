@@ -1,123 +1,81 @@
-if(typeof(relative_url_root) === 'undefined'){ relative_url_root = '';}
+(function(TabControl, $) {
+  TabControl.setupTabs = function() {
+    var $pages = $('div#tab_control .pages .page');
 
-var TabControlBehavior = Behavior.create({
-  initialize: function() {
-    this.controller = new TabControl(this.element);
-  }
-});
+    if($pages.length > 0) {
+      TabControl.updateTabsBasedOnPages();
 
-var TabControl = Class.create({
-  initialize: function(element) {
-    this.element = $(element);
-    TabControls[this.element.identify()] = this;
-    this.tabs = $A();
-    this.tabContainer = this.element.down('.tabs');
-    this.tabContainer.observe('click', this.ontabclick.bind(this));
-    this.updateTabs();
-    this.autoSelect();
-  },
+      $('div#tab_control .tabs').on('click', '.tab', function(event) {
+        event.preventDefault();
+        TabControl.selectTab($(this).attr('id'));
+      });
 
-  updateTabs: function() {
-    this.element.select('.page').each(function(page) {
-      if (!this.findTabByPage(page)) this.addTab(page);
-    }.bind(this));
-  },
+      $('div#tab_control .tabs').on('click', '.tab .close', function(event) {
+        event.stopPropagation();
+        TabControl.removeTab($(this).closest('.tab').attr('id'));
+      });
 
-  addTab: function(page) {
-    var tab = new TabControl.Tab(page);
-    this.tabs.push(tab);
-    this.tabContainer.insert({bottom: tab});
-    var part_index = $('page_part_index_field');
-    part_index.setValue(Number(part_index.value)+1);
-    page.hide();
-  },
-
-  removeSelected: function() {
-    var tab = this.selected;
-    var index = this.tabs.indexOf(tab);
-    var newSelectedTab = this.tabs[index-1];
-    var idInput = tab.page.down('.id_input');
-    var deleteInput = tab.page.down('.delete_input');
-    deleteInput.setValue('true');
-    tab.remove();
-    this.tabs = this.tabs.without(tab);
-    this.element.insert(idInput).insert(deleteInput);
-    this.select(newSelectedTab || this.tabs.first());
-  },
-
-  select: function(tab) {
-    if (this.selected) this.selected.unselect();
-    this.selected = tab;
-    tab.select();
-    cookie = Cookie.set('current_tab', tab.caption, 24, '/admin');
-  },
-
-  autoSelect: function() {
-    if (!this.tabs.any()) return;
-    var caption = Cookie.get('current_tab');
-    var tab = this.findTabByCaption(caption);
-    this.select(tab || this.tabs.first());
-  },
-
-  ontabclick: function(event) {
-    var e = event.findElement('.tab');
-    if (e) {
-      var tab = this.findTabByElement(e);
-      if (tab) {
-        if (event.target.hasClassName('close')) {
-          if (confirm('Remove the "' + tab.caption + '" part?')) {
-            var lastSelected = this.selected;
-            this.select(tab);
-            this.removeSelected();
-            if (lastSelected != tab) this.select(lastSelected);
-          }
-        } else {
-          this.select(tab);
-          $('part_' + tab.caption + '_content').focus();
-        }
-        event.stop();
-      }
+      TabControl.selectTab($pages.first().attr('id'));
     }
-  },
-
-  findTabByCaption: function(caption) {
-    return this.tabs.detect(function(tab) { return tab.caption == caption; });
-  },
-
-  findTabByPage: function(page) {
-    return this.tabs.detect(function(tab) { return tab.page == page; });
-  },
-
-  findTabByElement: function(element) {
-    return this.tabs.detect(function(tab) { return tab.element == element; });
   }
-});
 
-TabControl.Tab = Class.create({
-  initialize: function(page) {
-    this.page = page;
-    this.caption = page.readAttribute('data-caption');
-  },
-
-  select: function() {
-    this.page.show();
-    this.element.addClassName('here');
-  },
-
-  unselect: function() {
-    this.page.hide();
-    this.element.removeClassName('here');
-  },
-
-  remove: function() {
-    this.page.remove();
-    this.element.remove();
-  },
-
-  toElement: function() {
-    this.element = $a({'href': '#', 'class': 'tab'}, $span(this.caption), $img({'src': relative_url_root + "<%= asset_path('admin/tab_close.png') %>", 'class': 'close', 'alt': 'Remove part', 'title': 'Remove part'})).addClassName('tab');
-    return this.element;
+  TabControl.addTab = function(tabText) {
+    $('div#tab_control .tabs').append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><img src='" + relative_url_root + "<%= asset_path('admin/tab_close.png') %>' class='close' alt='Remove part' title='Remove part' /></a>");
+    var $page_part_index = $('#page_part_index_field');
+    $page_part_index.val(parseInt($page_part_index.val()) + 1);
   }
-});
 
-var TabControls = {};
+  TabControl.selectTab = function(id) {
+    id = id.replace(/^tab_/, '').replace(/^page_/, '');
+    var $pages = $('div#tab_control .pages .page');
+    var $tabs  = $('div#tab_control .tabs .tab');
+
+    $pages.hide();
+    $tabs.removeClass('here');
+
+    $pages.filter('#page_' + id).show();
+    $tabs.filter('#tab_' + id).addClass('here');
+  }
+
+  TabControl.removeTab = function(id) {
+    id = id.replace(/^tab_/, '').replace(/^page_/, '');
+    if(confirm('Remove the "' + id + '" part?')) {
+      var $pages = $('div#tab_control .pages .page');
+      var $tabs  = $('div#tab_control .tabs .tab');
+
+      var $tab = $tabs.filter('#tab_' + id);
+      if($tab.hasClass('here')) {
+        var $prevTab = $tab.prev('.tab');
+        var $nextTab = $tab.next('.tab');
+        if($prevTab.length > 0) {
+          TabControl.selectTab($prevTab.attr('id'));
+        } else if($nextTab.length > 0) {
+          TabControl.selectTab($nextTab.attr('id'));
+        }
+      }
+      $tab.remove();
+
+      $page = $pages.filter('#page_' + id);
+      var idInput = $page.find('.id_input');
+      var deleteInput = $page.find('.delete_input');
+      deleteInput.attr('value', 'true');
+      $('div#tab_control').append(idInput).append(deleteInput);
+      $page.remove();
+    }
+  }
+
+  TabControl.updateTabsBasedOnPages = function() {
+    var $pages = $('div#tab_control .pages .page');
+    $pages.each(function(page) {
+      var tabName = $(this).data('caption');
+      if($('div#tab_control .tabs #tab_' + tabName).length == 0) {
+        TabControl.addTab($(this).data('caption'));
+      }
+    });
+  }
+
+}(window.TabControl = window.TabControl || {}, jQuery));
+
+$(function () {
+  TabControl.setupTabs();
+});

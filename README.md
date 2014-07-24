@@ -80,6 +80,7 @@ Prerequisites:
 * Ruby 1.9.3
 * The bundler gem
 * Mysql
+* [PhantomJS >= 1.8.1](https://github.com/teampoltergeist/poltergeist/tree/v1.5.0#installing-phantomjs)
 
 1. Install the gems with bundler: `bundle`
 
@@ -94,9 +95,10 @@ Prerequisites:
         bundle exec rake db:test:prepare
 
 1. Run the tests to make sure they pass (If they don't, file a bug!):
-1. Run `rails s` to start the server. Visit the site in your browser at http://localhost:3000.
 
         rspec
+
+1. Run `rails s` to start the server. Visit the site in your browser at http://localhost:3000.
 
 When you're ready to make a change:
 

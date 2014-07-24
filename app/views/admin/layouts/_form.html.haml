@@ -21,7 +21,6 @@
         %p.content
           = f.label :content, "Body"
           ~ f.text_area :content, :size => "40x20", :style => "width: 100%", :class => "textarea large"
-  = javascript_tag "$('layout_name').activate()"
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
     - form_bottom.reference_links do
       %p

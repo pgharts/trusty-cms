@@ -38,7 +38,7 @@ function fieldLoading(element) {
 }
 function validFieldName() {
   var fieldName = $('page_field_name');
-  var name = fieldName.value.downcase();
+  var name = fieldName.value.toLowerCase();
   if (name.blank()) {
     alert('Field name cannot be empty.');
     return false;
@@ -50,5 +50,5 @@ function validFieldName() {
   return true;
 }
 function findFieldByName(name) {
-  return $('attributes').select('input.page_field_name').detect(function(input) { return input.value.downcase() == name; });
+  return $('attributes').select('input.page_field_name').detect(function(input) { return input.value.toLowerCase() == name; });
 }

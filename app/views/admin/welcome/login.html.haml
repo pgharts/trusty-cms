@@ -6,7 +6,7 @@
   = form_tag login_url do
     %p
       %label{:for=>"username_or_email"}= t('username_or_email')
-      = text_field_tag "username_or_email", @username_or_email, :class => 'textbox activate', :maxlength => 40, :size => 40
+      = text_field_tag "username_or_email", @username_or_email, :class => 'textbox', :maxlength => 40, :size => 40
     %p
       %label{:for=>"password"}= t('password')
       = password_field_tag "password", '', :class => 'textbox password', :maxlength => 40, :size => 40

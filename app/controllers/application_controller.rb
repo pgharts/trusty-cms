@@ -24,17 +24,6 @@ class ApplicationController < ActionController::Base
     @trusty_config = TrustyCms::Config
   end
 
-  # helpers to include additional assets from actions or views
-  helper_method :include_stylesheet, :include_javascript
-
-  def include_stylesheet(sheet)
-    @stylesheets << sheet
-  end
-
-  def include_javascript(script)
-    @javascripts << script
-  end
-
   def template_name
     case self.action_name
     when 'index'

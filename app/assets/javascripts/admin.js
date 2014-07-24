@@ -10,23 +10,15 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require 'admin/prototype'
-//= require 'admin/effects'
-//= require 'admin/dragdrop'
-//= require 'admin/lowpro'
-//= require 'admin/dateinput'
-//= require 'admin/pagestatus'
+//= require jquery
+//= require jquery_ujs
+//= require 'admin/autopopulate-breadcrumb'
 //= require 'admin/cookie'
-//= require 'admin/popup'
-//= require 'admin/pagefield'
 //= require 'admin/dropdown'
-//= require 'admin/status'
-//= require 'admin/utility'
-//= require 'admin/codearea'
+//= require 'admin/more-or-less'
+//= require 'admin/page-edit'
+//= require 'admin/pagefield'
+//= require 'admin/popup'
+//= require 'admin/preview'
 //= require 'admin/tabcontrol'
-//= require 'admin/ruledtable'
-//= require 'admin/sitemap'
-//= require 'admin/shortcuts'
-//= require 'admin/toggle'
-//= require 'admin/validationerror'
-//= require 'admin/application'
+//= require 'admin/utilities'
