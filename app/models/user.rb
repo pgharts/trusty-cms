@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :login
   validates_presence_of :password, :password_confirmation, :if => :new_record?
 
-  validates_format_of :email, :allow_nil => true, :with => /^$|^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 
   validates_length_of :name, :maximum => 100, :allow_nil => true
   validates_length_of :login, :within => 3..40, :allow_nil => true
