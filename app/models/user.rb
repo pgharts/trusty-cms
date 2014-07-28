@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :login, :password, :password_confirmation, :locale
+  attr_accessible :name, :email, :login, :password, :password_confirmation, :locale, :admin, :designer, :notes, :lock_version
   has_many :pages, :foreign_key => :created_by_id
 
   # Default Order
