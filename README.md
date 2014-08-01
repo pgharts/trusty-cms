@@ -8,7 +8,7 @@ purpose content management system (not just a blogging engine).
 
 [![Build Status](https://secure.travis-ci.org/pgharts/trusty-cms.png?branch=master)](https://travis-ci.org/pgharts/trusty-cms/)
 
-Currently, TrustyCMS is not functional. We're managing the outstanding problems in [Github Issues](https://github.com/pgharts/trusty-cms/issues?state=open), so if you'd like to help out, that's a great place to start. Also, if you find anything wrong, let us know there so we can get to work fixing it.
+Currently, TrustyCMS is functional but still has some core issues. We're managing the outstanding problems in [Github Issues](https://github.com/pgharts/trusty-cms/issues?state=open), so if you'd like to help out, that's a great place to start. Also, if you find anything wrong, let us know there so we can get to work fixing it.
 
 
 TrustyCms features:
