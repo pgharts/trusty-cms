@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require 'admin/jquery.validate.min'
 //= require 'admin/autopopulate-breadcrumb'
 //= require 'admin/cookie'
 //= require 'admin/dropdown'
