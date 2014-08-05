@@ -6,7 +6,7 @@
       - form.edit_title do
         %p.title
           = f.label :name, t('name')
-          = f.text_field :name, :maxlength => 100, :class => "textbox"
+          = f.text_field :name, :maxlength => 100, :class => "textbox", :required => true
       - form.edit_extended_metadata do
         .drawer
           .drawer_contents#attributes

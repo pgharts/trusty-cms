@@ -8,7 +8,7 @@
   - form.edit_title do
     %p.title
       %label{:for=>"page_title"}= t('page_title')
-      = fields.text_field :title, :class => 'textbox', :maxlength => 255
+      = fields.text_field :title, :class => 'textbox', :maxlength => 255, :required => true
   - form.edit_extended_metadata do
     .drawer
       .drawer_contents#attributes

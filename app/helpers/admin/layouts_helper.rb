@@ -1,5 +1,6 @@
 module Admin::LayoutsHelper
   def layout_edit_javascripts
+    raw(
     <<-CODE
     var tagReferenceWindows = {};
     function loadTagReference() {
@@ -17,5 +18,6 @@ module Admin::LayoutsHelper
       return false;
     }
     CODE
+    )
   end
 end

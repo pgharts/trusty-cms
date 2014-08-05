@@ -26,7 +26,7 @@
         - form.edit_username do
           %p
             = f.label :login, t("username")
-            = f.text_field "login", :class => "textbox", :size => 32, :maxlength => 40
+            = f.text_field "login", :class => "textbox", :size => 32, :maxlength => 40, :required => true
 
         - form.edit_password do
           = render "admin/users/password_fields", :f => f
