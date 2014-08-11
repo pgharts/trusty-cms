@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
+//= require 'admin/modernizr'
+//= require 'admin/datecheck'
 //= require 'admin/validation'
 //= require 'admin/autopopulate-breadcrumb'
 //= require 'admin/cookie'
