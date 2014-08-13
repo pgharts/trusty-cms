@@ -27,3 +27,4 @@
 //= require 'admin/preview'
 //= require 'admin/tabcontrol'
 //= require 'admin/utilities'
+//= require 'admin/tags'
