@@ -12,7 +12,7 @@
         %span{:id => "filter_reference_link_#{page_part.name.to_slug}"}
           = link_to_function t('filter'), "loadFilterReference('#{page_part.name.to_slug}');"
         %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
-          = link_to_function t('available_tags'), "loadTagReference('#{page_part.name.to_slug}');"
+          = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
       = render_region :part_controls, :locals => {:page_part => page_part}
     %div
       ~ text_area_tag "page[parts_attributes][#{page_part_counter}][content]", page_part.content, :class => "textarea large", :style => "width: 100%", :id => "part_#{page_part.name.to_slug}_content"

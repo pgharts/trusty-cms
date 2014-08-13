@@ -1,4 +1,4 @@
-.popup
+#tag_reference_popup.popup{:style => "display: none;"}
   .popup_title
     =t('available_tags_for', :name =>  _display_name)
   %p
@@ -6,7 +6,7 @@
     %input{:id => "search_#{class_of_page.name.underscore}_tag_reference", :type => "search", :name => "search_tag_reference"}/
     %span#tag_search_found_count.info
   .reference= tag_reference
-  %p.close_link= link_to_function "Close Help", "$(this).closePopup()"
+  %p.close_link= link_to_function "Close Help", "Popup.close();"
   :javascript
     var tags, searchingOn = "";
     var found_count = 0;
