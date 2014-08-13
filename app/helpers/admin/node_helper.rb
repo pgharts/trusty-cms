@@ -7,7 +7,7 @@ module Admin::NodeHelper
     if page.additional_menu_features?
       page.extend(*page.menu_renderer_modules)
     end
-    locals.reverse_merge!(:level => 0, :simple => false).merge!(:page => page)
+    locals.reverse_merge!(:level => 0, :index => 0, :simple => false).merge!(:page => page)
     render :partial => 'admin/pages/node', :locals =>  locals
   end
 

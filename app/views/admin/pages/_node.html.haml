@@ -1,4 +1,4 @@
-%tr.page{:class =>"level_#{level}#{children_class}#{virtual_class}", :id => "page_#{page.id}"}
+%tr.page{:class =>"level_#{level}#{children_class}#{virtual_class}", :data => { :tt_id =>   index}, :id => "page_#{page.id}"}
   - render_region :node, :locals => {:page => page, :level => level, :simple => simple} do |node|
     - node.title_column do
       %td.name{:style => "padding-left: #{padding_left(level)}px"}
@@ -23,4 +23,4 @@
 - if expanded
   - page.children.each do |child|
     - child.becomes(child.class_name.constantize) if child.class_name.present?
-    = render_node child, :level => level + 1, :simple => simple
+    = render_node child, :level => level + 1, :index => index, :simple => simple
