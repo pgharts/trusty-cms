@@ -14,7 +14,7 @@
             %th.actions= t('modify')
     %tbody
       - if @homepage
-        = render_node @homepage
+        = render_nodes(@homepage, 0).html_safe
       - else
         %tr
           %td.empty{:colspan => admin.page.index.node.length}= t('no_pages')

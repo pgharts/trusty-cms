@@ -1,14 +1,33 @@
 module Admin::NodeHelper
 
-  def render_node(page, locals = {})
-    @current_node = page
+  def render_nodes(page, starting_index, parent_index = nil)
+    @rendered_html = ""
+    render_node page, starting_index, parent_index
+    @rendered_html
+  end
+
+  def render_node(page, index, parent_index = nil)
+
     page.extend MenuRenderer
     page.view = self
     if page.additional_menu_features?
       page.extend(*page.menu_renderer_modules)
     end
-    locals.reverse_merge!(:level => 0, :index => 0, :simple => false).merge!(:page => page)
-    render :partial => 'admin/pages/node', :locals =>  locals
+    @current_node = page
+    @rendered_html += (render :partial => 'admin/pages/node', :locals =>  {level: index,
+                                                        index: index,
+                                                        parent_index: parent_index,
+                                                        page: page,
+                                                        simple: false})
+    if expanded
+      current_index = index
+      page.children.each do |child|
+        child.becomes(child.class_name.constantize) if child.class_name.present?
+        index = render_node child, index + 1, current_index
+      end
+    end
+
+    index
   end
 
   def homepage
