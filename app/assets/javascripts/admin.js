@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
+//= require 'admin/jquery.treetable'
 //= require 'admin/modernizr'
 //= require 'admin/datecheck'
 //= require 'admin/validation'
@@ -28,3 +29,4 @@
 //= require 'admin/tabcontrol'
 //= require 'admin/utilities'
 //= require 'admin/tags'
+//= require 'admin/treetable'

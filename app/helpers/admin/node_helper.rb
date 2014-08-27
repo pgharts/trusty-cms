@@ -8,17 +8,11 @@ module Admin::NodeHelper
 
   def render_node(page, index, parent_index = nil)
 
-    page.extend MenuRenderer
-    page.view = self
-    if page.additional_menu_features?
-      page.extend(*page.menu_renderer_modules)
-    end
-    @current_node = page
-    @rendered_html += (render :partial => 'admin/pages/node', :locals =>  {level: index,
-                                                        index: index,
-                                                        parent_index: parent_index,
-                                                        page: page,
-                                                        simple: false})
+    @current_node = prepare_page(page)
+
+    @rendered_html += (render :partial => 'admin/pages/node',
+                              :locals =>  {level: index, index: index, parent_index: parent_index,
+                                           page: page, simple: false})
     if expanded
       current_index = index
       page.children.each do |child|
@@ -26,8 +20,16 @@ module Admin::NodeHelper
         index = render_node child, index + 1, current_index
       end
     end
-
     index
+  end
+
+  def prepare_page(page)
+    page.extend MenuRenderer
+    page.view = self
+    if page.additional_menu_features?
+      page.extend(*page.menu_renderer_modules)
+    end
+    page
   end
 
   def homepage
