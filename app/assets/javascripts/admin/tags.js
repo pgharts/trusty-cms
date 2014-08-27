@@ -6,9 +6,13 @@ $(function(){
       url: href,
       type: "GET",
       dataType: "html",
-      success: function(url){
-          $('#popups').append(url);
-          $('#tag_reference_popup');
+      success: function(data, textStatus, xhr){
+        $('#popups').append(data);
+        Popup.show('tag_reference_popup');
+        $('.close_link').click(function(){
+          Popup.close();
+          $('#tag_reference_popup').remove();
+        });
       }
     });
   });

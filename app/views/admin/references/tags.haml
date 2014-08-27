@@ -7,4 +7,6 @@
       %input{:id => "search_#{class_of_page.name.underscore}_tag_reference", :type => "search", :name => "search_tag_reference"}/
       %span#tag_search_found_count.info{:id => "filter-count"}
   .reference= tag_reference
-  %p.close_link= link_to_function "Close Help", "Popup.close();"
+  %p.close_link
+    %a.close_tags{href:'#'}
+      Close Help
