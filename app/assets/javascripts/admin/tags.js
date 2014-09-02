@@ -29,7 +29,7 @@ $(function(){
           });
 
           // Update the count
-          $("#filter-count").text("Tags Found = "+count);
+          $("#filter-count").text("Found "+count+" Tags").css("background-color","yellow");
         });
         $('.close_link').click(function(){
           Popup.close();
