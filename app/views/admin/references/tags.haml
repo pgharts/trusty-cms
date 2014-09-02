@@ -4,8 +4,8 @@
   %p
     %fieldset{:id => "live-search"}
       %label.inline{:for => "search_#{class_of_page.name.underscore}_tag_reference"} Filter Tags
-      %input{:id => "search_#{class_of_page.name.underscore}_tag_reference", :type => "search", :name => "search_tag_reference"}/
-      %span#tag_search_found_count.info{:id => "filter-count"}
+      %input{:id => "filter", :type => "text", :name => "search_tag_reference", :value => ""}/
+      %span{:id => "filter-count"}
   .reference= tag_reference.html_safe
   %p.close_link
     %a.close_tags{href:'#'}
