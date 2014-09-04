@@ -12,8 +12,8 @@ module Admin::NodeHelper
 
     @rendered_html += (render :partial => 'admin/pages/node',
                               :locals =>  {level: index, index: index, parent_index: parent_index,
-                                           page: page, simple: false})
-    if expanded
+                                           page: page, simple: false, branch: (page.children.count > 0) })
+    if false
       current_index = index
       page.children.each do |child|
         child.becomes(child.class_name.constantize) if child.class_name.present?

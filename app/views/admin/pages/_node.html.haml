@@ -1,13 +1,13 @@
-%tr.page{:class =>"level_#{level}#{children_class}#{virtual_class} collapsed", :data => { :tt_branch => "true", :tt_id =>   index, :tt_parent_id => parent_index, :tt_page_id => page.id}, :id => "page_#{page.id}"}
+%tr.page{:class =>"branch", :data => { :tt_branch => branch.to_s,  :tt_id =>   index, :tt_parent_id => parent_index, :tt_page_id => page.id}, :id => "page_#{page.id}"}
   - render_region :node, :locals => {:page => page, :level => level, :simple => simple} do |node|
     - node.title_column do
-      %td.name{:style => "padding-left: #{padding_left(level)}px"}
+      %td.name
         %span.w1
           - if simple
             = icon
             = node_title
           - else
-            = (expander(level) + link_to("#{icon} #{node_title}".html_safe, edit_admin_page_url(page), :title => page.path)).html_safe
+            = (link_to("#{icon} #{node_title}".html_safe, edit_admin_page_url(page), :title => page.path)).html_safe
             = page_type
             = spinner
     - node.status_column do

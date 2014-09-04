@@ -12,6 +12,7 @@ class Admin::PagesController < Admin::ResourceController
     r.plural.js do
       @level = params[:level].to_i
       @index = params[:index].to_i
+      @rendered_html = ""
       @template_name = 'index'
       self.models = Page.find(params[:page_id]).children.all
       response.headers['Content-Type'] = 'text/html;charset=utf-8'

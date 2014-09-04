@@ -1,2 +1,6 @@
+- current_index = @index + 1
+- parent_index = @index
 - models.each do |child|
-  = render_node child, :expand => 1, :level => @level + 1, :index => @index + 1
+  - current_index = render_node child, current_index, parent_index
+  - current_index += 1
+= @rendered_html.html_safe
