@@ -1,4 +1,4 @@
-%tr.page{:class =>"branch", :data => { :tt_branch => branch.to_s,  :tt_id =>   index, :tt_parent_id => parent_index, :tt_page_id => page.id}, :id => "page_#{page.id}"}
+%tr.page{:class =>"branch", :data => { :tt_branch => branch.to_s,  :tt_id => page.id, :tt_parent_id => parent_index, :tt_page_id => page.id}, :id => "page_#{page.id}"}
   - render_region :node, :locals => {:page => page, :level => level, :simple => simple} do |node|
     - node.title_column do
       %td.name

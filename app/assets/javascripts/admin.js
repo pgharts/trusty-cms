@@ -15,6 +15,7 @@
 //= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
+//= require 'admin/persist.min'
 //= require 'admin/modernizr'
 //= require 'admin/datecheck'
 //= require 'admin/validation'

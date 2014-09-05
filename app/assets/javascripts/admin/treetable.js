@@ -1,11 +1,31 @@
 
 $(function() {
+  var persistStore = new Persist.Store("Trusty CMS");
+  var needToExpand = [];
   $("#pages").treetable({
     expandable: true,
     initialState: "collapsed",
+    onNodeCollapse: function() {
+      var node = this;
+      persistStore.remove(node.id);
+      $("#pages").treetable("unloadBranch", this);
+    },
+    onInitialized: function() {
+      var length = needToExpand.length;
+      for (var i = 0; i < length; i++)
+        $("#pages").treetable("expandNode", needToExpand[i]);
+    },
+    onNodeInitialized: function() {
+      var node = this;
+      var state = persistStore.get(node.id);
+      if (state) {
+        needToExpand.push(node.id);
+      }
+
+    },
     onNodeExpand: function() {
       var node = this;
-
+      persistStore.set(node.id, 'expanded');
       // Render loader/spinner while loading
       $.ajax({
         async: false, // Must be false, otherwise loadBranch happens after showChildren?
@@ -13,11 +33,14 @@ $(function() {
       }).done(function(html) {
         var rows = $(html).filter("tr");
 
-        rows.find(".directory").parents("tr").each(function() {
-          droppableSetup.apply(this);
-        });
 
         $("#pages").treetable("loadBranch", node, rows);
+        $.each(node.children, function() {
+          var state = persistStore.get(this.id);
+          if (state) {
+            $("#pages").treetable("expandNode", this.id);
+          }
+        });
         $('a.dropdown').each(function(){
           Dropdown.setup(this);
         });
