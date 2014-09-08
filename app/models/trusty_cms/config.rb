@@ -190,12 +190,6 @@ module TrustyCms
           key = [options[:prefix], key].join('.') if options[:prefix]
         end
 
-        raise LoadError, %{
-Config definition error: '#{key}' is defined twice:
-1. #{called_from}
-2. #{definitions[key].definer}
-        } unless definitions[key].nil? || definitions[key].empty?
-
         definition ||= TrustyCms::Config::Definition.new(options.merge(:definer => called_from))
         definitions[key] = definition
 
