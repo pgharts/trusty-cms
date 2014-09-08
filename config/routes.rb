@@ -1,5 +1,8 @@
 TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
+  TrustyCms::Application.config.enabled_extensions.each { |ext|
+    load File.join(TrustyCms::ExtensionPath.find(ext).to_s, "config", "routes.rb")
+  }
   namespace :admin do
     resources :pages do
       resources :children, :controller => 'pages'
