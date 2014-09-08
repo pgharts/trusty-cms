@@ -5,5 +5,7 @@
     %h1= t('edit_layout')
   - main.edit_form do
     = render :partial => 'form'
+  - main.edit_popups do
+    = render :partial => "popups"
 
 - content_for :page_scripts
