@@ -190,8 +190,10 @@ module TrustyCms
           key = [options[:prefix], key].join('.') if options[:prefix]
         end
 
-        definition ||= TrustyCms::Config::Definition.new(options.merge(:definer => called_from))
-        definitions[key] = definition
+        if definitions[key].nil? || definitions[key].empty?
+          definition ||= TrustyCms::Config::Definition.new(options.merge(:definer => called_from))
+          definitions[key] = definition
+        end
 
         if self[key].nil? && !definition.default.nil?
           begin
