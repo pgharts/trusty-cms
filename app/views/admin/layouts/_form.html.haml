@@ -27,7 +27,7 @@
         %span.reference_links
           Reference:
           %span{:id => "tag_reference_link"}
-            = link_to t('available_tags'), admin_reference(:tags), id: 'tag_reference'
+            = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
     - form_bottom.edit_buttons do
       .buttons
         = save_model_button @layout
