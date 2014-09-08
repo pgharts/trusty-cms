@@ -9,7 +9,8 @@
 .inset
   %table.index#site_map
     %tbody
-      = render_node @page, :simple => true
+      - render_nodes @page, @page.id
+      = @rendered_html.html_safe
 
 = form_for [:admin, @page.becomes(Page)], :html => {:method => :delete, 'data-onsubmit_status'=>"Removing pages&#8230;"} do
   .buttons
