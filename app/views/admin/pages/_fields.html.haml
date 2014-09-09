@@ -45,7 +45,7 @@
     - layout.edit_published_at do
       %p#published_at{:class => (@page.published? ? nil : 'hidden')}
         = fields.label :published_at, t('published_on')
-        = fields.text_field :published_at, :class=> "date", :type=>"date", :value => (@page.published_at? ? I18n.localize(@page.published_at.to_date, :format =>:long) : nil)
+        = fields.text_field :published_at, :class=> "date", :type=>"date", :value => (@page.published_at? ? I18n.localize(@page.published_at.to_date, :format =>:default) : nil)
     = render_region :layout_row, :locals => {:f => fields}
 
 - render_region :form_bottom, :locals => {:f => fields} do |form_bottom|
