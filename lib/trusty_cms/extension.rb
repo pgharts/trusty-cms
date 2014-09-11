@@ -46,7 +46,7 @@ module TrustyCms
 
     def load_initializers
       Dir["#{self.root}/config/initializers/**/*.rb"].sort.each do |initializer|
-        load(initializer)
+        require initializer
       end
     end
 

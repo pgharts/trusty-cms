@@ -101,7 +101,7 @@ class Rails::Application::Configuration
   def default_extension_paths
     env = ENV["RAILS_ENV"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
-    paths.unshift(TRUSTY_CMS_ROOT + "vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
+    paths.unshift(TRUSTY_CMS_ROOT + "/vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
     paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test/
     paths
   end
