@@ -21,6 +21,7 @@ module Admin::ConfigurationHelper
     end
     html << content_tag(:span, " #{t("units.#{setting.units}")}", :class => 'units') if setting.units
     html << content_tag(:span, " #{t('warning')}: #{[setting.errors.get(:value)].flatten.first}", :class => 'warning') if setting.errors.get(:value)
+    Rails.logger.error(html)
     html.html_safe
   end
 
@@ -51,12 +52,12 @@ module Admin::ConfigurationHelper
     if setting.boolean?
       html << hidden_field_tag(name, 0)
       html << check_box_tag(name, 1, value, :class => 'setting', :id => domkey)
-      html << content_tag(:label, title, :class => 'checkbox', :for => domkey)
+      html << content_tag(:label, title.html_safe, :class => 'checkbox', :for => domkey)
     elsif setting.selector?
-      html << content_tag(:label, title, :for => domkey)
+      html << content_tag(:label, title.html_safe, :for => domkey)
       html << select_tag(name, options_for_select(setting.definition.selection, value), :class => 'setting', :id => domkey)
     else
-      html << content_tag(:label, title, :for => domkey)
+      html << content_tag(:label, title.html_safe, :for => domkey)
       html << text_field_tag(name, value, :class => 'textbox', :id => domkey)
     end
     if setting.errors[:value].present?

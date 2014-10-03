@@ -15,6 +15,7 @@ module Admin::RegionsHelper
         raise e
       end
     end.join.html_safe
+    Rails.logger.error(output)
     block_given? ? concat(output) : output
   end
 
