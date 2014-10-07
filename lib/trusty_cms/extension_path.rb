@@ -24,7 +24,7 @@ module TrustyCms
     @@known_paths = {}
 
     def initialize(options = {}) #:nodoc
-      @name, @path = options[:name], options[:path]
+      @name, @path = options[:name].underscore, options[:path]
       @@known_paths[@name.to_sym] = self
     end
 
