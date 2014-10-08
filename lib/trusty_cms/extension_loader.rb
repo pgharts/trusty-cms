@@ -99,9 +99,21 @@ module TrustyCms
     #
     def activate_extensions
       initializer.initialize_views
-      extensions.each(&:activate)
+      ordered_extensions = []
+      configuration = TrustyCms::Application.config
+      if configuration.extensions.first == :all
+        ordered_extensions = extensions
+      else
+        configuration.extensions.each {|name| ordered_extensions << select_extension(name)  }
+      end
+      ordered_extensions.flatten.each(&:activate)
       Page.load_subclasses
     end
+
+    def select_extension(name)
+      extensions.select {|ext| ext.extension_name.symbolize == name}
+    end
+
     alias :reactivate :activate_extensions
 
     class << self
