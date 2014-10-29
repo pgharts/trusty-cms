@@ -5,7 +5,7 @@
     = hidden_field_tag "page[parts_attributes][#{page_part_counter}][_destroy]", page_part._destroy, :class => "delete_input"
     %p
       %label
-        = "To add Radius tags, switch to plain text view by clicking the 'Source' button."
+        = "To use HTML or Radius tags, switch to plain text view by clicking the 'Source' button."
       %span.reference_links
         = t('reference')
         %span{:id => "filter_reference_link_#{page_part.name.to_slug}"}
