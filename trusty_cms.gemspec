@@ -29,6 +29,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "rdoc",            "~> 3.9"
   s.add_dependency "acts_as_tree",    "~> 0.1.1"
   s.add_dependency "bundler",         ">= 1.0.0"
+  s.add_dependency 'compass',         '~> 1.0.0.alpha.21'
   s.add_dependency "compass-rails",   "~> 1.1.7"
   s.add_dependency "sprockets",       "= 2.2.2.backport2"
   s.add_dependency "sprockets-rails", "~> 2.0.0.backport1"
@@ -45,4 +46,5 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "RedCloth",        "~> 4.2.0"
   s.add_dependency "will_paginate",   "~> 3.0"
   s.add_dependency "stringex",        "~> 1.3.0"
+  s.add_dependency "ckeditor",        "~> 4.1.0"
 end

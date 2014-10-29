@@ -3,3 +3,5 @@ module TrustyCms
     paths["app/helpers"] = []
   end
 end
+
+require 'ckeditor'
