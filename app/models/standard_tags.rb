@@ -1152,6 +1152,26 @@ module StandardTags
     TrustyCms::Config["dev.host"]
   end
 
+  tag 'meta:description' do |tag|
+    show_tag = tag.attr['tag'] != 'false' || false
+    description = CGI.escapeHTML(tag.locals.page.field(:description).try(:content))
+    if show_tag
+      "<meta name=\"description\" content=\"#{description}\" />"
+    else
+      description
+    end
+  end
+
+ tag 'meta:keywords' do |tag|
+    show_tag = tag.attr['tag'] != 'false' || false
+    keywords = CGI.escapeHTML(tag.locals.page.field(:keywords).try(:content))
+    if show_tag
+      "<meta name=\"keywords\" content=\"#{keywords}\" />"
+    else
+      keywords
+    end
+  end
+
   private
     def render_children_with_pagination(tag, opts={})
       if opts[:aggregate]
