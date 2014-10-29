@@ -39,4 +39,5 @@ group :development, :test do
   gem 'launchy',          '~> 2.4.2'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist',      '~> 1.5.1'
+  gem "ckeditor",        "~> 4.1.0"
 end
