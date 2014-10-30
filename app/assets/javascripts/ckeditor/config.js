@@ -3,5 +3,6 @@ CKEDITOR.editorConfig = function( config ) {
   config.removeFormatTags = "";
   config.protectedSource.push(/<r:([\S]+)*>.*<\/r:\1>/g);
   config.protectedSource.push(/<r:[^>\/]*\/>/g);
-  config.forcePasteAsPlainText = true
+  config.forcePasteAsPlainText = true;
+  config.removePlugins = "save, newpage, preview, print, templates, forms, flash, smiley, language, pagebreak, iframe, bidi";
 };
