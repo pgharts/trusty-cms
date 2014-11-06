@@ -18,18 +18,20 @@ describe 'Editing using javascript features', js: true do
     click_link 'Add Child'
     click_link 'Normal Page'
     fill_in 'Page Title', with: 'Command Center'
-    fill_in 'part_body_content', with: 'You are on the bridge.'
+    page.execute_script("CKEDITOR.instances['part_body_content'].setData('You are on the bridge.');")
 
     # Add a custom page part
     click_link 'Add Part'
     fill_in 'Name', with: 'footer'
     click_button 'Add Part'
     expect(page).to have_selector '#tabs #tab_footer'
-    fill_in 'part_footer_content', with: 'Copyright Voyager 2371'
+    page.execute_script("CKEDITOR.instances['part_footer_content'].setData('You are on the bridge.');")
 
     # Switch tabs
     click_link 'tab_body'
-    expect(page).to have_field 'part_body_content', with: 'You are on the bridge.'
+    result = evaluate_script("CKEDITOR.instances['part_body_content'].getData()")
+    puts result
+    result.should include("You are on the bridge.")
     expect(page).to_not have_field 'part_footer_content'
 
     # Remove a tab
