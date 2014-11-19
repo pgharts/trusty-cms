@@ -29,9 +29,9 @@ gemspec
 # gem "radiant-smarty_pants_filter-extension", "~> 1.0.2"
 # gem "radiant-textile_filter-extension",      "~> 1.0.4"
 
-  gem 'sass-rails3', '~> 4.0.1'
 
 group :development, :test do
+  gem "compass-rails",   "~> 2.0.1"
   gem 'thin',             '~> 1.6.2'
   gem 'pry',              '~> 0.10.0'
   gem 'capybara',         '~> 2.3.0'
@@ -40,4 +40,5 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist',      '~> 1.5.1'
   gem "ckeditor",        "~> 4.1.0"
+  gem 'sprockets-rails', '2.0.0.backport1'
 end
