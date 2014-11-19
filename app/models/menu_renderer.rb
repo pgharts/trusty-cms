@@ -80,15 +80,15 @@ module MenuRenderer
   end
 
   def disabled_add_child_link
-    view.content_tag :span, view.image('plus_disabled') + ' ' + I18n.t('add_child'), :class => 'action disabled'
+    view.content_tag :span, view.image('plus_disabled') + ' Add Child', :class => 'action disabled'
   end
 
   def add_child_link
-    view.link_to((view.image('plus') + ' ' + I18n.t('add_child')), view.new_admin_page_child_path(self, :page_class => default_child.name), :class => "action")
+    view.link_to((view.image('plus') + ' Add Child'), view.new_admin_page_child_path(self, :page_class => default_child.name), :class => "action")
   end
 
   def add_child_link_with_menu_hook
-    view.link_to((view.image('plus') + ' ' + I18n.t('add_child')), "#allowed_children_#{id}", :class => "action dropdown")
+    view.link_to((view.image('plus') + ' Add Child'), "#allowed_children_#{id}", :class => "action dropdown")
   end
 
   def add_child_menu
