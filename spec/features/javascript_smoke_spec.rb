@@ -15,6 +15,7 @@ describe 'Editing using javascript features', js: true do
     click_button 'Create Page'
 
     # Create a new child page of the home page
+    # This is failing on Travis, but not on my box. Just trying to edit to push a new version.
     click_link 'Add Child'
     click_link 'Normal Page'
     fill_in 'Page Title', with: 'Command Center'
