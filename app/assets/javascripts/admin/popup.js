@@ -28,6 +28,7 @@
 
   Popup.close = function() {
     $('#popup_window').hide();
+    $('div.popup').hide();
   }
 
 }(window.Popup = window.Popup || {}, jQuery));
