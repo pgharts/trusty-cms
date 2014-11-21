@@ -9,4 +9,5 @@
   %td.actions
     = link_to '#add_field_popup', :class=>'popup', :alt => t('add_field') do
       = image 'plus_grey'
-    = link_to_function image('minus_grey', :alt => t('remove_field')), "event.stop(); window.removeField(this)", :title => t('remove_field')
+    = link_to "#remove_field#{page_field_counter}", :class => "remove_field", :alt => "Remove Field" do
+      = image 'minus_grey'
