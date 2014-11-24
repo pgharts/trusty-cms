@@ -1154,7 +1154,7 @@ module StandardTags
 
   tag 'meta:description' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
-    description = CGI.escapeHTML(tag.locals.page.field(:description).try(:content))
+    description = CGI.escapeHTML(tag.locals.page.field(:description).try(:content)) if tag.locals.page.field(:description)
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
     else
@@ -1164,7 +1164,7 @@ module StandardTags
 
  tag 'meta:keywords' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
-    keywords = CGI.escapeHTML(tag.locals.page.field(:keywords).try(:content))
+    keywords = CGI.escapeHTML(tag.locals.page.field(:keywords).try(:content)) if tag.locals.page.field(:keywords)
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
     else
