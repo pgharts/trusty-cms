@@ -23,4 +23,5 @@ radiant-*.gem
 vendor/plugins/rails_upgrade
 trusty-cms.box
 .vagrant
+*.gem
 .sass-cache
