@@ -15,7 +15,7 @@ namespace :radiant do
       end
 
       desc "Copies public assets of the <%= extension_name %> to the instance public/ directory."
-      task :update => :environment do
+      task :update => :environments do
         is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
         puts "Copying assets from <%= class_name %>"
         Dir[<%= class_name %>.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
@@ -27,7 +27,7 @@ namespace :radiant do
       end
 
       desc "Syncs all available translations for this ext to the English ext master"
-      task :sync => :environment do
+      task :sync => :environments do
         # The main translation root, basically where English is kept
         language_root = <%= class_name %>.root + "/config/locales"
         words = TranslationSupport.get_translation_keys(language_root)

@@ -13,7 +13,7 @@ namespace :radiant do
       end
 
       desc "Copies public assets of the <%= localization_name %> language pack to the instance public/ directory."
-      task :update => :environment do
+      task :update => :environments do
         is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
         puts "Copying assets from <%= class_name %>"
         Dir[<%= class_name %>.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
