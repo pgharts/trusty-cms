@@ -49,5 +49,4 @@ class Rails::Generator::Base
 
 end
 
-Rails::Generator::Base.use_application_sources!
-Rails::Generator::Scripts::Generate.new.run(ARGV, :generator => 'instance')
+Rails::Generators.invoke("trusty_cms", [ARGV])
