@@ -2,7 +2,7 @@ namespace :trusty_cms do
   namespace :i18n do
 
     desc "Syncs all available translations to the English master"
-    task :sync => :environments do
+    task :sync => :environment do
       # All places TrustyCms can store locales
       locale_paths = TrustyCms::AvailableLocales.locale_paths
       # The main translation root, basically where English is kept
@@ -24,7 +24,7 @@ namespace :trusty_cms do
     end
 
     desc "Creates or updates the English available tag descriptions"
-    task :available_tags => :environments do
+    task :available_tags => :environment do
       descriptions = Hash.new
       Page.tag_descriptions.sort.each do |tag, desc|
         tag = '    ' + tag.gsub(':','-') + ':'
@@ -36,7 +36,7 @@ namespace :trusty_cms do
     end
 
     desc "Syncs all translations available_tags to the English master"
-    task :sync_available_tags => :environments do
+    task :sync_available_tags => :environment do
       # All places TrustyCms can store locales
       locale_paths = TrustyCms::AvailableLocales.locale_paths
       # The main translation root, basically where English is kept

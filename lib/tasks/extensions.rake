@@ -3,7 +3,7 @@ require 'rake/testtask'
 namespace :db do
   namespace :migrate do
     desc "Run all TrustyCms extension migrations"
-    task :extensions => :environments do
+    task :extensions => :environment do
       require 'trusty_cms/extension_migrator'
       TrustyCms::ExtensionMigrator.migrate_extensions
       Rake::Task['db:schema:dump'].invoke
@@ -11,7 +11,7 @@ namespace :db do
   end
   namespace :remigrate do
     desc "Migrate down and back up all TrustyCms extension migrations"
-    task :extensions => :environments do
+    task :extensions => :environment do
       require 'highline/import'
       if agree("This task will destroy any data stored by extensions in the database. Are you sure you want to \ncontinue? [yn] ")
         require 'trusty_cms/extension_migrator'
@@ -77,7 +77,7 @@ end
 namespace :trusty_cms do
   namespace :extensions do
     desc "Runs update asset task for all extensions"
-    task :update_all => [:environments] do
+    task :update_all => [:environment] do
       extension_update_tasks = TrustyCms.configuration.enabled_extensions.map { |n| "trusty_cms:extensions:#{n}:update" }.select { |t| Rake::Task.task_defined?(t) }
       extension_update_tasks.each {|t| Rake::Task[t].invoke }
     end

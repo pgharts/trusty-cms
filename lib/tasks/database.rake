@@ -1,6 +1,6 @@
 namespace :db do
   desc "Migrate schema to version 0 and back up again. WARNING: Destroys all data in tables!!"
-  task :remigrate => :environments do
+  task :remigrate => :environment do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
 
@@ -18,7 +18,7 @@ namespace :db do
     end
   end
 
-  task :initialize => :environments do
+  task :initialize => :environment do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
 
@@ -63,7 +63,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
   end
 
   desc "Migrate the database through all available migration scripts (looks for db/migrate/* in trusty-cms, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
-  task :migrate => :environments do
+  task :migrate => :environment do
     Rake::Task['db:migrate:trusty_cms'].invoke
     Rake::Task['db:migrate:extensions'].invoke
     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
@@ -73,7 +73,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
 
   namespace :migrate do
     desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
-    task :trusty_cms => :environments do
+    task :trusty_cms => :environment do
       ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
       ActiveRecord::Migrator.migrate(File.join(TrustyCms.root, 'db', 'migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
       Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
