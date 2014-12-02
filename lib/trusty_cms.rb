@@ -4,9 +4,9 @@ unless defined? TrustyCms::Version
   module TrustyCms
     module Version
       Major = '1'
-      Minor = '0'
-      Tiny  = '1'
-      Patch = nil # set to nil for normal release
+      Minor = '1'
+      Tiny  = '0'
+      Patch = rc1 # set to nil for normal release
 
       class << self
         def to_s
