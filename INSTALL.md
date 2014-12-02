@@ -5,8 +5,8 @@ From within the directory containing your TrustyCms instance:
 1. Create a new Rails 3 application (i.e. `rails new [project_name]`)
 
 2. Replace most of your gemfile with these gems:
-   `gem "trusty-cms", :path => '../trusty-cms'`
-   `gem "mysql", "~> 2.9.1"`
+   - `gem "trusty-cms", "~>1.1.0`
+   - `gem "mysql", "~> 2.9.1"`
 
 3. Run `bundle install`
 
