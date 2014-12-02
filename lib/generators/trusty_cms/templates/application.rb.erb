@@ -66,9 +66,6 @@ module TrustyCms
     # If you change this key, all old sessions will become invalid!
     # Make sure the secret is at least 30 characters and all random,
     # no regular words or you'll be exposed to dictionary attacks.
-    config.session_store(:cookie_store,
-                         {:key => "_#{<%= project_name %>}_session",
-                          :secret => 'asdfqwerfxcoivswqenadfasdfqewpfioutyqwel'})
 
     # Comment out this line if you want to turn off all caching, or
     # add options to modify the behavior. In the majority of deployment

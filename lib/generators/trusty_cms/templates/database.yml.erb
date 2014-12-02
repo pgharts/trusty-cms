@@ -5,21 +5,21 @@
 
 development:
   adapter: mysql
-  database: <% project_name%>_blank_dev
+  database: <%= project_name%>_blank_dev
   username:
   password:
   host: localhost
 
 test: &TEST
   adapter: mysql
-  database: <% project_name%>_blank_test
+  database: <%= project_name%>_blank_test
   username:
   password:
   host:
 
 production:
   adapter: mysql
-  database: <% project_name%>_blank_live
+  database: <%= project_name%>_blank_live
   username:
   password:
   socket: /tmp/mysql.sock
