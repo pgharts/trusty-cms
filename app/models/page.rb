@@ -365,6 +365,7 @@ class Page < ActiveRecord::Base
     end
 
     def parse(text)
+      text = "" if text.nil?
       lazy_initialize_parser_and_context.parse(text)
     end
 
