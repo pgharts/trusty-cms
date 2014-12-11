@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (1.1.0)
+    trusty-cms (1.1.1)
       RedCloth (~> 4.2.0)
       acts_as_tree (~> 0.1.1)
       bundler (>= 1.0.0)
@@ -28,6 +28,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    RedCloth (4.2.9-java)
     actionmailer (3.2.21)
       actionpack (= 3.2.21)
       mail (~> 2.5.4)
@@ -72,7 +73,7 @@ GEM
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cliver (0.3.2)
-    cocaine (0.5.4)
+    cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     compass (1.0.1)
@@ -169,7 +170,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.4.1)
+    rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
