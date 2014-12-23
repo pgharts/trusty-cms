@@ -43,5 +43,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "will_paginate",   "~> 3.0"
   s.add_dependency "stringex",        "~> 1.3.0"
   s.add_dependency 'uglifier',        '~> 2.6.0'
+  s.add_dependency 'execjs',          '~> 2.2.2'
+  s.add_dependency 'therubyracer',    '~> 0.12.1'
   s.add_dependency "ckeditor",        "~> 4.1.0"
 end
