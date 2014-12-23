@@ -6,7 +6,7 @@ unless defined? TrustyCms::Version
       Major = '1'
       Minor = '1'
       Tiny  = '2'
-      Patch = 'rc1' # set to nil for normal release
+      Patch = nil # set to nil for normal release
 
       class << self
         def to_s
