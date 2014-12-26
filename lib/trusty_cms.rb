@@ -5,7 +5,7 @@ unless defined? TrustyCms::Version
     module Version
       Major = '1'
       Minor = '1'
-      Tiny  = '6'
+      Tiny  = '7'
       Patch = nil # set to nil for normal release
 
       class << self
