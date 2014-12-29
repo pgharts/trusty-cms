@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ckeditor/config.js
 //= require ckeditor/init
 //= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
