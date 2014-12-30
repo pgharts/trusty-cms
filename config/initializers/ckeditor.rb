@@ -1,3 +1,3 @@
 Ckeditor.setup do |config|
-  config.path = '/assets/'
+  #config.path = '/assets/'
 end
