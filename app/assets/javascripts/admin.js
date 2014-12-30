@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ckeditor/config.js
-//= require ckeditor/init
 //= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
@@ -34,3 +33,4 @@
 //= require 'admin/utilities'
 //= require 'admin/tags'
 //= require 'admin/treetable'
+//= require ckeditor/init

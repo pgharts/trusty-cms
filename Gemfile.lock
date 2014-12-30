@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (1.1.9)
+    trusty-cms (1.1.10)
       RedCloth (~> 4.2.0)
       acts_as_tree (~> 0.1.1)
       bundler (>= 1.0.0)
@@ -30,7 +30,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
-    RedCloth (4.2.9-java)
     actionmailer (3.2.21)
       actionpack (= 3.2.21)
       mail (~> 2.5.4)
