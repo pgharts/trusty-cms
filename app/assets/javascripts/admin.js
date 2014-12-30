@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ckeditor/config.js
 //= require 'admin/jquery-ui'
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
 //= require_tree './admin/validations'
+//= require ckeditor/init
+//= require ckeditor/config.js
 //= require 'admin/persist.min'
 //= require 'admin/modernizr'
 //= require 'admin/datecheck'
@@ -33,4 +34,3 @@
 //= require 'admin/utilities'
 //= require 'admin/tags'
 //= require 'admin/treetable'
-//= require ckeditor/init
