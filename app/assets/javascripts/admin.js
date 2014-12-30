@@ -16,9 +16,6 @@
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
 //= require_tree './admin/validations'
-//= require ckeditor/ckeditor
-//= require ckeditor/init
-//= require ckeditor/config.js
 //= require 'admin/persist.min'
 //= require 'admin/modernizr'
 //= require 'admin/datecheck'
