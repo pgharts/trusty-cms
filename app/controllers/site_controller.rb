@@ -21,7 +21,12 @@ class SiteController < ApplicationController
     end
     if @page = find_page(url)
       batch_page_status_refresh if (url == "/" || url == "")
-      process_page(@page)
+      # This is a bit of a hack to get Vanity URL pages working in another extension
+      # In Rails 2, redirect_to halted execution, so process_page could be aliased and
+      # a redirect could be used. This no longer works. There's a better fix for this,
+      # but for now, anything that aliases process_page can return false if it's rendering
+      # or redirecting on its own.
+      return unless process_page(@page)
       set_cache_control
       @performed_render ||= true
       render layout: false
