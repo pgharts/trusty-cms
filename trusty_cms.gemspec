@@ -28,7 +28,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "jquery-rails",    "~> 3.1"
   s.add_dependency "rdoc",            "~> 3.9"
   s.add_dependency "acts_as_tree",    "~> 0.1.1"
-  s.add_dependency "bundler",         ">= 1.7"
+  s.add_dependency "bundler",         "~> 1.7"
   s.add_dependency "compass-rails",   "~> 2.0"
   s.add_dependency "delocalize",      "~> 0.2"
   s.add_dependency "haml",            "~> 4.0"

@@ -4,7 +4,7 @@ PATH
     trusty-cms (1.1.24)
       RedCloth (~> 4.2)
       acts_as_tree (~> 0.1.1)
-      bundler (>= 1.7)
+      bundler (~> 1.7)
       ckeditor (~> 4.1)
       compass-rails (~> 2.0)
       delocalize (~> 0.2)
