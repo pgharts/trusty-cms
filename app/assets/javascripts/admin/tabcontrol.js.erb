@@ -26,19 +26,21 @@
   }
 
   TabControl.selectTab = function(id) {
-    id = id.replace(/^tab_/, '').replace(/^page_/, '').replace("_", "-");
+    id = id.replace(/^tab_/, '').replace(/^page_/, '');
+    var underscored_id = id.replace("_", "-");
     var $pages = $('div#tab_control .pages .page');
     var $tabs  = $('div#tab_control .tabs .tab');
 
     $pages.hide();
     $tabs.removeClass('here');
 
-    $pages.filter('#page_' + id).show();
+    $pages.filter('#page_' + underscored_id).show();
     $tabs.filter('#tab_' + id).addClass('here');
   }
 
   TabControl.removeTab = function(id) {
-    id = id.replace(/^tab_/, '').replace(/^page_/, '').replace("_", "-");
+    id = id.replace(/^tab_/, '').replace(/^page_/, '');
+    var underscored_id = id.replace("_", "-");
     if(confirm('Remove the "' + id + '" part?')) {
       var $pages = $('div#tab_control .pages .page');
       var $tabs  = $('div#tab_control .tabs .tab');
@@ -55,7 +57,7 @@
       }
       $tab.remove();
 
-      $page = $pages.filter('#page_' + id);
+      $page = $pages.filter('#page_' + underscored_id);
       var idInput = $page.find('.id_input');
       var deleteInput = $page.find('.delete_input');
       deleteInput.attr('value', 'true');
