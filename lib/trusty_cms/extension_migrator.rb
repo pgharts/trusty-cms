@@ -8,7 +8,7 @@ module TrustyCms
       end
 
       def migrate_extensions
-        TrustyCms::Application.config.enabled_extensions.each do |ext|
+        TrustyCms::Application.config.extensions.each do |ext|
           to_migrate = Extension.descendants.detect{|descendant| descendant.name == "#{ext.to_s.camelize}Extension" }
           to_migrate.migrator.migrate
         end
