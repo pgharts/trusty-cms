@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require 'admin/jquery-ui'
+//= require 'admin/jquery.cookie'
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
 //= require_tree './admin/validations'
