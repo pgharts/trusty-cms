@@ -11,7 +11,7 @@ core:
 * Aly Ferguson
 * Andrew Miller
 * Justin Reese
-* Patrick Fitzgeralr
+* Patrick Fitzgeralrd
 * Kurtis Rainbolt-Greene
 * Colin Dean
 
