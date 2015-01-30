@@ -1,4 +1,7 @@
 ---
+sudo: false
+cache: bundler
+
 language: ruby
 rvm:
   - 1.9.3
@@ -23,5 +26,4 @@ branches:
 notifications:
   recipients:
     - sipple@trustarts.org
-    - ferguson@trustarts.org
   irc: "irc.freenode.org#pghtrustarts"
