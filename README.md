@@ -1,5 +1,7 @@
 ## Welcome to TrustyCMS
 
+[![Gem Version](https://badge.fury.io/rb/trusty-cms.svg)](http://badge.fury.io/rb/trusty-cms)
+
 Trusty is a branch of the venerable Radiant CMS. Its goal is to pull the Radiant framework into Rails 3 with minimal changes to its infrastructure. Most of what is below is derived from the original Radiant CMS readme.
 
 TrustyCms is a no-fluff, open source content management system designed for
