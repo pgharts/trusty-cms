@@ -3,6 +3,20 @@
 The following people have submitted changes which have been applied to the
 core:
 
+## Trusty CMS
+
+## 1.1.27
+* Eric Sipple
+* Carol Nichols
+* Aly Ferguson
+* Andrew Miller
+* Justin Reese
+* Patrick Fitzgeralr
+* Kurtis Rainbolt-Greene
+* Colin Dean
+
+## Radiant CMS
+
 ## Edge
 
 * Jim Gay
