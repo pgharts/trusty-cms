@@ -8,7 +8,7 @@ core:
 ## 1.1.27
 * Eric Sipple
 * Carol Nichols
-* Aly Ferguson
+* Aly Fulton
 * Andrew Miller
 * Justin Reese
 * Patrick Fitzgeralrd
