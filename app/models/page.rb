@@ -1,5 +1,3 @@
-require 'acts_as_tree'
-
 class Page < ActiveRecord::Base
   attr_protected :created_at, :updated_at
 

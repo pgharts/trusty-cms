@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'acts_as_tree'
 require 'configuration_extensions/configuration_extensions'
 require 'radius'
 require 'trusty_cms/extension_loader'
