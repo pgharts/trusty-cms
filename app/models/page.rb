@@ -179,23 +179,26 @@ class Page < ActiveRecord::Base
     path = clean_path(path) if clean
     my_path = self.path
     if (my_path == path) && (not live or published?)
-      self
+      return self
     elsif (path =~ /^#{Regexp.quote(my_path)}([^\/]*)/)
       slug_child = children.find_by_slug($1)
       if slug_child
-        found = slug_child.find_by_url(path, live, clean) # TODO: set to find_by_path after deprecation
+        found = slug_child.find_by_path(path, live, clean) # TODO: set to find_by_path after deprecation
         return found if found
       end
       children.each do |child|
-        found = child.find_by_url(path, live, clean) # TODO: set to find_by_path after deprecation
+        found = child.find_by_path(path, live, clean) # TODO: set to find_by_path after deprecation
         return found if found
       end
+    end
+    unless slug_child
       file_not_found_types = ([FileNotFoundPage] + FileNotFoundPage.descendants)
       file_not_found_names = file_not_found_types.collect { |x| x.name }
       condition = (['class_name = ?'] * file_not_found_names.length).join(' or ')
       condition = "status_id = #{Status[:published].id} and (#{condition})" if live
-      children.where([condition] + file_not_found_names).first
+      return children.where([condition] + file_not_found_names).first
     end
+    slug_child
   end
   alias_method :find_by_url, :find_by_path
 
