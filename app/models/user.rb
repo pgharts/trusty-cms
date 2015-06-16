@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   attr_protected 'why_is_this_needed'
 
   # Default Order
-  default_scope :order => 'name'
+  default_scope {order("name")}
 
   # Associations
   belongs_to :created_by, :class_name => 'User'
