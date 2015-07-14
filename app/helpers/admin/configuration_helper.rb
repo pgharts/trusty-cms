@@ -69,7 +69,7 @@ module Admin::ConfigurationHelper
 
   def setting_for(key)
     @trusty_config ||= {}    # normally initialized in Admin::ConfigurationController
-    @trusty_config[key] ||= TrustyCms.config.find_or_create_by_key(key)
+    @trusty_config[key] ||= TrustyCms.config.find_or_initialize_by(key: key)
   end
 
   def definition_for(key)

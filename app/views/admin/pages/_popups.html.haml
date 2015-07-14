@@ -14,7 +14,7 @@
       .buttons
         = submit_tag t('add_part'), :id => 'add_part_button', :class => "button"
         = t('or')
-        = link_to_function t('cancel'), "Popup.close();", :class=>"cancel"
+        = link_to "Cancel", '#', onclick: "Popup.close(); return false", class: "cancel"
   #add_field_popup.popup{:style=>"display: none"}
     #add_field_busy.busy{:style=>"display: none"}= image('spinner.gif', :alt => "")
     .popup_title= t('add_field')
@@ -27,5 +27,5 @@
       .buttons
         = submit_tag t('add_field'), :class=>'button', :id=>'add_page_field_button'
         = t('or')
-        = link_to_function t('cancel'), "Popup.close();", :class=>"cancel"
+        = link_to "Cancel", '#', onclick: "Popup.close(); return false", class: "cancel"
   = render_region :popups

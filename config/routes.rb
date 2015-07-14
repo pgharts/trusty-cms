@@ -1,7 +1,7 @@
 TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
   TrustyCms::Application.config.enabled_extensions.each { |ext|
-    load File.join(TrustyCms::ExtensionPath.find(ext).to_s, "config", "routes.rb")
+    #load File.join(TrustyCms::ExtensionPath.find(ext).to_s, "config", "routes.rb")
   }
   namespace :admin do
     resources :pages do
@@ -27,12 +27,12 @@ TrustyCms::Application.routes.draw do
     match '/reference/:type(.:format)' => 'references#show', :as => :reference, :via => :get
   end
 
-  match 'admin' => 'admin/welcome#index', :as => :admin
-  match 'admin/welcome' => 'admin/welcome#index', :as => :welcome
-  match 'admin/login' => 'admin/welcome#login', :as => :login
-  match 'admin/logout' => 'admin/welcome#logout', :as => :logout
+  get 'admin' => 'admin/welcome#index', :as => :admin
+  get 'admin/welcome' => 'admin/welcome#index', :as => :welcome
+  match 'admin/login' => 'admin/welcome#login', :as => :login, :via => [:get, :post]
+  get 'admin/logout' => 'admin/welcome#logout', :as => :logout
   # match '/' => 'site#show_page', :url => '/' # set root to this so root_path works
-  match 'error/404' => 'site#not_found', :as => :not_found
-  match 'error/500' => 'site#error', :as => :error
-  match '*url' => 'site#show_page'
+  get 'error/404' => 'site#not_found', :as => :not_found
+  get 'error/500' => 'site#error', :as => :error
+  get '*url' => 'site#show_page'
 end

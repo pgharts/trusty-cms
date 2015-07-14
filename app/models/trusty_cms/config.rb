@@ -88,7 +88,7 @@ module TrustyCms
 
       def []=(key, value)
         if table_exists?
-          setting = find_or_initialize_by_key(key)
+          setting = find_or_initialize_by(key: key)
           setting.value = value
         end
       end

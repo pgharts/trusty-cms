@@ -10,9 +10,9 @@ class Page < ActiveRecord::Base
 
   # Associations
   acts_as_tree :order => 'virtual DESC, title ASC'
-  has_many :parts, :class_name => 'PagePart', :order => 'id', :dependent => :destroy
+  has_many :parts, {:class_name => 'PagePart', :dependent => :destroy}, -> {order(:id)}
   accepts_nested_attributes_for :parts, :allow_destroy => true
-  has_many :fields, :class_name => 'PageField', :order => 'id', :dependent => :destroy
+  has_many :fields, {:class_name => 'PageField', :dependent => :destroy}, -> {order(:id)}
   accepts_nested_attributes_for :fields, :allow_destroy => true
   belongs_to :layout
   belongs_to :created_by, :class_name => 'User'
@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
   validates_length_of :slug, :maximum => 100
   validates_length_of :breadcrumb, :maximum => 160
 
-  validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}
+  validates_format_of :slug, :with => %r{\A([-_.A-Za-z0-9]*|/)\z}
   validates_uniqueness_of :slug, :scope => :parent_id
 
   validate :valid_class_name

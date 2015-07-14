@@ -23,8 +23,9 @@ a general purpose content managment system--not merely a blogging engine.}
   s.summary = %q{A no-fluff content management system designed for small teams.}
   s.license = %q{MIT}
 
-  s.add_dependency "tzinfo",          "~> 0.3"
-  s.add_dependency "rails",           "~> 3.2"
+  s.add_dependency "tzinfo",          "~> 1.2"
+  s.add_dependency "rails",           "~> 4.2"
+  s.add_dependency "protected_attributes", '~> 1.0.9'
   s.add_dependency "jquery-rails",    "~> 3.1"
   s.add_dependency "rdoc",            "~> 3.9"
   s.add_dependency "acts_as_tree",    "~> 2.1"
@@ -32,7 +33,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "compass-rails",   "~> 2.0"
   s.add_dependency "delocalize",      "~> 0.2"
   s.add_dependency "haml",            "~> 4.0"
-  s.add_dependency "haml-rails",      ">= 0.4", "< 0.5" # 0.5 is rails 4+ only
+  s.add_dependency "haml-rails",      "~> 0.5" # 0.5 is rails 4+ only
   s.add_dependency "highline",        "~> 1.6"
   s.add_dependency "mysql",           "~> 2.9"
   s.add_dependency "rack",            "~> 1.4"

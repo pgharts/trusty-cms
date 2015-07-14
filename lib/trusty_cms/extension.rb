@@ -108,8 +108,10 @@ module TrustyCms
       def activate_extension
         return if instance.active?
         instance.activate if instance.respond_to? :activate
-        TrustyCms::Application.config.paths["config/routes"].concat([instance.routing_file]) if instance.routed?
-        TrustyCms::Application.reload_routes!
+        Dir["#{Rails.root}/config/routes/**/*.rb"].each do |route_file|
+          #config.paths["config/routes"] << route_file if instance.routed?
+        end
+        #TrustyCms::Application.reload_routes!
         instance.active = true
       end
       alias :activate :activate_extension

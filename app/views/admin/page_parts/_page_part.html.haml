@@ -8,8 +8,6 @@
         = "To use HTML or Radius tags, switch to plain text view by clicking the 'Source' button."
       %span.reference_links
         = t('reference')
-        %span{:id => "filter_reference_link_#{page_part.name.to_slug}"}
-          = link_to_function t('filter'), "loadFilterReference('#{page_part.name.to_slug}');"
         %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
           = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
       = render_region :part_controls, :locals => {:page_part => page_part}

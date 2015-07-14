@@ -148,10 +148,10 @@ module TrustyCms
     def initialize_framework_views
       view_paths = extension_loader.paths(:view) #.push(TrustyCms::Application.config.view_path)
       if ActionController::Base.view_paths.count == 0 || !ActionView::Base.cache_template_loading
-        ActionController::Base.view_paths = ActionView::Base.process_view_paths(view_paths)
+        ActionController::Base.view_paths = ActionView::PathSet.new(Array.wrap(view_paths))
       end
       if ActionMailer::Base.view_paths.count == 0 || !ActionView::Base.cache_template_loading
-        ActionMailer::Base.view_paths = ActionView::Base.process_view_paths(view_paths)
+        ActionMailer::Base.view_paths = ActionView::PathSet.new(Array.wrap(view_paths))
       end
     end
 

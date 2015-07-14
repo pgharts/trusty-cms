@@ -2,7 +2,7 @@ class Layout < ActiveRecord::Base
   attr_protected :created_at, :updated_at
 
   # Default Order
-  default_scope :order => "name"
+  default_scope {order("name")}
 
   # Associations
   has_many :pages
