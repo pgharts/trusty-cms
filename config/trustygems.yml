@@ -1,0 +1,3 @@
+gemspec: trusty_cms.gemspec
+# If using a private server, change this to the necessary command, i.e. gem inabox
+deploy_command: gem push

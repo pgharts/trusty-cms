@@ -7,6 +7,8 @@ source 'https://rubygems.org'
 # requires radiant and therefore pulls in every
 # dependency mentioned in radiant.gemspec.
 
+gem 'trustygems', '~> 0.0.1'
+
 gemspec
 
 # When trusty is installed as a gem you can run all of

@@ -5,3 +5,4 @@
 require File.expand_path('../config/application', __FILE__)
 STDOUT.sync = true
 TrustyCms::Application.load_tasks
+require 'trustygems'

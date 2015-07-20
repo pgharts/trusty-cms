@@ -2,18 +2,6 @@ TRUSTY_CMS_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "..")) unle
 
 unless defined? TrustyCms::Version
   module TrustyCms
-    module Version
-      Major = '1'
-      Minor = '2'
-      Tiny  = '29'
-      Patch = nil # set to nil for normal release
-
-      class << self
-        def to_s
-          [Major, Minor, Tiny, Patch].delete_if{|v| v.nil? }.join('.')
-        end
-        alias :to_str :to_s
-      end
-    end
+    VERSION = "2.0.0-beta"
   end
 end

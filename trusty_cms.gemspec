@@ -2,7 +2,7 @@
 require File.expand_path(__FILE__ + '/../lib/trusty_cms.rb')
 Gem::Specification.new do |s|
   s.name = %q{trusty-cms}
-  s.version = TrustyCms::Version.to_s
+  s.version = TrustyCms::VERSION
   s.platform = Gem::Platform::RUBY
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
