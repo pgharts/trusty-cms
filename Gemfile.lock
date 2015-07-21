@@ -260,7 +260,7 @@ GEM
     thread_safe (0.3.5)
     thread_safe (0.3.5-java)
     tilt (1.4.1)
-    trustygems (0.0.6)
+    trustygems (0.1.0)
       rake
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -291,4 +291,4 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0)
   thin (~> 1.6.2)
   trusty-cms!
-  trustygems (~> 0.0.1)
+  trustygems (~> 0.1.0)
