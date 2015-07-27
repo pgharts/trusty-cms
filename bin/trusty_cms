@@ -9,7 +9,7 @@ Signal.trap("INT") { puts; exit }
 
 require 'trusty_cms'
 if ARGV.any? { |arg| %w(--version -v).any? { |flag| arg == flag } }
-  puts "TrustyCms #{TrustyCms::Version}"
+  puts "TrustyCms #{TrustyCms::VERSION}"
   exit 0
 end
 

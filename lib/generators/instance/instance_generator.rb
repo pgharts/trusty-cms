@@ -92,7 +92,7 @@ class InstanceGenerator < Rails::Generator::Base
 
       # Instance Gemfile
       m.template "instance_gemfile", "Gemfile", :assigns => {
-        :radiant_version => TrustyCms::Version.to_s,
+        :radiant_version => TrustyCms::VERSION.to_s,
         :db => options[:db]
       }
 

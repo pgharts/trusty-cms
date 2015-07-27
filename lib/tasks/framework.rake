@@ -128,7 +128,7 @@ unless File.directory? "#{Rails.root}/app"
         active_db_gem = db_gems.keys.find { |g| Gem.loaded_specs[g] } || 'sqlite3'
 
         File.open(tmpfile, 'w') do |f|
-          radiant_version = TrustyCms::Version.to_s
+          radiant_version = TrustyCms::VERSION.to_s
           db = db_gems[active_db_gem]
           f.write ERB.new(File.read(genfile)).result(binding)
         end
@@ -187,7 +187,7 @@ A Gemfile has been created in your application directory. If you have config.gem
         [:env, :development, :test, :cucumber, :production].each do |env_file|
           File.open(tmps[env_file], 'w') do |f|
             app_name        = File.basename(File.expand_path(Rails.root))
-            radiant_version = TrustyCms::Version.to_s
+            radiant_version = TrustyCms::VERSION.to_s
             f.write ERB.new(File.read(gens[env_file])).result(binding)
           end
           unless File.exist?(instances[env_file]) && FileUtils.compare_file(instances[env_file], tmps[env_file])
