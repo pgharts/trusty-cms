@@ -10,7 +10,7 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "title", :string
       t.column "slug", :string, :limit => 100
       t.column "breadcrumb", :string, :limit => 160
-      t.column "behavior", :string, :limit => 25
+      t.column "class_name", :string, :limit => 25
       t.column "status_id", :integer, :default => 1, :null => false
       t.column "parent_id", :integer
       t.column "layout_id", :integer
