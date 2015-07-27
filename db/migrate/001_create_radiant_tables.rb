@@ -53,8 +53,8 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "email", :string
       t.column "login", :string, :limit => 40, :default => "", :null => false
       t.column "password", :string, :limit => 40
-      t.column "admin", :integer, :limit => 1, :default => 0, :null => false
-      t.column "developer", :integer, :limit => 1, :default => 0, :null => false
+      t.column "admin", :boolean, :default => false, :null => false
+      t.column "developer", :boolean, :default => false, :null => false
       t.column "created_at", :datetime
       t.column "updated_at", :datetime
       t.column "created_by", :integer
