@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (2.0.2.pre.beta)
+    trusty-cms (2.0.3.pre.beta)
       RedCloth (~> 4.2)
       acts_as_tree (~> 2.1)
       bundler (~> 1.7)
