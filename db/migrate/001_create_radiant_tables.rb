@@ -59,6 +59,7 @@ class CreateRadiantTables < ActiveRecord::Migration
       t.column "updated_at", :datetime
       t.column "created_by", :integer
       t.column "updated_by", :integer
+      t.column "salt", :string
     end
     add_index "users", ["login"], :name => "login", :unique => true
 
