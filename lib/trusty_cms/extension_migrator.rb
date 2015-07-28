@@ -84,13 +84,12 @@ module TrustyCms
 
       def record_version_state_after_migrating(version)
         sm_table = self.class.schema_migrations_table_name
-
         @migrated_versions ||= []
         if down?
           @migrated_versions.delete(version.to_i)
           ActiveRecord::Base.connection.update("DELETE FROM #{sm_table} WHERE version = #{quote(version_string(version))}")
         else
-          @migrated_versions.push(version.to_i).sort!
+          @migrated_versions.add(version.to_i)
           ActiveRecord::Base.connection.insert("INSERT INTO #{sm_table} (version) VALUES (#{quote(version_string(version))})")
         end
       end
