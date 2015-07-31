@@ -198,6 +198,7 @@ module TrustyCms
           index.bottom.concat %w{new_button}
         end
         user.new = user.edit
+        user.remove = user.edit
       end
     end
 
@@ -215,6 +216,7 @@ module TrustyCms
           index.bottom.concat %w{new_button}
         end
         layout.new = layout.edit
+        layout.remove = layout.edit
       end
     end
 
