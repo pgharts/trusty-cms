@@ -19,7 +19,7 @@
   color: mix($header, white, 15%);
   font-size: 80%;
   float: right;
-  padding: 15px 10px 0 5px;
+  padding: 12px 10px 0 5px;
   height: 16px;
   a {
     color: white;
@@ -104,8 +104,7 @@ ul#secondary_navigation {
   li {
     float: left;
     display: block;
-    background: image-url("admin/navigation_secondary_separator.gif") bottom right no-repeat;
-    padding-right: 2px;
+    border-right: 1px solid #d3d3d3;
     a {
       color: #555555;
       display: block;
