@@ -25,9 +25,16 @@ table.fieldset {
 }
 
 body.reversed {
+  fieldset h1 {
+    font-size: 1.5em;
+  }
+  .edit_header{
+    font-size: 2.5em;
+  }
   h1 {
-    border-bottom: 1px solid #ababab;
-    background: #7e7e7e;
+    color: #94BDC3;
+    border-bottom: 1px solid #94BDC3;
+    background: #fff;
     font-size: 125%;
     margin: -20px -20px 20px;
     padding: 15px 20px;

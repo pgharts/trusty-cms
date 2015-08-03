@@ -88,7 +88,7 @@
       font-size: 80%;
       margin: 2.5em 0 1em;
       button, input.button {
-        font-size: 150%;
+        font-size: 1.25em;
       }
       a {
         @include alt-link;
@@ -298,7 +298,7 @@ body.reversed {
         @include alt-box;
       }
       fieldset {
-        background: #858585;
+        background: #fff;
         padding: 20px 15px;
         margin-bottom: 20px;
         overflow: hidden;
@@ -320,7 +320,13 @@ body.reversed {
       color: #eeeeee;
     }
     textarea {
-      border: 1px solid white;
+      border: 1px solid #EAEAEA;
+    }
+    input:focus, textarea:focus{
+      border: 2px inset #EC0673;
+      -webkit-box-shadow: 0 0 10px #EC4091;
+      -moz-box-shadow: 0 0 10px #EC4091;
+      box-shadow: 0 0 10px #EC4091;
     }
     .box {
       @include single-box-shadow(rgba(0, 0, 0, 0.15), 2px, 2px, 3px);
