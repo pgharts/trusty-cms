@@ -54,22 +54,11 @@ div.popup {
   }
   .buttons {
     border-top: 1px solid #e5e5e5;
-    background: whitesmoke;
-    font-size: 85%;
-    margin: 1.5em -20px -10px;
-    padding: 10px;
     text-align: right;
     input.button {
       font-size: 120%;
     }
     button {
-      font-size: 110%;
-      padding: 4px 15px 5px;
-      background: whitesmoke;
-      border: 1px solid #959595;
-      @include border-radius(100px);
-      @include single-box-shadow(white, 0, 2px, 0, inset);
-      @include linear-gradient(color-stops(#dddddd 0%, #eeeeee 15%, white 100%));
       &.default {
         border: 1px solid #154ca6;
         @include single-box-shadow(#c7e0f6, 0, 2px, 1px, inset);

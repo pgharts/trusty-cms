@@ -22,6 +22,7 @@
           font-size: 95%;
           text-shadow: none;
           margin-right: 1em;
+          text-align: left;
         }
         &.multi_option {
           margin-bottom: 0.3em;
@@ -51,7 +52,6 @@
         text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
       }
       a {
-        color: white;
         &.action {
           background-color: #7e7e7e;
           font-size: 75%;
@@ -83,17 +83,6 @@
         margin: 0 1em 0 0;
       }
     }
-    .buttons {
-      color: #666666;
-      font-size: 80%;
-      margin: 2.5em 0 1em;
-      button, input.button {
-        font-size: 1.25em;
-      }
-      a {
-        @include alt-link;
-      }
-    }
   }
 }
 
@@ -103,7 +92,7 @@
 }
 
 .drawer_contents {
-  background: #7e7e7e;
+  background: #c9c9c9;
   @include border-bottom-right-radius(6px);
   margin: 0;
   margin-right: 2px;
@@ -282,9 +271,8 @@ body.reversed {
     form {
       p {
         label {
-          color: whitesmoke;
+          color: #B9B9B9;
           font-weight: normal;
-          text-shadow: 1px 1px 0 #888888;
           .hint {
             display: inline;
           }
@@ -322,11 +310,15 @@ body.reversed {
     textarea {
       border: 1px solid #EAEAEA;
     }
-    input:focus, textarea:focus{
-      border: 2px inset #EC0673;
-      -webkit-box-shadow: 0 0 10px #EC4091;
-      -moz-box-shadow: 0 0 10px #EC4091;
-      box-shadow: 0 0 10px #EC4091;
+    input:not([type=submit]):focus, textarea:focus {
+      border: 1px #EC65A5;
+      -webkit-box-shadow: 0 0 10px #EC65A5;
+      -moz-box-shadow: 0 0 10px #EC65A5;
+      box-shadow: 0 0 10px #EC65A5;
+      outline: 0;
+    }
+    input[type=checkbox] {
+      border-radius: 5px;
     }
     .box {
       @include single-box-shadow(rgba(0, 0, 0, 0.15), 2px, 2px, 3px);
@@ -421,5 +413,39 @@ body.edit_user, body.edit_personal_preferences {
       color: #e5e5e5;
       line-height: 1.3;
     }
+  }
+}
+
+.button, button, input[type=button], input[type=submit] {
+  -webkit-appearance: none;
+  font-size: 1.1em;
+  padding: .5em 3em;
+  margin: 0 1em;
+  color: #f3f3f3;
+  background-color: #94BDC3;
+  border: 2px outset buttonface;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  &:hover, .hover {
+    color: #94BDC3;
+    background-color: #f3f3f3;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+  }
+  &:hover > .fa {
+    color: #94BDC3;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+  }
+  .fa {
+    color: #f3f3f3;
   }
 }

@@ -8,7 +8,7 @@
 
 @mixin alt-link {
   color: $alt-link-color;
-  text-decoration: underline;
+  text-decoration: none;
   &:hover {
     text-decoration: none;
   }

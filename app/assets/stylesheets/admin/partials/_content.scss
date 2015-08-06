@@ -28,8 +28,8 @@ body.reversed {
   fieldset h1 {
     font-size: 1.5em;
   }
-  .edit_header{
-    font-size: 2.5em;
+  #content > h1:first-of-type {
+    font-size: 2em;
   }
   h1 {
     color: #94BDC3;

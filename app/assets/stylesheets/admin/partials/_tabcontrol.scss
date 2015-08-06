@@ -7,7 +7,7 @@
     margin-right: -4px;
     .tab {
       background-color: #e4e4e4;
-      color: #EC65A5;
+      color: black;
       display: inline-block;
       font-size: 90%;
       text-align: left;
@@ -18,11 +18,11 @@
       @include border-top-radius(6px);
       &.here {
         background-color: white;
-        color: #EC0673;
+        color: #737272;
         font-weight: bold;
       }
       span:hover {
-        color: #EC0673;
+        color: #737272;
       }
       .close {
         margin-top: -4px;

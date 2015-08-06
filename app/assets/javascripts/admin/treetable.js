@@ -25,14 +25,15 @@ $(function() {
     },
     onNodeExpand: function() {
       var node = this;
+      var spinner = $($(node.row[0]).find(".busy")[0]);
+      spinner.show();
       persistStore.set(node.id, 'expanded');
       // Render loader/spinner while loading
       $.ajax({
-        async: false, // Must be false, otherwise loadBranch happens after showChildren?
+        async: true, // Must be false, otherwise loadBranch happens after showChildren?
         url: "/admin/pages/" + node.row.data('ttPageId') + "/children?index=" + node.id
       }).done(function(html) {
         var rows = $(html).filter("tr");
-
 
         $("#pages").treetable("loadBranch", node, rows);
         $.each(node.children, function() {
@@ -44,6 +45,7 @@ $(function() {
         $('a.dropdown').each(function(){
           Dropdown.setup(this);
         });
+        spinner.hide();
       });
     }
   });
