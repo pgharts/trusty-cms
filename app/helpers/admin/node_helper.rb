@@ -1,18 +1,18 @@
 module Admin::NodeHelper
 
-  def render_nodes(page, starting_index, parent_index = nil)
+  def render_nodes(page, starting_index, parent_index = nil, simple = false)
     @rendered_html = ""
-    render_node page, starting_index, parent_index
+    render_node page, starting_index, parent_index, simple
     @rendered_html
   end
 
-  def render_node(page, index, parent_index = nil)
+  def render_node(page, index, parent_index = nil, simple = false)
 
     @current_node = prepare_page(page)
 
     @rendered_html += (render :partial => 'admin/pages/node',
                               :locals =>  {level: index, index: index, parent_index: parent_index,
-                                           page: page, simple: false, branch: (page.children.count > 0) })
+                                           page: page, simple: simple, branch: (page.children.count > 0) })
     index
   end
 

@@ -19,23 +19,23 @@
     }
   }
 
+    TabControl.selectTab = function(id) {
+        id = id.replace(/^tab_/, '').replace(/^page_/, '');
+        var underscored_id = id.replace(/_/g, "-");
+        var $pages = $('div#tab_control .pages .page');
+        var $tabs  = $('div#tab_control .tabs .tab');
+
+        $pages.hide();
+        $tabs.removeClass('here');
+
+        $pages.filter('#page_' + underscored_id).show();
+        $tabs.filter('#tab_' + id).addClass('here');
+    }
+
   TabControl.addTab = function(tabText) {
     $('div#tab_control .tabs').append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><img src='" + relative_url_root + "<%= asset_path('admin/tab_close.png') %>' class='close' alt='Remove part' title='Remove part' /></a>");
     var $page_part_index = $('#page_part_index_field');
     $page_part_index.val(parseInt($page_part_index.val()) + 1);
-  }
-
-  TabControl.selectTab = function(id) {
-    id = id.replace(/^tab_/, '').replace(/^page_/, '');
-    var underscored_id = id.replace(/_/g, "-");
-    var $pages = $('div#tab_control .pages .page');
-    var $tabs  = $('div#tab_control .tabs .tab');
-
-    $pages.hide();
-    $tabs.removeClass('here');
-
-    $pages.filter('#page_' + underscored_id).show();
-    $tabs.filter('#tab_' + id).addClass('here');
   }
 
   TabControl.removeTab = function(id) {
