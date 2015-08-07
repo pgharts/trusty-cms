@@ -11,7 +11,7 @@
         }
       )
     }
-  }
+  };
 
   PageEdit.partAdded = function (tabId) {
     $('#add_part_busy').hide();
@@ -20,12 +20,12 @@
     $('#part_name_field').val('');
     TabControl.updateTabsBasedOnPages();
     TabControl.selectTab($('div#tab_control .tabs .tab').last().attr('id'));
-  }
+  };
 
   PageEdit.partLoading = function () {
     $('#add_part_button').attr('disabled', true);
     $('#add_part_busy').show();
-  }
+  };
 
   PageEdit.validPartName = function () {
     var partNameField = $('#part_name_field');

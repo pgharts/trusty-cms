@@ -15,7 +15,7 @@
         TabControl.removeTab($(this).closest('.tab').attr('id'));
       });
 
-      TabControl.selectTab($pages.first().attr('id'));
+      TabControl.selectTab($pages.first().attr('id').replace(/-/, "_"));
     }
   }
 
@@ -27,7 +27,7 @@
 
   TabControl.selectTab = function(id) {
     id = id.replace(/^tab_/, '').replace(/^page_/, '');
-    var underscored_id = id.replace("_", "-");
+    var underscored_id = id.replace(/_/g, "-");
     var $pages = $('div#tab_control .pages .page');
     var $tabs  = $('div#tab_control .tabs .tab');
 
