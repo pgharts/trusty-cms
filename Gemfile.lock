@@ -291,3 +291,6 @@ DEPENDENCIES
   thin (~> 1.6.2)
   trusty-cms!
   trustygems (~> 0.1.0)
+
+BUNDLED WITH
+   1.10.5
