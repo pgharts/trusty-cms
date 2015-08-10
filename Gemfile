@@ -42,4 +42,6 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist',      '~> 1.5.1'
   gem "ckeditor",        "~> 4.1.0"
+  gem 'rails-observers'
+  gem "protected_attributes"
 end

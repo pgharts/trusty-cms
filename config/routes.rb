@@ -35,4 +35,5 @@ TrustyCms::Application.routes.draw do
   get 'error/404' => 'site#not_found', :as => :not_found
   get 'error/500' => 'site#error', :as => :error
   get '*url' => 'site#show_page'
+
 end

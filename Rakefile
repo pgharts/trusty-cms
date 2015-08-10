@@ -3,6 +3,5 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-STDOUT.sync = true
+#STDOUT.sync = true
 TrustyCms::Application.load_tasks
-require 'trustygems'
