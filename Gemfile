@@ -7,7 +7,7 @@ source 'https://rubygems.org'
 # requires radiant and therefore pulls in every
 # dependency mentioned in radiant.gemspec.
 
-gem 'trustygems', '~> 0.1.0', path: "../trustygems"
+gem 'trustygems', '~> 0.2.0'
 
 gemspec
 
