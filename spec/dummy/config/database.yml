@@ -1,0 +1,28 @@
+#
+# This is only an example configuration. Please see the Rails
+# documentation for more details.
+#
+
+development:
+  adapter: mysql
+  database: trusty_cms_dev
+  username: root
+  password:
+  host: localhost
+
+test: &TEST
+  adapter: mysql
+  database: trusty_cms_test
+  username: root
+  password:
+  host: localhost
+
+production:
+  adapter: mysql
+  database: trusty_cms_live
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+cucumber:
+  <<: *TEST

@@ -7,7 +7,7 @@ source 'https://rubygems.org'
 # requires radiant and therefore pulls in every
 # dependency mentioned in radiant.gemspec.
 
-gem 'trustygems', '~> 0.1.0'
+gem 'trustygems', '~> 0.1.0', path: "../trustygems"
 
 gemspec
 
@@ -42,6 +42,8 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist',      '~> 1.5.1'
   gem "ckeditor",        "~> 4.1.0"
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'rails-observers'
   gem "protected_attributes"
+  gem "pry-byebug"
 end

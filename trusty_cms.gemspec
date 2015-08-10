@@ -22,6 +22,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A no-fluff content management system designed for small teams.}
   s.license = %q{MIT}
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "tzinfo",          "~> 1.2"
   s.add_dependency "rails",           "~> 4.2"
