@@ -24,5 +24,4 @@ branches:
 notifications:
   recipients:
     - sipple@trustarts.org
-  notifications:
-    slack: trustarts:FrVc7H8dDadhctfZ7NvHTZES
+  slack: trustarts:FrVc7H8dDadhctfZ7NvHTZES
