@@ -35,7 +35,6 @@ describe 'Pages' do
     it 'lets you edit the homepage' do
       click_link 'Voyager Home'
 
-      expect(page).to have_content 'Edit Page'
       expect(page).to have_field 'Page Title', with: 'Voyager Home'
       expect(page).to have_button 'Save Changes'
       expect(page).to have_content 'Last Updated by Kathryn Janeway'
