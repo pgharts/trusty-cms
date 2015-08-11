@@ -63,9 +63,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
   end
 
   desc "Migrate the database through all available migration scripts (looks for db/migrate/* in trusty-cms, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
-  task :migrate => :environment do
-    Rake::Task['db:migrate:trusty_cms'].invoke
-    Rake::Task['db:migrate:extensions'].invoke
+  task :migrate => [:environment, 'db:migrate:trusty_cms', 'db:migrate:extensions'] do
     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
     ActiveRecord::Migrator.migrate("db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
     Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby

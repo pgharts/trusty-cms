@@ -104,15 +104,15 @@ ActiveRecord::Schema.define(version: 20120209231801) do
     t.string   "email",         limit: 255
     t.string   "login",         limit: 40,    default: "",    null: false
     t.string   "password",      limit: 40
-    t.boolean  "admin",                       default: false, null: false
-    t.boolean  "designer",                    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id", limit: 4
     t.integer  "updated_by_id", limit: 4
-    t.string   "salt",          limit: 255
+    t.boolean  "admin",                       default: false, null: false
+    t.boolean  "designer",                    default: false, null: false
     t.text     "notes",         limit: 65535
     t.integer  "lock_version",  limit: 4,     default: 0
+    t.string   "salt",          limit: 255
     t.string   "session_token", limit: 255
     t.string   "locale",        limit: 255
   end

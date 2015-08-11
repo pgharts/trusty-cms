@@ -11,6 +11,7 @@ services: mysql
 before_script:
   - cp spec/ci/database.mysql.yml config/database.yml;
   - bundle exec rake app:db:create
+  - bundle exec rake app:db:migrate
 
 
 script:
