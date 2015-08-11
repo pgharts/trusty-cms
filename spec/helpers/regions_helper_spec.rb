@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Admin::RegionsHelper do
+RSpec.describe Admin::RegionsHelper, type: :helper do
 
   describe "#render_region" do
 

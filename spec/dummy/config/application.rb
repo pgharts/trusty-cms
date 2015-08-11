@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'acts_as_tree'
+require "trusty_cms"
 require 'ckeditor'
 require 'radius'
 require 'trusty_cms/extension_loader'
@@ -21,25 +22,6 @@ end
 
 module TrustyCms
   class Application < Rails::Application
-
-    attr_accessor :captcha_public_key, :captcha_private_key
-    attr_accessor :extensions_migration_order
-    attr_accessor :tessitura_service_url
-    attr_accessor :assets_copy_cap_stage
-    attr_accessor :mock_server
-    attr_accessor :parking_season_type_ids
-    attr_accessor :server_ip_address
-    attr_accessor :facility_root
-    attr_accessor :contact_us_root
-    attr_accessor :custom_form_root
-    attr_accessor :guest_user
-    attr_accessor :javascript_include_base_path
-    attr_accessor :production_sync_interval, :package_sync_interval, :google_map_key
-    attr_accessor :order_expiration_time
-    attr_accessor :skip_captcha_environments
-    attr_accessor :domain
-    attr_accessor :test_email_recipients
-
     include TrustyCms::Initializer
 
     config.autoload_paths += %W(#{TRUSTY_CMS_ROOT}/lib)
@@ -56,6 +38,7 @@ module TrustyCms
       $LOAD_PATH.unshift path
     end
     # config.add_plugin_paths(extension_loader.paths(:plugin))
+    # TODO: Come back and look at this.
     radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
     config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
 
@@ -77,9 +60,6 @@ module TrustyCms
     # By default, only English translations are loaded. Remove any of these from
     # the list below if you'd like to provide any of the additional options
     # config.ignore_extensions []
-
-    config.captcha_public_key = "6LcbvwsAAAAAACQjq3ZNqqBuDIHUR6gUthjhT9_Z"
-    config.captcha_private_key = "6LcbvwsAAAAAALftkG9kwwqbPCeThnSOyn-TK8n5"
 
     # Your secret key for verifying cookie session data integrity.
     # If you change this key, all old sessions will become invalid!
@@ -106,6 +86,17 @@ module TrustyCms
     #    Sets the meta store type and storage location.  We recommend you use
     #    radiant: since this will enable manual expiration and acceleration headers.
 
+    # TODO: We're not sure this is actually working, but we can't really test this until the app initializes.
+    config.middleware.use Rack::Cache,
+                          :private_headers => ['Authorization'],
+                          :entitystore => "radiant:tmp/cache/entity",
+                          :metastore => "radiant:tmp/cache/meta",
+                          :verbose => false,
+                          :allow_reload => false,
+                          :allow_revalidate => false
+    # TODO: There's got to be a better place for this, but in order for assets to work fornow, we need ConditionalGet
+    # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
+    config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
 
 
@@ -153,13 +144,6 @@ module TrustyCms
       ActiveSupport::Inflector.inflections do |inflect|
         inflect.uncountable 'config'
       end
-
-      # TODO: Remove in 1.0
-      #Savon.configure do |savon_config|
-      #  savon_config.log = false
-      #  savon_config.env_namespace = :soap
-      #end
-      #HTTPI.log = false
 
     end
   end

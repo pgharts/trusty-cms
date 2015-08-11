@@ -2,7 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require 'rspec/rails'
-
+require 'capybara/rails'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
