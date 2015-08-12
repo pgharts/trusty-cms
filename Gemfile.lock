@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (2.0.9.pre.beta)
+    trusty-cms (2.0.10.pre.beta)
       RedCloth (~> 4.2)
       acts_as_tree (~> 2.1)
       bundler (~> 1.7)
@@ -273,7 +273,7 @@ GEM
     thread_safe (0.3.5)
     thread_safe (0.3.5-java)
     tilt (1.4.1)
-    trustygems (0.2.0)
+    trustygems (0.2.1)
       rake
     tzinfo (1.2.2)
       thread_safe (~> 0.1)

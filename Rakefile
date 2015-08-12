@@ -8,6 +8,7 @@
 
 require 'pry'
 require 'byebug'
+require 'trustygems'
 
 #!/usr/bin/env rake
 begin
