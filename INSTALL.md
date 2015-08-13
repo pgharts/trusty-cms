@@ -1,12 +1,14 @@
 # Installation and Setup
 
-From within the directory containing your TrustyCms instance:
+From within the directory containing your TrustyCMS instance:
 
-1. Create a new Rails 3 application (i.e. `rails new [project_name]`)
+1. Create a new Rails 4 application (i.e. `rails new [project_name]`)
 
-2. Replace most of your gemfile with these gems:
-   - `gem "trusty-cms", "~>1.1.0`
-   - `gem "mysql", "~> 2.9.1"`
+2. Replace most of your Gemfile with these gems:
+  - gem "trusty-cms", "~>2.0.0-beta"
+  - gem "mysql2"
+  - gem 'rails-observers'
+  - gem 'protected_attributes'
 
 3. Run `bundle install`
 
@@ -14,4 +16,3 @@ From within the directory containing your TrustyCms instance:
    - This will ask you if you want to replace a number of existing files (like application.rb); reply Y to all.
 
 5. Run `bundle exec rake db:create`, then `bundle exec rake db:bootstrap`.
-
