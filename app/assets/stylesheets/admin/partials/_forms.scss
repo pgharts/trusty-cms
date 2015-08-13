@@ -16,7 +16,8 @@
     p {
       label {
         display: block;
-        &.checkbox, &.radio {
+        &.checkbox,
+        &.radio {
           display: inline;
           font-weight: normal;
           font-size: 95%;
@@ -33,7 +34,8 @@
         font-size: 140%;
         margin-bottom: 0;
       }
-      input.checkbox, input.radio {
+      input.checkbox,
+      input.radio {
         margin-top: 0.3em;
       }
       textarea {
@@ -110,7 +112,8 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    th, td {
+    th,
+    td {
       border-top: 1px #999999 solid;
       padding: 6px;
     }
@@ -142,7 +145,8 @@
       }
     }
     tr:first-child {
-      td, th {
+      td,
+      th {
         border-top: none;
       }
     }
@@ -164,7 +168,9 @@
     text-shadow: #666666 1px 1px 0;
     text-decoration: none;
     @include border-bottom-radius(6px);
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       text-decoration: underline;
     }
     &.more {
@@ -189,7 +195,9 @@
     position: relative;
   }
   &:before {
-    @include linear-gradient(color-stops(white, #f5f1e2 50%, #f5f1e2));
+    @include linear-gradient(color-stops(white,
+    #f5f1e2 50%,
+    #f5f1e2));
     @include border-top-radius(10px);
     content: "\0020";
     display: block;
@@ -290,7 +298,10 @@ body.reversed {
         padding: 20px 15px;
         margin-bottom: 20px;
         overflow: hidden;
-        @include single-box-shadow(#ababab, 1px, 1px, 0);
+        @include single-box-shadow(#ababab,
+        1px,
+        1px,
+        0);
         @include border-radius(8px);
         h3 {
           font-weight: bold;
@@ -310,7 +321,8 @@ body.reversed {
     textarea {
       border: 1px solid #EAEAEA;
     }
-    input:not([type=submit]):focus, textarea:focus {
+    input:not([type=submit]):focus,
+    textarea:focus {
       border: 1px #EC65A5;
       -webkit-box-shadow: 0 0 10px #EC65A5;
       -moz-box-shadow: 0 0 10px #EC65A5;
@@ -321,7 +333,13 @@ body.reversed {
       border-radius: 5px;
     }
     .box {
-      @include single-box-shadow(rgba(0, 0, 0, 0.15), 2px, 2px, 3px);
+      @include single-box-shadow(rgba(0,
+      0,
+      0,
+      0.15),
+      2px,
+      2px,
+      3px);
     }
   }
 }
@@ -330,7 +348,9 @@ body.single_form {
   #content {
     #single_form {
       background: #f5f1e2;
-      @include linear-gradient(color-stops(#fdfcf9, #f5f1e2 25%, #f5f1e2));
+      @include linear-gradient(color-stops(#fdfcf9,
+      #f5f1e2 25%,
+      #f5f1e2));
       border: 0.35em solid #efead3;
       padding: 0.5em 1.5em;
       padding-right: 22px;
@@ -343,7 +363,8 @@ body.single_form {
       }
       p {
         font-size: 90%;
-        &.intro, &.error {
+        &.intro,
+        &.error {
           font-size: 100%;
           line-height: 1.4;
         }
@@ -402,7 +423,8 @@ body.single_form {
   }
 }
 
-body.edit_user, body.edit_personal_preferences {
+body.edit_user,
+body.edit_personal_preferences {
   #avatar {
     left: 26em;
     position: absolute;
@@ -416,14 +438,21 @@ body.edit_user, body.edit_personal_preferences {
   }
 }
 
-.button, button, input[type=button], input[type=submit] {
+.button,
+button,
+input[type=button],
+input[type=submit],
+input[type=file] {
+  .fa {
+    color: #f3f3f3;
+  }
   -webkit-appearance: none;
   font-size: 1.1em;
   padding: .5em 3em;
   margin: 0.5em;
   color: #f3f3f3;
   background-color: #94BDC3;
-  border: 2px outset buttonface;
+  border: 0;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -444,9 +473,6 @@ body.edit_user, body.edit_personal_preferences {
     -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
-  }
-  .fa {
-    color: #f3f3f3;
   }
 }
 

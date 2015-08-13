@@ -57,7 +57,7 @@
       = save_model_and_continue_editing_button(@page)
       = submit_tag(t('preview', :default => 'Preview'), :class => 'button', :id => 'show-preview')
       = t('or')
-      = link_to t('cancel'), admin_pages_url
+      = link_to t('cancel'), admin_pages_url, class: 'alt'
     #preview_panel.fullcover.grey_out{:style => 'display: none;'}
       %iframe{:id => 'page-preview', :class => 'fullcover', :name => 'page-preview', :src =>  ActionController::Base.relative_url_root.to_s + '/loading-iframe.html', :frameborder => 0, :scrolling => "auto"}
       .preview_tools

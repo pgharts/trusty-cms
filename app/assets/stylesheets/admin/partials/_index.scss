@@ -35,7 +35,8 @@ table.index {
     text-align: left;
     padding: 4px 9px;
     border-top: 1px solid #f0f0f0;
-    a.action, span.action.disabled {
+    a.action,
+    span.action.disabled {
       padding: 6px;
       margin: 0 25px 0 1px;
       img {
@@ -95,7 +96,8 @@ table.index {
     &:first-child {
       border-top: 1px solid white;
     }
-    &.hover, &:hover {
+    &.hover,
+    &:hover {
       td {
         border-top: 1px solid #d5f0ff;
         border-bottom: 1px solid #c5dff5;
@@ -105,7 +107,8 @@ table.index {
     }
   }
   thead {
-    tr, tr:first-child {
+    tr,
+    tr:first-child {
       border-top: none;
     }
   }

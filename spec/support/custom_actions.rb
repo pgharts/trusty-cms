@@ -7,3 +7,11 @@ def log_in_as(login, plaintext_password = 'password')
   fill_in 'password', with: plaintext_password
   click_on 'Login'
 end
+
+def fill_in_ckeditor(locator, opts)
+  content = opts.fetch(:with).to_json
+  page.execute_script <<-SCRIPT
+    CKEDITOR.instances['#{locator}'].setData(#{content});
+    $('textarea##{locator}').text(#{content});
+  SCRIPT
+end
