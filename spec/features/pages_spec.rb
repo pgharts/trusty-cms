@@ -32,13 +32,6 @@ describe 'Pages' do
       visit '/admin/pages'
     end
     
-#    it 'lets you edit the page body' do
-#      click_link 'Voyager Home'
-#      fill_in_ckeditor 'part_body_content', with: 'BODY CONTENT'
-#      expect(page).to have_content  'BODY CONTENT'
-#    end
-    
-    
     
     it 'lets you edit the homepage' do
       click_link 'Voyager Home'
