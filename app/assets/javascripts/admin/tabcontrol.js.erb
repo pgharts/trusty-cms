@@ -21,7 +21,7 @@
 
     TabControl.selectTab = function(id) {
         id = id.replace(/^tab_/, '').replace(/^page_/, '');
-        var underscored_id = id.replace(/_/g, "-");
+        var underscored_id = id.replace(/_/g, "-").toLowerCase();
         var $pages = $('div#tab_control .pages .page');
         var $tabs  = $('div#tab_control .tabs .tab');
 
@@ -39,8 +39,8 @@
   }
 
   TabControl.removeTab = function(id) {
-    id = id.replace(/^tab_/, '').replace(/^page_/, '');
-    var underscored_id = id.replace("_", "-");
+    id = id.replace(/^tab_/, '').replace(/^page_/, '').toLowerCase();
+    var underscored_id = id.replace("_", "-").toLowerCase();
     if(confirm('Remove the "' + id + '" part?')) {
       var $pages = $('div#tab_control .pages .page');
       var $tabs  = $('div#tab_control .tabs .tab');
