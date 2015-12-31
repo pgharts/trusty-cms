@@ -20,8 +20,8 @@ gem "compass-rails", "~> 1.0.3"
 # SQLite is the default database connection but only suitable for local use
 <%= '# ' unless db == 'sqlite3' %>gem "sqlite3", "~> 1.3.5"
 
-# To use MySQL
-<%= '# ' unless db == 'mysql' %>gem "mysql", "~> 2.8.1"
+# To use MySQL2
+<%= '# ' unless db == 'mysql2' %>"mysql2", "~> 0.4.2"
 
 # Postgres
 <%= '# ' unless db == 'postgresql' %>gem "pg", "~> 0.11.0"

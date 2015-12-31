@@ -120,7 +120,7 @@ unless File.directory? "#{Rails.root}/app"
 
         db_gems = {
           'sqlite3' => 'sqlite3',
-          'mysql' => 'mysql',
+          'mysql2' => 'mysql2',
           'pg' => 'postgresql',
           'db2' => 'db2',
           'activerecord-sqlserver-adapter' => 'sqlserver'
