@@ -3,7 +3,7 @@ require 'rails'
 require 'jquery-rails'
 require 'haml-rails'
 require 'haml'
-require 'mysql'
+require 'mysql2'
 
 require 'trusty_cms/admin_ui'
 require 'trusty_cms/extension_loader'
