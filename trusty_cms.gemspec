@@ -36,7 +36,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "haml",            "~> 4.0"
   s.add_dependency "haml-rails",      "~> 0.5" # 0.5 is rails 4+ only
   s.add_dependency "highline",        "~> 1.6"
-  s.add_dependency "mysql",           "~> 2.9"
+  s.add_dependency "mysql2",          "~> 0.4.2"
   s.add_dependency "rack",            "~> 1.4"
   s.add_dependency "rack-cache",      "~> 1.2"
   s.add_dependency "radius",          "~> 0.7"
