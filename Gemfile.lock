@@ -299,6 +299,7 @@ DEPENDENCIES
   database_cleaner (~> 1.3.0)
   factory_girl_rails (~> 4.5.0)
   launchy (~> 2.4.2)
+  mysql2 (~> 0.4.2)
   poltergeist (~> 1.5.1)
   protected_attributes
   pry (~> 0.10.0)

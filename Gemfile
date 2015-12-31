@@ -46,4 +46,5 @@ group :development, :test do
   gem 'rails-observers'
   gem "protected_attributes"
   gem "pry-byebug"
+  gem 'mysql2',          '~> 0.4.2'
 end
