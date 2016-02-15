@@ -124,6 +124,8 @@ Most of the development for TrustyCms happens on Github:
 
 https://github.com/pgharts/trusty-cms
 
+TrustyCMS is supported in part by https://www.browserstack.com/
+
 Enjoy!
 
 --
