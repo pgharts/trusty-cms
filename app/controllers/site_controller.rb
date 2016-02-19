@@ -34,7 +34,7 @@ class SiteController < ApplicationController
       render :template => 'site/not_found', :status => 404, layout: false
     end
   rescue Page::MissingRootPageError
-    redirect_to welcome_url
+    redirect_to welcome_path
   end
 
   def cacheable_request?
