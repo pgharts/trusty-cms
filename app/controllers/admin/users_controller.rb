@@ -24,7 +24,7 @@ class Admin::UsersController < Admin::ResourceController
   def ensure_deletable
     if current_user.id.to_s == params[:id].to_s
       announce_cannot_delete_self
-      redirect_to admin_users_url
+      redirect_to admin_users_path
     end
   end
 

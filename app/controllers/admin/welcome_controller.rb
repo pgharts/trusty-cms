@@ -4,7 +4,7 @@ class Admin::WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    redirect_to admin_pages_url
+    redirect_to admin_pages_path
   end
 
   def login
@@ -18,7 +18,7 @@ class Admin::WelcomeController < ApplicationController
         current_user.remember_me
         set_session_cookie
       end
-      redirect_to(session[:return_to] || welcome_url)
+      redirect_to(session[:return_to] || welcome_path)
       session[:return_to] = nil
     end
   end
@@ -28,7 +28,7 @@ class Admin::WelcomeController < ApplicationController
     self.current_user.forget_me if self.current_user
     self.current_user = nil
     announce_logged_out
-    redirect_to login_url
+    redirect_to login_path
   end
 
   private
