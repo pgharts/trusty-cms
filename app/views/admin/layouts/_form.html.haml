@@ -33,6 +33,6 @@
         = save_model_button @layout
         = save_model_and_continue_editing_button @layout
         = t('or')
-        = link_to t('cancel'), admin_layouts_url, class: 'alt'
+        = link_to t('cancel'), admin_layouts_path, class: 'alt'
     - form_bottom.edit_timestamp do
       = updated_stamp @layout
