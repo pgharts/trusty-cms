@@ -39,7 +39,7 @@
       %h3
         - if admin?
           .actions
-            = button_to t("edit_configuration"), edit_admin_configuration_url, :method => :get
+            = button_to t("edit_configuration"), edit_admin_configuration_path, :method => :get
         Configuration
       - TrustyCms.config.site_settings.each do |site_setting|
         %p.ruled
