@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (2.0.15)
+    trusty-cms (2.0.16)
       RedCloth (~> 4.2)
       acts_as_tree (~> 2.1)
       bundler (~> 1.7)
@@ -30,6 +30,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    RedCloth (4.2.9-java)
     actionmailer (4.2.5.1)
       actionpack (= 4.2.5.1)
       actionview (= 4.2.5.1)
@@ -236,7 +237,7 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
-    ruby_parser (3.8.0)
+    ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -309,4 +310,4 @@ DEPENDENCIES
   trustygems (~> 0.2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
