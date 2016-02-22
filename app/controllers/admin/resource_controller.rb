@@ -34,13 +34,13 @@ class Admin::ResourceController < ApplicationController
     r.stale.default { announce_update_conflict; render :action => template_name }
 
     r.create.publish(:xml, :json) { render format_symbol => model, :status => :created, :location => url_for(:format => format_symbol, :id => model) }
-    r.create.default { redirect_to continue_path(params) }
+    r.create.default { redirect_to continue_url(params) }
 
     r.update.publish(:xml, :json) { head :ok }
     r.update.default { redirect_to continue_url(params) }
 
     r.destroy.publish(:xml, :json) { head :deleted }
-    r.destroy.default { redirect_to continue_path(params) }
+    r.destroy.default { redirect_to continue_url(params) }
   end
 
   def index
