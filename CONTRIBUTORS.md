@@ -11,9 +11,11 @@ core:
 * Aly Fulton
 * Andrew Miller
 * Justin Reese
-* Patrick Fitzgerald
+* Patrick FitzGerald
 * Kurtis Rainbolt-Greene
 * Colin Dean
+* Brittant Martin
+* Danielle Greaves
 
 ## Radiant CMS
 
