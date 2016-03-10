@@ -90,8 +90,6 @@ class Admin::PagesController < Admin::ResourceController
       @meta << {:field => "breadcrumb", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 160}]}
     end
 
-  private
-
   def verify_page_class(page_class)
     if page_class.constantize.class == Page
       page_class.constantize

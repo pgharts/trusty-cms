@@ -17,3 +17,4 @@ exclude_paths:
 - spec/**/*
 - "**/vendor/**/*"
 - db/migrate/**/*
+- config/**/*
