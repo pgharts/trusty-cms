@@ -47,4 +47,5 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'execjs',          '~> 2.2'
   s.add_dependency 'therubyracer',    '~> 0.12'
   s.add_dependency "ckeditor",        "~> 4.1"
+  s.add_dependency "rake",            "< 11.0"
 end
