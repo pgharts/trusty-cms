@@ -47,7 +47,7 @@ class Admin::PagesController < Admin::ResourceController
 
     def model_class
       if Page.descendants.any? { |d| d.to_s == params[:page_class] }
-        params[:page_class].constantize
+        verify_page_class(params[:page_class])
       elsif params[:page_id]
         Page.find(params[:page_id]).children
       else
@@ -89,4 +89,14 @@ class Admin::PagesController < Admin::ResourceController
       @meta << {:field => "slug", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 100}]}
       @meta << {:field => "breadcrumb", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 160}]}
     end
+
+  private
+
+  def verify_page_class(page_class)
+    if page_class.constantize.class == Page
+      page_class.constantize
+    else
+      raise "I'm not allowed to constantize #{page_class}!"
+    end
+  end
 end
