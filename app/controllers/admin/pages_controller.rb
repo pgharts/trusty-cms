@@ -91,7 +91,7 @@ class Admin::PagesController < Admin::ResourceController
     end
 
   def verify_page_class(page_class)
-    if page_class.constantize.superclass == Page
+    if page_class.constantize.ancestors.include?(Page)
       page_class.constantize
     else
       raise "I'm not allowed to constantize #{page_class}!"
