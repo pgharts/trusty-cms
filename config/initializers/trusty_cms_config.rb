@@ -13,4 +13,5 @@ TrustyCms.config do |config|
   config.define 'site.title', :default => "Your site title", :allow_blank => false
   config.define 'site.host', :default => "www.example.com", :allow_blank => false
   config.define 'user.allow_password_reset?', :default => true
+  config.define 'session_timeout', :default => 2.weeks
 end

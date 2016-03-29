@@ -81,7 +81,7 @@ module LoginSystem
     end
 
     def set_session_cookie(user = current_user)
-      cookies[:session_token] = { :value => user.session_token , :expires => TrustyCms::Config['session_timeout'].to_i.from_now.utc }
+      cookies[:session_token] = { :value => user.session_token , :expires => (Time.now + ((TrustyCms::Config['session_timeout'].to_i)/86400).days).utc }
     end
 
   module ClassMethods
