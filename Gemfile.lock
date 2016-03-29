@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (2.0.19)
+    trusty-cms (2.0.2)
       RedCloth (~> 4.2)
       acts_as_tree (~> 2.1)
       bundler (~> 1.7)
@@ -151,8 +151,8 @@ GEM
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.3)
-      mime-types (>= 1.16, < 3)
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
