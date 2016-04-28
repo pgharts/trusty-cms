@@ -27,3 +27,4 @@ trusty-cms.box
 .vagrant
 *.gem
 .sass-cache
+/coverage/*
