@@ -18,3 +18,5 @@ exclude_paths:
 - "**/vendor/**/*"
 - db/migrate/**/*
 - config/**/*
+- app/assets/javascripts/admin/jquery-ui.js
+- app/assets/javascripts/admin/modernizr.js
