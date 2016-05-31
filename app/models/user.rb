@@ -60,7 +60,19 @@ class User < ActiveRecord::Base
     update_attribute(:session_token, nil)
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    update_attribute(:password_reset_sent_at, Time.zone.now)
+    PasswordMailer.password_reset(self).deliver_now
+  end
+
   private
+
+    def generate_token(column)
+      begin
+        self[column] = SecureRandom.urlsafe_base64
+      end while User.exists?(column => self[column])
+    end
 
     def validate_length_of_password?
       new_record? or not password.to_s.empty?
