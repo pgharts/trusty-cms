@@ -10,6 +10,7 @@
     %p
       %label{:for=>"password"}= t('password')
       = password_field_tag "password", '', :class => 'textbox password', :maxlength => 40, :size => 40
+    %p= link_to "Forgot password?", new_admin_password_reset_path
     %p.remember_me
       = check_box_tag :remember_me, 1, false, :class => 'checkbox'
       %label.checkbox{:for=>"remember_me"}= t('remember_me_in_this_browser')

@@ -15,6 +15,7 @@ TrustyCms::Application.routes.draw do
     resources :users do
       get 'remove', on: :member
     end
+    resources :password_resets
   end
 
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]

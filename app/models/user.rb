@@ -60,28 +60,38 @@ class User < ActiveRecord::Base
     update_attribute(:session_token, nil)
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    update_attribute(:password_reset_sent_at, Time.zone.now)
+    PasswordMailer.password_reset(self).deliver_now
+  end
+
   private
 
-    def validate_length_of_password?
-      new_record? or not password.to_s.empty?
-    end
+  def generate_token(column)
+    self[column] = SecureRandom.urlsafe_base64 if User.exists?(column => self[column])
+  end
 
-    before_create :encrypt_password
-    def encrypt_password
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now}--#{login}--sweet harmonious biscuits--")
-      self.password = sha1(password)
-    end
+  def validate_length_of_password?
+    new_record? or not password.to_s.empty?
+  end
 
-    before_update :encrypt_password_unless_empty_or_unchanged
-    def encrypt_password_unless_empty_or_unchanged
-      user = self.class.find(self.id)
-      case password
-      when ''
-        self.password = user.password
-      when user.password
-      else
-        encrypt_password
-      end
+  before_create :encrypt_password
+  def encrypt_password
+    self.salt = Digest::SHA1.hexdigest("--#{Time.now}--#{login}--sweet harmonious biscuits--")
+    self.password = sha1(password)
+  end
+
+  before_update :encrypt_password_unless_empty_or_unchanged
+  def encrypt_password_unless_empty_or_unchanged
+    user = self.class.find(self.id)
+    case password
+    when ''
+      self.password = user.password
+    when user.password
+    else
+      encrypt_password
     end
+  end
 
 end
