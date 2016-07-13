@@ -61,7 +61,7 @@ module LoginSystem
     end
 
     def login_from_session
-      User.find(session['user_id']) rescue nil
+      User.unscoped.find(session['user_id']) rescue nil
     end
 
     def login_from_cookie
