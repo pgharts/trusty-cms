@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_javascripts_and_stylesheets
   before_filter :force_utf8_params if RUBY_VERSION =~ /1\.9/
   before_filter :set_standard_body_style, :only => [:new, :edit, :update, :create]
+  before_filter :set_mailer
 
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
@@ -51,6 +52,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def set_mailer
+      ActionMailer::Base.default_url_options[:host] = request.host_with_port
+    end
 
     def set_current_user
       UserActionObserver.instance.current_user = current_user
