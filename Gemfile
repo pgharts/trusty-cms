@@ -50,3 +50,4 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'simplecov'
 end
+gem 'nokogiri', '>= 1.6.8'
