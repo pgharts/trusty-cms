@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 # the trusty-cms instance generator, which is (normally)
 # the only time the trusty gem functions as an
 # application. The instance has its own Gemfile, which
-# requires radiant and therefore pulls in every
-# dependency mentioned in radiant.gemspec.
+# requires trusty and therefore pulls in every
+# dependency mentioned in trusty.gemspec.
 
 gem 'trustygems', '~> 0.2.0'
 
@@ -14,22 +14,17 @@ gemspec
 # When trusty is installed as a gem you can run all of
 # its tests and specs from an instance. If you're working
 # on trusty itself and you want to run specs from the
-# radiant root directory, uncomment the lines below and
+# trusty root directory, uncomment the lines below and
 # run `bundle install`.
 
 # gemspec
 # gem "compass-rails", "~> 1.0.3"
 
-# gem "radiant-archive-extension",             "~> 1.0.7"
-# gem "radiant-clipped-extension",             "~> 1.1.0"
-# gem "radiant-debug-extension",               "~> 1.0.2"
-# gem "radiant-exporter-extension",            "~> 1.1.0"
-# gem "radiant-markdown_filter-extension",     "~> 1.0.2"
-# gem "radiant-sheets-extension",              "~> 1.1.0.alpha"
-# gem "radiant-snippets-extension",            "~> 1.1.0.alpha"
-# gem "radiant-site_templates-extension",      "~> 1.0.4"
-# gem "radiant-smarty_pants_filter-extension", "~> 1.0.2"
-# gem "radiant-textile_filter-extension",      "~> 1.0.4"
+# gem "trusty-clipped-extension",             "~> 2.0.13"
+# gem "trusty-snippets-extension",            "~> 2.0.7"
+# gem "trusty-multi-site-extension",          "~> 2.0.11"
+# gem "trusty-reorder-extension",             "~> 2.0.6"
+# gem "trusty-layouts-extension",             "~> 2.0.4"
 
 
 group :development, :test do
