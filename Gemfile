@@ -22,9 +22,9 @@ gemspec
 
 # gem "trusty-clipped-extension",             "~> 2.0.13"
 # gem "trusty-snippets-extension",            "~> 2.0.7"
-# gem "trusty-multi-site-extension", 		  "~> 2.0.11"
+# gem "trusty-multi-site-extension",          "~> 2.0.11"
 # gem "trusty-reorder-extension",             "~> 2.0.6"
-# gem "trusty-layouts-extension",      		  "~> 2.0.4"
+# gem "trusty-layouts-extension",             "~> 2.0.4"
 
 
 group :development, :test do
