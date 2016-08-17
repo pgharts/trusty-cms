@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 # the trusty-cms instance generator, which is (normally)
 # the only time the trusty gem functions as an
 # application. The instance has its own Gemfile, which
-# requires radiant and therefore pulls in every
-# dependency mentioned in radiant.gemspec.
+# requires trusty and therefore pulls in every
+# dependency mentioned in trusty.gemspec.
 
 gem 'trustygems', '~> 0.2.0'
 
