@@ -23,3 +23,7 @@ branches:
 
 notifications:
   slack: trustarts:FrVc7H8dDadhctfZ7NvHTZES
+
+addons:
+    code_climate:
+        repo_token: 10e89622ddc764206e253cd07c5784f83178fe45550920e0eac8ab2e020e3e93
