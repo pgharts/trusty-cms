@@ -77,7 +77,8 @@ class SiteController < ApplicationController
         klass = klass_name.constantize
       rescue NameError, LoadError
         director_klass = "TrustyCms::PageResponseCacheDirector"
-        eval(%Q{class #{klass_name} < #{director_klass}; end}, TOPLEVEL_BINDING)
+        #Rubocop: The use of eval is a serious security risk.
+        #eval(%Q{class #{klass_name} < #{director_klass}; end}, TOPLEVEL_BINDING)
         klass = director_klass.constantize
       end
       klass.new(page, self)

@@ -288,7 +288,9 @@ class Page < ActiveRecord::Base
           begin
             p.constantize
           rescue NameError, LoadError
-            eval(%Q{class #{p} < Page; acts_as_tree; def self.missing?; true end end}, TOPLEVEL_BINDING)
+            #Rubocop: The use of eval is a serious security risk.
+            #eval(%Q{class #{p} < Page; acts_as_tree; def self.missing?; true end end}, TOPLEVEL_BINDING)
+            Rails.logger.error NameError
           end
         end
       end
