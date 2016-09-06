@@ -37,6 +37,13 @@ class Admin::PagesController < Admin::ResourceController
     render :text => exception.message unless @performed_render
   end
 
+  def save_table_position
+    new_position = params[:new_position]
+    Page.save_order(new_position)
+    head :ok
+  end
+
+
   private
     def assign_page_attributes
       if params[:page_id].blank?

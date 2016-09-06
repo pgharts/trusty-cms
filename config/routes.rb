@@ -16,6 +16,7 @@ TrustyCms::Application.routes.draw do
       get 'remove', on: :member
     end
     resources :password_resets
+    post 'save-table-position' => "pages#save_table_position", as: "save_tables_position"
   end
 
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]

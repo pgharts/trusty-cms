@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require 'admin/jquery-ui'
+//= require jquery-ui
 //= require 'admin/jquery.cookie'
 //= require 'admin/jquery.validate.min'
 //= require 'admin/jquery.treetable'
@@ -34,3 +34,4 @@
 //= require 'admin/utilities'
 //= require 'admin/tags'
 //= require 'admin/treetable'
+//= require 'admin/sortable'
