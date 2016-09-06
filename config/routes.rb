@@ -16,6 +16,7 @@ TrustyCms::Application.routes.draw do
       get 'remove', on: :member
     end
     resources :password_resets
+    post 'save-table-position' => "pages#save_table_position", as: "save_tables_position"
   end
 
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
@@ -36,6 +37,5 @@ TrustyCms::Application.routes.draw do
   get 'error/404' => 'site#not_found', :as => :not_found
   get 'error/500' => 'site#error', :as => :error
   get '*url' => 'site#show_page'
-  post 'pages/save-table-position' => "admin/pages#save_table_position", as: "save_tables_position"
 
 end

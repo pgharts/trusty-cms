@@ -38,8 +38,9 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def save_table_position
-    #TODO write me a method plz
-    #TODO PS no bugs
+    new_position = params[:new_position]
+    Page.save_order(new_position)
+    head :ok
   end
 
 

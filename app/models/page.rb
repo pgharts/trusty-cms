@@ -137,6 +137,16 @@ class Page < ActiveRecord::Base
     set_content_type(response)
     headers.each { |k,v| response.headers[k] = v }
   end
+
+  def self.save_order(new_position)
+    dictionary = Hash[*new_position.flatten(1)]
+    dictionary.each do |id, position|
+      page = Page.find_by_id(id)
+      page.position = position if page.position.present?
+      page.save
+    end
+  end
+
   private :set_response_headers
 
   def set_content_type(response)

@@ -31,15 +31,15 @@ $(document).ready(function() {
       for(i=0;i<table_rows.length;i++) {
         var this_id = table_rows.eq(i).attr('id').replace("page_", "");
         var position = i;
-        var parent_id = table_rows.eq(i).attr('data-tt-parent-id');
-        data.push(this_id, parent_id, position)
+        // var parent_id = table_rows.eq(i).attr('data-tt-parent-id');
+        data.push(this_id, position)
       }
-      data.splice(0,3);
+      data.splice(0,2);
       console.log(data);
       $.ajax({
-        data: data,
+        data: {new_position: data},
         type: 'POST',
-        url: 'pages/save-table-position'
+        url: 'save-table-position'
       })
     }
   }).disableSelection();
