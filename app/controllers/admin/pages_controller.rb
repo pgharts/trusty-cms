@@ -1,6 +1,7 @@
 class Admin::PagesController < Admin::ResourceController
   before_filter :initialize_meta_rows_and_buttons, :only => [:new, :edit, :create, :update]
   before_filter :count_deleted_pages, :only => [:destroy]
+  rescue_from ActiveRecord::RecordInvalid, :with => :validation_error
 
   class PreviewStop < ActiveRecord::Rollback
     def message
@@ -45,6 +46,12 @@ class Admin::PagesController < Admin::ResourceController
 
 
   private
+
+    def validation_error(e)
+      flash[:error] = e.message
+      render :new
+    end
+
     def assign_page_attributes
       if params[:page_id].blank?
         self.model.slug = '/'

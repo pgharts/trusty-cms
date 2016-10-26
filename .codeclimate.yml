@@ -20,3 +20,5 @@ exclude_paths:
 - config/**/*
 - app/assets/javascripts/admin/jquery-ui.js
 - app/assets/javascripts/admin/modernizr.js
+- app/assets/bower_components/**/*
+- app/assets/javascripts/ckeditor/*
