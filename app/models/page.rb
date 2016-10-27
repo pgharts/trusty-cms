@@ -30,6 +30,8 @@ class Page < ActiveRecord::Base
 
   validate :valid_class_name
 
+  default_scope { order('position ASC') }
+
   include TrustyCms::Taggable
   include StandardTags
   include DeprecatedTags

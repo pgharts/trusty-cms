@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20120209231801) do
     t.boolean  "virtual",                               :default => false, :null => false
     t.integer  "lock_version",                          :default => 0
     t.text     "allowed_children_cache"
+    t.integer  "position",                            limit: 4
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"
