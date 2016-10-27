@@ -70,14 +70,6 @@ module ApplicationHelper
     uri.path.gsub(%r{/+}, '/').gsub(%r{/$}, '')
   end
 
-  def nav_link_to(name, options)
-    if current_url?(options)
-      %{<strong>#{ link_to translate_with_default(name), options }</strong>}
-    else
-      link_to translate_with_default(name), options
-    end
-  end
-
   def admin?
     current_user and current_user.admin?
   end
@@ -106,16 +98,6 @@ module ApplicationHelper
     I18n.localize(time, :format => :timestamp)
   end
 
-  def meta_visible(symbol)
-    v = case symbol
-    when :meta_more
-      not meta_errors?
-    when :meta, :meta_less
-      meta_errors?
-    end
-    v ? {} : {:style => "display: none"}
-  end
-
   def meta_errors?
     false
   end
@@ -128,16 +110,8 @@ module ApplicationHelper
     image_tag(append_image_extension("admin/#{name}"), options)
   end
 
-  def image_submit(name, options = {})
-    image_submit_tag(append_image_extension("admin/#{name}"), options)
-  end
-
   def admin
     TrustyCms::AdminUI.instance
-  end
-
-  def filter_options_for_select(selected=nil)
-    options_for_select([[t('select.none'), '']] + TextFilter.descendants_names, selected)
   end
 
   def body_classes

@@ -14,10 +14,6 @@ module Admin::PagesHelper
     !!(@page.errors[:slug] or @page.errors[:breadcrumb])
   end
 
-  def default_filter_name
-    @page.parts.empty? ? "" : @page.parts[0].filter_id
-  end
-
   def status_to_display
     @page.status_id = 100 if @page.status_id == 90
     @display_status = Status.selectable.map{ |s| [I18n.translate(s.name.downcase), s.id] }

@@ -17,11 +17,6 @@ class TextFilter
       instance.filter(text)
     end
 
-    def description_file(filename)
-      text = File.read(filename) rescue ""
-      self.description text
-    end
-
     def descendants_names
       descendants.map { |s| s.filter_name }.sort
     end

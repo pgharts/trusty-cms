@@ -29,12 +29,6 @@ class PageContext < Radius::Context
     render_error_message(e.message)
   end
 
-  def tag_missing(name, attributes = {}, &block)
-    super
-  rescue Radius::UndefinedTagError => e
-    raise StandardTags::TagError.new(e.message)
-  end
-
   private
 
     def render_error_message(message)
