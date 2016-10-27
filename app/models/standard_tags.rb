@@ -9,7 +9,6 @@ module StandardTags
   include WillPaginate::ViewHelpers
 
   class TagError < StandardError; end
-  class RequiredAttributeError < StandardError; end
 
   desc %{
     Causes the tags referring to a page's attributes to refer to the current page.

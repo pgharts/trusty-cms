@@ -53,26 +53,6 @@ module Admin::NodeHelper
     show_all? || expanded_rows.include?(@current_node.id)
   end
 
-  def padding_left(level)
-    (level * 23) + 9
-  end
-
-  def children_class
-    unless @current_node.children.empty?
-      if expanded
-        " children_visible"
-      else
-        " children_hidden"
-      end
-    else
-      " no_children"
-    end
-  end
-
-  def virtual_class
-    @current_node.virtual? ? " virtual": ""
-  end
-
   def expander(level)
     unless @current_node.children.empty? or level == 0
       image((expanded ? "collapse" : "expand"),

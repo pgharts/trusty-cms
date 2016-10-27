@@ -230,25 +230,6 @@ Supports:       TrustyCms #{supports_radiant_version}
     end
   end
 
-  class Bzip2 < Tarball
-    def filename
-      @unpacked ? super : "#{self.name}.tar.bz2"
-    end
-
-    def unpack
-      cd(Dir.tmpdir) { system "bunzip2 #{self.filename}" }
-      @unpacked = true
-      super
-    end
-  end
-
-  class Zip < Download
-    def unpack
-      output = nil
-      cd(Dir.tmpdir) { output = `unzip #{filename} -d #{name}` }
-      self.path = File.join(Dir.tmpdir, name)
-    end
-  end
 end
 
 module TrustyCms

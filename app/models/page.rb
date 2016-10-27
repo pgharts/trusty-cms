@@ -225,10 +225,6 @@ class Page < ActiveRecord::Base
     true
   end
 
-  def to_xml(options={}, &block)
-    super(options.reverse_merge(:include => :parts), &block)
-  end
-
   def default_child
     self.class.default_child
   end
@@ -347,10 +343,6 @@ class Page < ActiveRecord::Base
       unless Page.is_descendant_class_name?(class_name)
         errors.add :class_name, "must be set to a valid descendant of Page"
       end
-    end
-
-    def attributes_protected_by_default
-      super - [self.class.inheritance_column]
     end
 
     def update_virtual

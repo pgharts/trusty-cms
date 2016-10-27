@@ -42,15 +42,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def rescue_action_in_public(exception)
-    case exception
-      when ActiveRecord::RecordNotFound, ActionController::UnknownController, ActionController::UnknownAction, ActionController::RoutingError
-        render :template => "site/not_found", :status => 404
-      else
-        super
-    end
-  end
-
   private
 
     def set_mailer

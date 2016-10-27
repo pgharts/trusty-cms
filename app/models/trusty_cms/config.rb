@@ -211,10 +211,6 @@ module TrustyCms
         definitions[key] ||= TrustyCms::Config::Definition.new(:empty => true)
       end
 
-      def clear_definitions!
-        TrustyCms.config_definitions = {}
-      end
-
     end
 
     # The usual way to use a config item:
