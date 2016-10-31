@@ -2,6 +2,10 @@ class Admin::PagesController < Admin::ResourceController
   before_filter :initialize_meta_rows_and_buttons, :only => [:new, :edit, :create, :update]
   before_filter :count_deleted_pages, :only => [:destroy]
   rescue_from ActiveRecord::RecordInvalid, :with => :validation_error
+  only_allow_access_to :index,
+                     :when => [:designer, :admin],
+                     :denied_url => { :controller => '/admin/configuration', :action => 'show' },
+                     :denied_message => 'You must have Admin or Designer privileges to access Content.'
 
   class PreviewStop < ActiveRecord::Rollback
     def message
