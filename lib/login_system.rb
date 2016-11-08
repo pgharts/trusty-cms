@@ -120,7 +120,7 @@ module LoginSystem
       case
       when allowed_roles = permissions[:when]
         allowed_roles = [allowed_roles].flatten
-        allowed_roles.any? { |role| user.has_role?(role) }
+        user.present? ? allowed_roles.any? { |role| user.has_role?(role) } : false
       when condition_method = permissions[:if]
         instance.send(condition_method)
       else
