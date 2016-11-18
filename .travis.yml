@@ -16,6 +16,7 @@ before_script:
 
 script:
   - bundle exec rake app:spec
+  - bundle exec codeclimate-test-reporter
 
 branches:
   only:
