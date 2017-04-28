@@ -46,9 +46,9 @@ describe ApplicationController, :type => :controller do
 
   describe "set_timezone" do
     it "should use TrustyCms::Config['local.timezone']" do
-      TrustyCms::Config['local.timezone'] = 'Kuala Lumpur'
+      TrustyCms::Config['local.timezone'] = 'UTC'
       controller.send(:set_timezone)
-      expect(Time.zone.name).to eq('Kuala Lumpur')
+      expect(Time.zone.name).to eq('UTC')
     end
 
     it "should default to config.time_zone" do

@@ -3,11 +3,11 @@ class Admin::ResourceController < ApplicationController
   extend TrustyCms::ResourceResponses
 
   helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
-  before_filter :populate_format
-  before_filter :never_cache
-  before_filter :load_models, :only => :index
-  before_filter :load_model, :only => [:new, :create, :edit, :update, :remove, :destroy]
-  after_filter :clear_model_cache, :only => [:create, :update, :destroy]
+  before_action :populate_format
+  before_action :never_cache
+  before_action :load_models, :only => :index
+  before_action :load_model, :only => [:new, :create, :edit, :update, :remove, :destroy]
+  after_action :clear_model_cache, :only => [:create, :update, :destroy]
 
   cattr_reader :paginated
   cattr_accessor :default_per_page, :will_paginate_options

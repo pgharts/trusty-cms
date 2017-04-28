@@ -31,8 +31,8 @@ describe 'Pages' do
       Page.create!(title: 'Voyager Home', breadcrumb: 'Home', slug: '/')
       visit '/admin/pages'
     end
-    
-    
+
+
     it 'lets you edit the homepage' do
       click_link 'Voyager Home'
 

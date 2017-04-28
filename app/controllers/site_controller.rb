@@ -2,7 +2,7 @@ require 'trusty_cms/pagination/controller'
 class SiteController < ApplicationController
   include TrustyCms::Pagination::Controller
 
-  skip_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   no_login_required
 
   def self.cache_timeout=(val)
@@ -40,17 +40,17 @@ class SiteController < ApplicationController
   def cacheable_request?
     (request.head? || request.get?) && live?
   end
-  hide_action :cacheable_request?
+  # hide_action :cacheable_request?
 
   def set_expiry(time, options={})
     expires_in time, options
   end
-  hide_action :set_expiry
+  # hide_action :set_expiry
 
   def set_etag(val)
     headers['ETag'] = val
   end
-  hide_action :set_expiry
+  # hide_action :set_expiry
 
   private
     def batch_page_status_refresh
