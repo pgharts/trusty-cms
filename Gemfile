@@ -27,4 +27,5 @@ group :development, :test do
   gem 'simplecov'
   gem 'codeclimate-test-reporter'
 end
-gem 'nokogiri', '>= 1.6.8'
+
+gem 'nokogiri', '>= 1.7.1'
