@@ -2,8 +2,8 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-        prepend_before_filter :authenticate
-        prepend_before_filter :authorize
+        prepend_before_action :authenticate
+        prepend_before_action :authorize
       helper_method :current_user
     end
   end
@@ -73,7 +73,7 @@ module LoginSystem
     end
 
     def login_from_http
-      if [Mime::XML, Mime::JSON].include?(request.format)
+      if [Mime[:xml], Mime[:json]].include?(request.format)
         authenticate_with_http_basic do |user_name, password|
           User.authenticate(user_name, password)
         end
@@ -86,8 +86,8 @@ module LoginSystem
 
   module ClassMethods
     def no_login_required
-      skip_before_filter :authenticate
-      skip_before_filter :authorize
+      skip_before_action :authenticate
+      skip_before_action :authorize
       # puts _process_action_callbacks.map(&:filter)
     end
 
@@ -97,7 +97,7 @@ module LoginSystem
 
     def login_required
       unless login_required?
-        prepend_before_filter :authenticate, :authorize
+        prepend_before_action :authenticate, :authorize
       end
     end
 

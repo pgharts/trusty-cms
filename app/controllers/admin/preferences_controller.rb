@@ -1,5 +1,5 @@
 class Admin::PreferencesController < ApplicationController
-  before_filter :initialize_variables
+  before_action :initialize_variables
 
   def show
     set_standard_body_style

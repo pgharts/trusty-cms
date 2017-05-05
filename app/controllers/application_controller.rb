@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :set_current_user
-  before_filter :set_timezone
-  before_filter :set_user_locale
-  before_filter :set_javascripts_and_stylesheets
-  before_filter :force_utf8_params if RUBY_VERSION =~ /1\.9/
-  before_filter :set_standard_body_style, :only => [:new, :edit, :update, :create]
-  before_filter :set_mailer
+  before_action :set_current_user
+  before_action :set_timezone
+  before_action :set_user_locale
+  before_action :set_javascripts_and_stylesheets
+  before_action :force_utf8_params if RUBY_VERSION =~ /1\.9/
+  before_action :set_standard_body_style, :only => [:new, :edit, :update, :create]
+  before_action :set_mailer
 
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters

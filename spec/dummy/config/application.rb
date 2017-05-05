@@ -45,6 +45,7 @@ module TrustyCms
     config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
 
     config.encoding = 'utf-8'
+    config.time_zone = 'UTC'
     # Skip frameworks you're not going to use (only works if using vendor/rails).
     # To use Rails without a database, you must remove the Active Record framework
     # config.frameworks -= [ :action_mailer ]
