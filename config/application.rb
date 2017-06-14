@@ -23,6 +23,7 @@ module TrustyCms
     include TrustyCms::Initializer
     config.active_record.whitelist_attributes = true
     config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths << Rails.root.join('lib')
     Sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
 
     # Enable the asset pipeline
