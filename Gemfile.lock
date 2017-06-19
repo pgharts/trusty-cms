@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    trusty-cms (3.0.1)
+    trusty-cms (3.0.2)
       RedCloth (~> 4.3.2)
       acts_as_tree (~> 2.6.1)
       bundler (~> 1.7)
@@ -155,7 +155,7 @@ GEM
     json (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19)
+    libv8 (3.16.14.19-x86_64-darwin-16)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
