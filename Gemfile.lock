@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    trusty-cms (3.0.3)
+    trusty-cms (3.0.4)
       RedCloth (~> 4.3.2)
       acts_as_tree (~> 2.6.1)
       bundler (~> 1.7)
@@ -305,7 +305,6 @@ DEPENDENCIES
   simplecov
   trusty-cms!
   trustygems (~> 0.2.0)
-
 
 BUNDLED WITH
    1.15.1
