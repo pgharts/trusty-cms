@@ -2,7 +2,6 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   has_many :pages, :foreign_key => :created_by_id
-  attr_protected 'why_is_this_needed'
 
   # Default Order
   default_scope {order("name")}

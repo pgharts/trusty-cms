@@ -58,7 +58,7 @@ class Admin::ResourceController < ApplicationController
   [:create, :update].each do |action|
     class_eval %{
       def #{action}                                       # def create
-        model.update_attributes!(params[model_symbol])    #   model.update_attributes!(params[model_symbol])
+        model.update_attributes!(permitted_params[model_symbol])    #   model.update_attributes!(params[model_symbol])
         response_for :#{action}                           #   response_for :create
       end                                                 # end
     }, __FILE__, __LINE__
@@ -240,5 +240,8 @@ class Admin::ResourceController < ApplicationController
       params[:format] ||= 'html' unless request.xhr?
     end
 
+    def permitted_params
+      params.permit!
+    end
 
 end
