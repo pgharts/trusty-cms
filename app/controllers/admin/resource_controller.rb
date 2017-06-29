@@ -241,7 +241,13 @@ class Admin::ResourceController < ApplicationController
     end
 
     def permitted_params
-      params.permit!
+      model_symbols = ActiveRecord::Base.descendants.map{|a| a.name.underscore.to_sym}
+      keys = params.keys.map{|k| k.underscore.to_sym}
+      valid_symbols = model_symbols & keys
+      valid_symbols.each do |symbol|
+        params[symbol].permit!
+      end
+      params
     end
 
 end
