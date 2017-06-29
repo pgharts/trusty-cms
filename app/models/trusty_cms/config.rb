@@ -71,7 +71,6 @@ module TrustyCms
     self.table_name = "config"
     after_save :update_cache
     attr_reader :definition
-    attr_accessible :key
 
     class ConfigError < RuntimeError; end
 
