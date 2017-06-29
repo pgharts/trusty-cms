@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-
+  
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page'); super end
   end
@@ -50,7 +50,9 @@ class Page < ActiveRecord::Base
       layout_without_inheritance
     end
   end
-  alias_method_chain :layout, :inheritance
+
+  alias_method :layout_without_inheritance, :layout
+  alias_method :layout, :layout_with_inheritance
 
   def description
     self["description"]
