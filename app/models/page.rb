@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  
+
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page'); super end
   end
@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   before_save :update_virtual, :update_status, :set_allowed_children_cache
 
   # Associations
-  acts_as_tree :order => 'virtual DESC, title ASC'
+  acts_as_tree :order => 'title ASC'
   has_many :parts, {:class_name => 'PagePart', :dependent => :destroy}, -> {order(:id)}
   accepts_nested_attributes_for :parts, :allow_destroy => true
   has_many :fields, {:class_name => 'PageField', :dependent => :destroy}, -> {order(:id)}
