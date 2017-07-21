@@ -48,4 +48,5 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'therubyracer',    '~> 0.12.3'
   s.add_dependency "ckeditor",        "~> 4.2.2"
   s.add_dependency "rake",            "< 11.0"
+  s.add_dependency 'roadie-rails', '~> 1.2.1'
 end
