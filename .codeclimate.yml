@@ -22,4 +22,3 @@ exclude_paths:
 - app/assets/javascripts/admin/modernizr.js
 - app/assets/bower_components/**/*
 - app/assets/javascripts/ckeditor/*
-- app/assets/javascripts/lib/rad_social/jquery.validate.min.js
