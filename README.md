@@ -128,4 +128,4 @@ TrustyCMS is supported in part by:
 Enjoy!
 
 --
-The TrustyCms Dev Team
+The TrustyCMS Dev Team
