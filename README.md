@@ -48,7 +48,7 @@ See the INSTALL file for more details.
 
 Prerequisites:
 
-* A github account and Git ([Github has some really good instructons](https://help.github.com/articles/set-up-git))
+* A Github account and Git ([Github has some really good instructons](https://help.github.com/articles/set-up-git))
 
 Steps:
 
@@ -79,7 +79,7 @@ just start from the `vagrant up` step again!
 
 Prerequisites:
 
-* Ruby 1.9.3
+* Ruby 2.2.0
 * The bundler gem
 * Mysql
 * [PhantomJS >= 1.8.1](https://github.com/teampoltergeist/poltergeist/tree/v1.5.0#installing-phantomjs)
@@ -116,17 +116,16 @@ When you're ready to make a change:
 
 ## Support
 
-The best place to get support is on the Pittsburgh Ruby mailing list:
-
-https://groups.google.com/forum/#!forum/rubypgh
-
 Most of the development for TrustyCms happens on Github:
 
 https://github.com/pgharts/trusty-cms
 
-TrustyCMS is supported in part by https://www.browserstack.com/
+TrustyCMS is supported in part by:
+
+* [The Allegheny Regional Asset District (RAD)](https://www.radworkshere.org/)
+* [Browserstack](https://www.browserstack.com/)
 
 Enjoy!
 
 --
-The TrustyCms Dev Team
+The TrustyCMS Dev Team

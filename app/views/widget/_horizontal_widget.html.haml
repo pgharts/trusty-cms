@@ -1,0 +1,18 @@
+= stylesheet_link_tag('rad_social/rad_screen')
+= javascript_include_tag("rad_social/rad_widget", async: 'true')
+- local_variables = defined?(locals) ? locals : local_assigns
+- url = local_variables[:url]
+- message = local_variables[:message]
+- email_action_url = local_variables[:email_action_url]
+- email_subject = local_variables[:email_subject]
+- email_message = local_variables[:email_message]
+
+.rad-widget
+  .rad-icon
+    %a{:class => "rad-popup-window rad-facebook", :href => "https://www.facebook.com/sharer/sharer.php?u=#{CGI::escape(url)}", :target=> "_blank"}
+  .rad-icon
+    %a{:class => "rad-popup-window rad-twitter", :href => "https://twitter.com/intent/tweet?text=#{CGI::escape(message + " " + url)}", :target=> "_blank"}
+  .rad-icon
+    %a{:class => "rad-popup-window rad-email", :href => rad_social_mail_form_url(:email_subject => email_subject, :email_message => email_message, :email_action_url => email_action_url)}
+  .rad-icon
+    %a{:class => "rad-popup-window rad-gplus", :href => "https://plus.google.com/share?url=#{CGI::escape(url)}", :target=> "_blank"}

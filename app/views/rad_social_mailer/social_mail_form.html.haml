@@ -1,0 +1,42 @@
+= stylesheet_link_tag('rad_social/rad_screen')
+= javascript_include_tag("https://www.google.com/recaptcha/api/js/recaptcha_ajax.js")
+= javascript_include_tag("rad_social/rad_email")
+
+.rad-dialog-titlebar
+  %span.rad-dialog-title
+    Email a Friend
+
+%form{:id=>'rad-social-email-form', :class=>"rad-email-form"}
+  .rad-email-error
+  %input{:type=>'hidden', :id=> "auth_token", :value=>"#{form_authenticity_token}"}
+  %div.form-row
+    %label.form-label{:type=>"label", :for=>"from"}
+      From Email
+    %div.form-fields
+      %input{:class => "input-textbox", :type => "text", :id => "rs-from", :name => "from", :size => 30, :maxlength => 35}
+  %div.form-row
+    %label.form-label{:type=>"label", :for=>"from_name"}
+      From Name
+    %div.form-fields
+      %input{:class => "input-textbox", :type => "text", :id => "rs-from_name", :name => "from_name", :size => 30, :maxlength => 35}
+  %div.form-row
+    %label.form-label{:type=>"label", :for=>"to"}
+      To Email
+    %div.form-fields
+      %input{:class => "input-textbox", :type => "text", :id => "rs-to", :name => "to", :size => 30, :maxlength => 35}
+  %div.form-row
+    %label.form-label{:type=>"label", :for=>"message"}
+      Message
+    %div.form-fields
+      %textarea{:class => "input-textbox", :id => "rs-message", :name => "message", :rows => 5, :cols => 40}
+        = email_message
+  %input{:type=>"hidden", :name=>"subject", :value=> email_subject}
+  %input{:type=>"hidden", :id=>"rs-base-message", :value=> email_message}
+  #recaptcha-container.captcha-container
+    = recaptcha_tags
+  %input{:type=>"hidden", :name=>"submit_url", :value=> email_action_url}
+  %input.button.primary-button{:id => "rad_email_submit", :type=>:button ,:value=>"Submit"}
+  .loader
+
+#rad-confirmation.hidden
+  Your message has been sent.

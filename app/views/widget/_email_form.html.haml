@@ -1,0 +1,25 @@
+- javascript("rad_social/captcha")
+
+= form_tag
+%form{:id=>'rad_social_email_form', :class=>"rad-email-form"}
+  %label{:for => "from"}
+    Your Email:
+  %input{:class => "std_input", :type => "text", :id => "rs-from", :name => "from", :size => 40, :maxlength => 35}
+  %label{:for => "from_name"}
+    Your Name:
+  %input{:class => "std_input", :type => "text", :id => "rs-from_name", :name => "from_name", :size => 40, :maxlength => 35}
+  %label{:for => "to"}
+    To:
+  %input{:class => "std_input", :type => "text", :id => "rs-to", :name => "to", :size => 40, :maxlength => 35}
+  %label{:for => "subject"}
+    To:
+  %input{:class => "std_input", :type => "text", :id => "rs-subject", :name => "subject", :size => 40, :maxlength => 35}
+  %label{:for => "Message"}
+    Message:
+  %textarea{:id => "rs-message", :rows => 18, :cols => 40}
+  %input{:type=>"hidden", :name=>"submit_url", :value=>'contact/email'}
+  %input.button.primary-button{:id => "email_submit", :type=>:button ,:value=>"Submit"}
+  .loader
+
+  #recaptcha-container.captcha-container
+    = recaptcha_tags

@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    trusty-cms (3.0.6)
+    trusty-cms (3.0.7)
       RedCloth (~> 4.3.2)
       acts_as_tree (~> 2.6.1)
       bundler (~> 1.7)
@@ -27,6 +27,7 @@ PATH
       rails (~> 5.0.2)
       rake (< 11.0)
       rdoc (~> 5.1)
+      roadie-rails (~> 1.2.1)
       sass-rails (~> 5.0.6)
       stringex (~> 2.7.1)
       therubyracer (~> 0.12.3)
@@ -117,6 +118,8 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 4.0)
     concurrent-ruby (1.0.5)
+    css_parser (1.5.0)
+      addressable
     database_cleaner (1.5.3)
     delocalize (0.4.0)
       rails (>= 3.0)
@@ -221,6 +224,12 @@ GEM
       ffi (>= 0.5.0, < 2)
     rdoc (5.1.0)
     ref (2.0.0)
+    roadie (3.2.2)
+      css_parser (~> 1.4)
+      nokogiri (~> 1.5)
+    roadie-rails (1.2.1)
+      railties (>= 3.0, < 5.2)
+      roadie (~> 3.1)
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -303,6 +312,5 @@ DEPENDENCIES
   trusty-cms!
   trustygems (~> 0.2.0)
 
-
 BUNDLED WITH
-   1.15.1
+   1.15.2
