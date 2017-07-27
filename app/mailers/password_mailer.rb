@@ -1,4 +1,4 @@
-class PasswordMailer < ActionMailer::Base
+class PasswordMailer < ApplicationMailer
 
   default :from => ENV['ORG_FROM_EMAIL'] ||= "admin@trustycms.com"
 
