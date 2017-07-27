@@ -3,7 +3,7 @@ class SocialMailerController < ApplicationController
   no_login_required
 
   def create_social_mail
-      
+
     mailer_options = {
       :to => params[:to],
       :from => params[:from],

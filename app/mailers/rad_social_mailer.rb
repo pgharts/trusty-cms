@@ -1,5 +1,4 @@
-require 'mail'
-class RadSocialMailer < ActionMailer::Base
+class RadSocialMailer < ApplicationMailer
   include Roadie::Rails::Automatic
 
   def social_mail options

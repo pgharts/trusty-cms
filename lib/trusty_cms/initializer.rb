@@ -131,7 +131,6 @@ module TrustyCms
     #
     def initialize_views
       initialize_default_admin_tabs
-      initialize_framework_views
       admin.load_default_regions
     end
 
@@ -139,20 +138,6 @@ module TrustyCms
     #
     def initialize_default_admin_tabs
       admin.initialize_nav
-    end
-
-    # This adds extension view paths to the standard Rails::Initializer method.
-    # In environments that don't cache templates it reloads the path set on each request,
-    # so that new extension paths are noticed without a restart.
-    #
-    def initialize_framework_views
-      view_paths = extension_loader.paths(:view) #.push(TrustyCms::Application.config.view_path)
-      if ActionController::Base.view_paths.count == 0 || !ActionView::Base.cache_template_loading
-        ActionController::Base.view_paths = ActionView::PathSet.new(Array.wrap(view_paths))
-      end
-      if ActionMailer::Base.view_paths.count == 0 || !ActionView::Base.cache_template_loading
-        ActionMailer::Base.view_paths = ActionView::PathSet.new(Array.wrap(view_paths))
-      end
     end
 
     # Extends the Rails initializer to make sure that extension controller paths are available when routes
