@@ -2,8 +2,9 @@ require 'rails_generator'
 module TrustyCms
   module GeneratorBaseExtension
     def self.included(base)
-      base.class_eval %{
-        alias_method_chain :existing_migrations, :extensions
+      base.class_eval {
+        alias_method :existing_migrations_without_extensions, :existing_migrations
+        alias_method :existing_migrations, :existing_migrations_with_extensions
       }
     end
 
@@ -13,4 +14,5 @@ module TrustyCms
 
   end
 end
+
 Rails::Generator::Commands::Base.class_eval { include TrustyCms::GeneratorBaseExtension }

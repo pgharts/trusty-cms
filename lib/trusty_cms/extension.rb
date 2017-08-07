@@ -107,14 +107,11 @@ module TrustyCms
 
       def activate_extension
         return if instance.active?
-        instance.activate if instance.respond_to? :activate
+        instance.activate_extension if instance.respond_to? :activate
         Dir["#{Rails.root}/config/routes/**/*.rb"].each do |route_file|
-          #config.paths["config/routes"] << route_file if instance.routed?
         end
-        #TrustyCms::Application.reload_routes!
         instance.active = true
       end
-      alias :activate :activate_extension
 
       def deactivate_extension
         return unless instance.active?
@@ -131,14 +128,6 @@ module TrustyCms
         instance.migrates_from[extension_name] = until_migration
       end
 
-      # Expose the configuration object for init hooks
-      # class MyExtension < ActiveRecord::Base
-      #   extension_config do |config|
-      #     config.after_initialize do
-      #       run_something
-      #     end
-      #   end
-      # end
       def extension_config(&block)
         yield Rails.configuration
       end
