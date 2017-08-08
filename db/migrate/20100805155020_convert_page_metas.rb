@@ -1,4 +1,4 @@
-class ConvertPageMetas < ActiveRecord::Migration
+class ConvertPageMetas < ActiveRecord::Migration[5.1]
   def self.up
     remove_column :pages, :keywords
     remove_column :pages, :description

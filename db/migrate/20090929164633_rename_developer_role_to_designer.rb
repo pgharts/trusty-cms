@@ -1,4 +1,4 @@
-class RenameDeveloperRoleToDesigner < ActiveRecord::Migration
+class RenameDeveloperRoleToDesigner < ActiveRecord::Migration[5.1]
   def self.up
     rename_column 'users', 'developer', 'designer'
   end

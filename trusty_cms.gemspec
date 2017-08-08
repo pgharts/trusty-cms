@@ -25,7 +25,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "tzinfo",          "~> 1.2.3"
-  s.add_dependency "rails",           "~> 5.0.1"
+  s.add_dependency "rails",           "~> 5.1"
   s.add_dependency "rdoc",            "~> 5.1"
   s.add_dependency "acts_as_tree",    "~> 2.6.1"
   s.add_dependency "bundler",         "~> 1.7"

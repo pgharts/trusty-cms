@@ -28,7 +28,7 @@ namespace :db do
       # that's not a setup anyone would recommend.
       #
       ActiveRecord::Base.connection.tables.each do |table|
-        ActiveRecord::Migration.drop_table table
+        ActiveRecord::Migration[5.1].drop_table table
       end
       Rake::Task["db:migrate"].invoke
     else
@@ -64,7 +64,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
 
   desc "Migrate the database through all available migration scripts (looks for db/migrate/* in trusty-cms, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
   task :migrate => [:environment, 'db:migrate:trusty_cms', 'db:migrate:extensions'] do
-    ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+    ActiveRecord::Migration[5.1].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
     ActiveRecord::Migrator.migrate("db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
     Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
   end
@@ -72,7 +72,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
   namespace :migrate do
     desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
     task :trusty_cms => :environment do
-      ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+      ActiveRecord::Migration[5.1].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
       ActiveRecord::Migrator.migrate(File.join(TrustyCms.root, 'db', 'migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
       Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
     end
