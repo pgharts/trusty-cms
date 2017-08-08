@@ -1,4 +1,4 @@
-class ChangeUserLanguageToLocale < ActiveRecord::Migration
+class ChangeUserLanguageToLocale < ActiveRecord::Migration[5.1]
   def self.up
     rename_column 'users', 'language', 'locale'
   end

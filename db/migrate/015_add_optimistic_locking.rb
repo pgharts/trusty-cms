@@ -1,4 +1,4 @@
-class AddOptimisticLocking < ActiveRecord::Migration
+class AddOptimisticLocking < ActiveRecord::Migration[5.1]
 
   def self.up
     [:pages, :layouts, :snippets, :users].each do |table|

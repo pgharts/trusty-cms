@@ -1,4 +1,4 @@
-class AddDescriptionAndKeywordsToPages < ActiveRecord::Migration
+class AddDescriptionAndKeywordsToPages < ActiveRecord::Migration[5.1]
   def self.up
     add_column :pages, :description, :string
     add_column :pages, :keywords, :string
