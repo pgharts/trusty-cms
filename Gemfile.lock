@@ -168,13 +168,13 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.2)
     mysql2 (0.4.9)
     nio4r (2.1.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     poltergeist (1.14.0)
       capybara (~> 2.1)
@@ -312,6 +312,7 @@ DEPENDENCIES
   simplecov
   trusty-cms!
   trustygems (~> 0.2.0)
+
 
 BUNDLED WITH
    1.16.0.pre.2
