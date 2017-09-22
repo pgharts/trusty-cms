@@ -10,7 +10,7 @@ class Admin::PagePartsController < Admin::ResourceController
 private
 
   def page_parts_params
-    params.permit(:name, :filter_id, :content)
+    params.require(:page_part).permit(:name, :filter_id, :content)
   end
 
 end
