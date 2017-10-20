@@ -28,3 +28,4 @@ group :development, :test do
 end
 
 gem 'nokogiri', '>= 1.7.1'
+gem 'puma'

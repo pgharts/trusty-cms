@@ -193,6 +193,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.0)
+    puma (3.10.0)
     rack (2.0.3)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -310,12 +311,12 @@ DEPENDENCIES
   pry (~> 0.10.0)
   pry-byebug
   pry-rails
+  puma
   rails-observers!
   rspec-rails
   simplecov
   trusty-cms!
   trustygems (~> 0.2.0)
-
 
 BUNDLED WITH
    1.16.0.pre.2
