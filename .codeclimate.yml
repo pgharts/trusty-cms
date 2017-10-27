@@ -19,6 +19,7 @@ exclude_paths:
 - db/migrate/**/*
 - config/**/*
 - app/assets/javascripts/admin/jquery-ui.js
+- app/assets/javascripts/admin/jquery.treetable.js
 - app/assets/javascripts/admin/modernizr.js
 - app/assets/bower_components/**/*
 - app/assets/javascripts/ckeditor/*
