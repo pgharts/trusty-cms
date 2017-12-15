@@ -70,10 +70,12 @@ class Admin::PagesController < Admin::ResourceController
     end
 
     def render_preview
+      params.permit!
       Page.transaction do
         page_class = Page.descendants.include?(model_class) ? model_class : Page
         if request.referer =~ %r{/admin/pages/(\d+)/edit}
           page = Page.find($1).becomes(page_class)
+          layout_id = page.layout_id
           page.update_attributes(params[:page])
           page.published_at ||= Time.now
         else

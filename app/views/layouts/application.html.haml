@@ -7,7 +7,8 @@
     - @stylesheets.uniq.each do |stylesheet|
       = stylesheet_link_tag stylesheet, media: "all"
 
-    %script{:type=>"text/javascript"}="var relative_url_root = '#{ActionController::Base.relative_url_root}';"
+    %script{:type=>"text/javascript"}
+      var relative_url_root = "#{ActionController::Base.relative_url_root}";
 
     = javascript_include_tag 'admin'
     - @javascripts.uniq.each do |javascript|
