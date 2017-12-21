@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails-observers
-  revision: c569dc1525259f5ab82cddf90958777473499997
+  revision: fb6b95509c3f1a50c973280ddc2b56648e33623f
   specs:
     rails-observers (0.2.0)
       activemodel (>= 4.2)
@@ -318,6 +318,7 @@ DEPENDENCIES
   simplecov
   trusty-cms!
   trustygems (~> 0.2.0)
+
 
 BUNDLED WITH
    1.16.0
