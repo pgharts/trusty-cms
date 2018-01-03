@@ -356,7 +356,7 @@ class Page < ActiveRecord::Base
     end
 
     def clean_path(path)
-      "/#{ path.to_s.strip }/".gsub(%r{//+}, '/')
+      "/#{ path.to_s.strip }".gsub(%r{//+}, '/')
     end
     alias_method :clean_url, :clean_path
 
