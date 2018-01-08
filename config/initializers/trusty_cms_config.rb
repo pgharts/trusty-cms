@@ -15,3 +15,7 @@ TrustyCms.config do |config|
   config.define 'user.allow_password_reset?', :default => true
   config.define 'session_timeout', :default => 2.weeks
 end
+
+if TrustyCms.config_definitions['defaults.snippet.filter'].nil?
+  TrustyCms.config.define 'defaults.snippet.filter', :select_from => lambda { TextFilter.descendants.map { |s| s.filter_name }.sort }, :allow_blank => true
+end
