@@ -29,3 +29,4 @@ trusty-cms.box
 .sass-cache
 /coverage/*
 node_modules/**/*
+spec/dummy/node_modules/**/*
