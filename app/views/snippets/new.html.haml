@@ -1,0 +1,9 @@
+- render_region :main do |main|
+  - main.edit_header do
+    %h1= t('new_snippet')  
+  - main.edit_form do
+    = render :partial => 'form'
+  - main.edit_popups do
+    = render :partial => "popups"
+
+- content_for 'page_scripts'
