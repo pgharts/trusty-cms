@@ -1,0 +1,14 @@
+{
+  "name": "trusty-cms",
+  "version": "3.1.6",
+  "description": "TrustyCMS is a branch of Radiant CMS. Its goal is to pull the Radiant framework into Rails 5 with minimal changes to its infrastructure.",
+  "main": "index.js",
+  "repository": "https://github.com/pgharts/trusty-cms.git",
+  "author": "Danielle Greaves <danigreaves@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui-bundle": "^1.12.1",
+    "jquery-ujs": "^1.2.2"
+  }
+}

@@ -28,3 +28,4 @@ trusty-cms.box
 *.gem
 .sass-cache
 /coverage/*
+node_modules/**/*
