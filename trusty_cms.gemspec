@@ -33,7 +33,6 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency "haml",            "~> 5.0"
   s.add_dependency "haml-rails",      "~> 1.0.0"
   s.add_dependency "sass-rails",      "~> 5.0.6"
-  s.add_dependency "jquery-rails",    "~> 4.3.1"
   s.add_dependency "compass-rails",   "~> 3.0.2"
   s.add_dependency "highline",        "~> 1.7.8"
   s.add_dependency "mysql2",          "~> 0.4.2"

@@ -2,6 +2,7 @@ module TrustyCms
   class Engine < Rails::Engine
     paths["app/helpers"] = []
     initializer "trusty_cms.assets.precompile" do |app|
+      app.config.assets.paths << Rails.root.join('../trusty-cms/node_modules')
       app.config.assets.precompile += %w(
       admin/main.css admin.js
       ckeditor/config.js
