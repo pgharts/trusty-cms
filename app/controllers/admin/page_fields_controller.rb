@@ -10,7 +10,7 @@ class Admin::PageFieldsController < Admin::ResourceController
   private
 
   def page_fields_params
-    params.permit(:name, :content)
+    params.require(:page_field).permit(:name, :content)
   end
 
 end
