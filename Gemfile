@@ -16,7 +16,7 @@ group :development, :test do
   gem 'capybara',         '~> 2.13.0'
   gem 'rspec-rails'
   gem 'launchy',          '~> 2.4.2'
-  gem 'database_cleaner', '~> 1.5.3'
+  gem 'database_cleaner'
   gem 'poltergeist',      '~> 1.14.0'
   gem 'factory_girl_rails', '~> 4.6.0'
   gem 'rails-observers', :git => 'https://github.com/rails/rails-observers'

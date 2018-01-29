@@ -25,6 +25,9 @@
 @import "partials/validations";
 @import "partials/treetable";
 
+@import "multi_site_main";
+@import "site_chooser";
+
 // JQueryUI Partials
 @import "partials/jquery-ui";
 @import "partials/jquery-ui-structure";

@@ -1,3 +1,5 @@
+require 'multi_site/engine'
+
 TrustyCms.config do |config|
   config.define 'admin.title', :default => "TrustyCms CMS"
   config.define 'dev.host'
@@ -14,8 +16,12 @@ TrustyCms.config do |config|
   config.define 'site.host', :default => "www.example.com", :allow_blank => false
   config.define 'user.allow_password_reset?', :default => true
   config.define 'session_timeout', :default => 2.weeks
+  require 'multi_site/scoped_validation'
 end
 
 if TrustyCms.config_definitions['defaults.snippet.filter'].nil?
   TrustyCms.config.define 'defaults.snippet.filter', :select_from => lambda { TextFilter.descendants.map { |s| s.filter_name }.sort }, :allow_blank => true
 end
+
+Admin::LayoutsController.send :helper, MultiSite::SiteChooserHelper
+Admin::SnippetsController.send :helper, MultiSite::SiteChooserHelper
