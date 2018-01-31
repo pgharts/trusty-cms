@@ -1,0 +1,43 @@
+= stylesheet_link_tag 'admin/multi_site'
+= render_region :top 
+
+%h1 Sites
+
+%table{:class => "index", :cellspacing => "0"}
+  %thead
+    %tr
+      - render_region :thead do |thead|
+        - thead.title_header do
+          %th.site Name
+        - thead.domain_header do
+          %th.domain Domain match
+        - thead.basedomain_header do
+          %th.basedomain Base domain
+        - thead.modify_header do
+          %th.remove Delete
+        - thead.order_header do
+          %th.order Order
+    %tbody
+    - @sites.each do |site|
+      %tr.node.level-1
+        - render_region :tbody do |tbody|
+          - tbody.title_cell do
+            %td.site
+              = link_to site.name, edit_admin_site_path(site)
+          - tbody.domain_cell do
+            %td.domain
+              = h(site.domain)
+          - tbody.basedomain_cell do
+            %td.basedomain
+              = h(site.base_domain)
+          - tbody.modify_cell do
+            %td.remove
+              = link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
+          - tbody.order_cell do
+            %td.order
+              = order_links(site).html_safe
+
+- render_region :bottom do |bottom|
+  - bottom.new_button do
+    %p
+      = link_to "New Site", new_admin_site_path

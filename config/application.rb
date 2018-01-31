@@ -92,8 +92,6 @@ module TrustyCms
     # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
-
 
     config.filter_parameters += [:password, :password_confirmation]
 

@@ -1,0 +1,8 @@
+- unless current_user.site
+  %tr
+    %th.label
+      %label{:for=>"user_admin"} Can edit site
+    %td.field{:style => 'text-align: left;'}
+      = select :user, :site_id, [['<any>', '']] + Site.all.map { |s| [s.name, s.id] }
+    %td.help
+      A user with no site is able to act (to whatever extent their status allows) on any site.

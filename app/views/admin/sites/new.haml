@@ -1,0 +1,7 @@
+= stylesheet_link_tag 'admin/multi_site'
+- render_region :main do |main|
+  - main.edit_header do
+    %h1 New Site
+  - main.edit_form do
+    = form_for @site, :url => admin_sites_path do |f|
+      = render :partial => "form", :locals => {:f => f}

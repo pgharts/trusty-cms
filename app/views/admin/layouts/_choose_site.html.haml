@@ -1,0 +1,8 @@
+- unless current_user.site
+  %p{:style => 'float: left; margin-right: 32px'}
+    %label{:for=>"layout_site_id", :Class => "admin_only"}
+      Site
+    - sites = Site.all.map { |s| [s.name, s.id] }
+    - selection = {:include_blank => Layout.is_shareable?}
+    - selection[:selected] = current_site.id if @layout.new_record? && ! Layout.is_shareable?
+    = select :layout, :site_id, sites, selection

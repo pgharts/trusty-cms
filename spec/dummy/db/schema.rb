@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20161027141250) do
     t.integer "updated_by_id"
     t.string "content_type", limit: 40
     t.integer "lock_version", default: 0
+    t.integer "site_id"
   end
 
   create_table "page_fields", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -65,10 +66,12 @@ ActiveRecord::Schema.define(version: 20161027141250) do
     t.integer "updated_by_id"
     t.boolean "virtual", default: false, null: false
     t.integer "lock_version", default: 0
+    t.integer "site_id"
     t.text "allowed_children_cache"
     t.integer "position"
     t.index ["class_name"], name: "pages_class_name"
     t.index ["parent_id"], name: "pages_parent_id"
+    t.index ["site_id"], name: "index_pages_on_site_id"
     t.index ["slug", "parent_id"], name: "pages_child_slug"
     t.index ["virtual", "status_id"], name: "pages_published"
   end
@@ -81,6 +84,20 @@ ActiveRecord::Schema.define(version: 20161027141250) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "domain"
+    t.integer "homepage_id"
+    t.integer "position", default: 0
+    t.integer "created_by_id"
+    t.datetime "created_at"
+    t.integer "updated_by_id"
+    t.datetime "updated_at"
+    t.string "subtitle"
+    t.string "abbreviation"
+    t.string "base_domain"
+  end
+
   create_table "snippets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", limit: 100, default: "", null: false
     t.string "filter_id", limit: 25
@@ -90,7 +107,8 @@ ActiveRecord::Schema.define(version: 20161027141250) do
     t.integer "created_by_id"
     t.integer "updated_by_id"
     t.integer "lock_version", default: 0
-    t.index ["name"], name: "name", unique: true
+    t.integer "site_id"
+    t.index ["name", "site_id"], name: "name_site_id", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -108,10 +126,10 @@ ActiveRecord::Schema.define(version: 20161027141250) do
     t.text "notes"
     t.integer "lock_version", default: 0
     t.string "session_token"
+    t.integer "site_id"
     t.string "locale"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.index ["login"], name: "login", unique: true
   end
 
 end

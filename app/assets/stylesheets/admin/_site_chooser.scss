@@ -1,0 +1,76 @@
+//colors
+$color_turquoise_blue_approx: #66d9e0;
+$white: #fff;
+$black: #000;
+
+#site_chooser {
+	width: 20%;
+	border-collapse: collapse;
+	float: right;
+}
+#nav {
+	list-style: none;
+	font-weight: bold;
+	margin-bottom: 10px;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	margin: 0;
+	cursor: pointer;
+	li {
+		margin-right: 10px;
+		position: relative;
+		color: $color_turquoise_blue_approx;
+		&:hover {
+			a {
+				background: $black;
+				text-decoration: underline;
+			}
+			ul a {
+				text-decoration: none;
+			}
+		}
+	}
+	a {
+		display: block;
+		padding: 5px;
+		color: $white;
+		background: $black;
+		text-decoration: none;
+		&:hover {
+			color: $white;
+			background: $black;
+			text-decoration: underline;
+		}
+		&.site-link:hover {
+			color: $color_turquoise_blue_approx;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all 0.2s;
+		}
+	}
+	ul {
+		background: $white;
+		background: rgba(255,255,255,0);
+		list-style: none;
+		position: absolute;
+		margin-top: 10px;
+		visibility: hidden;
+		opacity: 0;
+		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: opacity 0.2s;
+		li {
+			float: none;
+		}
+		a {
+			white-space: nowrap; 
+		}
+	}
+	&:hover ul {
+		visibility: visible;
+		opacity: 1;
+		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: opacity 0.2s;
+		z-index: 99999;
+	}
+}

@@ -1,0 +1,50 @@
+= render_region :form_top
+.form-area
+  - render_region :form do |form|
+
+    - form.edit_name do
+      %fieldset.title
+        %h1
+          %i.fa.fa-sitemap
+          Site Information
+        %label{:for => "site_name"} Site title
+        = f.text_field :name, :class => "textbox", :size => 50
+        %br
+        %label{:for => "site_subtitle"} and subtitle
+        = f.text_field :subtitle, :class => "textbox"
+
+    - form.edit_domain do
+      %fieldset.domain
+        %h1
+          %i.fa.fa-lightbulb-o
+          Domain Information
+        %label{:for => "site_domain"}
+          Domain pattern
+        = f.text_field :domain, :class => "textbox", :size => 50
+        %br
+        %label{:for => "site_base_domain"}
+          Base domain name
+        = f.text_field :base_domain, :class => "textbox", :size => 50
+
+    - form.edit_homepage do
+      %fieldset.homepage
+        %h1
+          %i.fa.fa-home
+          Homepage ID
+        %label{:for => "site_homepage_id"} Homepage ID
+        = f.text_field :homepage_id, :class => "textbox"
+
+  %p.formnote
+    - if f.object.new_record?
+      A new homepage will be created automatically if none is specified.
+    - else
+      If you change the site homepage ID, be sure it is to a page with no parents.
+  
+  - render_region :form_bottom do |form_bottom|
+    - form_bottom.edit_timestamp do
+      = updated_stamp @site  
+      - form_bottom.edit_buttons do
+        %p.buttons
+          = save_model_button(@site)
+          or
+          = link_to "cancel", admin_sites_path
