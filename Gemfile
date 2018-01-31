@@ -25,6 +25,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'simplecov'
   gem 'codeclimate-test-reporter'
+  gem 'acts_as_list'
 end
 
 gem 'nokogiri', '>= 1.7.1'
