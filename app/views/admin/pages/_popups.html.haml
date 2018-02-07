@@ -24,6 +24,7 @@
         = f.text_field :name, :maxlength=>100, :class=>'textbox big', :style=>"width: 15em"
         = hidden_field_tag 'index', 2, :id=>'page_field_index_field'
         = hidden_field_tag 'page_field_counter', @page.fields.size
+        = f.hidden_field :page_id, value: @page.id
       .buttons
         = submit_tag t('add_field'), :class=>'button', :id=>'add_page_field_button'
         = t('or')
