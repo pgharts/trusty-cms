@@ -1,5 +1,3 @@
-= stylesheet_link_tag 'admin/multi_site'
-
 - if admin? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
   %nav#site_chooser
     %ul#nav
