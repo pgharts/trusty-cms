@@ -1,0 +1,54 @@
+- @stylesheets << 'admin/assets'
+= javascript_include_tag 'admin/assets_admin'
+
+#assets-container
+  #asset-tabs
+    - render_region :asset_tabs do |asset_tabs|
+      - if @page && !@page.new_record? 
+        - asset_tabs.attachment_tab do
+          %a.asset-tab{ :href => "#page-attachments", :id => "tab_page-attachments" }
+            = t("clipped_extension.attached_assets")
+        - asset_tabs.upload_tab do
+          %a.asset-tab{ :href => "#upload_assets", :id => "tab_upload_assets" }
+            = t("clipped_extension.upload")
+        - asset_tabs.bucket_tab do
+          %a.asset-tab{ :href => "#bucket", :id => "tab_bucket" }
+            = t("clipped_extension.bucket")
+        - asset_tabs.search_tab do  
+          %a.asset-tab{ :href => "#search-assets" }
+            = t("clipped_extension.search")
+      - else
+        - asset_tabs.bucket_tab do
+          %a.asset-tab.here{ :href => "#" }
+            = t("clipped_extension.bucket")
+    - if @page && !@page.new_record? 
+      - render_region :asset_panes do |asset_panes|
+
+        - asset_panes.page_attachments do 
+          #page-attachments.pane
+            %p
+              %span.note 
+                != t("clipped_extension.asset_note")
+            %ul#attachments
+              = render :partial => "admin/assets/page_assets" 
+            .clear
+      
+        - asset_panes.upload do
+          #upload_assets.pane
+            %p
+              %span.note
+                != t("clipped_extension.asset_page_upload_note")
+            = render :partial => "admin/assets/upload_to_page"
+            .clear
+        - asset_panes.search do
+          #search-assets.pane
+            - form_tag do
+              %p
+                %label.note{ :for => 'search' }
+                  = t("clipped_extension.search_assets")
+                %input{ :type => "hidden", :name => "search", :value => @page.id }
+                %input{ :type => "search", :id => "search", :name => "search" }
+                = submit_tag t("clipped_extension.search")
+            #search-results
+            .clear
+            = observe_field 'search',  :frequency => 1, :update => 'search-results', :url =>  admin_assets_path(:asset_page => @page), :method => 'get', :with => "'search=' + escape(value)"

@@ -1,0 +1,3 @@
+- if @asset.errors && !@asset.errors.empty?
+  %p#asset_errors
+    %strong= t("clipped_extension.asset_errors", :errors => @asset.errors.full_messages.to_sentence)

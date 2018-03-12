@@ -1,0 +1,16 @@
+= stylesheet_link_tag 'admin/assets'
+
+%h1= t("clipped_extension.remove_asset")
+%p.warning= t("clipped_extension.confirm_remove_asset")
+
+%table.index#assets{:cellpadding => "0", :cellspacing => "0", :border => "0"}
+  %tbody
+    %tr[@asset]
+      %td.icon= image_tag @asset.thumbnail(:icon), :title => @asset.asset_file_name
+      %td.name= @asset.title
+
+= form_for [:admin, @asset], :html => { :method => 'delete' } do
+  .buttons
+    %input.button{:type => "submit", :value => t("clipped_extension.delete_asset")}
+    = t("or")
+    = link_to t("cancel"), admin_assets_path

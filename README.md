@@ -23,7 +23,11 @@ TrustyCMS features:
 * Support for Markdown and Textile as well as traditional HTML (it's easy to
   create other filters)
 * An advanced plugin system
+* Asset management
+* Serve multiple sites (domains) from a single instance
 * Social sharing buttons
+* Reusable bits of content (Snippets)
+* Allows Rails controllers/actions to use Trusty CMS layouts as their "layout"
 * Operates in two modes: dev and production depending on the URL
 * A caching system which expires pages every 5 minutes
 * Built using Ruby on Rails (version 5)

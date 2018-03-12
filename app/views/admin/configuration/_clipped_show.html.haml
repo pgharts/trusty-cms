@@ -1,0 +1,12 @@
+%h4 
+  = t('clipped_extension.assets')
+%p.ruled
+  = show_config 'assets.max_asset_size'
+%p.ruled
+  = show_config 'assets.display_size'
+%p.ruled
+  = show_config 'assets.insertion_size'
+- %w{image video pdf}.each do |type|
+  %p.ruled
+    = show_config "assets.create_#{type}_thumbnails?"
+    

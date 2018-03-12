@@ -1,0 +1,30 @@
+- assets ||= @assets
+- page ||= @page
+- with_pagination ||= false
+
+- if assets.empty?
+  %p
+    = t("clipped_extension.no_assets")
+- else
+  - if with_pagination && assets.respond_to?(:total_pages) && assets.total_pages > 1
+    = pagination_for(assets, pagination_parameters.merge(:depaginate => false, :params => {:controller => 'admin/assets', :action => 'index', :id => nil, :format => 'js'}))
+
+  %ul
+    - assets.each_with_index do |asset, index|
+      - asset_type = asset.image? ? "image" : "link"
+      %li{:class => "#{asset_type} asset", :id => "asset_#{asset.id}"}
+        .front
+          .thumbnail= image_tag asset.thumbnail(:thumbnail)
+        .back
+          .title
+            = asset.title
+          %ul.actions
+            - if @page
+              %li= asset_insertion_link(asset)
+              %li= asset_attachment_link(asset)
+            - else
+              %li= link_to t('clipped_extension.edit'), admin_asset_path(asset), :class => 'edit'
+              %li= link_to t("clipped_extension.remove"), remove_admin_asset_path(asset), :class => "delete"
+            
+  - if with_pagination && assets.respond_to?(:total_pages) && assets.total_pages > 1
+    = pagination_for(assets, pagination_parameters.merge(:depaginate => false, :param_name => 'p', :params => {:controller => 'admin/assets', :action => 'index', :id => nil, :format => 'js', :page_id => (page && page.id), :pp => assets.per_page }))

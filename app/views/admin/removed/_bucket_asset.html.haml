@@ -1,0 +1,9 @@
+%li
+
+  %div{ :class => "#{asset_type} asset", :id =>  "bucket_#{asset_id}" }
+    = link_to image_tag(asset_thumbnail), asset_url, :title => asset_title, :class => "bucket_link"
+
+  .info{ :id => "#{asset_id}_info" }
+    = link_to image('assets/edit'), edit_admin_asset_url(asset_id), :class => "edit_asset", :title => t("clipped_extension.edit_asset", :asset => asset_title)
+    - if page && !page.new_record?
+      = link_to image('assets/add'), attach_page_asset_url(:asset => asset_id, :page => page.id), :class => "add_asset", :title => t("clipped_extension.attach_to_page")

@@ -1,0 +1,15 @@
+= stylesheet_link_tag 'admin/assets'
+= javascript_include_tag 'admin/assets_admin'
+
+- content_for :toolbar do
+  = render 'search'
+
+.outset
+  #assets_table.assets
+    = render :partial => 'asset_table', :locals => { assets: @assets, with_pagination: true }
+  %p{style: 'clear: both; height: 2em'} &nbsp;
+  
+- render_region :bottom do |bottom|
+  #actions
+    %ul
+      %li= link_to((image('upload') + ' ' + t('clipped_extension.upload_asset')), new_admin_asset_path)

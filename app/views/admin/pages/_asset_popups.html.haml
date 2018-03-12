@@ -1,0 +1,37 @@
+- render_region :asset_popups do |popups|
+  - popups.upload_asset do
+    #upload_asset.popup.textured{:style => "display: none; width: 28em"}
+      #upload_asset_busy.busy{:style => "display: none"}= image('spinner.gif', :alt => "")
+      
+      .popup_title= t('clipped_extension.upload_asset')
+
+      = form_for([:admin, Asset.new], :html => {:method => 'post', :multipart => true, :class => 'upload_asset'}) do |f|
+        = hidden_field_tag "for_attachment", 1
+        = hidden_field_tag "page_id", @page.id
+        #upload-controls
+          %p
+            = f.label :asset, t("clipped_extension.choose_file")
+            = f.file_field :asset, :class => 'file', :multiple => true
+            #upload-status{:style => 'display: none;'}
+              %img{:src => "/assets/admin/spinner.gif"}
+          %p
+            %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
+
+      -#%a.close_popup{:href=>"#"}= 'Upload Complete. Click to Close.'
+    
+  - popups.attach_asset do
+    #attach_asset.popup.textured{:style=>"display: none;"}
+      
+      .popup_title= t('clipped_extension.find_assets')
+      
+      .toolbar
+        = render :partial => 'admin/assets/search'
+      
+      #assets_table.assets.viewport{:style=>"height: 320px; width: 610px"}
+        - assets = Asset.all.paginate(:per_page => 20, page: params[:p])
+        = render :partial => 'admin/assets/asset_table', :locals => {:assets => assets, :with_pagination => true}
+    
+      .busy{:style => "display: none"}= image('spinner.gif', :alt => "")
+      .buttons
+        %a.cancel.close_popup{:href=>"#"}= t('close')
+        %a{:href=>"#upload_asset", :id=> "upload_asset_link", :style => 'color: #666; float: left'}= t('clipped_extension.upload_asset')
