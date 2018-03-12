@@ -1,0 +1,17 @@
+= form_tag(admin_assets_path, :id=>'filesearchform', :method => 'get', :class=>"search") do
+  - if @page
+    = hidden_field_tag "page_id", @page.id
+    = hidden_field_tag "p", params['p'] || 1
+    = hidden_field_tag "pp", params['pp'] || 20
+
+  .asset_filters
+    = link_to t("asset_types.all"), admin_assets_url, :id => "select_all", :class => params[:filter].blank? ? "deselective pressed" : "deselective"
+    - AssetType.all.each do |type|
+      - unless type.name == :other
+        = link_to t("asset_types.#{type.plural}"), admin_assets_url(:filter => type.name), :rel => type.name.to_s, :class => params[:filter] == type.name.to_s ? "selective pressed" : "selective"
+  .right
+    %input{:type=>"search", :id => 'filesearchforminput', :class=>"search", :name=>"search", :value=>h(params[:search]), :placeholder=>"Search", :results=>0, :size=>30}
+  
+  #type_boxes{:style => "display: none"}
+    - AssetType.all.each do |type|
+      = check_box_tag 'filter[]',  type.name.to_s, false, :id => "#{type.name}-check", :class => 'selective'

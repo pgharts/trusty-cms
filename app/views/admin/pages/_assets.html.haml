@@ -1,0 +1,13 @@
+= stylesheet_link_tag 'admin/assets'
+= javascript_include_tag 'admin/assets_admin'
+#content.fieldset
+  #attachment_list.assets
+    %ul#attachment_fields{:class => @page.page_attachments.empty? ? 'empty' : ''}
+      = render :partial => 'admin/page_attachments/attachment', :collection => @page.page_attachments
+  %p.note
+    = link_to "path/to/page.html" '#attach_asset', :class => 'button', :id => 'attach_assets' do
+      %i.fa.fa-image
+      = t('clipped_extension.assets')
+    %span.message
+      - if @page.page_attachments.empty?
+        = t('clipped_extension.no_attached_assets')

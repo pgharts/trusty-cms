@@ -1,0 +1,2 @@
+module TrustyCmsClippedExtension
+end

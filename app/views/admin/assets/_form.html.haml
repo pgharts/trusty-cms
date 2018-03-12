@@ -1,0 +1,18 @@
+= render_region :form_top
+- render_region :form do |form|
+  - form.edit_title do
+    %fieldset.title
+  - form.edit_metadata do
+    .drawer
+      .drawer_contents#attributes
+        %table.fieldset
+          %tr
+            %th.label
+              %label{ :for => "asset_caption" }
+                = t("clipped_extension.caption")
+            %td.field
+              = f.text_field :caption, :class => 'textbox', :maxlength => 255
+          = render_region :extended_metadata, :locals => {:f => f}
+      .drawer_handle
+        %a.toggle.more{:href=>'#attributes', :rel=>"toggle[attributes]"}
+          = t('more')

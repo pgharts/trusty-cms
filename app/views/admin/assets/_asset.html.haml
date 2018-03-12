@@ -1,0 +1,12 @@
+- asset ||= @asset
+- asset_type = asset.image? ? "image" : "link"
+
+%li{:class => "#{asset_type} asset", :id => "asset_#{asset.id}"}
+  .front
+    .thumbnail= image_tag asset.thumbnail(:thumbnail)
+  .back
+    .title= asset.title
+    %ul.actions
+      %li
+        = link_to t('clipped_extension.edit'), edit_admin_asset_url(asset), :class => 'edit_asset'
+        = link_to t('clipped_extension.remove'), remove_admin_asset_url(asset), :class => 'remove_asset'

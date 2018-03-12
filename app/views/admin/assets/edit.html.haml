@@ -1,0 +1,40 @@
+= stylesheet_link_tag 'admin/assets'
+= render_region :top 
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1= t("clipped_extension.asset_edit_title")
+  
+  - main.edit_form do
+    - form_for :asset, :url => admin_asset_path(@asset), :html => { :method => "put", :multipart => true } do |f|
+      .form_area
+        = render :partial => "form", :locals => { :f => f }
+        
+        %div.content
+          %fieldset
+            %label.filename
+              = "#{t("clipped_extension.filename")}: #{@asset.asset_file_name unless @asset.new_record?}"
+          %p.asset
+            - display_size = TrustyCms::config['assets.display_size'] || 'normal'
+            = image_tag @asset.thumbnail(display_size.to_sym), :class => 'preview'
+
+          = updated_stamp @asset
+        
+        %fieldset.upload
+          %label.upload
+            = t("clipped_extension.replace_file")
+          = f.file_field :asset, :class => "", :style => "width: 100%"
+        
+        .buttons
+          = save_model_button(@asset)
+          = save_model_and_continue_editing_button(@asset)
+          = t("or")
+          = link_to t("cancel"), admin_assets_path
+  
+  - main.edit_regenerate do
+    - if current_user.admin? or current_user.designer?
+      %fieldset= t("clipped_extension.regenerate_thumbnails")
+      
+      - form_tag refresh_admin_asset_path(@asset), :method => :put do
+        %p.asset_buttons
+          %input.button{ :type => "submit", :value => t("clipped_extension.regenerate") }

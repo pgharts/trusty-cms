@@ -1,0 +1,24 @@
+= stylesheet_link_tag 'admin/assets'
+= render_region :top 
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1= t("clipped_extension.new_asset")
+
+    - main.edit_form do
+      - form_for :asset, :url => admin_assets_path, :html => { :method => "post", :multipart => true } do |f|
+
+        = render :partial => "form", :locals => { :f => f }
+
+        %fieldset
+          %label= t("clipped_extension.choose_file")
+          = f.file_field :asset, :style => "width: 100%", :multiple => true
+
+        .buttons
+          = save_model_button(@asset)
+          = save_model_and_continue_editing_button(@asset)
+          = t("or")
+          = link_to t("cancel"), admin_assets_path
+
+    - main.edit_regenerate do
+      &nbsp;
