@@ -40,7 +40,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'paperclip',       '> 5.2'
   s.add_dependency 'rack',            '~> 2.0.1'
   s.add_dependency 'rack-cache',      '~> 1.7'
-  s.add_dependency 'rails',           '~> 5.1'
+  s.add_dependency 'rails',           '~> 5.2.0.rc2'
   s.add_dependency 'rdoc',            '~> 5.1'
   s.add_dependency 'radius',          '~> 0.7'
   s.add_dependency 'RedCloth',        '4.3.2'
