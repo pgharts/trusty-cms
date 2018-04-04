@@ -1,5 +1,6 @@
 class ClippedExtension < TrustyCms::Extension
   migrate_from 'Paperclipped', 20100327111216
+  require 'admin/assets_helper'
 
   def activate
     if Asset.table_exists?

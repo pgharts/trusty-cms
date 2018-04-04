@@ -19,9 +19,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'launchy',         '~> 2.4.2'
   gem 'mysql2',          '~> 0.4.2'
-  gem 'rails-observers', :git => 'https://github.com/rails/rails-observers'
-  gem 'rspec-rails'
   gem 'poltergeist',      '~> 1.14.0'
-  gem 'protected_attributes_continued'
   gem 'pry-byebug'
+  gem 'rails-observers'
+  gem 'rspec-rails'
 end

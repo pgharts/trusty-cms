@@ -76,21 +76,33 @@ module TrustyCms
 
     class << self
       def [](key)
-        if table_exists?
-          unless TrustyCms::Config.cache_file_exists?
-            TrustyCms::Config.ensure_cache_file
-            TrustyCms::Config.initialize_cache
+        if database_exists?
+          if table_exists?
+            unless TrustyCms::Config.cache_file_exists?
+              TrustyCms::Config.ensure_cache_file
+              TrustyCms::Config.initialize_cache
+            end
+            TrustyCms::Config.initialize_cache if TrustyCms::Config.stale_cache?
+            Rails.cache.read('TrustyCms::Config')[key]
           end
-          TrustyCms::Config.initialize_cache if TrustyCms::Config.stale_cache?
-          Rails.cache.read('TrustyCms::Config')[key]
         end
       end
 
       def []=(key, value)
-        if table_exists?
-          setting = where(key: key).first_or_initialize
-          setting.value = value
+        if database_exists?
+          if table_exists?
+            setting = where(key: key).first_or_initialize
+            setting.value = value
+          end
         end
+      end
+
+      def database_exists?
+        ActiveRecord::Base.connection
+      rescue ActiveRecord::NoDatabaseError
+        false
+      else
+        true
       end
 
       def to_hash
