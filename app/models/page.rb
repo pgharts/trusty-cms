@@ -282,14 +282,16 @@ class Page < ActiveRecord::Base
           $1.camelize.constantize if page =~ %r{/([^/]+)\.rb}
         end
       end
-      if ActiveRecord::Base.connection.data_sources.include?('pages') && Page.column_names.include?('class_name') # Assume that we have bootstrapped
-        Page.connection.select_values("SELECT DISTINCT class_name FROM pages WHERE class_name <> '' AND class_name IS NOT NULL").each do |p|
-          begin
-            p.constantize
-          rescue NameError, LoadError
-            #Rubocop: The use of eval is a serious security risk.
-            #eval(%Q{class #{p} < Page; acts_as_tree; def self.missing?; true end end}, TOPLEVEL_BINDING)
-            Rails.logger.error NameError
+      if database_exists?
+        if ActiveRecord::Base.connection.data_sources.include?('pages') && Page.column_names.include?('class_name') # Assume that we have bootstrapped
+          Page.connection.select_values("SELECT DISTINCT class_name FROM pages WHERE class_name <> '' AND class_name IS NOT NULL").each do |p|
+            begin
+              p.constantize
+            rescue NameError, LoadError
+              #Rubocop: The use of eval is a serious security risk.
+              #eval(%Q{class #{p} < Page; acts_as_tree; def self.missing?; true end end}, TOPLEVEL_BINDING)
+              Rails.logger.error NameError
+            end
           end
         end
       end
@@ -362,6 +364,14 @@ class Page < ActiveRecord::Base
 
     def parent?
       !parent.nil?
+    end
+
+    def database_exists?
+      ActiveRecord::Base.connection
+    rescue ActiveRecord::NoDatabaseError
+      false
+    else
+      true
     end
 
     def lazy_initialize_parser_and_context

@@ -15,16 +15,26 @@ module MultiSite::ScopedValidation
       # Hence the check for a site_id column. It's a hack, but a fairly harmless one.
 
       def validates_uniqueness_of_with_site(*attr)
-        if table_exists? && column_names.include?('site_id')
-          configuration = attr.extract_options!
-          configuration[:scope] ||= :site_id
-          attr.push(configuration)
+        if database_exists?
+          if table_exists? && column_names.include?('site_id')
+            configuration = attr.extract_options!
+            configuration[:scope] ||= :site_id
+            attr.push(configuration)
+          end
+          validates_uniqueness_of_without_site(*attr)
         end
-        validates_uniqueness_of_without_site(*attr)
       end
 
       alias_method :validates_uniqueness_of_without_site, :validates_uniqueness_of
       alias_method :validates_uniqueness_of, :validates_uniqueness_of_with_site
+
+      def database_exists?
+        ActiveRecord::Base.connection
+      rescue ActiveRecord::NoDatabaseError
+        false
+      else
+        true
+      end
     end
 
   end
