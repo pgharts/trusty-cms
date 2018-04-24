@@ -189,7 +189,7 @@ private
   end
 
   def assign_title
-    self.title = self.asset_file_name.sub(self.original_extension, "").sub(".", "")
+    self.title = self.asset_file_name.downcase.sub(self.original_extension, "").sub(".", "")
   end
 
   def assign_uuid
