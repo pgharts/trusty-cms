@@ -18,7 +18,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'launchy',         '~> 2.4.2'
-  gem 'mysql2',          '~> 0.4.2'
+  gem 'mysql2',          '~> 0.4.4'
   gem 'poltergeist',      '~> 1.14.0'
   gem 'pry-byebug'
   gem 'rails-observers'
