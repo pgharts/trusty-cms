@@ -13,12 +13,11 @@ gemspec
 
 group :development, :test do
   gem 'acts_as_list'
-  gem 'cocaine'
   gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'launchy',         '~> 2.4.2'
-  gem 'mysql2',          '~> 0.4.2'
+  gem 'mysql2'
   gem 'poltergeist',      '~> 1.14.0'
   gem 'pry-byebug'
   gem 'rails-observers'
