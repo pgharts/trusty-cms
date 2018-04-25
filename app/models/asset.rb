@@ -56,7 +56,7 @@ class Asset < ActiveRecord::Base
                         #'Expires'       => 1.month.from_now.httpdate
                     }
 
-  validates_attachment_content_type :asset, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/javascript", "text/javascript", "text/css"]
+  validates_attachment_content_type :asset, :content_type => ["application/zip", "image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/javascript", "text/javascript", "text/css"]
 
   before_save :assign_title
   before_save :assign_uuid
