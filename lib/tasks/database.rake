@@ -70,7 +70,7 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
     desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
     task :trusty_cms => :environment do
       ActiveRecord::Migration[5.2].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-      Rake::Task['railties:install:migrations'].invoke
+      Rake::Task['railties:install:migrations'].invoke if !Rails.env.test?
       Rake::Task['db:migrate'].invoke
     end
   end
