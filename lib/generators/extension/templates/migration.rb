@@ -1,4 +1,4 @@
-class Create<%= class_name %>Schema < ActiveRecord::Migration[5.1]
+class Create<%= class_name %>Schema < ActiveRecord::Migration[5.2]
   def self.up
 
   end

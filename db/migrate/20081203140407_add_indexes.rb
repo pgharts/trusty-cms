@@ -1,4 +1,4 @@
-class AddIndexes < ActiveRecord::Migration[5.1]
+class AddIndexes < ActiveRecord::Migration[5.2]
   def self.up
     add_index :pages,       :class_name,            :name => 'pages_class_name'
     add_index :pages,       :parent_id,             :name => 'pages_parent_id'

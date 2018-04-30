@@ -1,4 +1,4 @@
-class AddBaseDomainToSites < ActiveRecord::Migration[5.1]
+class AddBaseDomainToSites < ActiveRecord::Migration[5.2]
   def self.up
     add_column :sites, :base_domain, :string
   end

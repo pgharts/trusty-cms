@@ -1,4 +1,4 @@
-class CreateUserObserver < ActiveRecord::Migration[5.1]
+class CreateUserObserver < ActiveRecord::Migration[5.2]
   def self.up
     add_column :assets, :created_by, :integer
     add_column :assets, :updated_by, :integer

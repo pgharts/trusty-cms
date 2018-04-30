@@ -1,4 +1,4 @@
-class AddPositionToPages < ActiveRecord::Migration[5.1]
+class AddPositionToPages < ActiveRecord::Migration[5.2]
   def self.up
     unless column_exists? :pages, :position
       add_column :pages, :position, :integer

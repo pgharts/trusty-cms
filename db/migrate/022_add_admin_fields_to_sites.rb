@@ -1,4 +1,4 @@
-class AddAdminFieldsToSites < ActiveRecord::Migration[5.1]
+class AddAdminFieldsToSites < ActiveRecord::Migration[5.2]
   def self.up
     add_column :sites, :created_by_id, :integer
     add_column :sites, :created_at, :datetime

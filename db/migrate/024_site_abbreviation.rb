@@ -1,4 +1,4 @@
-class SiteAbbreviation < ActiveRecord::Migration[5.1]
+class SiteAbbreviation < ActiveRecord::Migration[5.2]
   def self.up
     add_column :sites, :abbreviation, :string
   end

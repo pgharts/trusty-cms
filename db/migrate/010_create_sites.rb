@@ -1,4 +1,4 @@
-class CreateSites < ActiveRecord::Migration[5.1]
+class CreateSites < ActiveRecord::Migration[5.2]
   def self.up
     create_table :sites do |t|
       t.column :name, :string

@@ -1,4 +1,4 @@
-class AddOrderToSites < ActiveRecord::Migration[5.1]
+class AddOrderToSites < ActiveRecord::Migration[5.2]
   def self.up
     add_column :sites, :position, :integer, :default => 0
   end

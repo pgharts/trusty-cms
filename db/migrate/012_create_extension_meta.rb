@@ -1,4 +1,4 @@
-class CreateExtensionMeta < ActiveRecord::Migration[5.1]
+class CreateExtensionMeta < ActiveRecord::Migration[5.2]
   def self.up
     create_table 'extension_meta', :force => true do |t|
       t.column 'name', :string

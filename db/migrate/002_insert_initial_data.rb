@@ -1,4 +1,4 @@
-class InsertInitialData < ActiveRecord::Migration[5.1]
+class InsertInitialData < ActiveRecord::Migration[5.2]
 
   # Historical. We no longer rely on this migration to insert the initial data into
   # the database. Instead we recommend `rake db:bootstrap`.

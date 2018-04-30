@@ -1,4 +1,4 @@
-class ChangePagesAllowedChildrenCacheToText  < ActiveRecord::Migration[5.1]
+class ChangePagesAllowedChildrenCacheToText  < ActiveRecord::Migration[5.2]
   def self.up
     change_column :pages, :allowed_children_cache, :text
   end

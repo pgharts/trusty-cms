@@ -1,4 +1,4 @@
-class RenameConfigDefaultPartsKey < ActiveRecord::Migration[5.1]
+class RenameConfigDefaultPartsKey < ActiveRecord::Migration[5.2]
 
   def self.up
     rename_config_key 'default.parts', 'defaults.page.parts'

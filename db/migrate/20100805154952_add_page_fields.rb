@@ -1,4 +1,4 @@
-class AddPageFields < ActiveRecord::Migration[5.1]
+class AddPageFields < ActiveRecord::Migration[5.2]
   def self.up
     create_table :page_fields do |t|
       t.integer :page_id

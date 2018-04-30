@@ -1,4 +1,4 @@
-class RemoveUserLoginIndex < ActiveRecord::Migration[5.1]
+class RemoveUserLoginIndex < ActiveRecord::Migration[5.2]
   def self.up
     remove_index "users", :name => "login"
   end
