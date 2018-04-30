@@ -1,4 +1,4 @@
-class Dimensions < ActiveRecord::Migration[5.1]
+class Dimensions < ActiveRecord::Migration[5.2]
   def self.up
     add_column :assets, :original_width, :integer
     add_column :assets, :original_height, :integer

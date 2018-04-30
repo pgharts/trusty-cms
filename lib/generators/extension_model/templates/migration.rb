@@ -1,4 +1,4 @@
-class <%= migration_name %> < ActiveRecord::Migration[5.1]
+class <%= migration_name %> < ActiveRecord::Migration[5.2]
   def self.up
     create_table :<%= table_name %> do |t|
 <% for attribute in attributes -%>

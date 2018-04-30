@@ -1,4 +1,4 @@
-class RemoveVirtualColumnFromPage < ActiveRecord::Migration[5.1]
+class RemoveVirtualColumnFromPage < ActiveRecord::Migration[5.2]
   def self.up
     remove_column "pages", "virtual"
   end

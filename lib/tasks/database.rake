@@ -28,7 +28,7 @@ namespace :db do
       # that's not a setup anyone would recommend.
       #
       ActiveRecord::Base.connection.tables.each do |table|
-        ActiveRecord::Migration[5.1].drop_table table
+        ActiveRecord::Migration[5.2].drop_table table
       end
       Rake::Task["db:migrate"].invoke
     else
@@ -46,8 +46,6 @@ namespace :db do
       :admin_password => ENV['ADMIN_PASSWORD'],
       :database_template => ENV['DATABASE_TEMPLATE']
     )
-    Rake::Task['db:migrate:extensions'].invoke
-    Rake::Task['trusty_cms:extensions:update_all'].invoke
     puts %{
 Your TrustyCms application is ready to use. Run `rails s -e production` to
 start the server. Your site will then be running at http://localhost:3000
@@ -64,15 +62,16 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
 
   desc "Migrate the database through all available migration scripts (looks for db/migrate/* in trusty-cms, in extensions and in your site) and update db/schema.rb by invoking db:schema:dump. Turn off output with VERBOSE=false."
   task :migrate => [:environment, 'db:migrate:trusty_cms', 'db:migrate:extensions'] do
-    ActiveRecord::Migration[5.1].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+    ActiveRecord::Migration[5.2].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
     Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
   end
 
   namespace :migrate do
     desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
     task :trusty_cms => :environment do
-      ActiveRecord::Migration[5.1].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-      Rake::Task["db:schema:dump"].invoke if ActiveRecord::Base.schema_format == :ruby
+      ActiveRecord::Migration[5.2].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+      Rake::Task['railties:install:migrations'].invoke if !Rails.env.test?
+      Rake::Task['db:migrate'].invoke
     end
   end
 end

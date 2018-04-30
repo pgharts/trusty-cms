@@ -1,4 +1,4 @@
-class AssetUuid < ActiveRecord::Migration[5.1]
+class AssetUuid < ActiveRecord::Migration[5.2]
   def self.up
     add_column :assets, :uuid, :string
     Asset.reset_column_information

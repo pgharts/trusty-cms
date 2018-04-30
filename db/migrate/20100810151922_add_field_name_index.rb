@@ -1,4 +1,4 @@
-class AddFieldNameIndex < ActiveRecord::Migration[5.1]
+class AddFieldNameIndex < ActiveRecord::Migration[5.2]
   def self.up
     remove_index :page_fields, :page_id
     add_index :page_fields, [:page_id, :name, :content]

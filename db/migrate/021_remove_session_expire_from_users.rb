@@ -1,4 +1,4 @@
-class RemoveSessionExpireFromUsers < ActiveRecord::Migration[5.1]
+class RemoveSessionExpireFromUsers < ActiveRecord::Migration[5.2]
   def self.up
     remove_column :users, :session_expire
   end

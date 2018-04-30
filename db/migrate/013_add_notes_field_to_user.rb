@@ -1,4 +1,4 @@
-class AddNotesFieldToUser < ActiveRecord::Migration[5.1]
+class AddNotesFieldToUser < ActiveRecord::Migration[5.2]
   def self.up
     add_column "users", "notes", :text
   end

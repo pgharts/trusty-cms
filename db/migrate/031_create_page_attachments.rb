@@ -1,4 +1,4 @@
-class CreatePageAttachments < ActiveRecord::Migration[5.1]
+class CreatePageAttachments < ActiveRecord::Migration[5.2]
   def self.up
     # See if a page_attachments table from the original 'page_attachments' extension already exists
     # If so, rename the table to old_page_attachments so they can be migrated later

@@ -1,4 +1,4 @@
-class UpdateConfiguration < ActiveRecord::Migration[5.1]
+class UpdateConfiguration < ActiveRecord::Migration[5.2]
   def self.up
     if TrustyCms.config.table_exists?
 

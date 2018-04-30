@@ -1,4 +1,4 @@
-class AddSiteIdToPages < ActiveRecord::Migration[5.1]
+class AddSiteIdToPages < ActiveRecord::Migration[5.2]
   def self.up
     add_column :pages, :site_id, :integer, required: true
     add_index :pages, :site_id

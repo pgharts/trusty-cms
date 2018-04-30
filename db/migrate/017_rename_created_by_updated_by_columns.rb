@@ -1,4 +1,4 @@
-class RenameCreatedByUpdatedByColumns < ActiveRecord::Migration[5.1]
+class RenameCreatedByUpdatedByColumns < ActiveRecord::Migration[5.2]
   def self.up
     %w{pages snippets layouts users}.each do |table|
       rename_column table, :created_by, :created_by_id

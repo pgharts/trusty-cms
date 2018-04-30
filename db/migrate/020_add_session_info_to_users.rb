@@ -1,4 +1,4 @@
-class AddSessionInfoToUsers < ActiveRecord::Migration[5.1]
+class AddSessionInfoToUsers < ActiveRecord::Migration[5.2]
   def self.up
     add_column :users, :session_token, :string
     add_column :users, :session_expire, :datetime

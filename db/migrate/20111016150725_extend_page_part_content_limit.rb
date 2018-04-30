@@ -1,4 +1,4 @@
-class ExtendPagePartContentLimit < ActiveRecord::Migration[5.1]
+class ExtendPagePartContentLimit < ActiveRecord::Migration[5.2]
   def self.up
     if ActiveRecord::Base.connection.adapter_name =~ /m[sy]sql/i
       # Make sure text longer than 64kB is not cropped in MySQL and MSSQL
