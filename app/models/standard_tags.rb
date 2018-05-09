@@ -1200,7 +1200,7 @@ module StandardTags
       paging = pagination_find_options(tag)
       result = []
       tag.locals.previous_headers = {}
-      displayed_children = paging ? findable.paginate(options.merge(paging)) : findable.all(options)
+      displayed_children = paging ? findable.paginate(options.merge(paging)) : findable.all.where(options[:conditions]).order(options[:order])
       displayed_children.each_with_index do |item, i|
         tag.locals.child = item
         tag.locals.page = item
