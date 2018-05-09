@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (3.3.3)
+    trusty-cms (3.3.4)
       RedCloth (= 4.3.2)
       acts_as_list (~> 0.9.5)
       acts_as_tree (~> 2.6.1)
@@ -185,7 +185,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.5.1)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
