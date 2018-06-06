@@ -18,6 +18,24 @@ namespace :db do
     end
   end
 
+  task :remigrate => :environment do
+    require 'highline/import'
+    if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
+
+      # Migrate downward
+      ActiveRecord::Migrator.migrate("#{TRUSTY_CMS_ROOT}/db/migrate/", 0)
+
+      # Migrate upward
+      Rake::Task["db:migrate"].invoke
+
+      # Dump the schema
+      Rake::Task["db:schema:dump"].invoke
+    else
+      say "Task cancelled."
+      exit
+    end
+  end
+
   task :initialize => :environment do
     require 'highline/import'
     if ENV['OVERWRITE'].to_s.downcase == 'true' or agree("This task will destroy any data in the database. Are you sure you want to \ncontinue? [yn] ")
@@ -70,7 +88,6 @@ To add more extensions just add them to your Gemfile and run `bundle install`.
     desc "Migrates the database through steps defined in the core trusty-cms distribution. Usual db:migrate options can apply."
     task :trusty_cms => :environment do
       ActiveRecord::Migration[5.2].verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-      Rake::Task['railties:install:migrations'].invoke if !Rails.env.test?
       Rake::Task['db:migrate'].invoke
     end
   end
