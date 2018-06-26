@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   before_save :update_virtual, :update_status, :set_allowed_children_cache
 
   # Associations
-  acts_as_tree :order => 'title ASC'
+  acts_as_tree :order => 'position ASC'
   has_many :parts, -> {order(:id)}, :class_name => 'PagePart', :dependent => :destroy
   accepts_nested_attributes_for :parts, :allow_destroy => true
   has_many :fields, -> {order(:id)}, :class_name => 'PageField', :dependent => :destroy
@@ -28,8 +28,6 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :slug, :scope => :parent_id
 
   validate :valid_class_name
-
-  default_scope { order('position ASC') }
 
   include TrustyCms::Taggable
   include StandardTags
