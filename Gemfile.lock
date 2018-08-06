@@ -23,7 +23,7 @@ PATH
       rake (< 11.0)
       rdoc (~> 5.1)
       roadie-rails
-      stringex (~> 2.7.1)
+      stringex (>= 2.7.1, < 2.9.0)
       therubyracer (~> 0.12.3)
       tzinfo (~> 1.2.3)
       uglifier (~> 3.2)
@@ -289,7 +289,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stringex (2.7.1)
+    stringex (2.8.4)
     temple (0.8.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
