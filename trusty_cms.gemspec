@@ -32,7 +32,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'execjs',          '~> 2.7'
   s.add_dependency 'haml',            '~> 5.0'
   s.add_dependency 'haml-rails',      '~> 1.0.0'
-  s.add_dependency 'highline',        '~> 1.7.8'
+  s.add_dependency 'highline',        '>= 1.7.8', '< 2.1.0'
   s.add_dependency 'kraken-io'
   s.add_dependency 'mysql2'
   s.add_dependency 'paperclip',       '> 5.2'

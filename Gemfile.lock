@@ -12,7 +12,7 @@ PATH
       execjs (~> 2.7)
       haml (~> 5.0)
       haml-rails (~> 1.0.0)
-      highline (~> 1.7.8)
+      highline (>= 1.7.8, < 2.1.0)
       kraken-io
       mysql2
       paperclip (> 5.2)
@@ -147,7 +147,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
-    highline (1.7.10)
+    highline (2.0.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
