@@ -26,7 +26,7 @@ PATH
       stringex (>= 2.7.1, < 2.9.0)
       therubyracer (~> 0.12.3)
       tzinfo (~> 1.2.3)
-      uglifier (~> 3.2)
+      uglifier (>= 3.2, < 5.0)
       uuidtools (~> 2.1.5)
       will_paginate (~> 3.0)
 
@@ -303,7 +303,7 @@ GEM
       rake
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
+    uglifier (4.1.17)
       execjs (>= 0.3.0, < 3)
     uuidtools (2.1.5)
     websocket-driver (0.7.0)
