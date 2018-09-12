@@ -20,7 +20,7 @@ PATH
       rack-cache (~> 1.7)
       radius (~> 0.7)
       rails (~> 5.2.0)
-      rake (< 11.0)
+      rake (< 13.0)
       rdoc (~> 5.1)
       roadie-rails
       stringex (>= 2.7.1, < 2.9.0)
@@ -238,7 +238,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rake (10.5.0)
+    rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -303,7 +303,7 @@ GEM
       rake
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.18)
+    uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     uuidtools (2.1.5)
     websocket-driver (0.7.0)
