@@ -21,7 +21,7 @@ PATH
       radius (~> 0.7)
       rails (~> 5.2.0)
       rake (< 13.0)
-      rdoc (~> 5.1)
+      rdoc (>= 5.1, < 7.0)
       roadie-rails
       stringex (>= 2.7.1, < 2.9.0)
       therubyracer (~> 0.12.3)
@@ -242,7 +242,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rdoc (5.1.0)
+    rdoc (6.0.4)
     ref (2.0.0)
     roadie (3.4.0)
       css_parser (~> 1.4)
