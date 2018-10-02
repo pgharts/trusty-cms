@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (3.4.0)
+    trusty-cms (3.5.0)
       RedCloth (= 4.3.2)
       acts_as_list (~> 0.9.5)
       acts_as_tree (>= 2.6.1, < 2.8.0)
@@ -171,7 +171,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    marcel (0.3.2)
+    marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mime-types (3.2.2)
@@ -303,7 +303,7 @@ GEM
       rake
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.18)
+    uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     uuidtools (2.1.5)
     websocket-driver (0.7.0)
@@ -331,4 +331,4 @@ DEPENDENCIES
   trustygems (~> 0.2.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.5

@@ -1,3 +1,5 @@
+require 'roadie-rails'
+
 class RadSocialMailer < ApplicationMailer
   include Roadie::Rails::Automatic
 

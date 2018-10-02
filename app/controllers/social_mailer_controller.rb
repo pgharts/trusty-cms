@@ -1,4 +1,5 @@
 class SocialMailerController < ApplicationController
+  include ShareLayouts::Controllers::ActionController
   trusty_layout "default", {:only => :create_social_mail}
   no_login_required
 
