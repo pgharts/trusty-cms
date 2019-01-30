@@ -16,7 +16,7 @@ div.popup {
   }
   .popup_title {
     background: #c5dff5;
-    @include linear-gradient(color_stops(#e5f5ff, #c5dff5));
+    background-image: linear-gradient(to bottom, #e5f5ff, #c5dff5);
     border-bottom: 1px solid #a7cdf0;
     font-weight: bold;
     font-size: 100%;
@@ -45,7 +45,7 @@ div.popup {
     border: 1px solid #dddddd;
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
-    @include single-box-shadow(white, 1px, 1px, 0);
+    box-shadow: 1px 1px 0 white;
     margin: 1em 0;
     overflow: auto;
     table.index {
@@ -61,18 +61,18 @@ div.popup {
     button {
       &.default {
         border: 1px solid #154ca6;
-        @include single-box-shadow(#c7e0f6, 0, 2px, 1px, inset);
+        box-shadow: inset 0 2px 1px #c7e0f6;
         color: white;
-        @include linear-gradient(color-stops(#67b4e1, #78b9e1));
+        background-image: linear-gradient(to bottom, #67b4e1, #78b9e1);
       }
       &:active {
         border: 1px solid #888888;
-        @include single-box-shadow(none);
-        @include linear-gradient(color-stops(#cccccc 0%, #dddddd 15%, #eeeeee 100%));
+        box-shadow: none;
+        background-image: linear-gradient(to bottom, #cccccc 0%, #dddddd 15%, #eeeeee 100%);
       }
       &.default:active {
         border: 1px solid #002c86;
-        @include linear-gradient(color-stops(#4794c1, #78b9e1));
+        background-image: linear-gradient(to bottom, #4794c1, #78b9e1);
       }
       &:focus {
         border-width: 2px;
@@ -227,13 +227,13 @@ div.popup.textured {
     padding: 10px 20px;
     margin: -20px -20px 20px;
     border-bottom: 1px solid #cccccc;
-    @include single-box-shadow(white, 0, 1px, 0);
+    box-shadow: 0 1px 0 white;
   }
   .buttons {
     border-top: 1px solid white;
     margin: 20px -20px -10px;
     padding: 20px;
-    @include single-box-shadow(#cccccc, 0, -1px, 0);
+    box-shadow: 0 -1px 0 #ccc;
   }
 }
 

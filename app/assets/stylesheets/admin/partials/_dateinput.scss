@@ -5,15 +5,15 @@ input.date {
 }
 
 .calendar_popup {
-  @include single-box-shadow;
-  @include border-radius;
+  box-shadow: 0 5px #333;
+  border-radius: 5px;
   z-index: 1000;
   border: 1px solid #b2b2b2;
   background-color: white;
   padding: 5px;
   line-height: 140% !important;
   a {
-    @include border-radius;
+    border-radius: 5px;
   }
   table.calendar {
     font-size: 90%;
@@ -37,7 +37,7 @@ input.date {
       padding: 3px !important;
       margin: 0;
       &.today {
-        @include border-radius;
+        border-radius: 5px;
         background-color: #e5e5e5;
       }
       &.today a {

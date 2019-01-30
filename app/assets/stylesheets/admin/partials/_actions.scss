@@ -1,9 +1,9 @@
 @mixin button-shadow {
-  @include single-box-shadow(#555555, 1px, 2px, 3px);
+  box-shadow: 1px 2px 3px #555;
 }
 
 @mixin no-button-shadow {
-  @include single-box-shadow(#555555, 0, 0, 0);
+  box-shadow: 0 0 0 #555;
 }
 
 #actions {
@@ -12,7 +12,7 @@
   right: 0;
   bottom: 0;
   background: #777777;
-  @include linear-gradient(color-stops(#555555, #666666, #777777, #777777));
+  background-image: linear-gradient(to bottom, #555555, #666666, #777777, #777777);
   ul {
     padding: 14px 8px;
   }
@@ -32,18 +32,20 @@
       padding: 6px 12px 6px 12px;
       margin-right: 1px;
       background: #dddddd;
-      @include linear-gradient(color-stops(#c5c5c5, #f0f0f0 20%, white 35%, white));
+      background-image: linear-gradient(to bottom, #c5c5c5, #f0f0f0 20%, #ffffff 35%, #ffffff);
       color: #999999;
       font-size: 80%;
       text-decoration: none;
-      @include border-bottom-radius(5px);
-      @include border-top-radius(0);
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius:: 5px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
     a {
       text-shadow: 1px 1px 1px #eeeeee;
       &:hover {
         background: #d8d8d8;
-        @include linear-gradient(color-stops(white, white, #dddddd));
+        background-image: linear-gradient(to bottom, #ffffff, #ffffff, #dddddd);
         color: #0076a3;
         @include button-shadow;
       }
@@ -55,7 +57,7 @@
     span.disabled {
       color: #666666;
       background-color: #999999;
-      @include linear-gradient(color-stops(#888888, #999999, #999999, #999999));
+      background-image: linear-gradient(to bottom, #888888, #999999, #999999, #999999);
     }
     span.current {
       color: black;
@@ -95,13 +97,13 @@
 .action_button {
   display: inline;
   background: #d8d8d8;
-  @include linear-gradient(color-stops(white, #cccccc));
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
   color: #333333;
   font-size: 80%;
   padding: 8px 12px;
   text-decoration: none;
   text-shadow: 1px 1px 1px #eeeeee;
-  @include border-radius(5px);
+  border-radius: 5px;
   @include button-shadow;
   &:hover {
     color: #0076a3;

@@ -15,7 +15,8 @@
       padding: 8px 15px 5px;
       text-decoration: none;
       text-transform: titlecase;
-      @include border-top-radius(6px);
+      border-top-left-radius: 6px;
+      border-top-right-radius:: 6px;
       &.here {
         background-color: white;
         color: #737272;
@@ -37,8 +38,8 @@
     clear: both;
     .page {
       background: white;
-      @include linear-gradient(color-stops(white, #f5f1e2 15%, #f5f1e2));
-      @include single-box-shadow(rgba(0, 0, 0, 0.15), 2px, 2px, 3px);
+      background-image: linear-gradient(to bottom, #ffffff, #f5f1e2 15%, #f5f1e2);
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
       padding: 12px 20px 20px;
       p {
         margin-top: 0;

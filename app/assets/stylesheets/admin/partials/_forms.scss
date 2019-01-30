@@ -60,7 +60,7 @@
           padding: 0.2em 0.5em 0.3em;
           text-decoration: none;
           text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
-          @include border-radius(4px);
+          border-radius: 4px;
           &:hover {
             background-color: #555555;
           }
@@ -95,7 +95,7 @@
 
 .drawer_contents {
   background: #c9c9c9;
-  @include border-bottom-right-radius(6px);
+  border-bottom-right-radius: 6px;
   margin: 0;
   margin-right: 2px;
   padding-bottom: 2px;
@@ -104,7 +104,7 @@
     content: "\0020";
     display: block;
     width: 100%;
-    @include linear-gradient(color-stops(rgba(black, 0.3), rgba(black, 0)));
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
     height: 3px;
     margin-bottom: -3px;
   }
@@ -167,7 +167,8 @@
     top: -1px;
     text-shadow: #666666 1px 1px 0;
     text-decoration: none;
-    @include border-bottom-radius(6px);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius:: 6px;
     &:hover,
     &:active,
     &:focus {
@@ -189,16 +190,19 @@
   padding: 1px 15px 10px;
   position: relative;
   margin: 3px 0 20px;
-  @include border-radius(8px);
-  @include pie-clearfix;
+  border-radius: 8px;
+  &:after {
+    clear: both;
+    content: "";
+    display: block;
+  }
   * {
     position: relative;
   }
   &:before {
-    @include linear-gradient(color-stops(white,
-    #f5f1e2 50%,
-    #f5f1e2));
-    @include border-top-radius(10px);
+    background-image: linear-gradient(to bottom, #ffffff, #f5f1e2 50%, #f5f1e2);
+    border-top-left-radius: 10px;
+    border-top-right-radius:: 10px;
     content: "\0020";
     display: block;
     position: absolute;
@@ -298,11 +302,8 @@ body.reversed {
         padding: 20px 15px;
         margin-bottom: 20px;
         overflow: hidden;
-        @include single-box-shadow(#ababab,
-        1px,
-        1px,
-        0);
-        @include border-radius(8px);
+        box-shadow: 1px 1px 0 #ababab;
+        border-radius: 8px;
         h3 {
           font-weight: bold;
           font-size: 120%;
@@ -333,13 +334,7 @@ body.reversed {
       border-radius: 5px;
     }
     .box {
-      @include single-box-shadow(rgba(0,
-      0,
-      0,
-      0.15),
-      2px,
-      2px,
-      3px);
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
     }
   }
 }
@@ -348,15 +343,13 @@ body.single_form {
   #content {
     #single_form {
       background: #f5f1e2;
-      @include linear-gradient(color-stops(#fdfcf9,
-      #f5f1e2 25%,
-      #f5f1e2));
+      background-image: linear-gradient(to bottom, #fdfcf9, #f5f1e2 25%, #f5f1e2);
       border: 0.35em solid #efead3;
       padding: 0.5em 1.5em;
       padding-right: 22px;
       position: relative;
       width: 28em;
-      @include border-radius(6px);
+      border-radius: 6px;
       h1 {
         font-size: 140%;
         margin: 0.75em 0 1.25em;
