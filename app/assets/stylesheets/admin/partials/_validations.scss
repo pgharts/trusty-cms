@@ -11,8 +11,8 @@
     padding: 3px 6px;
     margin: 0 0 0 6px;
     background-color: #b30000;
-    @include border-radius;
-    @include single-box-shadow;
+    border-radius: 5px;
+    box-shadow: 0 5px #333;
     a.closer {
       margin-left: 10px;
       color: #ffcccc;

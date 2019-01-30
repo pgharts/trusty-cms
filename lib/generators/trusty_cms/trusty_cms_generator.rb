@@ -10,7 +10,6 @@ class TrustyCmsGenerator < Rails::Generators::Base
     template "boot.rb.erb", "config/boot.rb"
     template "environment.rb.erb", "config/environment.rb"
     template "application.rb.erb", "config/application.rb"
-    template "compass.rb.erb", "config/compass.rb"
     template "preinitializer.rb.erb", "config/preinitializer.rb"
     template "routes.rb.erb", "config/routes.rb"
     template "database.yml.erb", "config/database.yml"

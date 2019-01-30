@@ -70,10 +70,10 @@ body.reversed {
   position: fixed;
   top: 10px;
   right: 20px;
-  @include opacity(0.7);
+  opacity: 0.7;
   @include alt-box;
   &:hover {
-    @include opaque;
+    opacity: 1;
   }
   a {
     @include alt-link;

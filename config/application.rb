@@ -6,7 +6,6 @@ require 'configuration_extensions/configuration_extensions'
 require 'radius'
 require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
-require 'compass'
 require 'rack/cache'
 require 'trustygems'
 
@@ -21,7 +20,6 @@ module TrustyCms
     config.active_record.whitelist_attributes = true
     config.autoload_paths += %W(#{config.root}/lib)
     config.eager_load_paths << Rails.root.join('lib')
-    Sass.load_paths << Compass::Frameworks['compass'].stylesheets_directory
 
     # Enable the asset pipeline
     config.assets.enabled = true
