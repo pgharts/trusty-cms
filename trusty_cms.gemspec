@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["TrustyCms CMS dev team"]
-  s.default_executable = %q{trusty_cms}
   s.description = %q{TrustyCms is a simple and powerful publishing system designed for small teams.
 It is built with Rails and is similar to Textpattern or MovableType, but is
 a general purpose content managment system--not merely a blogging engine.}
@@ -43,6 +42,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'RedCloth',        '4.3.2'
   s.add_dependency 'rake',            '< 13.0'
   s.add_dependency 'roadie-rails'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'stringex',        '>= 2.7.1', '< 2.9.0'
   s.add_dependency 'therubyracer',    '~> 0.12.3'
   s.add_dependency 'tzinfo',          '~> 1.2.3'

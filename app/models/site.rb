@@ -16,7 +16,7 @@ class Site < ActiveRecord::Base
 
     def find_for_host(hostname = '')
       return default if hostname.blank?
-      sites = where("domain IS NOT NULL")
+      sites = self.includes(:homepage).where("domain IS NOT NULL")
       site = sites.find { |site| hostname == site.base_domain || hostname =~ Regexp.compile(site.domain) }
       site || default
     end
