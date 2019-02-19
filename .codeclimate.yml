@@ -1,25 +1,43 @@
-engines:
-  rubocop:
+version: "2"
+plugins:
+  brakeman:
     enabled: true
-  golint:
+  bundler-audit:
     enabled: true
   eslint:
     enabled: true
-  csslint:
+  fixme:
     enabled: true
-ratings:
-  paths:
-  - app/**
-  - lib/**
-  - "**.rb"
-  - "**.go"
-exclude_paths:
+  flog:
+    enabled: true
+    config:
+      score_threshold: 20.0
+  haml-lint:
+    enabled: true
+  reek:
+    enabled: true
+    checks:
+      IrresponsibleModule:
+        enabled: false
+      UncommunicativeName:
+        enabled: false
+      UncommunicativeVariableName:
+        enabled: false
+  rubocop:
+    enabled: true
+    channel: rubocop-0-63
+  stylelint:
+    enabled: true
+exclude_patterns:
 - spec/**/*
 - "**/vendor/**/*"
 - db/migrate/**/*
 - config/**/*
-- app/assets/javascripts/admin/jquery-ui.js
-- app/assets/javascripts/admin/jquery.treetable.js
-- app/assets/javascripts/admin/modernizr.js
 - app/assets/bower_components/**/*
+- app/assets/javascripts/admin/jquery-ui.js
+- app/assets/javascripts/admin/jquery.iframe-transport.js 
+- app/assets/javascripts/admin/jquery.fileupload.js 
+- app/assets/javascripts/admin/jquery.treetable.js
+- app/assets/javascripts/admin/jquery.ui.widget.js
+- app/assets/javascripts/admin/modernizr.js
 - app/assets/javascripts/ckeditor/*
