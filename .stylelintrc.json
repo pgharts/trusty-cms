@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "color-no-invalid-hex": true,
+    "indentation": 2,
+    "no-eol-whitespace": true,
+    "no-missing-end-of-source-newline": true,
+    "string-quotes": "double"
+  }
+}
