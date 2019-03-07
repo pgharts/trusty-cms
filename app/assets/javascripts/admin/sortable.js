@@ -35,7 +35,6 @@ $(document).ready(function() {
         data.push(this_id, position)
       }
       data.splice(0,2);
-      console.log(data);
       $.ajax({
         data: {new_position: data},
         type: 'POST',

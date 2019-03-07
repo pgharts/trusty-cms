@@ -3,7 +3,7 @@
     $(link).on('click', function(event){
       event.preventDefault();
       var href = $(link).attr('href');
-      var match = href.match(/\#(.+)$/);
+      var match = href.match(/#(.+)$/);
       Popup.show(match[1]);
     });
   }

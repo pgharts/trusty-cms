@@ -9,11 +9,11 @@
         $(this).toggleClass('selected');
         Dropdown.findMenu(this).closest('.dropdown_wrapper').slideToggle();
       })
-    };
+    }
   }
 
   Dropdown.findMenu = function(link) {
-    var match = $(link).attr('href').match(/\#(.+)$/)[1];
+    var match = $(link).attr('href').match(/#(.+)$/)[1];
     return $('#' + match);
   }
 
