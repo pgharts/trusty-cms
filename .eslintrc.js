@@ -182,7 +182,7 @@ module.exports = {
         "no-unused-vars": "off",
         "no-use-before-define": "off",
         "no-useless-call": "off",
-        "no-useless-catch": "error",
+        "no-useless-catch": "off",
         "no-useless-computed-key": "error",
         "no-useless-concat": "off",
         "no-useless-constructor": "error",
