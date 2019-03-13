@@ -6,8 +6,9 @@ plugins:
     enabled: true
   eslint:
     enabled: true
+    channel: "eslint-5"
     config:
-      config: .eslintrc
+      config: .eslintrc.js
   fixme:
     enabled: true
   flog:
