@@ -61,7 +61,7 @@ function RadAjaxForm(form) {
     function handleSuccess(data, status, xhr)
     {
         var url = xhr.getResponseHeader("BrowserRedirectTo");
-        if (!!url) {
+        if (url) {
           location.href = url
         }
     }
