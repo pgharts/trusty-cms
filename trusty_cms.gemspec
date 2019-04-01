@@ -23,7 +23,7 @@ a general purpose content managment system--not merely a blogging engine.}
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'acts_as_list',    '~> 0.9.5'
-  s.add_dependency 'acts_as_tree',    '>= 2.6.1', '< 2.9.0'
+  s.add_dependency 'acts_as_tree',    '>= 2.6.1', '< 2.10.0'
   s.add_dependency 'bundler',         '~> 1.7'
   s.add_dependency 'ckeditor',        '>= 4.2.2', '< 4.3.0'
   s.add_dependency 'delocalize',      '>= 0.2', '< 2.0'
