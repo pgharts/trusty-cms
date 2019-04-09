@@ -15,7 +15,7 @@ group :development, :test do
   gem 'acts_as_list'
   gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '4.11.1'
   gem 'launchy',         '~> 2.4.2'
   gem 'mysql2'
   gem 'poltergeist',      '~> 1.18.1'
