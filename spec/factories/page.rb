@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :page do
-    title       'Page'
+    title       { 'Page' }
     breadcrumb  { title }
     slug        { title.slugify }
 
@@ -28,7 +28,7 @@ FactoryBot.define do
     end
 
     factory :published_page do
-      status_id Status[:published].id
+      status_id { Status[:published].id }
 
       factory :article do
         title { generate(:article_title)}
@@ -46,10 +46,10 @@ FactoryBot.define do
     end
 
     factory :home do |home|
-      title 'Home'
-      slug '/'
-      status_id Status[:published].id
-      parent_id nil
+      title { 'Home' }
+      slug { '/' }
+      status_id { Status[:published].id }
+      parent_id { nil }
     end
 
   end
