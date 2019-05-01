@@ -114,11 +114,11 @@ GEM
     erubi (1.8.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_bot (4.11.1)
-      activesupport (>= 3.0.0)
-    factory_bot_rails (4.11.1)
-      factory_bot (~> 4.11.1)
-      railties (>= 3.0.0)
+    factory_bot (5.0.2)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.0.2)
+      factory_bot (~> 5.0.2)
+      railties (>= 4.2.0)
     ffi (1.10.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -172,7 +172,7 @@ GEM
     multipart-post (2.0.0)
     mysql2 (0.5.2)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     paperclip (6.1.0)
@@ -307,7 +307,7 @@ DEPENDENCIES
   acts_as_list
   codeclimate-test-reporter
   database_cleaner
-  factory_bot_rails (= 4.11.1)
+  factory_bot_rails (= 5.0.2)
   launchy (~> 2.4.2)
   mysql2
   poltergeist (~> 1.18.1)
