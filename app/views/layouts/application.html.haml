@@ -48,7 +48,7 @@
                 %ul#secondary_navigation
                   - @current_tab.each do |sub_item|
                     - if sub_item.visible?(current_user)
-                      %li= link_to translate_with_default(sub_item.name), sub_item.relative_url, :class=>('current' if current_item?(sub_item))
+                      %li= link_to sub_item.name, sub_item.relative_url, :class=>('current' if current_item?(sub_item))
               = yield :toolbar
       #main
         - if flash[:notice]
