@@ -50,8 +50,7 @@ class Asset < ActiveRecord::Base
                     :fog_public => TrustyCms.config["paperclip.fog.public?"] || true,
                     :fog_host => TrustyCmsClippedExtension::Cloud.host,
                     :fog_file => {
-                        'Cache-Control' => 'max-age=2419200'
-                        #'Expires'       => 1.month.from_now.httpdate
+                        'Cache-Control' => 'max-age=31536000'
                     }
 
   validates_attachment_content_type :asset, :content_type => ["application/zip", "image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf", "application/javascript", "text/javascript", "text/css"]
