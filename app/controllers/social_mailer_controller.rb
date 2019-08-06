@@ -13,11 +13,11 @@ class SocialMailerController < ApplicationController
       :subject => params[:subject]
     }
 
-    if verify_recaptcha
+    if verify_recaptcha(action: 'emailSeats')
       RadSocialMailer.social_mail(mailer_options).deliver_now
       head :ok
     else
-      head :bad_request, :ErrorMsg => "Please verify that you are not a robot. Tick the reCAPTCHA checkbox."
+      head :bad_request, :ErrorMsg => 'We have detected suspicious activity and have disabled this feature for your user.'
     end
 
   end

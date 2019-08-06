@@ -33,7 +33,7 @@
   %input{:type=>"hidden", :name=>"subject", :value=> email_subject}
   %input{:type=>"hidden", :id=>"rs-base-message", :value=> email_message}
   #recaptcha-container.captcha-container
-    = recaptcha_tags
+    = recaptcha_v3 action: 'emailSeats'
   %input{:type=>"hidden", :name=>"submit_url", :value=> email_action_url}
   %input.button.primary-button{:id => "rad_email_submit", :type=>:button ,:value=>"Submit"}
   .loader
