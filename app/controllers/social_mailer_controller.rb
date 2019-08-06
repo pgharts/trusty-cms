@@ -17,7 +17,7 @@ class SocialMailerController < ApplicationController
       RadSocialMailer.social_mail(mailer_options).deliver_now
       head :ok
     else
-      head :bad_request, :ErrorMsg => "We have detected suspicious activity and have disabled this feature for your user."
+      head :bad_request, :ErrorMsg => 'We have detected suspicious activity and have disabled this feature for your user.'
     end
 
   end
