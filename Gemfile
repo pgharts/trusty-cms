@@ -13,7 +13,6 @@ gemspec
 
 group :development, :test do
   gem 'acts_as_list'
-  gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '5.0.2'
   gem 'launchy',         '~> 2.4.2'
@@ -23,4 +22,5 @@ group :development, :test do
   gem 'rails-observers'
   gem 'rspec-rails'
   gem 'sass-rails'
+  gem 'simplecov'
 end

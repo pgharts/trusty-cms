@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (3.6.2)
+    trusty-cms (3.7.1)
       RedCloth (= 4.3.2)
       acts_as_list (~> 0.9.5)
       acts_as_tree (>= 2.6.1, < 2.9.0)
@@ -96,10 +96,8 @@ GEM
       orm_adapter (~> 0.5.0)
     climate_control (0.2.0)
     cliver (0.3.2)
-    cocaine (0.6.0)
-      terrapin (= 0.6.0)
-    codeclimate-test-reporter (1.0.9)
-      simplecov (<= 0.13)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -109,7 +107,7 @@ GEM
     delocalize (1.2.0)
       rails (>= 2)
     diff-lcs (1.3)
-    docile (1.1.5)
+    docile (1.3.2)
     erubi (1.8.0)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -149,7 +147,7 @@ GEM
       multipart-post
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (7.3.492.27.1)
+    libv8 (7.3.492.27.1-x86_64-linux)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -174,12 +172,12 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-    paperclip (6.1.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
+      cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-      terrapin (~> 0.6.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
@@ -232,8 +230,8 @@ GEM
     roadie (3.5.0)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
-    roadie-rails (2.1.0)
-      railties (>= 5.1, < 6.1)
+    roadie-rails (1.3.0)
+      railties (>= 3.0, < 5.3)
       roadie (~> 3.1)
     rspec-core (3.8.1)
       rspec-support (~> 3.8.0)
@@ -266,8 +264,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sexp_processor (4.12.1)
-    simplecov (0.13.0)
-      docile (~> 1.1.0)
+    simplecov (0.17.0)
+      docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
@@ -280,8 +278,6 @@ GEM
       sprockets (>= 3.0.0)
     stringex (2.8.5)
     temple (0.8.1)
-    terrapin (0.6.0)
-      climate_control (>= 0.0.3, < 1.0)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
@@ -304,7 +300,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  codeclimate-test-reporter
   database_cleaner
   factory_bot_rails (= 5.0.2)
   launchy (~> 2.4.2)
@@ -314,6 +309,7 @@ DEPENDENCIES
   rails-observers
   rspec-rails
   sass-rails
+  simplecov
   trusty-cms!
   trustygems (~> 0.2.0)
 
