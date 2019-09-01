@@ -147,7 +147,7 @@ GEM
       multipart-post
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (7.3.492.27.1-x86_64-linux)
+    libv8 (7.3.492.27.1)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -225,7 +225,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    rdoc (6.1.1)
+    rdoc (6.2.0)
     regexp_parser (1.5.1)
     roadie (3.5.0)
       css_parser (~> 1.4)
