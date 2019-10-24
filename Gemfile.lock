@@ -100,7 +100,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
-    crass (1.0.4)
+    crass (1.0.5)
     css_parser (1.7.0)
       addressable
     database_cleaner (1.7.0)
@@ -147,8 +147,8 @@ GEM
       multipart-post
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (7.3.492.27.1-x86_64-linux)
-    loofah (2.2.3)
+    libv8 (7.3.492.27.1)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
