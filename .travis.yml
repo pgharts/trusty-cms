@@ -9,6 +9,8 @@ rvm:
 services: mysql
 
 before_script:
+  - gem update --system
+  - gem install bundler
   - cp spec/ci/database.mysql.yml config/database.yml;
   - bundle exec rake app:db:create
   - bundle exec rake app:db:migrate
