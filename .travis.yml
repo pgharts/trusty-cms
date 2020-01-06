@@ -9,8 +9,8 @@ rvm:
 services: mysql
 
 before_script:
+  - gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
   - gem update --system
-  - gem install bundler
   - cp spec/ci/database.mysql.yml config/database.yml;
   - bundle exec rake app:db:create
   - bundle exec rake app:db:migrate
