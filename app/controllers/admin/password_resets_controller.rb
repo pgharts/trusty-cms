@@ -4,12 +4,9 @@ class Admin::PasswordResetsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user
-      user.send_password_reset
-      redirect_to welcome_path, :notice => "Email sent with password reset instructions."
-    else
-      redirect_to welcome_path, :notice => "Email not registered. Double check your spelling or seek out your Admin."
-    end
+    user.send_password_reset if user
+    redirect_to welcome_path, :notice => "If the e-mail address you entered is associated with a customer account in our records, you will receive an e-mail from us with instructions for resetting your password.
+    If you don't receive this e-mail, please check your junk mail folder or speak with your TrustyCMS administrator."
   end
 
   def edit
@@ -32,5 +29,4 @@ private
   def password_params
     params.require(:user).permit(:password, :password_confirmation)
   end
-
 end

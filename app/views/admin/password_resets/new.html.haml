@@ -10,9 +10,3 @@
       = text_field_tag :email, params[:email], :class => 'textbox', :maxlength => 70, :size => 70
     .actions
       = submit_tag "Reset Password"
-
-  %p.version
-  = t('powered_by')
-  %a{ :href => "https://github.com/pgharts/trusty-cms" } TrustyCms CMS
-  = t('version')
-  = TrustyCms.loaded_via_gem? ? "#{TrustyCms::VERSION} (gem)." : "#{TrustyCms::VERSION}."
