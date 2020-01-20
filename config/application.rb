@@ -8,6 +8,7 @@ require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
 require 'rack/cache'
 require 'trustygems'
+require 'devise'
 
 
 if defined?(Bundler)

@@ -27,33 +27,35 @@ module LoginSystem
 
     def authenticate
       #puts _process_action_callbacks.map(&:filter)
-      if current_user
-        session['user_id'] = current_user.id
-        true
-      else
-        session[:return_to] = request.original_url
-        respond_to do |format|
-          format.html { redirect_to login_url }
-          format.any(:xml,:json) { request_http_basic_authentication }
-        end
-        false
-      end
+      # if current_user
+      #   session['user_id'] = current_user.id
+      #   true
+      # else
+      #   session[:return_to] = request.original_url
+      #   respond_to do |format|
+      #     format.html { redirect_to login_url }
+      #     format.any(:xml,:json) { request_http_basic_authentication }
+      #   end
+      #   false
+      # end
+      true
     end
 
     def authorize
       #puts _process_action_callbacks.map(&:filter)
-      action = action_name.to_s.intern
-      if user_has_access_to_action?(action)
-        true
-      else
-        permissions = self.class.controller_permissions[action]
-        flash[:error] = permissions[:denied_message] || 'Access denied.'
-        respond_to do |format|
-          format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
-          format.any(:xml, :json) { head :forbidden }
-        end
-        false
-      end
+      # action = action_name.to_s.intern
+      # if user_has_access_to_action?(action)
+      #   true
+      # else
+      #   permissions = self.class.controller_permissions[action]
+      #   flash[:error] = permissions[:denied_message] || 'Access denied.'
+      #   respond_to do |format|
+      #     format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
+      #     format.any(:xml, :json) { head :forbidden }
+      #   end
+      #   false
+      # end
+      true
     end
 
     def user_has_access_to_action?(action)
