@@ -29,7 +29,7 @@ TrustyCms::Application.routes.draw do
       post :regenerate, on: :collection
       put :refresh, on: :member
     end
-    resources :page_attachments, :only => [:new] do
+    resources :page_attachments, only: [:new] do
       get :remove, on: :member
     end
     resources :pages do
@@ -41,8 +41,8 @@ TrustyCms::Application.routes.draw do
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
   namespace :admin do
     resource :preferences
-    resource :configuration, :controller => 'configuration'
-    resources :extensions, :only => :index
+    resource :configuration, controller: 'configuration'
+    resources :extensions, only: :index
     resources :page_parts
     resources :page_fields
     match '/reference/:type(.:format)' => 'references#show', :as => :reference, :via => :get
@@ -55,13 +55,12 @@ TrustyCms::Application.routes.draw do
       put :move_to_bottom, on: :member
     end
   end
+  # get 'admin' => 'admin/welcome#index', :as => :admin
+  # get 'admin/welcome' => 'admin/welcome#index', :as => :welcome
+  # match 'admin/login' => 'admin/welcome#login', :as => :login, :via => [:get, :post]
+  # get 'admin/logout' => 'admin/welcome#logout', :as => :logout
 
-  get 'admin' => 'admin/welcome#index', :as => :admin
-  get 'admin/welcome' => 'admin/welcome#index', :as => :welcome
-  match 'admin/login' => 'admin/welcome#login', :as => :login, :via => [:get, :post]
-  get 'admin/logout' => 'admin/welcome#logout', :as => :logout
   get 'error/404' => 'site#not_found', :as => :not_found
   get 'error/500' => 'site#error', :as => :error
   get '*url' => 'site#show_page'
-
 end

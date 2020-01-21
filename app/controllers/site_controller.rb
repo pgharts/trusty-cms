@@ -2,7 +2,8 @@ require 'trusty_cms/pagination/controller'
 class SiteController < ApplicationController
   include TrustyCms::Pagination::Controller
 
-  no_login_required
+  #  no_login_required
+  skip_before_action :authenticate_user!
 
   def self.cache_timeout=(val)
     TrustyCms::PageResponseCacheDirector.cache_timeout=(val)

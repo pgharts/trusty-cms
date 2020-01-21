@@ -1,5 +1,5 @@
 class Admin::WelcomeController < ApplicationController
-  no_login_required
+  #  no_login_required
   before_action :never_cache
 
   def index

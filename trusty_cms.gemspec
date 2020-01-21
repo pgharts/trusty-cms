@@ -43,7 +43,6 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'RedCloth',        '4.3.2'
   s.add_dependency 'rake',            '< 13.0'
   s.add_dependency 'roadie-rails'
-  s.add_dependency 'rolify'
   s.add_dependency 'sass-rails'
   s.add_dependency 'stringex',        '>= 2.7.1', '< 2.9.0'
   s.add_dependency 'tzinfo',          '~> 1.2.3'

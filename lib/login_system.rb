@@ -2,28 +2,28 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-        prepend_before_action :authenticate
-        prepend_before_action :authorize
-      helper_method :current_user
+      prepend_before_action :authenticate
+      prepend_before_action :authorize
+      #helper_method :current_user
     end
   end
 
   protected
 
-    def current_user
-      @current_user ||= (login_from_session || login_from_cookie || login_from_http)
-    end
+    # def current_user
+    #   @current_user ||= (login_from_session || login_from_cookie || login_from_http)
+    # end
 
-    def current_user=(value=nil)
-      if value && value.is_a?(User)
-        @current_user = value
-        session['user_id'] = value.id
-      else
-        @current_user = nil
-        session['user_id'] = nil
-      end
-      @current_user
-    end
+    # def current_user=(value=nil)
+    #   if value && value.is_a?(User)
+    #     @current_user = value
+    #     session['user_id'] = value.id
+    #   else
+    #     @current_user = nil
+    #     session['user_id'] = nil
+    #   end
+    #   @current_user
+    # end
 
     def authenticate
       #puts _process_action_callbacks.map(&:filter)
@@ -87,11 +87,6 @@ module LoginSystem
     end
 
   module ClassMethods
-    def no_login_required
-      skip_before_action :authenticate
-      skip_before_action :authorize
-      # puts _process_action_callbacks.map(&:filter)
-    end
 
     def login_required?
       filter_chain.any? {|f| f.method == :authenticate || f.method == :authorize }

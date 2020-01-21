@@ -4,6 +4,7 @@ class UserActionObserver < ActiveRecord::Observer
   def current_user=(user)
     self.class.current_user = user
   end
+  
   def self.current_user=(user)
     Thread.current[:current_user] = user
   end
