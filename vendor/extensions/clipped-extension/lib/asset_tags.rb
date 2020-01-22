@@ -101,12 +101,6 @@ module AssetTags
     end
   end
 
-
-
-
-
-
-
   desc %{
     Renders the value for a top padding for a thumbnail. Put the thumbnail in a
     container with specified height and using this tag you can vertically
