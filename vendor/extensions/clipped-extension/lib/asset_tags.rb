@@ -101,12 +101,6 @@ module AssetTags
     end
   end
 
-
-
-
-
-
-
   desc %{
     Renders the value for a top padding for a thumbnail. Put the thumbnail in a
     container with specified height and using this tag you can vertically
@@ -229,33 +223,6 @@ module AssetTags
     options['alt'] ||= tag.locals.asset.title
     url = tag.locals.asset.thumbnail(size)
     ActionController::Base.helpers.image_tag(url, options)
-  end
-  
-  desc %{
-    Embeds a flash-movie in a cross-browser-compatible fashion using only HTML
-    If no width and height attributes are given it will use the intrinsic
-    dimensions of the swf file
-    
-    *Usage:*
-    <pre><code><r:asset:flash [name="asset name" or id="asset id"] [width="100"] [height="100"]>Fallback content</flash></code></pre>
-    
-    *Example with text fallback:*
-    <pre><code><r:asset:flash name="flash_movie">
-        Sorry, you need to have flash installed, <a href="http://adobe.com/flash">get it here</a>
-    </flash></code></pre>
-    
-    *Example with image fallback and explicit dimensions:*
-    <pre><code><r:asset:flash name="flash_movie" width="300" height="200">
-        <r:asset:image name="flash_screenshot" />
-      </flash></code></pre>
-  }
-  tag 'asset:flash' do |tag|
-    asset, options = asset_and_options(tag)
-    if tag.locals.asset.flash?
-      url = asset.thumbnail('original')
-      dimensions = [(tag.attr['width'] || asset.width),(tag.attr['height'] || asset.height)]
-      swf_embed_markup url, dimensions, tag.expand
-    end
   end
     
   desc %{
