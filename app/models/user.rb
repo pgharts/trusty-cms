@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :pages, :foreign_key => :id
+  has_many :pages, :foreign_key => :created_by_id
   self.table_name = "admins"
 
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -31,9 +31,38 @@ class User < ActiveRecord::Base
 
   # attr_writer :confirm_password
 
-  # def has_role?(role)
-  #   respond_to?("#{role}?") && send("#{role}?")
-  # end
+  def has_role?(role)
+    case role
+    when :admin
+      self.admin?
+    when :designer
+      self.designer?
+    when :content_editor
+      self.content_editor?  
+    else
+      false
+    end        
+  end
+
+  def admin?
+    self.admin
+  end
+
+  def designer?
+    self.designer
+  end
+
+  def content_editor?
+    self.content_editor
+  end
+
+  def locale 
+    'en'
+  end
+
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
 
   # def sha1(phrase)
   #   Digest::SHA1.hexdigest("--#{salt}--#{phrase}--")

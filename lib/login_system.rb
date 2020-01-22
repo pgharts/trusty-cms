@@ -2,8 +2,8 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-      prepend_before_action :authenticate
-      prepend_before_action :authorize
+      #prepend_before_action :authenticate
+      #prepend_before_action :authorize
       #helper_method :current_user
     end
   end
@@ -11,7 +11,6 @@ module LoginSystem
   protected
 
     # def current_user
-    #   @current_user ||= (login_from_session || login_from_cookie || login_from_http)
     # end
 
     # def current_user=(value=nil)

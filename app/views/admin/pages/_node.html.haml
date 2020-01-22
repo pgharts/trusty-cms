@@ -18,3 +18,5 @@
       - unless simple
         %td.actions
           = page.add_child_option
+          - if current_user.admin?
+            = page.remove_option

@@ -5,7 +5,7 @@
     - user.preferences do
       %h3
         .actions
-          = button_to t("edit_preferences"), "/admin/preferences", :method => :get
+          = button_to t("edit_preferences"), edit_user_registration_path, :method => :get
         = t('personal_preferences')
       = image_tag(gravatar_url(@user.email, :size=>"64px"), :class=>"avatar", :width=>64, :height=>64, :alt=>"")
       %p.ruled
@@ -18,11 +18,6 @@
           = t('email_address')
         %span.uri
           = current_user.email
-      %p.ruled
-        %label
-          = t('login')
-        %span
-          = current_user.login
       %p.ruled
         %label
           = t('password')
