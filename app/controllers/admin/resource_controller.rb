@@ -7,7 +7,7 @@ class Admin::ResourceController < ApplicationController
   before_action :never_cache
   before_action :load_models, :only => :index
   before_action :load_model, :only => [:new, :create, :edit, :update, :remove, :destroy]
-  before_action :set_owner_or_editor
+  before_action :set_owner_or_editor, :only => [:new, :create, :update]
   after_action :clear_model_cache, :only => [:create, :update, :destroy]
 
   cattr_reader :paginated

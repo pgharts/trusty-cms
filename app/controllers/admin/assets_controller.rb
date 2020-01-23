@@ -38,6 +38,7 @@ class Admin::AssetsController < Admin::ResourceController
       else
         uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type) && compress
         @asset = Asset.create(:asset => uploaded_asset, :caption => asset_params[:asset][:caption])
+        set_owner_or_editor
         if params[:for_attachment]
           @page = Page.find_by_id(params[:page_id]) || Page.new
           @page_attachments << @page_attachment = @asset.page_attachments.build(:page => @page)
@@ -79,6 +80,12 @@ private
     data = $kraken.upload(uploaded_asset.tempfile.path, 'lossy' => true)
     File.write(uploaded_asset.tempfile, open(data.kraked_url).read, { :mode => 'wb' })
     uploaded_asset
+  end
+
+  def set_owner_or_editor
+    @asset.created_by_id = current_user.id 
+    @asset.updated_by_id = current_user.id 
+    @asset.save! if @asset.id.present?
   end
 
   def asset_params
