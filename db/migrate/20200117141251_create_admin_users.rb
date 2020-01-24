@@ -33,6 +33,12 @@ class CreateAdminUsers < ActiveRecord::Migration[5.2]
       # Customization 
       t.string :first_name
       t.string :last_name
+      t.boolean :admin
+      t.boolean :designer
+      t.boolean :content_editor
+      t.integer :site_id
+      t.integer :updated_by_id
+      t.text    :notes
 
       t.timestamps
     end
