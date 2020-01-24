@@ -32,7 +32,6 @@
 #view_site {
   font-size: 90%;
   background: rgba(black, 0.45);
-  border-radius: 5px;
   display: inline;
   padding: 3px 10px 4px;
   text-decoration: none;
@@ -55,8 +54,6 @@ ul#navigation {
       padding: 0 20px;
       position: relative;
       text-decoration: none;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
     }
     &:hover a {
       background: opacify($primary-tab, 0.2);
@@ -72,7 +69,6 @@ ul#navigation {
 
 #toolbar {
   background: white;
-  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2, #cccccc);
   font-size: 95%;
   clear: both;
   margin: 0;
@@ -90,7 +86,6 @@ ul#navigation {
     padding: 8px 8px 0;
     input[type=search] {
       font-size: 12px;
-      border-radius: 100px;
       border: 1px solid #cccccc;
       border-top-color: #999999;
       border-left-color: #b0b0b0;
@@ -121,16 +116,13 @@ ul#secondary_navigation {
       height: 38px;
       text-decoration: none;
       &:hover {
-        background-image: linear-gradient(to bottom, #e4f9ff, #d2ebfd 30%, #b1d1f1 50%, #9bc5ed 50%, #caecff);
-        color: #444444;
+        background-color: #dddddd;
       }
       &.current {
         background: #dddddd;
-        background-image: linear-gradient(to bottom, #ffffff, #e6e6e6 35%, #d9d9d9 50%, #cccccc 50%, #d9d9d9);
         color: #333333;
         font-weight: bold;
         &:hover {
-          background-image: linear-gradient(to bottom, #e0f9fe, #c4e2f8 30%, #98c3e7 50%, #79aedb 50%, #b1ddef);
           color: #222222;
         }
       }

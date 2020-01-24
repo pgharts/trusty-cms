@@ -48,20 +48,13 @@ table.index {
       text-decoration: none;
       &:hover {
         background: #d8d8d8;
-        background-image: linear-gradient(to bottom, #ffffff, #cccccc);
         border: 1px solid #a5c9df;
         margin: 0 24px 0 0;
-        border-radius: 5px;
       }
       &.selected {
         background: #c5e0f5;
-        background-image: linear-gradient(to bottom, #e5f5ff, #c5e0ff);
         border: 1px solid #a5c9df;
         margin: 0 24px 0 0;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
       }
     }
     span.action.disabled {
@@ -104,7 +97,6 @@ table.index {
         border-top: 1px solid #d5f0ff;
         border-bottom: 1px solid #c5dff5;
         background: #c5dff5;
-        background-image: linear-gradient(to bottom, #e5f5ff, #c5dff5);
       }
     }
   }

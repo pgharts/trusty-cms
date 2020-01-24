@@ -15,8 +15,6 @@
       padding: 8px 15px 5px;
       text-decoration: none;
       text-transform: titlecase;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
       &.here {
         background-color: white;
         color: #737272;
@@ -38,15 +36,13 @@
     clear: both;
     .page {
       background: white;
-      background-image: linear-gradient(to bottom, #ffffff, #f5f1e2 15%, #f5f1e2);
-      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
       padding: 12px 20px 20px;
       p {
         margin-top: 0;
       }
       label {
         display: inline;
-        color: #333333;
+        color: #000;
         font-weight: normal;
         font-size: 80%;
         text-shadow: none;

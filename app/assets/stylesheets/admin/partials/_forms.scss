@@ -95,7 +95,6 @@
 
 .drawer_contents {
   background: #c9c9c9;
-  border-bottom-right-radius: 6px;
   margin: 0;
   margin-right: 2px;
   padding-bottom: 2px;
@@ -104,7 +103,6 @@
     content: "\0020";
     display: block;
     width: 100%;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
     height: 3px;
     margin-bottom: -3px;
   }
@@ -158,17 +156,12 @@
   margin-top: -1px;
   a {
     background: #7e7e7e;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
     color: #f0f0f0;
     font-size: 80%;
     padding: 4px 21px 5px 10px;
     position: relative;
     top: -1px;
-    text-shadow: #666666 1px 1px 0;
     text-decoration: none;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
     &:hover,
     &:active,
     &:focus {
@@ -190,7 +183,6 @@
   padding: 1px 15px 10px;
   position: relative;
   margin: 3px 0 20px;
-  border-radius: 8px;
   &:after {
     clear: both;
     content: "";
@@ -200,9 +192,6 @@
     position: relative;
   }
   &:before {
-    background-image: linear-gradient(to bottom, #ffffff, #f5f1e2 50%, #f5f1e2);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     content: "\0020";
     display: block;
     position: absolute;
@@ -214,11 +203,11 @@
   }
   h3 {
     color: #333333;
-    margin: 15px 0 0;
     border-bottom: 1px solid #cccccc;
     padding-bottom: 8px;
     .actions {
       float: right;
+      margin: -1em;
       button {
         font-size: 13px;
         padding-left: 1em;
@@ -283,7 +272,7 @@ body.reversed {
     form {
       p {
         label {
-          color: #B9B9B9;
+          color: #000;
           font-weight: normal;
           .hint {
             display: inline;
@@ -302,14 +291,11 @@ body.reversed {
         padding: 20px 15px;
         margin-bottom: 20px;
         overflow: hidden;
-        box-shadow: 1px 1px 0 #ababab;
-        border-radius: 8px;
         h3 {
           font-weight: bold;
           font-size: 120%;
           margin: -20px -20px 0 -20px;
           padding: 15px 20px 0 20px;
-          text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
         }
         p {
           margin-bottom: 0;
@@ -317,7 +303,7 @@ body.reversed {
       }
     }
     p.updated_line {
-      color: #eeeeee;
+      color: #000;
     }
     textarea {
       border: 1px solid #EAEAEA;
@@ -330,12 +316,6 @@ body.reversed {
       box-shadow: 0 0 10px #EC65A5;
       outline: 0;
     }
-    input[type=checkbox] {
-      border-radius: 5px;
-    }
-    .box {
-      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
-    }
   }
 }
 
@@ -343,13 +323,11 @@ body.single_form {
   #content {
     #single_form {
       background: #f5f1e2;
-      background-image: linear-gradient(to bottom, #fdfcf9, #f5f1e2 25%, #f5f1e2);
       border: 0.35em solid #efead3;
       padding: 0.5em 1.5em;
       padding-right: 22px;
       position: relative;
       width: 28em;
-      border-radius: 6px;
       h1 {
         font-size: 140%;
         margin: 0.75em 0 1.25em;
@@ -443,19 +421,15 @@ input[type=file] {
   font-size: 1.1em;
   padding: .5em 3em;
   margin: 0.5em;
-  color: #f3f3f3;
+  color: #fff;
   background-color: #94BDC3;
   border: 0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   text-decoration: none;
   &:hover {
-    color: #94BDC3;
-    background-color: #f3f3f3;
+    color: #f3f3f3;
+    background-color: darken(#94BDC3, 15%);
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
-    -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
   }
@@ -463,7 +437,6 @@ input[type=file] {
     color: #94BDC3;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
-    -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
   }
@@ -474,7 +447,6 @@ input[type=file] {
   background-color: #f3f3f3;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
-  -ms-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
 }

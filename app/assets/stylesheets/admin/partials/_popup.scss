@@ -16,7 +16,6 @@ div.popup {
   }
   .popup_title {
     background: #c5dff5;
-    background-image: linear-gradient(to bottom, #e5f5ff, #c5dff5);
     border-bottom: 1px solid #a7cdf0;
     font-weight: bold;
     font-size: 100%;
@@ -45,7 +44,6 @@ div.popup {
     border: 1px solid #dddddd;
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
-    box-shadow: 1px 1px 0 white;
     margin: 1em 0;
     overflow: auto;
     table.index {
@@ -61,18 +59,13 @@ div.popup {
     button {
       &.default {
         border: 1px solid #154ca6;
-        box-shadow: inset 0 2px 1px #c7e0f6;
         color: white;
-        background-image: linear-gradient(to bottom, #67b4e1, #78b9e1);
       }
       &:active {
         border: 1px solid #888888;
-        box-shadow: none;
-        background-image: linear-gradient(to bottom, #cccccc 0%, #dddddd 15%, #eeeeee 100%);
       }
       &.default:active {
         border: 1px solid #002c86;
-        background-image: linear-gradient(to bottom, #4794c1, #78b9e1);
       }
       &:focus {
         border-width: 2px;

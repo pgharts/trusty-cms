@@ -7,12 +7,31 @@
 }
 
 #actions {
+  a {
+    background: #d8d8d8;
+    color: #333333;
+    font-size: 80%;
+    padding: 8px 12px;
+    text-decoration: none;
+    &:hover {
+      color: #0076a3;
+    }
+    &:active {
+      background: white;
+      color: black;
+    }
+    img {
+      vertical-align: -20%;
+    }
+  }
+}
+
+#actions {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   background: #777777;
-  background-image: linear-gradient(to bottom, #555555, #666666, #777777, #777777);
   ul {
     padding: 14px 8px;
   }
@@ -32,39 +51,28 @@
       padding: 6px 12px 6px 12px;
       margin-right: 1px;
       background: #dddddd;
-      background-image: linear-gradient(to bottom, #c5c5c5, #f0f0f0 20%, #ffffff 35%, #ffffff);
       color: #999999;
       font-size: 80%;
       text-decoration: none;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
     }
     a {
-      text-shadow: 1px 1px 1px #eeeeee;
       &:hover {
         background: #d8d8d8;
-        background-image: linear-gradient(to bottom, #ffffff, #ffffff, #dddddd);
         color: #0076a3;
-        @include button-shadow;
       }
       &:active {
         color: black;
-        @include no-button-shadow;
       }
     }
     span.disabled {
       color: #666666;
       background-color: #999999;
-      background-image: linear-gradient(to bottom, #888888, #999999, #999999, #999999);
     }
     span.current {
       color: black;
       background: white;
       font-weight: bold;
       background-image: none;
-      @include button-shadow;
     }
     span.gap {
       display: block;
@@ -77,7 +85,6 @@
     float: right;
     padding: 6px 12px;
     a {
-      @include no-button-shadow;
       background: none;
       font-size: 80%;
       color: #cccccc;
@@ -97,21 +104,16 @@
 .action_button {
   display: inline;
   background: #d8d8d8;
-  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
   color: #333333;
   font-size: 80%;
   padding: 8px 12px;
   text-decoration: none;
-  text-shadow: 1px 1px 1px #eeeeee;
-  border-radius: 5px;
   @include button-shadow;
   &:hover {
     color: #0076a3;
-    text-shadow: 1px 1px 1px white;
   }
   &:active {
     background: white;
-    @include no-button-shadow;
     color: black;
   }
   img {
