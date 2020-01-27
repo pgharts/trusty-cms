@@ -1,18 +1,11 @@
 #content {
-  span.error-with-field {
-    input, select {
-      background: #f3c2c2;
-    }
-  }
   span.error {
-    line-height: 1.4;
-    background-color: #cc0000;
-    color: white;
-    padding: 3px 6px;
-    margin: 0 0 0 6px;
-    background-color: #b30000;
-    border-radius: 5px;
-    box-shadow: 0 5px #333;
+    display: block;
+    margin: 1em 0;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1em;
+    font-size: 1em;
     a.closer {
       margin-left: 10px;
       color: #ffcccc;

@@ -11,47 +11,44 @@
   }
 }
 
-body.reversed.login_form {
-  background: #fff;
-  .login-form-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3em;
-    margin-top: 5em;
-    .visual {
-      img {
-        height: 300px;
-        float: right;
-      }
+.login-form-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3em;
+  margin-top: 5em;
+  .visual {
+    img {
+      height: 300px;
+      float: right;
     }
+  }
 
-    .login {
-      width: 50%;
-      form {
+  .login {
+    width: 50%;
+    form {
+      padding: 1em;
+      .field #user_email, .field #user_password {
         padding: 1em;
-        .field #user_email, .field #user_password {
-          padding: 1em;
-          margin-bottom: 1em;
-          width: 200px;
-        }
+        margin-bottom: 1em;
+        width: 200px;
+      }
 
-        input[type='submit'] {
-          border-radius: 0;
-          background-color: #3c3a4b;
+      input[type='submit'] {
+        border-radius: 0;
+        background-color: #3c3a4b;
 
-          &:hover {
-            color: #fff;
-            cursor: pointer;
-          }
+        &:hover {
+          color: #fff;
+          cursor: pointer;
         }
       }
     }
   }
-  .error {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 1em;
-  }
+}
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1em;
 }
 
 #content {
