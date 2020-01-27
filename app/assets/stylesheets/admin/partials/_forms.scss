@@ -11,6 +11,37 @@
   }
 }
 
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3em;
+  margin-top: 5em;
+  .visual {
+    img {
+      height: 300px;
+      float: right;
+    }
+  }
+  .login {
+    form {
+      padding: 1em;
+      .field #user_email, .field #user_password {
+        padding: 1em;
+        margin-bottom: 1em;
+        width: 200px;
+      }
+      input[type='submit'] {
+        border-radius: 0;
+        background-color: #3C3A4B;
+        &:hover {
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
 #content {
   form {
     p {
