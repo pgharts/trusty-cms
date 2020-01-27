@@ -3,12 +3,10 @@ require 'login_system'
 
 class ApplicationController < ActionController::Base
   include LoginSystem
-  # TODO: Add an ActionView::PathSet.new([paths]) for all extension view paths
   prepend_view_path("#{TRUSTY_CMS_ROOT}/app/views")
   
   protect_from_forgery with: :exception
-
-  before_action :set_current_user
+  before_action :authenticate_user!
   before_action :set_timezone
   before_action :set_user_locale
   before_action :set_javascripts_and_stylesheets
@@ -23,6 +21,10 @@ class ApplicationController < ActionController::Base
   def initialize
     super
     @trusty_config = TrustyCms::Config
+  end
+
+  def after_sign_in_path_for(resource)
+    admin_pages_path
   end
 
   def template_name
@@ -46,10 +48,6 @@ class ApplicationController < ActionController::Base
 
     def set_mailer
       ActionMailer::Base.default_url_options[:host] = request.host_with_port
-    end
-
-    def set_current_user
-      UserActionObserver.instance.current_user = current_user
     end
 
     def set_user_locale

@@ -1,6 +1,7 @@
 class Admin::PasswordResetsController < ApplicationController
-  no_login_required
-
+  #  no_login_required
+  skip_before_action :authenticate_user!
+  
   def create
     user = User.find_by_email(params[:email])
     user.send_password_reset if user

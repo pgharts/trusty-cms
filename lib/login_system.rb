@@ -2,58 +2,59 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-        prepend_before_action :authenticate
-        prepend_before_action :authorize
-      helper_method :current_user
+      #prepend_before_action :authenticate
+      #prepend_before_action :authorize
+      #helper_method :current_user
     end
   end
 
   protected
 
-    def current_user
-      @current_user ||= (login_from_session || login_from_cookie || login_from_http)
-    end
+    # def current_user
+    # end
 
-    def current_user=(value=nil)
-      if value && value.is_a?(User)
-        @current_user = value
-        session['user_id'] = value.id
-      else
-        @current_user = nil
-        session['user_id'] = nil
-      end
-      @current_user
-    end
+    # def current_user=(value=nil)
+    #   if value && value.is_a?(User)
+    #     @current_user = value
+    #     session['user_id'] = value.id
+    #   else
+    #     @current_user = nil
+    #     session['user_id'] = nil
+    #   end
+    #   @current_user
+    # end
 
     def authenticate
       #puts _process_action_callbacks.map(&:filter)
-      if current_user
-        session['user_id'] = current_user.id
-        true
-      else
-        session[:return_to] = request.original_url
-        respond_to do |format|
-          format.html { redirect_to login_url }
-          format.any(:xml,:json) { request_http_basic_authentication }
-        end
-        false
-      end
+      # if current_user
+      #   session['user_id'] = current_user.id
+      #   true
+      # else
+      #   session[:return_to] = request.original_url
+      #   respond_to do |format|
+      #     format.html { redirect_to login_url }
+      #     format.any(:xml,:json) { request_http_basic_authentication }
+      #   end
+      #   false
+      # end
+      true
     end
 
     def authorize
       #puts _process_action_callbacks.map(&:filter)
-      action = action_name.to_s.intern
-      if user_has_access_to_action?(action)
-        true
-      else
-        permissions = self.class.controller_permissions[action]
-        flash[:error] = permissions[:denied_message] || 'Access denied.'
-        respond_to do |format|
-          format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
-          format.any(:xml, :json) { head :forbidden }
-        end
-        false
-      end
+      # action = action_name.to_s.intern
+      # if user_has_access_to_action?(action)
+      #   true
+      # else
+      #   permissions = self.class.controller_permissions[action]
+      #   flash[:error] = permissions[:denied_message] || 'Access denied.'
+      #   respond_to do |format|
+      #     format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
+      #     format.any(:xml, :json) { head :forbidden }
+      #   end
+      #   false
+      # end
+      true
     end
 
     def user_has_access_to_action?(action)
@@ -85,11 +86,6 @@ module LoginSystem
     end
 
   module ClassMethods
-    def no_login_required
-      skip_before_action :authenticate
-      skip_before_action :authorize
-      # puts _process_action_callbacks.map(&:filter)
-    end
 
     def login_required?
       filter_chain.any? {|f| f.method == :authenticate || f.method == :authorize }

@@ -1,25 +1,23 @@
 = form_for [:admin, @user], :html => {class: "user_form"} do |f|
-  = hidden_field "user", "lock_version"
-
   = render :partial => 'avatar' unless @user.new_record?
 
   = render_region :form_top, :locals => {:f => f}
 
   - render_region :form, :locals => {:f => f} do |form|
-    - form.edit_name do
+    - form.edit_first_name do
       %p
-        = f.label :name, t('name')
-        = f.text_field :name, :class => "textbox", :size => 32, :maxlength => 100
+        = f.label :name, t('first_name')
+        = f.text_field :first_name, :class => "textbox", :size => 32, :maxlength => 100
+
+    - form.edit_last_name do
+      %p
+        = f.label :name, t('last_name')
+        = f.text_field :last_name, :class => "textbox", :size => 32, :maxlength => 100    
 
     - form.edit_email do
       %p
         = f.label :email, t('email_address') , :class => "optional"
         = f.text_field "email", :class => 'textbox', :size => 32, :maxlength => 255
-
-    - form.edit_username do
-      %p
-        = f.label :login, t('username')
-        = f.text_field "login", :class => "textbox", :size => 32, :maxlength => 40, :autocomplete => 'off'
 
     - form.edit_password do
       = render "password_fields", :f => f
@@ -31,11 +29,6 @@
         = f.label :admin, t('admin'), :class => "checkbox"
         = f.check_box "designer", :class => "checkbox"
         = f.label :designer, t('designer'), :class => "checkbox"
-
-    - form.edit_locale do
-      %p
-        = f.label :locale, t('language')
-        = f.select "locale", available_locales_select
 
     - form.edit_notes do
       %p

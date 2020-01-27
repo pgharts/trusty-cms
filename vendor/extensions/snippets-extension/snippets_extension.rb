@@ -36,8 +36,6 @@ class SnippetsExtension < TrustyCms::Extension
 
     admin.snippet       ||= TrustyCms::AdminUI.load_default_snippet_regions
 
-    UserActionObserver.instance.send :add_observer!, ::Snippet
-
     tab 'Design' do
       add_item "Snippets", "/admin/snippets"
     end
