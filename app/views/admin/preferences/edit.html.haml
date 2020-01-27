@@ -13,10 +13,15 @@
         = render_region :form_top, :locals => {:f => f}
 
         - render_region :form, :locals => {:f => f} do |form|
-          - form.edit_name do
+          - form.edit_first_name do
             %p
-              = f.label :name, t("name")
-              = f.text_field :name, :class => "textbox", :size => 32, :maxlength => 100
+              = f.label :name, t("first_name")
+              = f.text_field :first_name, :class => "textbox", :size => 32, :maxlength => 100
+
+          - form.edit_last_name do
+            %p
+              = f.label :name, t("last_name")
+              = f.text_field :last_name, :class => "textbox", :size => 32, :maxlength => 100    
 
           - form.edit_email do
             %p
@@ -25,11 +30,6 @@
 
           - form.edit_password do
             = render "admin/users/password_fields", :f => f
-
-          - form.edit_locale do
-            %p
-              = f.label :locale, t('language')
-              = f.select "locale", available_locales_select
 
         - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
           - form_bottom.edit_buttons do

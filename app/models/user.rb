@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :pages, :foreign_key => :created_by_id
-  self.table_name = "admins"
+  self.table_name = 'admins'
 
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
 
   alias_attribute :created_by_id, :id
 
+  attr_accessor :skip_password_validation
+
   # Default Order
-  # default_scope {order("name")}
+  default_scope {order('last_name')}
 
   # Associations
   belongs_to :created_by, :class_name => 'User'
@@ -41,7 +43,7 @@ class User < ActiveRecord::Base
       self.content_editor?  
     else
       false
-    end        
+    end
   end
 
   def admin?
@@ -126,5 +128,10 @@ class User < ActiveRecord::Base
   #     encrypt_password
   #   end
   # end
+
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 
 end

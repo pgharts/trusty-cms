@@ -1,7 +1,7 @@
 module MultiSite::SiteChooserHelper
 
 def sites_chooser_thing
-  return "" unless admin? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
+  return "" unless current_user.admin? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
   options = Site.all.map{ |site| "<li>" + link_to( site.name, "#{request.path}?site_id=#{site.id}", :class => site == current_site ? 'fg' : '') + "</li>" }.join("")
   chooser = %{<div id="site_chooser">}
   #chooser << link_to("sites", admin_sites_url, {:id => 'show_site_list', :class => 'expandable'})

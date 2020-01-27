@@ -28,6 +28,6 @@ class Admin::PreferencesController < ApplicationController
   end
 
   def preferences_params
-    params.require(:user).permit(:name, :email, :login, :password, :password_confirmation, :locale)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :locale)
   end
 end

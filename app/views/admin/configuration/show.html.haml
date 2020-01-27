@@ -32,7 +32,7 @@
   - render_region :trusty_config do |config|
     - config.site do
       %h3
-        - if admin?
+        - if current_user.admin?
           .actions
             = button_to t("edit_configuration"), edit_admin_configuration_path, :method => :get
         Configuration

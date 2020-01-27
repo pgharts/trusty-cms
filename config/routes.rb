@@ -38,6 +38,8 @@ TrustyCms::Application.routes.draw do
   end
 
   match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
+  get 'admin' => 'admin/pages#index'
+
   namespace :admin do
     resource :preferences
     resource :configuration, controller: 'configuration'
