@@ -21,3 +21,5 @@
         = f.submit "Log in"
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
           = link_to "Forgot your password?", new_password_path(resource_name)
+      - if flash.alert
+        .error= flash.alert
