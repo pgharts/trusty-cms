@@ -23,7 +23,6 @@
 //= require 'admin/datecheck'
 //= require 'admin/validation'
 //= require 'admin/autopopulate-breadcrumb'
-//= require 'admin/cookie'
 //= require 'admin/dropdown'
 //= require 'admin/more-or-less'
 //= require 'admin/page-edit'
