@@ -19,7 +19,6 @@ TrustyCms::Application.routes.draw do
     resources :snippets do
       get :remove, on: :member
     end
-    resources :password_resets
     post 'save-table-position' => "pages#save_table_position", as: "save_tables_position"
 
     resources :assets do
@@ -56,10 +55,6 @@ TrustyCms::Application.routes.draw do
       put :move_to_bottom, on: :member
     end
   end
-  # get 'admin' => 'admin/welcome#index', :as => :admin
-  # get 'admin/welcome' => 'admin/welcome#index', :as => :welcome
-  # match 'admin/login' => 'admin/welcome#login', :as => :login, :via => [:get, :post]
-  # get 'admin/logout' => 'admin/welcome#logout', :as => :logout
 
   get 'error/404' => 'site#not_found', :as => :not_found
   get 'error/500' => 'site#error', :as => :error
