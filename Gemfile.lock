@@ -235,9 +235,12 @@ GEM
       ffi (~> 1.0)
     rdoc (6.2.1)
     regexp_parser (1.5.1)
+<<<<<<< HEAD
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+=======
+>>>>>>> e83101c9e4a0d2552e09744b9519ab736fd7c665
     roadie (4.0.0)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
