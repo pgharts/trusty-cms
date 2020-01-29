@@ -1,0 +1,14 @@
+- body_classes << 'password_form'
+.login-form-content
+  .visual
+    = image_tag('/assets/admin/default_forgot_password.svg', alt: 'person with hand to chin thoughtfully')
+  .login
+    %h1 Forgot your password?
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      .actions
+        = f.submit "Send me reset password instructions"
+    = render "devise/shared/links"

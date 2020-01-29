@@ -15,8 +15,9 @@ class Admin::UsersController < Admin::ResourceController
     user_params = params[model_symbol].permit!
     if user_params && user_params['admin'] == false && model == current_user
       user_params.delete('admin')
-      annouce_cannot_remove_self_from_admin_role
+      announce_cannot_remove_self_from_admin_role
     end
+    model.skip_password_validation = true unless user_params[:password_confirmation].present?
     model.update_attributes!(user_params)
     response_for :update
   end
@@ -34,7 +35,7 @@ class Admin::UsersController < Admin::ResourceController
       flash[:error] = t('users_controller.cannot_delete_self')
     end
 
-    def annouce_cannot_remove_self_from_admin_role
+    def announce_cannot_remove_self_from_admin_role
       flash[:error] = 'You cannot remove yourself from the admin role.'
     end
 end
