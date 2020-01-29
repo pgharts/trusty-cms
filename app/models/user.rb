@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :skip_password_validation
 
+  validate :password_complexity
+
   # Default Order
   default_scope {order('last_name')}
 
@@ -53,6 +55,13 @@ class User < ActiveRecord::Base
   def password_required?
     return false if skip_password_validation
     super
+  end
+
+  def password_complexity
+    # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
+
+    errors.add :password, 'Complexity requirement not met. Length should be 12 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character.'
   end
 
 end
