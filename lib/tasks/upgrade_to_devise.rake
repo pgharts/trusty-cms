@@ -4,13 +4,16 @@
 namespace :import do
   desc 'Imports the legacy user data into the Devise Admin table'
   task admins: :environment do
+    CHARS = ('0'..'9').to_a + ('A'..'Z').to_a + ('a'..'z').to_a + (1..9).to_a + ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*']
+    password = CHARS.sort_by { rand }.join[0...15]
+
     LegacyUser.all.each do |legacy|
       u = User.new(
         email: legacy.email,
         first_name: legacy.name.split(' ')[0],
         last_name: legacy.name.split(' ')[1],
-        password: 'PleaseChangeMe1!',
-        password_confirmation: 'PleaseChangeMe1!',
+        password: password,
+        password_confirmation: password,
         admin: legacy.admin,
         designer: legacy.designer,
         content_editor: legacy.content_editor,
