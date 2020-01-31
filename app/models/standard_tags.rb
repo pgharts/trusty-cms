@@ -749,7 +749,7 @@ module StandardTags
       url << "&default=#{default_avatar_url}" unless request.host_with_port == 'testhost.tld'
       # Test the Gravatar url
       require 'open-uri'
-      begin; open "http:#{url}", :proxy => true
+      begin; open "http:#{sanitize(url)}", :proxy => true
       rescue; local_avatar_url
       else; url
       end

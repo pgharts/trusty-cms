@@ -71,54 +71,6 @@ namespace :radiant do
           end
         end
       end
-      
-      desc "Migrates page attachments from the original page attachments extension into new Assets"
-      task :migrate_from_page_attachments => :environment do
-        puts "This task can clean up traces of the page_attachments (think table records and files currently in /public/page_attachments).
-If you would like to use this mode type \"yes\", type \"no\" or just hit enter to leave them untouched for now."
-        answer = STDIN.gets.chomp
-        erase_tracks = answer.eql?('yes') ? true : false
-        OldPageAttachment.find_all_by_parent_id(nil).each do |opa|
-          asset = opa.create_paperclipped_record
-          # move the actual file
-          old_dir = "#{Rails.root}/public/page_attachments/0000/#{opa.id.to_s.rjust(4,'0')}"
-          new_dir = "#{Rails.root}/public/assets/#{asset.id}"
-          puts "Copying #{old_dir.gsub(Rails.root, '')}/#{opa.filename} to #{new_dir.gsub(Rails.root, '')}/#{opa.filename}..."
-          mkdir_p new_dir
-          cp old_dir + "/#{opa.filename}", new_dir + "/#{opa.filename}"
-          # remove old record and remainings
-          if erase_tracks
-            rm_rf old_dir
-          end
-        end
-        # regenerate thumbnails
-        puts "Regenerating asset thumbnails"
-        ENV['CLASS'] = 'Asset'
-        Rake::Task['paperclip:refresh'].invoke
-        puts "Done."
-      end
-      
-      desc "Migrates from old 'assets' extension."
-      task :migrate_from_assets => :environment do
-        Asset.delete_all("thumbnail IS NOT NULL OR parent_id IS NOT NULL")
-        ActiveRecord::Base.connection.tap do |c|
-          c.rename_column :assets, :filename, :asset_file_name
-          c.rename_column :assets, :content_type, :asset_content_type
-          c.rename_column :assets, :size, :asset_file_size
-          c.remove_column :assets, :parent_id
-          c.remove_column :assets, :thumbnail
-        end
-
-        ClippedExtension.migrator.new(:up, ClippedExtension.migrations_path).send(:assume_migrated_upto_version, 3)
-        ClippedExtension.migrator.migrate
-      end
-
-      desc "Generate an example initializer"
-      task :initialize do
-        puts "Copying initializer from ClippedExtension"
-        cp ClippedExtension.root + "/lib/generators/templates/clipped_config.rb", Rails.root + "/config/initializers/", :verbose => false
-      end
-
     end
   end
 end
