@@ -41,7 +41,6 @@ module TrustyCms
     #     end
     #   end
     #
-    # and usually in a config/radiant_config.rb file either in radiant itself, in the application directory
     # or in an extension. TrustyCms currently defines the following settings and makes them editable by
     # admin users on the site configuration page:
     #
@@ -135,7 +134,7 @@ module TrustyCms
       end
 
       def cache_file
-        File.join(cache_path,'radiant_config_cache.txt')
+        File.join(cache_path,'trusty_config_cache.txt')
       end
 
       def site_settings
@@ -177,9 +176,7 @@ module TrustyCms
       # * :allow_blank should be false if the config item must not be blank or nil
       # * :allow_change should be false if the config item can only be set, not changed. Add a default to specify an unchanging config entry.
       # * :allow_display should be false if the config item should not be showable in radius tags
-      #
-      # From the main radiant config/initializers/radiant_config.rb:
-      #
+      #    
       #   TrustyCms.config do |config|
       #     config.define 'defaults.locale', :select_from => lambda { TrustyCms::AvailableLocales.locales }, :allow_blank => true
       #     config.define 'defaults.page.parts', :default => "Body,Extended"

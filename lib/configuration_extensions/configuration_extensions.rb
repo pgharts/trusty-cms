@@ -27,7 +27,7 @@ module TrustyCms
       Rails.configuration
     end
 
-    # Returns the root directory of this radiant installation (which is usually the gem directory).
+    # Returns the root directory of this installation (which is usually the gem directory).
     # This is not the same as Rails.root, which is the instance directory and tends to contain only site-delivery material.
     #
     def root
@@ -56,7 +56,7 @@ module TrustyCms
     end
 
     def vendor?
-      File.exist?("#{Rails.root}/vendor/radiant")
+      File.exist?("#{Rails.root}/vendor/trusty")
     end
 
     def app?
@@ -82,8 +82,8 @@ class Rails::Application::Configuration
 
   # The TrustyCms::Configuration class extends Rails::Configuration with three purposes:
   # * to reset some rails defaults so that files are found in TRUSTY_CMS_ROOT instead of Rails.root
-  # * to notice that some gems and plugins are in fact radiant extensions
-  # * to notice that some radiant extensions add load paths (for plugins, controllers, metal, etc)
+  # * to notice that some gems and plugins are in fact trusty extensions
+  # * to notice that some trusty extensions add load paths (for plugins, controllers, metal, etc)
 
   attr_accessor :extension_paths, :ignored_extensions
 
@@ -177,7 +177,7 @@ class Rails::Application::Configuration
   end
 
   # Returns an alphabetical list of every extension found among all the load paths and bundled gems. Any plugin or
-  # gem whose path ends in the form +radiant-something-extension+ is considered to be an extension.
+  # gem whose path ends in the form +trusty-something-extension+ is considered to be an extension.
   #
   #   TrustyCms.configuration.available_extensions  # => [:name, :name, :name, :name]
   #
@@ -204,7 +204,7 @@ class Rails::Application::Configuration
     end
   end
 
-  # Scans the bundled gems for any whose name match the +radiant-something-extension+ format
+  # Scans the bundled gems for any whose name match the +trusty-something-extension+ format
   # and returns a list of their names as symbols.
   #
   #   TrustyCms.configuration.gem_extensions  # => [:name, :name]
@@ -221,7 +221,7 @@ class Rails::Application::Configuration
   # Old extension-dependency mechanism now deprecated
   #
   def extension(ext)
-    ::ActiveSupport::Deprecation.warn("Extension dependencies have been deprecated and are no longer supported in radiant 1.0. Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.", caller)
+    ::ActiveSupport::Deprecation.warn("Extension dependencies have been deprecated and are no longer supported in trusty 1.0. Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.", caller)
   end
 
   # Old gem-invogation method now deprecated
@@ -299,7 +299,7 @@ class VendorBoot < Boot
   end
 
   def load_error_message
-    "Please verify that vendor/radiant contains a complete copy of the TrustyCms sources."
+    "Please verify that vendor/trusty contains a complete copy of the TrustyCms sources."
   end
 end
 
@@ -315,7 +315,7 @@ class AppBoot < Boot
 end
 
 class GemBoot < Boot
-  # The location and version of the radiant gem should be set in your Gemfile
+  # The location and version of the trusty gem should be set in your Gemfile
   def load_error_message
     "Have you run `bundle install`?'."
   end
