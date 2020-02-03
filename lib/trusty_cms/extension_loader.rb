@@ -120,7 +120,7 @@ module TrustyCms
       # Builds an ExtensionPath object from the supplied path, working out the name of the extension on the way.
       # The ExtensionPath object will later be used to scan and load the extension.
       # An extension name can be supplied in addition to the path. It will be processed in the usual way to
-      # remove radiant- and -extension and any verion numbering.
+      # remove trusty- and -extension and any verion numbering.
       #
       def record_path(path, name=nil)
         ExtensionPath.from_path(path, name)

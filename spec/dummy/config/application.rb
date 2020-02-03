@@ -38,8 +38,8 @@ module TrustyCms
     end
     # config.add_plugin_paths(extension_loader.paths(:plugin))
     # TODO: Come back and look at this.
-    radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
-    config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
+    trusty_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
+    config.i18n.load_path = trusty_locale_paths + extension_loader.paths(:locale)
 
     config.encoding = 'utf-8'
     config.time_zone = 'UTC'
@@ -78,19 +78,19 @@ module TrustyCms
     #    Turns on X-Accel-Redirect support for nginx. You have to provide
     #    a path that corresponds to a virtual location in your webserver
     #    configuration.
-    #  :entitystore => "radiant:tmp/cache/entity"
+    #  :entitystore => "trusty:tmp/cache/entity"
     #    Sets the entity store type (preceding the colon) and storage
     #   location (following the colon, relative to Rails.root).
-    #    We recommend you use radiant: since this will enable manual expiration.
-    #  :metastore => "radiant:tmp/cache/meta"
+    #    We recommend you use trusty: since this will enable manual expiration.
+    #  :metastore => "trusty:tmp/cache/meta"
     #    Sets the meta store type and storage location.  We recommend you use
-    #    radiant: since this will enable manual expiration and acceleration headers.
+    #    trusty: since this will enable manual expiration and acceleration headers.
 
     # TODO: We're not sure this is actually working, but we can't really test this until the app initializes.
     config.middleware.use Rack::Cache,
                           :private_headers => ['Authorization'],
-                          :entitystore => "radiant:tmp/cache/entity",
-                          :metastore => "radiant:tmp/cache/meta",
+                          :entitystore => "trusty:tmp/cache/entity",
+                          :metastore => "trusty:tmp/cache/meta",
                           :verbose => false,
                           :allow_reload => false,
                           :allow_revalidate => false

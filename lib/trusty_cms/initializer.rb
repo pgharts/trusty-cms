@@ -23,13 +23,13 @@ module TrustyCms
   module Initializer
 
     # Rails::Initializer is essentially a list of startup steps and we extend it here by:
-    # * overriding or extending some of those steps so that they use radiant and extension paths
+    # * overriding or extending some of those steps so that they use trusty and extension paths
     #   as well as (or instead of) the rails defaults.
     # * appending some extra steps to set up the admin UI and activate extensions
 
 
-    # Returns true in the very unusual case where radiant has been deployed as a rails app itself, rather than
-    # loaded as a gem or from vendor/. This is only likely in situations where radiant is customised so heavily
+    # Returns true in the very unusual case where trusty has been deployed as a rails app itself, rather than
+    # loaded as a gem or from vendor/. This is only likely in situations where trusty is customised so heavily
     # that extensions are not sufficient.
     #
     def deployed_as_app?
@@ -43,7 +43,7 @@ module TrustyCms
       super
     end
 
-    # Overrides the Rails initializer to load metal from TRUSTY_CMS_ROOT and from radiant extensions.
+    # Overrides the Rails initializer to load metal from TRUSTY_CMS_ROOT and from trusty extensions.
     #
     def initialize_metal
       Rails::Rack::Metal.requested_metals = configuration.metals
@@ -57,11 +57,11 @@ module TrustyCms
         Rails::Rack::Metal, :if => Rails::Rack::Metal.metals.any?)
     end
 
-    # Extends the Rails initializer to add locale paths from TRUSTY_CMS_ROOT and from radiant extensions.
+    # Extends the Rails initializer to add locale paths from TRUSTY_CMS_ROOT and from trusty extensions.
     #
     def initialize_i18n
-      radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
-      configuration.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
+      trusty_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
+      configuration.i18n.load_path = trusty_locale_paths + extension_loader.paths(:locale)
       super
     end
 
@@ -81,40 +81,40 @@ module TrustyCms
       @bundler_loaded ||= Bundler.require :default, Rails.env
     end
 
-    # Extends the Rails initializer also to load radiant extensions (which have been excluded from the list of plugins).
+    # Extends the Rails initializer also to load trusty extensions (which have been excluded from the list of plugins).
     #
     def load_plugins
       super
       extension_loader.load_extensions
     end
 
-    # Extends the Rails initializer to run initializers from radiant and from extensions. The load order will be:
+    # Extends the Rails initializer to run initializers from trusty and from extensions. The load order will be:
     # 1. TRUSTY_CMS_ROOT/config/intializers/*.rb
     # 2. Rails.root/config/intializers/*.rb
     # 3. config/initializers/*.rb found in extensions, in extension load order.
     #
-    # In the now rare case where radiant is deployed as an ordinary rails application, step 1 is skipped
+    # In the now rare case where trusty is deployed as an ordinary rails application, step 1 is skipped
     # because it is equivalent to step 2.
     #
     def load_application_initializers
-      load_radiant_initializers unless deployed_as_app?
+      load_trusty_initializers unless deployed_as_app?
       super
       extension_loader.load_extension_initalizers
     end
 
     # Loads initializers found in TRUSTY_CMS_ROOT/config/initializers.
     #
-    def load_radiant_initializers
+    def load_trusty_initializers
       Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
         load(initializer)
       end
     end
 
     # Extends the Rails initializer with some extra steps at the end of initialization:
-    # * hook up radiant view paths in controllers and notifiers
+    # * hook up trusty view paths in controllers and notifiers
     # * initialize the navigation tabs in the admin interface
     # * initialize the extendable partial sets that make up the admin interface
-    # * call +activate+ on all radiant extensions
+    # * call +activate+ on all trusty extensions
     # * add extension controller paths
     # * mark extension app paths for eager loading
     #

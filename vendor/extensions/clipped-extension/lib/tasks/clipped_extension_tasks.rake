@@ -1,10 +1,10 @@
-namespace :radiant do
+namespace :trusty do
   namespace :extensions do
     namespace :clipped do
       
       desc "Runs the migration of the Clipped extension"
       task :migrate => :environment do
-        require 'radiant/extension_migrator'
+        require 'trusty/extension_migrator'
         if ActiveRecord::Base.connection.select_values("SELECT version FROM #{ActiveRecord::Migrator.schema_migrations_table_name} WHERE version = 'Assets-20110513205050'").any?
           puts "Assimilating Assets extension migration 20110513205050"
           ClippedExtension.migrator.new(:up, ClippedExtension.migrations_path).send(:assume_migrated_upto_version, '20110513205050')

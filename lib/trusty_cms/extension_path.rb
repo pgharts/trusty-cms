@@ -37,7 +37,7 @@ module TrustyCms
     end
 
     # Builds a new ExtensionPath object from the supplied path, working out the name of the extension by
-    # stripping the extra bits from radiant-something-extension-1.0.0 to leave just 'something'. The object
+    # stripping the extra bits from trusty-something-extension-1.0.0 to leave just 'something'. The object
     # is returned, and also remembered here for later use by the initializer (to find load paths) and the
     # ExtensionLoader, to load and activate the extension.
     #

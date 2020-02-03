@@ -8,14 +8,14 @@ module TrustyCms
           ActiveRecord::Base.establish_connection(env_connection)
         end
       end
-      def config_export(path = "#{Rails.root}/config/radiant_config.yml")
+      def config_export(path = "#{Rails.root}/config/trusty_config.yml")
         self.establish_connection
         FileUtils.mkdir_p(File.dirname(path))
         if File.open(File.expand_path(path), 'w') { |f| YAML.dump(TrustyCms::Config.to_hash.to_yaml,f) }
           puts "TrustyCms::Config saved to #{path}"
         end
       end
-      def config_import(path = "#{Rails.root}/config/radiant_config.yml", clear = nil)
+      def config_import(path = "#{Rails.root}/config/trusty_config.yml", clear = nil)
         self.establish_connection
         if File.exist?(path)
           begin
