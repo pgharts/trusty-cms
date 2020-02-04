@@ -61,7 +61,6 @@ module ApplicationHelper
           else
             options.to_s
           end
-    #TODO: look for other instances of request_uri
     request.original_fullpath =~ Regexp.new('^' + Regexp.quote(clean(url)))
   end
 

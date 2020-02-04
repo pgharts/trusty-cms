@@ -184,9 +184,7 @@ module AssetTags
     asset_content_type = tag.locals.asset.asset_content_type
     tag.expand unless asset_content_type.match(regexp).nil?
   end
-  
-  #TODO: could use better docs for Asset#other? case explaining what types it covers
-  
+    
   [:title, :caption, :asset_file_name, :extension, :asset_content_type, :asset_file_size, :id].each do |method|
     desc %{
       Renders the @#{method.to_s}@ attribute of the asset
