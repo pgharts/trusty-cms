@@ -259,8 +259,6 @@ class Rails::Application::Configuration
   end
 end
 
-
-# TODO: Move all of this to a separate file.
 class Boot
   def run
     load_mutex

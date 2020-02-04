@@ -37,7 +37,6 @@ module TrustyCms
       $LOAD_PATH.unshift path
     end
     # config.add_plugin_paths(extension_loader.paths(:plugin))
-    # TODO: Come back and look at this.
     trusty_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
     config.i18n.load_path = trusty_locale_paths + extension_loader.paths(:locale)
 
@@ -85,8 +84,6 @@ module TrustyCms
     #  :metastore => "trusty:tmp/cache/meta"
     #    Sets the meta store type and storage location.  We recommend you use
     #    trusty: since this will enable manual expiration and acceleration headers.
-
-    # TODO: We're not sure this is actually working, but we can't really test this until the app initializes.
     config.middleware.use Rack::Cache,
                           :private_headers => ['Authorization'],
                           :entitystore => "trusty:tmp/cache/entity",
@@ -94,13 +91,8 @@ module TrustyCms
                           :verbose => false,
                           :allow_reload => false,
                           :allow_revalidate => false
-    # TODO: There's got to be a better place for this, but in order for assets to work fornow, we need ConditionalGet
-    # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
-
-
-
     config.filter_parameters += [:password, :password_confirmation]
 
     # Use the database for sessions instead of the cookie-based default,

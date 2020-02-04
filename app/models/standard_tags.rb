@@ -441,7 +441,6 @@ module StandardTags
     options = aggregate_children(tag)
     children = Page.where(options)
 
-    # TODO: What is this nonsnese?
     if first = children.first
       tag.locals.page = first
       tag.expand
@@ -464,7 +463,6 @@ module StandardTags
     options = aggregate_children(tag)
     children = Page.where(options)
 
-    # TODO: More nonsense
     if last = children.last
       tag.locals.page = last
       tag.expand
@@ -1343,7 +1341,6 @@ module StandardTags
 
     def dev?(request)
       return false if request.nil?
-      # TODO: More nonsense!
       if dev_host = TrustyCms::Config['dev.host']
         dev_host == request.host
       else
