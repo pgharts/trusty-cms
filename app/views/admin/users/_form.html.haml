@@ -23,12 +23,13 @@
       = render "password_fields", :f => f
 
     - form.edit_roles do
-      %p
-        %label.multi_option= t('roles')
-        = f.check_box "admin", :class => "checkbox"
-        = f.label :admin, t('admin'), :class => "checkbox"
-        = f.check_box "designer", :class => "checkbox"
-        = f.label :designer, t('designer'), :class => "checkbox"
+      - if current_user.admin?
+        %p
+          %label.multi_option= t('roles')
+          = f.check_box "admin", :class => "checkbox"
+          = f.label :admin, t('admin'), :class => "checkbox"
+          = f.check_box "designer", :class => "checkbox"
+          = f.label :designer, t('designer'), :class => "checkbox"
 
     - form.edit_notes do
       %p

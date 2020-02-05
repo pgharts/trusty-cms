@@ -11,6 +11,17 @@ class Admin::UsersController < Admin::ResourceController
     redirect_to edit_admin_user_path(params[:id])
   end
 
+  def create
+    user = User.new(user_params)
+    if user.save
+      flash[:notice] = 'User was created.'
+      redirect_to admin_users_path
+    else
+      flash[:error] = 'There was an error saving the user. Please try again.'
+      render :new
+    end
+  end 
+
   def update
     user_params = params[model_symbol].permit!
     if user_params && user_params['admin'] == false && model == current_user
@@ -18,8 +29,12 @@ class Admin::UsersController < Admin::ResourceController
       announce_cannot_remove_self_from_admin_role
     end
     model.skip_password_validation = true unless user_params[:password_confirmation].present?
-    model.update_attributes!(user_params)
-    response_for :update
+    if model.update_attributes(user_params)
+      response_for :update
+    else
+      flash[:error] = 'There was an error saving the user. Please try again.'
+      render :edit
+    end    
   end
 
   def ensure_deletable
@@ -30,6 +45,11 @@ class Admin::UsersController < Admin::ResourceController
   end
 
   private
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :admin, :designer, 
+        :password, :password_confirmation, :email, :site_id, :notes)
+    end
 
     def announce_cannot_delete_self
       flash[:error] = t('users_controller.cannot_delete_self')

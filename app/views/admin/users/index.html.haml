@@ -25,14 +25,15 @@
               %td.roles= roles(user)
             - tbody.actions_cell do
               %td.actions
-                - if user == current_user
+                - if !current_user.admin?
                   %span.action.disabled= image('minus_disabled') + ' ' + t('remove')
                 - else
                   = link_to image('minus') + ' ' + t('remove'), remove_admin_user_url(user), :class => "action"
 
 - render_region :bottom do |bottom|
   - bottom.new_button do
-    #actions
-      = pagination_for(@users)
-      %ul
-        %li= link_to image('plus') + " " + t('new_user'), new_admin_user_url, :class => 'action_button'
+    - if current_user.admin?
+      #actions
+        = pagination_for(@users)
+        %ul
+          %li= link_to image('plus') + " " + t('new_user'), new_admin_user_url, :class => 'action_button'

@@ -2,6 +2,6 @@ TRUSTY_CMS_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "..")) unle
 
 unless defined? TrustyCms::VERSION
   module TrustyCms
-    VERSION = '3.8.4'
+    VERSION = '3.9.0'
   end
 end
