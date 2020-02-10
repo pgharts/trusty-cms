@@ -5,7 +5,7 @@ describe 'Layouts (Design)' do
 
   before(:each) do
     @admin = users(:captain_janeway)
-    log_in_as @admin.login
+    login_as(@admin, :scope => :user)
     click_link 'Design'
   end
 

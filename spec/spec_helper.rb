@@ -4,6 +4,7 @@ require 'rspec/rails'
 require 'factory_bot_rails'
 require 'simplecov'
 SimpleCov.start
+include Warden::Test::Helpers
 
 Rails.backtrace_cleaner.remove_silencers!
 # Load support files
@@ -17,6 +18,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
+  config.include Warden::Test::Helpers
 
   config.before(:each, type: :controller) { @routes = TrustyCms::Engine.routes }
   config.before(:each, type: :routing)    { @routes = TrustyCms::Engine.routes }

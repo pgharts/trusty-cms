@@ -5,7 +5,7 @@ describe 'Pages' do
 
   before(:each) do
     @admin = users(:captain_janeway)
-    log_in_as @admin.login
+    login_as(@admin, :scope => :user)
   end
 
   context 'without any pages' do
