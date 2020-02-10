@@ -8,7 +8,7 @@ describe Layout do
     it 'is invalid when blank' do
       layout = FactoryBot.build(:layout, name: '')
       layout.valid?
-      expect(layout.errors[:name]).to include("this must not be blank")
+      expect(layout.errors[:name]).to include("This field is required.")
     end
 
     it 'should validate uniqueness of' do
@@ -23,7 +23,7 @@ describe Layout do
       expect(layout.errors[:name]).to be_blank
       layout = FactoryBot.build(:layout, name: 'x' * 101)
       expect{layout.save!}.to raise_error(ActiveRecord::RecordInvalid)
-      expect(layout.errors[:name]).to include("this must not be longer than 100 characters")
+      expect(layout.errors[:name]).to include("This must not be longer than 100 characters")
     end
   end
 end
