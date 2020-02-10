@@ -7,6 +7,7 @@ class Admin::ResourceController < ApplicationController
   before_action :never_cache
   before_action :load_models, :only => :index
   before_action :load_model, :only => [:new, :create, :edit, :update, :remove, :destroy]
+  before_action :set_owner_or_editor, :only => [:new, :create, :update]
   after_action :clear_model_cache, :only => [:create, :update, :destroy]
 
   cattr_reader :paginated
@@ -132,6 +133,11 @@ class Admin::ResourceController < ApplicationController
 
     def model_class
       self.class.model_class
+    end
+
+    def set_owner_or_editor
+      self.model.created_by_id = current_user.id if self.model.id == nil
+      self.model.updated_by_id = current_user.id 
     end
 
     def model

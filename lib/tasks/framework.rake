@@ -2,28 +2,28 @@
 unless File.directory? "#{Rails.root}/app"
   namespace :trusty_cms do
     namespace :freeze do
-      desc "Lock this application to the current gems (by unpacking them into vendor/radiant)"
+      desc "Lock this application to the current gems (by unpacking them into vendor/trusty)"
       task :gems do
         require 'rubygems'
         require 'rubygems/gem_runner'
 
-        radiant = (version = ENV['VERSION']) ?
+        trusty = (version = ENV['VERSION']) ?
           Gem.cache.search('trusty-cms', "= #{version}").first :
           Gem.cache.search('trusty-cms').sort_by { |g| g.version }.last
 
-        version ||= radiant.version
+        version ||= trusty.version
 
-        unless radiant
-          puts "No radiant gem #{version} is installed.  Do 'gem list radiant' to see what you have available."
+        unless trusty
+          puts "No trusty gem #{version} is installed.  Do 'gem list trusty' to see what you have available."
           exit
         end
 
-        puts "Freezing to the gems for TrustyCms #{radiant.version}"
-        rm_rf   "vendor/radiant"
+        puts "Freezing to the gems for TrustyCms #{trusty.version}"
+        rm_rf   "vendor/trusty"
 
         chdir("vendor") do
-          Gem::GemRunner.new.run(["unpack", "radiant", "--version", "=#{version}"])
-          FileUtils.mv(Dir.glob("radiant*").first, "radiant")
+          Gem::GemRunner.new.run(["unpack", "trusty", "--version", "=#{version}"])
+          FileUtils.mv(Dir.glob("trusty*").first, "trusty")
         end
       end
 
@@ -35,30 +35,30 @@ unless File.directory? "#{Rails.root}/app"
           exit 1
         end
 
-        radiant_git = "git://github.com/pgharts/trusty-cms.git"
+        trusty_git = "git://github.com/pgharts/trusty-cms.git"
 
         if File.exist?("vendor/trusty_cms/.git/HEAD")
-          cd("vendor/radiant") { system "git checkout master"; system "git pull origin master"}
+          cd("vendor/trusty") { system "git checkout master"; system "git pull origin master"}
         else
-          system "git clone #{radiant_git} vendor/radiant"
+          system "git clone #{trusty_git} vendor/trusty"
         end
 
         case
         when ENV['TAG']
-          cd("vendor/radiant") { system "git checkout -b v#{ENV['TAG']} #{ENV['TAG']}"}
+          cd("vendor/trusty") { system "git checkout -b v#{ENV['TAG']} #{ENV['TAG']}"}
         when ENV['BRANCH']
-          cd("vendor/radiant") { system "git checkout --track -b #{ENV['BRANCH']} origin/#{ENV['BRANCH']}"}
+          cd("vendor/trusty") { system "git checkout --track -b #{ENV['BRANCH']} origin/#{ENV['BRANCH']}"}
         when ENV['REVISION']
-          cd("vendor/radiant") { system "git checkout -b REV_#{ENV['REVISION']} #{ENV['REVISION']}"}
+          cd("vendor/trusty") { system "git checkout -b REV_#{ENV['REVISION']} #{ENV['REVISION']}"}
         end
 
-        cd("vendor/radiant") { system "git submodule update --init"}
+        cd("vendor/trusty") { system "git submodule update --init"}
       end
     end
 
     desc "Unlock this application from freeze of gems or edge and return to a fluid use of system gems"
     task :unfreeze do
-      rm_rf "vendor/radiant"
+      rm_rf "vendor/trusty"
     end
 
     desc "Update configs, scripts, html, images, sass, stylesheets and javascripts from TrustyCms."
@@ -94,7 +94,7 @@ unless File.directory? "#{Rails.root}/app"
         install "#{File.dirname(__FILE__)}/../generators/instance/templates/instance_generate", "#{local_base}/generate", :mode => 0755
       end
 
-      desc "Update your javascripts from your current radiant install"
+      desc "Update your javascripts from your current trusty install"
       task :javascripts do
         FileUtils.mkdir_p("#{Rails.root}/public/javascripts/admin/")
         copy_javascripts = proc do |project_dir, scripts|
@@ -110,7 +110,7 @@ unless File.directory? "#{Rails.root}/app"
         TrustyCms::TaskSupport.cache_admin_js
       end
 
-      desc "Update Gemfile from your current radiant install, backing up if required."
+      desc "Update Gemfile from your current trusty install, backing up if required."
       task :bundle do
         require 'erb'
         file = "#{Rails.root}/Gemfile"
@@ -128,7 +128,7 @@ unless File.directory? "#{Rails.root}/app"
         active_db_gem = db_gems.keys.find { |g| Gem.loaded_specs[g] } || 'sqlite3'
 
         File.open(tmpfile, 'w') do |f|
-          radiant_version = TrustyCms::VERSION.to_s
+          trusty_version = TrustyCms::VERSION.to_s
           db = db_gems[active_db_gem]
           f.write ERB.new(File.read(genfile)).result(binding)
         end
@@ -138,7 +138,7 @@ unless File.directory? "#{Rails.root}/app"
           if File.exist?(file)
             FileUtils.cp(file, backfile)
             warning << "** WARNING **
-Your old Gemfile has been saved as Gemfile.bak. If you had radiant extensions or other gems in that file, please copy those lines to the new file. After checking the Gemfile, please run `bundle install` to update your application."
+Your old Gemfile has been saved as Gemfile.bak. If you had trusty extensions or other gems in that file, please copy those lines to the new file. After checking the Gemfile, please run `bundle install` to update your application."
           else
             warning << "** WARNING **
 A Gemfile has been created in your application directory. If you have config.gem entries in your old environment.rb (now .bak), please move them to the Gemfile. When you're happy with it, run `bundle install` to install the gems."
@@ -149,7 +149,7 @@ A Gemfile has been created in your application directory. If you have config.gem
         puts warning
       end
 
-      desc "Update configuration files from your current radiant install"
+      desc "Update configuration files from your current trusty install"
       task :configs do
         require 'erb'
         instances = {
@@ -187,7 +187,7 @@ A Gemfile has been created in your application directory. If you have config.gem
         [:env, :development, :test, :cucumber, :production].each do |env_file|
           File.open(tmps[env_file], 'w') do |f|
             app_name        = File.basename(File.expand_path(Rails.root))
-            radiant_version = TrustyCms::VERSION.to_s
+            trusty_version = TrustyCms::VERSION.to_s
             f.write ERB.new(File.read(gens[env_file])).result(binding)
           end
           unless File.exist?(instances[env_file]) && FileUtils.compare_file(instances[env_file], tmps[env_file])
@@ -206,16 +206,16 @@ the new files: #{warning}"
         end
       end
 
-      desc "Update static HTML files from your current radiant install"
+      desc "Update static HTML files from your current trusty install"
       task :static_html do
         project_dir = Rails.root + "/public/"
         html_files = Dir["#{File.dirname(__FILE__)}/../../public/*.html"].delete_if { |f| f =~ /404.html|500.html/ }
         FileUtils.cp(html_files, project_dir)
       end
 
-      desc "Update admin and radiant images from your current radiant install"
+      desc "Update admin and trusty images from your current trusty install"
       task :images do
-        %w{admin radiant}.each do |d|
+        %w{admin trusty}.each do |d|
           project_dir = Rails.root + "/public/images/#{d}/"
           FileUtils.mkdir_p(project_dir)
           images = Dir["#{File.dirname(__FILE__)}/../../public/images/#{d}/*"]
@@ -223,7 +223,7 @@ the new files: #{warning}"
         end
       end
 
-      desc "Update admin stylesheets from your current radiant install"
+      desc "Update admin stylesheets from your current trusty install"
       task :stylesheets do
         project_dir = Rails.root + '/public/stylesheets/admin/'
 
@@ -234,7 +234,7 @@ the new files: #{warning}"
         copy_stylesheets[Rails.root + '/public/stylesheets/admin/',Dir["#{File.dirname(__FILE__)}/../../public/stylesheets/admin/*.css"]]
       end
 
-      desc "Update admin sass files from your current radiant install"
+      desc "Update admin sass files from your current trusty install"
       task :sass do
         copy_sass = proc do |project_dir, sass_files|
           sass_files.reject!{|s| File.basename(s) == 'overrides.sass'} if File.exists?(project_dir + 'overrides.sass') || File.exists?(project_dir + '../overrides.css')

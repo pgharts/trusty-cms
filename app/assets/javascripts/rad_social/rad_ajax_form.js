@@ -16,9 +16,6 @@ function RadAjaxForm(form) {
             type: "POST",
             url: form.find('input[name=submit_url]').attr('value'),
             data: form.serialize(),
-          beforeSend: function ( xhr ) {
-                xhr.setRequestHeader("X-CSRF-Token", $("#auth_token").attr('value'));
-          },
             success: function(data, status, xhr) {
                 form.find(".loader").removeClass('ajax-loader');
                 form.find(".loader-small").removeClass('ajax-loader-small');

@@ -4,7 +4,7 @@ module ScopedHelper
     base.module_eval do
       def title
         t = current_site.name 
-        t = TrustyCms::Config['admin.title'] || 'Radiant CMS' if t.blank?
+        t = TrustyCms::Config['admin.title'] || 'TrustyCMS' if t.blank?
         t
       end
 

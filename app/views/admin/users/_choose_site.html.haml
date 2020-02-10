@@ -1,4 +1,4 @@
-- unless current_user.site
+- if current_user.admin?
   %tr
     %th.label
       %label{:for=>"user_admin"} Can edit site

@@ -1,10 +1,10 @@
-namespace :radiant do
+namespace :trusty do
   namespace :extensions do
     namespace :scoped_admin do
       
       desc "Runs the migration of the Scoped Admin extension"
       task :migrate => :environment do
-        require 'radiant/extension_migrator'
+        require 'trusty/extension_migrator'
         if ENV["VERSION"]
           ScopedAdminExtension.migrator.migrate(ENV["VERSION"].to_i)
         else
