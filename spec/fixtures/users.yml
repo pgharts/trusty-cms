@@ -1,15 +1,13 @@
 captain_janeway:
   first_name: 'Kathryn'
   last_name: 'Janeway'
-  password: '3MHtmC5=!By!' 
-  password_confirmation: '3MHtmC5=!By!' 
+  encrypted_password: '3MHtmC5=!By!' 
   admin: true
   designer: false
 
 captain_picard:
   first_name: 'Jean-Luc'
   last_name: 'Picard'
-  password: 'pK_2h76VNhVr' 
-  password_confirmation: 'pK_2h76VNhVr' 
+  encrypted_password: 'pK_2h76VNhVr' 
   admin: false
   designer: true
