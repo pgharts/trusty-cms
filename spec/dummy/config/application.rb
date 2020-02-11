@@ -11,7 +11,7 @@ require 'string_extensions/string_extensions'
 require 'active_record_extensions/active_record_extensions'
 require 'configuration_extensions/configuration_extensions'
 require 'rack/cache'
-require "sass-rails"
+require "sassc-rails"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

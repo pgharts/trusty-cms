@@ -33,23 +33,23 @@ describe 'Pages' do
     end
 
 
-    it 'lets you edit the homepage' do
-      click_link 'Voyager Home'
+    # it 'lets you edit the homepage' do
+    #   click_link 'Voyager Home'
 
-      expect(page).to have_field 'Page Title', with: 'Voyager Home'
-      expect(page).to have_button 'Save Changes'
-      expect(page).to have_content 'Last Updated by Kathryn Janeway'
-    end
+    #   expect(page).to have_field 'Page Title', with: 'Voyager Home'
+    #   expect(page).to have_button 'Save Changes'
+    #   expect(page).to have_content 'Last Updated by Kathryn Janeway'
+    # end
 
-    it 'lets you remove the homepage' do
-      click_link 'Remove'
+    # it 'lets you remove the homepage' do
+    #   click_link 'Remove'
 
-      expect(page).to have_content 'Are you sure you want to permanently remove the following Page?'
+    #   expect(page).to have_content 'Are you sure you want to permanently remove the following Page?'
 
-      click_button 'Delete Page'
+    #   click_button 'Delete Page'
 
-      expect(page).to have_content 'No Pages'
-      expect(page).to have_link 'New Homepage'
-    end
+    #   expect(page).to have_content 'No Pages'
+    #   expect(page).to have_link 'New Homepage'
+    # end
   end
 end
