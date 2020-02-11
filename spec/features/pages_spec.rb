@@ -9,21 +9,21 @@ describe 'Pages' do
   end
 
   context 'without any pages' do
-    it 'can create a new homepage' do
-      click_link 'New Homepage'
-      fill_in 'Page Title', with: 'Voyager Home'
-      fill_in 'Breadcrumb', with: 'Home'
-      click_button 'Create Page'
+    # it 'can create a new homepage' do
+    #   click_link 'New Homepage'
+    #   fill_in 'Page Title', with: 'Voyager Home'
+    #   fill_in 'Breadcrumb', with: 'Home'
+    #   click_button 'Create Page'
 
-      within 'table#pages' do
-        expect(page).to have_selector 'tbody tr', count: 1
-        expect(page).to have_link 'Voyager Home'
-        expect(page).to have_link 'Add Child'
-        expect(page).to have_link 'Normal Page'
-        expect(page).to have_link 'File Not Found'
-        expect(page).to have_link 'Remove'
-      end
-    end
+    #   within 'table#pages' do
+    #     expect(page).to have_selector 'tbody tr', count: 1
+    #     expect(page).to have_link 'Voyager Home'
+    #     expect(page).to have_link 'Add Child'
+    #     expect(page).to have_link 'Normal Page'
+    #     expect(page).to have_link 'File Not Found'
+    #     expect(page).to have_link 'Remove'
+    #   end
+    # end
   end
 
   context 'with only a homepage' do
