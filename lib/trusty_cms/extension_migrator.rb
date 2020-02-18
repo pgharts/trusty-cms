@@ -41,7 +41,7 @@ module TrustyCms
         current_version = ActiveRecord::Base.connection.select_value("SELECT schema_version FROM extension_meta WHERE name = #{sanitize(quote(extension_name))}")
         if current_version
           assume_migrated_upto_version(current_version.to_i)
-          ActiveRecord::Base.connection.delete("DELETE FROM extension_meta WHERE name = #{sanitize(Aquote(extension_name))}")
+          ActiveRecord::Base.connection.delete("DELETE FROM extension_meta WHERE name = #{sanitize(quote(extension_name))}")
         end
       end
 
