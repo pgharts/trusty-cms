@@ -21,6 +21,5 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-observers'
   gem 'rspec-rails'
-  gem 'sass-rails'
   gem 'simplecov'
 end
