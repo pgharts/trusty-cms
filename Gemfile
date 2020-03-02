@@ -15,7 +15,7 @@ group :development, :test do
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '5.0.2'
-  gem 'launchy',         '~> 2.4.2'
+  gem 'launchy',         '~> 2.5.0'
   gem 'mysql2'
   gem 'poltergeist',      '~> 1.18.1'
   gem 'pry-byebug'
