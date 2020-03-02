@@ -1,6 +1,9 @@
 TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
   devise_for :users, module: :devise, :skip => :registration
+  as :user do
+    post 'authenticate', to: 'devise/sessions#create', as: :authenticate
+  end
   get '/rad_social/mail' => 'social_mailer#social_mail_form', as: :rad_social_mail_form
   post '/rad_social/mail' => 'social_mailer#create_social_mail', as: :rad_create_social_mail
   TrustyCms::Application.config.enabled_extensions.each { |ext|
