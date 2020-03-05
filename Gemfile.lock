@@ -166,8 +166,8 @@ GEM
       httparty
       json
       multipart-post
-    launchy (2.4.3)
-      addressable (~> 2.3)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     libv8 (7.3.492.27.1)
     loofah (2.4.0)
       crass (~> 1.0.2)
@@ -326,7 +326,7 @@ DEPENDENCIES
   acts_as_list
   database_cleaner
   factory_bot_rails (= 5.0.2)
-  launchy (~> 2.4.2)
+  launchy (~> 2.5.0)
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
