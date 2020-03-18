@@ -6,7 +6,7 @@ plugins:
     enabled: true
   eslint:
     enabled: true
-    channel: "eslint-5"
+    channel: "eslint-6"
     config:
       config: .eslintrc.js
   fixme:
@@ -28,7 +28,7 @@ plugins:
         enabled: false
   rubocop:
     enabled: true
-    channel: rubocop-0-63
+    channel: rubocop-0-79
   stylelint:
     enabled: true
 exclude_patterns:
@@ -41,7 +41,6 @@ exclude_patterns:
 - app/assets/javascripts/admin/jquery.iframe-transport.js 
 - app/assets/javascripts/admin/jquery.fileupload.js 
 - app/assets/javascripts/admin/jquery.treetable.js
-- app/assets/javascripts/admin/jquery.ui.widget.js
 - app/assets/javascripts/admin/jquery.validate.min.js
 - app/assets/javascripts/admin/persist.min.js
 - app/assets/javascripts/rad_social/jquery.validate.min.js

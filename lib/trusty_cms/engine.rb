@@ -21,3 +21,5 @@ module TrustyCms
 end
 
 require 'ckeditor'
+require 'devise'
+

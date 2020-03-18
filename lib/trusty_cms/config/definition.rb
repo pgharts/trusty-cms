@@ -6,7 +6,7 @@ module TrustyCms
 
       # Configuration 'definitions' are metadata held in memory that add restriction and description to individual config entries.
       #
-      # By default radiant's configuration machinery is open and ad-hoc: config items are just globally-accessible variables.
+      # By default trusty's configuration machinery is open and ad-hoc: config items are just globally-accessible variables.
       # They're created when first mentioned and then available in all parts of the application. The definition mechanism is a way
       # to place limits on that behavior. It allows you to protect a config entry, to specify the values it can take and to
       # validate it when it changes. In the next update it will also allow you to declare that

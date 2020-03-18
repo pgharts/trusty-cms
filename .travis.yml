@@ -4,11 +4,13 @@ cache: bundler
 
 language: ruby
 rvm:
-  - 2.5.0
+  - 2.6.5
 
 services: mysql
 
 before_script:
+  - gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+  - gem update --system
   - cp spec/ci/database.mysql.yml config/database.yml;
   - bundle exec rake app:db:create
   - bundle exec rake app:db:migrate
@@ -16,8 +18,7 @@ before_script:
 
 script:
   - bundle exec rake app:spec
-  - bundle exec codeclimate-test-reporter
-
+  
 branches:
   only:
     - master

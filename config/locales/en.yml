@@ -4,14 +4,14 @@ en:
   activerecord:
     errors:
       messages:
-        blank: 'this must not be blank' # required
-        invalid: 'this does not match the expected format' #invalid_format
-        not_a_number: 'this must be a number' # must be number
-        not_a_page: "there must be a page at this address"
-        not_permitted: 'this must be one of the permitted values'
-        taken: 'this name is already in use' # name_in_use
-        too_long: 'this must not be longer than %{count} characters' # character_limit
-        too_short: 'this must be at least %{count} characters long' # character_minimum
+        blank: 'This field is required.' # required
+        invalid: 'This does not match the expected format' #invalid_format
+        not_a_number: 'This must be a number' # must be number
+        not_a_page: "There must be a page at this address"
+        not_permitted: 'This must be one of the permitted values'
+        taken: 'This name is already in use' # name_in_use
+        too_long: 'This must not be longer than %{count} characters' # character_limit
+        too_short: 'This must be at least %{count} characters long' # character_minimum
       models:
         asset:
           attributes:
@@ -20,15 +20,15 @@ en:
         page:
           attributes:
             slug:
-              taken: 'this slug is already in use by a sibling of this page' # slug_in_use
+              taken: 'This slug is already in use by a sibling of this page' # slug_in_use
         user:
           attributes:
             email:
-              invalid: 'this is not a valid e-mail address' # invalid_email
+              invalid: 'This is not a valid e-mail address' # invalid_email
             login:
-              taken: 'this login is already in use' # login already in use
+              taken: 'This login is already in use' # login already in use
             password:
-              confirmation: 'this must match confirmation' # password_confirmation
+              confirmation: 'This must match confirmation' # password_confirmation
   add_child: 'Add Child'
   add_field: 'Add Field'
   add_part: 'Add Part'
@@ -42,11 +42,9 @@ en:
     images: 'Images'
     others: 'Others'
     audios: 'Audio'
-    flashes: 'Flash'
     fonts: 'Fonts'
     videos: 'Video'
     pdfs: 'PDFs'
-    swfs: 'Flash'
   available_tags: 'Available Tags'
   available_tags_for: 'Available Tags for %{name}'
   body: 'Body'
@@ -68,13 +66,13 @@ en:
     asset_page_attachment_note: 'Attached assets. These can be inserted with drag and drop or shown with the <code>&lt;r:assets:each /&gt;</code> tag.'
     asset_note: 'Attached assets. '
     assets: 'Assets'
-    assets_explanation: 'Assets and images can be uploaded and then attached or inserted into pages, snippets and layouts. Click on a asset name above to edit it or click <code>Remove</code> to delete it.'
+    assets_explanation: 'Assets and images can be uploaded and then attached or inserted into pages, snippets and layouts. Click on an asset name above to edit it or click <code>Remove</code> to delete it.'
     assets_title: 'Assets'
     asset_page_upload_note: 'Assets uploaded here will be automatically associated with this page.'
     asset_upload_note: 'Choose an asset to upload here. If the <code>Title</code> field is left blank, the filename (without the file type) will be automatically added. By clicking on <code>More</code>, you can add a caption as well.'
     attached_assets: 'Attached Assets'
     attach: 'Attach'
-    attach_asset: 'attach asset'
+    attach_asset: 'Attach asset'
     attach_assets: 'Attach assets'
     attach_existing: 'Attach Existing Assets'
     attach_to_page: 'Attach to page'
@@ -87,7 +85,7 @@ en:
     caption: 'Caption'
     confirm_refresh_assets: 'Are you sure you want to regenerate every asset thumbnail? This is likely to take a long time and use a lot of server resources: <strong class="warning">the performance of your site is very likely to be affected</strong> and your browser may time out before the operation is complete. This is only recommended if your asset collection is small!'
     confirm_remove_asset: 'Are you sure you want to permanently remove the following asset?'
-    confirm_remove_from_page: 'Are you sure you want to remove this assets from the page?'
+    confirm_remove_from_page: 'Are you sure you want to remove this asset from the page?'
     delete_asset: 'Delete Asset'
     detach: 'Detach'
     edit: 'Edit'

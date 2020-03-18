@@ -22,10 +22,11 @@ a general purpose content managment system--not merely a blogging engine.}
   s.license = %q{MIT}
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency 'acts_as_list',    '~> 0.9.5'
+  s.add_dependency 'acts_as_list',    '>= 0.9.5', '< 1.1.0'
   s.add_dependency 'acts_as_tree',    '>= 2.6.1', '< 2.9.0'
   s.add_dependency 'ckeditor',        '>= 4.2.2', '< 4.3.0'
   s.add_dependency 'delocalize',      '>= 0.2', '< 2.0'
+  s.add_dependency 'devise'
   s.add_dependency 'execjs',          '~> 2.7'
   s.add_dependency 'haml',            '~> 5.0'
   s.add_dependency 'haml-rails',      '~> 1.0.0'
@@ -36,13 +37,13 @@ a general purpose content managment system--not merely a blogging engine.}
   s.add_dependency 'paperclip',       '> 5.2'
   s.add_dependency 'rack',            '~> 2.0.1'
   s.add_dependency 'rack-cache',      '~> 1.7'
-  s.add_dependency 'rails',           '~> 5.2.0'
+  s.add_dependency 'rails'           
   s.add_dependency 'rdoc',            '>= 5.1', '< 7.0'
   s.add_dependency 'radius',          '~> 0.7'
   s.add_dependency 'RedCloth',        '4.3.2'
   s.add_dependency 'rake',            '< 13.0'
   s.add_dependency 'roadie-rails'
-  s.add_dependency 'sass-rails'
+  s.add_dependency 'sassc-rails'
   s.add_dependency 'stringex',        '>= 2.7.1', '< 2.9.0'
   s.add_dependency 'tzinfo',          '~> 1.2.3'
   s.add_dependency 'uglifier',        '>= 3.2', '< 5.0'

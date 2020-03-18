@@ -97,7 +97,6 @@ class AssetType
   #
   def paperclip_styles
     # Styles are not relevant if processors are not defined.
-    # TODO: should this default to an icon set?
     @paperclip_styles ||= if paperclip_processors.any?
       normalize_style_rules(configured_styles.merge(styles))
     else
@@ -107,9 +106,7 @@ class AssetType
   end
 
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
-  # Solitary strings are assumed to be
-  #TODO: define permitted and/or expected options for the asset type and pass through that subset of the style-definition hash
-  #
+  # Solitary strings are assumed to be  #
   def normalize_style_rules(styles={})
     styles.each_pair do |name, rule|
       unless rule.is_a? Hash

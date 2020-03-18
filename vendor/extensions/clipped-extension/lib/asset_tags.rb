@@ -184,9 +184,7 @@ module AssetTags
     asset_content_type = tag.locals.asset.asset_content_type
     tag.expand unless asset_content_type.match(regexp).nil?
   end
-  
-  #TODO: could use better docs for Asset#other? case explaining what types it covers
-  
+    
   [:title, :caption, :asset_file_name, :extension, :asset_content_type, :asset_file_size, :id].each do |method|
     desc %{
       Renders the @#{method.to_s}@ attribute of the asset
@@ -292,22 +290,6 @@ private
       :offset => attr[:offset] || nil,
       :conditions => conditions
     }
-  end
-  
-  def swf_embed_markup(url, dimensions, fallback_content)
-    width, height = dimensions
-    %{<!--[if !IE]> -->
-      <object type="application/x-shockwave-flash" data="#{url}" width="#{width}" height="#{height}">
-    <!-- <![endif]-->
-    <!--[if IE]>
-      <object width="#{width}" height="#{height}"
-        classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0">
-        <param name="movie" value="#{url}" />
-    <!-->
-    #{fallback_content}
-      </object>
-    <!-- <![endif]-->}
   end
 end
 

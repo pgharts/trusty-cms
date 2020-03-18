@@ -10,7 +10,7 @@ $(function () {
       },
       "user[password]": {
         required: true,
-        minlength: 5
+        minlength: 12
       },
       "user[password_confirmation]": {
         required: true,

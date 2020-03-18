@@ -8,6 +8,7 @@ require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
 require 'rack/cache'
 require 'trustygems'
+require 'devise'
 
 
 if defined?(Bundler)
@@ -36,21 +37,19 @@ module TrustyCms
     end
     paths["app/helpers"] = []
     # config.add_plugin_paths(extension_loader.paths(:plugin))
-    radiant_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
-    config.i18n.load_path = radiant_locale_paths + extension_loader.paths(:locale)
+    trusty_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
+    config.i18n.load_path = trusty_locale_paths + extension_loader.paths(:locale)
     I18n.enforce_available_locales = true
 
     config.encoding = 'utf-8'
 
     config.middleware.use Rack::Cache,
                           :private_headers => ['Authorization'],
-                          :entitystore => "radiant:tmp/cache/entity",
-                          :metastore => "radiant:tmp/cache/meta",
+                          :entitystore => "trusty:tmp/cache/entity",
+                          :metastore => "trusty:tmp/cache/meta",
                           :verbose => false,
                           :allow_reload => false,
                           :allow_revalidate => false
-    # TODO: There's got to be a better place for this, but in order for assets to work fornow, we need ConditionalGet
-    # TODO: Workaround from: https://github.com/rtomayko/rack-cache/issues/80
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
 
