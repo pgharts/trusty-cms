@@ -1,6 +1,6 @@
 - if current_user.admin? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
-  %nav#site_chooser
-    %ul#nav
+  .site_chooser
+    %ul.nav
       %li
         = "Current Site: #{current_site.name}"
         %ul.expansion

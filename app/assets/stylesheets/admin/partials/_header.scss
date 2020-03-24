@@ -1,18 +1,7 @@
 header {
   grid-area: header;
-  font-size: 90%;
-  background: $header;
+  background-color: $header;
   position: relative;
-  &:after {
-    content: "\0020";
-    display: block;
-    clear: both;
-    overflow: hidden;
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-  }
 }
 
 #site_links {
