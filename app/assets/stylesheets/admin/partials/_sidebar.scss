@@ -15,9 +15,9 @@ nav {
           cursor: pointer;
         }
         &.current {
-          background: $white;
+          background: darken($dark-blue, 15%);
           font-weight: bold;
-          color: $dark-gray;
+          color: $white;
         }
       }
     }
