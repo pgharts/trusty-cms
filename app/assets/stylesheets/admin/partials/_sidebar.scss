@@ -1,0 +1,43 @@
+nav {
+  grid-area: nav;
+  border-right: 0.5px solid $dark-gray;
+  ul.navigation {
+    border-right: 0.5px solid $dark-gray;
+    a {
+      color: mix($light-gray, white, 15%);
+      text-decoration: none;
+      li {
+        border-top: 1px solid $light-gray;
+        background-color: $dark-blue;
+        padding: 0.5em 7em 0.5em 1em;
+        &:hover {
+          background: darken($dark-blue, 15%);
+          cursor: pointer;
+        }
+        &.current {
+          background: $white;
+          font-weight: bold;
+          color: $dark-gray;
+        }
+      }
+    }
+  }
+}
+.toolbar {
+  grid-area: toolbar;
+  border-right: 0.5px solid $dark-gray;
+  ul.secondary_navigation {
+    border-right: 0.5px solid $dark-gray;
+    a {
+      text-decoration: none;
+      li {
+        padding: 0.5em 5em 0.5em 1em;
+        border-bottom: 0.5px solid $dark-gray;
+      }
+      &.current {
+        font-weight: bold;
+        font-style: italic;
+      }
+    }
+  }
+}

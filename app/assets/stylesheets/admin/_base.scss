@@ -2,13 +2,21 @@
 $base-font-family: "Open Sans", sans-serif;
 $base-font-size: 16px;
 
+//colors
+$white: #FFFFFF;
+$dark-blue: #3C3A4B;
+
+$dark-gray: #3A3A3A;
+$gray: #919191;
+$light-gray: #F3F3F4;
+
 // Links
-$base-link-color: #2c383d;
-$alt-link-color: red;
+$base-link-color: #3c3a4b;
+$alt-link-color: #8C0E19;
 
 // Header
-$header: #000 !default;
-$primary-tab: rgba(70, 81, 92, 0.6);
+$header: #3c3a4b !default;
+$primary-tab: #3c3a4b;
 $primary-tab-current: white;
 
 // Modules
