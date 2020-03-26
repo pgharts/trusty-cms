@@ -4,10 +4,10 @@
       %td.name
         %span.w1
           - if simple
-            = icon
             = node_title
           - else
-            = (link_to("#{icon} #{node_title}".html_safe, edit_admin_page_path(page), :title => page.path)).html_safe
+            %i.far.fa-file
+            = (link_to("#{node_title}".html_safe, edit_admin_page_path(page), :title => page.path)).html_safe
             = page_type
             = spinner
     - node.status_column do

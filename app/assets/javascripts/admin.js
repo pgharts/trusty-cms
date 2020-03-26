@@ -34,3 +34,6 @@
 //= require 'admin/tags'
 //= require 'admin/treetable'
 //= require 'admin/sortable'
+//= require 'tablesaw/dist/tablesaw.jquery.js'
+//= require 'tablesaw/dist/tablesaw-init.js'
+//= require '@fortawesome/fontawesome-free/js/all.js'

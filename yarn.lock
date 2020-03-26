@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@fortawesome/fontawesome-free@^5.13.0":
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.13.0.tgz#fcb113d1aca4b471b709e8c9c168674fbd6e06d9"
+  integrity sha512-xKOeQEl5O47GPZYIMToj6uuA2syyFlq9EMSl2ui0uytjY9xbe8XS0pexNWmxrdcCyNGyDmLyYw5FtKsalBUeOg==
+
+javascript-natural-sort@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
+  integrity sha1-+eIwPUUH9tdDVac2ZNFED7Wg71k=
+
 jquery-ui-bundle@^1.12.1:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/jquery-ui-bundle/-/jquery-ui-bundle-1.12.1.tgz#d6be2e4c377494e2378b1cae2920a91d1182d8c4"
@@ -18,3 +28,17 @@ jquery@>=1.8.0, jquery@^3.2.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
+
+shoestring@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/shoestring/-/shoestring-2.0.1.tgz#7dd35a600b7e5826788124452c4a8acf64648b06"
+  integrity sha512-F2jX6NN5OtZLzmt2Pnsfr4YZf7+H+3oZMTgRubtcS9Q+RuH0jZZASNsHkbrosX3GlHHfCF6QJgih+pxEY/pXhQ==
+
+tablesaw@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/tablesaw/-/tablesaw-3.1.2.tgz#3d004b98afcd223de6cb3e96b74d5a37d41d0502"
+  integrity sha512-TiFLcAaeM1OUysVO90nK2gMhFC/dukSt/RAFD3YkvawPyH6f/TGxPpvEe58vE/HM4iJlsvFMSoLJ5D600RtHrw==
+  dependencies:
+    shoestring "^2.0.0"
+  optionalDependencies:
+    javascript-natural-sort "^0.7.1"

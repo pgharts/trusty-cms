@@ -3,17 +3,18 @@
 // Common Variables and Modules
 @import "base";
 @import "reset";
+@import "tablesaw/dist/stackonly/tablesaw.stackonly.scss";
 
 // Partials
 @import "partials/typography";
 @import "partials/layout";
 @import "partials/header";
 @import "partials/sidebar";
+@import "partials/table";
 @import "partials/avatars";
 @import "partials/dropdown";
 @import "partials/messages";
 @import "partials/forms";
-@import "partials/index";
 @import "partials/content";
 @import "partials/actions";
 @import "partials/footer";
@@ -35,6 +36,3 @@
 
 // Deprecated
 @import "partials/deprecated";
-
-// Font Awesome
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");

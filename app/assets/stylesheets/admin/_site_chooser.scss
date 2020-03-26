@@ -1,19 +1,16 @@
 //colors
-$color_turquoise_blue_approx: #66d9e0;
-$white: #fff;
-$black: #000;
 
 .site_chooser {
-  width: 20%;
+  width: 50%;
   border-collapse: collapse;
-  float: right;
+  float: left;
+  padding-left: 1em;
 }
 
 .nav {
   color: $white;
   list-style: none;
   font-weight: bold;
-  width: 100%;
   padding: 1em;
   cursor: pointer;
   ul {

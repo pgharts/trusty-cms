@@ -68,7 +68,7 @@ module MenuRenderer
   end
 
   def remove_link
-    view.link_to view.image('minus') + ' ' + I18n.t('remove'), view.remove_admin_page_url(self), :class => "action"
+    view.link_to( '<i class="fas fa-minus-circle"></i> '.html_safe + I18n.t('remove'), view.remove_admin_page_url(self), :class => "action")
   end
 
   def remove_option
@@ -84,11 +84,11 @@ module MenuRenderer
   end
 
   def add_child_link
-    view.link_to((view.image('plus') + ' Add Child'), view.new_admin_page_child_path(self, :page_class => default_child.name), :class => "action")
+    view.link_to( '<i class="fas fa-plus-circle"></i> Add Child'.html_safe, view.new_admin_page_child_path(self, :page_class => default_child.name), :class => "action")
   end
 
   def add_child_link_with_menu_hook
-    view.link_to((view.image('plus') + ' Add Child'), "#allowed_children_#{id}", :class => "action dropdown")
+    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, "#allowed_children_#{id}", :class => "action dropdown")
   end
 
   def add_child_menu
