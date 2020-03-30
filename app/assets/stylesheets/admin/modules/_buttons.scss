@@ -1,0 +1,15 @@
+@mixin button {
+  padding: 0.75em 1.2em;
+  background-color: $dark-blue;
+  color: $white;
+  transition: all .3s ease-in-out;
+  &:hover {
+    background-color: darken($dark-blue, 15%);
+    transition: all .3s ease-in-out;
+  }
+}
+
+.button {
+  @include button;
+  text-decoration: none;
+}

@@ -26,7 +26,7 @@
           - form.edit_email do
             %p
               = f.label :email,  t("email_address"), :class => "optional"
-              = f.text_field "email", :class => 'textbox', :size => 32, :maxlength => 255
+              = f.text_field "email", :class => 'textbox', :maxlength => 255
 
           - form.edit_password do
             = render "admin/users/password_fields", :f => f

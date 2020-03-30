@@ -8,7 +8,7 @@
   - form.edit_title do
     %p.title
       %label{:for=>"page_title"}= t('page_title')
-      = fields.text_field :title, :class => 'textbox', :maxlength => 255, :required => true
+      = fields.text_field :title, :class => 'textbox', :required => true
   - form.edit_extended_metadata do
     .drawer
       .drawer_contents#attributes
@@ -17,7 +17,9 @@
           = render :partial => 'admin/page_fields/page_field', :collection => @page.fields
           = render_region :extended_metadata, :locals => {:f => fields}
       .drawer_handle
-        %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
+        %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+          = meta_label
+          %i.fas.fa-angle-down
   - form.edit_page_parts do
     #tab_control
       #tabs.tabs

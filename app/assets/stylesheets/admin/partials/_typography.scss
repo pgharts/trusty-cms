@@ -2,6 +2,16 @@ body {
   font-family: $base-font-family;
 }
 
+@mixin subtle-text {
+  color: $light-gray;
+  font-size: 0.75em;
+}
+
+@mixin subtle-text-reversed {
+  color: $dark-gray;
+  font-size: 0.75em;
+}
+
 a {
   @include default-link;
   &.alt {

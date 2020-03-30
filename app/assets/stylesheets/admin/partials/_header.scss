@@ -2,6 +2,7 @@ header {
   grid-area: header;
   background-color: $header;
   position: relative;
+  min-height: 50px;
 }
 
 #site_links {

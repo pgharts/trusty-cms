@@ -29,7 +29,7 @@
     = csrf_meta_tags
 
   %body{:class=>body_classes.join(" ")}
-    #page.container
+    #page.trusty-container
       %header
         - if logged_in?
           = render_region :before_nav
@@ -39,12 +39,13 @@
               &nbsp;
               = link_to t('view_site'), root_path, :id=>"view_site"
       %nav
-        %ul.navigation
-          - nav_tabs.each do |tab|
-            - if tab.visible?(current_user)
-              = link_to (tab.first.relative_url if tab.first) do
-                %li{class: ('current ' if current_tab?(tab)).to_s}
-                  = translate_with_default(tab.name)
+        - if logged_in?
+          %ul.navigation
+            - nav_tabs.each do |tab|
+              - if tab.visible?(current_user)
+                = link_to (tab.first.relative_url if tab.first) do
+                  %li{class: ('current ' if current_tab?(tab)).to_s}
+                    = translate_with_default(tab.name)
       - if @current_tab and @current_tab.size > 1
         .toolbar
           %ul.secondary_navigation
@@ -55,12 +56,12 @@
         = yield :toolbar
       %main
         - if flash[:notice]
-          #notice
+          .notice
             %p= flash[:notice]
         - if flash[:error]
-          #error
+          .error
             %p= flash[:error]
-        #content
+        .content
           = find_and_preserve(yield)
 
       #popups

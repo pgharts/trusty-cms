@@ -1,13 +1,13 @@
-#notice, #error {
-  padding: 1px 1em;
+.notice, .error {
+  padding: 1em;
 }
 
-#notice {
+.notice {
   background-color: #b2e5b2;
   color: #006600;
 }
 
-#error {
+.error {
   background-color: #f3c2c2;
   color: #770000;
 }

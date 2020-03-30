@@ -15,9 +15,9 @@
 
     $(link).toggleClass('less more');
     if (link.innerHTML.match(/less/i)) {
-      link.innerHTML = 'More';
+      link.innerHTML = 'More <i class="fas fa-angle-down"></i>';
     } else if (link.innerHTML.match(/more/i)) {
-      link.innerHTML = 'Less';
+      link.innerHTML = 'Less <i class="fas fa-angle-up"></i>';
     }
   }
 

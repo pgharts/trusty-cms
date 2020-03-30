@@ -4,7 +4,7 @@
   .form_area
     - render_region :form, :locals => {:f => f} do |form|
       - form.edit_title do
-        %p.title
+        .title
           = f.label :name, t('name')
           = f.text_field :name, :maxlength => 100, :class => "textbox", :required => true
       - form.edit_extended_metadata do
@@ -16,9 +16,11 @@
                 %td.field= f.text_field :content_type, :maxlength => 40, :class => "textbox"
               = render_region :extended_metadata, :locals => {:f => f}
           .drawer_handle
-            %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
+            %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+              = meta_label
+              %i.fas.fa-angle-down
       - form.edit_content do
-        %p.content
+        .content
           = f.label :content, "Body"
           ~ f.text_area :content, :size => "40x20", :style => "width: 100%", :class => "textarea large"
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
