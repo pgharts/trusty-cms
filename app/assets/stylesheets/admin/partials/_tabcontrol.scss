@@ -1,39 +1,32 @@
 #tab_control {
-  color: #333333;
-  margin-bottom: 1em;
   .tabs {
     float: left;
     width: 100%;
-    margin-right: -4px;
     .tab {
-      background-color: #e4e4e4;
-      color: black;
+      background-color: darken($light-gray, 5%);
       display: inline-block;
-      font-size: 90%;
-      text-align: left;
+      font-size: 0.9em;
       margin-right: 5px;
-      padding: 8px 15px 5px;
+      padding: 0.75em 1em;
       text-decoration: none;
-      text-transform: titlecase;
       &.here {
-        background-color: white;
-        color: #737272;
+        background-color: $white;
+        color: $gray;
         font-weight: bold;
       }
       span:hover {
-        color: #737272;
+        color: $gray;
       }
       .close {
-        margin-top: -4px;
-        margin-left: 5px;
-        margin-right: -5px;
+        padding-left: .5em;
       }
     }
   }
   .pages {
-    background: white;
-    width: 100%;
+    background: $white;
+    margin-right: 1em;
     clear: both;
+    padding: 1em;
     .page {
       background: white;
       padding: 12px 20px 20px;
@@ -63,8 +56,7 @@
   #tab_toolbar {
     float: right;
     overflow: hidden;
-    margin-top: 0.2em;
-    padding: 3px;
+    padding: 0 1em;
   }
 }
 

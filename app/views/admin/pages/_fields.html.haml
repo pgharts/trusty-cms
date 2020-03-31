@@ -25,7 +25,7 @@
       #tabs.tabs
         #tab_toolbar
           %a.popup{:href=> '#add_part_popup', :title=>t('add_part')}
-            = image('add_tab', :alt=>t('add_part'), :title=>"")
+            %i.fas.fa-plus-circle
       #pages.pages
         = render :partial => 'admin/page_parts/page_part', :collection => @page.parts
     = render_region :parts_bottom, :locals => {:f => fields}
