@@ -1,4 +1,4 @@
-.notice, .error {
+.notice, .error, .warning {
   padding: 1em;
 }
 
@@ -7,7 +7,7 @@
   color: #006600;
 }
 
-.error {
+.error, .warning {
   background-color: #f3c2c2;
   color: #770000;
 }

@@ -27,6 +27,7 @@ nav {
 .toolbar {
   grid-area: toolbar;
   border-right: 0.5px solid $dark-gray;
+  background-color: $white;
   ul.secondary_navigation {
     border-right: 0.5px solid $dark-gray;
     a {

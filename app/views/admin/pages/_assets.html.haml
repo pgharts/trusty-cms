@@ -1,6 +1,6 @@
 = stylesheet_link_tag 'admin/assets'
 = javascript_include_tag 'admin/assets_admin'
-.fieldset
+.fieldset.asset_attachment
   #attachment_list.assets
     %ul#attachment_fields{:class => @page.page_attachments.empty? ? 'empty' : ''}
       = render :partial => 'admin/page_attachments/attachment', :collection => @page.page_attachments

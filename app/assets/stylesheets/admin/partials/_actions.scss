@@ -7,31 +7,10 @@
 }
 
 #actions {
-  a {
-    background: #d8d8d8;
-    color: #333333;
-    font-size: 80%;
-    padding: 8px 12px;
-    text-decoration: none;
-    &:hover {
-      color: #0076a3;
-    }
-    &:active {
-      background: white;
-      color: black;
-    }
-    img {
-      vertical-align: -20%;
-    }
-  }
-}
-
-#actions {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  background: #777777;
   ul {
     padding: 14px 8px;
   }
