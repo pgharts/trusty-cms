@@ -136,8 +136,10 @@ class Admin::ResourceController < ApplicationController
     end
 
     def set_owner_or_editor
-      self.model.created_by_id = current_user.id if self.model.id == nil
-      self.model.updated_by_id = current_user.id 
+      if self.model.has_attribute? :created_by_id
+        self.model.created_by_id = current_user.id if self.model.id == nil
+        self.model.updated_by_id = current_user.id
+      end
     end
 
     def model
