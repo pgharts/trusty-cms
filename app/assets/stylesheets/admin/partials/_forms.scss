@@ -16,6 +16,13 @@ form {
     border: 0.5px solid $gray;
   }
 
+  select {
+    font-size: 1em;
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+  }
+
   label {
 
   }

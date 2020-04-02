@@ -29,3 +29,18 @@ body.reversed.login_form {
 body.reversed.password_form {
   background-color: #fff;
 }
+
+.set {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  grid-gap: 1em;
+  margin-bottom: 1em;
+}
+
+.page-actions {
+  margin-bottom: 1em;
+}
+
+.updated_line {
+  @include subtle-text-reversed;
+}
