@@ -9,9 +9,9 @@ form {
     font-size: 1em;
   }
 
-  input[type="text"] {
+  input[type="text"], input[type="search"] {
     width: 75%;
-    padding: 0.5em;
+    padding: 0.25em;
     margin: 0.5em;
     border: 0.5px solid $gray;
   }

@@ -11,8 +11,6 @@
   
 - render_region :bottom do |bottom|
   #actions
-    %ul
-      %li
-        = link_to new_admin_asset_path, class: "button" do
-          %i.fas.fa-upload
-          = t('clipped_extension.upload_asset')
+    = link_to new_admin_asset_path, class: "button" do
+      %i.fas.fa-upload
+      = t('clipped_extension.upload_asset')

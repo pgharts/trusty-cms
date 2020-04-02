@@ -17,8 +17,6 @@
           %p
             %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
 
-      -#%a.close_popup{:href=>"#"}= 'Upload Complete. Click to Close.'
-    
   - popups.attach_asset do
     #attach_asset.popup.textured{:style=>"display: none;"}
       
@@ -27,7 +25,7 @@
       .toolbar
         = render :partial => 'admin/assets/search'
       
-      #assets_table.assets.viewport{:style=>"height: 320px; width: 610px"}
+      #assets_table.assets.viewport
         - assets = Asset.all.paginate(:per_page => 20, page: params[:p])
         = render :partial => 'admin/assets/asset_table', :locals => {:assets => assets, :with_pagination => true}
     

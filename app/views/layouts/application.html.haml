@@ -53,8 +53,8 @@
               - if sub_item.visible?(current_user)
                 = link_to sub_item.relative_url, class: ('current' if current_item?(sub_item)) do
                   %li= sub_item.name
-        = yield :toolbar
       %main
+        = yield :toolbar
         - if flash[:notice]
           .notice
             %p= flash[:notice]
