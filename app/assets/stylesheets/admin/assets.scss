@@ -20,6 +20,7 @@
 
   .asset_search {
     display: inline-block;
+
     svg, input {
       display: inline;
     }
@@ -29,7 +30,7 @@
 
 .popup {
   div.toolbar {
-    border-bottom: 1px solid #F3F3F4;
+    border-bottom: 1px solid #f3f3f4;
     margin: -20px -20px 0;
     padding: 6px 10px 3px 10px;
     font-size: 95%;
@@ -85,6 +86,12 @@
 .asset_attachment {
   position: relative;
   margin-bottom: 2em;
+
+  .attach-assets {
+    .message {
+      margin: 1em 0;
+    }
+  }
 }
 
 .assets {
@@ -97,6 +104,7 @@
       margin: 1em;
       width: 100px;
       height: 100px;
+      position: relative;
 
       .front, .back {
         display: block;
@@ -193,8 +201,7 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   margin: -1em 0.5em 1em 0.5em;
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow: auto;
 
   ul.empty {
     display: none;
