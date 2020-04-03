@@ -83,20 +83,8 @@
 }
 
 .action_button {
-  display: inline;
-  background: #d8d8d8;
-  color: #333333;
-  font-size: 80%;
-  padding: 8px 12px;
+  @include button;
   text-decoration: none;
-  @include button-shadow;
-  &:hover {
-    color: #0076a3;
-  }
-  &:active {
-    background: white;
-    color: black;
-  }
   img {
     vertical-align: -20%;
   }
