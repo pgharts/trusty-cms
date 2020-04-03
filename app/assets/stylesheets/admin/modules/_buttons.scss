@@ -5,6 +5,7 @@
   transition: all .3s ease-in-out;
   &:hover {
     background-color: darken($dark-blue, 15%);
+    cursor: pointer;
     transition: all .3s ease-in-out;
   }
 }
@@ -12,4 +13,15 @@
 .button {
   @include button;
   text-decoration: none;
+}
+
+.cancel-button {
+  @include button;
+  color: $dark-red;
+  background-color: $light-red;
+  text-decoration: none;
+  &:hover {
+    background-color: $dark-red;
+    color: $white;
+  }
 }

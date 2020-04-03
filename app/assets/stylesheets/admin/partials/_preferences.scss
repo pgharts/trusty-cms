@@ -1,0 +1,35 @@
+#preferences, #config {
+  padding-bottom: 1em;
+
+  h3, h4 {
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid $gray;
+  }
+}
+
+.ruled {
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid $light-gray;
+
+  span {
+    font-weight: bold;
+  }
+
+  label {
+    margin-right: 0.5em;
+  }
+}
+
+#display_password {
+  .button {
+    display: block;
+    max-width: fit-content;
+  }
+}
+
+.multi_option {
+  .checkbox {
+    display: inline-block;
+  }
+}

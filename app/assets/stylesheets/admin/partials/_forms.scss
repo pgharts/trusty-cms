@@ -1,6 +1,13 @@
 form {
+  fieldset {
+    padding: 0.5em;
+    margin: 0.5em 0;
+    background-color: $gray;
+  }
+
   input[type="submit"] {
     @include button;
+    margin-left: 0.5em;
   }
 
   textarea {
@@ -9,7 +16,7 @@ form {
     font-size: 1em;
   }
 
-  input[type="text"], input[type="search"] {
+  input[type="text"], input[type="search"], input[type="password"] {
     width: 75%;
     padding: 0.25em;
     margin: 0.5em;
@@ -20,17 +27,22 @@ form {
     font-size: 1em;
     width: 100%;
     max-width: 100%;
+    margin: 0.5em;
     display: inline-block;
   }
 
   label {
-
+    @include subtle-text;
+    display: block;
   }
 }
 
 
 .reversed form {
+  fieldset {
+    background-color: $white;
+  }
   label {
-
+    @include subtle-text-reversed;
   }
 }

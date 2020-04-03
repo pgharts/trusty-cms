@@ -6,7 +6,7 @@ main {
 
 .reversed main {
   .content {
-    padding: 2em;
+    padding: 1em;
   }
 }
 
@@ -22,12 +22,6 @@ table.fieldset {
 body.reversed {
   fieldset h1 {
     font-size: 1.5em;
-  }
-  .content > h1:first-of-type {
-    font-size: 2em;
-  }
-  h1 {
-    padding: 15px 20px;
   }
 }
 

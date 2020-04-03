@@ -2,8 +2,6 @@
   - render_region :user do |user|
     - user.preferences do
       %h3
-        .actions
-          = button_to t("edit_preferences"), edit_admin_user_path(current_user), :method => :get
         = t('personal_preferences')
       = image_tag(gravatar_url(@user.email, :size=>"64px"), :class=>"avatar", :width=>64, :height=>64, :alt=>"")
       %p.ruled
@@ -25,14 +23,13 @@
           = t('language')
         %span
           = current_user.locale
+      .actions
+        = button_to t("edit_preferences"), edit_admin_user_path(current_user), :method => :get
 
 #config.box
   - render_region :trusty_config do |config|
     - config.site do
       %h3
-        - if current_user.admin?
-          .actions
-            = button_to t("edit_configuration"), edit_admin_configuration_path, :method => :get
         Configuration
       - TrustyCms.config.site_settings.each do |site_setting|
         %p.ruled
@@ -49,3 +46,6 @@
       - TrustyCms.config.user_settings.each do |user_setting|
         %p.ruled
           = show_config user_setting
+  - if current_user.admin?
+    .actions
+      = button_to t("edit_configuration"), edit_admin_configuration_path, :method => :get
