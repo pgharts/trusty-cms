@@ -20,16 +20,15 @@
               = meta_label
               %i.fas.fa-angle-down
       - form.edit_content do
-        .content
+        .textarea_content
           = f.label :content, "Body"
-          ~ f.text_area :content, :size => "40x20", :style => "width: 100%", :class => "textarea large"
+          ~ f.text_area :content
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
     - form_bottom.reference_links do
-      %p
-        %span.reference_links
-          Reference:
-          %span{:id => "tag_reference_link"}
-            = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
+      .reference_links
+        Reference:
+        %span{:id => "tag_reference_link"}
+          = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
     - form_bottom.edit_buttons do
       .buttons
         = save_model_button @layout

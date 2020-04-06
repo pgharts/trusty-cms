@@ -42,11 +42,7 @@
     }
     .reference_links {
       font-size: 85%;
-      margin-left: 1em;
-      float: right;
-      a {
-        color: #0066cc;
-      }
+      margin-bottom: 1em;
     }
   }
 }
@@ -61,12 +57,7 @@
 
 .reference_links {
   font-size: 85%;
-  span {
-    padding: 0 0 0 4px;
-    a {
-      color: #4444ee;
-    }
-  }
+  margin-bottom: 1em;
 }
 
 #tag_reference_link {

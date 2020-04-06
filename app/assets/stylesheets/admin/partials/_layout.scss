@@ -42,5 +42,6 @@ body.reversed.password_form {
 }
 
 .updated_line {
+  margin: 0.5em 0;
   @include subtle-text-reversed;
 }

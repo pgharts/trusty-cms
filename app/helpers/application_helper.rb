@@ -83,10 +83,10 @@ module ApplicationHelper
       name = updated_by ? updated_by.name : nil
       time = (model.updated_at || model.created_at)
       if name or time
-        html = %{<p class="updated_line">#{t('timestamp.last_updated')} }
+        html = %{<div class="updated_line">#{t('timestamp.last_updated')} }
         html << %{#{t('timestamp.by')} <strong>#{name}</strong> } if name
         html << %{#{t('timestamp.at')} #{timestamp(time)}} if time
-        html << %{</p>}
+        html << %{</div>}
         html.html_safe
       end
     end
