@@ -23,4 +23,7 @@
 - unless @homepage
   #actions
     %ul
-      %li= link_to image('plus') + ' ' + t("new_homepage"), new_admin_page_path, :class => 'action_button'
+      %li
+        = link_to new_admin_page_path, :class => 'action_button' do
+          %i.fas.fa-plus-circle
+          = t("new_homepage")
