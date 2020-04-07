@@ -4,8 +4,8 @@
 
     - form.edit_name do
       %fieldset.title
-        %h1
-          %i.fa.fa-sitemap
+        %h4
+          %i.fas.fa-sitemap
           Site Information
         %label{:for => "site_name"} Site title
         = f.text_field :name, :class => "textbox", :size => 50
@@ -15,8 +15,8 @@
 
     - form.edit_domain do
       %fieldset.domain
-        %h1
-          %i.fa.fa-lightbulb-o
+        %h4
+          %i.fas.fa-lightbulb
           Domain Information
         %label{:for => "site_domain"}
           Domain pattern
@@ -28,8 +28,8 @@
 
     - form.edit_homepage do
       %fieldset.homepage
-        %h1
-          %i.fa.fa-home
+        %h4
+          %i.fas.fa-home
           Homepage ID
         %label{:for => "site_homepage_id"} Homepage ID
         = f.text_field :homepage_id, :class => "textbox"
