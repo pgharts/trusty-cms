@@ -46,7 +46,7 @@ input[type="text"], input[type="search"], input[type="password"] {
 
 select {
   display: block;
-  width: 100%;
+  width: 75%;
   height: 30px;
   padding: 0.5em 1em;
   font-size: 1em;
@@ -79,6 +79,19 @@ textarea {
   width: 50%;
   display: block;
   margin: 0.5em;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  color: $dark-blue;
+  border: 1px solid $dark-blue;
+  font-size: 1em;
+  margin: 0.5em;
+  display: inline-block;
+  padding: 0.5em 1em;
+  cursor: pointer;
 }
 
 .reversed form {
