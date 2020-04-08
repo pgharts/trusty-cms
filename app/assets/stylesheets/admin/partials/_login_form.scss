@@ -16,19 +16,7 @@
       padding: 1em;
 
       .field #user_email, .field #user_password, .field #user_password_confirmation {
-        padding: 1em;
-        margin-bottom: 1em;
-        width: 200px;
-      }
-
-      input[type='submit'] {
-        border-radius: 0;
-        background-color: #3c3a4b;
-
-        &:hover {
-          color: #fff;
-          cursor: pointer;
-        }
+        max-width: 200px;
       }
     }
 
