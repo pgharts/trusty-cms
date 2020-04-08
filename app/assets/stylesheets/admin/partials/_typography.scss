@@ -12,6 +12,16 @@ body {
   font-size: 0.75em;
 }
 
+@mixin label-text {
+  color: $light-gray;
+  font-size: 0.85em;
+}
+
+@mixin label-text-reversed {
+  color: $dark-gray;
+  font-size: 0.85em;
+}
+
 a {
   @include default-link;
   &.alt {

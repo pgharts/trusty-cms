@@ -1,7 +1,7 @@
 fieldset {
   padding: 0.5em;
   margin: 0.5em 0;
-  background-color: $gray;
+  background-color: $white;
 
   input[type="checkbox"] {
     display: inline-block;
@@ -19,7 +19,7 @@ input[type="date"] {
   margin: 0.5em;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   @include button;
   margin-left: 0.5em;
 }
@@ -46,7 +46,6 @@ input[type="text"], input[type="search"], input[type="password"] {
 
 select {
   display: block;
-  width: 75%;
   height: 30px;
   padding: 0.5em 1em;
   font-size: 1em;
@@ -65,7 +64,7 @@ select {
 }
 
 label {
-  @include subtle-text;
+  @include label-text;
   display: block;
 }
 
@@ -95,10 +94,7 @@ input[type="file"] {
 }
 
 .reversed form {
-  fieldset {
-    background-color: $white;
-  }
   label {
-    @include subtle-text-reversed;
+    @include label-text-reversed;
   }
 }
