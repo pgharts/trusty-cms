@@ -31,10 +31,9 @@ body.reversed.password_form {
 }
 
 .set {
-  display: grid;
-  grid-template-columns: repeat(4, 150px);
-  grid-gap: 1em;
-  margin-bottom: 1em;
+  div {
+    display: inline-block;
+  }
 }
 
 .page-actions {
