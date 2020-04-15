@@ -12,8 +12,10 @@
 
 .button {
   @include button;
+  font-size: 1em;
   text-decoration: none;
 }
+
 
 .cancel-button {
   @include button;
