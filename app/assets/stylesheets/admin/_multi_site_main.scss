@@ -12,6 +12,7 @@ $font_4: serif;
         padding: .5em;
       }
     }
+
     &.node {
       &.site {
         small {
@@ -21,28 +22,45 @@ $font_4: serif;
           font-weight: normal;
           margin-left: .5em;
         }
+
         a {
           &:visited {
+            color: black;
             font-size: 115%;
             font-weight: bold;
-            color: black;
             text-decoration: none;
           }
         }
       }
     }
   }
+
   .form-area {
     p {
       &.domain {
         float: left;
-        width: 40%;
         margin: 1em 1em 0 0;
         overflow: hidden;
+        width: 40%;
+
         label {
-          
+          display: block;
+          position: relative;
         }
       }
+
+      &.homepage {
+        float: right;
+        margin: 1em 0 0;
+        overflow: hidden;
+        width: 16%;
+
+        label {
+          display: block;
+          position: relative;
+        }
+      }
+
       &.subtitle {
         margin: 1em 0 0 0;
       }
@@ -50,28 +68,9 @@ $font_4: serif;
   }
 }
 
-
-.content {
-	div.form-area p.homepage {
-		float: right;
-		width: 16%;
-		margin: 1em 0 0;
-		overflow: hidden;
-	}
-	.form-area p {
-		&.domain label {
-			display: block;
-			position: relative;
-		}
-		&.homepage label {
-			display: block;
-			position: relative;
-		}
-	}
-}
 p.formnote {
-	clear: both;
-	padding: 2em 0;
+  clear: both;
+  padding: 2em 0;
 }
 
 
@@ -79,7 +78,7 @@ p.formnote {
 //original selectors
 //#content div.form-area p.domain .textbox, #content div.form-area p.homepage .textbox, #content div.form-area p.subtitle .textbox, #content div.form-area p.subtitle select
 %extend_1 {
-	font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
-	font-size: 140%;
-	width: 100%;
+  font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+  font-size: 140%;
+  width: 100%;
 }

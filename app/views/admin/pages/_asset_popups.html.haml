@@ -1,6 +1,6 @@
 - render_region :asset_popups do |popups|
   - popups.upload_asset do
-    #upload_asset.popup.textured{:style => "display: none; width: 28em"}
+    #upload_asset.popup{:style => "display: none; width: 28em"}
       #upload_asset_busy.busy{:style => "display: none"}= image('spinner.gif', :alt => "")
       
       .popup_title= t('clipped_extension.upload_asset')
@@ -10,15 +10,16 @@
         = hidden_field_tag "page_id", @page.id
         #upload-controls
           %p
-            = f.label :asset, t("clipped_extension.choose_file")
-            = f.file_field :asset, :class => 'file', :multiple => true
-            #upload-status{:style => 'display: none;'}
-              %img{:src => "/assets/admin/spinner.gif"}
+            %label.custom-file-upload
+              = t("clipped_extension.choose_file")
+              = f.file_field :asset, :class => 'file', :multiple => true
+              #upload-status{:style => 'display: none;'}
+                %img{:src => "/assets/admin/spinner.gif"}
           %p
             %a#attach-popup{:href=>"#attach_asset", :style => 'color: #666; font-size: .8em'}= t('clipped_extension.attach_existing')
 
   - popups.attach_asset do
-    #attach_asset.popup.textured{:style=>"display: none;"}
+    #attach_asset.popup{:style=>"display: none;"}
       
       .popup_title= t('clipped_extension.find_assets')
       

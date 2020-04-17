@@ -1,28 +1,30 @@
 header {
-  grid-area: header;
   background-color: $header;
-  position: relative;
+  grid-area: header;
   min-height: 50px;
+  position: relative;
 }
 
 #site_links {
   color: mix($header, white, 15%);
-  font-size: 80%;
   float: right;
-  padding: 12px 10px 0 5px;
+  font-size: 80%;
   height: 16px;
+  padding: 12px 10px 0 5px;
+
   a {
     color: white;
   }
+
   a:hover, strong a {
     text-decoration: none;
   }
 }
 
 #view_site {
-  font-size: 90%;
   background: rgba(black, 0.45);
   display: inline;
+  font-size: 90%;
   padding: 3px 10px 4px;
   text-decoration: none;
 }

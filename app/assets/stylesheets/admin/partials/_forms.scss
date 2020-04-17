@@ -1,7 +1,7 @@
 fieldset {
-  padding: 0.5em;
-  margin: 0.5em 0;
   background-color: $white;
+  margin: 0.5em 0;
+  padding: 0.5em;
 
   input[type="checkbox"] {
     display: inline-block;
@@ -9,9 +9,9 @@ fieldset {
   }
 
   h4 {
-    padding: 0.5em;
-    margin-bottom: 1em;
     border-bottom: 1px solid $gray;
+    margin-bottom: 1em;
+    padding: 0.5em;
   }
 }
 
@@ -20,7 +20,6 @@ input[type="date"] {
 }
 
 input[type="submit"], input[type="button"] {
-  @include button;
   margin-left: 0.5em;
 }
 
@@ -31,70 +30,62 @@ input[type="submit"], input[type="button"] {
     display: block;
     font-family: Monaco, "Courier New", Courier, monospace;
     font-size: 0.85em;
+    height: 250px;
     margin: 0.5em;
     width: 85%;
-    height: 250px;
   }
 }
 
 input[type="text"], input[type="search"], input[type="password"], input[type="email"] {
-  width: 75%;
-  padding: 0.25em;
-  margin: 0.5em;
   border: 0.5px solid $gray;
+  margin: 0.5em;
+  padding: 0.25em;
+  width: 75%;
 }
 
 select {
-  display: block;
-  height: 30px;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  line-height: 1.5;
-  color: $dark-gray;
   background-color: $white;
   background-image: none;
   border: 1px solid $gray;
   border-radius: 0;
-  margin: 0.5em;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  color: $dark-gray;
+  display: block;
+  font-size: 1em;
+  height: 30px;
+  line-height: 1.5;
+  margin: 0.5em;
+  padding: 0.5em 1em;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 label {
-  @include label-text;
   display: block;
 }
 
 .admin_only {
   display: block;
-  width: 25%;
   margin-bottom: 1em;
+  width: 25%;
 }
 
 textarea {
-  width: 50%;
   display: block;
   margin: 0.5em;
+  width: 50%;
 }
 
-input[type="file"] {
-  display: none;
-}
 .custom-file-upload {
-  color: $dark-blue;
   border: 1px solid $dark-blue;
+  color: $dark-blue;
+  cursor: pointer;
+  display: inline-block;
   font-size: 1em;
   margin: 0.5em;
-  display: inline-block;
   padding: 0.5em 1em;
-  cursor: pointer;
-}
+  width: fit-content;
 
-.reversed form {
-  label {
-    @include label-text-reversed;
+  input[type="file"] {
+    display: none;
   }
 }

@@ -7,70 +7,82 @@
 }
 
 #actions {
-  position: fixed;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 0;
   margin: 1em 0.15em;
+  position: fixed;
+  right: 0;
   width: max-content;
+
   ul {
     padding: 14px 8px;
   }
+
   li {
     display: inline;
     margin-right: 5px;
   }
+
   .pagination {
-    position: relative;
-    overflow: hidden;
     float: right;
     margin-right: 24px;
+    overflow: hidden;
     padding: 0 5px 5px 0;
+    position: relative;
+
     a, span.current, span.disabled {
-      display: block;
-      float: left;
-      padding: 6px 12px 6px 12px;
-      margin-right: 1px;
       background: #dddddd;
       color: #999999;
+      display: block;
+      float: left;
       font-size: 80%;
+      margin-right: 1px;
+      padding: 6px 12px 6px 12px;
       text-decoration: none;
     }
+
     a {
       &:hover {
         background: #d8d8d8;
         color: #0076a3;
       }
+
       &:active {
         color: black;
       }
     }
+
     span.disabled {
-      color: #666666;
       background-color: #999999;
+      color: #666666;
     }
+
     span.current {
-      color: black;
       background: white;
-      font-weight: bold;
       background-image: none;
+      color: black;
+      font-weight: bold;
     }
+
     span.gap {
+      color: #cccccc;
       display: block;
       float: left;
       padding: 6px;
-      color: #cccccc;
     }
   }
+
   .depaginate {
     float: right;
     padding: 6px 12px;
+
     a {
       background: none;
-      font-size: 80%;
       color: #cccccc;
-      text-shadow: none;
+      font-size: 80%;
       text-decoration: none;
+      text-shadow: none;
+
       &:hover {
         color: white;
       }
@@ -83,8 +95,8 @@
 }
 
 .action_button {
-  @include button;
   text-decoration: none;
+
   img {
     vertical-align: -20%;
   }

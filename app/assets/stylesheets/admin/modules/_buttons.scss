@@ -1,7 +1,7 @@
 @mixin button {
-  padding: 0.5em 2em;
   background-color: $dark-blue;
   color: $white;
+  padding: 0.5em 2em;
   transition: all .3s ease-in-out;
   &:hover {
     background-color: darken($dark-blue, 15%);
@@ -19,9 +19,10 @@
 
 .cancel-button {
   @include button;
-  color: $dark-red;
   background-color: $light-red;
+  color: $dark-red;
   text-decoration: none;
+
   &:hover {
     background-color: $dark-red;
     color: $white;

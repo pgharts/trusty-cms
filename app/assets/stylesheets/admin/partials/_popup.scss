@@ -1,97 +1,117 @@
-div.popup {
-  color: #333333;
-  background-color: white;
+.popup {
+  background-color: $white;
   border: 1px solid #777777;
-  padding: 10px 20px;
+  color: #333333;
   display: none;
+  padding: 10px 20px;
+
   strong {
     font-weight: bold;
   }
+
   em {
     font-style: italic;
   }
+
   .busy {
     float: right;
     margin-top: 9px;
   }
+
   .popup_title {
-    background: #c5dff5;
-    border-bottom: 1px solid #a7cdf0;
+    background: $darker-blue;
+    border-bottom: 1px solid $darker-blue;
+    color: $white;
     font-weight: bold;
-    font-size: 100%;
     margin: -10px -20px 20px -20px;
-    padding: 6px 10px;
+    padding: 0.75em;
   }
+
   p.intro {
     font-size: 90%;
   }
+
   label {
+    color: $dark-gray;
     display: block;
     font-size: 85%;
+
     &.inline {
       display: inline;
     }
+
     span.hint {
-      font-size: 90%;
       color: #666666;
+      font-size: 90%;
     }
   }
+
   input.button {
     font-size: 120%;
   }
+
   .viewport {
-    background: white;
-    border: 1px solid #dddddd;
-    border-top: 1px solid #cccccc;
-    border-left: 1px solid #cccccc;
+    background: $white;
+    border: 1px solid $light-gray;
     margin: 1em 0;
     overflow: auto;
+
     table.index {
       margin: -1px 0 0;
     }
   }
+
   .buttons {
-    border-top: 1px solid #e5e5e5;
     text-align: right;
+
     input.button {
       font-size: 120%;
     }
+
     button {
       &.default {
         border: 1px solid #154ca6;
         color: white;
       }
+
       &:active {
         border: 1px solid #888888;
       }
+
       &.default:active {
         border: 1px solid #002c86;
       }
+
       &:focus {
         border-width: 2px;
       }
     }
+
     a.cancel {
       color: $alt-link-color;
     }
   }
+
   .tag_description, .snippet_description {
     border-bottom: 1px dotted silver;
     font-size: 95%;
     padding: 6px 0;
+
     h4 {
       color: green;
       font-size: 120%;
-      margin-top: 0;
       margin-bottom: 8px;
+      margin-top: 0;
     }
+
     code {
       background-color: whitesmoke;
       color: #666666;
       font-family: Monaco, "Courier New", Courier, monospace;
-      padding-top: 1px;
       padding-bottom: 1px;
+      padding-top: 1px;
     }
+
     pre {
       background-color: whitesmoke;
       border: 1px solid #dddddd;
@@ -101,24 +121,27 @@ div.popup {
       padding: 10px;
     }
   }
+
   .reference {
-    font-size: 90%;
     border: 1px solid silver;
-    overflow: auto;
-    overflow-y: auto;
-    overflow-x: hidden;
+    font-size: 90%;
+    height: 300px;
     line-height: 140%;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 12px;
     padding-top: 1px;
-    height: 300px;
     width: 40em;
+
     code {
       background-color: whitesmoke;
       color: #666666;
       font-family: Monaco, "Courier New", Courier, monospace;
-      padding-top: 1px;
       padding-bottom: 1px;
+      padding-top: 1px;
     }
+
     pre {
       background-color: whitesmoke;
       border: 1px solid #dddddd;
@@ -127,8 +150,10 @@ div.popup {
       overflow: auto;
       padding: 10px;
     }
+
     table {
       width: 100%;
+
       th {
         color: green;
         font-size: 120%;
@@ -136,30 +161,34 @@ div.popup {
         padding-left: 0;
         padding-right: 0;
       }
+
       td {
         border-bottom: 1px dotted silver;
-        padding-top: 8px;
         padding-bottom: 8px;
+        padding-top: 8px;
         text-align: left;
       }
+
       h1 {
         color: black;
         margin: 0;
         margin-bottom: 0.5em;
       }
+
       acronym {
         border-bottom: 1px dotted silver;
       }
+
       blockquote {
         border-left: 4px solid silver;
+        margin-bottom: 1em;
+        margin-top: 1em;
         padding-left: 1em;
         padding-right: 1em;
-        margin: 0;
-        margin-top: 1em;
-        margin-bottom: 1em;
       }
     }
   }
+
   .close_link {
     font-size: 85%;
     text-align: center;
@@ -170,12 +199,13 @@ div.popup {
   color: green;
   cursor: pointer;
   font-size: 120%;
-  margin-top: 0;
   margin-bottom: 8px;
+  margin-top: 0;
 }
 
 .tag_options {
   margin-left: 1em;
+
   li {
     margin-bottom: 8px;
   }
@@ -183,14 +213,18 @@ div.popup {
 
 .tag_option_value_list {
   margin-left: 1em;
+
   li {
     display: inline;
+
     &:last-child {
       border: none;
     }
+
     code {
       padding-left: 0.3em;
       padding-right: 0.3em;
+
       &:hover {
         background: #666666;
         color: white;
@@ -202,31 +236,15 @@ div.popup {
 div.popup .reference table {
   th {
     border-bottom: 1px dotted silver;
-    padding-top: 8px;
     padding-bottom: 8px;
+    padding-top: 8px;
     text-align: left;
   }
+
   h2, h3, h4 {
     color: black;
     margin: 0;
     margin-bottom: 0.5em;
-  }
-}
-
-div.popup.textured {
-  background: #eeeeee;
-  .head {
-    background: white;
-    padding: 10px 20px;
-    margin: -20px -20px 20px;
-    border-bottom: 1px solid #cccccc;
-    box-shadow: 0 1px 0 white;
-  }
-  .buttons {
-    border-top: 1px solid white;
-    margin: 20px -20px -10px;
-    padding: 20px;
-    box-shadow: 0 -1px 0 #ccc;
   }
 }
 

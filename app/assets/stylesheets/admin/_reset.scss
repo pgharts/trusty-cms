@@ -11,11 +11,11 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  padding: 0;
   border: 0;
   font: inherit;
   font-size: 100%;
+  margin: 0;
+  padding: 0;
   vertical-align: baseline;
 }
 
@@ -33,14 +33,15 @@ table {
 }
 
 caption, th, td {
-  text-align: left;
   font-weight: normal;
+  text-align: left;
   vertical-align: middle;
 }
 
 q, blockquote {
   quotes: none;
 }
+
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;

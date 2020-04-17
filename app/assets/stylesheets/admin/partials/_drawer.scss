@@ -8,12 +8,14 @@
       margin: 0;
       padding: 0;
       width: 100%;
+
       tr {
         &:hover td {
           background: none;
           border-bottom: none;
         }
       }
+
       th, td {
         border-top: 1px $gray solid;
         padding: 0.5em 1em;
@@ -22,8 +24,8 @@
       th {
         &.label {
           font-size: 85%;
-          width: 1%;
           text-align: left;
+          width: 1%;
         }
       }
 
@@ -41,9 +43,9 @@
         }
 
         &.actions {
-          width: 40px;
           text-align: left;
           vertical-align: middle;
+          width: 40px;
         }
       }
 
@@ -58,6 +60,7 @@
 
 .drawer_handle {
   padding: 4px 0 5px;
+
   a {
     background: $dark-gray;
     color: $white;
@@ -65,6 +68,7 @@
     padding: 4px 21px 5px 10px;
     position: relative;
     text-decoration: none;
+
     &.more, &.less {
       svg {
         margin-left: 10px;

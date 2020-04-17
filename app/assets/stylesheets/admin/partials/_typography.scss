@@ -24,6 +24,7 @@ body {
 
 a {
   @include default-link;
+
   &.alt {
     @include alt-link;
   }

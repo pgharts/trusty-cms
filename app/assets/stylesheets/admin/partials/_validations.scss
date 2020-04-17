@@ -1,14 +1,15 @@
 .content {
   span.error {
-    display: block;
-    margin: 1em 0;
     background-color: #f8d7da;
     color: #721c24;
-    padding: 1em;
+    display: block;
     font-size: 1em;
+    margin: 1em 0;
+    padding: 1em;
+
     a.closer {
-      margin-left: 10px;
       color: #ffcccc;
+      margin-left: 10px;
       text-decoration: none;
     }
   }

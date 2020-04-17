@@ -1,27 +1,29 @@
 //colors
 
 .site_chooser {
-  width: fit-content;
   border-collapse: collapse;
   float: left;
   padding-left: 1em;
+  width: fit-content;
 }
 
 .nav {
   color: $white;
-  list-style: none;
-  font-weight: bold;
-  padding: 1em;
   cursor: pointer;
+  font-weight: bold;
+  list-style: none;
+  padding: 1em;
+
   ul {
-    position: absolute;
-    visibility: hidden;
     opacity: 0;
+    position: absolute;
     transition: opacity 0.2s;
+    visibility: hidden;
 
     li {
-      position: relative;
       padding: 0.75em 5em 0.5em 1em;
+      position: relative;
+
       &:hover {
         background-color: darken($dark-blue, 15%);
         cursor: pointer;
@@ -29,18 +31,18 @@
     }
 
     a {
-      white-space: nowrap;
       color: $white;
       text-decoration: none;
+      white-space: nowrap;
     }
   }
 
   &:hover ul {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.2s;
-    z-index: 99999;
     background-color: $dark-blue;
     margin-top: 1em;
+    opacity: 1;
+    transition: opacity 0.2s;
+    visibility: visible;
+    z-index: 99999;
   }
 }

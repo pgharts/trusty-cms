@@ -1,8 +1,6 @@
 .trusty-container {
   display: grid;
-  grid-template-areas:
-    "header header header"
-    "nav toolbar content";
+  grid-template-areas: "header header header" "nav toolbar content";
   grid-template-columns: auto auto 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
@@ -15,6 +13,7 @@ body.reversed {
 body.single_form {
   .content {
     text-align: center;
+
     #single_form {
       margin: 6em auto 0;
       text-align: left;

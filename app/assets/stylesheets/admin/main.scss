@@ -30,11 +30,8 @@
 @import "multi_site_main";
 @import "site_chooser";
 
-// JQueryUI Partials
-@import "partials/jquery-ui";
-@import "partials/jquery-ui-structure";
-@import "partials/jquery-ui-theme";
-.ui-state-highlight { height: 5em; line-height: 1.2em; }
+.ui-state-highlight {
+  height: 5em;
+  line-height: 1.2em;
+}
 
-// Deprecated
-@import "partials/deprecated";

@@ -1,44 +1,54 @@
 nav {
-  grid-area: nav;
-  border-right: 0.5px solid $dark-gray;
   background-color: $white;
+  border-right: 0.5px solid $dark-gray;
+  grid-area: nav;
+
   ul.navigation {
     border-right: 0.5px solid $dark-gray;
+
     a {
       color: mix($light-gray, white, 15%);
       text-decoration: none;
+
       li {
-        border-top: 1px solid $light-gray;
         background-color: $dark-blue;
+        border-top: 1px solid $light-gray;
         padding: 1em 7em 1em 1em;
+
         &:hover {
           background: darken($dark-blue, 15%);
           cursor: pointer;
         }
+
         &.current {
           background: darken($dark-blue, 15%);
-          font-weight: bold;
           color: $white;
+          font-weight: bold;
         }
       }
     }
   }
 }
+
 .toolbar {
-  grid-area: toolbar;
-  border-right: 0.5px solid $dark-gray;
   background-color: $white;
+  border-right: 0.5px solid $dark-gray;
+  grid-area: toolbar;
+
   ul.secondary_navigation {
     border-right: 0.5px solid $dark-gray;
+
     a {
       text-decoration: none;
+
       li {
-        padding: 1em 5em 1em 1em;
         border-bottom: 0.5px solid $dark-gray;
+        padding: 1em 5em 1em 1em;
       }
+
       &.current {
-        font-weight: bold;
         font-style: italic;
+        font-weight: bold;
       }
     }
   }

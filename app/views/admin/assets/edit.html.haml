@@ -21,9 +21,9 @@
           = updated_stamp @asset
         
         %fieldset.upload
-          %label.upload
+          %label.custom-file-upload.upload
             = t("clipped_extension.replace_file")
-          = f.file_field :asset, :class => "", :style => "width: 100%"
+            = f.file_field :asset, :class => "", :style => "width: 100%"
         
         .buttons
           = save_model_button(@asset)
@@ -33,8 +33,9 @@
   
   - main.edit_regenerate do
     - if current_user.admin? or current_user.designer?
-      %fieldset= t("clipped_extension.regenerate_thumbnails")
-      
-      - form_tag refresh_admin_asset_path(@asset), :method => :put do
-        %p.asset_buttons
-          %input.button{ :type => "submit", :value => t("clipped_extension.regenerate") }
+      %fieldset
+        = form_tag refresh_admin_asset_path(@asset), :method => :put do
+          %label= t("clipped_extension.regenerate_thumbnails")
+          %br
+          .asset_buttons
+            %input.button{ :type => "submit", :value => t("clipped_extension.regenerate") }

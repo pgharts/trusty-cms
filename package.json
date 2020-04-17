@@ -12,5 +12,11 @@
     "jquery-ui-bundle": "^1.12.1",
     "jquery-ujs": "^1.2.2",
     "tablesaw": "^3.1.2"
+  },
+  "devDependencies": {
+    "stylelint": "^13.3.2",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-order": "^4.0.0",
+    "stylelint-scss": "^3.17.0"
   }
 }
