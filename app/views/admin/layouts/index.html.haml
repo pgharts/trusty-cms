@@ -10,7 +10,7 @@
             %th.name
               = t('layout')
           - thead.actions_header do
-            %th.actions{:style=>"width:9em"}
+            %th.actions{:style=>'width:9em'}
               = t('modify')
     %tbody
       - if @layouts.any?
@@ -24,7 +24,7 @@
                     = layout.name
               - tbody.actions_cell do
                 %td.actions
-                  = link_to remove_admin_layout_url(layout), :class => "action" do
+                  = link_to remove_admin_layout_url(layout), :class => 'action' do
                     %i.fas.fa-minus-circle
                     =t('remove')
       - else

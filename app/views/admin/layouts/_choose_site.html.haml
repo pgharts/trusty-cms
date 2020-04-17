@@ -1,5 +1,5 @@
 - unless current_user.site
-  %label{:for=>"layout_site_id", :class => "admin_only"}
+  %label{:for=>'layout_site_id', :class => 'admin_only'}
     Site
     - sites = Site.all.map { |s| [s.name, s.id] }
     - selection = {:include_blank => Layout.is_shareable?}

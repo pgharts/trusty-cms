@@ -2,11 +2,11 @@
 
 - page = attachment.page
 - asset = attachment.asset
-- asset_type = asset.image? ? "image" : "link"
+- asset_type = asset.image? ? 'image' : 'link'
 - css_class = "#{asset_type} asset"
 - css_class += ' unsaved' if attachment.new_record?
 
-%li{:class => css_class, :id => "attachment_#{asset.uuid}", data: {toggle: "tooltip", placement: "left"}, title: "Asset ID: #{asset.id}"}
+%li{:class => css_class, :id => "attachment_#{asset.uuid}", data: {toggle: 'tooltip', placement: 'left'}, title: "Asset ID: #{asset.id}"}
   = fields_for :page, @page do |f|
     = f.fields_for :page_attachments, attachment, :child_index => asset.uuid do |paf|
       - if attachment.new_record?

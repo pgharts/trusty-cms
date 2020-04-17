@@ -12,7 +12,7 @@
           - thead.roles_header do
             %th.roles= t('roles')
           - thead.actions_header do
-            %th.actions{:style=>"width:9em"}= t('modify')
+            %th.actions{:style=>'width:9em'}= t('modify')
     %tbody
       - @users.each do |user|
         %tr[user]
@@ -29,7 +29,7 @@
                     %i.fas.fa-minus-circle
                     = t('remove')
                 - else
-                  = link_to remove_admin_user_url(user), :class => "action" do
+                  = link_to remove_admin_user_url(user), :class => 'action' do
                     %i.fas.fa-minus-circle
                     = t('remove')
 

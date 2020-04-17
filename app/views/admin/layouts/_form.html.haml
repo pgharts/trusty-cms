@@ -6,28 +6,28 @@
       - form.edit_title do
         .title
           = f.label :name, t('name')
-          = f.text_field :name, :maxlength => 100, :class => "textbox", :required => true
+          = f.text_field :name, :maxlength => 100, :class => 'textbox', :required => true
       - form.edit_extended_metadata do
         .drawer
           .drawer_contents#attributes
             %table.fieldset
               %tr
                 %th.label= f.label :content_type, t('content_type').html_safe
-                %td.field= f.text_field :content_type, :maxlength => 40, :class => "textbox"
+                %td.field= f.text_field :content_type, :maxlength => 40, :class => 'textbox'
               = render_region :extended_metadata, :locals => {:f => f}
           .drawer_handle
-            %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+            %a.toggle{:href=>'#attributes', :rel=>'toggle[attributes]', :class=>"#{(meta_errors? ? 'less' : 'more')}"}
               = meta_label
               %i.fas.fa-angle-down
       - form.edit_content do
         .textarea_content
-          = f.label :content, "Body"
+          = f.label :content, 'Body'
           ~ f.text_area :content
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
     - form_bottom.reference_links do
       .reference_links
         Reference:
-        %span{:id => "tag_reference_link"}
+        %span{:id => 'tag_reference_link'}
           = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
     - form_bottom.edit_buttons do
       .buttons

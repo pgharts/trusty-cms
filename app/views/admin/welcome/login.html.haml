@@ -1,18 +1,18 @@
-- body_classes << "single_form"
+- body_classes << 'single_form'
 
 #single_form
   %h1= t('please_login')
 
   = form_tag login_path do
     %p
-      %label{:for=>"username_or_email"}= t('username_or_email')
-      = text_field_tag "username_or_email", @username_or_email, :class => 'textbox', :maxlength => 40, :size => 40
+      %label{:for=>'username_or_email'}= t('username_or_email')
+      = text_field_tag 'username_or_email', @username_or_email, :class => 'textbox', :maxlength => 40, :size => 40
     %p
-      %label{:for=>"password"}= t('password')
-      = password_field_tag "password", '', :class => 'textbox password', :maxlength => 40, :size => 40
-    %p= link_to "Forgot password?", new_admin_password_reset_path
+      %label{:for=>'password'}= t('password')
+      = password_field_tag 'password', '', :class => 'textbox password', :maxlength => 40, :size => 40
+    %p= link_to 'Forgot password?', new_admin_password_reset_path
     %p.remember_me
       = check_box_tag :remember_me, 1, false, :class => 'checkbox'
-      %label.checkbox{:for=>"remember_me"}= t('remember_me_in_this_browser')
+      %label.checkbox{:for=>'remember_me'}= t('remember_me_in_this_browser')
     .buttons
-      %input.button{:type => "submit", :value => t('login')}
+      %input.button{:type => 'submit', :value => t('login')}

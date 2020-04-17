@@ -1,4 +1,4 @@
 - if current_user.admin?
-  %label{:for=>"user_admin"} Can edit site
+  %label{:for=>'user_admin'} Can edit site
   = select :user, :site_id, [['<any>', '']] + Site.all.map { |s| [s.name, s.id] }
   .caption A user with no site is able to act (to whatever extent their status allows) on any site.

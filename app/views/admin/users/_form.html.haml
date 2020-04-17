@@ -1,4 +1,4 @@
-= form_for [:admin, @user], :html => {class: "user_form"} do |f|
+= form_for [:admin, @user], :html => {class: 'user_form'} do |f|
   = render :partial => 'avatar' unless @user.new_record?
 
   = render_region :form_top, :locals => {:f => f}
@@ -6,32 +6,32 @@
   - render_region :form, :locals => {:f => f} do |form|
     - form.edit_first_name do
       = f.label :name, t('first_name')
-      = f.text_field :first_name, :class => "textbox", :maxlength => 100
+      = f.text_field :first_name, :class => 'textbox', :maxlength => 100
 
     - form.edit_last_name do
       = f.label :name, t('last_name')
-      = f.text_field :last_name, :class => "textbox", :maxlength => 100
+      = f.text_field :last_name, :class => 'textbox', :maxlength => 100
 
     - form.edit_email do
-      = f.label :email, t('email_address') , :class => "optional"
-      = f.text_field "email", :class => 'textbox', :maxlength => 255
+      = f.label :email, t('email_address') , :class => 'optional'
+      = f.text_field 'email', :class => 'textbox', :maxlength => 255
 
     - form.edit_password do
-      = render "password_fields", :f => f
+      = render 'password_fields', :f => f
 
     - form.edit_roles do
       - if current_user.admin?
         %fieldset.multi_option
           %label= t('roles')
-          = f.check_box "admin", :class => "checkbox"
-          = f.label :admin, t('admin'), :class => "checkbox"
-          = f.check_box "designer", :class => "checkbox"
-          = f.label :designer, t('designer'), :class => "checkbox"
+          = f.check_box 'admin', :class => 'checkbox'
+          = f.label :admin, t('admin'), :class => 'checkbox'
+          = f.check_box 'designer', :class => 'checkbox'
+          = f.label :designer, t('designer'), :class => 'checkbox'
 
     - form.edit_notes do
       %fieldset
-        = f.label :notes, t('notes'), :class => "optional"
-        ~ f.text_area "notes", :size => "53x4", :class => "textarea"
+        = f.label :notes, t('notes'), :class => 'optional'
+        ~ f.text_area 'notes', :size => '53x4', :class => 'textarea'
 
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
     - form_bottom.edit_buttons do

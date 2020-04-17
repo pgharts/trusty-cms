@@ -9,6 +9,6 @@
     .message
       - if @page.page_attachments.empty?
         = t('clipped_extension.no_attached_assets')
-    = link_to "path/to/page.html" '#attach_asset', :class => 'button', :id => 'attach_assets' do
+    = link_to 'path/to/page.html' '#attach_asset', :class => 'button', :id => 'attach_assets' do
       %i.far.fa-image
       = t('clipped_extension.assets')

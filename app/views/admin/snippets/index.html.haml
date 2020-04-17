@@ -9,7 +9,7 @@
           - thead.title_header do
             %th.name= t('snippet')
           - thead.actions_header do
-            %th.actions{:style=>"width:9em"}= t('modify')
+            %th.actions{:style=>'width:9em'}= t('modify')
     %tbody
       - if @snippets.any?
         - @snippets.each do |snippet|
@@ -22,7 +22,7 @@
                     = snippet.name
               - tbody.actions_cell do
                 %td.actions
-                  = link_to remove_admin_snippet_url(snippet), :class => "action" do
+                  = link_to remove_admin_snippet_url(snippet), :class => 'action' do
                     %i.fas.fa-minus-circle
                     = t('remove')
       - else

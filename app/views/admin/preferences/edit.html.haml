@@ -16,20 +16,20 @@
           - form.edit_first_name do
             %p
               = f.label :name, t("first_name")
-              = f.text_field :first_name, :class => "textbox", :size => 32, :maxlength => 100
+              = f.text_field :first_name, :class => 'textbox', :size => 32, :maxlength => 100
 
           - form.edit_last_name do
             %p
               = f.label :name, t("last_name")
-              = f.text_field :last_name, :class => "textbox", :size => 32, :maxlength => 100    
+              = f.text_field :last_name, :class => 'textbox', :size => 32, :maxlength => 100
 
           - form.edit_email do
             %p
-              = f.label :email,  t("email_address"), :class => "optional"
-              = f.text_field "email", :class => 'textbox', :maxlength => 255
+              = f.label :email,  t("email_address"), :class => 'optional'
+              = f.text_field 'email', :class => 'textbox', :maxlength => 255
 
           - form.edit_password do
-            = render "admin/users/password_fields", :f => f
+            = render 'admin/users/password_fields', :f => f
 
         - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
           - form_bottom.edit_buttons do

@@ -7,10 +7,10 @@
     = form_for(resource, as: resource_name, url: authenticate_path) do |f|
       .field
         = f.label :email
-        = f.email_field :email, autofocus: true, autocomplete: "email"
+        = f.email_field :email, autofocus: true, autocomplete: 'email'
       .field
         = f.label :password
-        = f.password_field :password, autocomplete: "current-password"
+        = f.password_field :password, autocomplete: 'current-password'
       - if devise_mapping.rememberable?
         .field
           = f.label :remember_me do
@@ -18,8 +18,8 @@
             Remember Me
       %br
       .actions
-        = f.submit "Log in"
+        = f.submit 'Log in'
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-          = link_to "Forgot your password?", new_password_path(resource_name)
+          = link_to 'Forgot your password?', new_password_path(resource_name)
       - if flash.alert
         .error= flash.alert
