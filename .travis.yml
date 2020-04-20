@@ -5,6 +5,9 @@ cache: bundler
 language: ruby
 rvm:
   - 2.6.5
+node_js: "0.10"
+install: "npm install"
+script: "npm test"
 
 services: mysql
 
