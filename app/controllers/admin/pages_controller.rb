@@ -102,8 +102,8 @@ class Admin::PagesController < Admin::ResourceController
     def initialize_meta_rows_and_buttons
       @buttons_partials ||= []
       @meta ||= []
-      @meta << {:field => "slug", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 100}]}
-      @meta << {:field => "breadcrumb", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 160}]}
+      @meta << {:field => "slug", :type => "text_field", :args => [{:class => 'textbox'}]}
+      @meta << {:field => "breadcrumb", :type => "text_field", :args => [{:class => 'textbox'}]}
     end
 
   def verify_page_class(page_class)

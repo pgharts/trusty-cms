@@ -2,7 +2,7 @@
 
 %h1 Sites
 
-%table{:class => "index", :cellspacing => "0"}
+%table.index.tablesaw
   %thead
     %tr
       - render_region :thead do |thead|
@@ -31,12 +31,14 @@
               = h(site.base_domain)
           - tbody.modify_cell do
             %td.remove
-              = link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :onclick => "return confirm('Are you sure you want to permanently remove #{site.name}?')"
+              = link_to image('remove.png', :alt => 'Remove'), admin_site_path(site), :method => :delete, :onclick => "return confirm('Are you sure you want to permanently remove #{site.name}?')"
           - tbody.order_cell do
             %td.order
               = order_links(site).html_safe
 
 - render_region :bottom do |bottom|
   - bottom.new_button do
-    %p
-      = link_to "New Site", new_admin_site_path
+    .page-actions
+      = link_to new_admin_site_path, class: 'action_button' do
+        %i.fas.fa-plus-circle
+        New Site

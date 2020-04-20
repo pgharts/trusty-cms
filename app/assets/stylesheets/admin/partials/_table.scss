@@ -1,0 +1,172 @@
+@mixin status-badge($background, $color: white, $width: 5em) {
+  background: $background;
+  color: $color;
+  display: block;
+  padding: 0 6px;
+  text-align: center;
+  width: $width;
+}
+
+
+table {
+  th {
+    background-color: $light-gray;
+    color: $dark-gray;
+    padding: 0.75em;
+    white-space: nowrap;
+
+    &.actions {
+      padding: 0 17em 0 1em;
+    }
+
+    &.name {
+      width: 100%;
+    }
+
+    &.status {
+      min-width: 8em;
+    }
+  }
+
+  td {
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.85em;
+    padding: 1em 0.25em;
+
+    a.action,
+    span.action.disabled {
+      margin: 0 25px 0 1px;
+      padding: 6px;
+
+      img {
+        vertical-align: -18%;
+      }
+    }
+
+    a.action {
+      color: $dark-gray;
+      text-decoration: none;
+
+      &:hover {
+        background: $light-gray;
+        border: 1px solid darken($light-gray, 10%);
+        margin: 0 24px 0 0;
+      }
+
+      &.selected {
+        background: $light-gray;
+        border: 1px solid darken($light-gray, 10%);
+        margin: 0 24px 0 0;
+      }
+    }
+
+    span.action.disabled {
+      color: #cccccc;
+    }
+
+    &.empty {
+      color: silver;
+      font-style: italic;
+      padding: 3em;
+      text-align: center;
+    }
+
+    &.name {
+      font-weight: bold;
+
+      a {
+        color: $dark-gray;
+        text-decoration: none;
+      }
+    }
+
+    &.actions {
+      font-size: 85%;
+      white-space: nowrap;
+    }
+  }
+
+  tr {
+    &:first-child {
+      border-top: 1px solid white;
+    }
+
+    &.hover,
+    &:hover {
+      td {
+        background: #c5dff5;
+        border-bottom: 1px solid #c5dff5;
+        border-top: 1px solid #d5f0ff;
+      }
+    }
+  }
+
+  thead {
+    tr,
+    tr:first-child {
+      border-top: none;
+    }
+  }
+}
+
+table.index#pages {
+  td.name {
+    .w1 {
+      position: relative;
+
+      img.expander {
+        left: -25px;
+        padding: 6px 3px;
+        position: absolute;
+      }
+    }
+
+    .info {
+      color: #9eb3bf;
+      font-size: 0.90em;
+      font-style: italic;
+      font-weight: normal;
+    }
+  }
+
+  tr.page.virtual td.name a .title {
+    color: #9eb3bf;
+  }
+
+  td.status {
+    font-size: .80em;
+  }
+}
+
+.status {
+  a {
+    @include plain-link;
+  }
+}
+
+.draft_status {
+  @include status-badge($red);
+}
+
+.hidden_status {
+  @include status-badge(#9eb3bf);
+}
+
+table.index#users {
+  td.name {
+    padding-bottom: 8px;
+    padding-top: 8px;
+
+    img.avatar {
+      margin-right: 4px;
+      vertical-align: center;
+    }
+
+    .login {
+      color: #9eb3bf;
+      font-size: 90%;
+      font-style: italic;
+      font-weight: normal;
+    }
+  }
+}

@@ -1,81 +1,56 @@
 body {
-  font-size: $base-font-size;
   font-family: $base-font-family;
-  line-height: 1.4;
+}
+
+@mixin subtle-text {
+  color: $light-gray;
+  font-size: 0.75em;
+}
+
+@mixin subtle-text-reversed {
+  color: $dark-gray;
+  font-size: 0.75em;
+}
+
+@mixin label-text {
+  color: $light-gray;
+  font-size: 0.85em;
+}
+
+@mixin label-text-reversed {
+  color: $dark-gray;
+  font-size: 0.85em;
 }
 
 a {
   @include default-link;
+
   &.alt {
     @include alt-link;
   }
 }
 
-big {
-  font-size: 110%;
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+  margin: 0.25em;
 }
 
 h1 {
-  font-size: 180%;
-  font-weight: bold;
-  margin: 0.75em 0;
+  font-size: 1.5em;
 }
 
 h3 {
-  font-weight: bold;
-  font-size: 130%;
-  margin-top: 1.25em;
-  margin-bottom: 0.5em;
+  font-size: 1.2em;
 }
 
-h4, h5, h6 {
-  font-weight: bold;
+h4 {
+  font-size: 1em;
 }
 
-p {
-  margin: 1em 0;
+.caption {
+  @include subtle-text;
 }
 
-td {
-  vertical-align: middle;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-}
-
-img {
-  border: none;
-  vertical-align: middle;
-}
-
-input[type=image] {
-  border: none;
-  vertical-align: middle;
-}
-
-input.big {
-  font-size: 120%;
-}
-
-#change_password span, span.info, span.error {
-  font-size: 80%;
-}
-
-.clear {
-  font-size: 1px;
-  clear: both;
-}
-
-.warning {
-  color: red;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-.fa{
-  color: #94BDC3;
+.reversed .caption {
+  @include subtle-text-reversed;
 }

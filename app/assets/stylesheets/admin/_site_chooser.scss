@@ -1,73 +1,48 @@
 //colors
-$color_turquoise_blue_approx: #66d9e0;
-$white: #fff;
-$black: #000;
 
-#site_chooser {
-	width: 20%;
-	border-collapse: collapse;
-	float: right;
+.site_chooser {
+  border-collapse: collapse;
+  float: left;
+  padding-left: 1em;
+  width: fit-content;
 }
-#nav {
-	list-style: none;
-	font-weight: bold;
-	margin-bottom: 10px;
-	width: 100%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 5px;
-	margin: 0;
-	cursor: pointer;
-	li {
-		margin-right: 10px;
-		position: relative;
-		color: $color_turquoise_blue_approx;
-		&:hover {
-			a {
-				background: $black;
-				text-decoration: underline;
-			}
-			ul a {
-				text-decoration: none;
-			}
-		}
-	}
-	a {
-		display: block;
-		padding: 5px;
-		color: $white;
-		background: $black;
-		text-decoration: none;
-		&:hover {
-			color: $white;
-			background: $black;
-			text-decoration: underline;
-		}
-		&.site-link:hover {
-			color: $color_turquoise_blue_approx;
-			transition: all 0.2s;
-		}
-	}
-	ul {
-		background: $white;
-		background: rgba(255,255,255,0);
-		list-style: none;
-		position: absolute;
-		margin-top: 10px;
-		visibility: hidden;
-		opacity: 0;
-		transition: opacity 0.2s;
-		li {
-			float: none;
-		}
-		a {
-			white-space: nowrap;
-		}
-	}
-	&:hover ul {
-		visibility: visible;
-		opacity: 1;
-		transition: opacity 0.2s;
-		z-index: 99999;
-	}
+
+.nav {
+  color: $white;
+  cursor: pointer;
+  font-weight: bold;
+  list-style: none;
+  padding: 1em;
+
+  ul {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.2s;
+    visibility: hidden;
+
+    li {
+      padding: 0.75em 5em 0.5em 1em;
+      position: relative;
+
+      &:hover {
+        background-color: darken($dark-blue, 15%);
+        cursor: pointer;
+      }
+    }
+
+    a {
+      color: $white;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+  }
+
+  &:hover ul {
+    background-color: $dark-blue;
+    margin-top: 1em;
+    opacity: 1;
+    transition: opacity 0.2s;
+    visibility: visible;
+    z-index: 99999;
+  }
 }

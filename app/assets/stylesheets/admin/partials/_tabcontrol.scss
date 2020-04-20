@@ -1,64 +1,58 @@
 #tab_control {
-  color: #333333;
-  margin-bottom: 1em;
   .tabs {
     float: left;
     width: 100%;
-    margin-right: -4px;
+
     .tab {
-      background-color: #e4e4e4;
-      color: black;
+      background-color: darken($light-gray, 5%);
       display: inline-block;
-      font-size: 90%;
-      text-align: left;
+      font-size: 0.8em;
       margin-right: 5px;
-      padding: 8px 15px 5px;
+      padding: 0.85em 0.5em;
       text-decoration: none;
-      text-transform: titlecase;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
+
       &.here {
-        background-color: white;
-        color: #737272;
+        background-color: $white;
+        color: $gray;
         font-weight: bold;
       }
+
       span:hover {
-        color: #737272;
+        color: $gray;
       }
+
       .close {
-        margin-top: -4px;
-        margin-left: 5px;
-        margin-right: -5px;
+        padding-left: .5em;
       }
     }
   }
+
   .pages {
-    background: white;
-    width: 100%;
+    background: $white;
     clear: both;
+    margin-right: 1em;
+
     .page {
       background: white;
-      background-image: linear-gradient(to bottom, #ffffff, #f5f1e2 15%, #f5f1e2);
-      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
       padding: 12px 20px 20px;
+
       p {
         margin-top: 0;
       }
+
       label {
+        color: #000;
         display: inline;
-        color: #333333;
-        font-weight: normal;
         font-size: 80%;
+        font-weight: normal;
         text-shadow: none;
       }
     }
+
     .reference_links {
-      font-size: 85%;
-      margin-left: 1em;
       float: right;
-      a {
-        color: #0066cc;
-      }
+      font-size: 85%;
+      margin-bottom: 0;
     }
   }
 }
@@ -67,19 +61,13 @@
   #tab_toolbar {
     float: right;
     overflow: hidden;
-    margin-top: 0.2em;
-    padding: 3px;
+    padding: 0 1em;
   }
 }
 
 .reference_links {
   font-size: 85%;
-  span {
-    padding: 0 0 0 4px;
-    a {
-      color: #4444ee;
-    }
-  }
+  margin-bottom: 1em;
 }
 
 #tag_reference_link {

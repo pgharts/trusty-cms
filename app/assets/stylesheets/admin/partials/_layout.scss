@@ -1,10 +1,19 @@
+.trusty-container {
+  display: grid;
+  grid-template-areas: "header header header" "nav toolbar content";
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
 body.reversed {
-  background-color: #737272;
+  background-color: $light-gray;
 }
 
 body.single_form {
-  #content {
+  .content {
     text-align: center;
+
     #single_form {
       margin: 6em auto 0;
       text-align: left;
@@ -18,4 +27,19 @@ body.reversed.login_form {
 
 body.reversed.password_form {
   background-color: #fff;
+}
+
+.set {
+  div {
+    display: inline-block;
+  }
+}
+
+.page-actions {
+  margin: 0.5em 0;
+}
+
+.updated_line {
+  margin: 0.5em 0;
+  @include subtle-text-reversed;
 }

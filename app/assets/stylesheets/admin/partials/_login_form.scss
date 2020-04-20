@@ -1,0 +1,28 @@
+.login-form-content {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  margin-top: 5em;
+
+  .visual {
+    img {
+      float: right;
+      height: 300px;
+    }
+  }
+
+  .login {
+    form {
+      padding: 1em;
+
+      .field #user_email, .field #user_password, .field #user_password_confirmation {
+        max-width: 200px;
+      }
+    }
+
+    .error {
+      display: block;
+      margin: 1em;
+    }
+  }
+}

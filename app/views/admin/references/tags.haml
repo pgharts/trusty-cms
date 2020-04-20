@@ -2,10 +2,10 @@
   .popup_title
     =t('available_tags_for', :name =>  _display_name)
   %p
-    %fieldset{:id => "live-search"}
+    %fieldset{:id => 'live-search'}
       %label.inline{:for => "search_#{class_of_page.name.underscore}_tag_reference"} Filter Tags
-      %input{:id => "filter", :type => "text", :name => "search_tag_reference", :value => ""}/
-      %span{:id => "filter-count"}
+      %input{:id => 'filter', :type => 'text', :name => 'search_tag_reference', :value => ''}/
+      %span{:id => 'filter-count'}
   .reference= tag_reference.html_safe
   %p.close_link
     %a.close_tags{href:'#'}

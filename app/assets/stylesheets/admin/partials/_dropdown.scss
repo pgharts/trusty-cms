@@ -2,35 +2,32 @@
   border: 1px solid #b3b3b3;
   border-top: 1px solid #c3c3c3;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 
 ul.menu {
-  background: white;
+  background: $white;
   font-size: 80%;
   padding: 5px 20px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+
   li {
     margin: 0 -20px;
+
     &.separator {
-      margin: 5px -18px;
       border-top: 1px solid #e5e5e5;
+      margin: 5px -18px;
     }
   }
+
   a {
+    border-top: 1px solid white;
     color: black;
     display: block;
     padding: 6px 20px 7px;
     text-decoration: none;
-    border-top: 1px solid white;
+
     &:hover {
-      background: #e0f0ff;
-      border-top: 1px solid #d5f0ff;
-      background-image: linear-gradient(to bottom, #e5f5ff, #b5d0f5);
+      background: $light-blue;
+      border-top: 1px solid $light-blue;
     }
   }
 }

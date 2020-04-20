@@ -1,139 +1,30 @@
-#header {
-  font-size: 90%;
-  background: $header;
-  background-image: linear-gradient(to bottom, #000000, #000000, #000000);
+header {
+  background-color: $header;
+  grid-area: header;
+  min-height: 50px;
   position: relative;
-  &:after {
-    content: "\0020";
-    display: block;
-    clear: both;
-    overflow: hidden;
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-  }
 }
 
 #site_links {
   color: mix($header, white, 15%);
-  font-size: 80%;
   float: right;
-  padding: 12px 10px 0 5px;
+  font-size: 80%;
   height: 16px;
+  padding: 12px 10px 0 5px;
+
   a {
     color: white;
   }
+
   a:hover, strong a {
     text-decoration: none;
   }
 }
 
 #view_site {
-  font-size: 90%;
   background: rgba(black, 0.45);
-  border-radius: 5px;
   display: inline;
+  font-size: 90%;
   padding: 3px 10px 4px;
   text-decoration: none;
-}
-
-ul#navigation {
-  float: left;
-  margin-top: 6px;
-  li {
-    float: left;
-    height: 30px;
-    margin: 4px 0 0 8px;
-    white-space: nowrap;
-    a {
-      background: $primary-tab;
-      color: mix($header, white, 15%);
-      display: block;
-      height: 30px;
-      line-height: 30px;
-      padding: 0 20px;
-      position: relative;
-      text-decoration: none;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-    }
-    &:hover a {
-      background: opacify($primary-tab, 0.2);
-      color: white;
-    }
-    &.current a {
-      background: white;
-      color: #333333;
-      font-weight: bold;
-    }
-  }
-}
-
-#toolbar {
-  background: white;
-  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2, #cccccc);
-  font-size: 95%;
-  clear: both;
-  margin: 0;
-  width: 100%;
-  height: 38px;
-  &:after {
-    clear: both;
-    content: "";
-    display: block;
-  }
-  .right {
-    float: right;
-  }
-  form.search {
-    padding: 8px 8px 0;
-    input[type=search] {
-      font-size: 12px;
-      border-radius: 100px;
-      border: 1px solid #cccccc;
-      border-top-color: #999999;
-      border-left-color: #b0b0b0;
-      border-right-color: #bbbbbb;
-      background: white image_url("admin/search.png") 4px center no-repeat;
-      box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
-      width: 180px;
-      padding: 2px 8px 2px 20px;
-    }
-  }
-}
-
-ul#secondary_navigation {
-  float: left;
-  margin-right: 8px;
-  li {
-    float: left;
-    display: block;
-    border-right: 1px solid #d3d3d3;
-    a {
-      color: #555555;
-      display: block;
-      font-weight: normal;
-      float: left;
-      line-height: 38px;
-      margin: 0;
-      padding: 0 26px;
-      height: 38px;
-      text-decoration: none;
-      &:hover {
-        background-image: linear-gradient(to bottom, #e4f9ff, #d2ebfd 30%, #b1d1f1 50%, #9bc5ed 50%, #caecff);
-        color: #444444;
-      }
-      &.current {
-        background: #dddddd;
-        background-image: linear-gradient(to bottom, #ffffff, #e6e6e6 35%, #d9d9d9 50%, #cccccc 50%, #d9d9d9);
-        color: #333333;
-        font-weight: bold;
-        &:hover {
-          background-image: linear-gradient(to bottom, #e0f9fe, #c4e2f8 30%, #98c3e7 50%, #79aedb 50%, #b1ddef);
-          color: #222222;
-        }
-      }
-    }
-  }
 }

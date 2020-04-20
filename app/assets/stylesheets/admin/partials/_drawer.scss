@@ -1,0 +1,78 @@
+.drawer {
+  border-top: 1px solid $gray;
+  margin-bottom: 1em;
+
+  .drawer_contents {
+    //display: none;
+    table.fieldset {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      tr {
+        &:hover td {
+          background: none;
+          border-bottom: none;
+        }
+      }
+
+      th, td {
+        border-top: 1px $gray solid;
+        padding: 0.5em 1em;
+      }
+
+      th {
+        &.label {
+          font-size: 85%;
+          text-align: left;
+          width: 1%;
+        }
+      }
+
+      td {
+        &.field {
+          padding-left: 0px;
+          padding-right: 10px;
+          text-align: right;
+          width: auto;
+
+          input.textbox {
+            font-size: 110%;
+            width: 99.5%;
+          }
+        }
+
+        &.actions {
+          text-align: left;
+          vertical-align: middle;
+          width: 40px;
+        }
+      }
+
+      tr:first-child {
+        td, th {
+          border-top: none;
+        }
+      }
+    }
+  }
+}
+
+.drawer_handle {
+  padding: 4px 0 5px;
+
+  a {
+    background: $dark-gray;
+    color: $white;
+    font-size: 80%;
+    padding: 4px 21px 5px 10px;
+    position: relative;
+    text-decoration: none;
+
+    &.more, &.less {
+      svg {
+        margin-left: 10px;
+      }
+    }
+  }
+}

@@ -33,8 +33,7 @@
     }
 
   TabControl.addTab = function(tabText) {
-    var relative_url_root = "<%= ActionController::Base.relative_url_root %>";
-    $('div#tab_control .tabs').append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><img src='" + relative_url_root + "<%= asset_path('admin/tab_close.png') %>' class='close' alt='Remove part' title='Remove part' /></a>");
+    $('div#tab_control .tabs').append("<a id='tab_" + tabText + "' href='#' class='tab'><span>" + tabText + "</span><i class='fas fa-times-circle close' title='Remove part'></i></a>");
     var $page_part_index = $('#page_part_index_field');
     $page_part_index.val(parseInt($page_part_index.val()) + 1);
   }

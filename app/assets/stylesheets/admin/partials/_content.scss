@@ -1,26 +1,19 @@
-#main {
+main {
   float: left;
+  grid-area: content;
   width: 100%;
 }
 
-#content {
-  font-size: 95%;
-  line-height: 1.2em;
-  padding: 20px;
-}
-
-.outset {
-  margin: -20px;
-  margin-bottom: 20px;
+.reversed main {
+  .content {
+    padding: 1em;
+  }
 }
 
 table.fieldset {
-  th {
-    padding: 6px;
-  }
   td.field textarea {
-    width: 99.5%;
     margin-right: -5px;
+    width: 99.5%;
   }
 }
 
@@ -28,28 +21,16 @@ body.reversed {
   fieldset h1 {
     font-size: 1.5em;
   }
-  #content > h1:first-of-type {
-    font-size: 2em;
-  }
-  h1 {
-    color: #94BDC3;
-    border-bottom: 1px solid #94BDC3;
-    background: #fff;
-    font-size: 125%;
-    margin: -20px -20px 20px;
-    padding: 15px 20px;
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
-  }
 }
 
 .fullcover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
   bottom: 0;
+  height: 100%;
   left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
 }
 
 .clipped {
@@ -57,7 +38,6 @@ body.reversed {
 }
 
 .grey_out {
-  background: #666666;
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -67,15 +47,12 @@ body.reversed {
 
 .preview_tools {
   color: black;
-  position: fixed;
-  top: 10px;
-  right: 20px;
   opacity: 0.7;
-  @include alt-box;
+  position: fixed;
+  right: 20px;
+  top: 10px;
+
   &:hover {
     opacity: 1;
-  }
-  a {
-    @include alt-link;
   }
 }

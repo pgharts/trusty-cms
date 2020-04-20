@@ -7,34 +7,39 @@
 div.textarea_toolbar {
   float: left;
   margin-bottom: 8px;
+
   span.separator {
-    padding: 0;
-    height: 6px;
-    width: 2px;
-    margin: 0 2px;
     border-left: solid 1px #d5d5d5;
     border-right: solid 1px whitesmoke;
+    height: 6px;
+    margin: 0 2px;
+    padding: 0;
+    width: 2px;
   }
+
   button,
   button.unselected {
-    margin: 0;
     background: none;
     border: none;
+    margin: 0;
     padding: 2px 0;
     text-align: center;
     width: 24px;
+
     img {
       vertical-align: text-bottom;
     }
   }
+
   button:hover,
   button.unselected:hover {
     border: 1px solid #999999;
     padding: 1px 0;
   }
+
   button.selected {
-    border: 1px solid #ce9100;
     background-color: white;
+    border: 1px solid #ce9100;
     padding: 1px 0;
   }
 }

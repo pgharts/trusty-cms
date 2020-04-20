@@ -1,16 +1,32 @@
 // Fonts
-$base-font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-$base-font-size: 15px;
+$base-font-family: "Open Sans", sans-serif;
+$base-font-size: 16px;
+
+//colors
+$white: #FFFFFF;
+$light-blue: #e0f0ff;
+$dark-blue: #3C3A4B;
+$darker-blue: #292733;
+
+$dark-gray: #3A3A3A;
+$gray: #919191;
+$light-gray: #F3F3F4;
+
+$dark-red: #8C0E19;
+$red: #BA1321;
+$light-red: #f3c2c2;
+
 
 // Links
-$base-link-color:#94BDC3 ;
-$alt-link-color: red;
+$base-link-color: #3c3a4b;
+$alt-link-color: #8C0E19;
 
 // Header
-$header: #000 !default;
-$primary-tab: rgba(236, 6, 115, 0.6);
+$header: #3c3a4b !default;
+$primary-tab: #3c3a4b;
 $primary-tab-current: white;
 
 // Modules
 @import "modules/links";
 @import "modules/boxes";
+@import "modules/buttons";

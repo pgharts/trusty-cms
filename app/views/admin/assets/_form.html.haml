@@ -1,7 +1,7 @@
 = render_region :form_top
 - render_region :form do |form|
   - form.edit_title do
-    %fieldset.title
+    .title
   - form.edit_metadata do
     .drawer
       .drawer_contents#attributes
@@ -16,3 +16,4 @@
       .drawer_handle
         %a.toggle.more{:href=>'#attributes', :rel=>"toggle[attributes]"}
           = t('more')
+          %i.fas.fa-angle-down
