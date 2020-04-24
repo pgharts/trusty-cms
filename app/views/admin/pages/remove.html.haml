@@ -1,9 +1,10 @@
 - pages = @page.children.count > 1 ? t('pages') : t('page')
+- body_classes << "reversed"
 
 %h1
   = t('remove_pages', :pages => pages)
 
-%p
+%h4
   = t('text.pages.remove_warning', :pages => pages).html_safe
 
 .inset

@@ -1,4 +1,4 @@
-.notice, .error, .warning {
+.notice, .error {
   padding: 1em;
 }
 
@@ -7,7 +7,12 @@
   color: #006600;
 }
 
-.error, .warning {
+.error {
   background-color: #f3c2c2;
   color: $alt-link-color;
+}
+
+.warning {
+  color: $alt-link-color;
+  line-height: 1em;
 }
