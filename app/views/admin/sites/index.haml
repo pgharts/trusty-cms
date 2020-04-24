@@ -31,7 +31,9 @@
               = h(site.base_domain)
           - tbody.modify_cell do
             %td.remove
-              = link_to image('remove.png', :alt => 'Remove'), admin_site_path(site), :method => :delete, :onclick => "return confirm('Are you sure you want to permanently remove #{site.name}?')"
+              = link_to admin_site_path(site), :method => :delete, :onclick => "return confirm('Are you sure you want to permanently remove #{site.name}?')" do
+                %i.fas.fa-minus-circle
+                =t('remove')
           - tbody.order_cell do
             %td.order
               = order_links(site).html_safe
