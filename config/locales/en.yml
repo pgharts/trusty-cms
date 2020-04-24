@@ -84,7 +84,7 @@ en:
     documents: 'Documents'
     caption: 'Caption'
     confirm_refresh_assets: 'Are you sure you want to regenerate every asset thumbnail? This is likely to take a long time and use a lot of server resources: <strong class="warning">the performance of your site is very likely to be affected</strong> and your browser may time out before the operation is complete. This is only recommended if your asset collection is small!'
-    confirm_remove_asset: 'Are you sure you want to permanently remove the following asset?'
+    confirm_remove_asset: 'Are you sure you want to <span class="warning">permanently remove</span> the following asset?'
     confirm_remove_from_page: 'Are you sure you want to remove this asset from the page?'
     delete_asset: 'Delete Asset'
     detach: 'Detach'
@@ -279,11 +279,11 @@ en:
   testing: Testing
   text:
     layouts:
-      remove_warning: 'Are you sure you want to <strong class="warning">permanently remove</strong> the following layout?'
+      remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following layout?'
     pages:
-      remove_warning: 'Are you sure you want to <strong class="warning">permanently remove</strong> the following %{pages}?'
+      remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following %{pages}?'
     users:
-      remove_warning: 'Are you sure you want to <strong class="warning">permanently remove</strong> the following user?'
+      remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following user?'
   this_file_language: "English"
   time:
     am: 'am'
