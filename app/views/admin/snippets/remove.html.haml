@@ -1,13 +1,14 @@
+- body_classes << 'reversed'
+
 %h1= t('remove_snippet')
 
 %h4
   = t('text.snippets.remove_warning').html_safe
 
-%table.index#snippets
+%table.tablesaw.index#snippets
   %tbody
     %tr.node.level_1
       %td.snippet
-        = image('snippet', :alt => '')
         %span.title= @snippet.name
 
 = form_for [:admin, @snippet], :html => {:method => :delete, 'data-onsubmit_status'=>'Removing snippet&#8230;'} do

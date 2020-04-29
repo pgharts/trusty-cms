@@ -177,6 +177,7 @@ en:
       - :month
       - :day
   delete_layout: 'Delete Layout'
+  delete_snippet: 'Delete Snippet'
   delete_pages: 'Delete %{pages}'
   delete_user: 'Delete User'
   description: 'Description'
@@ -249,6 +250,7 @@ en:
   remove: 'Remove'
   remove_field: 'Remove Field'
   remove_layout: 'Remove Layout'
+  remove_snippet: 'Remove Snippet'
   remove_page: 'Remove Page'
   remove_pages: 'Remove %{pages}'
   remove_tab: 'Remove Tab'
@@ -280,6 +282,8 @@ en:
   text:
     layouts:
       remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following layout?'
+    snippets:
+      remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following snippet?'
     pages:
       remove_warning: 'Are you sure you want to <span class="warning">permanently remove</span> the following %{pages}?'
     users:

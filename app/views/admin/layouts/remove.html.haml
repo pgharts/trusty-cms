@@ -1,12 +1,13 @@
+- body_classes << 'reversed'
+
 %h1= t('remove_layout')
 
 %h4= t('text.layouts.remove_warning').html_safe
 
-%table.index#layouts
+%table.tablesaw.index#layouts
   %tbody
     %tr.node.level_1
       %td.layout
-        = image('layout', :alt => '')
         = h @layout.name
 
 = form_for [:admin, @layout], :html => { :method => 'delete', 'data-onsubmit_status'=>'Removing layout&#8230;' } do
