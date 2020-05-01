@@ -3,7 +3,7 @@
     = hidden_field_tag "page[parts_attributes][#{page_part_counter}][name]", page_part.name, :id => "part_#{page_part.name.to_slug}_name"
     = hidden_field_tag "page[parts_attributes][#{page_part_counter}][id]", page_part.id, :id => "part_#{page_part_counter}_id", :class => 'id_input' unless page_part.new_record?
     = hidden_field_tag "page[parts_attributes][#{page_part_counter}][_destroy]", page_part._destroy, :class => 'delete_input'
-    %p
+    .content
       %label To use HTML or Radius tags, switch to plain text view by clicking the 'Source' button.
       %span.reference_links
         = t('reference')

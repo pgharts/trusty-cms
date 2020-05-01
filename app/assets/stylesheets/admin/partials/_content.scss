@@ -1,12 +1,13 @@
 main {
   float: left;
   grid-area: content;
+  padding: 1em 0 1em 1em;
   width: 100%;
 }
 
 .reversed main {
   .content {
-    padding: 1em;
+    padding: 1em 0;
   }
 }
 
