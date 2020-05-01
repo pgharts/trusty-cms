@@ -64,17 +64,6 @@ class Admin::AssetsController < Admin::ResourceController
     end
   end
 
-  only_allow_access_to :regenerate,
-    :when => [:admin],
-    :denied_url => { :controller => 'admin/assets', :action => 'index' },
-    :denied_message => 'You must have admin privileges to refresh the whole asset set.'
-
-  def regenerate
-    Asset.all.each { |asset| asset.asset.reprocess! }
-    flash[:notice] = t('clipped_extension.all_thumbnails_refreshed')
-    redirect_to admin_assets_path
-  end
-
 private
   def compress(uploaded_asset)
     data = $kraken.upload(uploaded_asset.tempfile.path, 'lossy' => true)
