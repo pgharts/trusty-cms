@@ -8,7 +8,7 @@ module ClippedAdminUI
         def load_default_asset_regions
           OpenStruct.new.tap do |asset|
             asset.edit = TrustyCms::AdminUI::RegionSet.new do |edit|
-              edit.main.concat %w{edit_header edit_form edit_regenerate}
+              edit.main.concat %w{edit_header edit_form}
               edit.form.concat %w{edit_title edit_metadata}
             end
             asset.new = asset.edit
