@@ -14,7 +14,7 @@ module TrustyCms
     #     config['other.thing'] = 'nothing'
     #   end
     #
-    def config # method must be defined before any initializers run
+    def config  # method must be defined before any initializers run
       yield TrustyCms::Config if block_given?
       TrustyCms::Config
     end
@@ -33,7 +33,6 @@ module TrustyCms
     def root
       Pathname.new(TRUSTY_CMS_ROOT) if defined?(TRUSTY_CMS_ROOT)
     end
-
     def boot!
       unless booted?
         preinitialize
@@ -47,9 +46,9 @@ module TrustyCms
 
     def pick_boot
       case
-      when app?
+        when app?
           AppBoot.new
-      when vendor?
+        when vendor?
           VendorBoot.new
         else
           GemBoot.new
@@ -80,6 +79,7 @@ end
 
 
 class Rails::Application::Configuration
+
   # The TrustyCms::Configuration class extends Rails::Configuration with three purposes:
   # * to reset some rails defaults so that files are found in TRUSTY_CMS_ROOT instead of Rails.root
   # * to notice that some gems and plugins are in fact trusty extensions
@@ -99,10 +99,10 @@ class Rails::Application::Configuration
   # In test mode we also add a fixtures path for testing the extension loader.
   #
   def default_extension_paths
-    env = ENV['RAILS_ENV'] || Rails.env
+    env = ENV["RAILS_ENV"] || Rails.env
     paths = [Rails.root + 'vendor/extensions']
-    paths.unshift(TRUSTY_CMS_ROOT + '/vendor/extensions') unless Rails.root == TRUSTY_CMS_ROOT
-    paths.unshift(TRUSTY_CMS_ROOT + 'test/fixtures/extensions') if env =~ /test/
+    paths.unshift(TRUSTY_CMS_ROOT + "/vendor/extensions") unless Rails.root == TRUSTY_CMS_ROOT
+    paths.unshift(TRUSTY_CMS_ROOT + "test/fixtures/extensions") if env =~ /test/
     paths
   end
 
@@ -135,7 +135,6 @@ class Rails::Application::Configuration
   def expand_and_check(extension_list) #:nodoc
     missing_extensions = extension_list - [:all] - available_extensions
     raise LoadError, "These configured extensions have not been found: #{missing_extensions.to_sentence}" if missing_extensions.any?
-
     if m = extension_list.index(:all)
       extension_list[m] = available_extensions - extension_list
     end
@@ -221,14 +220,14 @@ class Rails::Application::Configuration
 
   # Old extension-dependency mechanism now deprecated
   #
-  def extension(_ext)
-    ::ActiveSupport::Deprecation.warn('Extension dependencies have been deprecated and are no longer supported in trusty 1.0. Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.', caller)
+  def extension(ext)
+    ::ActiveSupport::Deprecation.warn("Extension dependencies have been deprecated and are no longer supported in trusty 1.0. Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.", caller)
   end
 
   # Old gem-invogation method now deprecated
   #
   def gem(name, options = {})
-    ::ActiveSupport::Deprecation.warn('Please declare gem dependencies in your Gemfile (or for an extension, in the .gemspec file).', caller)
+    ::ActiveSupport::Deprecation.warn("Please declare gem dependencies in your Gemfile (or for an extension, in the .gemspec file).", caller)
     super
   end
 
@@ -269,20 +268,20 @@ class Boot
   # RubyGems from version 1.6 does not require thread but Rails depend on it
   # This should newer rails do automaticly
   def load_mutex
-    
-      unless defined?(Mutex)
-    rescue LoadError => _e
-      warn %(Mutex could not be initialized. #{load_error_message})
+    begin
+      require "thread" unless defined?(Mutex)
+    rescue LoadError => _
+      $stderr.puts %(Mutex could not be initialized. #{load_error_message})
       exit 1
-    
+    end
   end
 
   def load_initializer
     begin
       require 'trusty_cms'
       require 'trusty_cms/initializer'
-    rescue LoadError => _e
-      warn %(TrustyCms could not be initialized. #{load_error_message})
+    rescue LoadError => _
+      $stderr.puts %(TrustyCms could not be initialized. #{load_error_message})
       exit 1
     end
     TrustyCms::Initializer.run(:set_load_path)
@@ -298,7 +297,7 @@ class VendorBoot < Boot
   end
 
   def load_error_message
-    'Please verify that vendor/trusty contains a complete copy of the TrustyCms sources.'
+    "Please verify that vendor/trusty contains a complete copy of the TrustyCms sources."
   end
 end
 
@@ -309,7 +308,7 @@ class AppBoot < Boot
   end
 
   def load_error_message
-    'Please verify that you have a complete copy of the TrustyCms sources.'
+    "Please verify that you have a complete copy of the TrustyCms sources."
   end
 end
 
