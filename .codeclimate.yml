@@ -46,3 +46,4 @@ exclude_patterns:
 - app/assets/javascripts/rad_social/jquery.validate.min.js
 - app/assets/javascripts/admin/modernizr.js
 - app/assets/javascripts/ckeditor/*
+- lib/configuration_extensions/configuration_extensions.rb
