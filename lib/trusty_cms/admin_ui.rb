@@ -18,10 +18,10 @@ module TrustyCms
       end
 
       def [](id)
-        unless id.kind_of? Integer
-          self.find {|subnav_item| subnav_item.name.to_s.titleize == id.to_s.titleize }
-        else
+        if id.is_a? Integer
           super
+        else
+          find { |subnav_item| subnav_item.name.to_s.titleize == id.to_s.titleize }
         end
       end
 
@@ -29,6 +29,7 @@ module TrustyCms
         options = args.extract_options!
         item = args.size > 1 ? deprecated_add(*(args << caller)) : args.first
         raise DuplicateTabNameError.new("duplicate tab name `#{item.name}'") if self[item.name]
+
         item.tab = self if item.respond_to?(:tab=)
         if options.empty?
           super(item)
@@ -79,8 +80,9 @@ module TrustyCms
       attr_reader :name, :url
       attr_accessor :tab
 
-      def initialize(name, url = "#")
-        @name, @url = name, url
+      def initialize(name, url = '#')
+        @name = name
+        @url = url
       end
 
       def visible?(user)
@@ -92,8 +94,9 @@ module TrustyCms
       end
 
       private
+
       def visible_by_controller?(user)
-        params = TrustyCms::Application.routes.recognize_path(url, :method => :get)
+        params = TrustyCms::Application.routes.recognize_path(url, method: :get)
         if params && params[:controller]
           klass = "#{params[:controller].camelize}Controller".constantize
           klass.user_has_access_to_action?(user, params[:action])
@@ -131,24 +134,24 @@ module TrustyCms
     end
 
     def initialize_nav
-      @nav = NavTab.new("Tab Container")
+      @nav = NavTab.new('Tab Container')
       load_default_nav
     end
 
     def load_default_nav
-      content = nav_tab("Content")
-      content << nav_item("Pages", "/admin/pages")
+      content = nav_tab('Content')
+      content << nav_item('Pages', '/admin/pages')
       nav << content
 
-      design = nav_tab("Design")
-      design << nav_item("Layouts", "/admin/layouts")
+      design = nav_tab('Design')
+      design << nav_item('Layouts', '/admin/layouts')
       nav << design
 
-      settings = nav_tab("Settings")
-      settings << nav_item("General", "/admin/configuration")
-      settings << nav_item("Personal", "/admin/preferences")
-      settings << nav_item("Users", "/admin/users")
-      settings << nav_item("Extensions", "/admin/extensions")
+      settings = nav_tab('Settings')
+      settings << nav_item('General', '/admin/configuration')
+      settings << nav_item('Personal', '/admin/preferences')
+      settings << nav_item('Users', '/admin/users')
+      settings << nav_item('Extensions', '/admin/extensions')
       nav << settings
     end
 

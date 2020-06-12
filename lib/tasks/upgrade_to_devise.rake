@@ -17,7 +17,7 @@ namespace :import do
         admin: legacy.admin,
         designer: legacy.designer,
         content_editor: legacy.content_editor,
-        notes: legacy.notes
+        notes: legacy.notes,
       )
       u.save!
     end

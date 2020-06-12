@@ -1,5 +1,4 @@
 module MenuRenderer
-
   def exclude(*type_names)
     @excluded_class_names ||= []
     @excluded_class_names.concat(type_names).uniq!
@@ -26,7 +25,7 @@ module MenuRenderer
   end
 
   def menu_renderer_module_name
-    simple_name = self.class_name.to_s.sub('Page','')
+    simple_name = class_name.to_s.sub('Page', '')
     "#{simple_name}MenuRenderer"
   end
 
@@ -38,19 +37,18 @@ module MenuRenderer
     (allowed_children_cache.to_s.split(',') - Array(excluded_class_names)).map do |name|
       begin
         name.constantize
-      rescue LoadError, NameError => _
+      rescue LoadError, NameError => _e
         nil
       end
     end.compact
   end
-
 
   def default_child_item
     menu_item(default_child)
   end
 
   def separator_item
-    view.content_tag :li, '', :class => 'separator'
+    view.content_tag :li, '', class: 'separator'
   end
 
   def child_items
@@ -64,11 +62,11 @@ module MenuRenderer
   end
 
   def menu_list
-    view.content_tag :ul, menu_items.join.html_safe, :class => 'menu', :id => "allowed_children_#{id}"
+    view.content_tag :ul, menu_items.join.html_safe, class: 'menu', id: "allowed_children_#{id}"
   end
 
   def remove_link
-    view.link_to( '<i class="fas fa-minus-circle"></i> '.html_safe + I18n.t('remove'), view.remove_admin_page_url(self), :class => "action")
+    view.link_to('<i class="fas fa-minus-circle"></i> '.html_safe + I18n.t('remove'), view.remove_admin_page_url(self), class: 'action')
   end
 
   def remove_option
@@ -80,15 +78,15 @@ module MenuRenderer
   end
 
   def disabled_add_child_link
-    view.content_tag :span, view.image('plus_disabled') + ' Add Child', :class => 'action disabled'
+    view.content_tag :span, view.image('plus_disabled') + ' Add Child', class: 'action disabled'
   end
 
   def add_child_link
-    view.link_to( '<i class="fas fa-plus-circle"></i> Add Child'.html_safe, view.new_admin_page_child_path(self, :page_class => default_child.name), :class => "action")
+    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, view.new_admin_page_child_path(self, page_class: default_child.name), class: 'action')
   end
 
   def add_child_link_with_menu_hook
-    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, "#allowed_children_#{id}", :class => "action dropdown")
+    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, "#allowed_children_#{id}", class: 'action dropdown')
   end
 
   def add_child_menu
@@ -114,7 +112,7 @@ module MenuRenderer
   private
 
   def clean_page_description(page_class)
-    page_class.description.to_s.strip.gsub(/\t/,'').gsub(/\s+/,' ')
+    page_class.description.to_s.strip.gsub(/\t/, '').gsub(/\s+/, ' ')
   end
 
   def menu_item(child_class)
@@ -123,18 +121,18 @@ module MenuRenderer
 
   def menu_link(child_class)
     title = clean_page_description(child_class)
-    path = view.new_admin_page_child_path(self, :page_class => child_class.name)
+    path = view.new_admin_page_child_path(self, page_class: child_class.name)
     text = link_text_for_child_class(child_class.name)
-    view.link_to(text, path, :title => title)
+    view.link_to(text, path, title: title)
   end
 
   def link_text_for_child_class(given_class_name)
     translation_key = if given_class_name == 'Page' || given_class_name.blank?
-      'normal_page'
-    else
-      given_class_name.sub('Page','').underscore
+                        'normal_page'
+                      else
+                        given_class_name.sub('Page', '').underscore
     end
-    fallback = given_class_name == 'Page' ? 'Page' : given_class_name.sub('Page','').titleize
-    I18n.t(translation_key, :default => fallback)
+    fallback = given_class_name == 'Page' ? 'Page' : given_class_name.sub('Page', '').titleize
+    I18n.t(translation_key, default: fallback)
   end
 end

@@ -1,5 +1,4 @@
 class FileNotFoundPage < Page
-
   def allowed_children
     []
   end
@@ -13,7 +12,7 @@ class FileNotFoundPage < Page
     page type.
   }
 
-  tag "attempted_url" do |tag|
+  tag 'attempted_url' do |_tag|
     CGI.escapeHTML(request.request_uri) unless request.nil?
   end
 
@@ -28,5 +27,4 @@ class FileNotFoundPage < Page
   def cache?
     false
   end
-
 end

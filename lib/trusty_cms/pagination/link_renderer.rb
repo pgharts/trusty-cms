@@ -23,10 +23,10 @@ module TrustyCms
         linkclass = %{ class="#{attributes[:class]}"} if attributes[:class]
         linkrel = %{ rel="#{attributes[:rel]}"} if attributes[:rel]
         param_name = WillPaginate::ViewHelpers.pagination_options[:param_name]
-        %Q{<a href="#{@url_stem}?#{param_name}=#{page}"#{linkrel}#{linkclass}>#{text}</a>}
+        %{<a href="#{@url_stem}?#{param_name}=#{page}"#{linkrel}#{linkclass}>#{text}</a>}
       end
 
-      def page_span(page, text, attributes = {})
+      def page_span(_page, text, attributes = {})
         %{<span class="#{attributes[:class]}">#{text}</span>}
       end
     end

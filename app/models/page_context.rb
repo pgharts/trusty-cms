@@ -1,5 +1,4 @@
 class PageContext < Radius::Context
-
   attr_reader :page
 
   def initialize(page)
@@ -25,23 +24,23 @@ class PageContext < Radius::Context
     super
   rescue Exception => e
     raise e if raise_errors?
+
     @tag_binding_stack.pop unless @tag_binding_stack.last == binding
     render_error_message(e.message)
   end
 
   private
 
-    def render_error_message(message)
-      "<div><strong>#{message}</strong></div>"
-    end
+  def render_error_message(message)
+    "<div><strong>#{message}</strong></div>"
+  end
 
-    def set_process_variables(page)
-      page.request ||= @page.request
-      page.response ||= @page.response
-    end
+  def set_process_variables(page)
+    page.request ||= @page.request
+    page.response ||= @page.response
+  end
 
-    def raise_errors?
-      Rails.env != 'production'
-    end
-
+  def raise_errors?
+    Rails.env != 'production'
+  end
 end

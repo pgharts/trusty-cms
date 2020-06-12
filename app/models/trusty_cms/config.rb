@@ -1,5 +1,4 @@
 module TrustyCms
-
   class << self
     def config_definitions
       @config_definitions ||= {}
@@ -67,7 +66,7 @@ module TrustyCms
     #   edit_setting('admin.name)
     #
 
-    self.table_name = "config"
+    self.table_name = 'config'
     after_save :update_cache
     attr_reader :definition
 
@@ -105,12 +104,12 @@ module TrustyCms
       end
 
       def to_hash
-        Hash[ *all.map { |pair| [pair.key, pair.value] }.flatten ]
+        Hash[*all.map { |pair| [pair.key, pair.value] }.flatten]
       end
 
       def initialize_cache
         TrustyCms::Config.ensure_cache_file
-        Rails.cache.write('TrustyCms::Config',TrustyCms::Config.to_hash)
+        Rails.cache.write('TrustyCms::Config', TrustyCms::Config.to_hash)
         Rails.cache.write('TrustyCms.cache_mtime', File.mtime(cache_file))
         Rails.cache.silence!
       end
@@ -121,6 +120,7 @@ module TrustyCms
 
       def stale_cache?
         return true unless TrustyCms::Config.cache_file_exists?
+
         Rails.cache.read('TrustyCms.cache_mtime') != File.mtime(cache_file)
       end
 
@@ -134,15 +134,15 @@ module TrustyCms
       end
 
       def cache_file
-        File.join(cache_path,'trusty_config_cache.txt')
+        File.join(cache_path, 'trusty_config_cache.txt')
       end
 
       def site_settings
-        @site_settings ||= %w{ site.title site.host dev.host local.timezone }
+        @site_settings ||= %w{site.title site.host dev.host local.timezone}
       end
 
       def default_settings
-        @default_settings ||= %w{ defaults.locale defaults.page.filter defaults.page.parts defaults.page.fields defaults.page.status }
+        @default_settings ||= %w{defaults.locale defaults.page.filter defaults.page.parts defaults.page.fields defaults.page.status}
       end
 
       def user_settings
@@ -161,7 +161,7 @@ module TrustyCms
       #
       def namespace(prefix, options = {}, &block)
         prefix = [options[:prefix], prefix].join('.') if options[:prefix]
-        with_options(options.merge(:prefix => prefix), &block)
+        with_options(options.merge(prefix: prefix), &block)
       end
 
       # Declares a setting definition that will constrain and support the use of a particular config entry.
@@ -176,7 +176,7 @@ module TrustyCms
       # * :allow_blank should be false if the config item must not be blank or nil
       # * :allow_change should be false if the config item can only be set, not changed. Add a default to specify an unchanging config entry.
       # * :allow_display should be false if the config item should not be showable in radius tags
-      #    
+      #
       #   TrustyCms.config do |config|
       #     config.define 'defaults.locale', :select_from => lambda { TrustyCms::AvailableLocales.locales }, :allow_blank => true
       #     config.define 'defaults.page.parts', :default => "Body,Extended"
@@ -191,7 +191,7 @@ module TrustyCms
       #
       # but at the moment that's only done in testing.
       #
-      def define(key, options={})
+      def define(key, options = {})
         called_from = caller.grep(/\/initializers\//).first
         if options.is_a? TrustyCms::Config::Definition
           definition = options
@@ -199,7 +199,7 @@ module TrustyCms
           key = [options[:prefix], key].join('.') if options[:prefix]
         end
 
-        definition ||= TrustyCms::Config::Definition.new(options.merge(:definer => called_from))
+        definition ||= TrustyCms::Config::Definition.new(options.merge(definer: called_from))
         definitions[key] = definition
 
         if self[key].nil? && !definition.default.nil?
@@ -216,9 +216,8 @@ module TrustyCms
       end
 
       def definition_for(key)
-        definitions[key] ||= TrustyCms::Config::Definition.new(:empty => true)
+        definitions[key] ||= TrustyCms::Config::Definition.new(empty: true)
       end
-
     end
 
     # The usual way to use a config item:
@@ -236,13 +235,14 @@ module TrustyCms
     def value=(param)
       newvalue = param.to_s
       if newvalue != self[:value]
-        raise ConfigError, "#{self.key} cannot be changed" unless settable? || self[:value].blank?
-        if boolean?
-          self[:value] = (newvalue == "1" || newvalue == "true") ? "true" : "false"
-        else
-          self[:value] = newvalue
-        end
-        self.save!
+        raise ConfigError, "#{key} cannot be changed" unless settable? || self[:value].blank?
+
+        self[:value] = if boolean?
+                         newvalue == '1' || newvalue == 'true' ? 'true' : 'false'
+                       else
+                         newvalue
+                       end
+        save!
       end
       self[:value]
     end
@@ -270,20 +270,21 @@ module TrustyCms
     # that does not restrict use.
     #
     def definition
-      @definition ||= self.class.definition_for(self.key)
+      @definition ||= self.class.definition_for(key)
     end
 
     # Returns true if the item key ends with '?' or the definition specifies :type => :boolean.
     #
     def boolean?
-      definition.boolean? || self.key.ends_with?("?")
+      definition.boolean? || key.ends_with?('?')
     end
 
     # Returns true if the item is boolean and true.
     #
     def checked?
       return nil if self[:value].nil?
-      boolean? && self[:value] == "true"
+
+      boolean? && self[:value] == 'true'
     end
 
     # Returns true if the item defintion includes a :select_from parameter that limits the range of permissible options.
@@ -302,11 +303,10 @@ module TrustyCms
       TrustyCms::Config.initialize_cache
     end
 
-    delegate :default, :type, :allow_blank?, :hidden?, :visible?, :settable?, :selection, :notes, :units, :to => :definition
+    delegate :default, :type, :allow_blank?, :hidden?, :visible?, :settable?, :selection, :notes, :units, to: :definition
 
     def validate
       definition.validate(self)
     end
-
   end
 end

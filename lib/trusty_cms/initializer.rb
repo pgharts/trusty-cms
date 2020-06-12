@@ -11,7 +11,7 @@ require 'trusty_cms/engine'
 
 # This is a wild and probably terrible hack built to initialize extension engines.
 # I have no idea what the repercussions will be. Revisit later.
-Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), found|
+Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), _found|
   if gemname =~ /trusty-.*-extension$/
     ep = TrustyCms::ExtensionLoader.record_path(gemspec.full_gem_path, gemname)
     require "#{ep.name}/engine"
@@ -19,14 +19,11 @@ Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), found|
 end
 
 module TrustyCms
-
   module Initializer
-
     # Rails::Initializer is essentially a list of startup steps and we extend it here by:
     # * overriding or extending some of those steps so that they use trusty and extension paths
     #   as well as (or instead of) the rails defaults.
     # * appending some extra steps to set up the admin UI and activate extensions
-
 
     # Returns true in the very unusual case where trusty has been deployed as a rails app itself, rather than
     # loaded as a gem or from vendor/. This is only likely in situations where trusty is customised so heavily
@@ -54,7 +51,8 @@ module TrustyCms
 
       configuration.middleware.insert_before(
         :"ActionController::ParamsParser",
-        Rails::Rack::Metal, :if => Rails::Rack::Metal.metals.any?)
+        Rails::Rack::Metal, if: Rails::Rack::Metal.metals.any?
+      )
     end
 
     # Extends the Rails initializer to add locale paths from TRUSTY_CMS_ROOT and from trusty extensions.
@@ -120,7 +118,7 @@ module TrustyCms
     #
     def after_initialize
       super
-      extension_loader.activate_extensions  # also calls initialize_views
+      extension_loader.activate_extensions # also calls initialize_views
       TrustyCms::Application.config.add_controller_paths(extension_loader.paths(:controller))
       TrustyCms::Application.config.add_eager_load_paths(extension_loader.paths(:eager_load))
     end
@@ -157,8 +155,7 @@ module TrustyCms
     # Returns the ExtensionLoader singleton that will eventually load extensions.
     #
     def extension_loader
-      ExtensionLoader.instance {|l| l.initializer = self }
+      ExtensionLoader.instance { |l| l.initializer = self }
     end
-
   end
 end

@@ -1,16 +1,15 @@
 class Admin::PagePartsController < Admin::ResourceController
   def create
-    self.model.attributes = page_parts_params
+    model.attributes = page_parts_params
     @controller_name = 'page'
     @template_name = 'edit'
-    render :partial => "page_part", :object => model,
-      :locals => {:page_part_counter => params[:index].to_i}
+    render partial: 'page_part', object: model,
+           locals: { page_part_counter: params[:index].to_i }
   end
 
-private
+  private
 
   def page_parts_params
     params.require(:page_part).permit(:name, :filter_id, :content)
   end
-
 end

@@ -20,26 +20,26 @@ module InheritableClassAttributes
 
     def cattr_inheritable_reader(*symbols)
       symbols.each do |symbol|
-        self.inheritable_cattr_readers << symbol
-        self.module_eval %{
+        inheritable_cattr_readers << symbol
+        module_eval %{
           def self.#{symbol}
             @#{symbol}
           end
         }
       end
-      self.inheritable_cattr_readers.uniq!
+      inheritable_cattr_readers.uniq!
     end
 
     def cattr_inheritable_writer(*symbols)
       symbols.each do |symbol|
-        self.inheritable_cattr_writers << symbol
-        self.module_eval %{
+        inheritable_cattr_writers << symbol
+        module_eval %{
           def self.#{symbol}=(value)
             @#{symbol} = value
           end
         }
       end
-      self.inheritable_cattr_writers.uniq!
+      inheritable_cattr_writers.uniq!
     end
 
     def cattr_inheritable_accessor(*symbols)
@@ -52,12 +52,16 @@ module InheritableClassAttributes
 
       readers = inheritable_cattr_readers.dup
       writers = inheritable_cattr_writers.dup
-      inheritables = [:inheritable_cattr_readers, :inheritable_cattr_writers]
+      inheritables = %i[inheritable_cattr_readers inheritable_cattr_writers]
 
       (readers + writers + inheritables).uniq.each do |attr|
         var = "@#{attr}"
-        old_value = self.module_eval(var)
-        new_value = (old_value.dup rescue old_value)
+        old_value = module_eval(var)
+        new_value = (begin
+                       old_value.dup
+                     rescue StandardError
+                       old_value
+                     end)
         klass.module_eval("#{var} = new_value")
       end
     end

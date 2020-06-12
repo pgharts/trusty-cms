@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 require 'acts_as_tree'
@@ -10,9 +10,8 @@ require 'rack/cache'
 require 'trustygems'
 require 'devise'
 
-
 if defined?(Bundler)
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require(*Rails.groups(assets: %w(development test)))
 end
 
 module TrustyCms
@@ -30,12 +29,12 @@ module TrustyCms
 
     # Initialize extension paths
     config.initialize_extension_paths
-    extension_loader = ExtensionLoader.instance {|l| l.initializer = self }
+    extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path|
       config.autoload_paths.unshift path
       $LOAD_PATH.unshift path
     end
-    paths["app/helpers"] = []
+    paths['app/helpers'] = []
     # config.add_plugin_paths(extension_loader.paths(:plugin))
     trusty_locale_paths = Dir[File.join(TRUSTY_CMS_ROOT, 'config', 'locales', '*.{rb,yml}')]
     config.i18n.load_path = trusty_locale_paths + extension_loader.paths(:locale)
@@ -44,16 +43,16 @@ module TrustyCms
     config.encoding = 'utf-8'
 
     config.middleware.use Rack::Cache,
-                          :private_headers => ['Authorization'],
-                          :entitystore => "trusty:tmp/cache/entity",
-                          :metastore => "trusty:tmp/cache/meta",
-                          :verbose => false,
-                          :allow_reload => false,
-                          :allow_revalidate => false
+                          private_headers: ['Authorization'],
+                          entitystore: 'trusty:tmp/cache/entity',
+                          metastore: 'trusty:tmp/cache/meta',
+                          verbose: false,
+                          allow_reload: false,
+                          allow_revalidate: false
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
 
-    config.filter_parameters += [:password, :password_confirmation]
+    config.filter_parameters += %i[password password_confirmation]
 
     # Use the database for sessions instead of the cookie-based default,
     # which shouldn't be used to store highly confidential information
@@ -83,9 +82,9 @@ module TrustyCms
       extension_loader.load_extensions
       extension_loader.load_extension_initalizers
 
-      extension_loader.activate_extensions  # also calls initialize_views
-      #config.add_controller_paths(extension_loader.paths(:controller))
-      #config.add_eager_load_paths(extension_loader.paths(:eager_load))
+      extension_loader.activate_extensions # also calls initialize_views
+      # config.add_controller_paths(extension_loader.paths(:controller))
+      # config.add_eager_load_paths(extension_loader.paths(:eager_load))
 
       # Add new inflection rules using the following format:
       ActiveSupport::Inflector.inflections do |inflect|

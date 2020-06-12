@@ -1,5 +1,4 @@
 module Annotatable
-
   def self.included(base)
     base.extend ClassMethods
   end
@@ -14,7 +13,7 @@ module Annotatable
 
     def annotate(*attrs)
       options = {}
-      options = attrs.pop if attrs.last.kind_of?(Hash)
+      options = attrs.pop if attrs.last.is_a?(Hash)
       options.symbolize_keys!
       inherit = options[:inherit]
       if inherit
@@ -42,13 +41,12 @@ module Annotatable
 
     def inherited_with_annotatable(subclass)
       inherited_without_annotatable(subclass)
-      (["inherited_annotations"] + (@inherited_annotations || [])).each do |t|
+      (['inherited_annotations'] + (@inherited_annotations || [])).each do |t|
         ivar = "@#{t}"
         subclass.instance_variable_set(ivar, instance_variable_get(ivar))
       end
     end
   end
-
 end
 
 # We don't necessarily have ActiveSupport loaded yet!
@@ -63,6 +61,6 @@ class Hash
 
   # Destructively convert all keys to symbols.
   def symbolize_keys!
-    self.replace(self.symbolize_keys)
+    replace(symbolize_keys)
   end
 end

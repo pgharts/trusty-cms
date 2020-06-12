@@ -3,11 +3,11 @@
 
 class Site < ActiveRecord::Base
   acts_as_list
-  belongs_to :created_by, :class_name => 'User'
-  belongs_to :updated_by, :class_name => 'User'
-  belongs_to :production_homepage , :class_name => 'ProductionPage'
+  belongs_to :created_by, class_name: 'User'
+  belongs_to :updated_by, class_name: 'User'
+  belongs_to :production_homepage, class_name: 'ProductionPage'
 
-  default_scope {order('position ASC')}
+  default_scope { order('position ASC') }
 
   class << self
     attr_accessor :several
@@ -16,7 +16,8 @@ class Site < ActiveRecord::Base
 
     def find_for_host(hostname = '')
       return default if hostname.blank?
-      sites = self.includes(:homepage).where("domain IS NOT NULL")
+
+      sites = includes(:homepage).where('domain IS NOT NULL')
       site = sites.find { |site| hostname == site.base_domain || hostname =~ Regexp.compile(site.domain) }
       site || default
     end
@@ -30,12 +31,12 @@ class Site < ActiveRecord::Base
     # If none is found, we are probably brand new, so a workable default site is created.
 
     def catchall
-       create({
-        :domain => '',
-        :name => 'default_site',
-        :base_domain => 'localhost',
-        :homepage => Page.find_by_parent_id(nil)
-      })
+      create({
+               domain: '',
+               name: 'default_site',
+               base_domain: 'localhost',
+               homepage: Page.find_by_parent_id(nil),
+             })
     end
 
     # Returns true if more than one site is present. This is normally only used to make interface decisions, eg whether to show the site-chooser dropdown.
@@ -45,7 +46,7 @@ class Site < ActiveRecord::Base
     end
   end
 
-  belongs_to :homepage, :class_name => "Page", :foreign_key => "homepage_id"
+  belongs_to :homepage, class_name: 'Page', foreign_key: 'homepage_id'
   validates_presence_of :name, :base_domain
   validates_uniqueness_of :domain
 
@@ -54,27 +55,27 @@ class Site < ActiveRecord::Base
 
   # Returns the fully specified web address for the supplied path, or the root of this site if no path is given.
 
-  def url(path = "/")
-    uri = URI.join("http://#{self.base_domain}", path)
+  def url(path = '/')
+    uri = URI.join("http://#{base_domain}", path)
     uri.to_s
   end
 
   # Returns the fully specified web address for the development version of this site and the supplied path, or the root of this site if no path is given.
 
-  def dev_url(path = "/")
-    uri = URI.join("http://#{TrustyCms::Config['dev.host'] || 'dev'}.#{self.base_domain}", path)
+  def dev_url(path = '/')
+    uri = URI.join("http://#{TrustyCms::Config['dev.host'] || 'dev'}.#{base_domain}", path)
     uri.to_s
   end
 
   def create_homepage
-    if self.homepage_id.blank?
-      self.homepage = self.build_homepage(:title => "#{self.name} Homepage",
-                         :slug => "#{self.name.to_slug}", :breadcrumb => "Home")
+    if homepage_id.blank?
+      self.homepage = build_homepage(title: "#{name} Homepage",
+                                     slug: name.to_slug.to_s, breadcrumb: 'Home')
       default_status = TrustyCms::Config['defaults.page.status']
-      self.homepage.status = Status[default_status] if default_status
+      homepage.status = Status[default_status] if default_status
       default_parts = TrustyCms::Config['defaults.page.parts'].to_s.strip.split(/\s*,\s*/)
       default_parts.each do |name|
-        self.homepage.parts << PagePart.new(:name => name, :filter_id => TrustyCms::Config['defaults.page.filter'])
+        homepage.parts << PagePart.new(name: name, filter_id: TrustyCms::Config['defaults.page.filter'])
       end
       save
     end

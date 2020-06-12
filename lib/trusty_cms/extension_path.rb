@@ -24,7 +24,8 @@ module TrustyCms
     @@known_paths = {}
 
     def initialize(options = {}) #:nodoc
-      @name, @path = options[:name].underscore, options[:path]
+      @name = options[:name].underscore
+      @path = options[:path]
       @@known_paths[@name.to_sym] = self
     end
 
@@ -43,10 +44,10 @@ module TrustyCms
     #
     # If two arguments are given, the second is taken to be the full extension name.
     #
-    def self.from_path(path, name=nil)
+    def self.from_path(path, name = nil)
       name = path if name.blank?
       name = File.basename(name).gsub(/^trusty-|-extension(-[\d\.a-z]+|-[a-z\d]+)*$/, '')
-      new(:name => name, :path => path)
+      new(name: name, path: path)
     end
 
     # Forgets all recorded extension paths.
@@ -77,7 +78,7 @@ module TrustyCms
     # Call the class method ExtensionPath.plugin_paths to get a list of the plugin paths found in all enabled extensions.
     #
     def plugin_paths
-      check_subdirectory("vendor/plugins")
+      check_subdirectory('vendor/plugins')
     end
 
     # Returns a list of names of all the locale files found within this extension root.
@@ -85,8 +86,8 @@ module TrustyCms
     # in reverse order so that locale definitions override one another correctly.
     #
     def locale_paths
-      if check_subdirectory("config/locales")
-        Dir[File.join("#{path}","config/locales","*.{rb,yml}")]
+      if check_subdirectory('config/locales')
+        Dir[File.join(path.to_s, 'config/locales', '*.{rb,yml}')]
       end
     end
 
@@ -94,21 +95,21 @@ module TrustyCms
     # Call the class method ExtensionPath.helper_paths to get a list of the helper paths found in all enabled extensions.
     #
     def helper_paths
-      check_subdirectory("app/helpers")
+      check_subdirectory('app/helpers')
     end
 
     # Returns the app/models path if it is found within this extension root.
     # Call the class method ExtensionPath.model_paths to get a list of the model paths found in all enabled extensions.
     #
     def model_paths
-      check_subdirectory("app/models")
+      check_subdirectory('app/models')
     end
 
     # Returns the app/controllers path if it is found within this extension root.
     # Call the class method ExtensionPath.controller_paths to get a list of the controller paths found in all enabled extensions.
     #
     def controller_paths
-      check_subdirectory("app/controllers")
+      check_subdirectory('app/controllers')
     end
 
     # Returns the app/views path if it is found within this extension root.
@@ -116,21 +117,21 @@ module TrustyCms
     # in reverse order so that views override one another correctly.
     #
     def view_paths
-      check_subdirectory("app/views")
+      check_subdirectory('app/views')
     end
 
     # Returns the app/metal path if it is found within this extension root.
     # Call the class method ExtensionPath.metal_paths to get a list of the metal paths found in all enabled extensions.
     #
     def metal_paths
-      check_subdirectory("app/metal")
+      check_subdirectory('app/metal')
     end
 
     # Returns a list of all the rake task files found within this extension root.
     #
     def rake_task_paths
-      if check_subdirectory("lib/tasks")
-        Dir[File.join("#{path}","lib/tasks/**","*.rake")]
+      if check_subdirectory('lib/tasks')
+        Dir[File.join(path.to_s, 'lib/tasks/**', '*.rake')]
       end
     end
 
@@ -149,6 +150,7 @@ module TrustyCms
       #
       def find(name)
         raise LoadError, "Cannot return path for unknown extension: #{name}" unless @@known_paths[name.to_sym]
+
         @@known_paths[name.to_sym]
       end
 
@@ -175,19 +177,19 @@ module TrustyCms
         enabled.map(&:path)
       end
 
-      [:load_paths, :plugin_paths, :helper_paths, :model_paths, :controller_paths, :eager_load_paths].each do |m|
+      %i[load_paths plugin_paths helper_paths model_paths controller_paths eager_load_paths].each do |m|
         define_method(m) do
-          enabled.map{|ep| ep.send(m)}.flatten.compact
+          enabled.map { |ep| ep.send(m) }.flatten.compact
         end
       end
-      [:locale_paths, :view_paths, :metal_paths, :rake_task_paths].each do |m|
+      %i[locale_paths view_paths metal_paths rake_task_paths].each do |m|
         define_method(m) do
-          enabled.map{|ep| ep.send(m)}.flatten.compact.reverse
+          enabled.map { |ep| ep.send(m) }.flatten.compact.reverse
         end
       end
     end
 
-  private
+    private
 
     # If the supplied path within the extension root exists and is a directory, its absolute path is returned. Otherwise, nil.
     #
@@ -195,6 +197,5 @@ module TrustyCms
       subdirectory = File.join(path, subpath)
       subdirectory if File.directory?(subdirectory)
     end
-
   end
 end

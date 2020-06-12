@@ -22,7 +22,7 @@ module TrustyCms
     private
 
     def non_cacheable_response
-      @listener.set_expiry nil, :private => true, "no-cache" => true
+      @listener.set_expiry nil, :private => true, 'no-cache' => true
       @listener.set_etag('')
     end
 
@@ -32,12 +32,11 @@ module TrustyCms
         timeout = @page.cache_timeout
       end
 
-      @listener.set_expiry timeout, :public => true, :private => false
+      @listener.set_expiry timeout, public: true, private: false
     end
 
     def cacheable?
       @listener.cacheable_request? && @page.cache?
     end
-
   end
 end

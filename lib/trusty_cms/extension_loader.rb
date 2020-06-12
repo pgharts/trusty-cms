@@ -17,11 +17,11 @@ module TrustyCms
         @config = rails_config
       end
 
-      def before_clear(*args) #:nodoc
+      def before_clear(*_args) #:nodoc
         ExtensionLoader.deactivate_extensions
       end
 
-      def after_clear(*args) #:nodoc
+      def after_clear(*_args) #:nodoc
         ExtensionLoader.load_extensions
         ExtensionLoader.activate_extensions
       end
@@ -77,7 +77,7 @@ module TrustyCms
         extension.path = extension_path
         extension
       rescue LoadError, NameError => e
-        $stderr.puts "Could not load extension: #{name}.\n#{e.inspect}"
+        warn "Could not load extension: #{name}.\n#{e.inspect}"
         nil
       end
     end
@@ -104,14 +104,14 @@ module TrustyCms
       if configuration.extensions.first == :all
         ordered_extensions = extensions
       else
-        configuration.extensions.each {|name| ordered_extensions << select_extension(name)  }
+        configuration.extensions.each { |name| ordered_extensions << select_extension(name) }
       end
       ordered_extensions.flatten.each(&:activate)
       Page.load_subclasses
     end
 
     def select_extension(name)
-      extensions.select {|ext| ext.extension_name.symbolize == name}
+      extensions.select { |ext| ext.extension_name.symbolize == name }
     end
 
     alias :reactivate :activate_extensions
@@ -122,7 +122,7 @@ module TrustyCms
       # An extension name can be supplied in addition to the path. It will be processed in the usual way to
       # remove trusty- and -extension and any verion numbering.
       #
-      def record_path(path, name=nil)
+      def record_path(path, name = nil)
         ExtensionPath.from_path(path, name)
       end
 

@@ -1,7 +1,6 @@
 class TrustyCms::AdminUI::RegionSet
-
   def initialize
-    @regions = Hash.new do |h,k|
+    @regions = Hash.new do |h, k|
       h[k] = []
     end
     yield self if block_given?
@@ -11,8 +10,9 @@ class TrustyCms::AdminUI::RegionSet
     @regions[region.to_sym]
   end
 
-  def add(region=nil, partial=nil, options={})
-    raise ArgumentError, "You must specify a region and a partial" unless region and partial
+  def add(region = nil, partial = nil, options = {})
+    raise ArgumentError, 'You must specify a region and a partial' unless region && partial
+
     if options[:before]
       index = @regions[region].empty? ? 0 : (@regions[region].index(options[:before]) || @regions[region].size)
       self[region].insert(index, partial)
@@ -31,5 +31,4 @@ class TrustyCms::AdminUI::RegionSet
       super
     end
   end
-
 end
