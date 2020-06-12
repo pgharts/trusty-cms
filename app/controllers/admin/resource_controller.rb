@@ -5,10 +5,10 @@ class Admin::ResourceController < ApplicationController
   helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
   before_action :populate_format
   before_action :never_cache
-  before_action :load_models, :only => :index
-  before_action :load_model, :only => [:new, :create, :edit, :update, :remove, :destroy]
-  before_action :set_owner_or_editor, :only => [:new, :create, :update]
-  after_action :clear_model_cache, :only => [:create, :update, :destroy]
+  before_action :load_models, only: :index
+  before_action :load_model, only: %i[new create edit update remove destroy]
+  before_action :set_owner_or_editor, only: %i[new create update]
+  after_action :clear_model_cache, only: %i[create update destroy]
 
   cattr_reader :paginated
   cattr_accessor :default_per_page, :will_paginate_options
@@ -23,18 +23,18 @@ class Admin::ResourceController < ApplicationController
     r.plural.publish(:xml, :json) { render format_symbol => models }
 
     r.singular.publish(:xml, :json) { render format_symbol => model }
-    r.singular.default { redirect_to edit_model_path if action_name == "show" }
+    r.singular.default { redirect_to edit_model_path if action_name == 'show' }
 
     r.not_found.publish(:xml, :json) { head :not_found }
-    r.not_found.default { announce_not_found; redirect_to :action => "index" }
+    r.not_found.default { announce_not_found; redirect_to action: 'index' }
 
     r.invalid.publish(:xml, :json) { render format_symbol => model.errors, :status => :unprocessable_entity }
-    r.invalid.default { announce_validation_errors; render :action => template_name }
+    r.invalid.default { announce_validation_errors; render action: template_name }
 
     r.stale.publish(:xml, :json) { head :conflict }
-    r.stale.default { announce_update_conflict; render :action => template_name }
+    r.stale.default { announce_update_conflict; render action: template_name }
 
-    r.create.publish(:xml, :json) { render format_symbol => model, :status => :created, :location => url_for(:format => format_symbol, :id => model) }
+    r.create.publish(:xml, :json) { render format_symbol => model, :status => :created, :location => url_for(format: format_symbol, id: model) }
     r.create.default { redirect_to continue_url(params) }
 
     r.update.publish(:xml, :json) { head :ok }
@@ -48,7 +48,7 @@ class Admin::ResourceController < ApplicationController
     response_for :plural
   end
 
-  [:show, :new, :edit, :remove].each do |action|
+  %i[show new edit remove].each do |action|
     class_eval %{
       def #{action}                # def show
         response_for :singular     #   response_for :singular
@@ -56,7 +56,7 @@ class Admin::ResourceController < ApplicationController
     }, __FILE__, __LINE__
   end
 
-  [:create, :update].each do |action|
+  %i[create update].each do |action|
     class_eval %{
       def #{action}                                       # def create
         model.update_attributes!(permitted_params[model_symbol])    #   model.update_attributes!(params[model_symbol])
@@ -71,7 +71,7 @@ class Admin::ResourceController < ApplicationController
   end
 
   def self.model_class(model_class = nil)
-    @model_class ||= (model_class || self.controller_name).to_s.singularize.camelize.constantize
+    @model_class ||= (model_class || controller_name).to_s.singularize.camelize.constantize
   end
 
   # call paginate_models to declare that will_paginate should be used in the index view
@@ -81,9 +81,9 @@ class Admin::ResourceController < ApplicationController
   # Class MyController < Admin::ResourceController
   #   paginate_models :per_page => 100
 
-  def self.paginate_models(options={})
+  def self.paginate_models(options = {})
     @@paginated = true
-    @@will_paginate_options = options.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :container).merge(:param_name => :p)
+    @@will_paginate_options = options.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :container).merge(param_name: :p)
     @@default_per_page = options[:per_page]
   end
 
@@ -111,151 +111,153 @@ class Admin::ResourceController < ApplicationController
     pp = params[:pp] || TrustyCms.config['admin.pagination.per_page']
     pp = (self.class.default_per_page || 50) if pp.blank?
     {
-      :page => (params[:p] || 1).to_i,
-      :per_page => pp.to_i
+      page: (params[:p] || 1).to_i,
+      per_page: pp.to_i,
     }
   end
 
   protected
 
-    def rescue_action(exception)
-      case exception
-      when ActiveRecord::RecordInvalid
-        response_for :invalid
-      when ActiveRecord::StaleObjectError
-        response_for :stale
-      when ActiveRecord::RecordNotFound
-        response_for :not_found
-      else
-        super
-      end
+  def rescue_action(exception)
+    case exception
+    when ActiveRecord::RecordInvalid
+      response_for :invalid
+    when ActiveRecord::StaleObjectError
+      response_for :stale
+    when ActiveRecord::RecordNotFound
+      response_for :not_found
+    else
+      super
     end
+  end
 
-    def model_class
-      self.class.model_class
-    end
+  def model_class
+    self.class.model_class
+  end
 
-    def set_owner_or_editor
-      if self.model.has_attribute? :created_by_id
-        self.model.created_by_id = current_user.id if self.model.id == nil
-        self.model.updated_by_id = current_user.id
-      end
+  def set_owner_or_editor
+    if model.has_attribute? :created_by_id
+      model.created_by_id = current_user.id if model.id == nil
+      model.updated_by_id = current_user.id
     end
+  end
 
-    def model
-      instance_variable_get("@#{model_symbol}") || load_model
-    end
-    alias :current_object :model
-    def model=(object)
-      instance_variable_set("@#{model_symbol}", object)
-    end
-    def load_model
-      self.model = if params[:id]
-        model_class.find(params[:id])
-      else
-        model_class.new()
-      end
-    end
+  def model
+    instance_variable_get("@#{model_symbol}") || load_model
+  end
+  alias :current_object :model
+  def model=(object)
+    instance_variable_set("@#{model_symbol}", object)
+  end
 
-    def models
-      instance_variable_get("@#{plural_model_symbol}") || load_models
+  def load_model
+    self.model = if params[:id]
+                   model_class.find(params[:id])
+                 else
+                   model_class.new
     end
-    alias :current_objects :models
-    def models=(objects)
-      instance_variable_set("@#{plural_model_symbol}", objects)
-    end
-    def load_models
-      self.models = paginated? ? model_class.paginate(pagination_parameters) : model_class.all
-    end
+  end
 
-    def model_name
-      model_class.name
-    end
-    def plural_model_name
-      model_name.pluralize
-    end
-    alias :models_name :plural_model_name
+  def models
+    instance_variable_get("@#{plural_model_symbol}") || load_models
+  end
+  alias :current_objects :models
+  def models=(objects)
+    instance_variable_set("@#{plural_model_symbol}", objects)
+  end
 
-    def model_symbol
-      model_name.underscore.intern
-    end
-    def plural_model_symbol
-      model_name.pluralize.underscore.intern
-    end
-    alias :models_symbol :plural_model_symbol
+  def load_models
+    self.models = paginated? ? model_class.paginate(pagination_parameters) : model_class.all
+  end
 
-    def humanized_model_name
-      t(model_name.underscore.downcase)
+  def model_name
+    model_class.name
+  end
+
+  def plural_model_name
+    model_name.pluralize
+  end
+  alias :models_name :plural_model_name
+
+  def model_symbol
+    model_name.underscore.intern
+  end
+
+  def plural_model_symbol
+    model_name.pluralize.underscore.intern
+  end
+  alias :models_symbol :plural_model_symbol
+
+  def humanized_model_name
+    t(model_name.underscore.downcase)
+  end
+
+  def continue_url(options)
+    options[:redirect_to] || (params[:continue] ? { action: 'edit', id: model.id } : index_page_for_model)
+  end
+
+  def index_page_for_model
+    parts = { action: 'index' }
+    if paginated? && model && i = model_class.all.index(model)
+      p = (i / pagination_parameters[:per_page].to_i) + 1
+      parts[:p] = p if p && p > 1
     end
+    parts
+  end
 
-    def continue_url(options)
-      options[:redirect_to] || (params[:continue] ? {:action => 'edit', :id => model.id} : index_page_for_model)
+  def edit_model_path
+    method = "edit_admin_#{model_name.underscore}_path"
+    send method.to_sym, params[:id]
+  end
+
+  def announce_validation_errors
+    flash.now[:error] = t('resource_controller.validation_errors')
+  end
+
+  def announce_removed
+    ActiveSupport::Deprecation.warn('announce_removed is no longer encouraged in TrustyCms 0.9.x.', caller)
+    flash[:notice] = t('resource_controller.removed', humanized_model_name: humanized_model_name)
+  end
+
+  def announce_not_found
+    flash[:notice] = t('resource_controller.not_found', humanized_model_name: humanized_model_name)
+  end
+
+  def announce_update_conflict
+    flash.now[:error] = t('resource_controller.update_conflict', humanized_model_name: humanized_model_name)
+  end
+
+  def clear_model_cache
+    Rails.cache.clear
+  end
+
+  def format_symbol
+    format.to_sym
+  end
+
+  def format
+    params[:format] || 'html'
+  end
+
+  # I would like to set this to expires_in(1.minute, :private => true) to allow for more fluid navigation
+  # but the annoyance for concurrent authors would be too great.
+  def never_cache
+    expires_now
+  end
+
+  # Assist with user agents that cause improper content-negotiation
+  # warn "Remove default HTML format, Accept header no longer used. (#{__FILE__}: #{__LINE__})" if Rails.version !~ /^2\.1/
+  def populate_format
+    params[:format] ||= 'html' unless request.xhr?
+  end
+
+  def permitted_params
+    model_symbols = ActiveRecord::Base.descendants.map { |a| a.name.underscore.to_sym }
+    keys = params.keys.map { |k| k.underscore.to_sym }
+    valid_symbols = model_symbols & keys
+    valid_symbols.each do |symbol|
+      params[symbol].permit!
     end
-
-    def index_page_for_model
-      parts = {:action => "index"}
-      if paginated? && model && i = model_class.all.index(model)
-        p = (i / pagination_parameters[:per_page].to_i) + 1
-        parts[:p] = p if p && p > 1
-      end
-      parts
-    end
-
-    def edit_model_path
-      method = "edit_admin_#{model_name.underscore}_path"
-      send method.to_sym, params[:id]
-    end
-
-    def announce_validation_errors
-      flash.now[:error] = t("resource_controller.validation_errors")
-    end
-
-    def announce_removed
-      ActiveSupport::Deprecation.warn("announce_removed is no longer encouraged in TrustyCms 0.9.x.", caller)
-      flash[:notice] = t("resource_controller.removed", :humanized_model_name => humanized_model_name)
-    end
-
-    def announce_not_found
-      flash[:notice] = t("resource_controller.not_found", :humanized_model_name => humanized_model_name)
-    end
-
-    def announce_update_conflict
-      flash.now[:error] =  t("resource_controller.update_conflict", :humanized_model_name => humanized_model_name)
-    end
-
-    def clear_model_cache
-      Rails.cache.clear
-    end
-
-    def format_symbol
-      format.to_sym
-    end
-
-    def format
-      params[:format] || 'html'
-    end
-
-
-    # I would like to set this to expires_in(1.minute, :private => true) to allow for more fluid navigation
-    # but the annoyance for concurrent authors would be too great.
-    def never_cache
-      expires_now
-    end
-
-    # Assist with user agents that cause improper content-negotiation
-    # warn "Remove default HTML format, Accept header no longer used. (#{__FILE__}: #{__LINE__})" if Rails.version !~ /^2\.1/
-    def populate_format
-      params[:format] ||= 'html' unless request.xhr?
-    end
-
-    def permitted_params
-      model_symbols = ActiveRecord::Base.descendants.map{|a| a.name.underscore.to_sym}
-      keys = params.keys.map{|k| k.underscore.to_sym}
-      valid_symbols = model_symbols & keys
-      valid_symbols.each do |symbol|
-        params[symbol].permit!
-      end
-      params
-    end
-
+    params
+  end
 end

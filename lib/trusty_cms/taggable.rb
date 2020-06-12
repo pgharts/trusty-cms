@@ -13,20 +13,21 @@ module TrustyCms::Taggable
         end
         class << new_base
           def default_url_options
-            {:controller => "site", :action => "show_page", :only_path => true}
+            { controller: 'site', action: 'show_page', only_path: true }
           end
         end
-        new_base.tag_descriptions.merge! self.tag_descriptions
+        new_base.tag_descriptions.merge! tag_descriptions
       end
 
       protected
-        def params
-          @params ||= request.parameters unless request.nil?
-        end
 
-        def request_uri
-          @request_url ||= request.request_uri unless request.nil?
-        end
+      def params
+        @params ||= request.parameters unless request.nil?
+      end
+
+      def request_uri
+        @request_url ||= request.request_uri unless request.nil?
+      end
     end
   end
 
@@ -44,11 +45,11 @@ module TrustyCms::Taggable
     Util.tags_in_array(methods)
   end
 
-  def tag_descriptions(hash=nil)
+  def tag_descriptions(hash = nil)
     self.class.tag_descriptions hash
   end
 
-  def warn_of_tag_deprecation(tag_name, options={})
+  def warn_of_tag_deprecation(tag_name, options = {})
     message = "Deprecated radius tag <r:#{tag_name}>"
     message << " will be removed or significantly changed in trusty #{options[:deadline]}." if options[:deadline]
     message << " Please use <r:#{options[:substitute]}> instead." if options[:substitute]
@@ -57,12 +58,12 @@ module TrustyCms::Taggable
 
   module ClassMethods
     def inherited(subclass)
-      subclass.tag_descriptions.reverse_merge! self.tag_descriptions
+      subclass.tag_descriptions.reverse_merge! tag_descriptions
       super
     end
 
     def tag_descriptions(hash = nil)
-      TrustyCms::Taggable.tag_descriptions[self.name] ||= (hash ||{})
+      TrustyCms::Taggable.tag_descriptions[name] ||= (hash || {})
     end
 
     def desc(text)
@@ -71,13 +72,13 @@ module TrustyCms::Taggable
     end
 
     def tag(name, &block)
-      self.tag_descriptions[name] = TrustyCms::Taggable.last_description if TrustyCms::Taggable.last_description
+      tag_descriptions[name] = TrustyCms::Taggable.last_description if TrustyCms::Taggable.last_description
       TrustyCms::Taggable.last_description = nil
       define_method("tag:#{name}", &block)
     end
 
     def tags
-      Util.tags_in_array(self.instance_methods)
+      Util.tags_in_array(instance_methods)
     end
 
     # Define a tag while also deprecating it. Normal usage:
@@ -98,7 +99,7 @@ module TrustyCms::Taggable
     #   raise TagError "..."
     # end
     #
-    def deprecated_tag(name, options={}, &dblock)
+    def deprecated_tag(name, options = {}, &dblock)
       TrustyCms::Taggable.tag_deprecations[name] = options.dup
       if dblock
         tag(name) do |tag|
@@ -121,18 +122,14 @@ module TrustyCms::Taggable
 
     def self.strip_leading_whitespace(text)
       text = text.dup
-      text.gsub!("\t", "  ")
+      text.gsub!("\t", '  ')
       lines = text.split("\n")
       leading = lines.map do |line|
         unless line =~ /^\s*$/
-           line.match(/^(\s*)/)[0].length
-        else
-          nil
+          line.match(/^(\s*)/)[0].length
         end
       end.compact.min
-      lines.inject([]) {|ary, line| ary << line.sub(/^[ ]{#{leading}}/, "")}.join("\n")
+      lines.inject([]) { |ary, line| ary << line.sub(/^[ ]{#{leading}}/, '') }.join("\n")
     end
-
   end
-
 end

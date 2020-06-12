@@ -5,7 +5,7 @@ class PageAttachment < ActiveRecord::Base
 
   accepts_nested_attributes_for :asset
 
-  acts_as_list :scope => :page_id
+  acts_as_list scope: :page_id
 
   def selected?
     !!selected
@@ -16,5 +16,4 @@ class PageAttachment < ActiveRecord::Base
   def add_to_list_bottom
     self[position_column] ||= bottom_position_in_list.to_i + 1
   end
-
 end

@@ -1,11 +1,9 @@
 module Simpleton
-
   def self.included(base)
     base.extend(ClassMethods)
   end
 
   module ClassMethods
-
     def instance(&block)
       @instance ||= new
       block.call(@instance) if block_given?
@@ -15,7 +13,5 @@ module Simpleton
     def method_missing(method, *args, &block)
       instance.respond_to?(method) ? instance.send(method, *args, &block) : super
     end
-
   end
-
 end

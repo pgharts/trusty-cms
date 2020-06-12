@@ -1,11 +1,10 @@
 require 'trusty_cms/taggable'
 require 'local_time'
 module StandardTags
-
   include TrustyCms::Taggable
   include LocalTime
 
-  require "will_paginate/view_helpers"
+  require 'will_paginate/view_helpers'
   include WillPaginate::ViewHelpers
 
   class TagError < StandardError; end
@@ -22,7 +21,7 @@ module StandardTags
     tag.expand
   end
 
-  [:breadcrumb, :slug, :title].each do |method|
+  %i[breadcrumb slug title].each do |method|
     desc %{
       Renders the @#{method}@ attribute of the current page.
     }
@@ -37,7 +36,7 @@ module StandardTags
   tag 'path' do |tag|
     relative_url_for(tag.locals.page.path, tag.globals.page.request)
   end
-  deprecated_tag 'url', :substitute => 'path', :deadline => '1.2'
+  deprecated_tag 'url', substitute: 'path', deadline: '1.2'
 
   desc %{
     Gives access to a page's children.
@@ -171,7 +170,6 @@ module StandardTags
     tag.expand if tag.locals.first_child
   end
 
-
   desc %{
     Renders the tag contents unless the current page is the first child in the context of
     a children:each tag
@@ -207,7 +205,6 @@ module StandardTags
   tag 'children:each:if_last' do |tag|
     tag.expand if tag.locals.last_child
   end
-
 
   desc %{
     Renders the tag contents unless the current page is the last child in the context of
@@ -271,7 +268,7 @@ module StandardTags
 
     <pre><code><r:parent>...</r:parent></code></pre>
   }
-  tag "parent" do |tag|
+  tag 'parent' do |tag|
     parent = tag.locals.page.parent
     tag.locals.page = parent
     tag.expand if parent
@@ -285,7 +282,7 @@ module StandardTags
 
     <pre><code><r:if_parent>...</r:if_parent></code></pre>
   }
-  tag "if_parent" do |tag|
+  tag 'if_parent' do |tag|
     parent = tag.locals.page.parent
     tag.expand if parent
   end
@@ -298,7 +295,7 @@ module StandardTags
 
     <pre><code><r:unless_parent>...</r:unless_parent></code></pre>
   }
-  tag "unless_parent" do |tag|
+  tag 'unless_parent' do |tag|
     parent = tag.locals.page.parent
     tag.expand unless parent
   end
@@ -313,7 +310,7 @@ module StandardTags
 
     <pre><code><r:if_children [status="published"]>...</r:if_children></code></pre>
   }
-  tag "if_children" do |tag|
+  tag 'if_children' do |tag|
     children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
     tag.expand if children > 0
   end
@@ -328,12 +325,12 @@ module StandardTags
 
     <pre><code><r:unless_children [status="published"]>...</r:unless_children></code></pre>
   }
-  tag "unless_children" do |tag|
+  tag 'unless_children' do |tag|
     children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
     tag.expand unless children > 0
   end
 
-    desc %{
+  desc %{
     Aggregates the children of multiple paths using the @paths@ attribute.
     Useful for combining many different sections/categories into a single
     feed or listing.
@@ -342,10 +339,10 @@ module StandardTags
 
     <pre><code><r:aggregate paths="/section1; /section2; /section3"> ... </r:aggregate></code></pre>
   }
-  tag "aggregate" do |tag|
+  tag 'aggregate' do |tag|
     required_attr(tag, 'paths', 'urls')
-    paths = (tag.attr['paths']||tag.attr["urls"]).split(";").map(&:strip).reject(&:blank?).map { |u| clean_path u }
-    parent_ids = paths.map {|u| Page.find_by_path(u) }.map(&:id)
+    paths = (tag.attr['paths'] || tag.attr['urls']).split(';').map(&:strip).reject(&:blank?).map { |u| clean_path u }
+    parent_ids = paths.map { |u| Page.find_by_path(u) }.map(&:id)
     tag.locals.parent_ids = parent_ids
     tag.expand
   end
@@ -358,9 +355,9 @@ module StandardTags
 
     <pre><code><r:aggregate:each paths="/section1; /section2; /section3"> ... </r:aggregate:each></code></pre>
   }
-  tag "aggregate:each" do |tag|
+  tag 'aggregate:each' do |tag|
     aggregates = []
-    tag.locals.aggregated_pages = tag.locals.parent_ids.map {|p| Page.find(p)}
+    tag.locals.aggregated_pages = tag.locals.parent_ids.map { |p| Page.find(p) }
     tag.locals.aggregated_pages.each do |aggregate_page|
       tag.locals.page = aggregate_page
       aggregates << tag.expand
@@ -368,12 +365,12 @@ module StandardTags
     aggregates.flatten.join('')
   end
 
-  tag "aggregate:each:children" do |tag|
+  tag 'aggregate:each:children' do |tag|
     tag.locals.children = tag.locals.page.children
     tag.expand
   end
 
-  tag "aggregate:each:children:each" do |tag|
+  tag 'aggregate:each:children:each' do |tag|
     options = children_find_options(tag)
     result = []
     children = tag.locals.children
@@ -386,7 +383,7 @@ module StandardTags
     result.flatten.join('')
   end
 
-  tag "aggregate:children" do |tag|
+  tag 'aggregate:children' do |tag|
     tag.expand
   end
 
@@ -400,10 +397,10 @@ module StandardTags
       <r:children:count />
     </r:aggregate></code></pre>
   }
-  tag "aggregate:children:count" do |tag|
+  tag 'aggregate:children:count' do |tag|
     options = aggregate_children(tag)
     if ActiveRecord::Base.connection.adapter_name.downcase == 'postgresql'
-      options[:group] = Page.columns.map {|c| c.name}.join(', ')
+      options[:group] = Page.columns.map { |c| c.name }.join(', ')
       Page.where(options).size
     else
       Page.where(options).count
@@ -421,8 +418,8 @@ module StandardTags
       </r:children:each>
     </r:aggregate></code></pre>
   }
-  tag "aggregate:children:each" do |tag|
-    render_children_with_pagination(tag, :aggregate => true)
+  tag 'aggregate:children:each' do |tag|
+    render_children_with_pagination(tag, aggregate: true)
   end
 
   desc %{
@@ -437,7 +434,7 @@ module StandardTags
       </r:children:first>
     </r:aggregate></code></pre>
   }
-  tag "aggregate:children:first" do |tag|
+  tag 'aggregate:children:first' do |tag|
     options = aggregate_children(tag)
     children = Page.where(options)
 
@@ -459,7 +456,7 @@ module StandardTags
       </r:children:last>
     </r:aggregate></code></pre>
   }
-  tag "aggregate:children:last" do |tag|
+  tag 'aggregate:children:last' do |tag|
     options = aggregate_children(tag)
     children = Page.where(options)
 
@@ -485,16 +482,16 @@ module StandardTags
   tag 'cycle' do |tag|
     cycle = (tag.globals.cycle ||= {})
     if tag.attr['values']
-      values = tag.attr['values'].split(",").collect(&:strip)
+      values = tag.attr['values'].split(',').collect(&:strip)
     end
     start = tag.attr['start']
     cycle_name = tag.attr['name'] || 'cycle'
     if values
-      if start
-        current_index = (cycle[cycle_name] ||= values.index(start))
-      else
-        current_index = (cycle[cycle_name] ||=  0)
-      end
+      current_index = if start
+                        (cycle[cycle_name] ||= values.index(start))
+                      else
+                        (cycle[cycle_name] ||= 0)
+                      end
       current_index = 0 if tag.attr['reset'] == 'true'
       cycle[cycle_name] = (current_index + 1) % values.size
       values[current_index]
@@ -527,20 +524,21 @@ module StandardTags
     page = tag.locals.page
     part_name = tag_part_name(tag)
     # Prevent simple and deep recursive rendering of the same page part
-    rendering_parts = (tag.locals.rendering_parts ||= Hash.new {|h,k| h[k] = []})
+    rendering_parts = (tag.locals.rendering_parts ||= Hash.new { |h, k| h[k] = [] })
     if rendering_parts[page.id].include?(part_name)
       raise TagError.new(%{Recursion error: already rendering the `#{part_name}' part.})
     else
       rendering_parts[page.id] << part_name
     end
-    inherit = boolean_attr_or_error(tag,'inherit',false)
+
+    inherit = boolean_attr_or_error(tag, 'inherit', false)
     part_page = page
     if inherit
-      while (part_page.part(part_name).nil? and (not part_page.parent.nil?)) do
+      while part_page.part(part_name).nil? && (not part_page.parent.nil?)
         part_page = part_page.parent
       end
     end
-    contextual = boolean_attr_or_error(tag,'contextual', true)
+    contextual = boolean_attr_or_error(tag, 'contextual', true)
     part = part_page.part(part_name)
     tag.locals.page = part_page unless contextual
     result = tag.globals.page.render_snippet(part) unless part.nil?
@@ -566,21 +564,21 @@ module StandardTags
     part_name = tag_part_name(tag)
     parts_arr = part_name.split(',')
     inherit = boolean_attr_or_error(tag, 'inherit', 'false')
-    find = attr_or_error(tag, :attribute_name => 'find', :default => 'all', :values => 'any, all')
+    find = attr_or_error(tag, attribute_name: 'find', default: 'all', values: 'any, all')
     expandable = true
     one_found = false
     parts_arr.each do |name|
       part_page = tag.locals.page
       name.strip!
       if inherit
-        while (part_page.part(name).nil? and (not part_page.parent.nil?)) do
+        while part_page.part(name).nil? && (not part_page.parent.nil?)
           part_page = part_page.parent
         end
       end
       expandable = false if part_page.part(name).nil?
       one_found ||= true if !part_page.part(name).nil?
     end
-    expandable = true if (find == 'any' and one_found)
+    expandable = true if (find == 'any') && one_found
     tag.expand if expandable
   end
 
@@ -601,20 +599,21 @@ module StandardTags
     part_name = tag_part_name(tag)
     parts_arr = part_name.split(',')
     inherit = boolean_attr_or_error(tag, 'inherit', false)
-    find = attr_or_error(tag, :attribute_name => 'find', :default => 'all', :values => 'any, all')
-    expandable, all_found = true, true
+    find = attr_or_error(tag, attribute_name: 'find', default: 'all', values: 'any, all')
+    expandable = true
+    all_found = true
     parts_arr.each do |name|
       part_page = tag.locals.page
       name.strip!
       if inherit
-        while (part_page.part(name).nil? and (not part_page.parent.nil?)) do
+        while part_page.part(name).nil? && (not part_page.parent.nil?)
           part_page = part_page.parent
         end
       end
       expandable = false if !part_page.part(name).nil?
       all_found = false if part_page.part(name).nil?
     end
-    if all_found == false and find == 'all'
+    if (all_found == false) && (find == 'all')
       expandable = true
     end
     tag.expand if expandable
@@ -630,13 +629,13 @@ module StandardTags
     <pre><code><r:if_path matches="regexp" [ignore_case="true|false"]>...</r:if_path></code></pre>
   }
   tag 'if_path' do |tag|
-    required_attr(tag,'matches')
+    required_attr(tag, 'matches')
     regexp = build_regexp_for(tag, 'matches')
     unless tag.locals.page.path.match(regexp).nil?
-       tag.expand
+      tag.expand
     end
   end
-  deprecated_tag 'if_url', :substitute => 'if_path', :deadline => '1.2'
+  deprecated_tag 'if_url', substitute: 'if_path', deadline: '1.2'
 
   desc %{
     The opposite of the @if_path@ tag.
@@ -649,10 +648,10 @@ module StandardTags
     required_attr(tag, 'matches')
     regexp = build_regexp_for(tag, 'matches')
     if tag.locals.page.path.match(regexp).nil?
-        tag.expand
+      tag.expand
     end
   end
-  deprecated_tag 'unless_url', :substitute => 'unless_path', :deadline => '1.2'
+  deprecated_tag 'unless_url', substitute: 'unless_path', deadline: '1.2'
 
   desc %{
     Renders the contained elements if the current contextual page is either the actual page or one of its parents.
@@ -663,7 +662,7 @@ module StandardTags
 
     <pre><code><r:if_ancestor_or_self>...</r:if_ancestor_or_self></code></pre>
   }
-  tag "if_ancestor_or_self" do |tag|
+  tag 'if_ancestor_or_self' do |tag|
     tag.expand if (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
   end
 
@@ -676,7 +675,7 @@ module StandardTags
 
     <pre><code><r:unless_ancestor_or_self>...</r:unless_ancestor_or_self></code></pre>
   }
-  tag "unless_ancestor_or_self" do |tag|
+  tag 'unless_ancestor_or_self' do |tag|
     tag.expand unless (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
   end
 
@@ -689,7 +688,7 @@ module StandardTags
 
     <pre><code><r:if_self>...</r:if_self></code></pre>
   }
-  tag "if_self" do |tag|
+  tag 'if_self' do |tag|
     tag.expand if tag.locals.page == tag.globals.page
   end
 
@@ -702,7 +701,7 @@ module StandardTags
 
     <pre><code><r:unless_self>...</r:unless_self></code></pre>
   }
-  tag "unless_self" do |tag|
+  tag 'unless_self' do |tag|
     tag.expand unless tag.locals.page == tag.globals.page
   end
 
@@ -739,7 +738,9 @@ module StandardTags
     local_avatar_url = "/images/admin/avatar_#{([size.to_i] * 2).join('x')}.png"
     default_avatar_url = "#{request.protocol}#{request.host_with_port}#{local_avatar_url}"
 
-    unless email.blank?
+    if email.blank?
+      local_avatar_url
+    else
       url = '//gravatar.com/avatar/'
       url << "#{Digest::MD5.new.update(email)}?"
       url << "rating=#{rating}"
@@ -747,12 +748,10 @@ module StandardTags
       url << "&default=#{default_avatar_url}" unless request.host_with_port == 'testhost.tld'
       # Test the Gravatar url
       require 'open-uri'
-      begin; open "http:#{sanitize(url)}", :proxy => true
-      rescue; local_avatar_url
+      begin; open "http:#{sanitize(url)}", proxy: true
+      rescue StandardError; local_avatar_url
       else; url
       end
-    else
-      local_avatar_url
     end
   end
 
@@ -773,24 +772,29 @@ module StandardTags
     format = (tag.attr['format'] || '%A, %B %d, %Y')
     time_attr = tag.attr['for']
     date = if time_attr
-      case
-      when time_attr == 'now'
-        Time.zone.now
-      when Page.date_column_names.include?(time_attr)
-        page[time_attr]
-      else
-        raise TagError, "Invalid value for 'for' attribute."
-      end
-    else
-      page.published_at || page.created_at
+             if time_attr == 'now'
+               Time.zone.now
+             elsif Page.date_column_names.include?(time_attr)
+               page[time_attr]
+             else
+               raise TagError, "Invalid value for 'for' attribute."
+             end
+           else
+             page.published_at || page.created_at
     end
     case format
     when 'rfc1123'
       CGI.rfc1123_date(date.to_time)
     else
-      @i18n_date_format_keys ||= (I18n.config.backend.send(:translations)[I18n.locale][:date][:formats].keys rescue [])
-    format = @i18n_date_format_keys.include?(format.to_sym) ? format.to_sym : format
-      I18n.l date, :format => format
+      @i18n_date_format_keys ||= begin
+                                   begin
+                                    I18n.config.backend.send(:translations)[I18n.locale][:date][:formats].keys
+                                   rescue StandardError
+                                     []
+                                  end
+                                 end
+      format = @i18n_date_format_keys.include?(format.to_sym) ? format.to_sym : format
+      I18n.l date, format: format
     end
   end
 
@@ -858,7 +862,7 @@ module StandardTags
     <pre><code><r:find path="value_to_find">...</r:find></code></pre>
   }
   tag 'find' do |tag|
-    required_attr(tag,'path','url')
+    required_attr(tag, 'path', 'url')
     path = tag.attr['path'] || tag.attr['url']
 
     found = Page.find_by_path(absolute_path_for(tag.locals.page.path, path))
@@ -885,7 +889,7 @@ module StandardTags
     tag.expand
     options = tag.locals.random
     option = options[rand(options.size)]
-    option if option
+    option
   end
   tag 'random:option' do |tag|
     items = tag.locals.random
@@ -909,7 +913,7 @@ module StandardTags
 
     <pre><code><r:escape_html>...</r:escape_html></code></pre>
   }
-  tag "escape_html" do |tag|
+  tag 'escape_html' do |tag|
     CGI.escapeHTML(tag.expand)
   end
 
@@ -943,9 +947,10 @@ module StandardTags
     hash = tag.locals.navigation = {}
     tag.expand
     raise TagError.new("`navigation' tag must include a `normal' tag") unless hash.has_key? :normal
+
     ActiveSupport::Deprecation.warn("The 'urls' attribute of the r:navigation tag has been deprecated in favour of 'paths'. Please update your site.") if tag.attr['urls']
     result = []
-    pairs = (tag.attr['paths']||tag.attr['urls']).to_s.split('|').map do |pair|
+    pairs = (tag.attr['paths'] || tag.attr['urls']).to_s.split('|').map do |pair|
       parts = pair.split(':')
       value = parts.pop
       key = parts.join(':')
@@ -953,36 +958,36 @@ module StandardTags
     end
     pairs.each_with_index do |(title, path), i|
       compare_path = remove_trailing_slash(path)
-      page_path = remove_trailing_slash(self.path)
+      page_path = remove_trailing_slash(path)
       hash[:title] = title
       hash[:path] = path
       tag.locals.first_child = i == 0
       tag.locals.last_child = i == pairs.length - 1
-      case page_path
-      when compare_path
-        result << (hash[:here] || hash[:selected] || hash[:normal]).call
-      when Regexp.compile( '^' + Regexp.quote(path))
-        result << (hash[:selected] || hash[:normal]).call
-      else
-        result << hash[:normal].call
-      end
+      result << case page_path
+                when compare_path
+                  (hash[:here] || hash[:selected] || hash[:normal]).call
+                when Regexp.compile('^' + Regexp.quote(path))
+                  (hash[:selected] || hash[:normal]).call
+                else
+                  hash[:normal].call
+                end
     end
     between = hash.has_key?(:between) ? hash[:between].call : ' '
     result.reject { |i| i.blank? }.join(between)
   end
-  [:normal, :here, :selected, :between].each do |symbol|
+  %i[normal here selected between].each do |symbol|
     tag "navigation:#{symbol}" do |tag|
       hash = tag.locals.navigation
       hash[symbol] = tag.block
     end
   end
-  [:title, :path].each do |symbol|
+  %i[title path].each do |symbol|
     tag "navigation:#{symbol}" do |tag|
       hash = tag.locals.navigation
       hash[symbol]
     end
   end
-  tag "navigation:url" do |tag|
+  tag 'navigation:url' do |tag|
     hash = tag.locals.navigation
     ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
     hash[:path]
@@ -1069,6 +1074,7 @@ module StandardTags
   tag 'status' do |tag|
     status = tag.globals.page.status.name
     return status.downcase if tag.attr['downcase']
+
     status
   end
 
@@ -1080,7 +1086,7 @@ module StandardTags
     <pre><code><r:field name="Keywords" /></code></pre>
   )
   tag 'field' do |tag|
-    required_attr(tag,'name')
+    required_attr(tag, 'name')
     tag.locals.page.field(tag.attr['name']).try(:content)
   end
 
@@ -1095,14 +1101,14 @@ module StandardTags
     <pre><code><r:if_field name="author" [equals|matches="John"] [ignore_case="true|false"]>...</r:if_field></code></pre>
   )
   tag 'if_field' do |tag|
-    required_attr(tag,'name')
+    required_attr(tag, 'name')
     field = tag.locals.page.field(tag.attr['name'])
     return '' if field.nil?
-    tag.expand if case
-      when (tag.attr['equals'] and tag.attr['ignore_case'] == 'false') then field.content == tag.attr['equals']
-      when tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
-      when tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
-      else field
+
+    tag.expand if if tag.attr['equals'] && (tag.attr['ignore_case'] == 'false') then field.content == tag.attr['equals']
+                  elsif tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
+                  elsif tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
+                  else field
     end
   end
 
@@ -1117,13 +1123,12 @@ module StandardTags
     <pre><code><r:unless_field name="author" [equals|matches="John"] [ignore_case="true|false"]>...</r:unless_field></code></pre>
   )
   tag 'unless_field' do |tag|
-    required_attr(tag,'name')
+    required_attr(tag, 'name')
     field = tag.locals.page.field(tag.attr['name'])
-    tag.expand unless case
-      when (field and (tag.attr['equals'] and tag.attr['ignore_case'] == 'false')) then field.content == tag.attr['equals']
-      when (field and tag.attr['equals']) then field.content.downcase == tag.attr['equals'].downcase
-      when (field and tag.attr['matches']) then field.content =~ build_regexp_for(tag, 'matches')
-      else field
+    tag.expand unless if field && (tag.attr['equals'] && (tag.attr['ignore_case'] == 'false')) then field.content == tag.attr['equals']
+                      elsif field && tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
+                      elsif field && tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
+                      else field
     end
   end
 
@@ -1133,20 +1138,20 @@ module StandardTags
   desc %{
     Returns TrustyCms::Config['site.title'] as configured under the Settings tab.
   }
-  tag "site:title" do |tag|
-    TrustyCms::Config["site.title"]
+  tag 'site:title' do |_tag|
+    TrustyCms::Config['site.title']
   end
   desc %{
     Returns TrustyCms::Config['site.host'] as configured under the Settings tab.
   }
-  tag "site:host" do |tag|
-    TrustyCms::Config["site.host"]
+  tag 'site:host' do |_tag|
+    TrustyCms::Config['site.host']
   end
   desc %{
     Returns TrustyCms::Config['dev.host'] as configured under the Settings tab.
   }
-  tag "site:dev_host" do |tag|
-    TrustyCms::Config["dev.host"]
+  tag 'site:dev_host' do |_tag|
+    TrustyCms::Config['dev.host']
   end
 
   tag 'meta:description' do |tag|
@@ -1159,7 +1164,7 @@ module StandardTags
     end
   end
 
- tag 'meta:keywords' do |tag|
+  tag 'meta:keywords' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
     keywords = CGI.escapeHTML(tag.locals.page.field(:keywords).try(:content)) if tag.locals.page.field(:keywords)
     if show_tag
@@ -1169,183 +1174,184 @@ module StandardTags
     end
   end
 
-  desc "Widget of sharing icons"
-    tag "rad_share_widget" do |tag|
-      attributes = tag.attr.to_options
-      url = attributes[:url].nil? ? request.url : attributes[:url]
-      message = attributes[:message].nil? ? "Check out #{tag.locals.page.title}." : attributes[:message]
-      email_subject = attributes[:email_subject].nil? ? tag.locals.page.title : attributes[:email_subject]
-      email_message = attributes[:email_message].nil? ? "I thought you might be interested in this: #{url}" : "#{attributes[:email_message]} #{url}"
-      email_action_url = attributes[:email_action_url].nil? ? "/rad_social/mail" : attributes[:email_action_url]
-      request.env["action_controller.instance"].render_to_string :partial => "widget/horizontal_widget",
-                               :locals => { :url => url,
-                                            :message => message,
-                                            :email_subject => email_subject,
-                                            :email_message => email_message,
-                                            :email_action_url => email_action_url
-                               }
-    end
+  desc 'Widget of sharing icons'
+  tag 'rad_share_widget' do |tag|
+    attributes = tag.attr.to_options
+    url = attributes[:url].nil? ? request.url : attributes[:url]
+    message = attributes[:message].nil? ? "Check out #{tag.locals.page.title}." : attributes[:message]
+    email_subject = attributes[:email_subject].nil? ? tag.locals.page.title : attributes[:email_subject]
+    email_message = attributes[:email_message].nil? ? "I thought you might be interested in this: #{url}" : "#{attributes[:email_message]} #{url}"
+    email_action_url = attributes[:email_action_url].nil? ? '/rad_social/mail' : attributes[:email_action_url]
+    request.env['action_controller.instance'].render_to_string partial: 'widget/horizontal_widget',
+                                                               locals: { url: url,
+                                                                         message: message,
+                                                                         email_subject: email_subject,
+                                                                         email_message: email_message,
+                                                                         email_action_url: email_action_url }
+  end
 
   private
-    def render_children_with_pagination(tag, opts={})
-      if opts[:aggregate]
-        findable = Page
-        options = aggregate_children(tag)
-      else
-        findable = tag.locals.children
-        options = children_find_options(tag)
-      end
-      paging = pagination_find_options(tag)
-      result = []
-      tag.locals.previous_headers = {}
-      displayed_children = paging ? findable.paginate(options.merge(paging)) : findable.all.where(options[:conditions]).order(options[:order])
-      displayed_children.each_with_index do |item, i|
-        tag.locals.child = item
-        tag.locals.page = item
-        tag.locals.first_child = i == 0
-        tag.locals.last_child = i == displayed_children.length - 1
-        result << tag.expand
-      end
-      if paging && displayed_children.total_pages > 1
-        tag.locals.paginated_list = displayed_children
-        result << tag.render('pagination', tag.attr.dup)
-      end
-      result.flatten.join('')
-    end
 
-    def children_find_options(tag)
-      attr = tag.attr.symbolize_keys
-
-      options = {}
-
-      [:limit, :offset].each do |symbol|
-        if number = attr[symbol]
-          if number =~ /^\d+$/
-            options[symbol] = number.to_i
-          else
-            raise TagError.new("`#{symbol}' attribute must be a positive number")
-          end
-        end
-      end
-
-      by = (attr[:by] || 'published_at').strip
-      order = (attr[:order] || 'asc').strip
-      order_string = ''
-      if self.attributes.keys.include?(by)
-        order_string << by
-      else
-        raise TagError.new("`by' attribute of `each' tag must be set to a valid field name")
-      end
-      if order =~ /^(asc|desc)$/i
-        order_string << " #{$1.upcase}"
-      else
-        raise TagError.new(%{`order' attribute of `each' tag must be set to either "asc" or "desc"})
-      end
-      options[:order] = order_string
-
-      status = (attr[:status] || ( dev?(tag.globals.page.request) ? 'all' : 'published')).downcase
-      unless status == 'all'
-        stat = Status[status]
-        unless stat.nil?
-          options[:conditions] = ["(virtual = ?) and (status_id = ?)", false, stat.id]
-        else
-          raise TagError.new(%{`status' attribute of `each' tag must be set to a valid status})
-        end
-      else
-        options[:conditions] = ["virtual = ?", false]
-      end
-      options
-    end
-
-    def aggregate_children(tag)
+  def render_children_with_pagination(tag, opts = {})
+    if opts[:aggregate]
+      findable = Page
+      options = aggregate_children(tag)
+    else
+      findable = tag.locals.children
       options = children_find_options(tag)
-      parent_ids = tag.locals.parent_ids
+    end
+    paging = pagination_find_options(tag)
+    result = []
+    tag.locals.previous_headers = {}
+    displayed_children = paging ? findable.paginate(options.merge(paging)) : findable.all.where(options[:conditions]).order(options[:order])
+    displayed_children.each_with_index do |item, i|
+      tag.locals.child = item
+      tag.locals.page = item
+      tag.locals.first_child = i == 0
+      tag.locals.last_child = i == displayed_children.length - 1
+      result << tag.expand
+    end
+    if paging && displayed_children.total_pages > 1
+      tag.locals.paginated_list = displayed_children
+      result << tag.render('pagination', tag.attr.dup)
+    end
+    result.flatten.join('')
+  end
 
-      conditions = options[:conditions]
-      conditions.first << " AND parent_id IN (?)"
-      conditions << parent_ids
-      options
+  def children_find_options(tag)
+    attr = tag.attr.symbolize_keys
+
+    options = {}
+
+    %i[limit offset].each do |symbol|
+      if number = attr[symbol]
+        if number =~ /^\d+$/
+          options[symbol] = number.to_i
+        else
+          raise TagError.new("`#{symbol}' attribute must be a positive number")
+        end
+      end
     end
 
-    def pagination_find_options(tag)
-      attr = tag.attr.symbolize_keys
-      if attr[:paginated] == 'true'
-        pagination_parameters.merge(attr.slice(:per_page))
+    by = (attr[:by] || 'published_at').strip
+    order = (attr[:order] || 'asc').strip
+    order_string = ''
+    if attributes.keys.include?(by)
+      order_string << by
+    else
+      raise TagError.new("`by' attribute of `each' tag must be set to a valid field name")
+    end
+    if order =~ /^(asc|desc)$/i
+      order_string << " #{$1.upcase}"
+    else
+      raise TagError.new(%{`order' attribute of `each' tag must be set to either "asc" or "desc"})
+    end
+    options[:order] = order_string
+
+    status = (attr[:status] || (dev?(tag.globals.page.request) ? 'all' : 'published')).downcase
+    if status == 'all'
+      options[:conditions] = ['virtual = ?', false]
+    else
+      stat = Status[status]
+      if stat.nil?
+        raise TagError.new(%{`status' attribute of `each' tag must be set to a valid status})
       else
-        false
+        options[:conditions] = ['(virtual = ?) and (status_id = ?)', false, stat.id]
       end
     end
+    options
+  end
 
-    def will_paginate_options(tag)
-      attr = tag.attr.symbolize_keys
-      if attr[:paginated] == 'true'
-        attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :per_page).merge({:renderer => TrustyCms::Pagination::LinkRenderer.new(tag.globals.page.path)})
-      else
-        {}
-      end
+  def aggregate_children(tag)
+    options = children_find_options(tag)
+    parent_ids = tag.locals.parent_ids
+
+    conditions = options[:conditions]
+    conditions.first << ' AND parent_id IN (?)'
+    conditions << parent_ids
+    options
+  end
+
+  def pagination_find_options(tag)
+    attr = tag.attr.symbolize_keys
+    if attr[:paginated] == 'true'
+      pagination_parameters.merge(attr.slice(:per_page))
+    else
+      false
     end
+  end
 
-    def remove_trailing_slash(string)
-      (string =~ %r{^(.*?)/$}) ? $1 : string
+  def will_paginate_options(tag)
+    attr = tag.attr.symbolize_keys
+    if attr[:paginated] == 'true'
+      attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :per_page).merge({ renderer: TrustyCms::Pagination::LinkRenderer.new(tag.globals.page.path) })
+    else
+      {}
     end
+  end
 
-    def tag_part_name(tag)
-      tag.attr['part'] || 'body'
+  def remove_trailing_slash(string)
+    string =~ %r{^(.*?)/$} ? $1 : string
+  end
+
+  def tag_part_name(tag)
+    tag.attr['part'] || 'body'
+  end
+
+  def build_regexp_for(tag, attribute_name)
+    ignore_case = tag.attr.has_key?('ignore_case') && tag.attr['ignore_case'] == 'false' ? nil : true
+    begin
+      regexp = Regexp.new(tag.attr['matches'], ignore_case)
+    rescue RegexpError => e
+      raise TagError.new("Malformed regular expression in `#{attribute_name}' argument of `#{tag.name}' tag: #{e.message}")
     end
+    regexp
+  end
 
-    def build_regexp_for(tag, attribute_name)
-      ignore_case = tag.attr.has_key?('ignore_case') && tag.attr['ignore_case']=='false' ? nil : true
-      begin
-        regexp = Regexp.new(tag.attr['matches'], ignore_case)
-      rescue RegexpError => e
-        raise TagError.new("Malformed regular expression in `#{attribute_name}' argument of `#{tag.name}' tag: #{e.message}")
-      end
-      regexp
+  def relative_url_for(url, _request)
+    File.join(ActionController::Base.relative_url_root || '', url)
+  end
+
+  def absolute_path_for(base_path, new_path)
+    if new_path.first == '/'
+      new_path
+    else
+      File.expand_path(File.join(base_path, new_path))
     end
+  end
 
-    def relative_url_for(url, request)
-      File.join(ActionController::Base.relative_url_root || '', url)
+  def page_found?(page)
+    page && !(FileNotFoundPage === page)
+  end
+
+  def boolean_attr_or_error(tag, attribute_name, default)
+    attribute = attr_or_error(tag, attribute_name: attribute_name, default: default.to_s, values: 'true, false')
+    attribute.to_s.downcase == 'true'
+  end
+
+  def attr_or_error(tag, options = {})
+    attribute_name = options[:attribute_name].to_s
+    default = options[:default]
+    values = options[:values].split(',').map!(&:strip)
+
+    attribute = (tag.attr[attribute_name] || default).to_s
+    raise TagError.new(%{`#{attribute_name}' attribute of `#{tag.name}' tag must be one of: #{values.join(', ')}}) unless values.include?(attribute)
+
+    attribute
+  end
+
+  def required_attr(tag, *attribute_names)
+    attr_collection = attribute_names.map { |a| "`#{a}'" }.join(' or ')
+    raise TagError.new("`#{tag.name}' tag must contain a #{attr_collection} attribute.") if (tag.attr.keys & attribute_names).blank?
+  end
+
+  def dev?(request)
+    return false if request.nil?
+
+    if dev_host = TrustyCms::Config['dev.host']
+      dev_host == request.host
+    else
+      request.host =~ /^dev\./
     end
-
-    def absolute_path_for(base_path, new_path)
-      if new_path.first == '/'
-        new_path
-      else
-        File.expand_path(File.join(base_path, new_path))
-      end
-    end
-
-    def page_found?(page)
-      page && !(FileNotFoundPage === page)
-    end
-
-    def boolean_attr_or_error(tag, attribute_name, default)
-      attribute = attr_or_error(tag, :attribute_name => attribute_name, :default => default.to_s, :values => 'true, false')
-      (attribute.to_s.downcase == 'true') ? true : false
-    end
-
-    def attr_or_error(tag, options = {})
-      attribute_name = options[:attribute_name].to_s
-      default = options[:default]
-      values = options[:values].split(',').map!(&:strip)
-
-      attribute = (tag.attr[attribute_name] || default).to_s
-      raise TagError.new(%{`#{attribute_name}' attribute of `#{tag.name}' tag must be one of: #{values.join(', ')}}) unless values.include?(attribute)
-      return attribute
-    end
-
-    def required_attr(tag, *attribute_names)
-      attr_collection = attribute_names.map{|a| "`#{a}'"}.join(' or ')
-      raise TagError.new("`#{tag.name}' tag must contain a #{attr_collection} attribute.") if (tag.attr.keys & attribute_names).blank?
-    end
-
-    def dev?(request)
-      return false if request.nil?
-      if dev_host = TrustyCms::Config['dev.host']
-        dev_host == request.host
-      else
-        request.host =~ /^dev\./
-      end
-    end
-
+  end
 end

@@ -1,8 +1,8 @@
 module SnippetTags
   include TrustyCms::Taggable
-  
+
   class TagError < StandardError; end
-  
+
   desc %{
     Renders the snippet specified in the @name@ attribute within the context of a page.
 
@@ -22,7 +22,7 @@ module SnippetTags
     name = tag['name']
 
     snippet = snippet_cache(name.strip)
-    
+
     if snippet
       tag.locals.yield = tag.expand if tag.double?
       tag.globals.page.render_snippet(snippet)
@@ -48,7 +48,7 @@ module SnippetTags
     the snippet is called as a double tag.
 
     *Usage (within a snippet):*
-    
+
     <pre><code>
     <div id="outer">
       <p>before</p>

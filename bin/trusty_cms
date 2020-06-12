@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-ENV["RAILS_ENV"] ||= 'production'
+ENV['RAILS_ENV'] ||= 'production'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..')
 
 require 'ruby_version_check'
-Signal.trap("INT") { puts; exit }
+Signal.trap('INT') { puts; exit }
 
 require 'trusty_cms'
 if ARGV.any? { |arg| %w(--version -v).any? { |flag| arg == flag } }
@@ -19,7 +19,6 @@ require 'rails_generator'
 require 'rails_generator/scripts/generate'
 
 class Rails::Generator::Base
-
   def self.use_application_sources!
     reset_sources
     sources << Rails::Generator::PathSource.new(:builtin, "#{File.dirname(__FILE__)}/../lib/generators")
@@ -46,7 +45,6 @@ class Rails::Generator::Base
       end
     end
   end
-
 end
 
-Rails::Generators.invoke("trusty_cms", [ARGV])
+Rails::Generators.invoke('trusty_cms', [ARGV])

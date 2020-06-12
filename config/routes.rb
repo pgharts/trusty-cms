@@ -1,16 +1,16 @@
 TrustyCms::Application.routes.draw do
   root to: 'site#show_page'
-  devise_for :users, module: :devise, :skip => :registration
+  devise_for :users, module: :devise, skip: :registration
   as :user do
     post 'authenticate', to: 'devise/sessions#create', as: :authenticate
   end
   get '/rad_social/mail' => 'social_mailer#social_mail_form', as: :rad_social_mail_form
   post '/rad_social/mail' => 'social_mailer#create_social_mail', as: :rad_create_social_mail
-  TrustyCms::Application.config.enabled_extensions.each { |ext|
-  }
+  TrustyCms::Application.config.enabled_extensions.each do |ext|
+  end
   namespace :admin do
     resources :pages do
-      resources :children, :controller => 'pages'
+      resources :children, controller: 'pages'
       get 'remove', on: :member
     end
     resources :layouts do
@@ -22,7 +22,7 @@ TrustyCms::Application.routes.draw do
     resources :snippets do
       get :remove, on: :member
     end
-    post 'save-table-position' => "pages#save_table_position", as: "save_tables_position"
+    post 'save-table-position' => 'pages#save_table_position', as: 'save_tables_position'
 
     resources :assets do
       get :remove, on: :member
@@ -38,7 +38,7 @@ TrustyCms::Application.routes.draw do
     end
   end
 
-  match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => [:post, :put]
+  match 'admin/preview' => 'admin/pages#preview', :as => :preview, :via => %i[post put]
   get 'admin' => 'admin/pages#index'
 
   namespace :admin do

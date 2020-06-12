@@ -16,10 +16,10 @@ module Admin::PagesHelper
 
   def status_to_display
     @page.status_id = 100 if @page.status_id == 90
-    @display_status = Status.selectable.map{ |s| [I18n.translate(s.name.downcase), s.id] }
+    @display_status = Status.selectable.map { |s| [I18n.translate(s.name.downcase), s.id] }
   end
 
   def clean_page_description(page)
-    page.description.to_s.strip.gsub(/\t/,'').gsub(/\s+/,' ')
+    page.description.to_s.strip.gsub(/\t/, '').gsub(/\s+/, ' ')
   end
 end

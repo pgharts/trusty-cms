@@ -2,22 +2,19 @@
 # See more here: http://stackoverflow.com/questions/39278864/openstruct-issue-with-ruby-2-3-1/39280374#39280374
 
 class OpenStruct
-
-  def initialize(hash=nil)
+  def initialize(hash = nil)
     @table = {}
-    if hash
-      hash.each_pair do |k, v|
-        k = k.to_sym
-        @table[k] = v
-        new_ostruct_member(k)
-      end
+    hash&.each_pair do |k, v|
+      k = k.to_sym
+      @table[k] = v
+      new_ostruct_member(k)
     end
   end
 
   def modifiable
     begin
       @modifiable = true
-    rescue
+    rescue StandardError
       raise RuntimeError, "can't modify frozen #{self.class}", caller(3)
     end
     @table
@@ -41,6 +38,7 @@ class OpenStruct
       if len != 1
         raise ArgumentError, "wrong number of arguments (#{len} for 1)", caller(1)
       end
+
       modifiable[new_ostruct_member(mname)] = args[0]
     elsif len == 0
       @table[mid]
@@ -50,5 +48,4 @@ class OpenStruct
       raise err
     end
   end
-
 end

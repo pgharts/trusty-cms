@@ -39,7 +39,7 @@ module TrustyCms
         lambda do
           # Ruby 1.9.2 yields self in instance_eval... see https://gist.github.com/479572
           # lambdas are as strict as methods in 1.9.x, making sure that the args match, Procs are not.
-          if RUBY_VERSION =~ /^1\.9/ and proc.lambda? and proc.arity != 1
+          if RUBY_VERSION =~ /^1\.9/ && proc.lambda? && (proc.arity != 1)
             raise "You can only pass a proc ('Proc.new') or a lambda that takes exactly one arg (for self) to the wrap method."
           end
 
@@ -51,7 +51,7 @@ module TrustyCms
     class Collector < OpenStruct
       def initialize
         super
-        @table = Hash.new {|h,k| h[k] = Response.new }
+        @table = Hash.new { |h, k| h[k] = Response.new }
       end
 
       def initialize_copy(orig)
@@ -90,7 +90,7 @@ module TrustyCms
         if block_given?
           @publish_block = block
         else
-          raise ArgumentError, "Block required to publish" unless @publish_block
+          raise ArgumentError, 'Block required to publish' unless @publish_block
         end
       end
 

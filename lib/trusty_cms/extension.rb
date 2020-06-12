@@ -33,7 +33,7 @@ module TrustyCms
     end
 
     def migrations_path
-      File.join(self.root, 'db', 'migrate')
+      File.join(root, 'db', 'migrate')
     end
 
     def migrates_from
@@ -41,11 +41,11 @@ module TrustyCms
     end
 
     def routing_file
-      File.join(self.root, 'config', 'routes.rb')
+      File.join(root, 'config', 'routes.rb')
     end
 
     def load_initializers
-      Dir["#{self.root}/config/initializers/**/*.rb"].sort.each do |initializer|
+      Dir["#{root}/config/initializers/**/*.rb"].sort.each do |initializer|
         require initializer
       end
     end
@@ -53,7 +53,7 @@ module TrustyCms
     def migrator
       unless @migrator
         extension = self
-        @migrator = Class.new(ExtensionMigrator){ self.extension = extension }
+        @migrator = Class.new(ExtensionMigrator) { self.extension = extension }
       end
       @migrator
     end
@@ -62,7 +62,7 @@ module TrustyCms
       AdminUI.instance
     end
 
-    def tab(name, options={}, &block)
+    def tab(name, options = {}, &block)
       @the_tab = admin.nav[name]
       unless @the_tab
         @the_tab = TrustyCms::AdminUI::NavTab.new(name)
@@ -81,7 +81,7 @@ module TrustyCms
       if block_given?
         block.call(@the_tab)
       end
-      return @the_tab
+      @the_tab
     end
     alias :add_tab :tab
 
@@ -95,18 +95,16 @@ module TrustyCms
     #   ThirdPartyExtension.extend(MyExtension::IntegrationPoints)
     # end
     def extension_enabled?(extension)
-      begin
-        extension = (extension.to_s.camelcase + 'Extension').constantize
-        extension.enabled?
-      rescue NameError
-        false
-      end
+      extension = (extension.to_s.camelcase + 'Extension').constantize
+      extension.enabled?
+    rescue NameError
+      false
     end
 
     class << self
-
       def activate_extension
         return if instance.active?
+
         instance.activate_extension if instance.respond_to? :activate
         Dir["#{Rails.root}/config/routes/**/*.rb"].each do |route_file|
         end
@@ -115,6 +113,7 @@ module TrustyCms
 
       def deactivate_extension
         return unless instance.active?
+
         instance.active = false
         instance.deactivate if instance.respond_to? :deactivate
       end
@@ -124,14 +123,13 @@ module TrustyCms
         subclass.extension_name = subclass.name.to_name('Extension')
       end
 
-      def migrate_from(extension_name, until_migration=nil)
+      def migrate_from(extension_name, until_migration = nil)
         instance.migrates_from[extension_name] = until_migration
       end
 
-      def extension_config(&block)
+      def extension_config
         yield Rails.configuration
       end
-
     end
   end
 end

@@ -1,5 +1,4 @@
 class AssetType
-
   # The Asset Type encapsulates a type of attachment.
   # Conventionally this would a sensible category like 'image' or 'video'
   # that should be processed and presented in a particular way.
@@ -34,10 +33,10 @@ class AssetType
     Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(asset_content_type) end
     Asset.send :define_class_method, "#{name}_condition".intern do this.condition; end
     Asset.send :define_class_method, "not_#{name}_condition".intern do this.non_condition; end
-    Asset.send :scope, plural.to_sym, -> {where(:conditions => condition)}
-    Asset.send :scope, "not_#{plural}".to_sym, -> {where(:conditions => non_condition)}
+    Asset.send :scope, plural.to_sym, -> { where(conditions: condition) }
+    Asset.send :scope, "not_#{plural}".to_sym, -> { where(conditions: non_condition) }
 
-    self.define_radius_tags
+    define_radius_tags
     @@types.push self
     @@type_lookup[@name] = self
   end
@@ -46,21 +45,21 @@ class AssetType
     name.to_s.pluralize
   end
 
-  def icon(style_name='icon')
-    if File.exist?(Rails.root + "public/images/admin/assets/#{icon_name}_#{style_name.to_s}.png")
-      return "/assets/admin/#{icon_name}_#{style_name.to_s}.png"
+  def icon(style_name = 'icon')
+    if File.exist?(Rails.root + "public/images/admin/assets/#{icon_name}_#{style_name}.png")
+      "/assets/admin/#{icon_name}_#{style_name}.png"
     else
-      return "/assets/admin/#{icon_name}_icon.png"
+      "/assets/admin/#{icon_name}_icon.png"
     end
   end
 
-  def icon_path(style_name='icon')
+  def icon_path(style_name = 'icon')
     Rails.root + "public#{icon(style_name)}"
   end
 
   def condition
     if @mimes.any?
-      ["asset_content_type IN (#{@mimes.map{'?'}.join(',')})", *@mimes]
+      ["asset_content_type IN (#{@mimes.map { '?' }.join(',')})", *@mimes]
     else
       self.class.other_condition
     end
@@ -72,7 +71,7 @@ class AssetType
 
   def non_condition
     if @mimes.any?
-      ["NOT asset_content_type IN (#{@mimes.map{'?'}.join(',')})", *@mimes]
+      ["NOT asset_content_type IN (#{@mimes.map { '?' }.join(',')})", *@mimes]
     else
       self.class.non_other_condition
     end
@@ -98,23 +97,23 @@ class AssetType
   def paperclip_styles
     # Styles are not relevant if processors are not defined.
     @paperclip_styles ||= if paperclip_processors.any?
-      normalize_style_rules(configured_styles.merge(styles))
-    else
-      {}
+                            normalize_style_rules(configured_styles.merge(styles))
+                          else
+                            {}
     end
     @paperclip_styles
   end
 
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
   # Solitary strings are assumed to be  #
-  def normalize_style_rules(styles={})
+  def normalize_style_rules(styles = {})
     styles.each_pair do |name, rule|
       unless rule.is_a? Hash
         if rule =~ /\=/
-          parameters = rule.split(',').collect{ |parameter| parameter.split('=') }              # array of pairs
-          rule = Hash[parameters].symbolize_keys                                     # into hash of :first => last
+          parameters = rule.split(',').collect { |parameter| parameter.split('=') } # array of pairs
+          rule = Hash[parameters].symbolize_keys # into hash of :first => last
         else
-          rule = {:geometry => rule}                                                 # simplest case: name:geom|name:geom
+          rule = { geometry: rule } # simplest case: name:geom|name:geom
         end
       end
       rule[:geometry] ||= rule.delete(:size)
@@ -122,10 +121,10 @@ class AssetType
     end
     styles
   end
-  
+
   def standard_styles
     {
-      :thumbnail => { :geometry => '100x100#', :format => :png }
+      thumbnail: { geometry: '100x100#', format: :png },
     }
   end
 
@@ -140,17 +139,17 @@ class AssetType
   #
   def configured_styles
     @configured_styles ||= if style_definitions = TrustyCms.config["assets.thumbnails.#{name}"]
-      style_definitions.split('|').each_with_object({}) do |definition, styles|
-        name, rule = definition.split(':')
-        styles[name.strip.to_sym] = rule.to_s.strip
-      end
-    else
-      {}
+                             style_definitions.split('|').each_with_object({}) do |definition, styles|
+                               name, rule = definition.split(':')
+                               styles[name.strip.to_sym] = rule.to_s.strip
+                             end
+                           else
+                             {}
     end
   end
 
   def legacy_styles
-    TrustyCms::config["assets.additional_thumbnails"].to_s.gsub(' ','').split(',').collect{|s| s.split('=')}.inject({}) {|ha, (k, v)| ha[k.to_sym] = v; ha}
+    TrustyCms::config['assets.additional_thumbnails'].to_s.gsub(' ', '').split(',').collect { |s| s.split('=') }.inject({}) { |ha, (k, v)| ha[k.to_sym] = v; ha }
   end
 
   def style_dimensions(style_name)
@@ -160,21 +159,21 @@ class AssetType
   end
 
   def define_radius_tags
-    type = self.name
-    Page.class_eval {
+    type = name
+    Page.class_eval do
       tag "asset:if_#{type}" do |tag|
         tag.expand if find_asset(tag, tag.attr.dup).send("#{type}?".to_sym)
       end
       tag "asset:unless_#{type}" do |tag|
         tag.expand unless find_asset(tag, tag.attr.dup).send("#{type}?".to_sym)
       end
-    }
+    end
   end
 
   # class methods
 
   def self.for(attachment)
-    extension = File.extname(attachment.original_filename).sub(/^\.+/, "")
+    extension = File.extname(attachment.original_filename).sub(/^\.+/, '')
     from_extension(extension) || from_mimetype(attachment.instance_read(:content_type)) || catchall
   end
 
@@ -187,20 +186,21 @@ class AssetType
   end
 
   def self.catchall
-    @@default_type ||= self.find(:other)
+    @@default_type ||= find(:other)
   end
 
   def self.known?(name)
-    !self.find(name).nil?
+    !find(name).nil?
   end
 
   def self.slice(*types)
-    @@type_lookup.slice(*types.map(&:to_sym)).values if types   # Hash#slice is provided by will_paginate
+    @@type_lookup.slice(*types.map(&:to_sym)).values if types # Hash#slice is provided by will_paginate
   end
 
   def self.find(type)
     @@type_lookup[type] if type
   end
+
   def self.[](type)
     find(type)
   end
@@ -218,19 +218,18 @@ class AssetType
   end
 
   def self.mime_types_for(*names)
-    names.collect{ |name| find(name).mime_types }.flatten
+    names.collect { |name| find(name).mime_types }.flatten
   end
 
   def self.conditions_for(*names)
-    names.collect{ |name| self.find(name).sanitized_condition }.join(' OR ')
+    names.collect { |name| find(name).sanitized_condition }.join(' OR ')
   end
 
   def self.non_other_condition
-    ["asset_content_type IN (#{known_mimetypes.map{'?'}.join(',')})", *known_mimetypes]
+    ["asset_content_type IN (#{known_mimetypes.map { '?' }.join(',')})", *known_mimetypes]
   end
 
   def self.other_condition
-    ["NOT asset_content_type IN (#{known_mimetypes.map{'?'}.join(',')})", *known_mimetypes]
+    ["NOT asset_content_type IN (#{known_mimetypes.map { '?' }.join(',')})", *known_mimetypes]
   end
-
 end

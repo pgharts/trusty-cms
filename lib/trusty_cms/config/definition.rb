@@ -1,7 +1,6 @@
 module TrustyCms
   class Config
     class Definition
-
       attr_reader :empty, :default, :type, :notes, :validate_with, :select_from, :allow_blank, :allow_display, :allow_change, :units, :definer
 
       # Configuration 'definitions' are metadata held in memory that add restriction and description to individual config entries.
@@ -22,8 +21,8 @@ module TrustyCms
       #
       # See the method documentation in TrustyCms::Config for options and conventions.
       #
-      def initialize(options={})
-        [:empty, :default, :type, :notes, :validate_with, :select_from, :allow_blank, :allow_change, :allow_display, :units, :definer].each do |attribute|
+      def initialize(options = {})
+        %i[empty default type notes validate_with select_from allow_blank allow_change allow_display units definer].each do |attribute|
           instance_variable_set "@#{attribute}".to_sym, options[attribute]
         end
       end
@@ -61,7 +60,7 @@ module TrustyCms
           choices = select_from
           choices = choices.call if choices.respond_to? :call
           choices = normalize_selection(choices)
-          choices.unshift ["",""] if allow_blank?
+          choices.unshift ['', ''] if allow_blank?
           choices
         end
       end
@@ -71,14 +70,14 @@ module TrustyCms
       #
       def normalize_selection(choices)
         choices = choices.to_a if Hash === choices
-        choices = choices.collect{|c| (c.is_a? Array) ? c : [c,c]}
+        choices = choices.collect { |c| (c.is_a? Array) ? c : [c, c] }
       end
 
       # If the config item is a selector and :select_from specifies [name, value] pairs (as hash or array),
       # this will return the name corresponding to the currently selected value.
       #
       def selected(value)
-        if value && selector? && pair = selection.find{|s| s.last == value}
+        if value && selector? && pair = selection.find { |s| s.last == value }
           pair.first
         end
       end
@@ -103,13 +102,18 @@ module TrustyCms
           setting.errors.add :value, :not_permitted unless selectable?(setting.value)
         end
         if integer?
-          Integer(setting.value) rescue setting.errors.add :value, :not_a_number
+          begin
+            Integer(setting.value)
+          rescue StandardError
+            setting.errors.add :value, :not_a_number
+          end
         end
       end
 
       # Returns true if the value is one of the permitted selections. Not case-sensitive.
       def selectable?(value)
         return true unless selector?
+
         selection.map(&:last).map(&:downcase).include?(value.downcase)
       end
 
@@ -135,7 +139,6 @@ module TrustyCms
       def hidden?
         true if allow_display == false
       end
-
     end
   end
 end

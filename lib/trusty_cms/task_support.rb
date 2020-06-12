@@ -8,15 +8,17 @@ module TrustyCms
           ActiveRecord::Base.establish_connection(env_connection)
         end
       end
+
       def config_export(path = "#{Rails.root}/config/trusty_config.yml")
-        self.establish_connection
+        establish_connection
         FileUtils.mkdir_p(File.dirname(path))
-        if File.open(File.expand_path(path), 'w') { |f| YAML.dump(TrustyCms::Config.to_hash.to_yaml,f) }
+        if File.open(File.expand_path(path), 'w') { |f| YAML.dump(TrustyCms::Config.to_hash.to_yaml, f) }
           puts "TrustyCms::Config saved to #{path}"
         end
       end
+
       def config_import(path = "#{Rails.root}/config/trusty_config.yml", clear = nil)
-        self.establish_connection
+        establish_connection
         if File.exist?(path)
           begin
             TrustyCms::Config.transaction do
@@ -40,12 +42,13 @@ module TrustyCms
       # Write the combined content of files in dir into cache_file in the same dir.
       #
       def cache_files(dir, files, cache_file)
-        cache_content = files.collect { |f|
-          File.read(File.join(dir, f)) }.join("\n\n")
+        cache_content = files.collect do |f|
+          File.read(File.join(dir, f))
+        end .join("\n\n")
 
         cache_path = File.join(dir, cache_file)
         File.delete(cache_path) if File.exists?(cache_path)
-        File.open(cache_path, "w+") { |f| f.write(cache_content) }
+        File.open(cache_path, 'w+') { |f| f.write(cache_content) }
       end
 
       # Reads through the layout file and returns an array of JS filenames
