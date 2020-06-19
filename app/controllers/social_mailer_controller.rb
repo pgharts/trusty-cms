@@ -12,13 +12,6 @@ class SocialMailerController < ApplicationController
       message: params[:message],
       subject: params[:subject],
     }
-
-    if verify_recaptcha(action: 'emailSeats')
-      RadSocialMailer.social_mail(mailer_options).deliver_now
-      head :ok
-    else
-      head :bad_request, ErrorMsg: 'We have detected suspicious activity and have disabled this feature for your user.'
-    end
   end
 
   def social_mail_form

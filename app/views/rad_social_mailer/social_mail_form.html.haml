@@ -1,6 +1,6 @@
 = stylesheet_link_tag('rad_social/rad_screen')
-= javascript_include_tag('https://www.google.com/recaptcha/api/js/recaptcha_ajax.js')
 = javascript_include_tag('rad_social/rad_email')
+= csrf_meta_tags
 
 .rad-dialog-titlebar
   %span.rad-dialog-title
@@ -31,8 +31,6 @@
         = email_message
   %input{:type=>'hidden', :name=>'subject', :value=> email_subject}
   %input{:type=>'hidden', :id=>'rs-base-message', :value=> email_message}
-  #recaptcha-container.captcha-container
-    = recaptcha_v3 action: 'emailSeats'
   %input{:type=>'hidden', :name=>'submit_url', :value=> email_action_url}
   %input.button.primary-button{:id => 'rad_email_submit', :type=>:button ,:value=>'Submit'}
   .loader

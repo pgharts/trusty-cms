@@ -1,5 +1,3 @@
-- javascript('rad_social/captcha')
-
 = form_tag
 %form{:id=>'rad_social_email_form', :class=>'rad-email-form'}
   %label{:for => 'from'}
@@ -20,6 +18,3 @@
   %input{:type=>'hidden', :name=>'submit_url', :value=>'contact/email'}
   %input.button.primary-button{:id => 'email_submit', :type=>:button ,:value=>'Submit'}
   .loader
-
-  #recaptcha-container.captcha-container
-    = recaptcha_v3 action: 'emailSeats'

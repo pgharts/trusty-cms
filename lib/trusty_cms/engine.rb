@@ -12,7 +12,6 @@ module TrustyCms
         ckeditor/skins/moono/editor.css
         ckeditor/lang/en.js
         rad_social/rad_screen.css
-        rad_social/captcha.js
         rad_social/rad_email.js
         rad_social/rad_widget.js
       )
