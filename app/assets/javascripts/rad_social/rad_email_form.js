@@ -63,17 +63,12 @@ $(document).ready(function() {
     $('#rs-from_name').val('');
     $('#rs-to').val('');
     $('#rs-message').val($('#rs-base-message').val());
-    var captcha = new Captcha("#recaptcha-container");
-    captcha.reload();
   }
 
-function processFailure(xhr)
-{
-    var captcha = new Captcha("#recaptcha-container");
+  function processFailure(xhr) {
     var error_msg = xhr.getResponseHeader("ErrorMsg");
     displayErrorMessage(error_msg);
-    captcha.reload();
-}
+  }
 
 function displayErrorMessage(msg) {
     var error_msg_div = $('.rad-email-error');
