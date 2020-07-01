@@ -132,11 +132,11 @@ GEM
     erubi (1.9.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_bot (5.2.0)
-      activesupport (>= 4.2.0)
-    factory_bot_rails (5.2.0)
-      factory_bot (~> 5.2.0)
-      railties (>= 4.2.0)
+    factory_bot (6.0.2)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.0.0)
+      factory_bot (~> 6.0.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -317,7 +317,7 @@ GEM
     will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby
@@ -325,7 +325,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   database_cleaner
-  factory_bot_rails (= 5.2.0)
+  factory_bot_rails (= 6.0.0)
   launchy (~> 2.5.0)
   mysql2
   poltergeist (~> 1.18.1)
