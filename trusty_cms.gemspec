@@ -48,6 +48,6 @@ a general purpose content managment system--not merely a blogging engine.'
   s.add_dependency 'stringex',        '>= 2.7.1', '< 2.9.0'
   s.add_dependency 'tzinfo',          '>= 1.2.3', '< 2.1.0'
   s.add_dependency 'uglifier',        '>= 3.2', '< 5.0'
-  s.add_dependency 'uuidtools', '~> 2.1.5'
+  s.add_dependency 'uuidtools', '>= 2.1.5', '< 2.3.0'
   s.add_dependency 'will_paginate', '~> 3.0'
 end
