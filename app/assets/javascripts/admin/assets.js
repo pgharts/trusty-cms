@@ -109,7 +109,7 @@ Assets = {
     $.ajax({
       url: url,
       complete: function(data, textStatus, jqXHR) {
-        // Assets.updateTable(data.responseText);
+        Assets.updateTable(data.responseText);
       }
     });
   },
