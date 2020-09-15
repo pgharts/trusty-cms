@@ -65,6 +65,7 @@ en:
     asset_errors: 'Sorry. {{errors}}'
     asset_page_attachment_note: 'Attached assets. These can be inserted with drag and drop or shown with the <code>&lt;r:assets:each /&gt;</code> tag.'
     asset_note: 'Attached assets. '
+    asset_url: 'Asset URL'
     assets: 'Assets'
     assets_explanation: 'Assets and images can be uploaded and then attached or inserted into pages, snippets and layouts. Click on an asset name above to edit it or click <code>Remove</code> to delete it.'
     assets_title: 'Assets'
