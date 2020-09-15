@@ -14,6 +14,9 @@
           %fieldset
             %label.filename
               = "#{t("clipped_extension.filename")}: #{@asset.asset_file_name unless @asset.new_record?}"
+            %br
+            %label.url
+              = "#{t("clipped_extension.asset_url")}: #{image_path @asset.thumbnail unless @asset.new_record?}"
           %p.asset
             - display_size = TrustyCms::config['assets.display_size'] || 'normal'
             = image_tag @asset.thumbnail(display_size.to_sym), :class => 'preview'
