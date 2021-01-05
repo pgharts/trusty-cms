@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (4.1.7)
+    trusty-cms (4.1.8)
       RedCloth (= 4.3.2)
       acts_as_list (>= 0.9.5, < 1.1.0)
       acts_as_tree (>= 2.6.1, < 2.9.0)
@@ -123,7 +123,8 @@ GEM
     css_parser (1.7.1)
       addressable
     database_cleaner (1.8.5)
-    delocalize (0.2.6)
+    delocalize (1.2.0)
+      rails (>= 2)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -171,7 +172,7 @@ GEM
       multipart-post
     launchy (2.5.0)
       addressable (~> 2.7)
-    libv8 (8.4.255.0)
+    libv8 (8.4.255.0-x86_64-darwin-18)
     loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
