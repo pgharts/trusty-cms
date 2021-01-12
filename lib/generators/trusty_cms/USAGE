@@ -1,0 +1,8 @@
+Description:
+    Generates a new Trusty CMS project.
+
+Example:
+    rails generate trusty_cms [PROJECT NAME]
+
+    This will create:
+        A new Trusty CMS site with the name given in [PROJECT NAME]

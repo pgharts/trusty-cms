@@ -1,0 +1,28 @@
+#
+# This is only an example configuration. Please see the Rails
+# documentation for more details.
+#
+
+development:
+  adapter: mysql2
+  database: <%= project_name%>_blank_dev
+  username:
+  password:
+  host: localhost
+
+test: &TEST
+  adapter: mysql2
+  database: <%= project_name%>_blank_test
+  username:
+  password:
+  host:
+
+production:
+  adapter: mysql2
+  database: <%= project_name%>_blank_live
+  username:
+  password:
+  socket: /tmp/mysql.sock
+
+cucumber:
+  <<: *TEST
