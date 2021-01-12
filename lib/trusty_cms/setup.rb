@@ -29,16 +29,16 @@ module TrustyCms
         password ||= prompt_for_admin_password
       end
       attributes = {
-        name: name,
-        login: username,
+        first_name: name,
+        email: username,
         password: password,
         password_confirmation: password,
       }
-      admin = User.find_by(login: username)
+      admin = User.find_by(email: username)
       admin ||= User.new
       admin.update_attributes(attributes)
       admin.admin = true
-      admin.save
+      admin.save!
       admin
     end
 
@@ -98,17 +98,17 @@ module TrustyCms
     end
 
     def prompt_for_admin_username
-      username = ask('Username (admin): ', String) do |q|
+      username = ask('Username (admin@trustarts.org): ', String) do |q|
         q.validate = /^(|.{3,40})$/
         q.responses[:not_valid] = 'Invalid username. Must be at least 3 characters long.'
         q.whitespace = :strip
       end
-      username = 'admin' if username.blank?
+      username = 'admin@trustarts.org' if username.blank?
       username
     end
 
     def prompt_for_admin_password
-      default_password = 'trusty'
+      default_password = 'Trusty123456@!'
       password = ask("Password (#{default_password}): ", String) do |q|
         q.echo = false unless defined?(::JRuby) # JRuby doesn't support stty interaction
         q.validate = /^(|.{5,40})$/

@@ -15,4 +15,6 @@ From within the directory containing your TrustyCMS instance:
 
 5. add config.extensions = [ :snippets, :clipped, :layouts, :multi_site ] to enable them in application.rb
 
+7. Add utf8 encoding to your db.yml
+   
 6. Run `bundle exec rake db:setup`, `bundle exec rake trusty_cms_engine:install:migrations`, then `bundle exec rake db:bootstrap`.
