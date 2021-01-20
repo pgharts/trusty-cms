@@ -36,7 +36,7 @@ module TrustyCms
       }
       admin = User.find_by(email: username)
       admin ||= User.new
-      admin.update_attributes(attributes)
+      admin.update(attributes)
       admin.admin = true
       admin.save!
       admin

@@ -59,7 +59,7 @@ class Admin::ResourceController < ApplicationController
   %i[create update].each do |action|
     class_eval %{
       def #{action}                                       # def create
-        model.update_attributes!(permitted_params[model_symbol])    #   model.update_attributes!(params[model_symbol])
+        model.update!(permitted_params[model_symbol])    #   model.update!(params[model_symbol])
         response_for :#{action}                           #   response_for :create
       end                                                 # end
     }, __FILE__, __LINE__

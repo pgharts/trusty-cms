@@ -75,7 +75,7 @@ class Admin::PagesController < Admin::ResourceController
       if request.referer =~ %r{/admin/pages/(\d+)/edit}
         page = Page.find($1).becomes(page_class)
         layout_id = page.layout_id
-        page.update_attributes(params[:page])
+        page.update(params[:page])
         page.published_at ||= Time.now
       else
         page = page_class.new(params[:page])

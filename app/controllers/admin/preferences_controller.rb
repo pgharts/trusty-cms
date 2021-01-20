@@ -11,7 +11,7 @@ class Admin::PreferencesController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(preferences_params)
+    if @user.update(preferences_params)
       redirect_to admin_configuration_path
     else
       flash[:error] = t('preferences_controller.error_updating')
