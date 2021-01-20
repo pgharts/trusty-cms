@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (4.1.9)
+    trusty-cms (4.2.1)
       RedCloth (= 4.3.2)
       acts_as_list (>= 0.9.5, < 1.1.0)
       acts_as_tree (>= 2.6.1, < 2.9.0)

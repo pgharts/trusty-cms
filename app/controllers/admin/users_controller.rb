@@ -29,7 +29,7 @@ class Admin::UsersController < Admin::ResourceController
       announce_cannot_remove_self_from_admin_role
     end
     model.skip_password_validation = true unless user_params[:password_confirmation].present?
-    if model.update_attributes(user_params)
+    if model.update(user_params)
       response_for :update
     else
       flash[:error] = 'There was an error saving the user. Please try again.'
