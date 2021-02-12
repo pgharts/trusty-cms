@@ -14,7 +14,7 @@ test: &TEST
   database: trusty_cms_test
   username: root
   password: ''
-  host: '127.0.0.1'
+  db: '127.0.0.1'
   port: 3306
   encoding: utf8mb4
   charset: utf8mb4
