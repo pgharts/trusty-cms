@@ -11,6 +11,7 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           - MYSQL_DATABASE: trusty_cms_test
     executor: ruby/default
+    working_directory: ~/trusty-cms
     steps:
       - checkout
       - restore_cache:
