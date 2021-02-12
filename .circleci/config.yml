@@ -1,13 +1,11 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
-
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/ruby:2.6.0-node
       - image: circleci/mysql:5.7
         environment:
+          - RAILS_ENV: test
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           - MYSQL_DATABASE: trusty_cms_test
     executor: ruby/default
