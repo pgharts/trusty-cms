@@ -10,10 +10,15 @@ development:
   password:
 
 test: &TEST
-  adapter: mysql2
+  adapter:  mysql2
   database: trusty_cms_test
   username: root
-  password:
+  password: ''
+  host: '127.0.0.1'
+  port: 3306
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_bin
 
 production:
   adapter: mysql2
