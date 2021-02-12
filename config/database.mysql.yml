@@ -2,6 +2,9 @@
 # This is only an example configuration. Please see the Rails
 # documentation for more details.
 #
+defaults: &defaults
+  adapter:  mysql
+  db:     localhost
 
 development:
   adapter: mysql2
