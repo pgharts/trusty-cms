@@ -32,9 +32,11 @@ plugins:
   stylelint:
     enabled: true
 exclude_patterns:
+- .rubocop.yml
 - spec/**/*
 - "**/vendor/**/*"
 - db/migrate/**/*
+- db/schema.rb
 - config/**/*
 - app/assets/bower_components/**/*
 - app/assets/javascripts/admin/jquery-ui.js
