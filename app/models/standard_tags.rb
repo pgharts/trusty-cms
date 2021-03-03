@@ -961,7 +961,7 @@ module StandardTags
       page_path = remove_trailing_slash(path)
       hash[:title] = title
       hash[:path] = path
-      tag.locals.first_child = i == 0
+      tag.locals.first_child = i.zero?
       tag.locals.last_child = i == pairs.length - 1
       result << case page_path
                 when compare_path
