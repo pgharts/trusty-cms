@@ -312,7 +312,7 @@ module StandardTags
   }
   tag 'if_children' do |tag|
     children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
-    tag.expand if children > 0
+    tag.expand if children.positive?
   end
 
   desc %{
@@ -327,7 +327,7 @@ module StandardTags
   }
   tag 'unless_children' do |tag|
     children = tag.locals.page.children.where(children_find_options(tag)[:conditions]).count
-    tag.expand unless children > 0
+    tag.expand unless children.positive?
   end
 
   desc %{
