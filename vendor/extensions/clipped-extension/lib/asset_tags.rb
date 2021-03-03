@@ -125,7 +125,7 @@ module AssetTags
     asset, options = asset_and_options(tag)
     raise TagError, "'container' attribute required" unless options['container']
     size = options['size'] ? options.delete('size') : 'icon'
-    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
+    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     container = options.delete('container')
     ((container.to_i - asset.height(size).to_i)/2).to_s
   end
@@ -152,7 +152,7 @@ module AssetTags
   tag 'asset:orientation' do |tag|
     asset, options = asset_and_options(tag)
     size = options['size'] ? options.delete('size') : 'original'
-    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
+    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     asset.orientation(size)
   end
 
@@ -162,7 +162,7 @@ module AssetTags
   tag 'asset:aspect' do |tag|
     asset, options = asset_and_options(tag)
     size = options['size'] ? options.delete('size') : 'original'
-    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
+    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     asset.aspect(size)
   end
 
@@ -217,7 +217,7 @@ module AssetTags
   tag 'asset:image' do |tag|
     tag.locals.asset, options = asset_and_options(tag)
     size = options.delete('size') || 'original'
-    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
+    raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     options['alt'] ||= tag.locals.asset.title
     url = tag.locals.asset.thumbnail(size)
     ActionController::Base.helpers.image_tag(url, options)
