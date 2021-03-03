@@ -116,7 +116,7 @@ module LoginSystem
       permissions = controller_permissions[action.to_s.intern]
       if allowed_roles = permissions[:when]
         allowed_roles = [allowed_roles].flatten
-        user.present? ? allowed_roles.any? { |role| user.has_role?(role) } : false
+        user.present? ? allowed_roles.any? { |role| user.role?(role) } : false
       elsif condition_method = permissions[:if]
         instance.send(condition_method)
       else

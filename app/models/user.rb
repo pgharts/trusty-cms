@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  def has_role?(role)
+  def role?(role)
     case role
     when :admin
       admin?
