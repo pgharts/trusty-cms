@@ -74,12 +74,12 @@ class Asset < ActiveRecord::Base
 
   def thumbnail(style_name = 'original')
     return asset.url if style_name.to_sym == :original
-    return asset.url(style_name.to_sym) if has_style?(style_name)
+    return asset.url(style_name.to_sym) if style?(style_name)
 
     asset_type.icon(style_name)
   end
 
-  def has_style?(style_name = 'original')
+  def style?(style_name = 'original')
     style_name == 'original' || paperclip_styles.keys.include?(style_name.to_sym)
   end
 
@@ -110,7 +110,7 @@ class Asset < ActiveRecord::Base
   end
 
   def geometry(style_name = 'original')
-    raise Paperclip::StyleError, "Requested style #{style_name} is not defined for this asset." unless has_style?(style_name)
+    raise Paperclip::StyleError, "Requested style #{style_name} is not defined for this asset." unless style?(style_name)
 
     @geometry ||= {}
     begin
