@@ -10,7 +10,7 @@ PATH
       devise
       execjs (~> 2.7)
       haml
-      haml-rails
+      haml-rails (~> 2.0)
       highline (>= 1.7.8, < 2.1.0)
       kraken-io
       mini_racer
