@@ -76,16 +76,16 @@ class Page < ActiveRecord::Base
     end
   end
 
-  def has_part?(name)
+  def part?(name)
     !part(name).nil?
   end
 
   def has_or_inherits_part?(name)
-    has_part?(name) || inherits_part?(name)
+    part?(name) || inherits_part?(name)
   end
 
   def inherits_part?(name)
-    !has_part?(name) && ancestors.any? { |page| page.has_part?(name) }
+    !part?(name) && ancestors.any? { |page| page.part?(name) }
   end
 
   def field(name)
