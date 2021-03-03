@@ -10,7 +10,7 @@ module Admin::NodeHelper
 
     @rendered_html += (render partial: 'admin/pages/node',
                               locals: { level: index, index: index, parent_index: parent_index,
-                                        page: page, simple: simple, branch: (page.children.count > 0) })
+                                        page: page, simple: simple, branch: (page.children.count.positive?) })
     index
   end
 
