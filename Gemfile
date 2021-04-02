@@ -9,7 +9,7 @@ source 'https://rubygems.org'
 
 gem 'trustygems', '~> 0.2.0'
 
-ruby '2.5.8'
+ruby '2.6.6'
 
 gemspec
 
