@@ -28,7 +28,7 @@ plugins:
         enabled: false
   rubocop:
     enabled: true
-    channel: rubocop-0-88
+    channel: rubocop-1-9-1
   stylelint:
     enabled: true
 exclude_patterns:

@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.6-node
+      - image: circleci/ruby:3.0.1-node
         environment:
           - RAILS_ENV: test
       - image: circleci/mysql:5.7
@@ -14,8 +14,6 @@ jobs:
     executor: ruby/default
     working_directory: ~/trusty-cms
     steps:
-      - ruby/install:
-          - version: '2.6.6'
       - checkout
       - restore_cache:
           keys:
