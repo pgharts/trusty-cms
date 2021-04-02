@@ -9,12 +9,15 @@ source 'https://rubygems.org'
 
 gem 'trustygems', '~> 0.2.0'
 
+ruby '2.5.8'
+
 gemspec
 
 group :development, :test do
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '6.1.0'
+  gem 'kt-paperclip', git: 'https://github.com/sd/paperclip', branch: 'remove-mimemagic-kt'
   gem 'launchy', '~> 2.5.0'
   gem 'mysql2'
   gem 'poltergeist', '~> 1.18.1'
