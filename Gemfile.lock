@@ -344,5 +344,11 @@ DEPENDENCIES
   trusty-cms!
   trustygems (~> 0.2.0)
 
+<<<<<<< HEAD
+=======
+RUBY VERSION
+   ruby 2.6.6p146
+
+>>>>>>> 9bd434c5... bump ruby version 2.6.6
 BUNDLED WITH
    2.2.19
