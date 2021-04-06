@@ -129,7 +129,7 @@ module TrustyCms::Taggable
           line.match(/^(\s*)/)[0].length
         end
       end.compact.min
-      lines.inject([]) { |ary, line| ary << line.sub(/^[ ]{#{leading}}/, '') }.join("\n")
+      lines.inject([]) { |ary, line| ary << line.sub(/^ {#{leading}}/, '') }.join("\n")
     end
   end
 end

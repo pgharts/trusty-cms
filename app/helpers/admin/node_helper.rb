@@ -10,7 +10,7 @@ module Admin::NodeHelper
 
     @rendered_html += (render partial: 'admin/pages/node',
                               locals: { level: index, index: index, parent_index: parent_index,
-                                        page: page, simple: simple, branch: (page.children.count.positive?) })
+                                        page: page, simple: simple, branch: page.children.count.positive? })
     index
   end
 
@@ -35,15 +35,13 @@ module Admin::NodeHelper
     unless @expanded_rows
       @expanded_rows = if rows = cookies[:expanded_rows]
                          rows.split(',').map do |x|
-                           begin
-                                                                      Integer(x)
-                           rescue StandardError
-                             nil
-                                                                    end
-                         end .compact
+                           Integer(x)
+                         rescue StandardError
+                           nil
+                         end.compact
                        else
                          []
-      end
+                       end
 
       if homepage && !@expanded_rows.include?(homepage.id)
         @expanded_rows << homepage.id

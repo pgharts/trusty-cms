@@ -49,7 +49,9 @@ module TrustyCms
     def initialize_received_migrations
       if donors = self.class.extension.migrates_from
         donors.each do |extension_name, until_migration|
-          replaced = ActiveRecord::Base.connection.select_values("SELECT version FROM #{sanitize(ActiveRecord::Migrator.schema_migrations_table_name)} WHERE version LIKE '#{extension_name}-%'").map { |v| v.sub(/^#{extension_name}\-/, '').to_i }
+          replaced = ActiveRecord::Base.connection.select_values("SELECT version FROM #{sanitize(ActiveRecord::Migrator.schema_migrations_table_name)} WHERE version LIKE '#{extension_name}-%'").map do |v|
+            v.sub(/^#{extension_name}-/, '').to_i
+          end
           replaced.delete_if { |v| v > until_migration.to_i } if until_migration
           assume_migrated_upto_version(replaced.max) if replaced.any?
         end

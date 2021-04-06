@@ -7,13 +7,11 @@ module Admin::RegionsHelper
       (options[:locals] ||= {}).merge!(defaults: default_partials)
     end
     output = @region_set[region].compact.map do |partial|
-      begin
-        render options.merge(partial: partial)
-      rescue ::ActionView::MissingTemplate # couldn't find template
-        default_partials[partial]
-      rescue ::ActionView::TemplateError => e # error in template
-        raise e
-      end
+      render options.merge(partial: partial)
+    rescue ::ActionView::MissingTemplate # couldn't find template
+      default_partials[partial]
+    rescue ::ActionView::TemplateError => e # error in template
+      raise e
     end.join.html_safe
     Rails.logger.error(output)
     block_given? ? concat(output) : output

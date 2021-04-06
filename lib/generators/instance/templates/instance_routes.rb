@@ -1,1 +1,1 @@
-load File.join(TRUSTY_CMS_ROOT, "config", "routes.rb")
+load File.join(TRUSTY_CMS_ROOT, 'config', 'routes.rb')
