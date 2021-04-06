@@ -44,7 +44,7 @@ module TrustyCms
       def cache_files(dir, files, cache_file)
         cache_content = files.collect do |f|
           File.read(File.join(dir, f))
-        end .join("\n\n")
+        end.join("\n\n")
 
         cache_path = File.join(dir, cache_file)
         File.delete(cache_path) if File.exists?(cache_path)

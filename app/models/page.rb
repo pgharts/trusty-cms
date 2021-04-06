@@ -35,6 +35,7 @@ class Page < ActiveRecord::Base
 
   annotate :description
   attr_accessor :request, :response, :pagination_parameters
+
   class_attribute :default_child
   self.default_child = self
 
@@ -351,7 +352,7 @@ class Page < ActiveRecord::Base
   end
 
   def update_virtual
-    self.virtual = if self.class == Page.descendant_class(class_name)
+    self.virtual = if instance_of?(Page.descendant_class(class_name))
                      virtual?
                    else
                      Page.descendant_class(class_name).new.virtual?

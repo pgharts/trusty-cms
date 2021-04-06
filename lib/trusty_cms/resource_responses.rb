@@ -64,6 +64,7 @@ module TrustyCms
 
     class Response
       attr_reader :publish_formats, :publish_block, :blocks, :block_order
+
       def initialize
         @publish_formats = []
         @blocks = {}

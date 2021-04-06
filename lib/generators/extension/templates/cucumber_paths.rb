@@ -1,5 +1,4 @@
 module NavigationHelpers
-
   # Extend the standard PathMatchers with your own paths
   # to be used in your features.
   #
@@ -14,9 +13,8 @@ module NavigationHelpers
   #
   PathMatchers = {} unless defined?(PathMatchers)
   PathMatchers.merge!({
-    # /<%= file_name %>/i => 'admin_<%= file_name %>_path'
-  })
-
+                        # /<%= file_name %>/i => 'admin_<%= file_name %>_path'
+                      })
 end
 
 World(NavigationHelpers)

@@ -4,7 +4,7 @@ rescue LoadError
 end
 
 class ExtensionGenerator < Rails::Generator::NamedBase
-  default_options :with_test_unit => false
+  default_options with_test_unit: false
 
   attr_reader :extension_path, :extension_file_name
 
@@ -91,7 +91,7 @@ class ExtensionGenerator < Rails::Generator::NamedBase
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
-    opt.on("--with-test-unit",
-           "Use Test::Unit for this extension instead of RSpec") { |v| options[:with_test_unit] = v }
+    opt.on('--with-test-unit',
+           'Use Test::Unit for this extension instead of RSpec') { |v| options[:with_test_unit] = v }
   end
 end

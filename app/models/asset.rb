@@ -52,7 +52,9 @@ class Asset < ActiveRecord::Base
                       'Cache-Control' => 'max-age=31536000',
                     }
 
-  validates_attachment_content_type :asset, content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'application/javascript', 'text/javascript', 'text/css']
+  validates_attachment_content_type :asset,
+                                    content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf',
+                                                   'application/javascript', 'text/javascript', 'text/css']
 
   before_save :assign_title
   before_save :assign_uuid
@@ -61,7 +63,8 @@ class Asset < ActiveRecord::Base
 
   validates_attachment_presence :asset, message: 'You must choose a file to upload!'
   if TrustyCms.config['paperclip.skip_filetype_validation'] != 'true' && TrustyCms.config['paperclip.content_types']
-    validates_attachment_content_type :asset, content_type: TrustyCms.config['paperclip.content_types'].gsub(' ', '').split(',')
+    validates_attachment_content_type :asset,
+                                      content_type: TrustyCms.config['paperclip.content_types'].gsub(' ', '').split(',')
   else
     validates_attachment_presence :asset, message: 'Your uploaded file must have an extension in its name!'
   end
@@ -110,7 +113,10 @@ class Asset < ActiveRecord::Base
   end
 
   def geometry(style_name = 'original')
-    raise Paperclip::StyleError, "Requested style #{style_name} is not defined for this asset." unless style?(style_name)
+    unless style?(style_name)
+      raise Paperclip::StyleError,
+            "Requested style #{style_name} is not defined for this asset."
+    end
 
     @geometry ||= {}
     begin
@@ -119,7 +125,7 @@ class Asset < ActiveRecord::Base
                                 else
                                   style = asset.styles[style_name.to_sym]
                                   original_geometry.transformed_by(style.geometry) # this can return dimensions for fully specified style sizes but not for relative sizes when there are no original dimensions
-      end
+                                end
     rescue Paperclip::TransformationError => e
       Rails.logger.warn "geometry transformation error: #{e}"
       original_geometry # returns a blank geometry if the real geometry cannot be calculated
@@ -174,13 +180,11 @@ class Asset < ActiveRecord::Base
   # original file and calculate thumbnail dimensions later, on demand.
 
   def read_dimensions
-    if image?
-      if file = asset.queued_for_write[:original]
-        geometry = Paperclip::Geometry.from_file(file)
-        self.original_width = geometry.width
-        self.original_height = geometry.height
-        self.original_extension = File.extname(file.path)
-      end
+    if image? && file = asset.queued_for_write[:original]
+      geometry = Paperclip::Geometry.from_file(file)
+      self.original_width = geometry.width
+      self.original_height = geometry.height
+      self.original_extension = File.extname(file.path)
     end
     true
   end

@@ -1,5 +1,5 @@
 class LanguageExtensionGenerator < Rails::Generator::NamedBase
-  default_options :with_test_unit => false
+  default_options with_test_unit: false
 
   attr_reader :extension_path, :extension_file_name, :localization_name
 
@@ -23,7 +23,6 @@ class LanguageExtensionGenerator < Rails::Generator::NamedBase
       m.template 'lib.rb',                "#{extension_path}/lib/radiant-#{file_name}_language_pack-extension.rb"
       m.template 'gemspec.rb',            "#{extension_path}/radiant-#{file_name}_language_pack-extension.gemspec"
     end
-
   end
 
   def class_name
@@ -66,6 +65,7 @@ class LanguageExtensionGenerator < Rails::Generator::NamedBase
   end
 
   def copy_files
-    FileUtils.cp("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml","#{TRUSTY_CMS_ROOT}/#{extension_path}/config/locales/#{localization_name}_available_tags.yml")
+    FileUtils.cp("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml",
+                 "#{TRUSTY_CMS_ROOT}/#{extension_path}/config/locales/#{localization_name}_available_tags.yml")
   end
 end

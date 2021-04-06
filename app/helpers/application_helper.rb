@@ -28,9 +28,12 @@ module ApplicationHelper
   def save_model_button(model, options = {})
     model_name = model.class.name.underscore
     human_model_name = model_name.humanize.titlecase
-    options[:label] ||= model.new_record? ?
-      t('buttons.create', name: t(model_name, default: human_model_name), default: 'Create ' + human_model_name) :
-      t('buttons.save_changes', default: 'Save Changes')
+    options[:label] ||= if model.new_record?
+                          t('buttons.create', name: t(model_name, default: human_model_name),
+                                              default: 'Create ' + human_model_name)
+                        else
+                          t('buttons.save_changes', default: 'Save Changes')
+                        end
     options[:class] ||= 'button'
     options[:accesskey] ||= 'S'
     submit_tag options.delete(:label), options
@@ -206,6 +209,6 @@ module ApplicationHelper
       name
     else
       name + '.png'
-      end
+    end
   end
 end

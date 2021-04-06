@@ -15,12 +15,10 @@ module Admin::ReferencesHelper
   def filter_reference
     if filter.blank?
       'There is no filter on the current page part.'
+    elsif filter.description.blank?
+      'There is no documentation on this filter.'
     else
-      if filter.description.blank?
-        'There is no documentation on this filter.'
-      else
-        filter.description
-      end
+      filter.description
     end
   end
 
@@ -34,9 +32,7 @@ module Admin::ReferencesHelper
   end
 
   def filter
-    @filter ||= begin
-      TextFilter.find_descendant(params[:filter_name])
-    end
+    @filter ||= TextFilter.find_descendant(params[:filter_name])
   end
 
   def class_of_page

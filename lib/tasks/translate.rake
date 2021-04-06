@@ -32,7 +32,8 @@ namespace :trusty_cms do
         descriptions[tag] = ' "' + desc.gsub('%', '&#37;').gsub('"', '\"').strip + '"'
       end
       comments = ''
-      TranslationSupport.write_file("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml", "---\nen:\n  desc", comments, descriptions)
+      TranslationSupport.write_file("#{TRUSTY_CMS_ROOT}/config/locales/en_available_tags.yml", "---\nen:\n  desc",
+                                    comments, descriptions)
     end
 
     desc 'Syncs all translations available_tags to the English master'

@@ -35,11 +35,9 @@ module MenuRenderer
 
   def allowed_child_classes
     (allowed_children_cache.to_s.split(',') - Array(excluded_class_names)).map do |name|
-      begin
-        name.constantize
-      rescue LoadError, NameError => _e
-        nil
-      end
+      name.constantize
+    rescue LoadError, NameError => _e
+      nil
     end.compact
   end
 
@@ -66,7 +64,8 @@ module MenuRenderer
   end
 
   def remove_link
-    view.link_to('<i class="fas fa-minus-circle"></i> '.html_safe + I18n.t('remove'), view.remove_admin_page_url(self), class: 'action')
+    view.link_to('<i class="fas fa-minus-circle"></i> '.html_safe + I18n.t('remove'), view.remove_admin_page_url(self),
+                 class: 'action')
   end
 
   def remove_option
@@ -82,11 +81,13 @@ module MenuRenderer
   end
 
   def add_child_link
-    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, view.new_admin_page_child_path(self, page_class: default_child.name), class: 'action')
+    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe,
+                 view.new_admin_page_child_path(self, page_class: default_child.name), class: 'action')
   end
 
   def add_child_link_with_menu_hook
-    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, "#allowed_children_#{id}", class: 'action dropdown')
+    view.link_to('<i class="fas fa-plus-circle"></i> Add Child'.html_safe, "#allowed_children_#{id}",
+                 class: 'action dropdown')
   end
 
   def add_child_menu
@@ -100,12 +101,10 @@ module MenuRenderer
   def add_child_option
     if add_child_disabled?
       disabled_add_child_link
+    elsif allowed_child_classes.size == 1
+      add_child_link
     else
-      if allowed_child_classes.size == 1
-        add_child_link
-      else
-        add_child_link_with_menu
-      end
+      add_child_link_with_menu
     end
   end
 
@@ -131,7 +130,7 @@ module MenuRenderer
                         'normal_page'
                       else
                         given_class_name.sub('Page', '').underscore
-    end
+                      end
     fallback = given_class_name == 'Page' ? 'Page' : given_class_name.sub('Page', '').titleize
     I18n.t(translation_key, default: fallback)
   end

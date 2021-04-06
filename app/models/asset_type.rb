@@ -100,7 +100,7 @@ class AssetType
                             normalize_style_rules(configured_styles.merge(styles))
                           else
                             {}
-    end
+                          end
     @paperclip_styles
   end
 
@@ -109,7 +109,7 @@ class AssetType
   def normalize_style_rules(styles = {})
     styles.each_pair do |name, rule|
       unless rule.is_a? Hash
-        if rule =~ /\=/
+        if rule =~ /=/
           parameters = rule.split(',').collect { |parameter| parameter.split('=') } # array of pairs
           rule = Hash[parameters].symbolize_keys # into hash of :first => last
         else
@@ -145,11 +145,13 @@ class AssetType
                              end
                            else
                              {}
-    end
+                           end
   end
 
   def legacy_styles
-    TrustyCms::config['assets.additional_thumbnails'].to_s.gsub(' ', '').split(',').collect { |s| s.split('=') }.inject({}) { |ha, (k, v)| ha[k.to_sym] = v; ha }
+    TrustyCms::config['assets.additional_thumbnails'].to_s.gsub(' ', '').split(',').collect do |s|
+      s.split('=')
+    end.inject({}) { |ha, (k, v)| ha[k.to_sym] = v; ha }
   end
 
   def style_dimensions(style_name)

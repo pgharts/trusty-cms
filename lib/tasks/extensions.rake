@@ -78,7 +78,9 @@ namespace :trusty_cms do
   namespace :extensions do
     desc 'Runs update asset task for all extensions'
     task update_all: [:environment] do
-      extension_update_tasks = TrustyCms.configuration.enabled_extensions.map { |n| "trusty_cms:extensions:#{n}:update" }.select { |t| Rake::Task.task_defined?(t) }
+      extension_update_tasks = TrustyCms.configuration.enabled_extensions.map do |n|
+                                 "trusty_cms:extensions:#{n}:update"
+                               end.select { |t| Rake::Task.task_defined?(t) }
       extension_update_tasks.each { |t| Rake::Task[t].invoke }
     end
   end

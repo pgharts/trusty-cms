@@ -2,7 +2,6 @@ require 'rails_generator/base'
 require 'rails_generator/generators/components/migration/migration_generator'
 
 class ExtensionMigrationGenerator < MigrationGenerator
-
   attr_accessor :extension_name
 
   def initialize(runtime_args, runtime_options = {})

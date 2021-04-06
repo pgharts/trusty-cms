@@ -1,7 +1,8 @@
 module TrustyCms
   class Config
     class Definition
-      attr_reader :empty, :default, :type, :notes, :validate_with, :select_from, :allow_blank, :allow_display, :allow_change, :units, :definer
+      attr_reader :empty, :default, :type, :notes, :validate_with, :select_from, :allow_blank, :allow_display,
+                  :allow_change, :units, :definer
 
       # Configuration 'definitions' are metadata held in memory that add restriction and description to individual config entries.
       #
@@ -22,7 +23,8 @@ module TrustyCms
       # See the method documentation in TrustyCms::Config for options and conventions.
       #
       def initialize(options = {})
-        %i[empty default type notes validate_with select_from allow_blank allow_change allow_display units definer].each do |attribute|
+        %i[empty default type notes validate_with select_from allow_blank allow_change allow_display units
+           definer].each do |attribute|
           instance_variable_set "@#{attribute}".to_sym, options[attribute]
         end
       end
@@ -92,14 +94,14 @@ module TrustyCms
       def validate(setting)
         if allow_blank?
           return if setting.value.blank?
-        else
-          setting.errors.add :value, :blank if setting.value.blank?
+        elsif setting.value.blank?
+          setting.errors.add :value, :blank
         end
         if validate_with.is_a? Proc
           validate_with.call(setting)
         end
-        if selector?
-          setting.errors.add :value, :not_permitted unless selectable?(setting.value)
+        if selector? && !selectable?(setting.value)
+          setting.errors.add :value, :not_permitted
         end
         if integer?
           begin

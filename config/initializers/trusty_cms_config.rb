@@ -7,8 +7,14 @@ TrustyCms.config do |config|
   config.define 'local.timezone', allow_change: true, select_from: lambda { ActiveSupport::TimeZone::MAPPING.keys.sort }
   config.define 'defaults.locale', select_from: lambda { TrustyCms::AvailableLocales.locales }, allow_blank: true
   config.define 'defaults.page.parts', default: 'Body,Extended'
-  config.define 'defaults.page.status', select_from: lambda { Status.selectable_values }, allow_blank: false, default: 'Draft'
-  config.define 'defaults.page.filter', select_from: lambda { TextFilter.descendants.map { |s| s.filter_name }.sort }, allow_blank: true
+  config.define 'defaults.page.status', select_from: lambda {
+                                                       Status.selectable_values
+                                                     }, allow_blank: false, default: 'Draft'
+  config.define 'defaults.page.filter', select_from: lambda {
+                                                       TextFilter.descendants.map do |s|
+                                                         s.filter_name
+                                                       end.sort
+                                                     }, allow_blank: true
   config.define 'defaults.page.fields'
   config.define 'pagination.param_name', default: 'page'
   config.define 'pagination.per_page_param_name', default: 'per_page'
@@ -22,8 +28,10 @@ end
 
 TrustyCms.config do |config|
   config.namespace 'paperclip' do |pc|
-    pc.define 'url',                      default: '/system/:attachment/:id/:style/:basename:no_original_style.:extension', allow_change: true
-    pc.define 'path',                     default: ':rails_root/public/system/:attachment/:id/:style/:basename:no_original_style.:extension', allow_change: true
+    pc.define 'url',
+              default: '/system/:attachment/:id/:style/:basename:no_original_style.:extension', allow_change: true
+    pc.define 'path',
+              default: ':rails_root/public/system/:attachment/:id/:style/:basename:no_original_style.:extension', allow_change: true
     pc.define 'skip_filetype_validation', default: true, type: :boolean
     pc.define 'storage', default: 'filesystem',
                          select_from: {
@@ -87,7 +95,11 @@ TrustyCms.config do |config|
 end
 
 if TrustyCms.config_definitions['defaults.snippet.filter'].nil?
-  TrustyCms.config.define 'defaults.snippet.filter', select_from: lambda { TextFilter.descendants.map { |s| s.filter_name }.sort }, allow_blank: true
+  TrustyCms.config.define 'defaults.snippet.filter', select_from: lambda {
+                                                                    TextFilter.descendants.map do |s|
+                                                                      s.filter_name
+                                                                    end.sort
+                                                                  }, allow_blank: true
 end
 
 Admin::LayoutsController.send :helper, MultiSite::SiteChooserHelper
