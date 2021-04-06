@@ -7,11 +7,9 @@ unless File.directory? "#{Rails.root}/app"
         require 'rubygems'
         require 'rubygems/gem_runner'
 
-        trusty = if (version = ENV['VERSION'])
-                   Gem.cache.search('trusty-cms', "= #{version}").first
-                 else
-                   Gem.cache.search('trusty-cms').max_by { |g| g.version }
-                 end
+        trusty = (version = ENV['VERSION']) ?
+          Gem.cache.search('trusty-cms', "= #{version}").first :
+          Gem.cache.search('trusty-cms').max_by { |g| g.version }
 
         version ||= trusty.version
 
@@ -93,8 +91,7 @@ unless File.directory? "#{Rails.root}/app"
           end
           install script, "#{local_base}/#{base_name}", mode: 0o755
         end
-        install "#{File.dirname(__FILE__)}/../generators/instance/templates/instance_generate",
-                "#{local_base}/generate", mode: 0o755
+        install "#{File.dirname(__FILE__)}/../generators/instance/templates/instance_generate", "#{local_base}/generate", mode: 0o755
       end
 
       desc 'Update your javascripts from your current trusty install'
@@ -104,10 +101,8 @@ unless File.directory? "#{Rails.root}/app"
           scripts.reject! { |s| File.basename(s) == 'overrides.js' } if File.exists?(project_dir + 'overrides.js')
           FileUtils.cp(scripts, project_dir)
         end
-        copy_javascripts[Rails.root + '/public/javascripts/',
-                         Dir["#{File.dirname(__FILE__)}/../../public/javascripts/*.js"]]
-        copy_javascripts[Rails.root + '/public/javascripts/admin/',
-                         Dir["#{File.dirname(__FILE__)}/../../public/javascripts/admin/*.js"]]
+        copy_javascripts[Rails.root + '/public/javascripts/', Dir["#{File.dirname(__FILE__)}/../../public/javascripts/*.js"]]
+        copy_javascripts[Rails.root + '/public/javascripts/admin/', Dir["#{File.dirname(__FILE__)}/../../public/javascripts/admin/*.js"]]
       end
 
       desc 'Update the cached assets for the admin UI'
@@ -186,10 +181,8 @@ A Gemfile has been created in your application directory. If you have config.gem
           production: "#{Rails.root}/config/environments/production.bak",
         }
 
-        FileUtils.cp("#{File.dirname(__FILE__)}/../generators/instance/templates/instance_boot.rb",
-                     Rails.root + '/config/boot.rb')
-        FileUtils.cp("#{File.dirname(__FILE__)}/../../config/preinitializer.rb",
-                     Rails.root + '/config/preinitializer.rb')
+        FileUtils.cp("#{File.dirname(__FILE__)}/../generators/instance/templates/instance_boot.rb", Rails.root + '/config/boot.rb')
+        FileUtils.cp("#{File.dirname(__FILE__)}/../../config/preinitializer.rb", Rails.root + '/config/preinitializer.rb')
         warning = ''
         %i[env development test cucumber production].each do |env_file|
           File.open(tmps[env_file], 'w') do |f|
@@ -238,18 +231,13 @@ the new files: #{warning}"
           styles.reject! { |s| File.basename(s) == 'overrides.css' } if File.exists?(project_dir + 'overrides.css')
           FileUtils.cp(styles, project_dir)
         end
-        copy_stylesheets[Rails.root + '/public/stylesheets/admin/',
-                         Dir["#{File.dirname(__FILE__)}/../../public/stylesheets/admin/*.css"]]
+        copy_stylesheets[Rails.root + '/public/stylesheets/admin/', Dir["#{File.dirname(__FILE__)}/../../public/stylesheets/admin/*.css"]]
       end
 
       desc 'Update admin sass files from your current trusty install'
       task :sass do
         copy_sass = proc do |project_dir, sass_files|
-          if File.exists?(project_dir + 'overrides.sass') || File.exists?(project_dir + '../overrides.css')
-            sass_files.reject! do |s|
-              File.basename(s) == 'overrides.sass'
-            end
-          end
+          sass_files.reject! { |s| File.basename(s) == 'overrides.sass' } if File.exists?(project_dir + 'overrides.sass') || File.exists?(project_dir + '../overrides.css')
           sass_files.reject! { |s| File.directory?(s) }
           FileUtils.mkpath(project_dir)
           FileUtils.cp(sass_files, project_dir)

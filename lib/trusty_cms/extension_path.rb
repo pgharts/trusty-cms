@@ -21,7 +21,6 @@ module TrustyCms
     #   ExtensionPath.plugin_paths              #=> ["path/vendor/plugins", "path/vendor/plugins"]
 
     attr_accessor :name, :path
-
     @@known_paths = {}
 
     def initialize(options = {}) #:nodoc
@@ -47,7 +46,7 @@ module TrustyCms
     #
     def self.from_path(path, name = nil)
       name = path if name.blank?
-      name = File.basename(name).gsub(/^trusty-|-extension(-[\d.a-z]+|-[a-z\d]+)*$/, '')
+      name = File.basename(name).gsub(/^trusty-|-extension(-[\d\.a-z]+|-[a-z\d]+)*$/, '')
       new(name: name, path: path)
     end
 
@@ -72,9 +71,7 @@ module TrustyCms
     # You can call the class method ExtensionPath.load_paths to get a flattened list of all the load paths in all the enabled extensions.
     #
     def load_paths
-      %w(lib app/models app/controllers app/metal app/helpers test/helpers).collect do |d|
-        check_subdirectory(d)
-      end.push(path).flatten.compact
+      %w(lib app/models app/controllers app/metal app/helpers test/helpers).collect { |d| check_subdirectory(d) }.push(path).flatten.compact
     end
 
     # Returns a list of all the +vendor/plugin+ paths found within this extension root.

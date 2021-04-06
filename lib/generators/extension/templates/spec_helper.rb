@@ -1,25 +1,26 @@
 unless defined? TRUSTY_CMS_ROOT
-  ENV['Rails.env'] = 'test'
-  if ENV['RADIANT_ENV_FILE']
-    require ENV['RADIANT_ENV_FILE']
-  elsif File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
-    require "#{File.expand_path(File.dirname(__FILE__) + '/../../../../../../')}/config/environment"
+  ENV["Rails.env"] = "test"
+  case
+  when ENV["RADIANT_ENV_FILE"]
+    require ENV["RADIANT_ENV_FILE"]
+  when File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
+    require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../../../")}/config/environment"
   else
-    require "#{File.expand_path(File.dirname(__FILE__) + '/../../../../')}/config/environment"
+    require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../")}/config/environment"
   end
 end
 require "#{TRUSTY_CMS_ROOT}/spec/spec_helper"
 
-Dataset::Resolver.default << (File.dirname(__FILE__) + '/datasets')
+Dataset::Resolver.default << (File.dirname(__FILE__) + "/datasets")
 # Include any datasets from loaded extensions
 TrustyCms::Extension.descendants.each do |extension|
-  if File.directory?(extension.root + '/spec/datasets')
-    Dataset::Resolver.default << (extension.root + '/spec/datasets')
+  if File.directory?(extension.root + "/spec/datasets")
+    Dataset::Resolver.default << (extension.root + "/spec/datasets")
   end
 end
 
-if File.directory?(File.dirname(__FILE__) + '/matchers')
-  Dir[File.dirname(__FILE__) + '/matchers/*.rb'].each { |file| require file }
+if File.directory?(File.dirname(__FILE__) + "/matchers")
+  Dir[File.dirname(__FILE__) + "/matchers/*.rb"].each {|file| require file }
 end
 
 Spec::Runner.configure do |config|

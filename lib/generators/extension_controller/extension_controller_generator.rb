@@ -2,9 +2,9 @@ require 'rails_generator/base'
 require 'rails_generator/generators/components/controller/controller_generator'
 
 class ExtensionControllerGenerator < ControllerGenerator
-  attr_accessor :extension_name
 
-  default_options with_test_unit: false
+  attr_accessor :extension_name
+  default_options :with_test_unit => false
 
   def initialize(runtime_args, runtime_options = {})
     runtime_args = runtime_args.dup
@@ -35,26 +35,26 @@ class ExtensionControllerGenerator < ControllerGenerator
 
       # Controller spec, class, and helper.
       m.template 'controller_spec.rb',
-                 File.join('spec/controllers', class_path, "#{file_name}_controller_spec.rb")
+        File.join('spec/controllers', class_path, "#{file_name}_controller_spec.rb")
 
       m.template 'helper_spec.rb',
-                 File.join('spec/helpers', class_path, "#{file_name}_helper_spec.rb")
+        File.join('spec/helpers', class_path, "#{file_name}_helper_spec.rb")
 
       m.template 'controller:controller.rb',
-                 File.join('app/controllers', class_path, "#{file_name}_controller.rb")
+        File.join('app/controllers', class_path, "#{file_name}_controller.rb")
 
       m.template 'controller:helper.rb',
-                 File.join('app/helpers', class_path, "#{file_name}_helper.rb")
+        File.join('app/helpers', class_path, "#{file_name}_helper.rb")
 
       # Spec and view template for each action.
       actions.each do |action|
         m.template 'view_spec.rb',
-                   File.join('spec/views', class_path, file_name, "#{action}_view_spec.rb"),
-                   assigns: { action: action, model: file_name }
+          File.join('spec/views', class_path, file_name, "#{action}_view_spec.rb"),
+          :assigns => { :action => action, :model => file_name }
         path = File.join('app/views', class_path, file_name, "#{action}.html.erb")
         m.template 'controller:view.html.erb',
-                   path,
-                   assigns: { action: action, path: path }
+          path,
+          :assigns => { :action => action, :path => path }
       end
     end
   end
@@ -78,7 +78,7 @@ class ExtensionControllerGenerator < ControllerGenerator
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
-    opt.on('--with-test-unit',
-           'Use Test::Unit tests instead sof RSpec.') { |v| options[:with_test_unit] = v }
+    opt.on("--with-test-unit",
+           "Use Test::Unit tests instead sof RSpec.") { |v| options[:with_test_unit] = v }
   end
 end

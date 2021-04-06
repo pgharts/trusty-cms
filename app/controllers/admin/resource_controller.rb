@@ -2,8 +2,7 @@ require 'trusty_cms/resource_responses'
 class Admin::ResourceController < ApplicationController
   extend TrustyCms::ResourceResponses
 
-  helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class,
-                :model_name, :plural_model_name
+  helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
   before_action :populate_format
   before_action :never_cache
   before_action :load_models, only: :index
@@ -35,9 +34,7 @@ class Admin::ResourceController < ApplicationController
     r.stale.publish(:xml, :json) { head :conflict }
     r.stale.default { announce_update_conflict; render action: template_name }
 
-    r.create.publish(:xml, :json) do
-      render format_symbol => model, :status => :created, :location => url_for(format: format_symbol, id: model)
-    end
+    r.create.publish(:xml, :json) { render format_symbol => model, :status => :created, :location => url_for(format: format_symbol, id: model) }
     r.create.default { redirect_to continue_url(params) }
 
     r.update.publish(:xml, :json) { head :ok }
@@ -56,7 +53,7 @@ class Admin::ResourceController < ApplicationController
       def #{action}                # def show
         response_for :singular     #   response_for :singular
       end                          # end
-    }, __FILE__, __LINE__ - 4
+    }, __FILE__, __LINE__
   end
 
   %i[create update].each do |action|
@@ -65,7 +62,7 @@ class Admin::ResourceController < ApplicationController
         model.update!(permitted_params[model_symbol])    #   model.update!(params[model_symbol])
         response_for :#{action}                           #   response_for :create
       end                                                 # end
-    }, __FILE__, __LINE__ - 5
+    }, __FILE__, __LINE__
   end
 
   def destroy
@@ -86,8 +83,7 @@ class Admin::ResourceController < ApplicationController
 
   def self.paginate_models(options = {})
     @@paginated = true
-    @@will_paginate_options = options.slice(:class, :previous_label, :next_label, :inner_window, :outer_window,
-                                            :separator, :container).merge(param_name: :p)
+    @@will_paginate_options = options.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :container).merge(param_name: :p)
     @@default_per_page = options[:per_page]
   end
 
@@ -159,7 +155,7 @@ class Admin::ResourceController < ApplicationController
                    model_class.find(params[:id])
                  else
                    model_class.new
-                 end
+    end
   end
 
   def models

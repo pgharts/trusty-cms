@@ -16,8 +16,7 @@ a general purpose content managment system--not merely a blogging engine.'
   s.extra_rdoc_files = ['README.md', 'INSTALL.md', 'LICENSE.md']
   s.files = Dir['**/*', '.gitignore', 'public/.htaccess', 'log/.keep', 'vendor/extensions/.keep']
   s.homepage = 'https://github.com/pgharts/trusty-cms'
-  s.rdoc_options = ['--title', 'TrustyCms -- Content Management You Can Trust', '--line-numbers', '--main', 'README',
-                    '--exclude', 'app', '--exclude', 'bin', '--exclude', 'config', '--exclude', 'db', '--exclude', 'features', '--exclude', 'lib', '--exclude', 'log', '--exclude', 'pkg', '--exclude', 'public', '--exclude', 'script', '--exclude', 'spec', '--exclude', 'test', '--exclude', 'tmp', '--exclude', 'vendor']
+  s.rdoc_options = ['--title', 'TrustyCms -- Content Management You Can Trust', '--line-numbers', '--main', 'README', '--exclude', 'app', '--exclude', 'bin', '--exclude', 'config', '--exclude', 'db', '--exclude', 'features', '--exclude', 'lib', '--exclude', 'log', '--exclude', 'pkg', '--exclude', 'public', '--exclude', 'script', '--exclude', 'spec', '--exclude', 'test', '--exclude', 'tmp', '--exclude', 'vendor']
   s.require_paths = ['lib']
   s.rubygems_version = '1.3.7'
   s.summary = 'A no-fluff content management system designed for small teams.'

@@ -2,9 +2,10 @@ require 'test/unit'
 # Load the environment
 unless defined? TRUSTY_CMS_ROOT
   ENV['Rails.env'] = 'test'
-  if ENV['RADIANT_ENV_FILE']
+  case
+  when ENV['RADIANT_ENV_FILE']
     require ENV['RADIANT_ENV_FILE']
-  elsif File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
+  when File.dirname(__FILE__) =~ %r{vendor/trusty_cms/vendor/extensions}
     require "#{File.expand_path(File.dirname(__FILE__) + '/../../../../../../')}/config/environment"
   else
     require "#{File.expand_path(File.dirname(__FILE__) + '/../../../../')}/config/environment"

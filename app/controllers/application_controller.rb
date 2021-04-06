@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
 
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
-
   helper_method :pagination_parameters
 
   def initialize

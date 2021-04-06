@@ -70,9 +70,7 @@ module TrustyCms
       end
 
       def deprecated_add(name, url, caller)
-        ActiveSupport::Deprecation.warn(
-          "admin.tabs.add is no longer supported in TrustyCms 0.9.x.  Please update your code to use: \ntab \"Content\" do\n\tadd_item(...)\nend", caller
-        )
+        ActiveSupport::Deprecation.warn("admin.tabs.add is no longer supported in TrustyCms 0.9.x.  Please update your code to use: \ntab \"Content\" do\n\tadd_item(...)\nend", caller)
         NavSubItem.new(name, url)
       end
     end

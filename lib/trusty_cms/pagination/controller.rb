@@ -6,19 +6,12 @@ module TrustyCms
       def configure_pagination
         # unconfigured parameters remain at will_paginate defaults
         # will_paginate controller options are not overridden by tag attribetus
-        unless TrustyCms::Config['pagination.param_name'].blank?
-          WillPaginate::ViewHelpers.pagination_options[:param_name] =
-            TrustyCms::Config['pagination.param_name'].to_sym
-        end
-        WillPaginate::ViewHelpers.pagination_options[:per_page_param_name] =
-          TrustyCms::Config['pagination.per_page_param_name'].blank? ? :per_page : TrustyCms::Config['pagination.per_page_param_name'].to_sym
+        WillPaginate::ViewHelpers.pagination_options[:param_name] = TrustyCms::Config['pagination.param_name'].to_sym unless TrustyCms::Config['pagination.param_name'].blank?
+        WillPaginate::ViewHelpers.pagination_options[:per_page_param_name] = TrustyCms::Config['pagination.per_page_param_name'].blank? ? :per_page : TrustyCms::Config['pagination.per_page_param_name'].to_sym
 
         # will_paginate view options can be overridden by tag attributes
         %i[class previous_label next_label inner_window outer_window separator container].each do |opt|
-          unless TrustyCms::Config["pagination.#{opt}"].blank?
-            WillPaginate::ViewHelpers.pagination_options[opt] =
-              TrustyCms::Config["pagination.#{opt}"]
-          end
+          WillPaginate::ViewHelpers.pagination_options[opt] = TrustyCms::Config["pagination.#{opt}"] unless TrustyCms::Config["pagination.#{opt}"].blank?
         end
       end
 

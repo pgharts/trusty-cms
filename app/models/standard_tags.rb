@@ -781,17 +781,18 @@ module StandardTags
              end
            else
              page.published_at || page.created_at
-           end
+    end
     case format
     when 'rfc1123'
       CGI.rfc1123_date(date.to_time)
     else
       @i18n_date_format_keys ||= begin
-        I18n.config.backend.send(:translations)[I18n.locale][:date][:formats].keys
-      rescue StandardError
-        []
-      end
-
+                                   begin
+                                    I18n.config.backend.send(:translations)[I18n.locale][:date][:formats].keys
+                                   rescue StandardError
+                                     []
+                                  end
+                                 end
       format = @i18n_date_format_keys.include?(format.to_sym) ? format.to_sym : format
       I18n.l date, format: format
     end
@@ -1108,7 +1109,7 @@ module StandardTags
                   elsif tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
                   elsif tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
                   else field
-                  end
+    end
   end
 
   desc %(
@@ -1128,7 +1129,7 @@ module StandardTags
                       elsif field && tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
                       elsif field && tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
                       else field
-                      end
+    end
   end
 
   tag 'site' do |tag|
@@ -1283,8 +1284,7 @@ module StandardTags
   def will_paginate_options(tag)
     attr = tag.attr.symbolize_keys
     if attr[:paginated] == 'true'
-      attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator,
-                 :per_page).merge({ renderer: TrustyCms::Pagination::LinkRenderer.new(tag.globals.page.path) })
+      attr.slice(:class, :previous_label, :next_label, :inner_window, :outer_window, :separator, :per_page).merge({ renderer: TrustyCms::Pagination::LinkRenderer.new(tag.globals.page.path) })
     else
       {}
     end
