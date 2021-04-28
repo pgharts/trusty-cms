@@ -1,0 +1,34 @@
+version: 2
+registries:
+  rubygems-server-gems-contribsys-com:
+    type: rubygems-server
+    url: https://gems.contribsys.com
+    username: "${{secrets.RUBYGEMS_SERVER_GEMS_CONTRIBSYS_COM_USERNAME}}"
+    password: "${{secrets.RUBYGEMS_SERVER_GEMS_CONTRIBSYS_COM_PASSWORD}}"
+
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "10:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ckeditor
+    versions:
+    - ">= 5.a, < 6"
+  - dependency-name: rails
+    versions:
+    - 6.1.3
+  - dependency-name: activerecord
+    versions:
+    - 6.1.2.1
+    - 6.1.3
+  - dependency-name: actionpack
+    versions:
+    - 6.1.2.1
+  - dependency-name: database_cleaner
+    versions:
+    - 2.0.0
+  registries:
+  - rubygems-server-gems-contribsys-com
