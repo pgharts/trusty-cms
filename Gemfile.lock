@@ -177,6 +177,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8 (8.4.255.0-x86_64-darwin-20)
+    libv8 (8.4.255.0-x86_64-linux)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -196,6 +197,8 @@ GEM
     mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.2-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     poltergeist (1.18.1)
@@ -245,7 +248,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 1.0)
     rake (13.0.3)
-    rdoc (6.3.0)
+    rdoc (6.3.1)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -324,6 +327,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   acts_as_list
