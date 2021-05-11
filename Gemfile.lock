@@ -140,10 +140,10 @@ GEM
     erubi (1.10.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_bot (6.1.0)
+    factory_bot (6.2.0)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.1.0)
-      factory_bot (~> 6.1.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.0)
     globalid (0.4.2)
@@ -332,7 +332,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   database_cleaner
-  factory_bot_rails (= 6.1.0)
+  factory_bot_rails (= 6.2.0)
   launchy (~> 2.5.0)
   mysql2
   poltergeist (~> 1.18.1)
