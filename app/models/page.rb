@@ -264,8 +264,8 @@ class Page < ActiveRecord::Base
       else
         @display_name ||= begin
           n = name.to_s
-          n.sub!(/^(.+?)Page$/, '\1')
-          n.gsub!(/([A-Z])/, ' \1')
+          n.sub(/^(.+?)Page$/, '\1')
+          n.gsub(/([A-Z])/, ' \1')
           n.strip
         end
       end

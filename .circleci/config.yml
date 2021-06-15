@@ -1,10 +1,10 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@1.1.2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.0-node
+      - image: circleci/ruby:3.0.1-node
         environment:
           - RAILS_ENV: test
       - image: circleci/mysql:5.7

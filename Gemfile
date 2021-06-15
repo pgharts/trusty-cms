@@ -15,6 +15,7 @@ group :development, :test do
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '6.2.0'
+  gem 'kt-paperclip', '~> 7.0.0'
   gem 'launchy', '~> 2.5.0'
   gem 'mysql2'
   gem 'poltergeist', '~> 1.18.1'
