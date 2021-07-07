@@ -5,6 +5,7 @@ AllCops:
   - db/schema.rb
   - spec/**/*
   - app/assets/images/**/*
+  TargetRubyVersion: 3.0.1
 
 Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.
