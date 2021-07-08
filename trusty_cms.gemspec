@@ -2,7 +2,7 @@
 
 require File.expand_path(__FILE__ + '/../lib/trusty_cms.rb')
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>=3.0.1'
+  s.required_ruby_version = '>=2.5.3'
   s.name = 'trusty-cms'
   s.version = TrustyCms::VERSION
   s.platform = Gem::Platform::RUBY
