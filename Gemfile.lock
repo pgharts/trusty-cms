@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (4.3.3)
+    trusty-cms (4.3.4)
       RedCloth (= 4.3.2)
       acts_as_list (>= 0.9.5, < 1.1.0)
       acts_as_tree (~> 2.9.1)
@@ -143,7 +143,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    ffi (1.15.3)
+    ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
     haml (5.2.2)
@@ -280,7 +280,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-    ruby_parser (3.16.0)
+    ruby_parser (3.17.0)
       sexp_processor (~> 4.15, >= 4.15.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
