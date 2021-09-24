@@ -1,6 +1,4 @@
 class Asset < ActiveRecord::Base
-  include Paperclip::Glue
-
   has_many :page_attachments, dependent: :destroy
   has_many :pages, through: :page_attachments
   has_site if respond_to? :has_site
@@ -33,39 +31,21 @@ class Asset < ActiveRecord::Base
     end
   }
 
-  has_attached_file :asset,
-                    styles: lambda { |attachment|
-                      AssetType.for(attachment).paperclip_styles
-                    },
-                    processors: lambda { |asset|
-                      asset.paperclip_processors
-                    },
-                    whiny: false,
-                    storage: TrustyCms.config['paperclip.storage'],
-                    path: TrustyCms.config['paperclip.path'],
-                    url: TrustyCms.config['paperclip.url'],
-                    fog_credentials: TrustyCmsClippedExtension::Cloud.credentials,
-                    fog_directory: TrustyCms.config['paperclip.fog.directory'],
-                    fog_public: TrustyCms.config['paperclip.fog.public?'] || true,
-                    fog_host: TrustyCmsClippedExtension::Cloud.host,
-                    fog_file: {
-                      'Cache-Control' => 'max-age=31536000',
-                    }
-
-  validates_attachment_content_type :asset, content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'application/javascript', 'text/javascript', 'text/css']
+  has_one_attached :asset
+  # validates_attachment_content_type :asset, content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'application/javascript', 'text/javascript', 'text/css']
 
   before_save :assign_title
   before_save :assign_uuid
 
-  after_post_process :read_dimensions
+  # after_post_process :read_dimensions
 
-  validates_attachment_presence :asset, message: 'You must choose a file to upload!'
-  if TrustyCms.config['paperclip.skip_filetype_validation'] != 'true' && TrustyCms.config['paperclip.content_types']
-    validates_attachment_content_type :asset, content_type: TrustyCms.config['paperclip.content_types'].gsub(' ', '').split(',')
-  else
-    validates_attachment_presence :asset, message: 'Your uploaded file must have an extension in its name!'
-  end
-  validates_attachment_size :asset, less_than: (TrustyCms.config['assets.max_asset_size'] || 5).to_i.megabytes
+  # validates_attachment_presence :asset, message: 'You must choose a file to upload!'
+  # if TrustyCms.config['paperclip.skip_filetype_validation'] != 'true' && TrustyCms.config['paperclip.content_types']
+  #   validates_attachment_content_type :asset, content_type: TrustyCms.config['paperclip.content_types'].gsub(' ', '').split(',')
+  # else
+  #   validates_attachment_presence :asset, message: 'Your uploaded file must have an extension in its name!'
+  # end
+  # validates_attachment_size :asset, less_than: (TrustyCms.config['assets.max_asset_size'] || 5).to_i.megabytes
 
   def asset_type
     AssetType.for(asset)
@@ -74,9 +54,13 @@ class Asset < ActiveRecord::Base
 
   def thumbnail(style_name = 'original')
     return asset.url if style_name.to_sym == :original
-    return asset.url(style_name.to_sym) if style?(style_name)
-
+    return asset_variant(style_name) if asset.variable?
     asset_type.icon(style_name)
+  end
+
+  def asset_variant(style_name)
+    return asset.variant(gravity: "Center", resize: "100x100^", crop: "100x100+0+0").processed.url if style_name == :thumbnail
+    return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :normal
   end
 
   def style?(style_name = 'original')
@@ -186,7 +170,7 @@ class Asset < ActiveRecord::Base
   end
 
   def assign_title
-    self.title = asset_file_name.downcase.sub(original_extension, '').sub('.', '')
+    self.title = asset.filename.base
   end
 
   def assign_uuid

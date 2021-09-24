@@ -12,6 +12,7 @@ PATH
       haml
       haml-rails (~> 2.0)
       highline (>= 1.7.8, < 2.1.0)
+      image_processing
       kraken-io
       mini_racer
       mysql2
@@ -341,7 +342,6 @@ DEPENDENCIES
   database_cleaner
   factory_bot_rails (= 6.2.0)
   file_validators
-  image_processing
   launchy (~> 2.5.0)
   mysql2
   poltergeist (~> 1.18.1)
