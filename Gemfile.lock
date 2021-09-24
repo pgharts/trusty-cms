@@ -144,6 +144,9 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.4)
+    file_validators (3.0.0)
+      activemodel (>= 3.2)
+      mime-types (>= 1.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
     haml (5.2.2)
@@ -166,18 +169,15 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.1)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     json (2.5.1)
     kraken-io (0.1.3)
       activesupport
       httparty
       json
       multipart-post
-    kt-paperclip (7.0.0)
-      activemodel (>= 4.2.0)
-      activesupport (>= 4.2.0)
-      marcel (~> 1.0.1)
-      mime-types
-      terrapin (~> 0.6.0)
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (15.14.0.1-x86_64-darwin-18)
@@ -192,6 +192,7 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
+    mini_magick (4.11.0)
     mini_mime (1.1.1)
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
@@ -280,6 +281,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
+    ruby-vips (2.1.3)
+      ffi (~> 1.12)
     ruby_parser (3.17.0)
       sexp_processor (~> 4.15, >= 4.15.1)
     sass-rails (6.0.0)
@@ -337,7 +340,8 @@ DEPENDENCIES
   acts_as_list
   database_cleaner
   factory_bot_rails (= 6.2.0)
-  kt-paperclip (~> 7.0.0)
+  file_validators
+  image_processing
   launchy (~> 2.5.0)
   mysql2
   poltergeist (~> 1.18.1)
@@ -349,4 +353,4 @@ DEPENDENCIES
   trustygems (~> 0.2.0)
 
 BUNDLED WITH
-   2.2.19
+   2.2.27
