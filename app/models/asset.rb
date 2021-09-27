@@ -32,35 +32,27 @@ class Asset < ActiveRecord::Base
   }
 
   has_one_attached :asset
-  # validates_attachment_content_type :asset, content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'application/javascript', 'text/javascript', 'text/css']
-
+  validates :asset, presence: true, blob: { content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'text/css' ], size_range: 1..5.megabytes }
   before_save :assign_title
   before_save :assign_uuid
-
-  # after_post_process :read_dimensions
-
-  # validates_attachment_presence :asset, message: 'You must choose a file to upload!'
-  # if TrustyCms.config['paperclip.skip_filetype_validation'] != 'true' && TrustyCms.config['paperclip.content_types']
-  #   validates_attachment_content_type :asset, content_type: TrustyCms.config['paperclip.content_types'].gsub(' ', '').split(',')
-  # else
-  #   validates_attachment_presence :asset, message: 'Your uploaded file must have an extension in its name!'
-  # end
-  # validates_attachment_size :asset, less_than: (TrustyCms.config['assets.max_asset_size'] || 5).to_i.megabytes
 
   def asset_type
     AssetType.for(asset)
   end
-  delegate :paperclip_processors, :paperclip_styles, :style_dimensions, :style_format, to: :asset_type
+  delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format, to: :asset_type
 
   def thumbnail(style_name = 'original')
+    # binding.pry
     return asset.url if style_name.to_sym == :original
-    return asset_variant(style_name) if asset.variable?
+    return asset_variant(style_name.to_sym) if asset.variable?
     asset_type.icon(style_name)
   end
 
   def asset_variant(style_name)
+    # binding.pry
     return asset.variant(gravity: "Center", resize: "100x100^", crop: "100x100+0+0").processed.url if style_name == :thumbnail
     return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :normal
+    return asset.variant(gravity: "Center", resize: "50x50^").processed.url if style_name == :icon
   end
 
   def style?(style_name = 'original')

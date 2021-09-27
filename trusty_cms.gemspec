@@ -23,7 +23,7 @@ a general purpose content managment system--not merely a blogging engine.'
   s.summary = 'A no-fluff content management system designed for small teams.'
   s.license = 'MIT'
   s.test_files = Dir['spec/**/*']
-
+  s.add_dependency 'activestorage-validator'
   s.add_dependency 'acts_as_list',    '>= 0.9.5', '< 1.1.0'
   s.add_dependency 'acts_as_tree',    '~> 2.9.1'
   s.add_dependency 'ckeditor',        '>= 4.2.2', '< 4.4.0'

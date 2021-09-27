@@ -104,6 +104,10 @@ class AssetType
     @paperclip_styles
   end
 
+  def active_storage_styles
+    @active_storage_styles ||= normalize_style_rules(configured_styles.merge(styles))
+  end
+
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
   # Solitary strings are assumed to be  #
   def normalize_style_rules(styles = {})
