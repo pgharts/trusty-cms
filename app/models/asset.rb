@@ -42,14 +42,12 @@ class Asset < ActiveRecord::Base
   delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format, to: :asset_type
 
   def thumbnail(style_name = 'original')
-    # binding.pry
     return asset.url if style_name.to_sym == :original
     return asset_variant(style_name.to_sym) if asset.variable?
     asset_type.icon(style_name)
   end
 
   def asset_variant(style_name)
-    # binding.pry
     return asset.variant(gravity: "Center", resize: "100x100^", crop: "100x100+0+0").processed.url if style_name == :thumbnail
     return asset.variant(gravity: "Center", resize: "640x640^").processed.url if style_name == :normal
     return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :small
