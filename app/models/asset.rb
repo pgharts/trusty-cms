@@ -51,7 +51,8 @@ class Asset < ActiveRecord::Base
   def asset_variant(style_name)
     # binding.pry
     return asset.variant(gravity: "Center", resize: "100x100^", crop: "100x100+0+0").processed.url if style_name == :thumbnail
-    return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :normal
+    return asset.variant(gravity: "Center", resize: "640x640^").processed.url if style_name == :normal
+    return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :small
     return asset.variant(gravity: "Center", resize: "50x50^").processed.url if style_name == :icon
   end
 
