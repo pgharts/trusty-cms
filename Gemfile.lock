@@ -185,6 +185,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (15.14.0.1-x86_64-darwin-18)
+    libv8-node (15.14.0.1-x86_64-darwin-20)
     libv8-node (15.14.0.1-x86_64-linux)
     loofah (2.12.0)
       crass (~> 1.0.2)
@@ -338,9 +339,11 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
+  activestorage-validator
   acts_as_list
   database_cleaner
   factory_bot_rails (= 6.2.0)
