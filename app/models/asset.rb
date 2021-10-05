@@ -32,26 +32,40 @@ class Asset < ActiveRecord::Base
   }
 
   has_one_attached :asset
-  validates :asset, presence: true, blob: { content_type: ['application/zip', 'image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'text/css' ], size_range: 1..5.megabytes }
+  validates :asset,
+            presence: true,
+            blob:
+              {
+                content_type: %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css],
+                size_range: 1..5.megabytes,
+              }
   before_save :assign_title
   before_save :assign_uuid
 
   def asset_type
     AssetType.for(asset)
   end
-  delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format, to: :asset_type
+  delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format,
+           to: :asset_type
 
   def thumbnail(style_name = 'original')
     return asset.url if style_name.to_sym == :original
     return asset_variant(style_name.to_sym) if asset.variable?
+
     asset_type.icon(style_name)
   end
 
   def asset_variant(style_name)
-    return asset.variant(gravity: "Center", resize: "100x100^", crop: "100x100+0+0").processed.url if style_name == :thumbnail
-    return asset.variant(gravity: "Center", resize: "640x640^").processed.url if style_name == :normal
-    return asset.variant(gravity: "Center", resize: "320x320^").processed.url if style_name == :small
-    return asset.variant(gravity: "Center", resize: "50x50^").processed.url if style_name == :icon
+    case style_name
+    when :thumbnail
+      asset.variant(gravity: 'Center', resize: '100x100^', crop: '100x100+0+0').processed.url
+    when :normal
+      asset.variant(gravity: 'Center', resize: '640x640^').processed.url
+    when :small
+      asset.variant(gravity: 'Center', resize: '320x320^').processed.url
+    when :icon
+      asset.variant(gravity: 'Center', resize: '50x50^').processed.url
+    end
   end
 
   def style?(style_name = 'original')
@@ -85,7 +99,10 @@ class Asset < ActiveRecord::Base
   end
 
   def geometry(style_name = 'original')
-    raise Paperclip::StyleError, "Requested style #{style_name} is not defined for this asset." unless style?(style_name)
+    unless style?(style_name)
+      raise Paperclip::StyleError,
+            "Requested style #{style_name} is not defined for this asset."
+    end
 
     @geometry ||= {}
     begin
@@ -93,8 +110,9 @@ class Asset < ActiveRecord::Base
                                   original_geometry
                                 else
                                   style = asset.styles[style_name.to_sym]
-                                  original_geometry.transformed_by(style.geometry) # this can return dimensions for fully specified style sizes but not for relative sizes when there are no original dimensions
-      end
+                                  original_geometry.transformed_by(style.geometry)
+                                  # this can return dimensions for fully specified style sizes but not for relative sizes when there are no original dimensions
+                                end
     rescue Paperclip::TransformationError => e
       Rails.logger.warn "geometry transformation error: #{e}"
       original_geometry # returns a blank geometry if the real geometry cannot be calculated
@@ -149,13 +167,11 @@ class Asset < ActiveRecord::Base
   # original file and calculate thumbnail dimensions later, on demand.
 
   def read_dimensions
-    if image?
-      if file = asset.queued_for_write[:original]
-        geometry = Paperclip::Geometry.from_file(file)
-        self.original_width = geometry.width
-        self.original_height = geometry.height
-        self.original_extension = File.extname(file.path)
-      end
+    if image? && file = asset.queued_for_write[:original]
+      geometry = Paperclip::Geometry.from_file(file)
+      self.original_width = geometry.width
+      self.original_height = geometry.height
+      self.original_extension = File.extname(file.path)
     end
     true
   end
@@ -210,7 +226,7 @@ class Asset < ActiveRecord::Base
 
   # this is a convenience for image-pickers
   def self.thumbnail_options
-    asset_sizes = thumbnail_sizes.collect do |k, v|
+    asset_sizes = thumbnail_sizes.map do |k, v|
       size_id = k
       size_description = "#{k}: "
       size_description << (v.is_a?(Array) ? v.join(' as ') : v)
