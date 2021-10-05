@@ -49,22 +49,22 @@ class Asset < ActiveRecord::Base
            to: :asset_type
 
   def thumbnail(style_name = 'original')
-    return asset.url if style_name.to_sym == :original
-    return asset_variant(style_name.to_sym) if asset.variable?
+    return asset.url if style_name == 'original'
+    return asset_variant(style_name).processed.url if asset.variable?
 
     asset_type.icon(style_name)
   end
 
   def asset_variant(style_name)
     case style_name
-    when :thumbnail
-      asset.variant(gravity: 'Center', resize: '100x100^', crop: '100x100+0+0').processed.url
-    when :normal
-      asset.variant(gravity: 'Center', resize: '640x640^').processed.url
-    when :small
-      asset.variant(gravity: 'Center', resize: '320x320^').processed.url
-    when :icon
-      asset.variant(gravity: 'Center', resize: '50x50^').processed.url
+    when 'thumbnail'
+      asset.variant(gravity: 'Center', resize: '100x100^', crop: '100x100+0+0')
+    when 'normal'
+      asset.variant(gravity: 'Center', resize: '640x640^')
+    when 'small'
+      asset.variant(gravity: 'Center', resize: '320x320^')
+    when 'icon'
+      asset.variant(gravity: 'Center', resize: '50x50^')
     end
   end
 
