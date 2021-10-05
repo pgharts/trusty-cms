@@ -1,6 +1,9 @@
 class Admin::AssetsController < Admin::ResourceController
   paginate_models(per_page: 50)
   COMPRESS_FILE_TYPE = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'].freeze
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
 
   def index
     assets = Asset.order('created_at DESC')
@@ -67,6 +70,7 @@ class Admin::AssetsController < Admin::ResourceController
   private
 
   def compress(uploaded_asset)
+    require 'open-uri'
     data = $kraken.upload(uploaded_asset.tempfile.path, 'lossy' => true)
     File.write(uploaded_asset.tempfile, URI.open(data.kraked_url).read, mode: 'wb')
     uploaded_asset

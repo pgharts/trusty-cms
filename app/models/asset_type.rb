@@ -104,6 +104,10 @@ class AssetType
     @paperclip_styles
   end
 
+  def active_storage_styles
+    @active_storage_styles ||= normalize_style_rules(configured_styles.merge(styles))
+  end
+
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
   # Solitary strings are assumed to be  #
   def normalize_style_rules(styles = {})
@@ -173,8 +177,8 @@ class AssetType
   # class methods
 
   def self.for(attachment)
-    extension = File.extname(attachment.original_filename).sub(/^\.+/, '')
-    from_extension(extension) || from_mimetype(attachment.instance_read(:content_type)) || catchall
+    extension = attachment.record.original_extension
+    from_extension(extension) || from_mimetype(attachment.content_type) || catchall
   end
 
   def self.from_extension(extension)
