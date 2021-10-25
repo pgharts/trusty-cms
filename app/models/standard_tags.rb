@@ -1042,17 +1042,6 @@ module StandardTags
   end
 
   desc %{
-    Renders the containing elements only if TrustyCms in is development mode.
-
-    *Usage:*
-
-    <pre><code><r:if_dev>...</r:if_dev></code></pre>
-  }
-  tag 'if_dev' do |tag|
-    tag.expand if dev?(tag.globals.page.request)
-  end
-
-  desc %{
     The opposite of the @if_dev@ tag.
 
     *Usage:*
