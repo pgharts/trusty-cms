@@ -49,7 +49,7 @@ class Asset < ActiveRecord::Base
            to: :asset_type
 
   def thumbnail(style_name = 'original')
-    return asset.url if style_name == :original
+    return asset.url if style_name == 'original'
     return asset_variant(style_name).processed.url if asset.variable?
 
     asset_type.icon(style_name)
