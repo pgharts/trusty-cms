@@ -467,47 +467,6 @@ module StandardTags
   end
 
   desc %{
-    Renders a counter value or one of the values given based on a global cycle counter.
-
-    To get a numeric counter just use the tag, or specify a start value with @start@.
-    Use the @reset@ attribute to reset the cycle to the beginning. Using @reset@ on a
-    numbered cycle will begin at 0. Use the @name@  attribute to track multiple cycles;
-    the default is @cycle@.
-
-    *Usage:*
-
-    <pre><code><r:cycle [values="first, second, third"] [reset="true|false"] [name="cycle"] [start="second"] /></code></pre>
-    <pre><code><r:cycle start="3" /></code></pre>
-  }
-  tag 'cycle' do |tag|
-    cycle = (tag.globals.cycle ||= {})
-    if tag.attr['values']
-      values = tag.attr['values'].split(',').collect(&:strip)
-    end
-    start = tag.attr['start']
-    cycle_name = tag.attr['name'] || 'cycle'
-    if values
-      current_index = if start
-                        (cycle[cycle_name] ||= values.index(start))
-                      else
-                        (cycle[cycle_name] ||= 0)
-                      end
-      current_index = 0 if tag.attr['reset'] == 'true'
-      cycle[cycle_name] = (current_index + 1) % values.size
-      values[current_index]
-    else
-      cycle[cycle_name] ||= (start.presence || 0).to_i
-      output = cycle[cycle_name]
-      cycle[cycle_name] += 1
-      if tag.attr['reset'] == 'true'
-        cycle[cycle_name] = 0
-        output = cycle[cycle_name]
-      end
-      output
-    end
-  end
-
-  desc %{
     Renders the main content of a page. Use the @part@ attribute to select a specific
     page part. By default the @part@ attribute is set to body. Use the @inherit@
     attribute to specify that if a page does not have a content part by that name that
