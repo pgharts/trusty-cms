@@ -271,14 +271,7 @@ en:
       *Usage:*
 
       <pre><code><r:if_dev>...</r:if_dev></code></pre>"
-    if_field: "Renders the contained elements if the field given in the @name@ attribute
-      exists. The tag also takes an optional @equals@ or @matches@ attribute;
-      these will expand the tag if the field's content equals or matches the
-      given string or regex.
 
-      *Usage:*
-
-      <pre><code><r:if_field name=\"author\" [equals|matches=\"John\"] [ignore_case=\"true|false\"]>...</r:if_field></code></pre>"
     if_parent: "Renders the contained elements only if the current contextual page has a parent, i.e.
       is not the root page.
 
