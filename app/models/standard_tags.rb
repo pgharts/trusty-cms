@@ -823,7 +823,6 @@ module StandardTags
     text = tag.double? ? tag.expand : tag.render('title')
     %{<a href="#{tag.render('path')}#{anchor}"#{attributes}>#{text}</a>}
   end
-  
   desc %{
     Inside this tag all page related tags refer to the page found at the @path@ attribute.
     @path@s may be relative or absolute paths.

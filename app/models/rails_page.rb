@@ -25,5 +25,4 @@ class RailsPage < Page
       (part(k) || parts.build(name: k.to_s, filter_id: '')).content = v
     end
   end
-  
 end
