@@ -823,36 +823,7 @@ module StandardTags
     text = tag.double? ? tag.expand : tag.render('title')
     %{<a href="#{tag.render('path')}#{anchor}"#{attributes}>#{text}</a>}
   end
-
-  desc %{
-    Renders a trail of breadcrumbs to the current page. The separator attribute
-    specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-    default it is set to @>@. The boolean @nolinks@ attribute can be specified to render
-    breadcrumbs in plain text, without any links (useful when generating title tag).
-    Set the boolean @noself@ attribute to omit the present page (useful in page headers).
-
-    *Usage:*
-
-    <pre><code><r:breadcrumbs [separator="separator_string"] [nolinks="true"] [noself="true"]/></code></pre>
-  }
-  tag 'breadcrumbs' do |tag|
-    page = tag.locals.page
-    nolinks = (tag.attr['nolinks'] == 'true')
-    noself = (tag.attr['noself'] == 'true')
-    breadcrumbs = []
-    breadcrumbs.unshift page.breadcrumb unless noself
-    page.ancestors.each do |ancestor|
-      tag.locals.page = ancestor
-      if nolinks
-        breadcrumbs.unshift tag.render('breadcrumb')
-      else
-        breadcrumbs.unshift %{<a href="#{tag.render('path')}">#{tag.render('breadcrumb')}</a>}
-      end
-    end
-    separator = tag.attr['separator'] || ' &gt; '
-    breadcrumbs.join(separator)
-  end
-
+  
   desc %{
     Inside this tag all page related tags refer to the page found at the @path@ attribute.
     @path@s may be relative or absolute paths.

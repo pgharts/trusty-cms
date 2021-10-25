@@ -55,15 +55,6 @@ en:
       <pre><code><r:aggregate paths=\"/section1; /section2; /section3\"> ... </r:aggregate></code></pre>"
     author: "Renders the name of the author of the current page."
     breadcrumb: "Renders the @breadcrumb@ attribute of the current page."
-    breadcrumbs: "Renders a trail of breadcrumbs to the current page. The separator attribute
-      specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-      default it is set to @>@. The boolean @nolinks@ attribute can be specified to render
-      breadcrumbs in plain text, without any links (useful when generating title tag).
-      Set the boolean @noself@ attribute to omit the present page (useful in page headers).
-
-      *Usage:*
-
-      <pre><code><r:breadcrumbs [separator=\"separator_string\"] [nolinks=\"true\"] [noself=\"true\"]/></code></pre>"
     children-count: "Renders the total number of children."
     children-each-child: "Page attribute tags inside of this tag refer to the current child. This is occasionally
       useful if you are inside of another tag (like &lt;r:find&gt;) and need to refer back to the
