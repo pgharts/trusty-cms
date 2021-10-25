@@ -216,11 +216,7 @@ en:
       *Usage:*
 
       <pre><code><r:escape_html>...</r:escape_html></code></pre>"
-    field: "Renders the content of the field given in the @name@ attribute.
 
-      *Usage:*
-
-      <pre><code><r:field name=\"Keywords\" /></code></pre>"
     find: "Inside this tag all page related tags refer to the page found at the @path@ attribute.
       @path@s may be relative or absolute paths.
 

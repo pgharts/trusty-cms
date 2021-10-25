@@ -1079,18 +1079,6 @@ module StandardTags
   end
 
   desc %(
-    Renders the content of the field given in the @name@ attribute.
-
-    *Usage:*
-
-    <pre><code><r:field name="Keywords" /></code></pre>
-  )
-  tag 'field' do |tag|
-    required_attr(tag, 'name')
-    tag.locals.page.field(tag.attr['name']).try(:content)
-  end
-
-  desc %(
     Renders the contained elements if the field given in the @name@ attribute
     exists. The tag also takes an optional @equals@ or @matches@ attribute;
     these will expand the tag if the field's content equals or matches the
