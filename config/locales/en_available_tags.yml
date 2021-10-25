@@ -332,21 +332,6 @@ The above example will produce the following:
 //]]>
 </script>
 <script type=\"text/javascript\" src=\"/js/other.js\"></script></code></pre>"
-    link: "Renders a link to the page. When used as a single tag it uses the page's title
-      for the link name. When used as a double tag the part in between both tags will
-      be used as the link text. The link tag passes all attributes over to the HTML
-      @a@ tag. This is very useful for passing attributes like the @class@ attribute
-      or @id@ attribute. If the @anchor@ attribute is passed to the tag it will
-      append a pound sign (<code>#</code>) followed by the value of the attribute to
-      the @href@ attribute of the HTML @a@ tag--effectively making an HTML anchor.
-
-      *Usage:*
-
-      <pre><code><r:link [anchor=\"name\"] [other attributes...] /></code></pre>
-
-      or
-
-      <pre><code><r:link [anchor=\"name\"] [other attributes...]>link text here</r:link></code></pre>"
     markdown: "Filters its contents with the Markdown filter.
 
       *Usage:*
