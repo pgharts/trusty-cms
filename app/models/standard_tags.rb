@@ -660,21 +660,9 @@ module StandardTags
 
     *Usage:*
 
-    <pre><code><r:if_ancestor_or_self>...</r:if_ancestor_or_self></code></pre>
+    <pre><code>...</code></pre>
   }
-  tag 'if_ancestor_or_self' do |tag|
-    tag.expand if (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
-  end
 
-  desc %{
-    Renders the contained elements unless the current contextual page is either the actual page or one of its parents.
-
-    This is typically used inside another tag (like &lt;r:children:each&gt;) to add conditional mark-up unless the child element is or descends from the current page.
-
-    *Usage:*
-
-    <pre><code><r:unless_ancestor_or_self>...</r:unless_ancestor_or_self></code></pre>
-  }
   tag 'unless_ancestor_or_self' do |tag|
     tag.expand unless (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
   end
