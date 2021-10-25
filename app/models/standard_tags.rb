@@ -799,32 +799,6 @@ module StandardTags
   end
 
   desc %{
-    Renders a link to the page. When used as a single tag it uses the page's title
-    for the link name. When used as a double tag the part in between both tags will
-    be used as the link text. The link tag passes all attributes over to the HTML
-    @a@ tag. This is very useful for passing attributes like the @class@ attribute
-    or @id@ attribute. If the @anchor@ attribute is passed to the tag it will
-    append a pound sign (<code>#</code>) followed by the value of the attribute to
-    the @href@ attribute of the HTML @a@ tag--effectively making an HTML anchor.
-
-    *Usage:*
-
-    <pre><code><r:link [anchor="name"] [other attributes...] /></code></pre>
-
-    or
-
-    <pre><code><r:link [anchor="name"] [other attributes...]>link text here</r:link></code></pre>
-  }
-  tag 'link' do |tag|
-    options = tag.attr.dup
-    anchor = options['anchor'] ? "##{options.delete('anchor')}" : ''
-    attributes = options.inject('') { |s, (k, v)| s << %{#{k.downcase}="#{v}" } }.strip
-    attributes = " #{attributes}" unless attributes.empty?
-    text = tag.double? ? tag.expand : tag.render('title')
-    %{<a href="#{tag.render('path')}#{anchor}"#{attributes}>#{text}</a>}
-  end
-  
-  desc %{
     Inside this tag all page related tags refer to the page found at the @path@ attribute.
     @path@s may be relative or absolute paths.
 
