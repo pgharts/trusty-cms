@@ -1078,26 +1078,6 @@ module StandardTags
     status
   end
 
-  desc %(
-    The opposite of @if_field@. Renders the contained elements unless the field
-    given in the @name@ attribute exists. The tag also takes an optional
-    @equals@ or @matches@ attribute; these will expand the tag unless the
-    field's content equals or matches the given string or regex.
-
-    *Usage:*
-
-    <pre><code><r:unless_field name="author" [equals|matches="John"] [ignore_case="true|false"]>...</r:unless_field></code></pre>
-  )
-  tag 'unless_field' do |tag|
-    required_attr(tag, 'name')
-    field = tag.locals.page.field(tag.attr['name'])
-    tag.expand unless if field && (tag.attr['equals'] && (tag.attr['ignore_case'] == 'false')) then field.content == tag.attr['equals']
-                      elsif field && tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
-                      elsif field && tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
-                      else field
-    end
-  end
-
   tag 'site' do |tag|
     tag.expand
   end

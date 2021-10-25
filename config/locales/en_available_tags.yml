@@ -557,14 +557,6 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:unless_dev>...</r:unless_dev></code></pre>"
-    unless_field: "The opposite of @if_field@. Renders the contained elements unless the field
-      given in the @name@ attribute exists. The tag also takes an optional
-      @equals@ or @matches@ attribute; these will expand the tag unless the
-      field's content equals or matches the given string or regex.
-
-      *Usage:*
-
-      <pre><code><r:unless_field name=\"author\" [equals|matches=\"John\"] [ignore_case=\"true|false\"]>...</r:unless_field></code></pre>"
     unless_parent: "Renders the contained elements only if the current contextual page has no parent, i.e.
       is the root page.
 
