@@ -1042,17 +1042,6 @@ module StandardTags
   end
 
   desc %{
-    The opposite of the @if_dev@ tag.
-
-    *Usage:*
-
-    <pre><code><r:unless_dev>...</r:unless_dev></code></pre>
-  }
-  tag 'unless_dev' do |tag|
-    tag.expand unless dev?(tag.globals.page.request)
-  end
-
-  desc %{
     Prints the page's status as a string.  Optional attribute 'downcase'
     will cause the status to be all lowercase.
 
