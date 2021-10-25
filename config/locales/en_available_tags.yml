@@ -558,11 +558,6 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:unless_content [part=\"part_name, other_part\"] [inherit=\"false\"] [find=\"any\"]>...</r:unless_content></code></pre>"
-    unless_dev: "The opposite of the @if_dev@ tag.
-
-      *Usage:*
-
-      <pre><code><r:unless_dev>...</r:unless_dev></code></pre>"
     unless_parent: "Renders the contained elements only if the current contextual page has no parent, i.e.
       is the root page.
 
