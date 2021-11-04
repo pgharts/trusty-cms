@@ -182,17 +182,6 @@ en:
       *Usage:*
 
       <pre><code><r:content [part=\"part_name\"] [inherit=\"true|false\"] [contextual=\"true|false\"] /></code></pre>"
-    cycle: "Renders a counter value or one of the values given based on a global cycle counter.
-
-      To get a numeric counter just use the tag, or specify a start value with @start@.
-      Use the @reset@ attribute to reset the cycle to the beginning. Using @reset@ on a
-      numbered cycle will begin at 0. Use the @name@  attribute to track multiple cycles;
-      the default is @cycle@.
-
-      *Usage:*
-
-      <pre><code><r:cycle [values=\"first, second, third\"] [reset=\"true|false\"] [name=\"cycle\"] [start=\"second\"] /></code></pre>
-      <pre><code><r:cycle start=\"3\" /></code></pre>"
     date: "Renders the date based on the current page (by default when it was published or created).
       The format attribute uses the same formating codes used by the Ruby @strftime@ function. By
       default it's set to @&#37;A, &#37;B &#37;d, &#37;Y@.  The @for@ attribute selects which date to render.  Valid
