@@ -200,15 +200,6 @@
 
       <pre><code><r&#58;find url="value_to_find">...</r&#58;find></code></pre>
 
-    if_ancestor_or_self:
-      Renders the contained elements if the current contextual page is either the actual page or one of its parents.
-
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up if the child element is or descends from the current page.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;if_ancestor_or_self>...</r&#58;if_ancestor_or_self></code></pre>
-
     if_children:
       Renders the contained elements only if the current contextual page has one or
       more child pages.  The @status@ attribute limits the status of found child pages
