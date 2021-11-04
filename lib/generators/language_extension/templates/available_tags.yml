@@ -7,16 +7,6 @@
     breadcrumb:
         Renders the @breadcrumb@ attribute of the current page.
 
-    breadcrumbs:
-      Renders a trail of breadcrumbs to the current page. The separator attribute
-      specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-      default it is set to @>@. The boolean nolinks attribute can be specified to render
-      breadcrumbs in plain text, without any links (useful when generating title tag).
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;breadcrumbs [separator="separator_string"] [nolinks="true"] /></code></pre>
-
     children-count:
       Renders the total number of children.
 
