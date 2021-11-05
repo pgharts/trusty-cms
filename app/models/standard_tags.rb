@@ -467,47 +467,6 @@ module StandardTags
   end
 
   desc %{
-    Renders a counter value or one of the values given based on a global cycle counter.
-
-    To get a numeric counter just use the tag, or specify a start value with @start@.
-    Use the @reset@ attribute to reset the cycle to the beginning. Using @reset@ on a
-    numbered cycle will begin at 0. Use the @name@  attribute to track multiple cycles;
-    the default is @cycle@.
-
-    *Usage:*
-
-    <pre><code><r:cycle [values="first, second, third"] [reset="true|false"] [name="cycle"] [start="second"] /></code></pre>
-    <pre><code><r:cycle start="3" /></code></pre>
-  }
-  tag 'cycle' do |tag|
-    cycle = (tag.globals.cycle ||= {})
-    if tag.attr['values']
-      values = tag.attr['values'].split(',').collect(&:strip)
-    end
-    start = tag.attr['start']
-    cycle_name = tag.attr['name'] || 'cycle'
-    if values
-      current_index = if start
-                        (cycle[cycle_name] ||= values.index(start))
-                      else
-                        (cycle[cycle_name] ||= 0)
-                      end
-      current_index = 0 if tag.attr['reset'] == 'true'
-      cycle[cycle_name] = (current_index + 1) % values.size
-      values[current_index]
-    else
-      cycle[cycle_name] ||= (start.presence || 0).to_i
-      output = cycle[cycle_name]
-      cycle[cycle_name] += 1
-      if tag.attr['reset'] == 'true'
-        cycle[cycle_name] = 0
-        output = cycle[cycle_name]
-      end
-      output
-    end
-  end
-
-  desc %{
     Renders the main content of a page. Use the @part@ attribute to select a specific
     page part. By default the @part@ attribute is set to body. Use the @inherit@
     attribute to specify that if a page does not have a content part by that name that
@@ -660,21 +619,9 @@ module StandardTags
 
     *Usage:*
 
-    <pre><code><r:if_ancestor_or_self>...</r:if_ancestor_or_self></code></pre>
+    <pre><code>...</code></pre>
   }
-  tag 'if_ancestor_or_self' do |tag|
-    tag.expand if (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
-  end
 
-  desc %{
-    Renders the contained elements unless the current contextual page is either the actual page or one of its parents.
-
-    This is typically used inside another tag (like &lt;r:children:each&gt;) to add conditional mark-up unless the child element is or descends from the current page.
-
-    *Usage:*
-
-    <pre><code><r:unless_ancestor_or_self>...</r:unless_ancestor_or_self></code></pre>
-  }
   tag 'unless_ancestor_or_self' do |tag|
     tag.expand unless (tag.globals.page.ancestors + [tag.globals.page]).include?(tag.locals.page)
   end
@@ -796,35 +743,6 @@ module StandardTags
       format = @i18n_date_format_keys.include?(format.to_sym) ? format.to_sym : format
       I18n.l date, format: format
     end
-  end
-
-  desc %{
-    Renders a trail of breadcrumbs to the current page. The separator attribute
-    specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-    default it is set to @>@. The boolean @nolinks@ attribute can be specified to render
-    breadcrumbs in plain text, without any links (useful when generating title tag).
-    Set the boolean @noself@ attribute to omit the present page (useful in page headers).
-
-    *Usage:*
-
-    <pre><code><r:breadcrumbs [separator="separator_string"] [nolinks="true"] [noself="true"]/></code></pre>
-  }
-  tag 'breadcrumbs' do |tag|
-    page = tag.locals.page
-    nolinks = (tag.attr['nolinks'] == 'true')
-    noself = (tag.attr['noself'] == 'true')
-    breadcrumbs = []
-    breadcrumbs.unshift page.breadcrumb unless noself
-    page.ancestors.each do |ancestor|
-      tag.locals.page = ancestor
-      if nolinks
-        breadcrumbs.unshift tag.render('breadcrumb')
-      else
-        breadcrumbs.unshift %{<a href="#{tag.render('path')}">#{tag.render('breadcrumb')}</a>}
-      end
-    end
-    separator = tag.attr['separator'] || ' &gt; '
-    breadcrumbs.join(separator)
   end
 
   desc %{
@@ -1050,60 +968,6 @@ module StandardTags
     return status.downcase if tag.attr['downcase']
 
     status
-  end
-
-  desc %(
-    Renders the content of the field given in the @name@ attribute.
-
-    *Usage:*
-
-    <pre><code><r:field name="Keywords" /></code></pre>
-  )
-  tag 'field' do |tag|
-    required_attr(tag, 'name')
-    tag.locals.page.field(tag.attr['name']).try(:content)
-  end
-
-  desc %(
-    Renders the contained elements if the field given in the @name@ attribute
-    exists. The tag also takes an optional @equals@ or @matches@ attribute;
-    these will expand the tag if the field's content equals or matches the
-    given string or regex.
-
-    *Usage:*
-
-    <pre><code><r:if_field name="author" [equals|matches="John"] [ignore_case="true|false"]>...</r:if_field></code></pre>
-  )
-  tag 'if_field' do |tag|
-    required_attr(tag, 'name')
-    field = tag.locals.page.field(tag.attr['name'])
-    return '' if field.nil?
-
-    tag.expand if if tag.attr['equals'] && (tag.attr['ignore_case'] == 'false') then field.content == tag.attr['equals']
-                  elsif tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
-                  elsif tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
-                  else field
-    end
-  end
-
-  desc %(
-    The opposite of @if_field@. Renders the contained elements unless the field
-    given in the @name@ attribute exists. The tag also takes an optional
-    @equals@ or @matches@ attribute; these will expand the tag unless the
-    field's content equals or matches the given string or regex.
-
-    *Usage:*
-
-    <pre><code><r:unless_field name="author" [equals|matches="John"] [ignore_case="true|false"]>...</r:unless_field></code></pre>
-  )
-  tag 'unless_field' do |tag|
-    required_attr(tag, 'name')
-    field = tag.locals.page.field(tag.attr['name'])
-    tag.expand unless if field && (tag.attr['equals'] && (tag.attr['ignore_case'] == 'false')) then field.content == tag.attr['equals']
-                      elsif field && tag.attr['equals'] then field.content.downcase == tag.attr['equals'].downcase
-                      elsif field && tag.attr['matches'] then field.content =~ build_regexp_for(tag, 'matches')
-                      else field
-    end
   end
 
   tag 'site' do |tag|
