@@ -19,7 +19,7 @@
               = "#{t("clipped_extension.asset_url")}: #{image_path @asset.asset.url unless @asset.new_record?}"
             %br
             %label.id
-              = "#{t("clipped_extension.asset_id")}: #{@asset.asset.id unless @asset.new_record?}"
+              = "#{t("clipped_extension.asset_id")}: #{@asset.id unless @asset.new_record?}"
           %p.asset
             = image_tag @asset.thumbnail("normal"), :class => 'preview'
 

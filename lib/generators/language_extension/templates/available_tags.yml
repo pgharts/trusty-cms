@@ -7,16 +7,6 @@
     breadcrumb:
         Renders the @breadcrumb@ attribute of the current page.
 
-    breadcrumbs:
-      Renders a trail of breadcrumbs to the current page. The separator attribute
-      specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-      default it is set to @>@. The boolean nolinks attribute can be specified to render
-      breadcrumbs in plain text, without any links (useful when generating title tag).
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;breadcrumbs [separator="separator_string"] [nolinks="true"] /></code></pre>
-
     children-count:
       Renders the total number of children.
 
@@ -165,15 +155,6 @@
 
       <pre><code><r&#58;content [part="part_name"] [inherit="true|false"] [contextual="true|false"] /></code></pre>
 
-    cycle:
-      Renders one of the passed values based on a global cycle counter.  Use the @reset@
-      attribute to reset the cycle to the beginning.  Use the @name@ attribute to track
-      multiple cycles; the default is @cycle@.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;cycle values="first, second, third" [reset="true|false"] [name="cycle"] /></code></pre>
-
     date:
       Renders the date based on the current page (by default when it was published or created).
       The format attribute uses the same formating codes used by the Ruby @strftime@ function. By
@@ -199,15 +180,6 @@
       *Usage&#58;*
 
       <pre><code><r&#58;find url="value_to_find">...</r&#58;find></code></pre>
-
-    if_ancestor_or_self:
-      Renders the contained elements if the current contextual page is either the actual page or one of its parents.
-
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up if the child element is or descends from the current page.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;if_ancestor_or_self>...</r&#58;if_ancestor_or_self></code></pre>
 
     if_children:
       Renders the contained elements only if the current contextual page has one or
