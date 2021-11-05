@@ -25,13 +25,4 @@ class RailsPage < Page
       (part(k) || parts.build(name: k.to_s, filter_id: '')).content = v
     end
   end
-
-  alias_method 'tag:old_breadcrumbs', 'tag:breadcrumbs'
-  tag 'breadcrumbs' do |tag|
-    if tag.locals.page.is_a?(RailsPage) && tag.locals.page.breadcrumbs
-      tag.locals.page.breadcrumbs
-    else
-      render_tag('old_breadcrumbs', tag)
-    end
-  end
 end
