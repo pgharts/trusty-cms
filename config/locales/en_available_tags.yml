@@ -240,11 +240,6 @@ en:
       *Usage:*
 
       <pre><code><r:if_content [part=\"part_name, other_part\"] [inherit=\"true\"] [find=\"any\"]>...</r:if_content></code></pre>"
-    if_dev: "Renders the containing elements only if TrustyCms in is development mode.
-
-      *Usage:*
-
-      <pre><code><r:if_dev>...</r:if_dev></code></pre>"
 
     if_parent: "Renders the contained elements only if the current contextual page has a parent, i.e.
       is not the root page.
@@ -505,11 +500,6 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:unless_content [part=\"part_name, other_part\"] [inherit=\"false\"] [find=\"any\"]>...</r:unless_content></code></pre>"
-    unless_dev: "The opposite of the @if_dev@ tag.
-
-      *Usage:*
-
-      <pre><code><r:unless_dev>...</r:unless_dev></code></pre>"
     unless_parent: "Renders the contained elements only if the current contextual page has no parent, i.e.
       is the root page.
 
