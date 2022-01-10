@@ -391,14 +391,6 @@
 
       <pre><code><r&#58;snippet name="snippet_name">Lorem ipsum dolor...</r&#58;snippet></code></pre>
 
-    status:
-      Prints the page's status as a string.  Optional attribute 'downcase'
-      will cause the status to be all lowercase.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;status [downcase='true'] /></code></pre>
-
     textile:
       Filters its contents with the Textile filter.
 

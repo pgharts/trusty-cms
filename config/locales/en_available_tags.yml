@@ -442,12 +442,6 @@ The above example will produce the following:
       *Usage:*
 
       <pre><code><r:snippet name=\"snippet_name\">Lorem ipsum dolor...</r:snippet></code></pre>"
-    status: "Prints the page's status as a string.  Optional attribute 'downcase'
-      will cause the status to be all lowercase.
-
-      *Usage:*
-
-      <pre><code><r:status [downcase='true'] /></code></pre>"
     stylesheet: "Renders the content from or a reference to the stylesheet specified in the @slug@
 attribute. Additionally, the @as@ attribute can be used to make the tag render
 as one of the following:
