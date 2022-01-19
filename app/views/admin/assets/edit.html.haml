@@ -1,4 +1,5 @@
 = stylesheet_link_tag 'admin/assets'
+= javascript_include_tag 'admin/custom_file_upload'
 = render_region :top 
 
 - render_region :main do |main|
@@ -28,7 +29,8 @@
         %fieldset.upload
           %label.custom-file-upload.upload
             = t("clipped_extension.replace_file")
-            = f.file_field :asset, :class => "", :style => "width: 100%"
+            = f.file_field :asset, :style => "width: 100%"
+          %span#file-chosen No file chosen
         
         .buttons
           = save_model_button(@asset)
