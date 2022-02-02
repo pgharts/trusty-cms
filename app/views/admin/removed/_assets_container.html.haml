@@ -21,18 +21,18 @@
         - asset_tabs.bucket_tab do
           %a.asset-tab.here{ :href => '#' }
             = t('clipped_extension.bucket')
-    - if @page && !@page.new_record? 
+    - if @page && !@page.new_record?
       - render_region :asset_panes do |asset_panes|
 
-        - asset_panes.page_attachments do 
+        - asset_panes.page_attachments do
           #page-attachments.pane
             %p
-              %span.note 
+              %span.note
                 != t('clipped_extension.asset_note')
             %ul#attachments
               = render :partial => 'admin/assets/page_assets'
             .clear
-      
+
         - asset_panes.upload do
           #upload_assets.pane
             %p

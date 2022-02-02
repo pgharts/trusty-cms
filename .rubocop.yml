@@ -421,6 +421,11 @@ Layout/ExtraSpacing:
   Description: 'Do not use unnecessary spacing.'
   Enabled: true
 
+Layout/LineLength:
+  Description: 'Limit lines to 80 characters.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+  Max: 180
+
 Layout/MultilineOperationIndentation:
   Description: >-
                  Checks indentation of binary operations that span more than
