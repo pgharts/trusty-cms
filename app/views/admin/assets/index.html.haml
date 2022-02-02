@@ -9,7 +9,7 @@
   #assets_table.assets
     = render :partial => 'asset_table', :locals => { assets: @assets, with_pagination: true }
   %p{style: 'clear: both; height: 2em'} &nbsp;
-  
+
 - render_region :bottom do |bottom|
   #actions
     = link_to new_admin_asset_path, class: 'button' do

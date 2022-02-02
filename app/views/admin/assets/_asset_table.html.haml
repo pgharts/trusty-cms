@@ -25,6 +25,6 @@
             - else
               %li= link_to t('clipped_extension.edit'), admin_asset_path(asset), :class => 'edit'
               %li= link_to t("clipped_extension.remove"), remove_admin_asset_path(asset), :class => "delete"
-            
+
   - if with_pagination && assets.respond_to?(:total_pages) && assets.total_pages > 1
     = pagination_for(assets, pagination_parameters.merge(:depaginate => false, :param_name => 'p', :params => {:controller => 'admin/assets', :action => 'index', :id => nil, :format => 'js', :page_id => (page && page.id), :pp => assets.per_page }))

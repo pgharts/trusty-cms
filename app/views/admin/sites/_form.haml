@@ -39,10 +39,10 @@
       A new homepage will be created automatically if none is specified.
     - else
       If you change the site homepage ID, be sure it is to a page with no parents.
-  
+
   - render_region :form_bottom do |form_bottom|
     - form_bottom.edit_timestamp do
-      = updated_stamp @site  
+      = updated_stamp @site
       - form_bottom.edit_buttons do
         .buttons
           = save_model_button(@site)

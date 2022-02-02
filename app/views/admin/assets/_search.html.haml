@@ -12,7 +12,7 @@
   .asset_search
     %i.fas.fa-search
     %input{:type=>"search", :id => 'filesearchforminput', :class=>"search", :name=>"search", :value=>h(params[:search]), :placeholder=>"Search", :results=>0, :size=>30}
-  
+
   #type_boxes{:style => "display: none"}
     - AssetType.all.each do |type|
       = check_box_tag 'filter[]',  type.name.to_s, false, :id => "#{type.name}-check", :class => 'selective'

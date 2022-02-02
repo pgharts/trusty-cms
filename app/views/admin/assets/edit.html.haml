@@ -1,11 +1,11 @@
 = stylesheet_link_tag 'admin/assets'
 = javascript_include_tag 'admin/custom_file_upload'
-= render_region :top 
+= render_region :top
 
 - render_region :main do |main|
   - main.edit_header do
     %h1= t("clipped_extension.asset_edit_title")
-  
+
   - main.edit_form do
     - form_for :asset, :url => admin_asset_path(@asset), :html => { :method => "put", :multipart => true } do |f|
       .form_area
