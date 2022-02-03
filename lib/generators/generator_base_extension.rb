@@ -11,7 +11,6 @@ module TrustyCms
     def existing_migrations_with_extensions(file_name)
       Dir.glob("#{destination_path(@migration_directory)}/[0-9]*_*.rb").grep(/[0-9]+_#{file_name}.rb$/)
     end
-
   end
 end
 

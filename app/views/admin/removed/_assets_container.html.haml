@@ -4,7 +4,7 @@
 #assets-container
   #asset-tabs
     - render_region :asset_tabs do |asset_tabs|
-      - if @page && !@page.new_record? 
+      - if @page && !@page.new_record?
         - asset_tabs.attachment_tab do
           %a.asset-tab{ :href => '#page-attachments', :id => 'tab_page-attachments' }
             = t('clipped_extension.attached_assets')
@@ -14,7 +14,7 @@
         - asset_tabs.bucket_tab do
           %a.asset-tab{ :href => '#bucket', :id => 'tab_bucket' }
             = t('clipped_extension.bucket')
-        - asset_tabs.search_tab do  
+        - asset_tabs.search_tab do
           %a.asset-tab{ :href => '#search-assets' }
             = t('clipped_extension.search')
       - else
