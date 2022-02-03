@@ -32,20 +32,20 @@ plugins:
   stylelint:
     enabled: true
 exclude_patterns:
-- .rubocop.yml
-- spec/**/*
-- "**/vendor/**/*"
-- db/migrate/**/*
-- db/schema.rb
-- config/**/*
-- app/assets/bower_components/**/*
-- app/assets/javascripts/admin/jquery-ui.js
-- app/assets/javascripts/admin/jquery.iframe-transport.js 
-- app/assets/javascripts/admin/jquery.fileupload.js 
-- app/assets/javascripts/admin/jquery.treetable.js
-- app/assets/javascripts/admin/jquery.validate.min.js
-- app/assets/javascripts/admin/persist.min.js
-- app/assets/javascripts/rad_social/jquery.validate.min.js
-- app/assets/javascripts/admin/modernizr.js
-- app/assets/javascripts/ckeditor/*
-- lib/configuration_extensions/configuration_extensions.rb
+  - .rubocop.yml
+  - spec/**/*
+  - "**/vendor/**/*"
+  - db/migrate/**/*
+  - db/schema.rb
+  - config/**/*
+  - app/assets/bower_components/**/*
+  - app/assets/javascripts/admin/jquery.cookie.js
+  - app/assets/javascripts/admin/jquery.fileupload.js 
+  - app/assets/javascripts/admin/jquery.iframe-transport.js 
+  - app/assets/javascripts/admin/jquery.treetable.js
+  - app/assets/javascripts/admin/jquery.validate.min.js
+  - app/assets/javascripts/admin/persist.min.js
+  - app/assets/javascripts/rad_social/jquery.validate.min.js
+  - app/assets/javascripts/admin/modernizr.js
+  - app/assets/javascripts/ckeditor/*
+  - lib/configuration_extensions/configuration_extensions.rb
