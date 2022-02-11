@@ -55,7 +55,6 @@ class Asset < ActiveRecord::Base
     asset_type.icon(style_name.to_s)
   end
 
-
   def asset_variant(style_name)
     case style_name
     when 'thumbnail'

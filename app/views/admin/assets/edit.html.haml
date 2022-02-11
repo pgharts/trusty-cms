@@ -10,7 +10,7 @@
     - form_for :asset, :url => admin_asset_path(@asset), :html => { :method => "put", :multipart => true } do |f|
       .form_area
         = render :partial => "form", :locals => { :f => f }
-        
+
         %div.content
           %fieldset
             %label.filename
@@ -25,13 +25,13 @@
             = image_tag @asset.thumbnail("normal"), :class => 'preview'
 
           = updated_stamp @asset
-        
+
         %fieldset.upload
           %label.custom-file-upload.upload
             = t("clipped_extension.replace_file")
             = f.file_field :asset, :style => "width: 100%"
           %span#file-chosen No file chosen
-        
+
         .buttons
           = save_model_button(@asset)
           = save_model_and_continue_editing_button(@asset)

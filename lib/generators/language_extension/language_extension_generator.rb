@@ -23,7 +23,6 @@ class LanguageExtensionGenerator < Rails::Generator::NamedBase
       m.template 'lib.rb',                "#{extension_path}/lib/radiant-#{file_name}_language_pack-extension.rb"
       m.template 'gemspec.rb',            "#{extension_path}/radiant-#{file_name}_language_pack-extension.gemspec"
     end
-
   end
 
   def class_name
