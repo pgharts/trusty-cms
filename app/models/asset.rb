@@ -45,14 +45,19 @@ class Asset < ActiveRecord::Base
   def asset_type
     AssetType.for(asset)
   end
+
   delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format,
            to: :asset_type
 
   def thumbnail(style_name = 'original')
-    return asset.url if style_name.to_s == 'original' || asset.key.include?('culturaldistrict')
+    return asset.url if style_name.to_s == 'original' || render_original(style_name)
     return asset_variant(style_name.to_s).processed.url if asset.variable?
 
     asset_type.icon(style_name.to_s)
+  end
+
+  def render_original(style_name)
+    style_name.to_s == 'original' && asset.key.include?('culturaldistrict')
   end
 
   def asset_variant(style_name)
@@ -212,7 +217,9 @@ class Asset < ActiveRecord::Base
 
   # returns the return value of class << self block, which is self (as defined within that block)
   def self.eigenclass
-    class << self; self; end
+    class << self
+      self;
+    end
   end
 
   # for backwards compatibility
