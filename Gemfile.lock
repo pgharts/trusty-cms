@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.0.6)
+    trusty-cms (5.0.7)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -186,6 +186,7 @@ GEM
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
+    libv8-node (16.10.0.0-x86_64-linux-musl)
     loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -265,12 +266,12 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    roadie (4.0.0)
+    roadie (5.0.0)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
-    roadie-rails (2.3.0)
+    roadie-rails (3.0.0)
       railties (>= 5.1, < 7.1)
-      roadie (>= 3.1, < 5.0)
+      roadie (~> 5.0)
     rspec-core (3.10.2)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.2)
