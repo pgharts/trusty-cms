@@ -215,7 +215,8 @@ module AssetTags
     <pre><code><r:asset:image [name="asset name" or id="asset id"] [size="icon|thumbnail|whatever"]></code></pre>
   }    
   tag 'asset:image' do |tag|
-    tag.locals.asset, options = asset_and_options(tag)
+    tag.locals.asset, options = image_asset_and_options(tag)
+    return "Error: This image cannot be found" if tag.locals.asset == nil
     size = options.delete('size') || 'original'
     raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     options['alt'] ||= tag.locals.asset.title
@@ -260,7 +261,12 @@ private
     options = tag.attr.dup
     [find_asset(tag, options), options]
   end
-  
+
+  def image_asset_and_options(tag)
+    options = tag.attr.dup
+    [find_image_asset(tag, options), options]
+  end
+
   def find_asset(tag, options)
     tag.locals.asset ||= if title = (options.delete('name') || options.delete('title'))
       Asset.find_by_title(title)
@@ -269,7 +275,16 @@ private
     end
     tag.locals.asset || raise(TagError, "Asset not found.")
   end
-  
+
+  def find_image_asset(tag, options)
+    tag.locals.asset ||= if title = (options.delete('name') || options.delete('title'))
+      Asset.find_by_title(title)
+    elsif id = options.delete('id')
+      Asset.find_by_id(id)
+    end
+    tag.locals.asset || nil
+  end
+
   def assets_find_options(tag)
     attr = tag.attr.symbolize_keys
     extensions = attr[:extensions] && attr[:extensions].split('|') || []
