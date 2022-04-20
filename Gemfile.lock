@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.0.8)
+    trusty-cms (5.1.0)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -186,6 +186,7 @@ GEM
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
+    libv8-node (16.10.0.0-x86_64-linux-musl)
     loofah (2.15.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -302,7 +303,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sexp_processor (4.16.0)
+    sexp_processor (4.16.1)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
