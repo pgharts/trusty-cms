@@ -3,7 +3,6 @@ class TrustyCmsGenerator < Rails::Generators::Base
   argument :project_name, type: :string, default: "trusty"
 
   def generate_config
-
     template "Rakefile.erb", "Rakefile"
     template "config.ru.erb", "config.ru"
 

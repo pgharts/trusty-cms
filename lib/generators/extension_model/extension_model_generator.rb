@@ -2,7 +2,6 @@ require 'rails_generator/base'
 require 'rails_generator/generators/components/model/model_generator'
 
 class ExtensionModelGenerator < ModelGenerator
-
   attr_accessor :extension_name
   default_options :with_test_unit => false
 
