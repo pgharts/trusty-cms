@@ -144,5 +144,4 @@ class InstanceGenerator < Rails::Generator::Base
     def radiant_root(filename = '')
       File.join("..", "..", "..", "..", filename)
     end
-
 end

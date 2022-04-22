@@ -2,7 +2,6 @@ require 'rails_generator/base'
 require 'rails_generator/generators/components/mailer/mailer_generator'
 
 class ExtensionMailerGenerator < MailerGenerator
-
   attr_accessor :extension_name
   default_options :with_test_unit => false
 
