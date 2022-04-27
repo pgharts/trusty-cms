@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.1.0)
+    trusty-cms (5.2.0)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -192,7 +192,6 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
-    libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
