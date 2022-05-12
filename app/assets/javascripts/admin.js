@@ -13,9 +13,9 @@
 //= require jquery/dist/jquery.js
 //= require jquery-ujs/src/rails.js
 //= require jquery-ui-bundle/jquery-ui
-//= require 'admin/jquery.cookie'
-//= require 'admin/jquery.validate.min'
-//= require 'admin/jquery.treetable'
+//= require js-cookie/dist/js.cookie
+//= require 'jquery-validation/dist/jquery.validate.min'
+//= require 'jquery-treetable/jquery.treetable'
 //= require_tree './admin/validations'
 //= require ckeditor/init
 //= require 'admin/persist.min'
