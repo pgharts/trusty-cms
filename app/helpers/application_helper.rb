@@ -145,39 +145,6 @@ module ApplicationHelper
     overrides
   end
 
-  # Returns a Gravatar URL associated with the email parameter.
-  # See: http://douglasfshearer.com/blog/gravatar-for-ruby-and-ruby-on-rails
-  def gravatar_url(email, options = {})
-    # Default to highest rating. Rating can be one of G, PG, R X.
-    options[:rating] ||= 'G'
-
-    # Default size of the image.
-    options[:size] ||= '32px'
-
-    # Default image url to be used when no gravatar is found
-    # or when an image exceeds the rating parameter.
-    local_avatar_url = "/production/assets/admin/avatar_#{([options[:size].to_i] * 2).join('x')}.png"
-    default_avatar_url = "#{request.protocol}#{request.host_with_port}#{ActionController::Base.relative_url_root}#{local_avatar_url}"
-    options[:default] ||= default_avatar_url
-
-    if email.blank?
-      local_avatar_url
-    else
-      # Build the Gravatar url.
-      url = '//gravatar.com/avatar/'
-      url << "#{Digest::MD5.new.update(email)}?"
-      url << "rating=#{options[:rating]}" if options[:rating]
-      url << "&size=#{options[:size]}" if options[:size]
-      url << "&default=#{options[:default]}" if options[:default]
-      # Test the Gravatar url
-      require 'open-uri'
-      begin; open "http:#{url}", proxy: true
-      rescue StandardError; local_avatar_url
-      else; url
-      end
-    end
-  end
-
   # returns the usual set of pagination links.
   # options are passed through to will_paginate
   # and a 'show all' depagination link is added if relevant.
