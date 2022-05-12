@@ -663,46 +663,6 @@ module StandardTags
   end
 
   desc %{
-    Renders the Gravatar of the author of the current page or the named user.
-
-    *Usage:*
-
-    <pre><code><r:gravatar /></code></pre>
-
-    or
-
-    <pre><code><r:gravatar [name="User Name"]
-        [rating="G | PG | R | X"]
-        [size="32px"] /></code></pre>
-  }
-  tag 'gravatar' do |tag|
-    page = tag.locals.page
-    name = (tag.attr['name'] || page.created_by.name)
-    rating = (tag.attr['rating'] || 'G')
-    size = (tag.attr['size'] || '32px')
-    user = User.find_by_name(name)
-    email = user ? user.email : nil
-    local_avatar_url = "/images/admin/avatar_#{([size.to_i] * 2).join('x')}.png"
-    default_avatar_url = "#{request.protocol}#{request.host_with_port}#{local_avatar_url}"
-
-    if email.blank?
-      local_avatar_url
-    else
-      url = '//gravatar.com/avatar/'
-      url << "#{Digest::MD5.new.update(email)}?"
-      url << "rating=#{rating}"
-      url << "&size=#{size.to_i}"
-      url << "&default=#{default_avatar_url}" unless request.host_with_port == 'testhost.tld'
-      # Test the Gravatar url
-      require 'open-uri'
-      begin; open "http:#{sanitize(url)}", proxy: true
-      rescue StandardError; local_avatar_url
-      else; url
-      end
-    end
-  end
-
-  desc %{
     Renders the date based on the current page (by default when it was published or created).
     The format attribute uses the same formating codes used by the Ruby @strftime@ function.
     By default it's set to @%A, %B %d, %Y@. You may also use the string @rfc1123@ as a shortcut
