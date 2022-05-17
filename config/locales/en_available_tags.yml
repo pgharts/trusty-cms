@@ -203,17 +203,7 @@ en:
       *Usage:*
 
       <pre><code><r:find path=\"value_to_find\">...</r:find></code></pre>"
-    gravatar: "Renders the Gravatar of the author of the current page or the named user.
 
-      *Usage:*
-
-      <pre><code><r:gravatar /></code></pre>
-
-      or
-
-      <pre><code><r:gravatar [name=\"User Name\"]
-            [rating=\"G | PG | R | X\"]
-            [size=\"32px\"] /></code></pre>"
     hide: "Nothing inside a set of hide tags is rendered.
 
       *Usage:*

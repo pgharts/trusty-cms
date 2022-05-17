@@ -1,5 +1,4 @@
 = form_for [:admin, @user], :html => {class: 'user_form'} do |f|
-  = render :partial => 'avatar' unless @user.new_record?
 
   = render_region :form_top, :locals => {:f => f}
 
