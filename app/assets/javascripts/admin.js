@@ -15,7 +15,7 @@
 //= require jquery-ui-bundle/jquery-ui
 //= require js-cookie/dist/js.cookie
 //= require 'jquery-validation/dist/jquery.validate.min'
-//= require 'jquery-treetable/jquery.treetable'
+//= require jquery-treetable/jquery.treetable.js
 //= require_tree './admin/validations'
 //= require ckeditor/init
 //= require 'admin/persist.min'
