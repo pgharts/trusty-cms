@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.5.0",
+    "jquery-treetable": "^3.2.0-1",
     "jquery-ui-bundle": "^1.12.1",
     "jquery-ujs": "^1.2.2"
   }
