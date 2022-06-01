@@ -72,7 +72,8 @@ class Admin::AssetsController < Admin::ResourceController
   def compress(uploaded_asset)
     require 'open-uri'
     data = $kraken.upload(uploaded_asset.tempfile.path, 'lossy' => true)
-    File.write(uploaded_asset.tempfile, URI.open(data.kraked_url).read, mode: 'wb')
+    new_asset = data.success ? data.kraked_url : uploaded_asset.tempfile.path
+    File.write(uploaded_asset.tempfile, URI.open(new_asset).read, mode: 'wb')
     uploaded_asset
   end
 
