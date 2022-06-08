@@ -7,7 +7,7 @@ jobs:
       - image: cimg/ruby:3.0.1-node
         environment:
           - RAILS_ENV: test
-      - image: cimg/mysql:5.7.36
+      - image: circleci/mysql:5.7
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           - MYSQL_DATABASE: trusty_cms_test
