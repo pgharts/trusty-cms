@@ -7,6 +7,7 @@ jobs:
       - image: cimg/ruby:3.0.1-node
         environment:
           - RAILS_ENV: test
+          - CC_TEST_REPORTER_ID: 10e89622ddc764206e253cd07c5784f83178fe45550920e0eac8ab2e020e3e93
       - image: cimg/mysql:5.7.36
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -56,9 +57,18 @@ jobs:
             sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
             bundle exec rake app:db:migrate
 
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
       - run: mkdir /tmp/test-results
       - run:
-          command: bundle exec rspec --format progress -o /tmp/test-results/rspec.xml --profile 10 $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec --format progress -o /tmp/test-results/rspec.xml --profile 10 $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            ./cc-test-reporter after-build --coverage-input-type simplecov
           when: always
       - store_test_results:
           path: /tmp/test-results
