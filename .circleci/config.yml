@@ -53,8 +53,8 @@ jobs:
       - run:
           name: database setup
           command: |
-          sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
-          bundle exec rake app:db:migrate
+            sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
+            bundle exec rake app:db:migrate
 
       - run: mkdir /tmp/test-results
       - run:
