@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@1.1.2
+  ruby: circleci/ruby@1.8.0
 jobs:
   build:
     docker:
@@ -52,7 +52,9 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: database setup
-          command: bundle exec rake app:db:migrate
+          command: |
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
+          bundle exec rake app:db:migrate
 
       - run: mkdir /tmp/test-results
       - run:
