@@ -4,10 +4,10 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:3.0.1-node
+      - image: cimg/ruby:3.0.1-node
         environment:
           - RAILS_ENV: test
-      - image: circleci/mysql:5.7
+      - image: cimg/mysql:5.7.36
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           - MYSQL_DATABASE: trusty_cms_test
