@@ -41,18 +41,23 @@ class Admin::AssetsController < Admin::ResourceController
       else
         uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type) && compress
         @asset = Asset.create(asset: uploaded_asset, caption: asset_params[:asset][:caption])
-        set_owner_or_editor
-        if params[:for_attachment]
-          @page = Page.find_by_id(params[:page_id]) || Page.new
-          @page_attachments << @page_attachment = @asset.page_attachments.build(page: @page)
+        if @asset.valid?
+          set_owner_or_editor
+          if params[:for_attachment]
+            @page = Page.find_by_id(params[:page_id]) || Page.new
+            @page_attachments << @page_attachment = @asset.page_attachments.build(page: @page)
+          end
+          @assets << @asset
+        else
+          error = @asset.errors.first.message
+          flash[:error] = error
         end
-        @assets << @asset
       end
-    end
-    if asset_params[:for_attachment]
-      render partial: 'admin/page_attachments/attachment', collection: @page_attachments
-    else
-      response_for :create
+      if asset_params[:for_attachment]
+        render partial: 'admin/page_attachments/attachment', collection: @page_attachments
+      else
+        response_for :create
+      end
     end
   end
 
