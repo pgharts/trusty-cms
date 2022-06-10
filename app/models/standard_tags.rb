@@ -362,7 +362,7 @@ module StandardTags
       tag.locals.page = aggregate_page
       aggregates << tag.expand
     end
-    aggregates.flatten.join('')
+    aggregates.flatten.join
   end
 
   tag 'aggregate:each:children' do |tag|
@@ -380,7 +380,7 @@ module StandardTags
       tag.locals.page = item
       result << tag.expand
     end
-    result.flatten.join('')
+    result.flatten.join
   end
 
   tag 'aggregate:children' do |tag|
@@ -976,7 +976,7 @@ module StandardTags
       tag.locals.paginated_list = displayed_children
       result << tag.render('pagination', tag.attr.dup)
     end
-    result.flatten.join('')
+    result.flatten.join
   end
 
   def children_find_options(tag)
