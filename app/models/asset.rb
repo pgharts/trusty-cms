@@ -37,7 +37,7 @@ class Asset < ActiveRecord::Base
             blob:
               {
                 content_type: %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css],
-                size_range: 1..5.megabytes,
+                size_range: 1..10.megabytes,
               }
   before_save :assign_title
   before_save :assign_uuid
