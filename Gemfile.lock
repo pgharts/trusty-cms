@@ -202,8 +202,11 @@ GEM
       libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
     multi_xml (0.6.0)
+
     multipart-post (2.2.2)
-    mysql2 (0.5.3)
+
+    mysql2 (0.5.4)
+
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
@@ -220,11 +223,11 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
-    psych (4.0.3)
+    psych (4.0.4)
       stringio
     public_suffix (4.0.6)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-cache (1.13.0)
       rack (>= 0.4)
     rack-test (1.1.0)
@@ -356,7 +359,7 @@ DEPENDENCIES
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
-  psych (= 4.0.3)
+  psych (= 4.0.4)
   rails-observers
   rspec-rails
   simplecov
