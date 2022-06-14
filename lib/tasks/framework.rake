@@ -7,7 +7,7 @@ unless File.directory? "#{Rails.root}/app"
         require 'rubygems'
         require 'rubygems/gem_runner'
 
-        trusty = (version = ENV['VERSION']) ?
+        trusty = (version = ENV.fetch('VERSION')) ?
           Gem.cache.search('trusty-cms', "= #{version}").first :
           Gem.cache.search('trusty-cms').max_by { |g| g.version }
 

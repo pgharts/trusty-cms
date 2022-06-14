@@ -10,7 +10,7 @@ class RadSocialMailer < ApplicationMailer
     @from_name = from_address.display_name
     @from_email = from_address
     @message = options[:message]
-    @actual_from = ENV['RAD_SOCIAL_FROM_EMAIL']
+    @actual_from = ENV.fetch('RAD_SOCIAL_FROM_EMAIL')
     @actual_from = from_address if @actual_from.nil?
 
     mail({

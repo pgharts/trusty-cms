@@ -59,10 +59,10 @@ namespace :db do
   task bootstrap: :initialize do
     require 'trusty_cms/setup'
     TrustyCms::Setup.bootstrap(
-      admin_name: ENV['ADMIN_NAME'],
-      admin_username: ENV['ADMIN_USERNAME'],
-      admin_password: ENV['ADMIN_PASSWORD'],
-      database_template: ENV['DATABASE_TEMPLATE'],
+      admin_name: ENV.fetch('ADMIN_NAME'),
+      admin_username: ENV.fetch('ADMIN_USERNAME'),
+      admin_password: ENV.fetch('ADMIN_PASSWORD'),
+      database_template: ENV.fetch('DATABASE_TEMPLATE'),
     )
     puts %{
 Your TrustyCms application is ready to use. Run `rails s -e production` to

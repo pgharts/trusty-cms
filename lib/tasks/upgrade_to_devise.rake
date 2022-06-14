@@ -10,8 +10,8 @@ namespace :import do
     LegacyUser.all.each do |legacy|
       u = User.new(
         email: legacy.email,
-        first_name: legacy.name.split(' ')[0],
-        last_name: legacy.name.split(' ')[1],
+        first_name: legacy.name.split[0],
+        last_name: legacy.name.split[1],
         password: password,
         password_confirmation: password,
         admin: legacy.admin,
