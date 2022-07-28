@@ -8,7 +8,7 @@ class TranslationSupport
 
     # Retrieve comments, translation data in hash form
     def read_file(filename, basename)
-      (comments, data) = IO.read(filename).split(/\n#{basename}:\s*\n/) # Add error checking for failed file read?
+      (comments, data) = File.read(filename).split(/\n#{basename}:\s*\n/) # Add error checking for failed file read?
       [comments, create_hash(data, basename)]
     end
 
