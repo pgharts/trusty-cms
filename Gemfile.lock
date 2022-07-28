@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.3.3)
+    trusty-cms (5.3.6)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -202,7 +202,7 @@ GEM
       libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.2.2)
+    multipart-post (2.2.3)
     mysql2 (0.5.4)
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
@@ -322,7 +322,7 @@ GEM
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.1)
-    tilt (2.0.10)
+    tilt (2.0.11)
     trustygems (0.2.1)
       rake
     tzinfo (2.0.4)
