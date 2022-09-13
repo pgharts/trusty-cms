@@ -14,5 +14,3 @@
     %a{:class => 'rad-popup-window rad-twitter', :href => "https://twitter.com/intent/tweet?text=#{CGI::escape(message + " " + url)}", :target=> '_blank'}
   .rad-icon
     %a{:class => 'rad-popup-window rad-email', :href => rad_social_mail_form_url(:email_subject => email_subject, :email_message => email_message, :email_action_url => email_action_url)}
-  .rad-icon
-    %a{:class => 'rad-popup-window rad-gplus', :href => "https://plus.google.com/share?url=#{CGI::escape(url)}", :target=> '_blank'}
