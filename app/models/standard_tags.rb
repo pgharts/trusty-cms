@@ -915,6 +915,14 @@ module StandardTags
     TrustyCms::Config['dev.host']
   end
 
+  tag 'meta' do |tag|
+    if tag.double?
+      tag.expand
+    else
+      tag.render('description', tag.attr) + tag.render('keywords', tag.attr)
+    end
+  end
+
   tag 'meta:description' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
     description = CGI.escapeHTML(tag.locals.page.field(:description).try(:content)) if tag.locals.page.field(:description)

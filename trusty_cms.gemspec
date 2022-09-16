@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ['TrustyCms CMS dev team']
   s.description = 'TrustyCms is a simple and powerful publishing system designed for small teams.
 It is built with Rails and is similar to Textpattern or MovableType, but is
-a general purpose content managment system--not merely a blogging engine.'
+a general purpose content management system--not merely a blogging engine.'
   s.email = 'webteam@trustarts.org'
   s.executables = ['trusty_cms']
   s.extra_rdoc_files = ['README.md', 'INSTALL.md', 'LICENSE.md']
