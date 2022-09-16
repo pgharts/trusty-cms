@@ -185,6 +185,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -219,7 +220,7 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
-    psych (4.0.4)
+    psych (4.0.5)
       stringio
     public_suffix (4.0.6)
     racc (1.6.0)
@@ -355,7 +356,7 @@ DEPENDENCIES
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
-  psych (= 4.0.4)
+  psych (= 4.0.5)
   rails-observers
   rspec-rails
   simplecov
