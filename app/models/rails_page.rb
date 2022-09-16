@@ -2,7 +2,7 @@ class RailsPage < Page
   display_name 'Application'
   attr_accessor :breadcrumbs
 
-  def find_by_url(url, live = true, clean = true)
+  def find_by_path(url, live = true, clean = true)
     found_page = super
     if found_page.nil? || found_page.is_a?(FileNotFoundPage)
       url = clean_url(url) if clean
