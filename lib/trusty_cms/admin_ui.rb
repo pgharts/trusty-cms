@@ -196,8 +196,8 @@ module TrustyCms
           edit.form_bottom.concat %w{edit_buttons edit_timestamp}
         end
         user.index = RegionSet.new do |index|
-          index.thead.concat %w{title_header roles_header actions_header}
-          index.tbody.concat %w{title_cell roles_cell actions_cell}
+          index.thead.concat %w{title_header roles_header actions_header last_sign_in_at_header}
+          index.tbody.concat %w{title_cell roles_cell actions_cell last_sign_in_at_cell}
           index.bottom.concat %w{new_button}
         end
         user.new = user.edit

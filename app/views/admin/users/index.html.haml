@@ -13,6 +13,8 @@
             %th.roles= t('roles')
           - thead.actions_header do
             %th.actions{:style=>'width:9em'}= t('modify')
+          - thead.last_sign_in_at_header do
+            %th.last_sign_in_at= "Last Sign In"
     %tbody
       - @users.each do |user|
         %tr[user]
@@ -32,6 +34,11 @@
                   = link_to remove_admin_user_url(user), :class => 'action' do
                     %i.fas.fa-minus-circle
                     = t('remove')
+            - tbody.last_sign_in_at_cell do
+              -if user.last_sign_in_at.present?
+                %td.last_sign_in_at= user.last_sign_in_at.to_date
+              - else
+                %td.last_sign_in_at
 
 - render_region :bottom do |bottom|
   - bottom.new_button do
