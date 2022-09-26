@@ -8,7 +8,6 @@
   - main.edit_form do
     = form_for @user, :url => admin_preferences_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_preferences')}&#8230;" } do |f|
       %fieldset
-        = render :partial => 'admin/users/avatar'
 
         = render_region :form_top, :locals => {:f => f}
 
