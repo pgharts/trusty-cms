@@ -274,6 +274,8 @@ en:
   settings: 'Settings'
   show_all: 'Show all'
   slug: 'Slug'
+  snippets: 'Snippets'
+  snippet: 'Snippet'
   status: 'Status'
     # Warnings and info text:
   testing: Testing
