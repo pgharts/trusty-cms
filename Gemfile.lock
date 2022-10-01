@@ -10,7 +10,7 @@ PATH
       delocalize (>= 0.2, < 2.0)
       devise
       execjs (~> 2.7)
-      haml (~> 5.2.2)
+      haml (>= 5.2.2, < 6.1.0)
       haml-rails (~> 2.0)
       highline (>= 1.7.8, < 2.1.0)
       image_processing
@@ -152,8 +152,9 @@ GEM
       mime-types (>= 1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.0.3)
+      temple (>= 0.8.2)
+      thor
       tilt
     haml-rails (2.1.0)
       actionpack (>= 5.1)
@@ -178,6 +179,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
