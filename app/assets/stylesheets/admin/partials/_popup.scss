@@ -155,11 +155,11 @@ div.popup {
       width: 100%;
 
       th {
+        border-bottom: 1px dotted silver;
         color: green;
         font-size: 120%;
-        padding: 5px;
-        padding-left: 0;
-        padding-right: 0;
+        padding: 8px 5px;
+        text-align: left;
       }
 
       td {
@@ -169,12 +169,12 @@ div.popup {
         text-align: left;
       }
 
-      h1 {
+      h1, h2, h3, h4 {
         color: black;
         margin: 0;
         margin-bottom: 0.5em;
       }
-
+      
       acronym {
         border-bottom: 1px dotted silver;
       }
@@ -230,21 +230,6 @@ div.popup {
         color: white;
       }
     }
-  }
-}
-
-div.popup .reference table {
-  th {
-    border-bottom: 1px dotted silver;
-    padding-bottom: 8px;
-    padding-top: 8px;
-    text-align: left;
-  }
-
-  h2, h3, h4 {
-    color: black;
-    margin: 0;
-    margin-bottom: 0.5em;
   }
 }
 
