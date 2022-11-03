@@ -21,7 +21,7 @@ group :development, :test do
   gem 'mysql2'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
-  gem 'psych', '4.0.4'
+  gem 'psych', '4.0.6'
   gem 'rails-observers'
   gem 'rspec-rails'
   gem 'simplecov'
