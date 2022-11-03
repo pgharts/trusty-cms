@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.4.3)
+    trusty-cms (5.5)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -177,10 +177,8 @@ GEM
       multipart-post
     launchy (2.5.0)
       addressable (~> 2.7)
-    libv8 (8.4.255.0)
-    libv8 (8.4.255.0-x86_64-darwin-18)
-    libv8 (8.4.255.0-x86_64-darwin-20)
-    libv8 (8.4.255.0-x86_64-linux)
+    libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -193,8 +191,8 @@ GEM
     mime-types-data (3.2021.0225)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    mini_racer (0.3.1)
-      libv8 (~> 8.4.255)
+    mini_racer (0.6.3)
+      libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
@@ -260,12 +258,12 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    roadie (4.0.0)
+    roadie (5.0.1)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
-    roadie-rails (2.3.0)
+    roadie-rails (3.0.0)
       railties (>= 5.1, < 7.1)
-      roadie (>= 3.1, < 5.0)
+      roadie (~> 5.0)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.0)
