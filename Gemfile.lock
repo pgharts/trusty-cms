@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (5.4.2)
+    trusty-cms (5.4.3)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.1.0)
@@ -308,7 +308,7 @@ GEM
       sprockets (>= 3.0.0)
     stringex (2.8.5)
     stringio (3.0.2)
-    temple (0.8.2)
+    temple (0.9.1)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.1)

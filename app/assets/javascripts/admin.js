@@ -12,7 +12,7 @@
 //
 //= require jquery/dist/jquery.js
 //= require jquery-ujs/src/rails.js
-//= require jquery-ui-bundle/jquery-ui
+//= require jquery-ui/dist/jquery-ui
 //= require js-cookie/dist/js.cookie
 //= require 'jquery-validation/dist/jquery.validate.min'
 //= require jquery-treetable/jquery.treetable.js
