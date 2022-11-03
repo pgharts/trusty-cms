@@ -3,7 +3,7 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require 'rspec/rails'
 require 'factory_bot_rails'
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start('rails')
 include Warden::Test::Helpers
 
 Rails.backtrace_cleaner.remove_silencers!
