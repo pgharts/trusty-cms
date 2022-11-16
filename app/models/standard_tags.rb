@@ -594,7 +594,7 @@ module StandardTags
       tag.expand
     end
   end
-  deprecated_tag 'if_url', substitute: 'if_path', deadline: '1.2'
+  # deprecated_tag 'if_url', substitute: 'if_path', deadline: '1.2'
 
   desc %{
     The opposite of the @if_path@ tag.
@@ -610,7 +610,7 @@ module StandardTags
       tag.expand
     end
   end
-  deprecated_tag 'unless_url', substitute: 'unless_path', deadline: '1.2'
+  # deprecated_tag 'unless_url', substitute: 'unless_path', deadline: '1.2'
 
   desc %{
     Renders the contained elements if the current contextual page is either the actual page or one of its parents.
@@ -839,9 +839,9 @@ module StandardTags
       hash[symbol]
     end
   end
-  tag 'navigation:url' do |tag|
+  tag 'navigation:path' do |tag|
     hash = tag.locals.navigation
-    ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
+    # ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
     hash[:path]
   end
 
