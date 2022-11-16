@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
 
   include TrustyCms::Taggable
   include StandardTags
-  include DeprecatedTags
+  # include DeprecatedTags
   include Annotatable
 
   annotate :description

@@ -36,7 +36,7 @@ module StandardTags
   tag 'path' do |tag|
     relative_url_for(tag.locals.page.path, tag.globals.page.request)
   end
-  deprecated_tag 'url', substitute: 'path', deadline: '1.2'
+  # deprecated_tag 'url', substitute: 'path', deadline: '1.2'
 
   desc %{
     Gives access to a page's children.
