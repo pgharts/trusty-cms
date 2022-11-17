@@ -1,8 +1,6 @@
 require 'trusty_cms/taggable'
-require 'local_time'
 module StandardTags
   include TrustyCms::Taggable
-  include LocalTime
 
   require 'will_paginate/view_helpers'
   include WillPaginate::ViewHelpers
