@@ -594,7 +594,6 @@ module StandardTags
       tag.expand
     end
   end
-  deprecated_tag 'if_url', substitute: 'if_path', deadline: '1.2'
 
   desc %{
     The opposite of the @if_path@ tag.

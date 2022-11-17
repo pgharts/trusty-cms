@@ -222,15 +222,6 @@
 
       <pre><code><r&#58;if_self>...</r&#58;if_self></code></pre>
 
-    if_url:
-      Renders the containing elements only if the page's url matches the regular expression
-      given in the @matches@ attribute. If the @ignore_case@ attribute is set to false, the
-      match is case sensitive. By default, @ignore_case@ is set to true.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;if_url matches="regexp" [ignore_case="true|false"]>...</r&#58;if_url></code></pre>
-
     markdown:
       Filters its contents with the Markdown filter.
 
