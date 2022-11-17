@@ -214,11 +214,6 @@ class Admin::ResourceController < ApplicationController
     flash.now[:error] = t('resource_controller.validation_errors')
   end
 
-  def announce_removed
-    ActiveSupport::Deprecation.warn('announce_removed is no longer encouraged in TrustyCms 0.9.x.', caller)
-    flash[:notice] = t('resource_controller.removed', humanized_model_name: humanized_model_name)
-  end
-
   def announce_not_found
     flash[:notice] = t('resource_controller.not_found', humanized_model_name: humanized_model_name)
   end
