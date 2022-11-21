@@ -34,7 +34,6 @@ module StandardTags
   tag 'path' do |tag|
     relative_url_for(tag.locals.page.path, tag.globals.page.request)
   end
-  deprecated_tag 'url', substitute: 'path', deadline: '1.2'
 
   desc %{
     Gives access to a page's children.
@@ -607,7 +606,6 @@ module StandardTags
       tag.expand
     end
   end
-  deprecated_tag 'unless_url', substitute: 'unless_path', deadline: '1.2'
 
   desc %{
     Renders the contained elements if the current contextual page is either the actual page or one of its parents.
@@ -797,7 +795,7 @@ module StandardTags
     tag.expand
     raise TagError.new("`navigation' tag must include a `normal' tag") unless hash.has_key? :normal
 
-    ActiveSupport::Deprecation.warn("The 'urls' attribute of the r:navigation tag has been deprecated in favour of 'paths'. Please update your site.") if tag.attr['urls']
+    # ActiveSupport::Deprecation.warn("The 'urls' attribute of the r:navigation tag has been deprecated in favour of 'paths'. Please update your site.") if tag.attr['urls']
     result = []
     pairs = (tag.attr['paths'] || tag.attr['urls']).to_s.split('|').map do |pair|
       parts = pair.split(':')
@@ -836,9 +834,9 @@ module StandardTags
       hash[symbol]
     end
   end
-  tag 'navigation:url' do |tag|
+  tag 'navigation:path' do |tag|
     hash = tag.locals.navigation
-    ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
+    # ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
     hash[:path]
   end
 
