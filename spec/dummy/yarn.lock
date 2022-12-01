@@ -2,12 +2,10 @@
 # yarn lockfile v1
 
 
-jquery-treetable@^3.2.0-1:
-  version "3.2.0-1"
-  resolved "https://registry.yarnpkg.com/jquery-treetable/-/jquery-treetable-3.2.0-1.tgz#2a844f59396f764f71747a5087ee555d360aaed7"
-  integrity sha1-KoRPWTlvdk9xdHpQh+5VXTYKrtc=
-  dependencies:
-    jquery ">=1.6"
+jquery-treetable@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/jquery-treetable/-/jquery-treetable-3.2.0.tgz#01095e945cf2f8218bbe9a35aeb7bf1ad86f1f9c"
+  integrity sha512-bfrXHKcPelypgCh/Z5AHej9adKgusuzxrjM19l83SU+ZoIiX4AtuiHgUANoNSvhV8YcY1JNVN0Z+/NlflbXyuQ==
 
 jquery-ui@^1.12.1:
   version "1.13.2"
@@ -21,11 +19,6 @@ jquery-ujs@^1.2.2:
   resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.2.tgz#6a8ef1020e6b6dda385b90a4bddc128c21c56397"
   dependencies:
     jquery ">=1.8.0"
-
-jquery@>=1.6:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
-  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 jquery@>=1.8.0, jquery@^3.5.0:
   version "3.5.0"
