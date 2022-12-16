@@ -50,7 +50,11 @@ class MultiSiteExtension < TrustyCms::Extension
         add_item "Sites", "/admin/sites", :after => "Extensions", :visibility => [:admin]
       end
     else
-      admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
+      # admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
+      # below is the replacement advised in the deprecation warning for admin.tabs.add
+      tab("Settings") do
+        add_item "Sites", "/admin/sites", :visibility => [:admin]
+      end
     end
   end
 

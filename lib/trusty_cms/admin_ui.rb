@@ -27,6 +27,7 @@ module TrustyCms
 
       def <<(*args)
         options = args.extract_options!
+        #deprecated_add needs to be replaced, likely with NavSubItem.new(arg.name, arg.url)
         item = args.size > 1 ? deprecated_add(*(args << caller)) : args.first
         raise DuplicateTabNameError.new("duplicate tab name `#{item.name}'") if self[item.name]
 
