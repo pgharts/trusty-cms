@@ -212,7 +212,6 @@ class Page < ActiveRecord::Base
     end
     slug_child
   end
-  alias_method :find_by_url, :find_by_path
 
   def update_status
     self.published_at = Time.zone.now if published? && published_at == nil
@@ -246,11 +245,6 @@ class Page < ActiveRecord::Base
       raise MissingRootPageError unless root
 
       root.find_by_path(path, live)
-    end
-
-    def find_by_url(*args)
-      ActiveSupport::Deprecation.warn("`find_by_url' has been deprecated; use `find_by_path' instead.", caller)
-      find_by_path(*args)
     end
 
     def date_column_names
