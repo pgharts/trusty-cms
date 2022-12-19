@@ -434,13 +434,6 @@
 
       <pre><code><r&#58;unless_self>...</r&#58;unless_self></code></pre>
 
-    unless_url:
-      The opposite of the @if_url@ tag.
-
-      *Usage&#58;*
-
-      <pre><code><r&#58;unless_url matches="regexp" [ignore_case="true|false"]>...</r&#58;unless_url></code></pre>
-
     url:
       Renders the @url@ attribute of the current page.
 
