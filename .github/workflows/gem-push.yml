@@ -14,11 +14,11 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
-      uses: ruby/setup-ruby@v1
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: '2.6'
+        ruby-version: 2.6.3
 
     - name: Publish to RubyGems
       run: |
