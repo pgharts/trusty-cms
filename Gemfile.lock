@@ -119,7 +119,7 @@ GEM
     climate_control (0.2.0)
     cliver (0.3.2)
     coderay (1.1.3)
-    concurrent-ruby (1.2.0)
+    concurrent-ruby (1.2.2)
     crass (1.0.6)
     css_parser (1.12.0)
       addressable
@@ -131,7 +131,7 @@ GEM
     database_cleaner-core (2.0.1)
     delocalize (1.2.0)
       rails (>= 2)
-    devise (4.8.1)
+    devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -275,9 +275,9 @@ GEM
     rdoc (6.5.0)
       psych (>= 4.0.0)
     regexp_parser (2.1.1)
-    responders (3.0.1)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
+    responders (3.1.0)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     roadie (4.0.0)
       css_parser (~> 1.4)
       nokogiri (~> 1.8)
@@ -350,7 +350,7 @@ GEM
     will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.6)
+    zeitwerk (2.6.7)
 
 PLATFORMS
   x86_64-darwin-18
