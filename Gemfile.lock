@@ -321,7 +321,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stringex (2.8.5)
+    stringex (2.8.6)
     stringio (3.0.5)
     strscan (3.0.6)
     temple (0.10.0)
