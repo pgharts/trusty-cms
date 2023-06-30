@@ -12,7 +12,7 @@ gem 'trustygems', '~> 0.2.0'
 gemspec
 
 group :development, :test do
-  gem 'activestorage-validator'
+  gem 'activestorage-validator', '>= 0.3.0'
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '6.2.0'
@@ -23,6 +23,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'psych', '5.1.0'
   gem 'rails-observers'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 6.0.2'
   gem 'simplecov'
 end
