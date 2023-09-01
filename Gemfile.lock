@@ -153,7 +153,7 @@ GEM
       mime-types (>= 1.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    haml (6.1.1)
+    haml (6.1.2)
       temple (>= 0.8.2)
       thor
       tilt
@@ -329,11 +329,11 @@ GEM
     stringex (2.8.6)
     stringio (3.0.5)
     strscan (3.0.6)
-    temple (0.10.0)
+    temple (0.10.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.2)
-    tilt (2.1.0)
+    tilt (2.2.0)
     timeout (0.4.0)
     trustygems (0.2.1)
       rake
