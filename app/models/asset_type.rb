@@ -152,10 +152,6 @@ class AssetType
     end
   end
 
-  def legacy_styles
-    TrustyCms::config['assets.additional_thumbnails'].to_s.gsub(' ', '').split(',').collect { |s| s.split('=') }.inject({}) { |ha, (k, v)| ha[k.to_sym] = v; ha }
-  end
-
   def style_dimensions(style_name)
     if style = paperclip_styles[style_name.to_sym]
       style[:size]
