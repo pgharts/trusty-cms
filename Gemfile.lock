@@ -10,7 +10,7 @@ PATH
       delocalize (>= 0.2, < 2.0)
       devise
       execjs (~> 2.7)
-      haml (>= 5.0, < 6.0)
+      haml (>= 5.0, < 7.0)
       haml-rails
       highline (>= 1.7.8, < 2.2.0)
       image_processing
@@ -153,8 +153,9 @@ GEM
       mime-types (>= 1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.2.0)
+      temple (>= 0.8.2)
+      thor
       tilt
     haml-rails (2.1.0)
       actionpack (>= 5.1)
@@ -323,11 +324,11 @@ GEM
       sprockets (>= 3.0.0)
     stringex (2.8.6)
     stringio (3.0.5)
-    temple (0.10.0)
+    temple (0.10.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.2)
-    tilt (2.1.0)
+    tilt (2.3.0)
     timeout (0.4.0)
     trustygems (0.2.1)
       rake
