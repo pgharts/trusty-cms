@@ -1,4 +1,6 @@
 require 'trusty_cms/pagination/controller'
+require 'will_paginate/array'
+
 class SiteController < ApplicationController
   include TrustyCms::Pagination::Controller
 
@@ -42,16 +44,19 @@ class SiteController < ApplicationController
   def cacheable_request?
     (request.head? || request.get?) && live?
   end
+
   # hide_action :cacheable_request?
 
   def set_expiry(time, options = {})
     expires_in time, options
   end
+
   # hide_action :set_expiry
 
   def set_etag(val)
     headers['ETag'] = val
   end
+
   # hide_action :set_expiry
 
   private

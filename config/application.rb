@@ -10,7 +10,8 @@ require 'rack/cache'
 require 'trustygems'
 require 'devise'
 require "zeitwerk"
-loader = Zeitwerk::Loader.for_gem
+
+loader = Zeitwerk::Loader.new
 loader.ignore("#{__dir__}/active_record_extensions")
 loader.ignore("#{__dir__}/annotatable.rb")
 loader.ignore("#{__dir__}/configuration_extensions")
@@ -24,7 +25,7 @@ loader.ignore("#{__dir__}/simpleton.rb")
 loader.ignore("#{__dir__}/string_extensions")
 loader.ignore("#{__dir__}/symbol_extensions")
 loader.ignore("#{__dir__}/translation_support.rb")
-
+loader.enable_reloading
 loader.setup
 
 if defined?(Bundler)
