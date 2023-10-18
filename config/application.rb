@@ -9,24 +9,6 @@ require 'trusty_cms/initializer'
 require 'rack/cache'
 require 'trustygems'
 require 'devise'
-require "zeitwerk"
-
-loader = Zeitwerk::Loader.new
-loader.ignore("#{__dir__}/active_record_extensions")
-loader.ignore("#{__dir__}/annotatable.rb")
-loader.ignore("#{__dir__}/configuration_extensions")
-loader.ignore("#{__dir__}/generators")
-loader.ignore("#{__dir__}/inheritable_class_attributes.rb")
-loader.ignore("#{__dir__}/layouts_extension")
-loader.ignore("#{__dir__}/login_system.rb")
-loader.ignore("#{__dir__}/method_observer.rb")
-loader.ignore("#{__dir__}/ostruct.rb")
-loader.ignore("#{__dir__}/simpleton.rb")
-loader.ignore("#{__dir__}/string_extensions")
-loader.ignore("#{__dir__}/symbol_extensions")
-loader.ignore("#{__dir__}/translation_support.rb")
-loader.enable_reloading
-loader.setup
 
 if defined?(Bundler)
   Bundler.require(*Rails.groups(assets: %w(development test)))
@@ -36,8 +18,6 @@ module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
     config.active_record.whitelist_attributes = true
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.eager_load_paths << Rails.root.join('lib')
 
     # Enable the asset pipeline
     config.assets.enabled = true
