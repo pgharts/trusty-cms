@@ -76,7 +76,8 @@ module TrustyCms
       begin
         constant = "#{name}_extension".camelize
         extension = constant.constantize
-        extension.unloadable
+        # not sure if this is going to break anything
+        # extension.unloadable
         extension.path = extension_path
         extension
       rescue LoadError, NameError => e
