@@ -81,7 +81,8 @@ module TrustyCms
               TrustyCms::Config.initialize_cache
             end
             TrustyCms::Config.initialize_cache if TrustyCms::Config.stale_cache?
-            Rails.cache.read('TrustyCms::Config')[key]
+            # Rails.cache.read('TrustyCms::Config')[key]
+            # TODO: Do we need this line?
           end
         end
       end

@@ -76,8 +76,6 @@ module TrustyCms
       begin
         constant = "#{name}_extension".camelize
         extension = constant.constantize
-        # not sure if this is going to break anything
-        # extension.unloadable
         extension.path = extension_path
         extension
       rescue LoadError, NameError => e
@@ -88,8 +86,12 @@ module TrustyCms
 
     # Loads all the initializers defined in enabled extensions, in the configured order.
     #
-    def load_extension_initializers
+    def load_extension_initalizers
       extensions.each(&:load_initializers)
+    end
+
+    def load_extension_initializers
+      load_extension_initalizers
     end
 
     # Deactivates all enabled extensions.
@@ -142,5 +144,7 @@ module TrustyCms
         end
       end
     end
+
+    alias_method :load_extension_initializers, :load_extension_initalizers
   end
 end
