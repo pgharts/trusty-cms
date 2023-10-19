@@ -97,7 +97,7 @@ module TrustyCms
     def load_application_initializers
       load_trusty_initializers unless deployed_as_app?
       super
-      extension_loader.load_extension_initalizers
+      extension_loader.load_extension_initializers
     end
 
     # Loads initializers found in TRUSTY_CMS_ROOT/config/initializers.

@@ -78,7 +78,7 @@ module TrustyCms
     end
     config.after_initialize do
       extension_loader.load_extensions
-      extension_loader.load_extension_initalizers
+      extension_loader.load_extension_initializers
 
       extension_loader.activate_extensions # also calls initialize_views
       # config.add_controller_paths(extension_loader.paths(:controller))
