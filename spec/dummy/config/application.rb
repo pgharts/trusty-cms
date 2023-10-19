@@ -31,7 +31,7 @@ module TrustyCms
 
     # Initialize extension paths
     config.initialize_extension_paths
-    extension_loader = ExtensionLoader.instance {|l| l.initializer = self }
+    extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path, value|
       config.autoload_paths.unshift path
       $LOAD_PATH.unshift path
@@ -101,7 +101,7 @@ module TrustyCms
     # config.action_controller.session_store = :cookie_store DEPRECATED
 
     # Activate observers that should always be running
-    #config.active_record.observers = :user_action_observer
+    # config.active_record.observers = :user_action_observer
 
     # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
     # All files from config/locales/*.rb,yml are added automatically.
@@ -122,15 +122,15 @@ module TrustyCms
 
     config.after_initialize do
       extension_loader.load_extensions
-      extension_loader.load_extension_initalizers
+      extension_loader.load_extension_initializers
 
-      #Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
+      # Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
       #  load(initializer)
-      #end
+      # end
 
-      extension_loader.activate_extensions  # also calls initialize_views
-      #config.add_controller_paths(extension_loader.paths(:controller))
-      #config.add_eager_load_paths(extension_loader.paths(:eager_load))
+      extension_loader.activate_extensions # also calls initialize_views
+      # config.add_controller_paths(extension_loader.paths(:controller))
+      # config.add_eager_load_paths(extension_loader.paths(:eager_load))
 
       # Add new inflection rules using the following format:
       ActiveSupport::Inflector.inflections do |inflect|
