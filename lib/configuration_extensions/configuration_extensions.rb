@@ -14,7 +14,7 @@ module TrustyCms
     #     config['other.thing'] = 'nothing'
     #   end
     #
-    def config  # method must be defined before any initializers run
+    def config # method must be defined before any initializers run
       yield TrustyCms::Config if block_given?
       TrustyCms::Config
     end
@@ -33,6 +33,7 @@ module TrustyCms
     def root
       Pathname.new(TRUSTY_CMS_ROOT) if defined?(TRUSTY_CMS_ROOT)
     end
+
     def boot!
       unless booted?
         preinitialize
@@ -46,12 +47,12 @@ module TrustyCms
 
     def pick_boot
       case
-        when app?
-          AppBoot.new
-        when vendor?
-          VendorBoot.new
-        else
-          GemBoot.new
+      when app?
+        AppBoot.new
+      when vendor?
+        VendorBoot.new
+      else
+        GemBoot.new
       end
     end
 
@@ -76,7 +77,6 @@ module TrustyCms
     end
   end
 end
-
 
 class Rails::Application::Configuration
 
@@ -132,7 +132,8 @@ class Rails::Application::Configuration
     @extension_list ||= extensions ? expand_and_check(extensions) : available_extensions
   end
 
-  def expand_and_check(extension_list) #:nodoc
+  def expand_and_check(extension_list)
+    #:nodoc
     missing_extensions = extension_list - [:all] - available_extensions
     raise LoadError, "These configured extensions have not been found: #{missing_extensions.to_sentence}" if missing_extensions.any?
     if m = extension_list.index(:all)

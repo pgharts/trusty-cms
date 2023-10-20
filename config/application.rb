@@ -1,4 +1,4 @@
-require File.expand_path('boot', __dir__)
+require_relative 'boot'
 
 require 'rails/all'
 require 'acts_as_tree'
@@ -18,8 +18,6 @@ module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
     config.active_record.whitelist_attributes = true
-    config.autoload_paths += %W(#{config.root}/lib)
-    config.eager_load_paths << Rails.root.join('lib')
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -80,7 +78,7 @@ module TrustyCms
     end
     config.after_initialize do
       extension_loader.load_extensions
-      extension_loader.load_extension_initalizers
+      extension_loader.load_extension_initializers
 
       extension_loader.activate_extensions # also calls initialize_views
       # config.add_controller_paths(extension_loader.paths(:controller))
