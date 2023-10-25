@@ -13,15 +13,18 @@ module TrustyCms
 
       attr_accessor :config
 
-      def initialize(rails_config) #:nodoc
+      def initialize(rails_config)
+        #:nodoc
         @config = rails_config
       end
 
-      def before_clear(*_args) #:nodoc
+      def before_clear(*_args)
+        #:nodoc
         ExtensionLoader.deactivate_extensions
       end
 
-      def after_clear(*_args) #:nodoc
+      def after_clear(*_args)
+        #:nodoc
         ExtensionLoader.load_extensions
         ExtensionLoader.activate_extensions
       end
@@ -73,7 +76,6 @@ module TrustyCms
       begin
         constant = "#{name}_extension".camelize
         extension = constant.constantize
-        extension.unloadable
         extension.path = extension_path
         extension
       rescue LoadError, NameError => e
