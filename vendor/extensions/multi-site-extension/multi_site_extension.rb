@@ -1,12 +1,9 @@
-require_dependency 'application_controller'
-
 class MultiSiteExtension < TrustyCms::Extension
   version "3.0.2"
   description %{ Enables virtual sites to be created with associated domain names.
                  Also scopes the sitemap view to any given page (or the root of an
                  individual site) and allows model classes to be scoped by site. }
   url "http://trustarts.org/"
-
 
   def activate
 
@@ -19,7 +16,7 @@ class MultiSiteExtension < TrustyCms::Extension
     Admin::ResourceController.send :include, MultiSite::ApplicationControllerExtensions
     ApplicationController.send :include, MultiSite::ApplicationControllerFilterExtensions
 
-    #ActionController::Base.send :include, MultiSite::ApplicationControllerExtensions
+    # ActionController::Base.send :include, MultiSite::ApplicationControllerExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::ResourceController.send :include, MultiSite::ResourceControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
@@ -38,7 +35,6 @@ class MultiSiteExtension < TrustyCms::Extension
       admin.layouts.edit.add :form, "choose_site", :before => "edit_timestamp"
       admin.snippets.edit.add :form, "choose_site", :before => "edit_filter" unless admin.snippets.edit.form.include?("choose_site")
     end
-
 
     unless defined? admin.site
       TrustyCms::AdminUI.send :include, MultiSite::AdminUI

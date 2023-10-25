@@ -1,5 +1,4 @@
 # Uncomment this if you reference any of your controllers in activate
-# require_dependency "application_controller"
 require "radiant-<%= file_name %>-extension"
 
 class <%= class_name %> < TrustyCms::Extension

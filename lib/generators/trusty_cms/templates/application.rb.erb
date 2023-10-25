@@ -30,7 +30,7 @@ module TrustyCms
 
     # Initialize extension paths
     config.initialize_extension_paths
-    extension_loader = ExtensionLoader.instance {|l| l.initializer = self }
+    extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path, value|
       config.autoload_paths.unshift path
       $LOAD_PATH.unshift path
@@ -51,7 +51,7 @@ module TrustyCms
     # An example of how to add extensions:
     # config.extensions = [ :snippets, :clipped, :layouts, :reorder, :multi_site, :rad_social]
 
-    config.extensions = [ ]
+    config.extensions = []
 
     # By default, only English translations are loaded. Remove any of these from
     # the list below if you'd like to provide any of the additional options
@@ -85,7 +85,6 @@ module TrustyCms
     #    Sets the meta store type and storage location.  We recommend you use
     #    radiant: since this will enable manual expiration and acceleration headers.
 
-
     config.middleware.use Rack::Cache,
                           :private_headers => ['Authorization'],
                           :entitystore => "radiant:tmp/cache/entity",
@@ -96,8 +95,6 @@ module TrustyCms
 
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
-
-
 
     config.filter_parameters += [:password, :password_confirmation]
 
@@ -128,13 +125,13 @@ module TrustyCms
 
     config.after_initialize do
       extension_loader.load_extensions
-      extension_loader.load_extension_initalizers
+      extension_loader.load_extension_initializers
 
       #Dir["#{TRUSTY_CMS_ROOT}/config/initializers/**/*.rb"].sort.each do |initializer|
       #  load(initializer)
       #end
 
-      extension_loader.activate_extensions  # also calls initialize_views
+      extension_loader.activate_extensions # also calls initialize_views
       #config.add_controller_paths(extension_loader.paths(:controller))
       #config.add_eager_load_paths(extension_loader.paths(:eager_load))
 

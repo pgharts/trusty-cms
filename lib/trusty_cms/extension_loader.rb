@@ -90,6 +90,10 @@ module TrustyCms
       extensions.each(&:load_initializers)
     end
 
+    def load_extension_initializers
+      load_extension_initalizers
+    end
+
     # Deactivates all enabled extensions.
     #
     def deactivate_extensions
@@ -140,5 +144,7 @@ module TrustyCms
         end
       end
     end
+
+    alias_method :load_extension_initializers, :load_extension_initalizers
   end
 end
