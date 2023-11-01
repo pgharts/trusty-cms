@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (6.0.3)
+    trusty-cms (6.0.4)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.2.0)
@@ -28,7 +28,6 @@ PATH
       stringex (>= 2.7.1, < 2.9.0)
       tzinfo (>= 1.2.3, < 2.1.0)
       uglifier (>= 3.2, < 5.0)
-      uuidtools (>= 2.1.5, < 2.3.0)
       will_paginate (>= 3, < 5)
 
 GEM
@@ -341,7 +340,6 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    uuidtools (2.2.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.6)

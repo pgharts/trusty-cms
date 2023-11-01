@@ -186,7 +186,7 @@ class Asset < ActiveRecord::Base
   end
 
   def assign_uuid
-    self.uuid = UUIDTools::UUID.timestamp_create.to_s unless uuid?
+    self.uuid = SecureRandom.uuid unless uuid?
   end
 
   class << self
