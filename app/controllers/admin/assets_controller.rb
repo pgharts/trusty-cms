@@ -53,11 +53,12 @@ class Admin::AssetsController < Admin::ResourceController
           flash[:error] = error
         end
       end
-      if asset_params[:for_attachment]
-        render partial: 'admin/page_attachments/attachment', collection: @page_attachments
-      else
-        response_for :create
-      end
+    end
+    
+    if asset_params[:for_attachment]
+      render partial: 'admin/page_attachments/attachment', collection: @page_attachments
+    else
+      response_for :create
     end
   end
 
