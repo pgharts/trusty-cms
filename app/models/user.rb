@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     content_editor
   end
 
+  def scoped?
+    site_id.present?
+  end
+
   def locale
     'en'
   end
