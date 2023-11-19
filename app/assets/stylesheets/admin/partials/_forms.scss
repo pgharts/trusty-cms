@@ -41,7 +41,7 @@ input[type="text"], input[type="search"], input[type="password"], input[type="em
   border: 0.5px solid $gray;
   margin: 0.5em;
   padding: 0.25em;
-  width: 75%;
+  max-width: 75%;
 }
 
 select {

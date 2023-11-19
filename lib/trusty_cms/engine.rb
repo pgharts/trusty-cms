@@ -21,4 +21,5 @@ end
 
 require 'ckeditor'
 require 'devise'
+require 'ransack'
 
