@@ -12,8 +12,8 @@
 
   .asset_search
     %i.fas.fa-search
-    = f.search_field :title_cont, placeholder: 'Search Asset Title', class: 'search', id: 'filesearchforminput', size: '50'
-
+    = f.search_field :title_cont, placeholder: 'Search Asset Title', class: 'search', id: 'filesearchforminput', size: '30'
+    Sort By #{sort_link(@term, :title)} or #{sort_link(@term, :created_at)}
   #type_boxes{:style => "display: none"}
     - AssetType.all.each do |type|
       = check_box_tag 'filter[]',  type.name.to_s, false, :id => "#{type.name}-check", :class => 'selective'
