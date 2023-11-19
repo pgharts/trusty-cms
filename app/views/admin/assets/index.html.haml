@@ -3,7 +3,7 @@
 - body_classes << 'reversed'
 
 - content_for :toolbar do
-  = render 'search'
+  = render 'search', locals: { term: @term, page: @page }
 
 .outset
   #assets_table.assets

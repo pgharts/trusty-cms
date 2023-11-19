@@ -1,6 +1,8 @@
-= search_form_for @term, url: admin_assets_path, class: 'search', id: 'filesearchform' do |f|
-  - if @page
-    = hidden_field_tag "page_id", @page.id
+- page ||= @page
+- term ||= @term
+= search_form_for term, url: admin_assets_path, class: 'search', id: 'filesearchform' do |f|
+  - if page
+    = hidden_field_tag "page_id", page.id
     = hidden_field_tag "p", params['p'] || 1
     = hidden_field_tag "pp", params['pp'] || 50
 
@@ -13,7 +15,7 @@
   .asset_search
     %i.fas.fa-search
     = f.search_field :title_cont, placeholder: 'Search Asset Title', class: 'search', id: 'filesearchforminput', size: '30'
-    Sort By #{sort_link(@term, :title)} or #{sort_link(@term, :created_at)}
+    Sort By #{sort_link(term, :title)} or #{sort_link(term, :created_at)}
   #type_boxes{:style => "display: none"}
     - AssetType.all.each do |type|
       = check_box_tag 'filter[]',  type.name.to_s, false, :id => "#{type.name}-check", :class => 'selective'
