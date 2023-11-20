@@ -1,6 +1,6 @@
 class FileNotFoundPage < Page
   def cache_timeout
-    24.hours
+    5.minutes
   end
 
   def allowed_children
