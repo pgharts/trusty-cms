@@ -1,4 +1,8 @@
 class FileNotFoundPage < Page
+  def cache_timeout
+    5.minutes
+  end
+
   def allowed_children
     []
   end
@@ -22,9 +26,5 @@ class FileNotFoundPage < Page
 
   def response_code
     404
-  end
-
-  def cache?
-    false
   end
 end
