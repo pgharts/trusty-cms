@@ -3,11 +3,11 @@
 - body_classes << 'reversed'
 
 - content_for :toolbar do
-  = render 'search'
+  = render partial: 'search', locals: { term: @term, page: @page }
 
 .outset
   #assets_table.assets
-    = render :partial => 'asset_table', :locals => { assets: @assets, with_pagination: true }
+    = render partial: 'asset_table', locals: { assets: @assets, with_pagination: true }
   %p{style: 'clear: both; height: 2em'} &nbsp;
 
 - render_region :bottom do |bottom|

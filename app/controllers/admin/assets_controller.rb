@@ -9,8 +9,8 @@ class Admin::AssetsController < Admin::ResourceController
     assets = Asset.order('created_at DESC')
     @page = Page.find(params[:page_id]) if params[:page_id]
 
-    @term = params[:search] || ''
-    assets = assets.matching(@term) if @term && !@term.blank?
+    @term = assets.ransack(params[:search] || '')
+    assets = @term.result(distinct: true)
 
     @types = params[:filter] ? params[:filter].split(',') : []
     if @types.include?('all')
@@ -20,6 +20,7 @@ class Admin::AssetsController < Admin::ResourceController
     end
 
     @assets = paginated? ? assets.paginate(pagination_parameters) : assets.all
+
     respond_to do |format|
       format.js do
         @page = Page.find_by_id(params[:page_id])
@@ -54,7 +55,7 @@ class Admin::AssetsController < Admin::ResourceController
         end
       end
     end
-    
+
     if asset_params[:for_attachment]
       render partial: 'admin/page_attachments/attachment', collection: @page_attachments
     else

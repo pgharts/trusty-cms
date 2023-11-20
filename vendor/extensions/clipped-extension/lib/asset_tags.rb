@@ -2,34 +2,34 @@ module AssetTags
   include TrustyCms::Taggable
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::AssetTagHelper
-  
+
   class TagError < StandardError; end
-  
+
   %w{top_padding width height caption asset_file_name asset_content_type asset_file_size id filename image flash thumbnail url link extension if_content_type page:title page:url}.each do |name|
     deprecated_tag "assets:#{name}", :substitute => "asset:#{name}", :deadline => '2.0'
   end
-  
+
   desc %{
     The namespace for referencing images and assets.
     
     *Usage:* 
     <pre><code><r:asset [name="asset name"]>...</r:asset></code></pre>
-  }    
+  }
   tag 'asset' do |tag|
     tag.locals.asset = find_asset(tag, tag.attr) unless tag.attr.empty?
-      tag.expand
+    tag.expand
   end
 
   desc %{
     Cycles through all assets attached to the current page.  
-    This tag does not require the name atttribute, nor do any of its children.
+    This tag does not require the name attribute, nor do any of its children.
     Use the @limit@ and @offset@ attribute to render a specific number of assets.
     Use @by@ and @order@ attributes to control the order of assets.
     Use @extensions@ attribute to specify which assets to be rendered.
     
     *Usage:* 
     <pre><code><r:assets:each [limit=0] [offset=0] [order="asc|desc"] [by="position|title|..."] [extensions="png|pdf|doc"]>...</r:assets:each></code></pre>
-  }    
+  }
   tag 'assets' do |tag|
     tag.expand
   end
@@ -58,7 +58,7 @@ module AssetTags
     end
     result
   end
-  
+
   desc %{
     References the first asset attached to the current page.  
     
@@ -84,7 +84,7 @@ module AssetTags
     assets = tag.locals.page.assets.count(:conditions => assets_find_options(tag)[:conditions])
     tag.expand if assets >= count
   end
-  
+
   desc %{
     The opposite of @<r:if_assets/>@.
   }
@@ -93,7 +93,7 @@ module AssetTags
     assets = tag.locals.page.assets.count(:conditions => assets_find_options(tag)[:conditions])
     tag.expand unless assets >= count
   end
-  
+
   # Resets the page Url and title within the asset tag
   [:title, :url].each do |method|
     tag "asset:page:#{method.to_s}" do |tag|
@@ -127,10 +127,10 @@ module AssetTags
     size = options['size'] ? options.delete('size') : 'icon'
     raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.style?(size)
     container = options.delete('container')
-    ((container.to_i - asset.height(size).to_i)/2).to_s
+    ((container.to_i - asset.height(size).to_i) / 2).to_s
   end
-    
-  ['height','width'].each do |dimension|
+
+  ['height', 'width'].each do |dimension|
     desc %{
       Renders the #{dimension} of the asset.
     }
@@ -180,11 +180,11 @@ module AssetTags
   tag 'asset:if_content_type' do |tag|
     options = tag.attr.dup
     # XXX build_regexp_for comes from StandardTags
-    regexp = build_regexp_for(tag,options)
+    regexp = build_regexp_for(tag, options)
     asset_content_type = tag.locals.asset.asset_content_type
     tag.expand unless asset_content_type.match(regexp).nil?
   end
-    
+
   [:title, :caption, :asset_file_name, :extension, :asset_content_type, :asset_file_size, :id].each do |method|
     desc %{
       Renders the @#{method.to_s}@ attribute of the asset
@@ -194,16 +194,16 @@ module AssetTags
       asset.send(method) rescue nil
     end
   end
-  
+
   tag 'asset:name' do |tag|
     tag.render('asset:title', tag.attr.dup)
-  end  
-  
+  end
+
   tag 'asset:filename' do |tag|
     asset, options = asset_and_options(tag)
     asset.asset_file_name rescue nil
   end
-  
+
   desc %{
     Renders an image tag for the asset.
     
@@ -213,7 +213,7 @@ module AssetTags
     
     *Usage:* 
     <pre><code><r:asset:image [name="asset name" or id="asset id"] [size="icon|thumbnail|whatever"]></code></pre>
-  }    
+  }
   tag 'asset:image' do |tag|
     tag.locals.asset, options = image_asset_and_options(tag)
     return "Error: This image cannot be found" if tag.locals.asset == nil
@@ -223,20 +223,20 @@ module AssetTags
     url = tag.locals.asset.thumbnail(size)
     ActionController::Base.helpers.image_tag(url, options)
   end
-    
+
   desc %{
     Renders the url for the asset. If the asset is an image, the <code>size</code> attribute can be used to 
     generate the url for that size. 
     
     *Usage:* 
     <pre><code><r:url [name="asset name" or id="asset id"] [size="icon|thumbnail"]></code></pre>
-  }    
+  }
   tag 'asset:url' do |tag|
     asset, options = asset_and_options(tag)
     size = options['size'] ? options.delete('size') : 'original'
     asset.thumbnail(size) rescue nil
   end
-  
+
   desc %{
     Renders a link to the asset. If the asset is an image, the <code>size</code> attribute can be used to 
     generate a link to that size. 
@@ -255,8 +255,9 @@ module AssetTags
     url = asset.thumbnail(size)
     %{<a href="#{url  }#{anchor}"#{attributes}>#{text}</a>} rescue nil
   end
-    
-private
+
+  private
+
   def asset_and_options(tag)
     options = tag.attr.dup
     [find_asset(tag, options), options]
@@ -269,19 +270,19 @@ private
 
   def find_asset(tag, options)
     tag.locals.asset ||= if title = (options.delete('name') || options.delete('title'))
-      Asset.find_by_title(title)
-    elsif id = options.delete('id')
-      Asset.find_by_id(id)
-    end
+                           Asset.find_by_title(title)
+                         elsif id = options.delete('id')
+                           Asset.find_by_id(id)
+                         end
     tag.locals.asset || raise(TagError, "Asset not found.")
   end
 
   def find_image_asset(tag, options)
     tag.locals.asset ||= if title = (options.delete('name') || options.delete('title'))
-      Asset.find_by_title(title)
-    elsif id = options.delete('id')
-      Asset.find_by_id(id)
-    end
+                           Asset.find_by_title(title)
+                         elsif id = options.delete('id')
+                           Asset.find_by_id(id)
+                         end
     tag.locals.asset || nil
   end
 
@@ -289,16 +290,16 @@ private
     attr = tag.attr.symbolize_keys
     extensions = attr[:extensions] && attr[:extensions].split('|') || []
     conditions = unless extensions.blank?
-      # this is soon to be removed in favour of asset types
-      [ extensions.map { |ext| "assets.asset_file_name LIKE ?"}.join(' OR '), 
-        *extensions.map { |ext| "%.#{ext}" } ]
-    else
-      nil
-    end
-    
+                   # this is soon to be removed in favour of asset types
+                   [extensions.map { |ext| "assets.asset_file_name LIKE ?" }.join(' OR '),
+                    *extensions.map { |ext| "%.#{ext}" }]
+                 else
+                   nil
+                 end
+
     by = attr[:by] || 'page_attachments.position'
     order = attr[:order] || 'asc'
-    
+
     options = {
       :order => "#{by} #{order}",
       :limit => attr[:limit] || nil,

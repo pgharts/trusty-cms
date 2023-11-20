@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (6.0.4)
+    trusty-cms (6.1.0)
       RedCloth (= 4.3.2)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.2.0)
@@ -22,6 +22,7 @@ PATH
       radius (~> 0.7)
       rails
       rake (< 14.0)
+      ransack
       rdoc (>= 5.1, < 7.0)
       roadie-rails
       sass-rails
@@ -265,6 +266,10 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rake (13.1.0)
+    ransack (4.1.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.5.0)
       psych (>= 4.0.0)
     regexp_parser (2.1.1)
@@ -362,6 +367,7 @@ DEPENDENCIES
   pry-byebug
   psych (= 5.1.1.1)
   rails-observers
+  ransack
   rspec-rails
   simplecov
   trusty-cms!

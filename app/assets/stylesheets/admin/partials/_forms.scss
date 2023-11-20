@@ -40,8 +40,8 @@ input[type="submit"], input[type="button"] {
 input[type="text"], input[type="search"], input[type="password"], input[type="email"] {
   border: 0.5px solid $gray;
   margin: 0.5em;
+  max-width: 75%;
   padding: 0.25em;
-  width: 75%;
 }
 
 select {

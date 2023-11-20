@@ -23,6 +23,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'psych', '5.1.1.1'
   gem 'rails-observers'
+  gem 'ransack'
   gem 'rspec-rails'
   gem 'simplecov'
 end
