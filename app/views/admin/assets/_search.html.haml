@@ -1,5 +1,3 @@
-- page ||= @page
-- term ||= @term
 = search_form_for term, url: admin_assets_path, class: 'search', id: 'filesearchform' do |f|
   - if page
     = hidden_field_tag "page_id", page.id

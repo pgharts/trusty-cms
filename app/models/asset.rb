@@ -57,18 +57,7 @@ class Asset < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[asset_content_type
-        asset_file_name
-        asset_file_size
-        caption created_at
-        created_by_id id
-        original_extension
-        original_height
-        original_width
-        title
-        updated_at
-        updated_by_id
-        uuid]
+    %w[asset_content_type asset_file_name asset_file_size caption created_at created_by_id id original_extension original_height original_width title updated_at updated_by_id uuid]
   end
 
   def render_original(style_name)
