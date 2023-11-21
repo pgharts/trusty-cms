@@ -32,6 +32,13 @@ class Admin::PagesController < Admin::ResourceController
     response_for :new
   end
 
+  def edit
+    assets = Asset.order('created_at DESC')
+    @term = assets.ransack(params[:search] || '')
+    @term.result(distinct: true)
+    response_for :edit
+  end
+
   def preview
     render_preview
   rescue PreviewStop => e

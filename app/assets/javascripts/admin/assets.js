@@ -56,7 +56,7 @@ Assets = {
     assetFilterParameters: function () {
         var parameters = [];
         if ($('#filesearchforminput').val() !== '') {
-            parameters.push([ 'search', $('#filesearchforminput').val() ]);
+            parameters.push([ 'search[title_cont]', $('#filesearchforminput').val() ]);
         }
 
         if ($('#page_id').val() !== undefined) {
@@ -193,6 +193,15 @@ $(function () {
         }
     });
 
+    $('#filesearchforminput').keyup(function () {
+        clearTimeout($(this).data('timeout'));
+        var timeout = setTimeout(function () {
+            Assets.filterAssets();
+            Assets.attachEvents();
+        }, 500);
+        $(this).data('timeout', timeout);
+    });
+
     $("#attach_assets").click(function (e) {
         e.preventDefault();
         Popup.show('attach_asset');
@@ -201,6 +210,14 @@ $(function () {
             Popup.close();
             $('#attach_asset').hide();
         });
+    });
+
+    $('#filesearchforminput').keyup(function () {
+        clearTimeout($(this).data('timeout'));
+        var timeout = setTimeout(function () {
+            Assets.filterAssets();
+        }, 500);
+        $(this).data('timeout', timeout);
     });
 
     $("#upload_asset_link").click(function (e) {
