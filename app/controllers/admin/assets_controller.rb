@@ -8,7 +8,6 @@ class Admin::AssetsController < Admin::ResourceController
   def index
     assets = Asset.order('created_at DESC')
     @page = Page.find(params[:page_id]) if params[:page_id]
-
     @term = assets.ransack(params[:search] || '')
     assets = @term.result(distinct: true)
 
