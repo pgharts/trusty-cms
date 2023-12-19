@@ -27,6 +27,8 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def new
+    assets = Asset.order('created_at DESC')
+    @term = assets.ransack(params[:search] || '')
     @page = self.model = model_class.new_with_defaults(trusty_config)
     assign_page_attributes
     response_for :new
