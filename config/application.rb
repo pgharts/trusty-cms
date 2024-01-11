@@ -17,8 +17,7 @@ end
 module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
-    config.active_record.whitelist_attributes = true
-
+    Rails.autoloaders.log!
     # Enable the asset pipeline
     config.assets.enabled = true
 
@@ -26,6 +25,7 @@ module TrustyCms
     config.assets.version = '1.0'
 
     # Initialize extension paths
+    config.eager_load_paths << Rails.root.join('vendor', 'extensions')
     config.initialize_extension_paths
     extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path|
@@ -77,16 +77,18 @@ module TrustyCms
       end
     end
     config.after_initialize do
-      extension_loader.load_extensions
-      extension_loader.load_extension_initializers
+      # extension_loader.load_extensions
+      # extension_loader.load_extension_initializers
 
       extension_loader.activate_extensions # also calls initialize_views
       # config.add_controller_paths(extension_loader.paths(:controller))
       # config.add_eager_load_paths(extension_loader.paths(:eager_load))
 
       # Add new inflection rules using the following format:
-      ActiveSupport::Inflector.inflections do |inflect|
-        inflect.uncountable 'config'
+      Rails.autoloaders.each do |autoloader|
+        autoloader.inflector.inflect(
+          'config' => 'Configuration'
+        )
       end
     end
   end

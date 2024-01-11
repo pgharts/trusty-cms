@@ -1,5 +1,6 @@
 module TrustyCms
   class Engine < Rails::Engine
+    isolate_namespace TrustyCms
     paths['app/helpers'] = []
     initializer 'trusty_cms.assets.precompile' do |app|
       app.config.assets.paths << Rails.root.join('../trusty-cms/node_modules')
