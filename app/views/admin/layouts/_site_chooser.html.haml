@@ -1,4 +1,3 @@
-- require "pry"; binding.pry
 - if current_user.admin? && !current_user.scoped? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
   .site_chooser
     %ul.nav
