@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
-$:.push File.expand_path("../lib", __FILE__)
-require_relative "lib/trusty_cms/version"
+
+$:.push File.expand_path('lib', __dir__)
+require_relative 'lib/trusty_cms/version'
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>=2.5.3'
+  s.required_ruby_version = '>= 3.0.5'
   s.name = 'trusty-cms'
   s.version = TrustyCms::VERSION
   s.platform = Gem::Platform::RUBY
