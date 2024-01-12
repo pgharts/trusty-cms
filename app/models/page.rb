@@ -249,7 +249,6 @@ class Page < ActiveRecord::Base
     end
 
     def find_by_path(path, live = true)
-      binding.pry
       raise MissingRootPageError unless root
 
       root.find_by_path(path, live)
