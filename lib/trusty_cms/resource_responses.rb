@@ -1,4 +1,4 @@
-require 'ostruct'
+require 'open_struct'
 module TrustyCms
   module ResourceResponses
     def self.extended(base)
@@ -64,6 +64,7 @@ module TrustyCms
 
     class Response
       attr_reader :publish_formats, :publish_block, :blocks, :block_order
+
       def initialize
         @publish_formats = []
         @blocks = {}

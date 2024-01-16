@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.1-node
+      - image: cimg/ruby:3.0.5-node
         environment:
           - RAILS_ENV: test
           - CC_TEST_REPORTER_ID: 10e89622ddc764206e253cd07c5784f83178fe45550920e0eac8ab2e020e3e93

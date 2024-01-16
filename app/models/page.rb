@@ -1,6 +1,10 @@
+require 'trusty_cms/taggable'
+
 class Page < ActiveRecord::Base
   class MissingRootPageError < StandardError
-    def initialize(message = 'Database missing root page'); super end
+    def initialize(message = 'Database missing root page')
+      ; super
+    end
   end
 
   # Callbacks
@@ -65,6 +69,7 @@ class Page < ActiveRecord::Base
   def child_path(child)
     clean_path(path + '/' + child.slug)
   end
+
   alias_method :child_url, :child_path
 
   def part(name)
@@ -118,6 +123,7 @@ class Page < ActiveRecord::Base
       clean_path(slug)
     end
   end
+
   alias_method :url, :path
 
   def process(request, response)
@@ -157,6 +163,7 @@ class Page < ActiveRecord::Base
       end
     end
   end
+
   private :set_content_type
 
   def response_code
@@ -256,11 +263,11 @@ class Page < ActiveRecord::Base
         @display_name = string
       else
         @display_name ||= begin
-          n = name.to_s
-          n.sub(/^(.+?)Page$/, '\1')
-          n.gsub(/([A-Z])/, ' \1')
-          n.strip
-        end
+                            n = name.to_s
+                            n.sub(/^(.+?)Page$/, '\1')
+                            n.gsub(/([A-Z])/, ' \1')
+                            n.strip
+                          end
       end
       @display_name = @display_name + ' - not installed' if missing? && @display_name !~ /not installed/
       @display_name
@@ -355,6 +362,7 @@ class Page < ActiveRecord::Base
   def clean_path(path)
     "/#{path.to_s.strip}".gsub(%r{//+}, '/')
   end
+
   alias_method :clean_url, :clean_path
 
   def parent?
