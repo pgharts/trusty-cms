@@ -45,6 +45,14 @@
   #assets_table.assets {
     overflow: auto;
   }
+
+  .toolbar {
+    .asset_search {
+      #filesearchforminput {
+        width: 55%;
+      }
+    }
+  }
 }
 
 #upload_holders {
