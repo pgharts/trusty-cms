@@ -277,7 +277,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rdoc (6.5.0)
+    rdoc (6.6.2)
       psych (>= 4.0.0)
     regexp_parser (2.1.1)
     responders (3.1.1)
@@ -332,7 +332,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     stringex (2.8.6)
-    stringio (3.0.6)
+    stringio (3.1.0)
     temple (0.10.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
