@@ -3,7 +3,7 @@ name: Ruby Gem
 on:
   push:
     branches: [ master ]
-    paths: ['lib/trusty_cms.rb']
+    paths: [ 'lib/trusty_cms.rb' ]
 
 jobs:
   build:
@@ -14,22 +14,22 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 3.0.5
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.5'
 
-    - name: Publish to RubyGems
-      run: |
-        mkdir -p $HOME/.gem
-        touch $HOME/.gem/credentials
-        chmod 0600 $HOME/.gem/credentials
-        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push *.gem
-      env:
-        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
-      
-    - name: Remove gem build file
-      run: rm *.gem
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+
+      - name: Remove gem build file
+        run: rm *.gem
