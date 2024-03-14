@@ -15,7 +15,7 @@
         = paf.hidden_field :_destroy, :class => 'destroyer'
       = paf.hidden_field :position, :class => 'pos'
   .front
-    .thumbnail= image_tag asset.thumbnail(:thumbnail), alt: "Asset ID: #{asset.id}"
+    .thumbnail= image_tag(asset.thumbnail(:thumbnail), size: "100x100", alt: "Asset ID: #{asset.id}")
   .back
     .title= asset.title
     %ul.actions

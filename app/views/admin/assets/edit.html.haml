@@ -22,7 +22,7 @@
             %label.id
               = "#{t("clipped_extension.asset_id")}: #{@asset.id unless @asset.new_record?}"
           %p.asset
-            = image_tag @asset.thumbnail("normal"), :class => 'preview'
+            = image_tag @asset.thumbnail("original"), :class => 'preview'
 
           = updated_stamp @asset
 

@@ -3,7 +3,8 @@
 
 %li{:class => "#{asset_type} asset", :id => "asset_#{asset.id}"}
   .front
-    .thumbnail= image_tag asset.thumbnail(:thumbnail)
+    .thumbnail
+      = image_tag(asset.thumbnail(:thumbnail), size: "100x100")
   .back
     .title= asset.title
     %ul.actions
