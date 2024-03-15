@@ -36,7 +36,7 @@ class Asset < ActiveRecord::Base
             presence: true,
             blob:
               {
-                content_type: %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css],
+                content_type: %w[application/zip image/jpg image/jpeg image/png image/gif image/svg+xml application/pdf text/css],
                 size_range: 1..10.megabytes,
               }
   before_save :assign_title
@@ -52,6 +52,7 @@ class Asset < ActiveRecord::Base
   def thumbnail(style_name = 'original')
     return asset.url if style_name.to_s == 'original' || render_original(style_name)
     return asset_variant(style_name.to_s).processed.url if asset.variable?
+    return asset.url if asset.image?
 
     asset_type.icon(style_name.to_s)
   end

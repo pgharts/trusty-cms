@@ -12,6 +12,7 @@ gem 'trustygems', '~> 0.2.0'
 gemspec
 
 group :development, :test do
+  gem 'active_storage_svg_sanitizer'
   gem 'activestorage-validator'
   gem 'acts_as_list'
   gem 'database_cleaner'
