@@ -12,8 +12,8 @@ gem 'trustygems', '~> 0.2.0'
 gemspec
 
 group :development, :test do
-  gem 'activestorage-validator'
   gem 'active_storage_svg_sanitizer'
+  gem 'activestorage-validator'
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '6.4.2'
