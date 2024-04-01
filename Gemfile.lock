@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     trusty-cms (6.2.2)
-      RedCloth (= 4.3.3)
+      RedCloth (= 4.3.4)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.2.0)
       acts_as_tree (~> 2.9.1)
@@ -34,7 +34,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    RedCloth (4.3.3)
+    RedCloth (4.3.4)
     actioncable (7.0.8.1)
       actionpack (= 7.0.8.1)
       activesupport (= 7.0.8.1)
