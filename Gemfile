@@ -17,7 +17,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails', '6.4.2'
   gem 'file_validators'
-  gem 'launchy', '~> 2.5.0'
+  gem 'launchy', '~> 3.0.0'
   gem 'mysql2'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
