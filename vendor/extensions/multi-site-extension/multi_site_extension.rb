@@ -19,7 +19,6 @@ class MultiSiteExtension < TrustyCms::Extension
     # ActionController::Base.send :include, MultiSite::ApplicationControllerExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::ResourceController.send :include, MultiSite::ResourceControllerExtensions
-    Admin::PagesController.send :include, MultiSite::ResourceControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     Admin::ResourceController.send :helper, MultiSite::SiteChooserHelper
     Admin::PagesController.send :helper, MultiSite::SiteChooserHelper
