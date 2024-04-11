@@ -1,22 +1,17 @@
 module MultiSite::ApplicationControllerFilterExtensions
+  protected
 
-  def self.included(base)
-    base.class_eval {
-      prepend_before_action :set_site
-      alias_method :authenticate_without_site, :authenticate
-      alias_method :authenticate, :authenticate_with_site
-    }
-  end
-
-protected
-
-  def authenticate_with_site
+  def authenticate
     self.current_site = discover_current_site
-    authenticate_without_site
+    super
   end
 
   def set_site
-    true if self.current_site = discover_current_site
+    true if (self.current_site = discover_current_site)
   end
+end
 
+class ApplicationController < ActionController::Base
+  prepend MultiSite::ApplicationControllerFilterExtensions
+  prepend_before_action :set_site
 end

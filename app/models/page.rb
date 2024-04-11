@@ -1,6 +1,14 @@
 require 'trusty_cms/taggable'
 
+module LayoutInheritance
+  def layout
+    super || parent.layout if parent?
+  end
+end
+
 class Page < ActiveRecord::Base
+  prepend LayoutInheritance
+
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
       ; super
@@ -42,17 +50,6 @@ class Page < ActiveRecord::Base
   self.default_child = self
 
   self.inheritance_column = 'class_name'
-
-  def layout_with_inheritance
-    if layout_without_inheritance
-      layout_without_inheritance
-    else
-      parent.layout if parent?
-    end
-  end
-
-  alias_method :layout_without_inheritance, :layout
-  alias_method :layout, :layout_with_inheritance
 
   def description
     self['description']

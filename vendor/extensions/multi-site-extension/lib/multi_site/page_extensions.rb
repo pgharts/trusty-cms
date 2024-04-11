@@ -4,16 +4,15 @@ module MultiSite::PageExtensions
   def self.included(base)
     base.class_eval {
       include InstanceMethods
-      alias_method :url_without_sites, :url
-      alias_method :url, :url_with_sites
       mattr_accessor :current_site
       belongs_to :site
       before_create :associate_with_site
     }
     base.extend ClassMethods
+
     class << base
 
-      def find_by_path(path, live=true)
+      def find_by_path(path, live = true)
         root = homepage
         raise Page::MissingRootPageError unless root
         path = root.path if clean_path(path) == "/"
@@ -24,7 +23,7 @@ module MultiSite::PageExtensions
         if result.is_a?(FileNotFoundPage) && result.site_id != homepage.site_id
           get_site_specific_file_not_found(result)
 
-        # Otherwise, just go with it.
+          # Otherwise, just go with it.
         else
           result
         end
@@ -33,9 +32,11 @@ module MultiSite::PageExtensions
       def current_site
         @current_site ||= Site.default
       end
+
       def current_site=(site)
         @current_site = site
       end
+
       def clean_path(path)
         "/#{ path.to_s.strip }/".gsub(%r{//+}, '/')
       end
