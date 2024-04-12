@@ -69,7 +69,7 @@ module TrustyCms
     def add_plugin_load_paths
       configuration.add_plugin_paths(extension_loader.paths(:plugin))
       super
-      ActiveSupport::Reloader.autoload_once_paths -= extension_loader.paths(:load)
+      ActiveSupport::Dependencies.autoload_paths -= extension_loader.paths(:load)
     end
 
     # Overrides the standard gem-loader to use Bundler instead of config.gem. This is the method normally monkey-patched
