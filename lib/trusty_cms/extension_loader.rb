@@ -65,7 +65,8 @@ module TrustyCms
     #
     def load_extensions
       configuration = TrustyCms::Application.config
-      @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Reloader)
+      # Support for the below is going away in rails 7. Currently this works in rails 6.1, using the classic loader.
+      @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Dependencies)
       self.extensions = configuration.enabled_extensions.map { |ext| load_extension(ext) }.compact
     end
 
