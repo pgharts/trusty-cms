@@ -4,6 +4,7 @@ require 'open_struct'
 module TrustyCms
   class AdminUI
     # This may be loaded before ActiveSupport, so do an explicit require
+    # this might need to be removed for zeitwerk
     require 'trusty_cms/admin_ui/region_set'
 
     class DuplicateTabNameError < StandardError; end

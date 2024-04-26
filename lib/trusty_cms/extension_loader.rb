@@ -18,12 +18,12 @@ module TrustyCms
         @config = rails_config
       end
 
-      def before_clear(*_args)
+      def before_class_unload(*_args)
         #:nodoc
         ExtensionLoader.deactivate_extensions
       end
 
-      def after_clear(*_args)
+      def after_class_unload(*_args)
         #:nodoc
         ExtensionLoader.load_extensions
         ExtensionLoader.activate_extensions
@@ -65,7 +65,7 @@ module TrustyCms
     #
     def load_extensions
       configuration = TrustyCms::Application.config
-      @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Dependencies)
+      @observer ||= DependenciesObserver.new(configuration).observe(::ActiveSupport::Reloader)
       self.extensions = configuration.enabled_extensions.map { |ext| load_extension(ext) }.compact
     end
 

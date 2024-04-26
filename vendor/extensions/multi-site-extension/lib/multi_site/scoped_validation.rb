@@ -40,4 +40,4 @@ module MultiSite::ScopedValidation
   end
 end
 
-ActiveRecord::Validations::ClassMethods.send :include, MultiSite::ScopedValidation
+# ActiveRecord::Validations::ClassMethods.send :include, MultiSite::ScopedValidation

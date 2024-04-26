@@ -8,6 +8,9 @@ class MultiSiteExtension < TrustyCms::Extension
   def activate
 
     # Model extensions
+
+    ActiveRecord::Validations::ClassMethods.send :include, MultiSite::ScopedValidation
+    binding.pry
     ActiveRecord::Base.send :include, MultiSite::ScopedModel
     Page.send :include, MultiSite::PageExtensions
 
@@ -19,7 +22,6 @@ class MultiSiteExtension < TrustyCms::Extension
     # ActionController::Base.send :include, MultiSite::ApplicationControllerExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::ResourceController.send :include, MultiSite::ResourceControllerExtensions
-    Admin::PagesController.send :include, MultiSite::ResourceControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     Admin::ResourceController.send :helper, MultiSite::SiteChooserHelper
     Admin::PagesController.send :helper, MultiSite::SiteChooserHelper
