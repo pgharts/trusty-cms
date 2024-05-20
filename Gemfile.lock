@@ -108,7 +108,7 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -138,7 +138,7 @@ GEM
     date (3.3.4)
     delocalize (1.2.0)
       rails (>= 2)
-    devise (4.9.3)
+    devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -171,7 +171,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.1)
+    i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
@@ -195,7 +195,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
-    method_source (1.0.0)
+    method_source (1.1.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
@@ -203,7 +203,7 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
-    minitest (5.22.2)
+    minitest (5.23.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
     mysql2 (0.5.6)
@@ -235,7 +235,7 @@ GEM
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (2.2.9)
     rack-cache (1.17.0)
       rack (>= 0.4)
@@ -353,7 +353,7 @@ GEM
     will_paginate (4.0.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.13)
+    zeitwerk (2.6.14)
 
 PLATFORMS
   x86_64-darwin-18
