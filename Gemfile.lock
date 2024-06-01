@@ -119,6 +119,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    childprocess (5.0.0)
     ckeditor (4.3.0)
       orm_adapter (~> 0.5.0)
       terrapin
@@ -182,8 +183,9 @@ GEM
       httparty
       json
       multipart-post
-    launchy (2.5.2)
+    launchy (3.0.1)
       addressable (~> 2.8)
+      childprocess (~> 5.0)
     libv8-node (18.16.0.0-x86_64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
     loofah (2.22.0)
@@ -234,7 +236,7 @@ GEM
       pry (>= 0.13, < 0.15)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.4)
+    public_suffix (5.0.5)
     racc (1.8.0)
     rack (2.2.9)
     rack-cache (1.17.0)
@@ -368,7 +370,7 @@ DEPENDENCIES
   database_cleaner
   factory_bot_rails (= 6.4.2)
   file_validators
-  launchy (~> 2.5.0)
+  launchy (~> 3.0.1)
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
