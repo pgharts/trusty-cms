@@ -276,7 +276,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.2.1)
-    ransack (4.1.1)
+    ransack (4.2.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
