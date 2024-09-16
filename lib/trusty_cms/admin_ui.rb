@@ -1,5 +1,5 @@
 require 'simpleton'
-require 'open_struct'
+require 'ostruct'
 
 module TrustyCms
   class AdminUI
