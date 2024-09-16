@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-$:.push File.expand_path('lib', __dir__)
-require_relative 'lib/trusty_cms/version'
+require File.expand_path(__FILE__ + '/../lib/trusty_cms/version.rb')
 Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.0.5'
   s.name = 'trusty-cms'
@@ -43,7 +42,7 @@ a general purpose content management system--not merely a blogging engine.'
   s.add_dependency 'rack', '>= 2.0.1', '< 3.1.0'
   s.add_dependency 'rack-cache', '~> 1.7'
   s.add_dependency 'radius', '~> 0.7'
-  s.add_dependency 'rails'
+  s.add_dependency 'rails', '~> 6.1.7'
   s.add_dependency 'rake', '< 14.0'
   s.add_dependency 'ransack'
   s.add_dependency 'rdoc', '>= 5.1', '< 7.0'

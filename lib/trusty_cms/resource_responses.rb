@@ -1,4 +1,4 @@
-require 'open_struct'
+require 'ostruct'
 module TrustyCms
   module ResourceResponses
     def self.extended(base)
