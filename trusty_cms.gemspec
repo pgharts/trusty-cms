@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-require File.expand_path(__FILE__ + '/../lib/trusty_cms.rb')
+require File.expand_path(__FILE__ + '/../lib/trusty_cms/version.rb')
 Gem::Specification.new do |s|
   s.required_ruby_version = '>=2.5.3'
   s.name = 'trusty-cms'
