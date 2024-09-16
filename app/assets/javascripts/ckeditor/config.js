@@ -1,6 +1,7 @@
 CKEDITOR.editorConfig = function (config) {
     config.allowedContent = true;
     config.removeFormatTags = "";
+    config.fillEmptyBlocks = false;
     config.protectedSource.push(/<r:([\S]+).*<\/r:\1>/g);
     config.protectedSource.push(/<r:[^>/]*\/>/g);
     //let paste from word be available
