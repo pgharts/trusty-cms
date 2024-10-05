@@ -6,7 +6,6 @@ class MultiSiteExtension < TrustyCms::Extension
   url "http://trustarts.org/"
 
   def activate
-
     # Model extensions
     ActiveRecord::Base.send :include, MultiSite::ScopedModel
     Page.send :include, MultiSite::PageExtensions

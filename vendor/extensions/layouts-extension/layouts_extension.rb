@@ -8,11 +8,11 @@ class LayoutsExtension < TrustyCms::Extension
     ActionView::Base.send :include, ShareLayouts::Helpers::ActionView
 
     # Nested Layouts
-    Page.send   :include, NestedLayouts::Tags::Core
+    Page.send :include, NestedLayouts::Tags::Core
 
     # HAML Layouts
-    Layout.send  :include, HamlLayouts::Models::Layout
-    Page.send    :include, HamlLayouts::Models::Page
+    Layout.send :include, HamlLayouts::Models::Layout
+    Page.send :include, HamlLayouts::Models::Page
     HamlFilter
   end
 

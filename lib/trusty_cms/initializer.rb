@@ -9,15 +9,6 @@ require 'trusty_cms/extension_loader'
 require 'string_extensions/string_extensions'
 require 'trusty_cms/engine'
 
-# This is a wild and probably terrible hack built to initialize extension engines.
-# I have no idea what the repercussions will be. Revisit later.
-Gem.loaded_specs.each_with_object([]) do |(gemname, gemspec), _found|
-  if gemname =~ /trusty-.*-extension$/
-    ep = TrustyCms::ExtensionLoader.record_path(gemspec.full_gem_path, gemname)
-    require "#{ep.name}/engine"
-  end
-end
-
 module TrustyCms
   module Initializer
     # Rails::Initializer is essentially a list of startup steps and we extend it here by:

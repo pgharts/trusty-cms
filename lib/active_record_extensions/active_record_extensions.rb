@@ -1,6 +1,5 @@
-require 'active_record'
-
 class ActiveRecord::Base
+
   def self.validates_path(*args)
     configuration = args.extract_options!
     validates_each(args, configuration) do |record, attr_name, value|
