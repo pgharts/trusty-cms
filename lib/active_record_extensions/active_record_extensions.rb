@@ -1,5 +1,3 @@
-require 'active_record'
-
 class ActiveRecord::Base
   def self.validates_path(*args)
     configuration = args.extract_options!

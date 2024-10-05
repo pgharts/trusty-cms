@@ -1,4 +1,4 @@
 module TrustyCms
-  VERSION = '6.2.1'.freeze
+  VERSION = '6.3'.freeze
 end
 

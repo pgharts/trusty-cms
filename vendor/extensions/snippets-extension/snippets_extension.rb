@@ -34,7 +34,7 @@ class SnippetsExtension < TrustyCms::Extension
       end
     end
 
-    admin.snippet       ||= TrustyCms::AdminUI.load_default_snippet_regions
+    admin.snippet ||= TrustyCms::AdminUI.load_default_snippet_regions
 
     tab 'Design' do
       add_item "Snippets", "/admin/snippets"
