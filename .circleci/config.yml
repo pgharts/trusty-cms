@@ -1,10 +1,9 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@1.8.0
+
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.5-node
+      - image: cimg/ruby:3.3.1-node
         environment:
           - RAILS_ENV: test
           - CC_TEST_REPORTER_ID: 10e89622ddc764206e253cd07c5784f83178fe45550920e0eac8ab2e020e3e93
@@ -12,7 +11,6 @@ jobs:
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           - MYSQL_DATABASE: trusty_cms_test
-    executor: ruby/default
     working_directory: ~/trusty-cms
     steps:
       - checkout
@@ -24,11 +22,6 @@ jobs:
       - run:
           name: Bundler
           command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
-      - run:
-          name: "Update Node.js and npm"
-          command: |
-            curl -sSL "https://nodejs.org/dist/v16.13.2/node-v16.13.2-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v16.13.2-linux-x64/bin/node
-            curl -O -L https://www.npmjs.com/install.sh | sudo bash
       - run:
           name: Bundle Install
           command: bundle install --jobs=4 --retry=3 --path vendor/bundle
