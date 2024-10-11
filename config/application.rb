@@ -67,7 +67,7 @@ module TrustyCms
 
     # Make Active Record use UTC-base instead of local time
     config.time_zone = 'UTC'
-
+    config.legacy_connection_handling = false
     # Set the default field error proc
     config.action_view.field_error_proc = Proc.new do |html, instance|
       if html !~ /label/
@@ -76,6 +76,7 @@ module TrustyCms
         html
       end
     end
+
     config.to_prepare do
       extension_loader.deactivate_extensions
       extension_loader.load_extensions

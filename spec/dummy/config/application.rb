@@ -24,7 +24,7 @@ end
 module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
-
+    config.legacy_connection_handling = false
     config.autoload_paths += %W(#{TRUSTY_CMS_ROOT}/lib)
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/helpers)
@@ -110,7 +110,6 @@ module TrustyCms
 
     # Make Active Record use UTC-base instead of local time
     config.time_zone = 'UTC'
-
     # Set the default field error proc
     config.action_view.field_error_proc = Proc.new do |html, instance|
       if html !~ /label/
