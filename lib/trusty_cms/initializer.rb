@@ -56,12 +56,13 @@ module TrustyCms
 
     # Extends the Rails initializer to add plugin paths in extensions
     # and makes extension load paths reloadable (eg in development mode)
-    #
-    def add_plugin_load_paths
-      configuration.add_plugin_paths(extension_loader.paths(:plugin))
-      super
-      ActiveSupport::Dependencies.autoload_once_paths -= extension_loader.paths(:load)
-    end
+    # ActiveSupport::Dependencies has been deprecated. We imported all the gems a long
+    # time ago. This is a relic of the past. We should remove it and any references to plugins/gems in the future.
+    # def add_plugin_load_paths
+    #   configuration.add_plugin_paths(extension_loader.paths(:plugin))
+    #   super
+    #   ActiveSupport::Dependencies.autoload_once_paths -= extension_loader.paths(:load)
+    # end
 
     # Overrides the standard gem-loader to use Bundler instead of config.gem. This is the method normally monkey-patched
     # into Rails::Initializer from boot.rb if you follow the instructions at http://gembundler.com/rails23.html
