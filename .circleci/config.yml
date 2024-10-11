@@ -24,7 +24,7 @@ jobs:
           command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
       - run:
           name: Bundle Install
-          command: bundle config set path 'vendor/bundle' --jobs=4 --retry=3
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./vendor/bundle
