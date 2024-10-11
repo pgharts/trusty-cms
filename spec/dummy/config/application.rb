@@ -119,7 +119,8 @@ module TrustyCms
       end
     end
 
-    config.after_initialize do
+    config.to_prepare do
+      extension_loader.deactivate_extensions
       extension_loader.load_extensions
       extension_loader.load_extension_initializers
 
