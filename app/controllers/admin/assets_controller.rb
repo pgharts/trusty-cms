@@ -35,7 +35,7 @@ class Admin::AssetsController < Admin::ResourceController
     @assets = []
     @page_attachments = []
     compress = current_site.try(:compress).nil? ? true : current_site.compress
-    asset_params[:asset][:asset].to_a.each do |uploaded_asset|
+    asset_params[:asset][:asset].reject(&:blank?).each do |uploaded_asset|
       if uploaded_asset.content_type == 'application/octet-stream'
         flash[:notice] = 'Please only upload assets that have a valid extension in the name.'
       else
@@ -90,6 +90,6 @@ class Admin::AssetsController < Admin::ResourceController
   end
 
   def asset_params
-    params.permit(:id, :for_attachment, asset: [:caption, :for_attachment, asset: []])
+    params.permit(:id, :for_attachment, asset: [:for_attachment, { asset: [] }])
   end
 end
