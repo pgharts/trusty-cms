@@ -28,6 +28,11 @@ plugins:
       score_threshold: 20.0
   haml-lint:
     enabled: true
+    checks:
+      HamlLint/FinalNewline:
+        enabled: false
+      HamlLint/RuboCop:
+        enabled: false
   reek:
     enabled: true
     checks:
@@ -39,7 +44,7 @@ plugins:
         enabled: false
   rubocop:
     enabled: true
-    channel: rubocop-1-50-2
+    channel: rubocop-1-56-3
   stylelint:
     enabled: true
 exclude_patterns:
