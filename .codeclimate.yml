@@ -60,3 +60,11 @@ exclude_patterns:
   - app/assets/javascripts/admin/modernizr.js
   - app/assets/javascripts/ckeditor/*
   - lib/configuration_extensions/configuration_extensions.rb
+  - lib/generators/extension_model/templates/*
+  - lib/generators/extension/templates/*
+  - lib/generators/extension_controller/templates/*
+  - lib/generators/extension_mailer/templates/*
+  - lib/generators/extension_migration/templates/*
+  - lib/generators/instance/templates/instance_environment.rb
+  - lib/generators/language_extension/templates/
+  - lib/tasks/convoy_seed_util.rb
