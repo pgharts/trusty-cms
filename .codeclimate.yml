@@ -28,6 +28,11 @@ plugins:
       score_threshold: 20.0
   haml-lint:
     enabled: true
+    checks:
+      HamlLint/FinalNewline:
+        enabled: false
+      HamlLint/RuboCop:
+        enabled: false
   reek:
     enabled: true
     checks:
@@ -39,7 +44,7 @@ plugins:
         enabled: false
   rubocop:
     enabled: true
-    channel: rubocop-1-50-2
+    channel: rubocop-1-56-3
   stylelint:
     enabled: true
 exclude_patterns:
@@ -55,3 +60,11 @@ exclude_patterns:
   - app/assets/javascripts/admin/modernizr.js
   - app/assets/javascripts/ckeditor/*
   - lib/configuration_extensions/configuration_extensions.rb
+  - lib/generators/extension_model/templates/*
+  - lib/generators/extension/templates/*
+  - lib/generators/extension_controller/templates/*
+  - lib/generators/extension_mailer/templates/*
+  - lib/generators/extension_migration/templates/*
+  - lib/generators/instance/templates/instance_environment.rb
+  - lib/generators/language_extension/templates/
+  - lib/tasks/convoy_seed_util.rb
