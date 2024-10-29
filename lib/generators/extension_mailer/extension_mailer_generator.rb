@@ -29,12 +29,12 @@ class ExtensionMailerGenerator < MailerGenerator
       m.directory File.join('app/views', file_path)
 
       # Mailer class and unit test.
-      m.template "mailer:mailer.rb",    File.join('app/models', class_path, "#{file_name}.rb")
+      m.template "mailer:mailer.rb", File.join('app/models', class_path, "#{file_name}.rb")
 
       # View template and fixture for each action.
       actions.each do |action|
         relative_path = File.join(file_path, action)
-        view_path     = File.join('app/views', "#{relative_path}.erb")
+        view_path = File.join('app/views', "#{relative_path}.erb")
 
         m.template "mailer:view.erb", view_path,
                    :assigns => { :action => action, :path => view_path }
@@ -55,7 +55,7 @@ class ExtensionMailerGenerator < MailerGenerator
   end
 
   def extension_uses_rspec?
-    File.exists?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
+    File.exist?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
   end
 
   def add_options!(opt)

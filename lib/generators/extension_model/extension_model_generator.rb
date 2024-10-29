@@ -30,9 +30,9 @@ class ExtensionModelGenerator < ModelGenerator
       # m.directory File.join('spec/fixtures', class_path)
 
       # Model class, spec and fixtures.
-      m.template 'model:model.rb',      File.join('app/models', class_path, "#{file_name}.rb")
+      m.template 'model:model.rb', File.join('app/models', class_path, "#{file_name}.rb")
       # m.template 'model:fixtures.yml',  File.join('spec/fixtures', class_path, "#{table_name}.yml")
-      m.template 'model_spec.rb',       File.join('spec/models', class_path, "#{file_name}_spec.rb")
+      m.template 'model_spec.rb', File.join('spec/models', class_path, "#{file_name}_spec.rb")
 
       unless options[:skip_migration]
         m.migration_template 'model:migration.rb', 'db/migrate', :assigns => {
@@ -55,7 +55,7 @@ class ExtensionModelGenerator < ModelGenerator
   end
 
   def extension_uses_rspec?
-    File.exists?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
+    File.exist?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
   end
 
   def add_options!(opt)

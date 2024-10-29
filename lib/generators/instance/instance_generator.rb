@@ -8,7 +8,7 @@ class Rails::Generator::Commands::Create
     command = %{"#{Gem.ruby}" -rubygems "#{Gem.bin_path('bundler', 'bundle')}" install --gemfile="#{File.join(File.expand_path(destination_root), 'Gemfile')}"}
     begin
       bundled_env = ENV.to_hash
-      bundler_vars.each{ |var| ENV.delete(var) }
+      bundler_vars.each { |var| ENV.delete(var) }
       print `#{command}`
     ensure
       ENV.replace(bundled_env)
@@ -23,14 +23,14 @@ class InstanceGenerator < Rails::Generator::Base
   DATABASES = %w( mysql postgresql sqlite3 sqlserver db2 )
 
   MYSQL_SOCKET_LOCATIONS = [
-    "/tmp/mysql.sock",                        # default
-    "/var/run/mysqld/mysqld.sock",            # debian/gentoo
-    "/var/tmp/mysql.sock",                    # freebsd
-    "/var/lib/mysql/mysql.sock",              # fedora
-    "/opt/local/lib/mysql/mysql.sock",        # fedora
-    "/opt/local/var/run/mysqld/mysqld.sock",  # mac + darwinports + mysql
-    "/opt/local/var/run/mysql4/mysqld.sock",  # mac + darwinports + mysql4
-    "/opt/local/var/run/mysql5/mysqld.sock"   # mac + darwinports + mysql5
+    "/tmp/mysql.sock", # default
+    "/var/run/mysqld/mysqld.sock", # debian/gentoo
+    "/var/tmp/mysql.sock", # freebsd
+    "/var/lib/mysql/mysql.sock", # fedora
+    "/opt/local/lib/mysql/mysql.sock", # fedora
+    "/opt/local/var/run/mysqld/mysqld.sock", # mac + darwinports + mysql
+    "/opt/local/var/run/mysql4/mysqld.sock", # mac + darwinports + mysql4
+    "/opt/local/var/run/mysql5/mysqld.sock" # mac + darwinports + mysql5
   ]
 
   default_options :db => "sqlite3", :shebang => DEFAULT_SHEBANG, :freeze => false
@@ -47,7 +47,7 @@ class InstanceGenerator < Rails::Generator::Base
     root = File.expand_path(TRUSTY_CMS_ROOT)
 
     # Use /usr/bin/env if no special shebang was specified
-    script_options     = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }
+    script_options = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }
     dispatcher_options = { :chmod => 0755, :shebang => options[:shebang] }
 
     record do |m|
@@ -87,7 +87,7 @@ class InstanceGenerator < Rails::Generator::Base
       # database.yml and .htaccess
       m.template "databases/#{options[:db]}.yml", "config/database.yml", :assigns => {
         :app_name => File.basename(File.expand_path(@destination_root)),
-        :socket   => options[:db] == "mysql" ? mysql_socket_location : nil
+        :socket => options[:db] == "mysql" ? mysql_socket_location : nil
       }
 
       # Instance Gemfile
@@ -120,28 +120,28 @@ class InstanceGenerator < Rails::Generator::Base
 
   protected
 
-    def banner
-      "Usage: #{$0} /path/to/trusty_cms/app [options]"
-    end
+  def banner
+    "Usage: #{$0} /path/to/trusty_cms/app [options]"
+  end
 
-    def add_options!(opt)
-      opt.separator ''
-      opt.separator 'Options:'
-      opt.on("-r", "--ruby=path", String,
-             "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
-             "Default: #{DEFAULT_SHEBANG}") { |v| options[:shebang] = v }
-      opt.on("-d", "--database=name", String,
-            "Preconfigure for selected database (options: #{DATABASES.join(", ")}).",
-            "Default: sqlite3") { |v| options[:db] = v }
-    end
+  def add_options!(opt)
+    opt.separator ''
+    opt.separator 'Options:'
+    opt.on("-r", "--ruby=path", String,
+           "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
+           "Default: #{DEFAULT_SHEBANG}") { |v| options[:shebang] = v }
+    opt.on("-d", "--database=name", String,
+           "Preconfigure for selected database (options: #{DATABASES.join(", ")}).",
+           "Default: sqlite3") { |v| options[:db] = v }
+  end
 
-    def mysql_socket_location
-      RUBY_PLATFORM =~ /mswin32/ ? MYSQL_SOCKET_LOCATIONS.find { |f| File.exists?(f) } : nil
-    end
+  def mysql_socket_location
+    RUBY_PLATFORM =~ /mswin32/ ? MYSQL_SOCKET_LOCATIONS.find { |f| File.exist?(f) } : nil
+  end
 
   private
 
-    def radiant_root(filename = '')
-      File.join("..", "..", "..", "..", filename)
-    end
+  def radiant_root(filename = '')
+    File.join("..", "..", "..", "..", filename)
+  end
 end

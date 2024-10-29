@@ -8,8 +8,8 @@ unless File.directory? "#{Rails.root}/app"
         require 'rubygems/gem_runner'
 
         trusty = (version = ENV.fetch('VERSION')) ?
-          Gem.cache.search('trusty-cms', "= #{version}").first :
-          Gem.cache.search('trusty-cms').max_by { |g| g.version }
+                   Gem.cache.search('trusty-cms', "= #{version}").first :
+                   Gem.cache.search('trusty-cms').max_by { |g| g.version }
 
         version ||= trusty.version
 
@@ -76,11 +76,11 @@ unless File.directory? "#{Rails.root}/app"
       desc 'Add new scripts to the instance script/ directory'
       task :scripts do
         local_base = 'script'
-        edge_base  = "#{File.dirname(__FILE__)}/../../script"
+        edge_base = "#{File.dirname(__FILE__)}/../../script"
 
         local = Dir["#{local_base}/**/*"].reject { |path| File.directory?(path) }
-        edge  = Dir["#{edge_base}/**/*"].reject { |path| File.directory?(path) }
-        edge  = edge.reject { |f| f =~ /(generate|plugin|destroy)$/ }
+        edge = Dir["#{edge_base}/**/*"].reject { |path| File.directory?(path) }
+        edge = edge.reject { |f| f =~ /(generate|plugin|destroy)$/ }
 
         edge.each do |script|
           base_name = script[(edge_base.length + 1)..-1]
@@ -98,7 +98,7 @@ unless File.directory? "#{Rails.root}/app"
       task :javascripts do
         FileUtils.mkdir_p("#{Rails.root}/public/javascripts/admin/")
         copy_javascripts = proc do |project_dir, scripts|
-          scripts.reject! { |s| File.basename(s) == 'overrides.js' } if File.exists?(project_dir + 'overrides.js')
+          scripts.reject! { |s| File.basename(s) == 'overrides.js' } if File.exist?(project_dir + 'overrides.js')
           FileUtils.cp(scripts, project_dir)
         end
         copy_javascripts[Rails.root + '/public/javascripts/', Dir["#{File.dirname(__FILE__)}/../../public/javascripts/*.js"]]
@@ -228,7 +228,7 @@ the new files: #{warning}"
         project_dir = Rails.root + '/public/stylesheets/admin/'
 
         copy_stylesheets = proc do |project_dir, styles|
-          styles.reject! { |s| File.basename(s) == 'overrides.css' } if File.exists?(project_dir + 'overrides.css')
+          styles.reject! { |s| File.basename(s) == 'overrides.css' } if File.exist?(project_dir + 'overrides.css')
           FileUtils.cp(styles, project_dir)
         end
         copy_stylesheets[Rails.root + '/public/stylesheets/admin/', Dir["#{File.dirname(__FILE__)}/../../public/stylesheets/admin/*.css"]]
@@ -237,7 +237,7 @@ the new files: #{warning}"
       desc 'Update admin sass files from your current trusty install'
       task :sass do
         copy_sass = proc do |project_dir, sass_files|
-          sass_files.reject! { |s| File.basename(s) == 'overrides.sass' } if File.exists?(project_dir + 'overrides.sass') || File.exists?(project_dir + '../overrides.css')
+          sass_files.reject! { |s| File.basename(s) == 'overrides.sass' } if File.exist?(project_dir + 'overrides.sass') || File.exist?(project_dir + '../overrides.css')
           sass_files.reject! { |s| File.directory?(s) }
           FileUtils.mkpath(project_dir)
           FileUtils.cp(sass_files, project_dir)
