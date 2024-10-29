@@ -47,7 +47,7 @@ module TrustyCms
         end.join("\n\n")
 
         cache_path = File.join(dir, cache_file)
-        File.delete(cache_path) if File.exists?(cache_path)
+        File.delete(cache_path) if File.exist?(cache_path)
         File.open(cache_path, 'w+') { |f| f.write(cache_content) }
       end
 

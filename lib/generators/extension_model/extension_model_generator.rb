@@ -55,7 +55,7 @@ class ExtensionModelGenerator < ModelGenerator
   end
 
   def extension_uses_rspec?
-    File.exists?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
+    File.exist?(File.join(destination_root, 'spec')) && !options[:with_test_unit]
   end
 
   def add_options!(opt)

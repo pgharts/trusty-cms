@@ -136,7 +136,7 @@ class InstanceGenerator < Rails::Generator::Base
     end
 
     def mysql_socket_location
-      RUBY_PLATFORM =~ /mswin32/ ? MYSQL_SOCKET_LOCATIONS.find { |f| File.exists?(f) } : nil
+      RUBY_PLATFORM =~ /mswin32/ ? MYSQL_SOCKET_LOCATIONS.find { |f| File.exist?(f) } : nil
     end
 
   private
