@@ -127,12 +127,16 @@ class InstanceGenerator < Rails::Generator::Base
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
-    opt.on("-r", "--ruby=path", String,
-            "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
-            "Default: #{DEFAULT_SHEBANG}") { |v| options[:shebang] = v }
-    opt.on("-d", "--database=name", String,
-          "Preconfigure for selected database (options: #{DATABASES.join(", ")}).",
-          "Default: sqlite3") { |v| options[:db] = v }
+    opt.on(
+      "-r", "--ruby=path", String,
+      "Path to the Ruby binary of your choice (otherwise scripts use env, dispatchers current path).",
+      "Default: #{DEFAULT_SHEBANG}"
+    ) { |v| options[:shebang] = v }
+    opt.on(
+      "-d", "--database=name", String,
+      "Preconfigure for selected database (options: #{DATABASES.join(", ")}).",
+      "Default: sqlite3"
+    ) { |v| options[:db] = v }
   end
 
   def mysql_socket_location
