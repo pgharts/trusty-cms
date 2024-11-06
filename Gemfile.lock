@@ -162,8 +162,8 @@ GEM
     execjs (2.10.0)
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.2)
-      factory_bot (~> 6.4)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
       railties (>= 5.0.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
@@ -217,7 +217,7 @@ GEM
     libv8-node (18.19.0.0-x86_64-linux)
     libv8-node (18.19.0.0-x86_64-linux-musl)
     logger (1.6.1)
-    loofah (2.22.0)
+    loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -421,7 +421,7 @@ DEPENDENCIES
   activestorage-validator
   acts_as_list
   database_cleaner
-  factory_bot_rails (= 6.4.2)
+  factory_bot_rails (= 6.4.4)
   file_validators
   launchy (~> 3.0.1)
   mysql2

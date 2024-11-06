@@ -15,7 +15,7 @@ group :development, :test do
   gem 'activestorage-validator'
   gem 'acts_as_list'
   gem 'database_cleaner'
-  gem 'factory_bot_rails', '6.4.2'
+  gem 'factory_bot_rails', '6.4.4'
   gem 'file_validators'
   gem 'launchy', '~> 3.0.1'
   gem 'mysql2'
