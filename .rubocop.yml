@@ -5,7 +5,6 @@ AllCops:
     - db/schema.rb
     - spec/**/*
     - app/assets/images/**/*
-  TargetRubyVersion: 3.0.5
   NewCops: enable
 
 Naming/AccessorMethodName:
