@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   # Associations
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
+  has_many :admins_sites, foreign_key: 'admin_id', class_name: 'AdminsSite', dependent: :destroy
+  has_many :sites, through: :admins_sites
 
   def role?(role)
     case role
@@ -44,8 +46,8 @@ class User < ActiveRecord::Base
     content_editor
   end
 
-  def scoped?
-    site_id.present?
+  def has_site?
+    sites.present?
   end
 
   def locale

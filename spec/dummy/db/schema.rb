@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_192097) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_08_172942) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,6 +67,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_192097) do
     t.text "notes"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "admins_sites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "admin_id", null: false
+    t.integer "site_id", null: false
+    t.index ["admin_id"], name: "index_admins_sites_on_admin_id"
+    t.index ["site_id"], name: "index_admins_sites_on_site_id"
   end
 
   create_table "assets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -60,6 +60,14 @@ select {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+select[multiple] {
+  height: auto;
+
+  option {
+    padding: 0.5em 0 0.5em 0;
+  }
+}
+
 label {
   display: block;
 }

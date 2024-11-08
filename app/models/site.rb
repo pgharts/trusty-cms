@@ -7,6 +7,8 @@ class Site < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
   belongs_to :production_homepage, class_name: 'ProductionPage'
+  has_many :admins_sites
+  has_many :admins, through: :admins_sites, class_name: 'User'
 
   default_scope { order('position ASC') }
 
