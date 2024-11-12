@@ -31,6 +31,8 @@ module TrustyCms
 
     # Initialize extension paths
     config.initialize_extension_paths
+    config.active_record.legacy_connection_handling = false
+
     extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path, value|
       config.autoload_paths.unshift path
