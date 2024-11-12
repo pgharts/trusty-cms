@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
     content_editor
   end
 
-  def has_site?
+  def has_a_site?
     sites.present?
   end
 

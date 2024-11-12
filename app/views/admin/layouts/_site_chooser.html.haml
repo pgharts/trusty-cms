@@ -1,4 +1,4 @@
-- if current_user.admin? && current_user.has_site? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
+- if current_user.admin? && current_user.has_a_site? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
   .site_chooser
     %ul.nav
       %li
