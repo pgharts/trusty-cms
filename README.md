@@ -10,7 +10,7 @@ small teams. It is similar to Textpattern or MovableType, but is a general
 purpose content management system (not just a blogging engine). TrustyCMS is a
 Rails engine and is built to be installed into an existing Rails 7 application as a gem.
 
-TravisCI: [![Build Status](https://secure.travis-ci.org/pgharts/trusty-cms.png?branch=master)](https://travis-ci.org/pgharts/trusty-cms/)
+CircleCI: [![CircleCI](https://circleci.com/gh/pgharts/trusty-cms/tree/master.svg?style=shield)](https://circleci.com/gh/pgharts/trusty-cms/tree/master)
 
 CodeClimate: [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 
