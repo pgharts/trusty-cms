@@ -2,7 +2,7 @@
 
 From within the directory containing your TrustyCMS instance:
 
-1. Create a new Rails 5.2 application (i.e. `rails new [project_name]`)
+1. Create a new Rails 7.0+ application (i.e. `rails new [project_name]`)
 
 2. Add the following gems to your Gemfile:
 
@@ -17,6 +17,6 @@ From within the directory containing your TrustyCMS instance:
 5. add config.extensions = [ :snippets, :clipped, :layouts, :multi_site ] to enable them in application.rb
 
 7. Add utf8 encoding to your db.yml
-   
+
 6. Run `bundle exec rake db:setup`, `bundle exec rake trusty_cms:install:migrations`, then
    `bundle exec rake db:bootstrap`.
