@@ -110,9 +110,9 @@ module MultiSite
       end
 
       def user_scope_condition
-        condition = ""
-        condition << "INNER JOIN `admins_sites` ON `admins_sites`.`admin_id` = `admins`.`id` AND `admins_sites`.`site_id` = #{self.current_site.id}" if self.current_site
-        condition
+        return "" unless self.current_site
+
+        "INNER JOIN `admins_sites` ON `admins_sites`.`admin_id` = `admins`.`id` AND `admins_sites`.`site_id` = #{self.current_site.id}"
       end
 
       def plural_symbol_for_class
