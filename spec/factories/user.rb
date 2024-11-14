@@ -1,34 +1,34 @@
 FactoryBot.define do
   factory :user do
-    name { 'User' }
+    first_name { 'FirstName' }
+    last_name { 'LastName' }
     email { 'email@test.com' }
-    login { 'user' }
-    password { 'password' }
+    password { 'ComplexPass1!' }
     password_confirmation { password }
 
     factory :admin do
-      name { 'Admin' }
-      login { 'admin' }
+      first_name { 'FirstName' }
+      last_name { 'LastName' }
       email { 'admin@example.com' }
       admin { true }
     end
 
     factory :existing do
-      name { 'Existing' }
-      login { 'existing' }
+      first_name { 'FirstName' }
+      last_name { 'LastName' }
       email { 'existing@example.com' }
     end
 
     factory :designer do
-      name { 'Designer' }
-      login { 'designer' }
+      first_name { 'FirstName' }
+      last_name { 'LastName' }
       email { '' }
       designer { true }
     end
 
     factory :non_admin do
-      name { 'Non Admin' }
-      login { 'non_admin' }
+      first_name { 'FirstName' }
+      last_name { 'LastName' }
       admin { false }
     end
   end
