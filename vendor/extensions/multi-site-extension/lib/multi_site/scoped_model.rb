@@ -17,7 +17,7 @@ module MultiSite
       # that is, anything without a site is considered to be shared among all sites
       # the default is false
 
-      def is_site_scoped(options={})
+      def is_site_scoped(options = {})
         return if is_site_scoped?
 
         options = {
@@ -25,7 +25,7 @@ module MultiSite
         }.merge(options)
 
         class_eval <<-EO
-          default_scope {where(site_scope_condition)}
+          #{ self == User ? 'default_scope { joins(user_scope_condition) }' : 'default_scope { where(site_scope_condition) }' }
           extend MultiSite::ScopedModel::ScopedClassMethods
           include MultiSite::ScopedModel::ScopedInstanceMethods
         EO
@@ -52,8 +52,7 @@ module MultiSite
 
     module ScopedClassMethods
 
-
-      def paginate_with_site(options={})
+      def paginate_with_site(options = {})
         return paginate_without_site(options) unless sites?
         where(site_scope_condition) do
           paginate_without_site(options)
@@ -63,7 +62,7 @@ module MultiSite
       %w{count average minimum maximum sum}.each do |getter|
         define_method("#{getter}_with_site") do |*args|
           return send("#{getter}_without_site".intern, *args) unless sites?
-          with_scope(:find => {:conditions => site_scope_condition}) do
+          with_scope(:find => { :conditions => site_scope_condition }) do
             send "#{getter}_without_site".intern, *args
           end
         end
@@ -73,11 +72,11 @@ module MultiSite
       # and should only be used in odd cases like migration.
       def find_without_site(*args)
         options = args.extract_options!
-        #set_readonly_option!(options)
+        # set_readonly_option!(options)
 
         case args.first
-          when :first then find_initial_without_site(options)     # defined here
-          when :all   then all_without_site(options)       # already defined by the alias chain
+        when :first then find_initial_without_site(options) # defined here
+        when :all then all_without_site(options) # already defined by the alias chain
         end
       end
 
@@ -110,6 +109,12 @@ module MultiSite
         condition
       end
 
+      def user_scope_condition
+        condition = ""
+        condition << "INNER JOIN `admins_sites` ON `admins_sites`.`admin_id` = `admins`.`id` AND `admins_sites`.`site_id` = #{self.current_site.id}" if self.current_site
+        condition
+      end
+
       def plural_symbol_for_class
         self.to_s.pluralize.underscore.intern
       end
@@ -125,9 +130,10 @@ module MultiSite
 
     module ScopedInstanceMethods
       protected
-        def set_site
-          self.site ||= self.class.current_site! unless self.class.is_shareable?
-        end
+
+      def set_site
+        self.site ||= self.class.current_site! unless self.class.is_shareable?
+      end
     end
   end
 end
