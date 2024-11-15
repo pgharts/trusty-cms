@@ -44,7 +44,7 @@ module LoginSystem
     action = action_name.to_s.intern
     return true if user_has_access_to_action?(action)
 
-    handle_unauthorized_access
+    handle_unauthorized_access(action)
     false
   end
 
@@ -52,7 +52,7 @@ module LoginSystem
     self.class.user_has_access_to_action?(current_user, action, self)
   end
 
-  def handle_unauthorized_access
+  def handle_unauthorized_access(action)
     permissions = self.class.controller_permissions[action]
     flash[:error] = permissions[:denied_message] || 'Access denied.'
     respond_to do |format|
