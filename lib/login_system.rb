@@ -2,6 +2,7 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
+      prepend_before_action :authorize_role
       # prepend_before_action :authenticate
       # prepend_before_action :authorize
       # helper_method :current_user
@@ -40,21 +41,19 @@ module LoginSystem
     true
   end
 
-  def authorize
-    # puts _process_action_callbacks.map(&:filter)
-    # action = action_name.to_s.intern
-    # if user_has_access_to_action?(action)
-    #   true
-    # else
-    #   permissions = self.class.controller_permissions[action]
-    #   flash[:error] = permissions[:denied_message] || 'Access denied.'
-    #   respond_to do |format|
-    #     format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
-    #     format.any(:xml, :json) { head :forbidden }
-    #   end
-    #   false
-    # end
-    true
+  def authorize_role
+    action = action_name.to_s.intern
+    if user_has_access_to_action?(action)
+      true
+    else
+      permissions = self.class.controller_permissions[action]
+      flash[:error] = permissions[:denied_message] || 'Access denied.'
+      respond_to do |format|
+        format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
+        format.any(:xml, :json) { head :forbidden }
+      end
+      false
+    end
   end
 
   def user_has_access_to_action?(action)

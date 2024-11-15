@@ -159,6 +159,7 @@ en:
       allow_password_reset?: "allow password reset"
   content: 'Content'
   content_type: 'Content&#8209;Type'
+  content_editor: 'Content Editor'
   creating_status: 'Creating %{model}&#8230;'
   date:
     abbr_day_names: [ Sun, Mon, Tue, Wed, Thu, Fri, Sat ]
