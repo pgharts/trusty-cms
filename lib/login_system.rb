@@ -42,21 +42,23 @@ module LoginSystem
 
   def authorize_role
     action = action_name.to_s.intern
-    if user_has_access_to_action?(action)
-      true
-    else
-      permissions = self.class.controller_permissions[action]
-      flash[:error] = permissions[:denied_message] || 'Access denied.'
-      respond_to do |format|
-        format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
-        format.any(:xml, :json) { head :forbidden }
-      end
-      false
-    end
+    return true if user_has_access_to_action?(action)
+
+    handle_unauthorized_access
+    false
   end
 
   def user_has_access_to_action?(action)
     self.class.user_has_access_to_action?(current_user, action, self)
+  end
+
+  def handle_unauthorized_access
+    permissions = self.class.controller_permissions[action]
+    flash[:error] = permissions[:denied_message] || 'Access denied.'
+    respond_to do |format|
+      format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
+      format.any(:xml, :json) { head :forbidden }
+    end
   end
 
   def login_from_session
