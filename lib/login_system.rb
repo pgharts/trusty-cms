@@ -56,7 +56,7 @@ module LoginSystem
     permissions = self.class.controller_permissions[action]
     flash[:error] = permissions[:denied_message] || 'Access denied.'
     respond_to do |format|
-      format.html { redirect_to(permissions[:denied_url] || { :action => :index }) }
+      format.html { redirect_to(permissions[:denied_url] || { action: :index }) }
       format.any(:xml, :json) { head :forbidden }
     end
   end
