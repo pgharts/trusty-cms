@@ -41,9 +41,10 @@
         = fields.label :class_name, t('page_type')
         = fields.select :class_name, [[t('select.normal'), '']] + Page.descendants.map { |p| [p.display_name, p.name] }.sort_by { |p| p.first }
     - layout.edit_status do
-      .status
-        = fields.label :status_id, t('status')
-        = fields.select :status_id, status_to_display
+      - if current_user.admin? || current_user.editor?
+        .status
+          = fields.label :status_id, t('status')
+          = fields.select :status_id, status_to_display
     - layout.edit_published_at do
       .published-date
         #published_at{:class => (@page.published? ? nil : 'hidden')}
