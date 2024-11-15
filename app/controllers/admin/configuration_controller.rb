@@ -5,7 +5,7 @@ class Admin::ConfigurationController < ApplicationController
   # and the show and edit views determine what set of config values is shown and made editable.
 
   before_action :initialize_config
-
+  before_action :authorize_role
   only_allow_access_to :edit, :update,
                        when: [:admin],
                        denied_url: { controller: 'admin/configuration', action: 'show' },

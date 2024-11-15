@@ -2,7 +2,6 @@ module LoginSystem
   def self.included(base)
     base.extend ClassMethods
     base.class_eval do
-      prepend_before_action :authorize_role
       # prepend_before_action :authenticate
       # prepend_before_action :authorize
       # helper_method :current_user

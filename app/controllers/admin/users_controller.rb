@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::ResourceController
   paginate_models
+  before_action :authorize_role
   only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove, :destroy,
                        when: :admin,
                        denied_url: { controller: 'pages', action: 'index' },
