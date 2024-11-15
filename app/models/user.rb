@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   # Roles
   # Admin - all permissions
   # Editor - all permissions except for users, sites editing
+  # Content Editor - all permissions except for users, sites, publishing and deleting
 
   def role?(role)
     case role
