@@ -76,5 +76,4 @@ class User < ActiveRecord::Base
     errors.add :password, 'Complexity requirement not met. Length should be 12 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character.'
   end
 
-  alias editor? designer?
 end
