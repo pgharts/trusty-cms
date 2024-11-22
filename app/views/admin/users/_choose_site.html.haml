@@ -1,4 +1,5 @@
 - if current_user.admin?
   %label{:for=>'user_admin'} Can edit site
-  = select :user, :site_id, [['<any>', '']] + Site.all.map { |s| [s.name, s.id] }
+  .caption (hold ctrl or cmd to select multiple)
   .caption A user with no site is able to act (to whatever extent their status allows) on any site.
+  = select :user, :site_ids, options_for_select(Site.all.map { |s| [s.name, s.id] }, selected: @user.site_ids), {}, { multiple: true }

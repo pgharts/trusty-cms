@@ -1,4 +1,5 @@
 require 'trusty_cms/resource_responses'
+
 class Admin::ResourceController < ApplicationController
   extend TrustyCms::ResourceResponses
 
@@ -95,6 +96,7 @@ class Admin::ResourceController < ApplicationController
   def will_paginate_options
     self.class.will_paginate_options || {}
   end
+
   helper_method :will_paginate_options
 
   # a convenience method that returns true if paginate_models has been called on this controller class
@@ -102,6 +104,7 @@ class Admin::ResourceController < ApplicationController
   def paginated?
     self.class.paginated == true && params[:pp] != 'all'
   end
+
   helper_method :paginated?
 
   # return a hash of page and per_page that can be used to build a will_paginate collection
@@ -145,7 +148,9 @@ class Admin::ResourceController < ApplicationController
   def model
     instance_variable_get("@#{model_symbol}") || load_model
   end
+
   alias :current_object :model
+
   def model=(object)
     instance_variable_set("@#{model_symbol}", object)
   end
@@ -155,13 +160,15 @@ class Admin::ResourceController < ApplicationController
                    model_class.find(params[:id])
                  else
                    model_class.new
-    end
+                 end
   end
 
   def models
     instance_variable_get("@#{plural_model_symbol}") || load_models
   end
+
   alias :current_objects :models
+
   def models=(objects)
     instance_variable_set("@#{plural_model_symbol}", objects)
   end
@@ -177,6 +184,7 @@ class Admin::ResourceController < ApplicationController
   def plural_model_name
     model_name.pluralize
   end
+
   alias :models_name :plural_model_name
 
   def model_symbol
@@ -186,6 +194,7 @@ class Admin::ResourceController < ApplicationController
   def plural_model_symbol
     model_name.pluralize.underscore.intern
   end
+
   alias :models_symbol :plural_model_symbol
 
   def humanized_model_name

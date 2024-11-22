@@ -49,7 +49,7 @@ class Admin::UsersController < Admin::ResourceController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :admin, :designer,
-                                 :password, :password_confirmation, :email, :site_id, :notes)
+                                 :password, :password_confirmation, :email, :site_id, :notes, site_ids: [])
   end
 
   def announce_cannot_delete_self
