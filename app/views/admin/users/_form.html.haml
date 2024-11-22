@@ -25,7 +25,9 @@
           = f.check_box 'admin', :class => 'checkbox'
           = f.label :admin, t('admin'), :class => 'checkbox'
           = f.check_box 'designer', :class => 'checkbox'
-          = f.label :designer, t('designer'), :class => 'checkbox'
+          = f.label :designer, t('editor'), :class => 'checkbox'
+          = f.check_box 'content_editor', :class => 'checkbox'
+          = f.label :content_editor, t('content_editor'), :class => 'checkbox'
 
     - form.edit_notes do
       %fieldset
