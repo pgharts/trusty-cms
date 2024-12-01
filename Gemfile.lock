@@ -275,7 +275,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    psych (5.1.1.1)
+    psych (5.2.0)
       stringio
     public_suffix (6.0.1)
     racc (1.8.1)
@@ -378,7 +378,7 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     stringex (2.8.6)
-    stringio (3.1.1)
+    stringio (3.1.2)
     temple (0.10.3)
     terrapin (1.0.1)
       climate_control
@@ -427,7 +427,7 @@ DEPENDENCIES
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
-  psych (= 5.1.1.1)
+  psych (= 5.2.0)
   rails-observers
   ransack
   rspec-rails
