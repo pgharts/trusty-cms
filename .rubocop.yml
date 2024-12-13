@@ -16,6 +16,11 @@ Style/Alias:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#alias-method'
   Enabled: false
 
+Style/ArgumentsForwarding:
+  Description: 'Use anonymous positional arguments forwarding (*)'
+  StyleGuide: 'https://github.com/rubocop/ruby-style-guide?tab=readme-ov-file#arguments-forwarding'
+  Enabled: false
+
 Style/ArrayJoin:
   Description: 'Use Array#join instead of Array#*.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#array-join'

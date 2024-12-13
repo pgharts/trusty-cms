@@ -140,7 +140,7 @@ en:
         secret: 'Secret'
       skip_filetype_validation: 'Skip Filetype Validation'
       storage: 'Storage'
-      url: 'Url'  
+      url: 'Url'
     defaults:
       locale: 'default language'
       page:
@@ -159,17 +159,18 @@ en:
       allow_password_reset?: "allow password reset"
   content: 'Content'
   content_type: 'Content&#8209;Type'
+  content_editor: 'Content Editor'
   creating_status: 'Creating %{model}&#8230;'
   date:
-    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
-    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
-    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [ Sun, Mon, Tue, Wed, Thu, Fri, Sat ]
+    abbr_month_names: [ ~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec ]
+    day_names: [ Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday ]
     formats:
       default: "%Y-%m-%d"
       long: "%B %e, %Y"
       only_day: "%e"
       short: "%e %b"
-    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    month_names: [ ~, January, February, March, April, May, June, July, August, September, October, November, December ]
     order:
       - :year
       - :month
@@ -183,9 +184,10 @@ en:
   designer: 'Designer'
   draft: 'Draft'
   edit: 'Edit'
+  editor: 'Editor'
   edit_configuration: 'Edit Configuration'
   edit_layout: 'Edit Layout'
-  edit_page:  'Edit Page'
+  edit_page: 'Edit Page'
   edit_preferences: 'Edit Preferences'
   edit_settings: 'Edit Settings'
   edit_user: 'Edit User'
@@ -242,7 +244,7 @@ en:
   published: 'Published'
   published_at: 'Published at'
   published_on: 'Published On'
-  reference:  'Reference'
+  reference: 'Reference'
   remember_me: 'Remember me'
   remember_me_in_this_browser: 'Remember me in this browser'
   remove: 'Remove'
@@ -277,7 +279,7 @@ en:
   snippets: 'Snippets'
   snippet: 'Snippet'
   status: 'Status'
-    # Warnings and info text:
+  # Warnings and info text:
   testing: Testing
   text:
     layouts:

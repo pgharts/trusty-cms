@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::ResourceController
   paginate_models
+  before_action :authorize_role
   only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove, :destroy,
                        when: :admin,
                        denied_url: { controller: 'pages', action: 'index' },
@@ -48,7 +49,7 @@ class Admin::UsersController < Admin::ResourceController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :admin, :designer,
-                                 :password, :password_confirmation, :email, :site_id, :notes)
+                                 :password, :password_confirmation, :email, :site_id, :notes, site_ids: [])
   end
 
   def announce_cannot_delete_self

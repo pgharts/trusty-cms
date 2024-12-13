@@ -1,4 +1,5 @@
 class Admin::ExtensionsController < ApplicationController
+  before_action :authorize_role
   only_allow_access_to :index,
                        when: :admin,
                        denied_url: { controller: 'pages', action: 'index' },

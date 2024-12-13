@@ -60,6 +60,19 @@ select {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+select[multiple] {
+  height: auto;
+
+  option {
+    padding: 0.5em;
+
+    &:checked {
+      background-color: #e5e6e7;
+      font-weight: 700;
+    }
+  }
+}
+
 label {
   display: block;
 }

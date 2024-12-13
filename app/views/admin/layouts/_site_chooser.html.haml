@@ -1,9 +1,9 @@
-- if current_user.admin? && !current_user.scoped? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
+- if current_user.scoped_site? && defined?(Site) && defined?(controller) && controller.sited_model? && controller.template_name == 'index' && Site.several?
   .site_chooser
     %ul.nav
       %li
         = "Current Site: #{current_site.name}"
         %ul.expansion
-          - Site.all.each do |site|
+          - current_user.sites.each do |site|
             %li
               = link_to( site.name, "#{request.path}?site_id=#{site.id}", :class => site == current_site ? 'fg site-link' : 'site-link')

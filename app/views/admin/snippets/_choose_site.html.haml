@@ -1,5 +1,6 @@
 - unless current_user.site
   %label{:for=>'snippet_site_id', :Class => 'admin_only'}
     Site
-    - sites = Site.all.map { |s| [s.name, s.id] }
+    - user_sites = current_user.admins_sites.pluck(:site_id)
+    - sites = Site.where(:id => user_sites).map { |s| [s.name, s.id] }
     = select :snippet, :site_id, sites, :include_blank => Snippet.is_shareable?, :selected => @snippet.site_id || current_site.id
