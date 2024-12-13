@@ -1,8 +1,9 @@
 - unless current_user.site
   %label{:for=>'layout_site_id', :class => 'admin_only'}
     Site
-    - user_sites = current_user.admins_sites.pluck(:site_id)
-    - sites = Site.where(:id => user_sites).map { |s| [s.name, s.id] }
-    - selection = {:include_blank => Layout.is_shareable?}
-    - selection[:selected] = current_site.id if @layout.new_record? && ! Layout.is_shareable?
+    :ruby
+      user_sites = current_user.admins_sites.pluck(:site_id)
+      sites = Site.where(:id => user_sites).map { |s| [s.name, s.id] }
+      selection = {:include_blank => Layout.is_shareable?}
+      selection[:selected] = current_site.id if @layout.new_record? && ! Layout.is_shareable?
     = select :layout, :site_id, sites, selection
