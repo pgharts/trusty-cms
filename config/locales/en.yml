@@ -243,7 +243,7 @@ en:
   preview: 'Preview'
   published: 'Published'
   published_at: 'Published at'
-  published_on: 'Published On'
+  publish_datetime: 'Publish Date & Time'
   reference: 'Reference'
   remember_me: 'Remember me'
   remember_me_in_this_browser: 'Remember me in this browser'

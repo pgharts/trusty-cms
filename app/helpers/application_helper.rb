@@ -33,11 +33,12 @@ module ApplicationHelper
       t('buttons.save_changes', default: 'Save Changes')
     options[:class] ||= 'button'
     options[:accesskey] ||= 'S'
+    options[:id] ||= 'save-button'
     submit_tag options.delete(:label), options
   end
 
   def save_model_and_continue_editing_button(_model)
-    submit_tag t('buttons.save_and_continue'), name: 'continue', class: 'button', accesskey: 's'
+    submit_tag t('buttons.save_and_continue'), name: 'continue', class: 'button', accesskey: 's', id: 'save-and-continue-button'
   end
 
   def current_item?(item)

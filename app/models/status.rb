@@ -19,12 +19,8 @@ class Status
     @@statuses.find { |status| status.id.to_s == id.to_s }
   end
 
-  def self.find_all
-    @@statuses.dup
-  end
-
   def self.selectable
-    find_all - [self['Scheduled']]
+    @@statuses
   end
 
   def self.selectable_values
