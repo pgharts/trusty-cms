@@ -23,7 +23,6 @@ class SiteController < ApplicationController
             url.to_s
           end
     if @page = find_page(url)
-      batch_page_status_refresh if url == '/' || url == ''
       # This is a bit of a hack to get Vanity URL pages working in another extension
       # In Rails 2, redirect_to halted execution, so process_page could be aliased and
       # a redirect could be used. This no longer works. There's a better fix for this,
@@ -60,20 +59,6 @@ class SiteController < ApplicationController
   # hide_action :set_expiry
 
   private
-
-  def batch_page_status_refresh
-    @changed_pages = []
-    @pages = Page.where({ status_id: Status[:scheduled].id })
-    @pages.each do |page|
-      if page.published_at <= Time.now
-        page.status_id = Status[:published].id
-        page.save
-        @changed_pages << page.id
-      end
-    end
-
-    expires_in nil, :private => true, 'no-cache' => true if @changed_pages.length > 0
-  end
 
   def set_cache_control
     response_cache_director(@page).set_cache_control
