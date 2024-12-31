@@ -10,6 +10,10 @@
 .error {
   background-color: #f3c2c2;
   color: $alt-link-color;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .warning {
