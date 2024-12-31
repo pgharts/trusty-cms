@@ -31,11 +31,12 @@ class PageStatusController < ApplicationController
     remaining_pages = []
 
     pages.each do |page|
+      page_id = page.id
       if page.published_at <= Time.now
         page.update(status_id: Status[:published].id)
-        updated_pages << page.id
+        updated_pages << page_id
       else
-        remaining_pages << page.id
+        remaining_pages << page_id
       end
     end
 
@@ -44,15 +45,16 @@ class PageStatusController < ApplicationController
 
   def refresh_response(updated_pages, remaining_pages)
     if updated_pages.any?
+      updated_pages_count = updated_pages.count
       {
-        message: "Successfully updated status of #{updated_pages.count} #{'page'.pluralize(updated_pages.count)}.",
+        message: "Successfully updated status of #{updated_pages_count} #{'page'.pluralize(updated_pages_count)}.",
         updated_page_ids: updated_pages,
-        remaining_scheduled_page_ids: remaining_pages
+        remaining_scheduled_page_ids: remaining_pages,
       }
     else
       {
-        message: "No scheduled pages matched the criteria for status refresh.",
-        remaining_scheduled_page_ids: remaining_pages
+        message: 'No scheduled pages matched the criteria for status refresh.',
+        remaining_scheduled_page_ids: remaining_pages,
       }
     end
   end

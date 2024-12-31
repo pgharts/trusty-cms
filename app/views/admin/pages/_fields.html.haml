@@ -52,8 +52,8 @@
         #published_at{:class => (@page.published? ? nil : 'hidden')}
           = fields.label :published_at, t('publish_datetime')
           = fields.text_field :published_at,
-              class: 'datetime', 
-              type: 'datetime-local', 
+              class: 'datetime',
+              type: 'datetime-local',
               value: (@page.published_at? ? @page.published_at.strftime('%Y-%m-%dT%H:%M') : nil)
     = render_region :layout_row, :locals => {:f => fields}
 
