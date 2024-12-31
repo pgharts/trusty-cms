@@ -6,46 +6,54 @@ class PageStatusController < ApplicationController
   def refresh
     pages = Page.where(status_id: Status[:scheduled].id)
 
-    updated_pages = []
-    remaining_scheduled_page_ids = []
+    updated_pages, remaining_pages = process_pages(pages)
 
-    pages.each do |page|
-      if page.published_at <= Time.now
-        page.update(status_id: Status[:published].id)
-        updated_pages << page.id
-      else
-        remaining_scheduled_page_ids << page.id
-      end
-    end
-
-    if updated_pages.any?
-      render json: {
-        message: "Successfully updated status of #{updated_pages.count} #{'page'.pluralize(updated_pages.count)}.",
-        updated_page_ids: updated_pages,
-        remaining_scheduled_page_ids: remaining_scheduled_page_ids
-      }, status: :ok
-    else
-      render json: {
-        message: "No scheduled pages matched the criteria for status refresh.",
-        remaining_scheduled_page_ids: remaining_scheduled_page_ids
-      }, status: :ok
-    end
+    render json: refresh_response(updated_pages, remaining_pages), status: :ok
   end
 
   private
 
   def authenticate_bearer_token
     provided_token = request.headers['Authorization']&.split(' ')&.last
+    expected_token = Rails.application.credentials[:trusty_cms][:page_status_bearer_token]
 
     if provided_token.blank?
-      render json: { error: 'Missing Bearer Token' }, status: :unauthorized
-      return
+      render json: { error: 'Missing Bearer Token' }, status: :unauthorized and return
     end
-
-    expected_token = Rails.application.credentials[:trusty_cms][:page_status_bearer_token]
 
     unless ActiveSupport::SecurityUtils.secure_compare(provided_token, expected_token)
       render json: { error: 'Invalid Bearer Token' }, status: :unauthorized
+    end
+  end
+
+  def process_pages(pages)
+    updated_pages = []
+    remaining_pages = []
+
+    pages.each do |page|
+      if page.published_at <= Time.now
+        page.update(status_id: Status[:published].id)
+        updated_pages << page.id
+      else
+        remaining_pages << page.id
+      end
+    end
+
+    [updated_pages, remaining_pages]
+  end
+
+  def refresh_response(updated_pages, remaining_pages)
+    if updated_pages.any?
+      {
+        message: "Successfully updated status of #{updated_pages.count} #{'page'.pluralize(updated_pages.count)}.",
+        updated_page_ids: updated_pages,
+        remaining_scheduled_page_ids: remaining_pages
+      }
+    else
+      {
+        message: "No scheduled pages matched the criteria for status refresh.",
+        remaining_scheduled_page_ids: remaining_pages
+      }
     end
   end
 end
