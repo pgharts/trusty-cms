@@ -221,7 +221,7 @@ class Page < ActiveRecord::Base
   end
 
   def update_published_datetime
-    self.published_at = Time.zone.now if published? && published_at == nil
+    self.published_at = Time.zone.now if published? && published_at.blank?
   end
 
   def default_child
