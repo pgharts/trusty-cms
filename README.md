@@ -49,8 +49,6 @@ See the INSTALL.md file for more instructions.
 
 ### Installation
 
-#### App Setup
-
 Prerequisites:
 
 * A Github account and Git ([Github has some really good instructions](https://help.github.com/articles/set-up-git))
