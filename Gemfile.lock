@@ -311,7 +311,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rdoc (6.8.1)
+    rdoc (6.10.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
     reline (0.5.11)
