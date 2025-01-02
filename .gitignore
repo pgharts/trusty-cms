@@ -18,6 +18,7 @@ rerun.txt
 *.swp
 .rvmrc
 .bundle
+vendor/bundle/
 .ruby-gemset
 *.rails2
 vendor/plugins/rails_upgrade

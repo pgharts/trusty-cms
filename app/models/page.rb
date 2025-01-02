@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   end
 
   # Callbacks
-  before_save :update_virtual, :update_status, :set_allowed_children_cache
+  before_save :update_virtual, :update_published_datetime, :set_allowed_children_cache
 
   # Associations
   acts_as_tree order: 'position ASC'
@@ -220,15 +220,8 @@ class Page < ActiveRecord::Base
     slug_child
   end
 
-  def update_status
-    self.published_at = Time.zone.now if published? && published_at == nil
-
-    if !published_at.nil? && (published? || scheduled?)
-      self[:status_id] = Status[:scheduled].id if published_at > Time.zone.now
-      self[:status_id] = Status[:published].id if published_at <= Time.zone.now
-    end
-
-    true
+  def update_published_datetime
+    self.published_at = Time.zone.now if published? && published_at.blank?
   end
 
   def default_child
