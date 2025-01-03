@@ -266,7 +266,8 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    psych (5.2.0)
+    psych (5.2.2)
+      date
       stringio
     public_suffix (6.0.1)
     racc (1.8.1)
@@ -414,7 +415,7 @@ DEPENDENCIES
   mysql2
   poltergeist (~> 1.18.1)
   pry-byebug
-  psych (= 5.2.0)
+  psych (= 5.2.2)
   rails-observers
   ransack
   rspec-rails
