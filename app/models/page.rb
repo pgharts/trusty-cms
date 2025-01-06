@@ -1,6 +1,8 @@
 require 'trusty_cms/taggable'
 
 class Page < ActiveRecord::Base
+  has_paper_trail
+  
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
       ; super
@@ -12,9 +14,9 @@ class Page < ActiveRecord::Base
 
   # Associations
   acts_as_tree order: 'position ASC'
-  has_many :parts, -> { order(:id) }, class_name: 'PagePart', dependent: :destroy
+  has_many :parts, -> { order(:id) }, class_name: 'PagePart', autosave: true, dependent: :destroy
   accepts_nested_attributes_for :parts, allow_destroy: true
-  has_many :fields, -> { order(:id) }, class_name: 'PageField', dependent: :destroy
+  has_many :fields, -> { order(:id) }, class_name: 'PageField', autosave: true, dependent: :destroy
   accepts_nested_attributes_for :fields, allow_destroy: true
   belongs_to :layout
   belongs_to :created_by, class_name: 'User'

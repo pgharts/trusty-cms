@@ -19,6 +19,8 @@ group :development, :test do
   gem 'file_validators'
   gem 'launchy', '~> 3.0.1'
   gem 'mysql2'
+  gem 'paper_trail'
+  gem 'paper_trail-association_tracking'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
   gem 'psych', '5.2.0'

@@ -1,4 +1,6 @@
 class PagePart < ActiveRecord::Base
+  has_paper_trail
+  
   # Default Order
   default_scope { order('name') }
 
