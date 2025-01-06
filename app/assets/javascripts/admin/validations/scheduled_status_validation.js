@@ -51,7 +51,7 @@ $(document).ready(function() {
     }
   }
 
-  $('#save-button, #save-and-continue-button').on('click', function(event) {
+  $('input[value="Save Changes"], input[value="Save and Continue Editing"]').on('click', function(event) {
     if (!validateDateTime()) {
       event.preventDefault();
       event.stopImmediatePropagation();
