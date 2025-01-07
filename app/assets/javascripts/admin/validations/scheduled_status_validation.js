@@ -36,9 +36,8 @@ $(document).ready(function() {
     return true;
   }
 
-  function validateDateTime() {
+  function validateDateTime(status) {
     const publishedAt = $('#page_published_at').val();
-    const status = $('#page_status_id').val();
     const publishedTime = new Date(publishedAt);
     const currentTime = new Date();
 
@@ -49,10 +48,14 @@ $(document).ready(function() {
     if (status === '100') {
       return validatePublishedStatus(publishedTime, currentTime);
     }
+
+    return true;
   }
 
   $('#save-button, #save-and-continue-button').on('click', function(event) {
-    if (!validateDateTime()) {
+    const status = $('#page_status_id').val();
+
+    if (status && !validateDateTime(status)) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
