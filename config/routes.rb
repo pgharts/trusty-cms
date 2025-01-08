@@ -13,6 +13,7 @@ TrustyCms::Application.routes.draw do
     resources :pages do
       resources :children, controller: 'pages'
       get 'remove', on: :member
+      put 'restore/:version_index', on: :member, to: 'pages#restore', as: :restore_version
     end
     resources :layouts do
       get 'remove', on: :member

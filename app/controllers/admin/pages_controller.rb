@@ -38,7 +38,32 @@ class Admin::PagesController < Admin::ResourceController
     assets = Asset.order('created_at DESC')
     @term = assets.ransack(params[:search] || '')
     @term.result(distinct: true)
+    @page = Page.find(params[:id])
+    @versions = if @page.versions.any?
+      @page.versions
+        .sort_by(&:created_at).reverse
+        .map do |version|
+          {
+            index: version&.index,
+            update_date: version&.created_at&.strftime("%B %d, %Y"),
+            update_time: version&.created_at&.strftime("%I:%M %p"),
+            updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User'
+          }
+      end
+    else
+      nil
+    end
     response_for :edit
+  end
+
+  def restore
+    page = Page.find(params[:id])
+    lock_version = page.lock_version
+    index = params[:version_index].to_i
+    restored_page = page.versions[index].reify(has_many: true)
+    restored_page.lock_version = lock_version
+    restored_page.save!
+    redirect_to edit_admin_page_path(page)
   end
 
   def preview

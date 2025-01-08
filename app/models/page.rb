@@ -14,9 +14,9 @@ class Page < ActiveRecord::Base
 
   # Associations
   acts_as_tree order: 'position ASC'
-  has_many :parts, -> { order(:id) }, class_name: 'PagePart', autosave: true, dependent: :destroy
+  has_many :parts, -> { order(:id) }, class_name: 'PagePart', foreign_key: :page_id, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :parts, allow_destroy: true
-  has_many :fields, -> { order(:id) }, class_name: 'PageField', autosave: true, dependent: :destroy
+  has_many :fields, -> { order(:id) }, class_name: 'PageField', foreign_key: :page_id, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :fields, allow_destroy: true
   belongs_to :layout
   belongs_to :created_by, class_name: 'User'

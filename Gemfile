@@ -7,6 +7,9 @@ source 'https://rubygems.org'
 # requires trusty and therefore pulls in every
 # dependency mentioned in trusty.gemspec.
 
+gem 'paper_trail'
+gem 'paper_trail-association_tracking'
+gem 'psych', '5.2.0'
 gem 'trustygems', '~> 0.2.0'
 
 gemspec
@@ -19,11 +22,8 @@ group :development, :test do
   gem 'file_validators'
   gem 'launchy', '~> 3.0.1'
   gem 'mysql2'
-  gem 'paper_trail'
-  gem 'paper_trail-association_tracking'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
-  gem 'psych', '5.2.0'
   gem 'rails-observers'
   gem 'ransack'
   gem 'rspec-rails'
