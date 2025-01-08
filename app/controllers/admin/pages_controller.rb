@@ -44,11 +44,8 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def restore
-    lock_version = @page.lock_version
     index = params[:version_index].to_i
-    restored_page = @page.versions[index].reify(has_many: true)
-    restored_page.lock_version = lock_version
-    restored_page.save!
+    restore_page_version(@page, index)
     redirect_to edit_admin_page_path(@page)
   end
 
@@ -95,6 +92,13 @@ class Admin::PagesController < Admin::ResourceController
           updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User'
         }
       end
+  end
+
+  def restore_page_version(page, index)
+    lock_version = page.lock_version
+    restored_page = page.versions[index].reify(has_many: true)
+    restored_page.lock_version = lock_version
+    restored_page.save!
   end
 
   def model_class
