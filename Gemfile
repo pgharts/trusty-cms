@@ -7,8 +7,8 @@ source 'https://rubygems.org'
 # requires trusty and therefore pulls in every
 # dependency mentioned in trusty.gemspec.
 
-gem 'paper_trail'
-gem 'paper_trail-association_tracking'
+gem 'paper_trail', '~> 16.0.0'
+gem 'paper_trail-association_tracking', '~> 2.2.1'
 gem 'psych', '5.2.2'
 gem 'trustygems', '~> 0.2.0'
 
