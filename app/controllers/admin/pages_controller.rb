@@ -87,9 +87,9 @@ class Admin::PagesController < Admin::ResourceController
       .map do |version|
         {
           index: version&.index,
-          update_date: version&.created_at&.strftime("%B %d, %Y"),
-          update_time: version&.created_at&.strftime("%I:%M %p"),
-          updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User'
+          update_date: version&.created_at&.strftime('%B %d, %Y'),
+          update_time: version&.created_at&.strftime('%I:%M %p'),
+          updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User',
         }
       end
   end
