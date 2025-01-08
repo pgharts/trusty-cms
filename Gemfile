@@ -9,7 +9,7 @@ source 'https://rubygems.org'
 
 gem 'paper_trail'
 gem 'paper_trail-association_tracking'
-gem 'psych', '5.2.0'
+gem 'psych', '5.2.2'
 gem 'trustygems', '~> 0.2.0'
 
 gemspec
