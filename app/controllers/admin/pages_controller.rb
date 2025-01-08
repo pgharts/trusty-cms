@@ -1,6 +1,7 @@
 class Admin::PagesController < Admin::ResourceController
   before_action :initialize_meta_rows_and_buttons, only: %i[new edit create update]
   before_action :count_deleted_pages, only: [:destroy]
+  before_action :set_page, only: %i[edit restore]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
 
   class PreviewStop < ActiveRecord::Rollback
@@ -38,32 +39,17 @@ class Admin::PagesController < Admin::ResourceController
     assets = Asset.order('created_at DESC')
     @term = assets.ransack(params[:search] || '')
     @term.result(distinct: true)
-    @page = Page.find(params[:id])
-    @versions = if @page.versions.any?
-      @page.versions
-        .sort_by(&:created_at).reverse
-        .map do |version|
-          {
-            index: version&.index,
-            update_date: version&.created_at&.strftime("%B %d, %Y"),
-            update_time: version&.created_at&.strftime("%I:%M %p"),
-            updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User'
-          }
-      end
-    else
-      nil
-    end
+    @versions = format_versions(@page.versions)
     response_for :edit
   end
 
   def restore
-    page = Page.find(params[:id])
-    lock_version = page.lock_version
+    lock_version = @page.lock_version
     index = params[:version_index].to_i
-    restored_page = page.versions[index].reify(has_many: true)
+    restored_page = @page.versions[index].reify(has_many: true)
     restored_page.lock_version = lock_version
     restored_page.save!
-    redirect_to edit_admin_page_path(page)
+    redirect_to edit_admin_page_path(@page)
   end
 
   def preview
@@ -80,6 +66,10 @@ class Admin::PagesController < Admin::ResourceController
 
   private
 
+  def set_page
+    @page = Page.find(params[:id])
+  end
+
   def validation_error(e)
     flash[:error] = e.message
     render :new
@@ -90,6 +80,21 @@ class Admin::PagesController < Admin::ResourceController
       model.slug = '/'
     end
     model.parent_id = params[:page_id]
+  end
+
+  def format_versions(versions)
+    return nil unless versions.any?
+
+    versions
+      .sort_by(&:created_at).reverse
+      .map do |version|
+        {
+          index: version&.index,
+          update_date: version&.created_at&.strftime("%B %d, %Y"),
+          update_time: version&.created_at&.strftime("%I:%M %p"),
+          updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User'
+        }
+      end
   end
 
   def model_class
