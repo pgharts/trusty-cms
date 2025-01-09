@@ -16,7 +16,7 @@ From within the directory containing your TrustyCMS instance:
 
 5. Add `config.extensions = [ :snippets, :clipped, :layouts, :multi_site ]` to enable them in application.rb
 
-6. Add `config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]` to application.rb. This is required for Pages to save previous versions.
+6. Add `config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]` to application.rb. This is required for pages to save previous versions.
 
 7. Add utf8 encoding to your db.yml
 
