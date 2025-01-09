@@ -1,0 +1,28 @@
+%fieldset
+  %h4
+    %i.fas.fa-clock-rotate-left
+    Previous Versions
+
+  - if @versions.present?
+    %section
+      %table
+        %thead
+          %tr
+            %th Date Updated
+            %th Time Updated
+            %th Updated By
+            %th Action
+        %tbody{ :id => 'versions-table' }
+          - @versions.each do |version|
+            %tr
+              %td= version[:update_date]
+              %td= version[:update_time]
+              %td= version[:updated_by]
+              %td
+                = link_to 'Restore', 
+                  restore_version_admin_page_path(@page.id, version_index: version[:index]),
+                  method: :put,
+                  data: { confirm: 'Are you sure you want to restore this version?' }
+  - else
+    %section
+      %p No previous versions are available.

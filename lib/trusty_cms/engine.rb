@@ -1,3 +1,9 @@
+require 'ckeditor'
+require 'devise'
+require 'ransack'
+require 'paper_trail'
+require 'paper_trail-association_tracking'
+
 module TrustyCms
   class Engine < Rails::Engine
     isolate_namespace TrustyCms
@@ -19,8 +25,3 @@ module TrustyCms
     end
   end
 end
-
-require 'ckeditor'
-require 'devise'
-require 'ransack'
-
