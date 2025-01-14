@@ -23,9 +23,27 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def index
-    @homepage = Page.find_by_parent_id(nil)
+    @site ||= Page.current_site
+    @homepage ||= @site.homepage if @site
+    @homepage ||= Page.homepage
+    @site_id ||= @site.id
+    @q = Page.ransack(params[:search] || '')
     response_for :plural
   end
+
+  def search
+    @site_id = params[:site_id] || Page.current_site.id
+    @q = Page.ransack(params[:search])
+  
+    if params.dig(:search, :title).present?
+      @title = params[:search][:title]
+      @pages = Page.ransack(title_cont: @title, site_id_eq: @site_id).result
+    else
+      @pages = nil
+    end
+  
+    render
+  end  
 
   def new
     assets = Asset.order('created_at DESC')

@@ -155,6 +155,10 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['site_id', 'title']
+  end
+
   private :set_response_headers
 
   def set_content_type(response)

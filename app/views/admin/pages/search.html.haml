@@ -4,10 +4,11 @@
   = render_region :top
   = search_form_for @q, url: search_admin_pages_path, html: { method: :get, class: 'search-form' } do |f|
     = hidden_field_tag :site_id, @site_id
-    .page_search
+    .page-search
       %i.fas.fa-search
-      = f.search_field :title, placeholder: 'Search by Page Title', id: 'search-input'
+      = f.search_field :title, value: @title, placeholder: 'Search by Page Title', id: 'search-input'
       %input.button{:type => 'submit', :value => 'Search'}
+      = link_to t("view_all_pages"), admin_pages_path, class: 'button'
   %table.index.tablesaw#pages{:summary=>t('page_hierarchy')}
     %thead
       %tr
@@ -19,17 +20,19 @@
           - sitemap_head.actions_column_header do
             %th.actions= t('modify')
     %tbody
-      - if @homepage
-        = render_nodes(@homepage, 0).html_safe
+      - if @pages.present?
+        - @pages.each do |page|
+          = render_search_node(page).html_safe
       - else
         %tr.sortable
-          %td.empty{:colspan => admin.page.index.node.length}= t('no_pages')
-  = render_region :bottom
+          %td.empty{:colspan => admin.page.index.node.length}= t('no_pages_found')
 
-- unless @homepage
+= render_region :bottom
+
+- unless @pages
   #actions
     %ul
       %li
-        = link_to admin_pages_path, :class => 'action_button' do
+        = link_to new_admin_page_path, :class => 'action_button' do
           %i.fas.fa-plus-circle
-          = t("new_homepage")
+          = t("view_all_pages")

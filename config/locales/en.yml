@@ -216,6 +216,7 @@ en:
   'no': 'No'
   no_layouts: 'No Layouts'
   no_pages: 'No Pages'
+  no_pages_found: 'No Pages Found'
   normal_page: 'Normal Page'
   notes: 'Notes'
   optional: 'Optional'
@@ -326,6 +327,7 @@ en:
   users_controller:
     cannot_delete_self: 'You cannot delete yourself.'
   version: 'Version'
+  view_all_pages: 'View All Pages'
   view_site: 'View Site'
   warning: 'Warning'
   website: 'Website'

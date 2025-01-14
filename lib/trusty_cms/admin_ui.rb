@@ -177,6 +177,10 @@ module TrustyCms
           index.sitemap_head.concat %w{title_column_header status_column_header actions_column_header}
           index.node.concat %w{title_column status_column actions_column}
         end
+        page.search = RegionSet.new do |search|
+          search.sitemap_head.concat %w{title_column_header status_column_header actions_column_header}
+          search.node.concat %w{title_column status_column actions_column}
+        end
         page.remove = page.children = page.index
         page.new = page._part = page.edit
       end

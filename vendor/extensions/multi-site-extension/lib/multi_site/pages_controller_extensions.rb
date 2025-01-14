@@ -5,7 +5,6 @@ module MultiSite::PagesControllerExtensions
       alias_method :discover_current_site, :discover_current_site_with_root
 
       alias_method :index_without_site, :index
-      alias_method :index, :index_with_site
 
       alias_method :continue_url_without_site, :continue_url
       alias_method :continue_url, :continue_url_with_site
@@ -35,13 +34,6 @@ module MultiSite::PagesControllerExtensions
     if params[:root] && @homepage = Page.find(params[:root])
       @site = @homepage.root.site
     end
-  end
-
-  def index_with_site
-    @site ||= Page.current_site
-    @homepage ||= @site.homepage if @site
-    @homepage ||= Page.homepage
-    response_for :plural
   end
 
   def remove_with_back

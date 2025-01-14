@@ -14,6 +14,7 @@ TrustyCms::Application.routes.draw do
       resources :children, controller: 'pages'
       get 'remove', on: :member
       put 'restore/:version_index', on: :member, to: 'pages#restore', as: :restore_version
+      get 'search', on: :collection, to: 'pages#search', as: :search
     end
     resources :layouts do
       get 'remove', on: :member
