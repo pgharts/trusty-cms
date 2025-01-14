@@ -23,27 +23,18 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def index
-    @site ||= Page.current_site
-    @homepage ||= @site.homepage if @site
-    @homepage ||= Page.homepage
-    @site_id ||= @site.id
-    @q = Page.ransack(params[:search] || '')
+    set_site_and_homepage
+    @q = initialize_search
     response_for :plural
   end
-
+  
   def search
     @site_id = params[:site_id] || Page.current_site.id
-    @q = Page.ransack(params[:search])
+    @q = initialize_search
   
-    if params.dig(:search, :title).present?
-      @title = params[:search][:title]
-      @pages = Page.ransack(title_cont: @title, site_id_eq: @site_id).result
-    else
-      @pages = nil
-    end
-  
+    @pages = fetch_search_results if search_title_present?
     render
-  end  
+  end
 
   def new
     assets = Asset.order('created_at DESC')
@@ -83,6 +74,25 @@ class Admin::PagesController < Admin::ResourceController
 
   def set_page
     @page = Page.find(params[:id])
+  end
+
+  def set_site_and_homepage
+    @site ||= Page.current_site
+    @homepage = @site&.homepage || Page.homepage
+    @site_id = @site&.id
+  end
+
+  def initialize_search
+    Page.ransack(params[:search] || '')
+  end
+
+  def fetch_search_results
+    @title = params.dig(:search, :title)
+    Page.ransack(title_cont: @title, site_id_eq: @site_id).result
+  end
+
+  def search_title_present?
+    params.dig(:search, :title).present?
   end
 
   def validation_error(e)

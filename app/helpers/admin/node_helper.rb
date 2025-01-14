@@ -7,7 +7,7 @@ module Admin::NodeHelper
 
   def render_node(page, index, parent_index = nil, simple = false)
     @current_node = prepare_page(page)
-    @rendered_html += render_partial(page, index: index, parent_index: parent_index, simple: simple)
+    @rendered_html += render_partial(page, index:, parent_index:, simple:)
     index
   end
 
@@ -98,12 +98,12 @@ module Admin::NodeHelper
   def render_partial(page, index:, parent_index:, simple:)
     render partial: 'admin/pages/node',
       locals: {
-        level: index,
-        index: index,
+        level:        index,
+        index:        index,
         parent_index: parent_index,
-        page: page,
-        simple: simple,
-        branch: page.children.count.positive?
+        page:         page,
+        simple:       simple,
+        branch:       page.children.count.positive?,
       }
-  end
+  end  
 end

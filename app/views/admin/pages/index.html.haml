@@ -7,8 +7,8 @@
     .page_search
       %i.fas.fa-search
       = f.search_field :title, placeholder: 'Search by Page Title', id: 'search-input'
-      %input.button{:type => 'submit', :value => 'Search'}
-  %table.index.tablesaw#pages{:summary=>t('page_hierarchy')}
+      %input.button{ :type => 'submit', :value => 'Search' }
+  %table.index.tablesaw#pages{ :summary => t('page_hierarchy') }
     %thead
       %tr
         - render_region :sitemap_head do |sitemap_head|
@@ -23,7 +23,7 @@
         = render_nodes(@homepage, 0).html_safe
       - else
         %tr.sortable
-          %td.empty{:colspan => admin.page.index.node.length}= t('no_pages')
+          %td.empty{ :colspan => admin.page.index.node.length }= t('no_pages')
   = render_region :bottom
 
 - unless @homepage
