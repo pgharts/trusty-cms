@@ -2,12 +2,7 @@
 
 .outset
   = render_region :top
-  = search_form_for @q, url: search_admin_pages_path, html: { method: :get, class: 'search-form' } do |f|
-    = hidden_field_tag :site_id, @site_id
-    .page_search
-      %i.fas.fa-search
-      = f.search_field :title, placeholder: 'Search by Page Title', id: 'search-input'
-      %input.button{ :type => 'submit', :value => 'Search' }
+  = render 'search_form', title: nil, show_view_all_button: false
   %table.index.tablesaw#pages{ :summary => t('page_hierarchy') }
     %thead
       %tr

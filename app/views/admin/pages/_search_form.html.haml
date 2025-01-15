@@ -1,0 +1,8 @@
+= search_form_for @q, url: search_admin_pages_path, html: { method: :get, class: 'search-form' } do |f|
+  = hidden_field_tag :site_id, @site_id
+  .page-search
+    %i.fas.fa-search
+    = f.search_field :title, value: title, placeholder: 'Search by Page Title', id: 'search-input'
+    %input.button{ type: 'submit', value: 'Search' }
+    - if show_view_all_button
+      = link_to t("view_all_pages"), admin_pages_path, class: 'button'
