@@ -62,7 +62,9 @@ module MenuRenderer
   end
 
   def menu_list
-    view.content_tag :ul, menu_items.join.html_safe, class: 'menu', id: "allowed_children_#{id}"
+    view.content_tag :div, class: 'dropdown_wrapper', style: 'position: absolute; display: none' do
+      view.content_tag :ul, menu_items.join.html_safe, class: 'menu', id: "allowed_children_#{id}"
+    end
   end
 
   def remove_link
