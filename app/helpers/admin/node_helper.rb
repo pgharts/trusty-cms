@@ -97,13 +97,13 @@ module Admin::NodeHelper
 
   def render_partial(page, index:, parent_index:, simple:)
     render partial: 'admin/pages/node',
-      locals: {
-        level:        index,
-        index:        index,
-        parent_index: parent_index,
-        page:         page,
-        simple:       simple,
-        branch:       page.children.count.positive?,
-      }
-  end  
+           locals: {
+             level: index,
+             index: index,
+             parent_index: parent_index,
+             page: page,
+             simple: simple,
+             branch: page.children.count.positive?,
+           }
+  end
 end

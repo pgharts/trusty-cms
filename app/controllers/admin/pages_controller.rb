@@ -27,11 +27,11 @@ class Admin::PagesController < Admin::ResourceController
     @q = initialize_search
     response_for :plural
   end
-  
+
   def search
     @site_id = params[:site_id] || Page.current_site.id
     @q = initialize_search
-  
+
     @pages = fetch_search_results if search_title_present?
     render
   end
