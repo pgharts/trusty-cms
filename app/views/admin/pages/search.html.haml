@@ -28,11 +28,3 @@
           %td.empty{ :colspan => admin.page.index.node.length }= t('no_pages_found')
 
 = render_region :bottom
-
-- unless @pages
-  #actions
-    %ul
-      %li
-        = link_to new_admin_page_path, :class => 'action_button' do
-          %i.fas.fa-plus-circle
-          = t("view_all_pages")
