@@ -5,7 +5,7 @@
     // Attach click handler to toggle dropdown
     $(link).off('click').on('click', function(event) {
       event.preventDefault();
-      event.stopPropagation(); // Prevent click from propagating to document
+      event.stopPropagation();
       var $link = $(this);
       var $menuWrapper = $link.siblings("div.dropdown_wrapper");
 
