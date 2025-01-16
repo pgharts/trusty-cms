@@ -24,6 +24,7 @@ class MultiSiteExtension < TrustyCms::Extension
     admin.layouts.index.add(:before_nav, "admin/layouts/site_chooser")
     admin.pages.index.add(:before_nav, "admin/layouts/site_chooser")
     admin.snippets.index.add(:before_nav, "admin/layouts/site_chooser")
+    admin.pages.search.add(:before_nav, "admin/layouts/site_chooser")
     Layout.send :is_site_scoped
     Snippet.send :is_site_scoped
     User.send :is_site_scoped, :shareable => true

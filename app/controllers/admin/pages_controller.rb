@@ -23,8 +23,17 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def index
-    @homepage = Page.find_by_parent_id(nil)
+    set_site_and_homepage
+    @q = initialize_search
     response_for :plural
+  end
+
+  def search
+    @site_id = params[:site_id] || Page.current_site.id
+    @q = initialize_search
+
+    @pages = fetch_search_results if search_title_present?
+    render
   end
 
   def new
@@ -65,6 +74,25 @@ class Admin::PagesController < Admin::ResourceController
 
   def set_page
     @page = Page.find(params[:id])
+  end
+
+  def set_site_and_homepage
+    @site ||= Page.current_site
+    @homepage = @site&.homepage || Page.homepage
+    @site_id = @site&.id
+  end
+
+  def initialize_search
+    Page.ransack(params[:search] || '')
+  end
+
+  def fetch_search_results
+    @title = params.dig(:search, :title)
+    Page.ransack(title_cont: @title, site_id_eq: @site_id).result
+  end
+
+  def search_title_present?
+    params.dig(:search, :title).present?
   end
 
   def validation_error(e)

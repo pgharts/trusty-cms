@@ -7,11 +7,13 @@ module Admin::NodeHelper
 
   def render_node(page, index, parent_index = nil, simple = false)
     @current_node = prepare_page(page)
-
-    @rendered_html += (render partial: 'admin/pages/node',
-                              locals: { level: index, index: index, parent_index: parent_index,
-                                        page: page, simple: simple, branch: (page.children.count.positive?) })
+    @rendered_html += render_partial(page, index:, parent_index:, simple:)
     index
+  end
+
+  def render_search_node(page)
+    @current_node = prepare_page(page)
+    @rendered_html = render_partial(page, index: 0, parent_index: nil, simple: false)
   end
 
   def prepare_page(page)
@@ -89,5 +91,19 @@ module Admin::NodeHelper
           class: 'busy', id: "busy_#{@current_node.id}",
           alt: '', title: '',
           style: 'display: none;')
+  end
+
+  private
+
+  def render_partial(page, index:, parent_index:, simple:)
+    render partial: 'admin/pages/node',
+           locals: {
+             level: index,
+             index: index,
+             parent_index: parent_index,
+             page: page,
+             simple: simple,
+             branch: page.children.count.positive?,
+           }
   end
 end

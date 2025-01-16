@@ -2,7 +2,7 @@
 
 .outset
   = render_region :top
-  = render 'search_form', title: nil, show_view_all_button: false
+  = render 'search_form', title: @title, show_view_all_button: true
   %table.index.tablesaw#pages{ :summary => t('page_hierarchy') }
     %thead
       %tr
@@ -14,17 +14,11 @@
           - sitemap_head.actions_column_header do
             %th.actions= t('modify')
     %tbody
-      - if @homepage
-        = render_nodes(@homepage, 0).html_safe
+      - if @pages.present?
+        - @pages.each do |page|
+          = render_search_node(page).html_safe
       - else
         %tr.sortable
-          %td.empty{ :colspan => admin.page.index.node.length }= t('no_pages')
-  = render_region :bottom
+          %td.empty{ :colspan => admin.page.index.node.length }= t('no_pages_found')
 
-- unless @homepage
-  #actions
-    %ul
-      %li
-        = link_to admin_pages_path, :class => 'action_button' do
-          %i.fas.fa-plus-circle
-          = t("new_homepage")
+= render_region :bottom
