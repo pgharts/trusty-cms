@@ -3,6 +3,7 @@ class Admin::PagesController < Admin::ResourceController
   before_action :count_deleted_pages, only: [:destroy]
   before_action :set_page, only: %i[edit restore]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
+  include Admin::PagesHelper
 
   class PreviewStop < ActiveRecord::Rollback
     def message
@@ -113,13 +114,13 @@ class Admin::PagesController < Admin::ResourceController
     versions
       .sort_by(&:created_at).reverse
       .map do |version|
-        {
-          index: version&.index,
-          update_date: version&.created_at&.strftime('%B %d, %Y'),
-          update_time: version&.created_at&.strftime('%I:%M %p'),
-          updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User',
-        }
-      end
+      {
+        index: version&.index,
+        update_date: version&.created_at&.strftime('%B %d, %Y'),
+        update_time: version&.created_at&.strftime('%I:%M %p'),
+        updated_by: User.unscoped.find_by(id: version&.whodunnit)&.name || 'Unknown User',
+      }
+    end
   end
 
   def restore_page_version(page, index)

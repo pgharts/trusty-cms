@@ -231,6 +231,7 @@ en:
     removed_many: "The pages were successfully removed from the site."
     removed_one: "The page was successfully removed from the site."
     saved: "Your page has been saved below."
+  parent_page: 'Parent Page'
   password: 'Password'
   password_confirmation: 'Confirm New Password'
   personal: 'Personal'
