@@ -159,6 +159,10 @@ class Page < ActiveRecord::Base
     ['site_id', 'title']
   end
 
+  def self.parent_pages(homepage_id)
+    where(parent_id: homepage_id).or(where(id: homepage_id))
+  end
+
   private :set_response_headers
 
   def set_content_type(response)

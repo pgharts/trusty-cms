@@ -1,7 +1,6 @@
 = fields.hidden_field :lock_version
 = fields.hidden_field :parent_id
 = fields.hidden_field :class_name
-
 = render_region :form_top, :locals => {:f => fields}
 
 - render_region :form, :locals => {:f => fields} do |form|
@@ -43,6 +42,10 @@
       .page-type
         = fields.label :class_name, t('page_type')
         = fields.select :class_name, [[t('select.normal'), '']] + Page.descendants.map { |p| [p.display_name, p.name] }.sort_by { |p| p.first }
+    - layout.edit_parent do
+      .parent-page
+        = fields.label :parent_id, t('parent_page')
+        = fields.select :parent_id, parent_page_options(current_site, @page)
     - layout.edit_status do
       - if current_user.admin? || current_user.editor?
         .status
@@ -56,6 +59,7 @@
             class: 'datetime',
             type: 'datetime-local',
             value: (@page.published_at? ? @page.published_at.strftime('%Y-%m-%dT%H:%M') : nil)
+
     = render_region :layout_row, :locals => {:f => fields}
 
 .error.hidden
