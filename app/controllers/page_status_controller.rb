@@ -32,7 +32,8 @@ class PageStatusController < ApplicationController
 
     pages.each do |page|
       page_id = page.id
-      if page.published_at && page.published_at <= Time.now
+      published_at = page.published_at
+      if published_at && published_at <= Time.now
         page.update(status_id: Status[:published].id)
         updated_pages << page_id
       else
