@@ -93,17 +93,25 @@ SecureRandom.base58(24)
 ```  
 
 **2. Store the Token in Rails Credentials**  
-Run the following command to edit your credentials:  
+To store your token securely, edit your Rails credentials by running the following command:
 ```bash
 bin/rails encrypted:edit config/credentials.yml.enc
-```  
-Add the token to your credentials:  
+```
+Then, add the token to your credentials file under the `trusty_cms` namespace:
 ```yaml
 trusty_cms:
   page_status_bearer_token: '<your bearer token>'
-```  
+```
 
-**3. Create a Ruby Lambda Function in AWS**  
+**3. Add Google Tag Manager Container ID (Optional)**
+If you'd like to enable trusty-cms to submit Google Tag Manager data for tracking admin page activity (this does not include public-facing pages), add your Google Tag Manager Container ID to the `trusty_cms` section of your `credentials.yml.enc` file:
+ ```yaml
+trusty_cms:
+  page_status_bearer_token: '<your bearer token>'
+  gtm_container_id: 'GTM-xxxxxx'
+```
+
+**4. Create a Ruby Lambda Function in AWS**  
 - Log into **AWS Lambda** and create a **new Ruby Lambda function**.  
 - Note the **Ruby version** used, as you'll need it locally.  
 - Use [rbenv](https://github.com/rbenv/rbenv) to manage the Ruby version locally:  
@@ -112,7 +120,7 @@ trusty_cms:
   rbenv local 3.3.0
   ```
 
-**4. Write the Lambda Function Code**  
+**5. Write the Lambda Function Code**  
 In your local development environment:  
 - Create a new folder and open it in your IDE.  
 - Save the following code in a file named `lambda_handler.rb`:  
@@ -140,7 +148,7 @@ def lambda_handler(event:, context:)
 end
 ```
 
-**5. Install Dependencies**  
+**6. Install Dependencies**  
 Run the following commands in your terminal:  
 ```bash
 gem install bundler
@@ -156,25 +164,25 @@ bundle config set --local path 'vendor/bundle'
 bundle install
 ```
 
-**6. Package the Lambda Function**  
+**7. Package the Lambda Function**  
 Archive your function and dependencies:  
 ```bash
 zip -r lambda_package.zip .
 ```
 
-**7. Upload to AWS Lambda**  
+**8. Upload to AWS Lambda**  
 - In **AWS Lambda**, open your function.  
 - Select **Upload From > .zip file**.  
 - Upload the `lambda_package.zip` file.  
 
-**8. Configure Environment Variables**  
+**9. Configure Environment Variables**  
 In the AWS Lambda Configuration: 
 - Go to **Environment Variables** > **Edit**.  
 - Add the following:  
   - `API_ENDPOINT`: `<your-url>/page-status/refresh`  
   - `BEARER_TOKEN`: `<your bearer token>`  
 
-**9. Set Up EventBridge Trigger**  
+**10. Set Up EventBridge Trigger**  
 - In **Configuration Settings > Triggers**, create a **new EventBridge Trigger**.  
 - Set the **Schedule** to match your desired **page status refresh frequency**.  
 
