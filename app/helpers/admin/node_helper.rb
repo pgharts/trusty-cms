@@ -1,19 +1,19 @@
 module Admin::NodeHelper
   def render_nodes(page, starting_index, parent_index = nil, simple = false)
     @rendered_html = ''
-    render_node page, starting_index, parent_index, simple
+    render_node(page, starting_index, parent_index, simple)
     @rendered_html
   end
 
   def render_node(page, index, parent_index = nil, simple = false)
     @current_node = prepare_page(page)
-    @rendered_html += render_partial(page, index:, parent_index:, simple:)
+    @rendered_html += render_partial(page, index, parent_index, simple)
     index
   end
 
   def render_search_node(page)
     @current_node = prepare_page(page)
-    @rendered_html = render_partial(page, index: 0, parent_index: nil, simple: false)
+    @rendered_html = render_partial(page, 0, nil, false)
   end
 
   def prepare_page(page)
@@ -95,7 +95,7 @@ module Admin::NodeHelper
 
   private
 
-  def render_partial(page, index:, parent_index:, simple:)
+  def render_partial(page, index, parent_index, simple)
     render partial: 'admin/pages/node',
            locals: {
              level: index,
