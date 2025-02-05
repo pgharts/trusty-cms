@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (7.0.11)
+    trusty-cms (7.0.14)
       RedCloth (= 4.3.3)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.3.0)

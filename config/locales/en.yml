@@ -234,6 +234,7 @@ en:
   parent_page: 'Parent Page'
   password: 'Password'
   password_confirmation: 'Confirm New Password'
+  path: 'Path'
   personal: 'Personal'
   personal_preferences: 'Personal Preferences'
   please_login: 'Please Login'

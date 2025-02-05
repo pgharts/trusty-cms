@@ -9,6 +9,8 @@
         - render_region :sitemap_head do |sitemap_head|
           - sitemap_head.title_column_header do
             %th.name= t('page')
+          - sitemap_head.path_column_header do
+            %th.path= t('path')
           - sitemap_head.status_column_header do
             %th.status= t('status')
           - sitemap_head.actions_column_header do

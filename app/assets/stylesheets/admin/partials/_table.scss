@@ -23,6 +23,10 @@ table {
       width: 100%;
     }
 
+    &.path {
+      min-width: 8em;
+    }
+
     &.status {
       min-width: 8em;
     }
