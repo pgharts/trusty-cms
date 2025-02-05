@@ -26,14 +26,14 @@ module Admin::NodeHelper
   end
 
   def format_path(path)
-    return "" if path.nil? || path.empty?
-  
+    return '' if path.nil? || path.empty?
+
     parts = path.split('/').reject(&:empty?)
-    return "Root" if parts.size == 1
-    return "/" if parts.size == 2
-  
+    return 'Root' if parts.size == 1
+    return '/' if parts.size == 2
+
     formatted_path = parts[1..-2].join('/')
-    formatted_path.empty? ? "/" : "/#{formatted_path}"
+    formatted_path.empty? ? '/' : "/#{formatted_path}"
   end
 
   def homepage
