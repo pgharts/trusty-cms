@@ -1,3 +1,4 @@
+- gtm_container_id = Rails.application.credentials&.dig(:trusty_cms, :gtm_container_id)
 <!DOCTYPE html>
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en", :class => "tablesaw-enhanced fontawesome-i2svg-active fontawesome-i2svg-complete" }
   %head
@@ -8,6 +9,19 @@
     - @stylesheets.uniq.each do |stylesheet|
       = stylesheet_link_tag stylesheet, media: "all"
 
+    - if gtm_container_id
+      %script{:type=>"text/javascript"}
+        :plain
+          (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', "#{gtm_container_id}");
     %script{:type=>"text/javascript"}
       var relative_url_root = "#{ActionController::Base.relative_url_root}";
 
@@ -30,6 +44,9 @@
     = csrf_meta_tags
 
   %body{:class=>body_classes.join(" ")}
+    - if gtm_container_id
+      %noscript
+        %iframe{src: "https://www.googletagmanager.com/ns.html?id=#{gtm_container_id}", height: "0", width: "0", style: "display:none;visibility:hidden"}
     #page.trusty-container
       %header
         - if logged_in?

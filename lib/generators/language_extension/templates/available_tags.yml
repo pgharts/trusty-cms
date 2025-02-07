@@ -107,7 +107,7 @@
 
       <pre><code><r&#58;children&#58;each [offset="number"] [limit="number"]
        [by="published_at|updated_at|created_at|slug|title|keywords|description"]
-       [order="asc|desc"] [status="draft|reviewed|published|hidden|all"]>
+       [order="asc|desc"] [status="draft|reviewed|scheduled|published|all"]>
        ...
       </r&#58;children&#58;each>
       </code></pre>

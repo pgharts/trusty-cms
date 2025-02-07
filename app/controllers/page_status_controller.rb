@@ -15,7 +15,7 @@ class PageStatusController < ApplicationController
 
   def authenticate_bearer_token
     provided_token = request.headers['Authorization']&.split(' ')&.last
-    expected_token = Rails.application.credentials[:trusty_cms][:page_status_bearer_token]
+    expected_token = Rails.application.credentials&.dig(:trusty_cms, :page_status_bearer_token)
 
     if provided_token.blank?
       render json: { error: 'Missing Bearer Token' }, status: :unauthorized and return
