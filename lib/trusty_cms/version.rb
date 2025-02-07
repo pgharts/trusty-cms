@@ -1,3 +1,3 @@
 module TrustyCms
-  VERSION = '7.0.13'.freeze
+  VERSION = '7.0.14'.freeze
 end

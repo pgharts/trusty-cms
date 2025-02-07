@@ -11,9 +11,9 @@ module Admin::NodeHelper
     index
   end
 
-  def render_search_node(page)
+  def render_search_node(page, index = 0, parent_index = nil, simple = false)
     @current_node = prepare_page(page)
-    @rendered_html = render_partial(page, index: 0, parent_index: nil, simple: false)
+    @rendered_html = render_search_partial(page, index:, parent_index:, simple:, path: format_path(page.path))
   end
 
   def prepare_page(page)
@@ -23,6 +23,17 @@ module Admin::NodeHelper
       page.extend(*page.menu_renderer_modules)
     end
     page
+  end
+
+  def format_path(path)
+    return '' if path.nil? || path.empty?
+
+    parts = path.split('/').reject(&:empty?)
+    return 'Root' if parts.size == 1
+    return '/' if parts.size == 2
+
+    formatted_path = parts[1..-2].join('/')
+    formatted_path.empty? ? '/' : "/#{formatted_path}"
   end
 
   def homepage
@@ -104,6 +115,19 @@ module Admin::NodeHelper
              page: page,
              simple: simple,
              branch: page.children.count.positive?,
+           }
+  end
+
+  def render_search_partial(page, index:, parent_index:, simple:, path:)
+    render partial: 'admin/pages/search_result_node',
+           locals: {
+             level: index,
+             index: index,
+             parent_index: parent_index,
+             page: page,
+             simple: simple,
+             branch: false,
+             path: path,
            }
   end
 end

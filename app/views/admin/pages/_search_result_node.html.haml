@@ -1,0 +1,25 @@
+%tr.page
+  - render_region :node, :locals => { :page => page, :level => level, :simple => simple, :path => path } do |node|
+    - node.title_column do
+      %td.name
+        %span.w1
+          - if simple
+            = node_title
+          - else
+            %i.far.fa-file
+            = (link_to("#{node_title}".html_safe, edit_admin_page_path(page), :title => page.path)).html_safe
+            = page_type
+            = spinner
+    - node.path_column do
+      %td.path
+        = path
+    - node.status_column do
+      - unless simple
+        %td.status
+          %span.status{ :class => "#{page.status.name.downcase}_status", :title => "#{timestamp(page.published_at) if page.published_at}" }= t(page.status.name.downcase)
+    - node.actions_column do
+      - unless simple
+        %td.actions
+          = page.add_child_option
+          - if current_user.editor? || current_user.admin?
+            = page.remove_option
