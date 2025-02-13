@@ -5,5 +5,6 @@
         = "Current Site: #{current_site.name}"
         %ul.expansion
           - current_user.sites.each do |site|
-            %li
-              = link_to( site.name, "#{request.path}?site_id=#{site.id}", :class => site == current_site ? 'fg site-link' : 'site-link')
+            - unless site.name == 'default_site'
+              %li
+                = link_to( site.name, "#{request.path}?site_id=#{site.id}", :class => site == current_site ? 'fg site-link' : 'site-link')
