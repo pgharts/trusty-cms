@@ -19,8 +19,10 @@ module Admin::PagesHelper
   end
 
   def parent_page_options(current_site, page)
-    parent_pages = Page.parent_pages(current_site.homepage_id)
-    selected_page_id = page.id.presence_in(parent_pages.pluck(:id)) || page.parent_id.presence_in(parent_pages.pluck(:id))
+    parent_pages = []
+    parent_pages.concat(Page.parent_pages(current_site.homepage_id))
+    parent_pages << page.parent if page.parent
+    selected_page_id = page.parent_id
     options_for_select(parent_pages.map { |p| [p.title, p.id] }, selected_page_id)
   end
 end
