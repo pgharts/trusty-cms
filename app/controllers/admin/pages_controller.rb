@@ -46,6 +46,7 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def edit
+    verify_site_id
     assets = Asset.order('created_at DESC')
     @term = assets.ransack(params[:search] || '')
     @term.result(distinct: true)
@@ -81,6 +82,13 @@ class Admin::PagesController < Admin::ResourceController
     @site ||= Page.current_site
     @homepage = @site&.homepage || Page.homepage
     @site_id = @site&.id
+  end
+
+  def verify_site_id
+    @site_id = params[:site_id]&.to_i
+    if @site_id == nil || @page&.site_id != @site_id
+      redirect_to admin_pages_url
+    end
   end
 
   def initialize_search
