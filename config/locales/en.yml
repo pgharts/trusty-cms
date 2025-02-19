@@ -322,6 +322,7 @@ en:
     days: "days"
     weeks: "weeks"
     months: "months"
+  url: 'URL'
   user: 'User'
   username: 'Username'
   username_or_email: 'Username or E-mail Address'

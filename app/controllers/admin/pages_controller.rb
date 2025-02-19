@@ -4,6 +4,7 @@ class Admin::PagesController < Admin::ResourceController
   before_action :set_page, only: %i[edit restore]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
   include Admin::PagesHelper
+  include Admin::UrlHelper
 
   class PreviewStop < ActiveRecord::Rollback
     def message
@@ -47,6 +48,7 @@ class Admin::PagesController < Admin::ResourceController
 
   def edit
     assets = Asset.order('created_at DESC')
+    @page_url = generate_page_url(request.url, @page)
     @term = assets.ransack(params[:search] || '')
     @term.result(distinct: true)
     @versions = format_versions(@page.versions)
