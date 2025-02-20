@@ -1,5 +1,5 @@
 %tr
   %th.label
-    %label{:for=>"page_path"}= t('url')
+    %label{:for=>"page_url"}= t('url')
   %td.field
-    = text_field_tag "page[path]", page_url, :id => "page_path_content", :class => 'textbox', :maxlength => 200, disabled: true
+    = text_field_tag "page[url]", page_url, :id => "page_url_content", :class => 'textbox', :maxlength => 200, disabled: true

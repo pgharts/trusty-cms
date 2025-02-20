@@ -49,6 +49,7 @@ class Admin::PagesController < Admin::ResourceController
   def edit
     assets = Asset.order('created_at DESC')
     @page_url = generate_page_url(request.url, @page)
+    @page_path = @page.path
     @term = assets.ransack(params[:search] || '')
     @term.result(distinct: true)
     @versions = format_versions(@page.versions)

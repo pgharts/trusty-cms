@@ -12,13 +12,17 @@ module Admin::UrlHelper
     return unless page&.respond_to?(:slug)
 
     base_url = extract_base_url(url)
-    path = lookup_page_path(page)
 
-    path ? "#{base_url}/#{path}/#{page.slug}" : nil
+    if page.class.name == "Page"
+      return "#{base_url}#{page.path}"
+    else
+      path = lookup_page_path(page)
+      path ? "#{base_url}/#{path}/#{page.slug}" : nil
+    end
   end
 
   def lookup_page_path(page)
-    PAGE_TYPES[page.class_name.to_sym]
+    PAGE_TYPES[page.class.name.to_sym]
   end
 
   private
@@ -32,6 +36,7 @@ module Admin::UrlHelper
     MultiViewPage: "multiview",
     NonTicketedEventPage: "event",
     PackagePage: "package",
+    PersonPage: 'biography',
     ProductionPage: "production",
     RegistrationEventPage: "registration",
     RenewalPage: "package/renewal",

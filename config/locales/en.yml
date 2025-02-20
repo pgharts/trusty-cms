@@ -270,6 +270,7 @@ en:
   saving_changes: Saving Changes
   saving_preferences: Saving preferences
   scheduled: "Scheduled"
+  search: 'Search'
   search_tags: 'Search Tags:'
   select:
     default: '<default>'
