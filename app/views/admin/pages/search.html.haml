@@ -2,7 +2,7 @@
 
 .outset
   = render_region :top
-  = render 'search_form', title: @title, show_view_all_button: true
+  = render 'search_form', query: @query, show_view_all_button: true
   %table.index.tablesaw#pages{ :summary => t('page_hierarchy') }
     %thead
       %tr
