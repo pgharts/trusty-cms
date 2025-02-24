@@ -7,7 +7,7 @@
             = node_title
           - else
             %i.far.fa-file
-            = (link_to("#{node_title}".html_safe, edit_admin_page_path(page), :title => page.path)).html_safe
+            = (link_to("#{node_title}".html_safe, edit_admin_page_path(page, site_id: page.site_id), :title => page.path)).html_safe
             = page_type
             = spinner
     - node.status_column do

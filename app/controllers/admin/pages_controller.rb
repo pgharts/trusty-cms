@@ -46,9 +46,8 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def edit
-    assets = Asset.order('created_at DESC')
-    @term = assets.ransack(params[:search] || '')
-    @term.result(distinct: true)
+    verify_site_id
+    load_assets
     @versions = format_versions(@page.versions)
     response_for :edit
   end
@@ -81,6 +80,19 @@ class Admin::PagesController < Admin::ResourceController
     @site ||= Page.current_site
     @homepage = @site&.homepage || Page.homepage
     @site_id = @site&.id
+  end
+
+  def verify_site_id
+    @site_id = params[:site_id]&.to_i
+    unless @site_id && @page&.site_id == @site_id
+      redirect_to admin_pages_url
+    end
+  end
+
+  def load_assets
+    assets = Asset.order(created_at: :desc)
+    @term = assets.ransack(params[:search].presence || {})
+    @term.result(distinct: true)
   end
 
   def initialize_search
