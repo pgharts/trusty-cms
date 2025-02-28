@@ -25,9 +25,9 @@ module Admin::UrlHelper
   end
 
   def lookup_page_path(page)
-    # Use the globally defined PAGE_TYPES from the parent application
-    return nil unless defined?(PAGE_TYPES) && PAGE_TYPES.is_a?(Hash)
+    # Use the globally defined PAGE_TYPE_ROUTES from the parent application
+    return nil unless defined?(PAGE_TYPE_ROUTES) && PAGE_TYPE_ROUTES.is_a?(Hash)
 
-    PAGE_TYPES[page.class.name.to_sym]
+    PAGE_TYPE_ROUTES[page.class.name.to_sym]
   end
 end
