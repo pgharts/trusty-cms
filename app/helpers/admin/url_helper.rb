@@ -25,20 +25,9 @@ module Admin::UrlHelper
   end
 
   def lookup_page_path(page)
+    # Use the globally defined PAGE_TYPES from the parent application
+    return nil unless defined?(PAGE_TYPES) && PAGE_TYPES.is_a?(Hash)
+
     PAGE_TYPES[page.class.name.to_sym]
   end
-
-  PAGE_TYPES = {
-    BlogPage: 'blog',
-    DonationPage: 'donate',
-    ExhibitionPage: 'exhibit',
-    FlexPackagePage: 'flex_package',
-    MembershipPage: 'membership',
-    MultiViewPage: 'multiview',
-    NonTicketedEventPage: 'event',
-    PersonPage: 'biography',
-    ProductionPage: 'production',
-    RegistrationEventPage: 'registration',
-    SimpleDonationPage: 'donationfeed',
-  }.freeze
 end
