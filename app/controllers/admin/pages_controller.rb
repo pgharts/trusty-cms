@@ -3,7 +3,9 @@ class Admin::PagesController < Admin::ResourceController
   before_action :count_deleted_pages, only: [:destroy]
   before_action :set_page, only: %i[edit restore]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
+  include Admin::NodeHelper
   include Admin::PagesHelper
+  include Admin::UrlHelper
 
   class PreviewStop < ActiveRecord::Rollback
     def message
@@ -33,7 +35,7 @@ class Admin::PagesController < Admin::ResourceController
     @site_id = params[:site_id] || Page.current_site.id
     @q = initialize_search
 
-    @pages = fetch_search_results if search_title_present?
+    @pages = fetch_search_results if search_query_present?
     render
   end
 
@@ -48,6 +50,8 @@ class Admin::PagesController < Admin::ResourceController
   def edit
     verify_site_id
     load_assets
+    @page_url = generate_page_url(request.url, @page)
+    @page_path = format_path(@page.path)
     @versions = format_versions(@page.versions)
     response_for :edit
   end
@@ -100,12 +104,13 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def fetch_search_results
-    @title = params.dig(:search, :title)
-    Page.ransack(title_cont: @title, site_id_eq: @site_id).result
+    @query = params.dig(:search, :query)
+    Page.ransack(title_cont: @query, site_id_eq: @site_id).result
+      .or(Page.ransack(slug_cont: @query, site_id_eq: @site_id).result)
   end
 
-  def search_title_present?
-    params.dig(:search, :title).present?
+  def search_query_present?
+    params.dig(:search, :query).present?
   end
 
   def validation_error(e)

@@ -77,6 +77,25 @@ Steps:
 
         rspec
 
+### Page Type Routes Setup
+If your TrustyCMS project includes custom Page models, additional configuration is required to ensure proper URL formatting in the Admin interface. This setup allows TrustyCMS to determine the live URL of a page while editing, and to display it conveniently in the Edit Page dropdown menu.
+
+To enable this, create the following initializer file: `config/initializers/page_type_routes.rb`
+
+```ruby
+PAGE_TYPE_ROUTES = {
+  BlogPage: 'blog',
+  DonationPage: 'donate',
+  ExhibitionPage: 'exhibit',
+  NonTicketedEventPage: 'event',
+  PackagePage: 'package',
+  PersonPage: 'biography',
+  ProductionPage: 'production',
+  VenuePage: 'venues',
+}.freeze
+```
+
+This `PAGE_TYPE_ROUTES` constant maps custom Page model names to their corresponding route segments as defined in `config/routes.rb`. TrustyCMS will use these mappings to generate URLs for pages in the admin interface.
 
 ### Page Status Refresh Setup
 

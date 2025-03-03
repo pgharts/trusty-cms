@@ -156,7 +156,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ['site_id', 'title']
+    ['site_id', 'title', 'slug']
   end
 
   def self.parent_pages(homepage_id)
