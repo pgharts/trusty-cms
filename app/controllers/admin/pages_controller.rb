@@ -87,8 +87,9 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def verify_site_id
-    @site_id = params[:site_id]&.to_i
-    unless @site_id && @page&.site_id == @site_id
+    page_site_id = @page.site_id
+    user_site_ids = current_user.admins_sites.each.pluck(:site_id)
+    unless user_site_ids.include?(page_site_id)
       redirect_to admin_pages_url
     end
   end

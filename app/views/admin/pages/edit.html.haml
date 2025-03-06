@@ -6,5 +6,6 @@
   - main.edit_form do
     = form_for @page, :as => :page, :url => admin_page_path(@page), :html => {:method => :put, :multipart => true, :id => 'edit_page', 'data-onsubmit_status'=>t('saving_changes')} do |fields|
       = render :partial => 'fields', :object => fields
+    = render :partial => 'previous_versions'
   - main.edit_popups do
     = render :partial => 'popups'
