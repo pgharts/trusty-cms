@@ -33,9 +33,6 @@
         = render :partial => 'admin/page_parts/page_part', :collection => @page.parts
     = render_region :parts_bottom, :locals => {:f => fields}
 
-#previous-versions
-  = render :partial => 'admin/pages/previous_versions'
-
 .set
   - render_region :layout, :locals => {:f => fields} do |layout|
     - layout.edit_layout do
