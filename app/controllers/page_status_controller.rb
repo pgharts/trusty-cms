@@ -33,7 +33,9 @@ class PageStatusController < ApplicationController
     pages.each do |page|
       page_id = page.id
       published_at = page.published_at
-      if published_at && published_at <= Time.now
+
+      # Publish the page if its scheduled publish date is today or earlier
+      if published_at && published_at.beginning_of_day <= Time.now
         page.update(status_id: Status[:published].id)
         updated_pages << page_id
       else
