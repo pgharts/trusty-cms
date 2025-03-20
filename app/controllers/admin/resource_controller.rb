@@ -36,13 +36,13 @@ class Admin::ResourceController < ApplicationController
     r.stale.default { announce_update_conflict; render action: template_name }
 
     r.create.publish(:xml, :json) { render format_symbol => model, :status => :created, :location => url_for(format: format_symbol, id: model) }
-    r.create.default { redirect_to continue_url(params) }
+    r.create.default { redirect_to redirect_url }
 
     r.update.publish(:xml, :json) { head :ok }
-    r.update.default { redirect_to continue_url(params) }
+    r.update.default { redirect_to redirect_url }
 
     r.destroy.publish(:xml, :json) { head :deleted }
-    r.destroy.default { redirect_to continue_url(params) }
+    r.destroy.default { redirect_to redirect_url }
   end
 
   def index
@@ -201,8 +201,11 @@ class Admin::ResourceController < ApplicationController
     t(model_name.underscore.downcase)
   end
 
-  def continue_url(options)
-    options[:redirect_to] || (params[:continue] ? { action: 'edit', id: model.id } : index_page_for_model)
+  def redirect_url
+    return edit_admin_page_url(model) if params[:continue]
+    return "#{edit_admin_page_url(model)}?view_page=true" if params[:save_and_view]
+
+    admin_pages_url(:site_id => model.site.id)
   end
 
   def index_page_for_model

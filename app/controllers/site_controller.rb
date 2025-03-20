@@ -78,8 +78,7 @@ class SiteController < ApplicationController
   end
 
   def find_page(url)
-    found = Page.find_by_path(url, live?)
-    found if found && (found.published? || dev?)
+    can_view_drafts? ? Page.find_by_path(url, false) : Page.find_by_path(url, live?)
   end
 
   def process_page(page)
@@ -88,10 +87,14 @@ class SiteController < ApplicationController
   end
 
   def dev?
-    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./
+    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./ #|| request.host =~ /\.localhost/
   end
 
   def live?
     not dev?
+  end
+
+  def can_view_drafts?
+    user_signed_in? && (current_user[:admin] || current_user[:designer] || current_user[:content_editor])
   end
 end
