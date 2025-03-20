@@ -76,7 +76,7 @@
       = save_model_and_view_page_button(@page)
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
-    #redirect-url-data{ data: { url: @redirect_url } }
+    #view-page-url-data{ data: { url: @view_page_url } }
   - form_bottom.edit_timestamp do
     = updated_stamp @page
 
@@ -84,7 +84,7 @@
 :javascript
   document.addEventListener("DOMContentLoaded", function() {
     let params = new URLSearchParams(window.location.search);
-    let dataDiv = document.getElementById("redirect-url-data");
+    let dataDiv = document.getElementById("view-page-url-data");
 
     if (params.get("view_page") === "true" && dataDiv) {
       let newTabUrl = dataDiv.dataset.url;
