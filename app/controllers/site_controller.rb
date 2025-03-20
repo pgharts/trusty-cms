@@ -87,7 +87,7 @@ class SiteController < ApplicationController
   end
 
   def dev?
-    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./ #|| request.host =~ /\.localhost/
+    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./
   end
 
   def live?

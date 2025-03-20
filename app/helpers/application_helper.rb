@@ -45,9 +45,7 @@ module ApplicationHelper
   def save_model_and_view_page_button(model, options = {})
     return nil unless generate_page_url(request.url, model)
 
-    options[:label] ||= model.published? ?
-        t('buttons.save_and_view_page') :
-        t('buttons.save_and_view_draft')
+    options[:label] ||= model.published? ? t('buttons.save_and_view_page') : t('buttons.save_and_view_draft')
     options[:class] ||= 'button'
     options[:name] ||= 'save_and_view'
     options[:id] ||= 'save-and-view-button'

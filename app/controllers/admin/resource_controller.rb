@@ -205,7 +205,7 @@ class Admin::ResourceController < ApplicationController
     return edit_admin_page_url(model) if params[:continue]
     return "#{edit_admin_page_url(model)}?view_page=true" if params[:save_and_view]
 
-    admin_pages_url(:site_id => model.site.id)
+    admin_pages_url(site_id: model.site.id)
   end
 
   def index_page_for_model

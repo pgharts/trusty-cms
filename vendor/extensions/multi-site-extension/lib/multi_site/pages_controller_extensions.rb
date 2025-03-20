@@ -10,7 +10,7 @@ module MultiSite::PagesControllerExtensions
       alias_method :remove, :remove_with_back
       responses.destroy.default do
         session[:came_from] = nil
-        redirect_to admin_pages_url(:site_id => model.site.id)
+        redirect_to admin_pages_url(site_id: model.site.id)
       end
     }
   end
