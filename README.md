@@ -86,7 +86,7 @@ In this file, define a `CUSTOM_PAGE_TYPE_ROUTES` hash constant that maps custom 
 
 For example, the BlogPage type below maps to the route `get 'blog/:slug'`, so its route segment is `'blog'`.
 
-For custom Page models that rely on default routing behavior, define a `DEFAULT_PAGE_TYPES_ROUTES` array listing their class names. TrustyCMS will use these mappings to correctly build page URLs for use in the admin UI.
+For custom Page models that rely on default routing behavior, define a `DEFAULT_PAGE_TYPE_ROUTES` array listing their class names. TrustyCMS will use these mappings to correctly build page URLs for use in the admin UI.
 
 ```ruby
 CUSTOM_PAGE_TYPE_ROUTES = {
@@ -100,7 +100,7 @@ CUSTOM_PAGE_TYPE_ROUTES = {
   VenuePage: 'venues',
 }.freeze
 
-DEFAULT_PAGE_TYPES_ROUTES = %w[
+DEFAULT_PAGE_TYPE_ROUTES = %w[
   ConstituencyPage
   FacilityPage
   FileNotFoundPage

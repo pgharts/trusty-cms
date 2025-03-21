@@ -26,7 +26,7 @@ module Admin::UrlHelper
 
   def default_route?(page)
     page_class_name = page.class.name
-    page_class_name == 'Page' || (defined?(DEFAULT_PAGE_TYPES_ROUTES) && DEFAULT_PAGE_TYPES_ROUTES.include?(page_class_name))
+    page_class_name == 'Page' || (defined?(DEFAULT_PAGE_TYPE_ROUTES) && DEFAULT_PAGE_TYPE_ROUTES.include?(page_class_name))
   end
 
   def lookup_page_path(page)
