@@ -41,7 +41,7 @@ class SiteController < ApplicationController
   end
 
   def cacheable_request?
-    (request.head? || request.get?) && live?
+    (request.head? || request.get?) && !Rails.env.development?
   end
 
   # hide_action :cacheable_request?
@@ -78,20 +78,12 @@ class SiteController < ApplicationController
   end
 
   def find_page(url)
-    can_view_drafts? ? Page.find_by_path(url, false) : Page.find_by_path(url, live?)
+    Page.find_by_path(url, can_view_drafts?)
   end
 
   def process_page(page)
     page.pagination_parameters = pagination_parameters
     page.process(request, response)
-  end
-
-  def dev?
-    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./
-  end
-
-  def live?
-    not dev?
   end
 
   def can_view_drafts?

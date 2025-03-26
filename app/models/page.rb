@@ -201,21 +201,21 @@ class Page < ActiveRecord::Base
     parse_object(snippet)
   end
 
-  def find_by_path(path, live = true, clean = true)
+  def find_by_path(path, can_view_drafts = false, clean = true)
     return nil if virtual?
 
     path = clean_path(path) if clean
     my_path = self.path
-    if (my_path == path) && ((not live) || published?)
+    if (my_path == path) && (can_view_drafts || published?)
       return self
     elsif path =~ /^#{Regexp.quote(my_path)}([^\/]*)/
       slug_child = children.find_by_slug($1)
       if slug_child
-        found = slug_child.find_by_path(path, live, clean)
+        found = slug_child.find_by_path(path, can_view_drafts, clean)
         return found if found
       end
       children.each do |child|
-        found = child.find_by_path(path, live, clean)
+        found = child.find_by_path(path, can_view_drafts, clean)
         return found if found
       end
     end
@@ -251,10 +251,10 @@ class Page < ActiveRecord::Base
       find_by_parent_id(nil)
     end
 
-    def find_by_path(path, live = true)
+    def find_by_path(path, can_view_drafts = false)
       raise MissingRootPageError unless root
 
-      root.find_by_path(path, live)
+      root.find_by_path(path, can_view_drafts)
     end
 
     def date_column_names

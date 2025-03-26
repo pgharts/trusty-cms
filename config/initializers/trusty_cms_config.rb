@@ -1,7 +1,6 @@
 Rails.application.reloader.to_prepare do
   TrustyCms.config do |config|
     config.define 'admin.title', default: 'TrustyCms CMS'
-    config.define 'dev.host'
     config.define 'local.timezone', allow_change: true, select_from: lambda { ActiveSupport::TimeZone::MAPPING.keys.sort }
     config.define 'defaults.locale', select_from: lambda { TrustyCms::AvailableLocales.locales }, allow_blank: true
     config.define 'defaults.page.parts', default: 'Body,Extended'

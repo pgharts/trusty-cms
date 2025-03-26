@@ -13,11 +13,11 @@ module MultiSite::PageExtensions
     base.extend ClassMethods
     class << base
 
-      def find_by_path(path, live=true)
+      def find_by_path(path, can_view_drafts = false)
         root = homepage
         raise Page::MissingRootPageError unless root
         path = root.path if clean_path(path) == "/"
-        result = root.find_by_path(path, live)
+        result = root.find_by_path(path, can_view_drafts)
 
         # If the result is a FileNotFoundPage and it
         # doesn't match the current site, try to find one that does.
