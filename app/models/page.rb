@@ -224,7 +224,7 @@ class Page < ActiveRecord::Base
       file_not_found_types = ([FileNotFoundPage] + FileNotFoundPage.descendants)
       file_not_found_names = file_not_found_types.collect { |x| x.name }
       condition = (['class_name = ?'] * file_not_found_names.length).join(' or ')
-      condition = "status_id = #{Status[:published].id} and (#{condition})" if live
+      condition = "status_id = #{Status[:published].id} and (#{condition})" unless can_view_drafts
       return children.where([condition] + file_not_found_names).first
     end
     slug_child
