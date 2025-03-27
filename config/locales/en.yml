@@ -52,6 +52,8 @@ en:
   buttons:
     create: 'Create %{name}'
     save_and_continue: 'Save and Continue Editing'
+    save_and_view_draft: 'Save and View Draft'
+    save_and_view_page: 'Save and View Page'
     save_changes: 'Save Changes'
   cancel: 'Cancel'
   change: 'Change'

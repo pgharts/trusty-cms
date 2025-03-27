@@ -73,12 +73,23 @@
     .page-actions
       = save_model_button(@page)
       = save_model_and_continue_editing_button(@page)
-      = submit_tag(t('preview', :default => 'Preview'), :class => 'button', :id => 'show-preview')
+      = save_model_and_view_page_button(@page)
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
-    #preview_panel.fullcover.grey_out{:style => 'display: none;'}
-      %iframe{:id => 'page-preview', :class => 'fullcover', :name => 'page-preview', :src =>  ActionController::Base.relative_url_root.to_s + '/loading-iframe.html', :frameborder => 0, :scrolling => 'auto'}
-      .preview_tools
-        =link_to(t('edit_page'), {}, :class => 'button cancel')
+    #view-page-url-data{ data: { url: @view_page_url } }
   - form_bottom.edit_timestamp do
     = updated_stamp @page
+
+-# Opens a new tab with the page URL when "Save and View Page" is selected
+:javascript
+  document.addEventListener("DOMContentLoaded", function() {
+    let params = new URLSearchParams(window.location.search);
+    let dataDiv = document.getElementById("view-page-url-data");
+
+    if (params.get("view_page") === "true" && dataDiv) {
+      let newTabUrl = dataDiv.dataset.url;
+      if (newTabUrl) {
+        window.open(newTabUrl, '_blank');
+      }
+    }
+  });

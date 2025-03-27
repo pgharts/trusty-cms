@@ -41,7 +41,7 @@ class SiteController < ApplicationController
   end
 
   def cacheable_request?
-    (request.head? || request.get?) && live?
+    (request.head? || request.get?) && !Rails.env.development?
   end
 
   # hide_action :cacheable_request?
@@ -78,8 +78,7 @@ class SiteController < ApplicationController
   end
 
   def find_page(url)
-    found = Page.find_by_path(url, live?)
-    found if found && (found.published? || dev?)
+    Page.find_by_path(url, can_view_drafts?)
   end
 
   def process_page(page)
@@ -87,11 +86,7 @@ class SiteController < ApplicationController
     page.process(request, response)
   end
 
-  def dev?
-    request.host == @trusty_config['dev.host'] || request.host =~ /^dev\./
-  end
-
-  def live?
-    not dev?
+  def can_view_drafts?
+    user_signed_in? # CMS users can view drafts
   end
 end
