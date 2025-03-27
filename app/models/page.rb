@@ -206,7 +206,7 @@ class Page < ActiveRecord::Base
 
     path = clean_path(path) if clean
     my_path = self.path
-    if (my_path == path) && (can_view_drafts || published?)
+    if (my_path == path) && (published? || can_view_drafts)
       return self
     elsif path =~ /^#{Regexp.quote(my_path)}([^\/]*)/
       slug_child = children.find_by_slug($1)
