@@ -1,13 +1,18 @@
 module Admin::UrlHelper
   require 'uri'
 
+  def generate_page_url(url, page)
+    base_url = extract_base_url(url)
+    build_url(base_url, page)
+  end
+
   def build_url(base_url, page)
-    if page.class.name == 'Page'
-      "#{base_url}#{page.path}"
-    else
-      path = lookup_page_path(page)
-      path ? "#{base_url}/#{path}/#{page.slug}" : nil
-    end
+    return "#{base_url}#{page.path}" if default_route?(page)
+
+    path = lookup_page_path(page)
+    return nil unless path
+
+    "#{base_url}/#{path}/#{page.slug}"
   end
 
   def extract_base_url(url)
@@ -19,15 +24,14 @@ module Admin::UrlHelper
     "#{scheme}://#{host}"
   end
 
-  def generate_page_url(url, page)
-    base_url = extract_base_url(url)
-    build_url(base_url, page)
+  def default_route?(page)
+    page_class_name = page.class.name
+    page_class_name == 'Page' || (defined?(DEFAULT_PAGE_TYPE_ROUTES) && DEFAULT_PAGE_TYPE_ROUTES.include?(page_class_name))
   end
 
   def lookup_page_path(page)
-    # Use the globally defined PAGE_TYPE_ROUTES from the parent application
-    return nil unless defined?(PAGE_TYPE_ROUTES) && PAGE_TYPE_ROUTES.is_a?(Hash)
+    return nil unless defined?(CUSTOM_PAGE_TYPE_ROUTES) && CUSTOM_PAGE_TYPE_ROUTES.is_a?(Hash)
 
-    PAGE_TYPE_ROUTES[page.class.name.to_sym]
+    CUSTOM_PAGE_TYPE_ROUTES[page.class.name.to_sym]
   end
 end
