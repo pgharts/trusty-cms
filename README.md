@@ -78,13 +78,11 @@ Steps:
         rspec
 
 ### Custom Page Type Routes Setup
-If your TrustyCMS project includes custom routing and `Page` models, additional configuration is required to ensure correct URL generation in the admin interface — specifically for the "Edit Page" dropdown and the "Save and View Page" functionality.
+Additional configuration is required to ensure correct URL generation in the admin interface — specifically for the "Edit Page" dropdown and the "Save and View Draft" functionality.
 
 To enable this, create the following initializer: `config/initializers/page_type_routes.rb`
 
-In this file, define a `CUSTOM_PAGE_TYPE_ROUTES` hash constant that maps custom Page model class names to the corresponding route segments defined in your `config/routes.rb` file.
-
-For example, the BlogPage type below maps to the route `get 'blog/:slug'`, so its route segment is `'blog'`.
+In this file, define a `CUSTOM_PAGE_TYPE_ROUTES` hash constant that maps custom Page model class names to the corresponding route segments defined in your `config/routes.rb` file. For example, the BlogPage model maps to the route `get 'blog/:slug'`, so its route segment is `'blog'`.
 
 For custom Page models that rely on default routing behavior, define a `DEFAULT_PAGE_TYPE_ROUTES` array listing their class names. TrustyCMS will use these mappings to correctly build page URLs for use in the admin UI.
 
