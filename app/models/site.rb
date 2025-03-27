@@ -63,13 +63,6 @@ class Site < ActiveRecord::Base
     uri.to_s
   end
 
-  # Returns the fully specified web address for the development version of this site and the supplied path, or the root of this site if no path is given.
-
-  def dev_url(path = '/')
-    uri = URI.join("http://#{TrustyCms::Config['dev.host'] || 'dev'}.#{base_domain}", path)
-    uri.to_s
-  end
-
   def create_homepage
     if homepage_id.blank?
       self.homepage = build_homepage(title: "#{name} Homepage",

@@ -711,7 +711,6 @@ module StandardTags
   tag 'find' do |tag|
     required_attr(tag, 'path', 'url')
     path = tag.attr['path'] || tag.attr['url']
-
     found = Page.find_by_path(absolute_path_for(tag.locals.page.path, path))
     if page_found?(found)
       tag.locals.page = found
@@ -903,12 +902,6 @@ module StandardTags
   tag 'site:host' do |_tag|
     TrustyCms::Config['site.host']
   end
-  desc %{
-    Returns TrustyCms::Config['dev.host'] as configured under the Settings tab.
-  }
-  tag 'site:dev_host' do |_tag|
-    TrustyCms::Config['dev.host']
-  end
 
   tag 'meta' do |tag|
     if tag.double?
@@ -1012,7 +1005,7 @@ module StandardTags
     end
     options[:order] = order_string
 
-    status = (attr[:status] || (dev?(tag.globals.page.request) ? 'all' : 'published')).downcase
+    status = attr[:status]
     if status == 'all'
       options[:conditions] = ['virtual = ?', false]
     else
@@ -1107,15 +1100,5 @@ module StandardTags
   def required_attr(tag, *attribute_names)
     attr_collection = attribute_names.map { |a| "`#{a}'" }.join(' or ')
     raise TagError.new("`#{tag.name}' tag must contain a #{attr_collection} attribute.") if (tag.attr.keys & attribute_names).blank?
-  end
-
-  def dev?(request)
-    return false if request.nil?
-
-    if dev_host = TrustyCms::Config['dev.host']
-      dev_host == request.host
-    else
-      request.host =~ /^dev\./
-    end
   end
 end

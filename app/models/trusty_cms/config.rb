@@ -50,7 +50,6 @@ module TrustyCms
     # defaults.page.filter      :: the default filter to use on new page parts
     # defaults.page.fields      :: a comma separated list of the default page fields
     # defaults.snippet.filter   :: the default filter to use on new snippets
-    # dev.host                  :: the hostname where draft pages are viewable
     # local.timezone            :: the timezone name (`rake -D time` for full list)
     #                              used to correct displayed times
     # page.edit.published_date? :: when true, shows the datetime selector
@@ -139,7 +138,7 @@ module TrustyCms
       end
 
       def site_settings
-        @site_settings ||= %w{site.title site.host dev.host local.timezone}
+        @site_settings ||= %w{site.title site.host local.timezone}
       end
 
       def default_settings

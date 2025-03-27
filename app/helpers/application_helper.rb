@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Admin::RegionsHelper
+  include Admin::UrlHelper
 
   def trusty_config
     TrustyCms::Config
@@ -39,6 +40,16 @@ module ApplicationHelper
 
   def save_model_and_continue_editing_button(_model)
     submit_tag t('buttons.save_and_continue'), name: 'continue', class: 'button', accesskey: 's', id: 'save-and-continue-button'
+  end
+
+  def save_model_and_view_page_button(model, options = {})
+    return nil unless generate_page_url(request.url, model)
+
+    options[:label] ||= model.published? ? t('buttons.save_and_view_page') : t('buttons.save_and_view_draft')
+    options[:class] ||= 'button'
+    options[:name] ||= 'save_and_view'
+    options[:id] ||= 'save-and-view-button'
+    submit_tag options.delete(:label), options
   end
 
   def current_item?(item)
