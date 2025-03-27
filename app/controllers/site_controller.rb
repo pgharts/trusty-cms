@@ -87,6 +87,6 @@ class SiteController < ApplicationController
   end
 
   def can_view_drafts?
-    user_signed_in? && (current_user[:admin] || current_user[:designer] || current_user[:content_editor])
+    user_signed_in? # CMS users can view drafts
   end
 end
