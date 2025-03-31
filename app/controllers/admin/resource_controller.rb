@@ -202,19 +202,9 @@ class Admin::ResourceController < ApplicationController
   end
 
   def redirect_url
-    return edit_admin_page_url(model) if params[:continue]
     return "#{edit_admin_page_url(model)}?view_page=true" if params[:save_and_view]
 
-    admin_pages_url(site_id: model.site.id)
-  end
-
-  def index_page_for_model
-    parts = { action: 'index' }
-    if paginated? && model && i = model_class.all.index(model)
-      p = (i / pagination_parameters[:per_page].to_i) + 1
-      parts[:p] = p if p && p > 1
-    end
-    parts
+    params[:continue] ? { action: 'edit', id: model.id } : { action: 'index' }
   end
 
   def edit_model_path
