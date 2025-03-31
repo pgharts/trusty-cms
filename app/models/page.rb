@@ -119,11 +119,8 @@ class Page < ActiveRecord::Base
   end
 
   def path
-    if parent?
-      parent.child_path(self)
-    else
-      clean_path(slug)
-    end
+    return '' if slug.blank?
+    parent? ? parent.child_path(self) : clean_path(slug)
   end
 
   alias_method :url, :path
