@@ -120,7 +120,7 @@ class Page < ActiveRecord::Base
 
   def path
     return '' if slug.blank?
-  
+
     parent? ? parent.child_path(self) : clean_path(slug)
   end
 
