@@ -203,6 +203,7 @@ class Admin::ResourceController < ApplicationController
 
   def redirect_url
     return "#{edit_admin_page_url(model)}?view_page=true" if params[:save_and_view]
+
     params[:continue] ? { action: 'edit', id: model.id } : { action: 'index' }
   end
 
