@@ -76,7 +76,7 @@
       = save_model_and_view_page_button(@page)
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
-    #view-page-url-data{ data: { url: @view_page_url } }
+    #view-page-url-data{ data: { url: @page_url } }
   - form_bottom.edit_timestamp do
     = updated_stamp @page
 

@@ -2,7 +2,6 @@ class Admin::PagesController < Admin::ResourceController
   before_action :initialize_meta_rows_and_buttons, only: %i[new edit create update]
   before_action :count_deleted_pages, only: [:destroy]
   before_action :set_page, only: %i[edit restore]
-  before_action :generate_view_page_url, only: [:edit]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
   include Admin::NodeHelper
   include Admin::PagesHelper
@@ -73,10 +72,6 @@ class Admin::PagesController < Admin::ResourceController
 
   def set_page
     @page = Page.find(params[:id])
-  end
-
-  def generate_view_page_url
-    @view_page_url = generate_page_url(request.url, @page)
   end
 
   def set_site_and_homepage
