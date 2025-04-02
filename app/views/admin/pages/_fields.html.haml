@@ -83,13 +83,15 @@
 -# Opens a new tab with the page URL when "Save and View Page" is selected
 :javascript
   document.addEventListener("DOMContentLoaded", function() {
-    let params = new URLSearchParams(window.location.search);
-    let dataDiv = document.getElementById("view-page-url-data");
+    const params = new URLSearchParams(window.location.search);
+    const dataDiv = document.getElementById("view-page-url-data");
+    const baseUrl = dataDiv?.dataset?.url;
 
-    if (params.get("view_page") === "true" && dataDiv) {
-      let newTabUrl = dataDiv.dataset.url;
-      if (newTabUrl) {
-        window.open(newTabUrl, '_blank');
-      }
+    if (params.get("view_page") === "true" && baseUrl) {
+      const now = new Date().toISOString();
+      const separator = baseUrl.includes("?") ? "&" : "?";
+      const newTabUrl = `${baseUrl}${separator}trusty-no-cache=${encodeURIComponent(now)}`;
+      window.open(newTabUrl, '_blank');
     }
   });
+

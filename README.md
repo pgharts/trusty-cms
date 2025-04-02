@@ -106,6 +106,11 @@ DEFAULT_PAGE_TYPE_ROUTES = %w[
 ].freeze
 ```
 
+### Save and View Draft Caching
+To ensure that pages and drafts under development are not cached by the browser or content delivery networks (such as CloudFront), the CMS appends a `trusty-no-cache` URL parameter containing the current date and time when a user selects **Save and View Draft** or **Save and View Page**.
+
+Because the `trusty-no-cache` parameter is always unique, it effectively bypasses caching mechanisms at both the CDN and browser levels, ensuring the user receives the most up-to-date version of the content with every request.
+
 ### Page Status Refresh Setup
 
 To ensure **Scheduled Pages** automatically update their status to **Published** after their designated **Publish Date & Time**, follow these steps to set up an automated refresh using **AWS Lambda** and **EventBridge**.  
