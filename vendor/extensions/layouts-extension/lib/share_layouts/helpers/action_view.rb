@@ -40,6 +40,8 @@ module ShareLayouts
               page.is_a?(RailsPage) ? page : RailsPage.new(:class_name => "RailsPage")
             end
 
+            private
+
             def can_view_drafts?
               user_signed_in? # CMS users can view drafts
             end
