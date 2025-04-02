@@ -109,7 +109,7 @@ DEFAULT_PAGE_TYPE_ROUTES = %w[
 ### Save and View Draft Caching
 To ensure that pages and drafts under development are not cached by the browser or content delivery networks (such as CloudFront), the CMS appends a `trusty-no-cache` URL parameter containing the current date and time when a user selects **Save and View Draft** or **Save and View Page**.
 
-Because the `trusty-no-cache` parameter is always unique, it effectively bypasses caching mechanisms at both the CDN and browser levels, ensuring the user receives the most up-to-date version of the content with every request.
+Because the `trusty-no-cache` parameter is always unique, it effectively bypasses caching mechanisms at both the CDN and browser levels, ensuring the user receives the most up-to-date version of the content with every request. Note that additional CDN configuration may be required to ensure query parameters are respected.
 
 ### Page Status Refresh Setup
 
