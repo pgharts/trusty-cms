@@ -36,10 +36,13 @@ module ShareLayouts
             end
             
             def find_page
-              page = Page.find_by_path(request.path) rescue nil
+              page = Page.find_by_path(request.path, can_view_drafts?) rescue nil
               page.is_a?(RailsPage) ? page : RailsPage.new(:class_name => "RailsPage")
             end
-            
+
+            def can_view_drafts?
+              user_signed_in?
+            end
           end
         end
       
