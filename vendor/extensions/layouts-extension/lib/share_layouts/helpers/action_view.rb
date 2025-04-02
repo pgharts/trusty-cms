@@ -41,7 +41,7 @@ module ShareLayouts
             end
 
             def can_view_drafts?
-              user_signed_in?
+              user_signed_in? # CMS users can view drafts
             end
           end
         end
