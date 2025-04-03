@@ -1,4 +1,6 @@
 module Admin::NodeHelper
+  include Admin::UrlHelper
+
   def render_nodes(page, starting_index, parent_index = nil, simple = false)
     @rendered_html = ''
     render_node page, starting_index, parent_index, simple
@@ -23,17 +25,6 @@ module Admin::NodeHelper
       page.extend(*page.menu_renderer_modules)
     end
     page
-  end
-
-  def format_path(path)
-    return '' if path.nil? || path.empty?
-
-    parts = path.split('/').reject(&:empty?)
-    return 'Root' if parts.size == 1
-    return '/' if parts.size == 2
-
-    formatted_path = parts[1..-2].join('/')
-    formatted_path.empty? ? '/' : "/#{formatted_path}"
   end
 
   def homepage
