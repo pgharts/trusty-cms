@@ -1,6 +1,17 @@
 module Admin::UrlHelper
   require 'uri'
 
+  def format_path(path)
+    return '' if path.nil? || path.empty?
+
+    parts = path.split('/').reject(&:empty?)
+    return 'Root' if parts.size == 1
+    return '/' if parts.size == 2
+
+    formatted_path = parts[1..-2].join('/')
+    formatted_path.empty? ? '/' : "/#{formatted_path}"
+  end
+
   def generate_page_url(url, page)
     base_url = extract_base_url(url)
     build_url(base_url, page)

@@ -3,7 +3,6 @@ class Admin::PagesController < Admin::ResourceController
   before_action :count_deleted_pages, only: [:destroy]
   before_action :set_page, only: %i[edit restore]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
-  include Admin::NodeHelper
   include Admin::PagesHelper
   include Admin::UrlHelper
 
