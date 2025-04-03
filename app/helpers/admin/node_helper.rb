@@ -1,6 +1,6 @@
 module Admin::NodeHelper
   include Admin::UrlHelper
-  
+
   def render_nodes(page, starting_index, parent_index = nil, simple = false)
     @rendered_html = ''
     render_node page, starting_index, parent_index, simple

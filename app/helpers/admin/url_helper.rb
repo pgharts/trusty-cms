@@ -2,11 +2,12 @@ module Admin::UrlHelper
   require 'uri'
 
   def format_path(path)
-    return '' if path.nil? || path.empty?
+    return '' if path.to_s.empty?
 
     parts = path.split('/').reject(&:empty?)
-    return 'Root' if parts.size == 1
-    return '/' if parts.size == 2
+    parts_size = parts.size
+    return 'Root' if parts_size== 1
+    return '/' if parts_size == 2
 
     formatted_path = parts[1..-2].join('/')
     formatted_path.empty? ? '/' : "/#{formatted_path}"

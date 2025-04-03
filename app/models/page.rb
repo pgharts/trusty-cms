@@ -120,7 +120,7 @@ class Page < ActiveRecord::Base
 
   def path
     return '' if slug.blank?
-  
+
     parent.present? ? clean_path("#{parent.path}/#{slug}") : clean_path(slug)
   end
 
