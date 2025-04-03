@@ -6,7 +6,7 @@ module Admin::UrlHelper
 
     parts = path.split('/').reject(&:empty?)
     parts_size = parts.size
-    return 'Root' if parts_size== 1
+    return 'Root' if parts_size == 1
     return '/' if parts_size == 2
 
     formatted_path = parts[1..-2].join('/')
