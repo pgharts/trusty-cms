@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :set_standard_body_style, only: %i[new edit update create]
   before_action :set_mailer
   before_action :set_paper_trail_whodunnit
+  before_action :prevent_cookie_cache
 
   attr_accessor :trusty_config, :cache
   attr_reader :pagination_parameters
@@ -67,6 +68,10 @@ class ApplicationController < ActionController::Base
   def set_standard_body_style
     @body_classes ||= []
     @body_classes.concat(%w(reversed))
+  end
+
+  def prevent_cookie_cache
+    response.headers['Cache-Control'] = 'no-cache="Set-Cookie"'
   end
 
   # When using TrustyCms with Ruby 1.9, the strings that come in from forms are ASCII-8BIT encoded.
