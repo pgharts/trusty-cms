@@ -162,21 +162,48 @@ class Admin::PagesController < Admin::ResourceController
   def render_preview
     params.permit!
     Page.transaction do
-      page_class = Page.descendants.include?(model_class) ? model_class : Page
-      if request.referer =~ %r{/admin/pages/(\d+)/edit}
-        page = Page.find($1).becomes(page_class)
-        layout_id = page.layout_id
-        page.update(params[:page])
-        page.published_at ||= Time.now
-      else
-        page = page_class.new(params[:page])
-        page.published_at = page.updated_at = page.created_at = Time.now
-        page.parent = Page.find($1) if request.referer =~ %r{/admin/pages/(\d+)/children/new}
-      end
+      page = build_preview_page
       page.pagination_parameters = pagination_parameters
       process_with_exception(page)
     end
   end
+
+  def build_preview_page
+    page_class = Page.descendants.include?(model_class) ? model_class : Page
+    referer_page_id = extract_page_id_from_referer
+
+    if editing_existing_page?
+      page = Page.find(referer_page_id).becomes(page_class)
+      page.update(params[:page])
+      page.published_at ||= Time.current
+    else
+      page = page_class.new(params[:page])
+      now = Time.current
+      page.published_at = page.updated_at = page.created_at = now
+
+      if creating_child_page?
+        parent = Page.find(referer_page_id)
+        page.parent = parent
+        page.layout_id ||= parent.layout_id
+      end
+
+      page.save!
+    end
+
+    page
+  end
+
+  def editing_existing_page?
+    request.referer =~ %r{/admin/pages/\d+/edit}
+  end
+
+  def creating_child_page?
+    request.referer =~ %r{/admin/pages/\d+/children/new}
+  end
+
+  def extract_page_id_from_referer
+    request.referer[%r{/admin/pages/(\d+)}, 1]
+  end  
 
   def process_with_exception(page)
     page.process(request, response)
