@@ -165,7 +165,7 @@ class Admin::PagesController < Admin::ResourceController
       page = Admin::PreviewPageBuilder.new(
         model_class:,
         page_params: params[:page],
-        referer: request.referer
+        referer: request.referer,
       ).build
 
       page.pagination_parameters = pagination_parameters

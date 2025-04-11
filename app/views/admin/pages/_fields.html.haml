@@ -74,7 +74,7 @@
     .page-actions
       = save_model_button(@page)
       = save_model_and_continue_editing_button(@page)
-      = submit_tag(t('preview', default: 'Preview'), class: 'button', id: 'show-preview') if @render_preview_button
+      = submit_tag(t('preview'), class: 'button', id: 'show-preview') if @render_preview_button
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
 
