@@ -20,7 +20,8 @@
           = render :partial => 'admin/page_fields/page_field', :collection => @page.fields
           = render_region :extended_metadata, :locals => {:f => fields}
       .drawer_handle
-        %a.toggle{:href=>'#attributes', :rel=>'toggle[attributes]', :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+        - toggle_class = meta_errors? ? 'less' : 'more'
+        %a.toggle{ href: '#attributes', rel: 'toggle[attributes]', class: toggle_class }
           = meta_label
           %i.fas.fa-angle-down
   - form.edit_page_parts do
@@ -66,32 +67,27 @@
 .error.hidden
   %span#published-at-error
 
-- render_region :form_bottom, :locals => {:f => fields} do |form_bottom|
+- render_region :form_bottom, locals: { f: fields } do |form_bottom|
   - form_bottom.edit_buttons do
     - @buttons_partials.each do |partial|
-      = render :partial => partial, :locals => {:f => fields}
+      = render partial: partial, locals: { f: fields }
+
     .page-actions
       = save_model_button(@page)
       = save_model_and_continue_editing_button(@page)
-      = save_model_and_view_page_button(@page)
+      = submit_tag(t('preview'), class: 'button', id: 'show-preview') if @render_preview_button
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
-    #view-page-url-data{ data: { url: @page_url } }
+
+    .fullcover.grey_out#preview_panel{ style: 'display: none;' }
+      %iframe.fullcover#page-preview{
+        name: 'page-preview',
+        src: "#{ActionController::Base.relative_url_root}/loading-iframe.html",
+        frameborder: 0,
+        scrolling: 'auto'
+      }
+      .preview_tools
+        = link_to t('edit_page'), {}, class: 'button cancel'
+
   - form_bottom.edit_timestamp do
-    = updated_stamp @page
-
--# Opens a new tab with the page URL when "Save and View Page" is selected
-:javascript
-  document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const dataDiv = document.getElementById("view-page-url-data");
-    const baseUrl = dataDiv?.dataset?.url;
-
-    if (params.get("view_page") === "true" && baseUrl) {
-      const now = new Date().toISOString();
-      const separator = baseUrl.includes("?") ? "&" : "?";
-      const newTabUrl = `${baseUrl}${separator}trusty-no-cache=${encodeURIComponent(now)}`;
-      window.open(newTabUrl, '_blank');
-    }
-  });
-
+    = updated_stamp(@page)

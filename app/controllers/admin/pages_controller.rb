@@ -42,6 +42,7 @@ class Admin::PagesController < Admin::ResourceController
     assets = Asset.order('created_at DESC')
     @term = assets.ransack(params[:search] || '')
     @page = self.model = model_class.new_with_defaults(trusty_config)
+    @render_preview_button = render_preview_button?
     assign_page_attributes
     response_for :new
   end
@@ -52,6 +53,7 @@ class Admin::PagesController < Admin::ResourceController
     @page_url = generate_page_url(request.url, @page)
     @page_path = format_path(@page.path)
     @versions = format_versions(@page.versions)
+    @render_preview_button = render_preview_button?
     response_for :edit
   end
 
@@ -59,6 +61,12 @@ class Admin::PagesController < Admin::ResourceController
     index = params[:version_index].to_i
     restore_page_version(@page, index)
     redirect_to edit_admin_page_path(@page)
+  end
+
+  def preview
+    render_preview
+  rescue PreviewStop => e
+    render text: e.message unless @performed_render
   end
 
   def save_table_position
@@ -151,6 +159,20 @@ class Admin::PagesController < Admin::ResourceController
     end
   end
 
+  def render_preview
+    params.permit!
+    Page.transaction do
+      page = Admin::PreviewPageBuilder.new(
+        model_class:,
+        page_params: params[:page],
+        referer: request.referer,
+      ).build
+
+      page.pagination_parameters = pagination_parameters
+      process_with_exception(page)
+    end
+  end
+
   def process_with_exception(page)
     page.process(request, response)
     @performed_render = true
@@ -175,5 +197,12 @@ class Admin::PagesController < Admin::ResourceController
     else
       raise "I'm not allowed to constantize #{page_class}!"
     end
+  end
+
+  def render_preview_button?
+    page_class = @page.class.name
+    previewable_classes = ['Page']
+    previewable_classes += PREVIEW_PAGE_TYPES if defined?(PREVIEW_PAGE_TYPES)
+    previewable_classes.include?(page_class)
   end
 end

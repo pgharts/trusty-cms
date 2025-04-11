@@ -28,6 +28,7 @@
 //= require 'admin/page-edit'
 //= require 'admin/pagefield'
 //= require 'admin/popup'
+//= require 'admin/preview'
 //= require 'admin/tabcontrol'
 //= require 'admin/utilities'
 //= require 'admin/tags'
