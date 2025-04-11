@@ -66,19 +66,27 @@
 .error.hidden
   %span#published-at-error
 
-- render_region :form_bottom, :locals => {:f => fields} do |form_bottom|
+- render_region :form_bottom, locals: { f: fields } do |form_bottom|
   - form_bottom.edit_buttons do
     - @buttons_partials.each do |partial|
-      = render :partial => partial, :locals => {:f => fields}
+      = render partial: partial, locals: { f: fields }
+
     .page-actions
       = save_model_button(@page)
       = save_model_and_continue_editing_button(@page)
-      = submit_tag(t('preview', :default => 'Preview'), :class => 'button', :id => 'show-preview') if @render_preview_button
+      = submit_tag(t('preview', default: 'Preview'), class: 'button', id: 'show-preview') if @render_preview_button
       = t('or')
       = link_to t('cancel'), admin_pages_url(site_id: @site_id), class: 'alt'
-    #preview_panel.fullcover.grey_out{:style => 'display: none;'}
-      %iframe{:id => 'page-preview', :class => 'fullcover', :name => 'page-preview', :src =>  ActionController::Base.relative_url_root.to_s + '/loading-iframe.html', :frameborder => 0, :scrolling => 'auto'}
+
+    .fullcover.grey_out#preview_panel{ style: 'display: none;' }
+      %iframe.fullcover#page-preview{
+        name: 'page-preview',
+        src: "#{ActionController::Base.relative_url_root}/loading-iframe.html",
+        frameborder: 0,
+        scrolling: 'auto'
+      }
       .preview_tools
-        = link_to(t('edit_page'), {}, :class => 'button cancel')
+        = link_to t('edit_page'), {}, class: 'button cancel'
+
   - form_bottom.edit_timestamp do
-    = updated_stamp @page
+    = updated_stamp(@page)

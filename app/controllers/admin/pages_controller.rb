@@ -163,15 +163,15 @@ class Admin::PagesController < Admin::ResourceController
     params.permit!
     Page.transaction do
       page = Admin::PreviewPageBuilder.new(
-        model_class: model_class,
+        model_class:,
         page_params: params[:page],
         referer: request.referer
       ).build
-  
+
       page.pagination_parameters = pagination_parameters
       process_with_exception(page)
     end
-  end  
+  end
 
   def process_with_exception(page)
     page.process(request, response)
