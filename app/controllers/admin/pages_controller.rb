@@ -162,7 +162,7 @@ class Admin::PagesController < Admin::ResourceController
   def render_preview
     params.permit!
     Page.transaction do
-      page = PreviewPageBuilder.new(
+      page = Admin::PreviewPageBuilder.new(
         model_class: model_class,
         page_params: params[:page],
         referer: request.referer
