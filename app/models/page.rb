@@ -121,16 +121,10 @@ class Page < ActiveRecord::Base
 
   def path
     return '' if slug.blank?
-  
-    if default_route?(self)
-      full_path = parent.present? ? "#{parent.path}/#{slug}" : slug
-    else
-      custom_path = lookup_custom_page_path(self)
-      return '' unless custom_path
-  
-      full_path = "#{custom_path}/#{slug}"
-    end
-  
+
+    full_path = build_full_path
+    return '' if full_path.blank?
+
     clean_path(full_path)
   end
 
@@ -368,6 +362,17 @@ class Page < ActiveRecord::Base
                      Page.descendant_class(class_name).new.virtual?
                    end
     true
+  end
+
+  def build_full_path
+    if default_route?(self)
+      parent.present? ? "#{parent.path}/#{slug}" : slug
+    else
+      custom_path = lookup_custom_page_path(self)
+      return nil unless custom_path
+  
+      "#{custom_path}/#{slug}"
+    end
   end
 
   def clean_path(path)
