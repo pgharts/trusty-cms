@@ -1,4 +1,9 @@
 module UrlHelper
+  def default_path(page)
+    return '' if page.slug.blank?
+    page.parent.present? ? "#{page.parent.path}/#{page.slug}" : page.slug
+  end
+
   def default_route?(page)
     page_class_name = page.class.name
     page_class_name == 'Page' || (defined?(DEFAULT_PAGE_TYPE_ROUTES) && DEFAULT_PAGE_TYPE_ROUTES.include?(page_class_name))

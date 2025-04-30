@@ -366,12 +366,10 @@ class Page < ActiveRecord::Base
 
   def build_full_path
     if default_route?(self)
-      parent.present? ? "#{parent.path}/#{slug}" : slug
+      default_path(self)
     else
       custom_path = lookup_custom_page_path(self)
-      return nil unless custom_path
-  
-      "#{custom_path}/#{slug}"
+      custom_path ? "#{custom_path}/#{slug}" : default_path(self)
     end
   end
 
