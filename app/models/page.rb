@@ -2,6 +2,7 @@ require 'trusty_cms/taggable'
 
 class Page < ActiveRecord::Base
   has_paper_trail
+  include UrlHelper
 
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
@@ -120,8 +121,17 @@ class Page < ActiveRecord::Base
 
   def path
     return '' if slug.blank?
-
-    parent.present? ? clean_path("#{parent.path}/#{slug}") : clean_path(slug)
+  
+    if default_route?(self)
+      full_path = parent.present? ? "#{parent.path}/#{slug}" : slug
+    else
+      custom_path = lookup_custom_page_path(self)
+      return '' unless custom_path
+  
+      full_path = "#{custom_path}/#{slug}"
+    end
+  
+    clean_path(full_path)
   end
 
   alias_method :url, :path
