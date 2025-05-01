@@ -95,9 +95,9 @@ TrustyCMS supports a preview feature for standard page types. However, this func
 3. Test the Preview button with each custom page type. If a page type does not preview correctly, remove it from the list.
 
 ### Custom Page Type Routes Setup
-Additional configuration is required to ensure correct URL generation in the admin interface — specifically for the "Edit Page" dropdown and the "Save and View Draft" functionality.
+To ensure correct URL generation throughout the application—including in calls to `page.path` and when displaying page URLs in the admin interface—additional configuration is required.
 
-To enable this, create the following initializer: `config/initializers/page_type_routes.rb`
+Create the following initializer: `config/initializers/page_type_routes.rb`
 
 In this file, define a `CUSTOM_PAGE_TYPE_ROUTES` hash constant that maps custom Page model class names to the corresponding route segments defined in your `config/routes.rb` file. For example, the BlogPage model maps to the route `get 'blog/:slug'`, so its route segment is `'blog'`.
 
