@@ -1,0 +1,43 @@
+- @page_title = @user.name + ' - Security'
+- body_classes << 'edit_security'
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1 Security
+
+  - main.edit_form do
+    %fieldset
+      %h3 Change Password
+      = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_preferences')}&#8230;" } do |f|
+        - render_region :form, :locals => {:f => f} do |form|
+          - form.edit_password do
+            = render 'admin/users/password_fields', :f => f
+
+        - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
+          - form_bottom.edit_buttons do
+            .buttons
+              = save_model_button @user
+
+  - main.two_factor do
+    %fieldset
+      %h3 Two-Factor Authentication
+
+      - if @two_factor_enabled
+        %p
+          Two-Factor Authentication is currently enabled.
+        = link_to "Disable",
+          disable_two_factor_admin_security_path,
+          method: :post,
+          data: { confirm: "Are you sure you want to disable Two-Factor Authentication?" },
+          class: "button"
+      - else
+        %p Scan this QR code in your Authenticator app:
+        = image_tag @qr_png_data, alt: "Scan this with Google Authenticator or Authy"
+        %p Or manually enter this secret key:
+        %strong= current_user.otp_secret
+
+        = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
+          %div
+            = form.label :otp_attempt, "Enter the 6-Digit Code"
+            = form.text_field :otp_attempt, autofocus: true, size: 6, maxlength: 6
+          = form.submit "Verify and Enable 2FA"

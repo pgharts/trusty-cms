@@ -46,6 +46,10 @@ TrustyCms::Application.routes.draw do
 
   namespace :admin do
     resource :preferences
+    resource :security, controller: 'security' do
+      post :verify_two_factor, on: :collection
+      post :disable_two_factor, on: :collection
+    end
     resource :configuration, controller: 'configuration'
     resources :extensions, only: :index
     resources :page_parts

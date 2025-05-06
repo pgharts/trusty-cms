@@ -27,9 +27,6 @@
               = f.label :email,  t("email_address"), :class => 'optional'
               = f.text_field 'email', :class => 'textbox', :maxlength => 255
 
-          - form.edit_password do
-            = render 'admin/users/password_fields', :f => f
-
         - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
           - form_bottom.edit_buttons do
             .buttons

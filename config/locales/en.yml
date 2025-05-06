@@ -155,8 +155,6 @@ en:
     site:
       title: "site title"
       host: "site domain"
-    user:
-      allow_password_reset?: "allow password reset"
   content: 'Content'
   content_type: 'Content&#8209;Type'
   content_editor: 'Content Editor'

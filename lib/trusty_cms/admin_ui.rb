@@ -150,6 +150,7 @@ module TrustyCms
       settings = nav_tab('Settings')
       settings << nav_item('General', '/admin/configuration')
       settings << nav_item('Personal', '/admin/preferences')
+      settings << nav_item('Security', '/admin/security')
       settings << nav_item('Users', '/admin/users')
       settings << nav_item('Extensions', '/admin/extensions')
       nav << settings
@@ -190,13 +191,17 @@ module TrustyCms
       OpenStruct.new.tap do |user|
         user.preferences = RegionSet.new do |preferences|
           preferences.main.concat %w{edit_header edit_form}
-          preferences.form.concat %w{edit_first_name edit_last_name edit_email edit_password}
+          preferences.form.concat %w{edit_first_name edit_last_name edit_email}
           preferences.form_bottom.concat %w{edit_buttons}
+        end
+        user.security = RegionSet.new do |security|
+          security.main.concat %w{edit_header edit_form two_factor}
+          security.form.concat %w{edit_password}
+          security.form_bottom.concat %w{edit_buttons}
         end
         user.edit = RegionSet.new do |edit|
           edit.main.concat %w{edit_header edit_form}
-          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_password
-                              edit_roles edit_notes}
+          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_roles edit_notes}
           edit.form_bottom.concat %w{edit_buttons edit_timestamp}
         end
         user.index = RegionSet.new do |index|
@@ -231,11 +236,11 @@ module TrustyCms
       OpenStruct.new.tap do |configuration|
         configuration.show = RegionSet.new do |show|
           show.user.concat %w{preferences}
-          show.trusty_config.concat %w{site defaults users}
+          show.trusty_config.concat %w{site defaults}
         end
         configuration.edit = RegionSet.new do |edit|
           edit.main.concat %w{edit_header edit_form}
-          edit.form.concat %w{edit_site edit_defaults edit_users}
+          edit.form.concat %w{edit_site edit_defaults}
           edit.form_bottom.concat %w{edit_buttons}
         end
       end
