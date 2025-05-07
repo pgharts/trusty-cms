@@ -11,7 +11,13 @@
       = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_preferences')}&#8230;" } do |f|
         - render_region :form, :locals => {:f => f} do |form|
           - form.edit_password do
-            = render 'admin/users/password_fields', :f => f
+            %fieldset#change_password
+              %p
+                = f.label :password, t('new_password')
+                = f.password_field 'password', :value => '', :maxlength => 40, :autocomplete => 'new-password'
+              %p
+                = f.label :password_confirmation, t('password_confirmation')
+                = f.password_field 'password_confirmation', :value => '', :maxlength => 40, :autocomplete => 'new-password'
 
         - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
           - form_bottom.edit_buttons do
@@ -25,7 +31,7 @@
       - if @two_factor_enabled
         %p
           Two-Factor Authentication is currently enabled.
-        = link_to "Disable",
+        = button_to "Disable",
           disable_two_factor_admin_security_path,
           method: :post,
           data: { confirm: "Are you sure you want to disable Two-Factor Authentication?" },
