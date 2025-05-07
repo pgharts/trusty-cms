@@ -1,5 +1,3 @@
-require 'rqrcode'
-
 class Admin::UsersController < Admin::ResourceController
   paginate_models
   before_action :authorize_role
@@ -23,14 +21,6 @@ class Admin::UsersController < Admin::ResourceController
       flash[:error] = 'There was an error saving the user. Please try again.'
       render :new
     end
-  end
-
-  def edit
-    current_user.otp_secret ||= User.generate_otp_secret
-    current_user.save!
-    otp_uri = current_user.otp_provisioning_uri(current_user.email, issuer: "YourAppName")
-    qr = RQRCode::QRCode.new(otp_uri)
-    @qr_png_data = qr.as_png(size: 200).to_data_url
   end
 
   def update
