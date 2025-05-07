@@ -2,12 +2,12 @@
 .login-form-content
   .visual
     = image_tag('/assets/admin/default_safe_login.svg', alt: 'Web browser with padlock on top')
-  .two-factor
+  .login
     %h1 Two-Factor Authentication
     = form_with url: admin_two_factor_path, method: :post, local: true do |form|
       .field
         = form.label :otp_attempt, "Enter your 6-digit code:"
         = form.text_field :otp_attempt, autofocus: true, maxlength: 6, size: 6
-
+      %br
       .actions
         = form.submit "Verify Code"

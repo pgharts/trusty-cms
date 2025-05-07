@@ -270,6 +270,13 @@ en:
   scheduled: "Scheduled"
   search: 'Search'
   search_tags: 'Search Tags:'
+  security_controller:
+    error_updating_password: 'There was an error updating your password.'
+    password_updated: 'Password updated. Please log in again.'
+    two_factor_enabled: 'Two-Factor Authentication Enabled'
+    two_factor_disabled: 'Two-Factor Authentication Disabled'
+    two_factor_disabled_error: 'Error Disabling Two-Factor Authentication'
+    two_factor_invalid_code: 'Invalid 2FA Code'
   select:
     default: '<default>'
     inherit: '<inherit>'
