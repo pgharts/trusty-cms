@@ -62,7 +62,7 @@ class Admin::SecurityController < ApplicationController
     @two_factor_enabled = current_user.otp_required_for_login
 
     unless @two_factor_enabled
-      otp_uri = current_user.otp_provisioning_uri(current_user.email, issuer: "YourAppName")
+      otp_uri = current_user.otp_provisioning_uri(current_user.email, issuer: "TrustyCMS")
       qr = RQRCode::QRCode.new(otp_uri)
       @qr_png_data = qr.as_png(size: 200).to_data_url
     end
