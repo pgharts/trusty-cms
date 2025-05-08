@@ -36,6 +36,7 @@ class Admin::TwoFactorController < ApplicationController
   def session_expired?
     started_at = session[:pre_2fa_started_at]
     return true unless started_at
+
     Time.current.to_i - started_at > MAX_2FA_SESSION_DURATION
   end
 end
