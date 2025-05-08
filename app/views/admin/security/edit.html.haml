@@ -32,23 +32,26 @@
         = t('two_factor_authentication')
 
       - if @two_factor_enabled
-        %p
-          = t('security_controller.two_factor_is_enabled')
-        = button_to t('disable'),
-          disable_two_factor_admin_security_path,
-          method: :post,
-          data: { confirm: t('security_controller.two_factor_disable_confirm') },
-          class: "button"
+        %fieldset
+          %p
+            = t('security_controller.two_factor_is_enabled')
+          = button_to t('disable'),
+            disable_two_factor_admin_security_path,
+            method: :post,
+            data: { confirm: t('security_controller.two_factor_disable_confirm') },
+            class: "button button-margin-top"
       - else
-        %p
-          = t('security_controller.scan_qr_instructions')
-        = image_tag @qr_png_data, alt: t('security_controller.qr_alt')
-        %p
-          = t('security_controller.manual_key_instructions')
-        %strong= current_user.otp_secret
+        %fieldset
+          %p
+            = t('security_controller.scan_qr_instructions')
+          = image_tag @qr_png_data, alt: t('security_controller.qr_alt')
+          %p
+            = t('security_controller.manual_key_instructions')
+          %strong= current_user.otp_secret
 
-        = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
-          %div
-            = form.label :otp_attempt, t('security_controller.enter_qr_code')
-            = form.text_field :otp_attempt, autofocus: true, size: 6, maxlength: 6
-          = form.submit t('security_controller.verify_and_enable')
+          .form-margin-top
+            = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
+              %div
+                = form.label :otp_attempt, t('security_controller.enter_qr_code')
+                = form.text_field :otp_attempt, autofocus: true, size: 6, maxlength: 6
+              = form.submit t('security_controller.verify_and_enable')
