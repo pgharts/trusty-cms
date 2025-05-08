@@ -45,7 +45,7 @@ TrustyCms::Application.routes.draw do
 
   namespace :admin do
     resource :preferences
-    resource :two_factor, only: [:show, :create], controller: 'two_factor'
+    resource :two_factor, only: [:show, :create], controller: 'two_factor', path: 'two-factor'
     resource :security, controller: 'security' do
       post :verify_two_factor, on: :collection
       post :disable_two_factor, on: :collection
