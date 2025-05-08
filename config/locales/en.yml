@@ -278,7 +278,7 @@ en:
   search_tags: 'Search Tags:'
   security: 'Security'
   security_controller:
-    enter_qr_code: 'Enter the 6-Digit Code'
+    enter_qr_code: 'Enter 6-Digit Verification Code'
     error_updating_password: 'There was an error updating your password.'
     manual_key_instructions: 'Or manually enter this secret key:'
     password_updated: 'Password updated. Please log in again.'
