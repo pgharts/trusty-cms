@@ -25,19 +25,19 @@
   - render_region :user do |user|
     - user.preferences do
       %h3
-        Security
+        = t('security')
       %p.ruled
         %label
-          Password
+          = t('password')
         %span.value
           &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
       %p.ruled
         %label
-          Two Factor Authentication
+          = t('two_factor_authentication')
         %span
-          = current_user.otp_required_for_login ? 'Enabled' : 'Disabled'
+          = current_user.otp_required_for_login ? t('enabled') : t('disabled')
       .actions
-        = button_to "Edit Security Settings", admin_security_path, :method => :get
+        = button_to t('edit_security_settings'), admin_security_path, :method => :get
 
 %fieldset
   - render_region :trusty_config do |config|

@@ -3,12 +3,14 @@
 
 - render_region :main do |main|
   - main.edit_header do
-    %h1 Security
+    %h1
+      = t('security')
 
   - main.edit_form do
     %fieldset
-      %h3 Change Password
-      = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_preferences')}&#8230;" } do |f|
+      %h3
+        = t('change_password')
+      = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_changes')}&#8230;" } do |f|
         - render_region :form, :locals => {:f => f} do |form|
           - form.edit_password do
             %fieldset#change_password
@@ -26,24 +28,27 @@
 
   - main.two_factor do
     %fieldset
-      %h3 Two-Factor Authentication
+      %h3
+        = t('two_factor_authentication')
 
       - if @two_factor_enabled
         %p
-          Two-Factor Authentication is currently enabled.
-        = button_to "Disable",
+          = t('security_controller.two_factor_is_enabled')
+        = button_to t('disable'),
           disable_two_factor_admin_security_path,
           method: :post,
-          data: { confirm: "Are you sure you want to disable Two-Factor Authentication?" },
+          data: { confirm: t('security_controller.two_factor_disable_confirm') },
           class: "button"
       - else
-        %p Scan this QR code in your Authenticator app:
-        = image_tag @qr_png_data, alt: "Scan this with Google Authenticator or Authy"
-        %p Or manually enter this secret key:
+        %p
+          = t('security_controller.scan_qr_instructions')
+        = image_tag @qr_png_data, alt: t('security_controller.qr_alt')
+        %p
+          = t('security_controller.manual_key_instructions')
         %strong= current_user.otp_secret
 
         = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
           %div
-            = form.label :otp_attempt, "Enter the 6-Digit Code"
+            = form.label :otp_attempt, t('security_controller.enter_qr_code')
             = form.text_field :otp_attempt, autofocus: true, size: 6, maxlength: 6
-          = form.submit "Verify and Enable 2FA"
+          = form.submit t('security_controller.verify_and_enable')

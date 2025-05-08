@@ -55,6 +55,7 @@ en:
     save_changes: 'Save Changes'
   cancel: 'Cancel'
   change: 'Change'
+  change_password: 'Change Password'
   clipped_extension:
     actions: Actions
     all: 'All'
@@ -180,6 +181,8 @@ en:
   description: 'Description'
   design: 'Design'
   designer: 'Designer'
+  disable: 'Disable'
+  disabled: 'Disabled'
   draft: 'Draft'
   edit: 'Edit'
   editor: 'Editor'
@@ -187,9 +190,11 @@ en:
   edit_layout: 'Edit Layout'
   edit_page: 'Edit Page'
   edit_preferences: 'Edit Preferences'
+  edit_security_settings: 'Edit Security Settings'
   edit_settings: 'Edit Settings'
   edit_user: 'Edit User'
   email_address: 'E-mail Address'
+  enabled: 'Enabled'
   extension: 'Extension'
   extensions: 'Extensions'
   filter: 'Filter'
@@ -266,17 +271,25 @@ en:
   reviewed: 'Reviewed'
   roles: 'Roles'
   saving_changes: Saving Changes
-  saving_preferences: Saving preferences
+  saving_preferences: Saving Preferences
   scheduled: "Scheduled"
   search: 'Search'
   search_tags: 'Search Tags:'
+  security: 'Security'
   security_controller:
+    enter_qr_code: 'Enter the 6-Digit Code'
     error_updating_password: 'There was an error updating your password.'
+    manual_key_instructions: 'Or manually enter this secret key:'
     password_updated: 'Password updated. Please log in again.'
+    scan_qr_instructions: 'Scan this QR code in your Authenticator app:'
     two_factor_enabled: 'Two-Factor Authentication Enabled'
+    two_factor_is_enabled: 'Two-Factor Authentication is currently enabled.'
+    two_factor_disable_confirm: 'Are you sure you want to disable Two-Factor Authentication?'
     two_factor_disabled: 'Two-Factor Authentication Disabled'
     two_factor_disabled_error: 'Error Disabling Two-Factor Authentication'
     two_factor_invalid_code: 'Invalid 2FA Code'
+    qr_alt: 'Scan this with Google Authenticator or Authy'
+    verify_and_enable: 'Verify and Enable 2FA'
   select:
     default: '<default>'
     inherit: '<inherit>'
@@ -317,6 +330,7 @@ en:
     at: 'at'
     by: 'by'
     last_updated: 'Last Updated'
+  two_factor_authentication: 'Two-Factor Authentication'
   type: 'Type'
   units:
     KB: "KB"
