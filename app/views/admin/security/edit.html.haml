@@ -13,7 +13,7 @@
       = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_changes')}&#8230;" } do |f|
         - render_region :form, :locals => {:f => f} do |form|
           - form.edit_password do
-            %fieldset#change_password
+            %fieldset#change-password
               %p
                 = f.label :password, t('new_password')
                 = f.password_field 'password', :value => '', :maxlength => 40, :autocomplete => 'new-password'

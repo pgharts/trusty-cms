@@ -3,11 +3,11 @@ require 'rqrcode'
 class Admin::SecurityController < ApplicationController
   before_action :authenticate_user!
   before_action :initialize_variables
-  before_action :initialize_two_factor_variables, only: [:show, :edit, :update]
+  before_action :initialize_two_factor_variables, only: %i[show edit update]
 
   def show
     set_standard_body_style
-    ensure_user_has_otp_secret!
+    ensure_user_has_otp_secret
     render :edit
   end
 
@@ -52,9 +52,9 @@ class Admin::SecurityController < ApplicationController
     @template_name   = 'security'
   end
 
-  def ensure_user_has_otp_secret!
+  def ensure_user_has_otp_secret
     return if current_user.otp_secret.present?
-  
+
     current_user.update!(otp_secret: User.generate_otp_secret)
   end
 
@@ -62,7 +62,7 @@ class Admin::SecurityController < ApplicationController
     @two_factor_enabled = current_user.otp_required_for_login
 
     unless @two_factor_enabled
-      otp_uri = current_user.otp_provisioning_uri(current_user.email, issuer: "TrustyCMS")
+      otp_uri = current_user.otp_provisioning_uri(current_user.email, issuer: 'TrustyCMS')
       qr = RQRCode::QRCode.new(otp_uri)
       @qr_png_data = qr.as_png(size: 200).to_data_url
     end
