@@ -289,6 +289,7 @@ en:
     two_factor_disabled_error: 'Error Disabling Two-Factor Authentication'
     two_factor_invalid_code: 'Invalid 2FA Code'
     qr_alt: 'Scan this with Google Authenticator or Authy'
+    verify_code: 'Verify Code'
     verify_and_enable: 'Verify and Enable 2FA'
   select:
     default: '<default>'
