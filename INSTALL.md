@@ -8,6 +8,7 @@ From within the directory containing your TrustyCMS instance:
 
     - gem 'trusty-cms'
     - gem 'rails-observers'
+    - gem 'devise-two-factor'
 
 3. Run `bundle install`
 
