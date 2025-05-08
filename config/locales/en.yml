@@ -200,6 +200,7 @@ en:
   filter: 'Filter'
   hidden: 'Hidden'
   hide: 'Hide'
+  invalid_email_or_password: 'Invalid e-mail address or password.'
   keywords: 'Keywords'
   language: 'Language'
   layout: 'Layout'

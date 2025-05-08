@@ -32,7 +32,7 @@ class Admin::SessionsController < Devise::SessionsController
   def handle_failed_authentication
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
-    flash.now[:alert] = "Invalid email or password."
+    flash.now[:alert] = t('invalid_email_or_password')
     render :new
   end
 
