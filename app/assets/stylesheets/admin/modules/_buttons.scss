@@ -18,7 +18,6 @@
   text-decoration: none;
 }
 
-
 .cancel-button {
   @include button;
   background-color: $light-red;
@@ -29,4 +28,8 @@
     background-color: $dark-red;
     color: $white;
   }
+}
+
+.button-margin-top {
+  margin-top: 0.5em;
 }

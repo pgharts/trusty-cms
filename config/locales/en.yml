@@ -55,6 +55,7 @@ en:
     save_changes: 'Save Changes'
   cancel: 'Cancel'
   change: 'Change'
+  change_password: 'Change Password'
   clipped_extension:
     actions: Actions
     all: 'All'
@@ -155,8 +156,6 @@ en:
     site:
       title: "site title"
       host: "site domain"
-    user:
-      allow_password_reset?: "allow password reset"
   content: 'Content'
   content_type: 'Content&#8209;Type'
   content_editor: 'Content Editor'
@@ -182,6 +181,8 @@ en:
   description: 'Description'
   design: 'Design'
   designer: 'Designer'
+  disable: 'Disable'
+  disabled: 'Disabled'
   draft: 'Draft'
   edit: 'Edit'
   editor: 'Editor'
@@ -189,14 +190,17 @@ en:
   edit_layout: 'Edit Layout'
   edit_page: 'Edit Page'
   edit_preferences: 'Edit Preferences'
+  edit_security_settings: 'Edit Security Settings'
   edit_settings: 'Edit Settings'
   edit_user: 'Edit User'
   email_address: 'E-mail Address'
+  enabled: 'Enabled'
   extension: 'Extension'
   extensions: 'Extensions'
   filter: 'Filter'
   hidden: 'Hidden'
   hide: 'Hide'
+  invalid_email_or_password: 'Invalid e-mail address or password.'
   keywords: 'Keywords'
   language: 'Language'
   layout: 'Layout'
@@ -267,11 +271,27 @@ en:
     validation_errors: "Validation errors occurred while processing this form. Please take a moment to  review the form and correct any input errors before continuing."
   reviewed: 'Reviewed'
   roles: 'Roles'
-  saving_changes: Saving Changes
-  saving_preferences: Saving preferences
-  scheduled: "Scheduled"
+  saving_changes: 'Saving Changes'
+  saving_preferences: 'Saving Preferences'
+  scheduled: 'Scheduled'
   search: 'Search'
   search_tags: 'Search Tags:'
+  security: 'Security'
+  security_controller:
+    enter_qr_code: 'Enter 6-Digit Verification Code'
+    error_updating_password: 'There was an error updating your password.'
+    manual_key_instructions: 'Or manually enter this secret key:'
+    password_updated: 'Password updated. Please log in again.'
+    scan_qr_instructions: 'Scan this QR code in your Authenticator app:'
+    two_factor_enabled: 'Two-Factor Authentication Enabled'
+    two_factor_is_enabled: 'Two-Factor Authentication is currently enabled.'
+    two_factor_disable_confirm: 'Are you sure you want to disable Two-Factor Authentication?'
+    two_factor_disabled: 'Two-Factor Authentication Disabled'
+    two_factor_disabled_error: 'Error Disabling Two-Factor Authentication'
+    two_factor_invalid_code: 'Invalid 2FA Code'
+    qr_alt: 'Scan this with Google Authenticator or Authy'
+    verify_code: 'Verify Code'
+    verify_and_enable: 'Verify and Enable 2FA'
   select:
     default: '<default>'
     inherit: '<inherit>'
@@ -312,6 +332,10 @@ en:
     at: 'at'
     by: 'by'
     last_updated: 'Last Updated'
+  two_factor_authentication: 'Two-Factor Authentication'
+  two_factor_controller:
+    invalid_code: 'Invalid two-factor authentication code.'
+    session_expired: 'Your session has expired. Please log in again.'
   type: 'Type'
   units:
     KB: "KB"

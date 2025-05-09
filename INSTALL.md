@@ -6,8 +6,9 @@ From within the directory containing your TrustyCMS instance:
 
 2. Add the following gems to your Gemfile:
 
-- gem 'trusty-cms'
-- gem 'rails-observers'
+    - gem 'trusty-cms'
+    - gem 'rails-observers'
+    - gem 'devise-two-factor'
 
 3. Run `bundle install`
 
@@ -20,5 +21,22 @@ From within the directory containing your TrustyCMS instance:
 
 7. Add utf8 encoding to your db.yml
 
-8. Run `bundle exec rake db:setup`, `bundle exec rake trusty_cms:install:migrations`, then
+8. Set up encryption keys required for Rails’ native encryption (used by features like two-factor authentication):
+
+    - Run the encryption initializer command:
+
+    ```bash
+    ./bin/rails db:encryption:init
+    ```
+
+    - This will output three secrets. Copy the values and set them as environment variables in your preferred environment file (e.g., `.env`, `.env.development`, or via system environment settings):
+
+    ```env
+    ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY
+    ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY
+    ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
+    ```
+    - **Important**: Use different keys for each environment (development, test, production) unless two environments (e.g., development and staging) share a database — in that case, they **must** use the same keys.
+
+9. Run `bundle exec rake db:setup`, `bundle exec rake trusty_cms:install:migrations`, then
    `bundle exec rake db:bootstrap`.

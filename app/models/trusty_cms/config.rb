@@ -145,10 +145,6 @@ module TrustyCms
         @default_settings ||= %w{defaults.locale defaults.page.filter defaults.page.parts defaults.page.fields defaults.page.status}
       end
 
-      def user_settings
-        @user_settings ||= ['user.allow_password_reset?']
-      end
-
       # A convenient drying method for specifying a prefix and options common to several settings.
       #
       #   TrustyCms.config do |config|

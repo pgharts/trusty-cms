@@ -1,0 +1,57 @@
+- @page_title = @user.name + ' - Security'
+- body_classes << 'edit_security'
+
+- render_region :main do |main|
+  - main.edit_header do
+    %h1
+      = t('security')
+
+  - main.edit_form do
+    %fieldset
+      %h3
+        = t('change_password')
+      = form_for @user, :url => admin_security_path, :html => { :method => :put, 'data-onsubmit_status' => "#{t('saving_changes')}&#8230;" } do |f|
+        - render_region :form, :locals => {:f => f} do |form|
+          - form.edit_password do
+            %fieldset#change-password
+              %p
+                = f.label :password, t('new_password')
+                = f.password_field 'password', :value => '', :maxlength => 40, :autocomplete => 'new-password'
+              %p
+                = f.label :password_confirmation, t('password_confirmation')
+                = f.password_field 'password_confirmation', :value => '', :maxlength => 40, :autocomplete => 'new-password'
+
+        - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
+          - form_bottom.edit_buttons do
+            .buttons
+              = save_model_button @user
+
+  - main.two_factor do
+    %fieldset
+      %h3
+        = t('two_factor_authentication')
+
+      - if @two_factor_enabled
+        %fieldset
+          %p
+            = t('security_controller.two_factor_is_enabled')
+          = button_to t('disable'),
+            disable_two_factor_admin_security_path,
+            method: :post,
+            data: { confirm: t('security_controller.two_factor_disable_confirm') },
+            class: "button button-margin-top"
+      - else
+        %fieldset
+          %p
+            = t('security_controller.scan_qr_instructions')
+          = image_tag @qr_png_data, alt: t('security_controller.qr_alt')
+          %p
+            = t('security_controller.manual_key_instructions')
+          %strong= current_user.otp_secret
+
+          .form-margin-top
+            = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
+              %div
+                = form.label :otp_attempt, t('security_controller.enter_qr_code')
+                = form.text_field :otp_attempt, autofocus: true, size: 6, maxlength: 6
+              = form.submit t('security_controller.verify_and_enable')

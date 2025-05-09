@@ -1,10 +1,10 @@
 - body_classes << 'login_form'
 .login-form-content
   .visual
-    = image_tag('/assets/admin/default_safe_login.svg', alt: 'web browser with padlock on top')
+    = image_tag('/assets/admin/default_safe_login.svg', alt: 'Web browser with padlock on top')
   .login
-    %h1 Log in
-    = form_for(resource, as: resource_name, url: authenticate_path) do |f|
+    %h1 Log In
+    = form_for(resource, as: resource_name, url: user_session_path) do |f|
       .field
         = f.label :email
         = f.email_field :email, autofocus: true, autocomplete: 'email'
@@ -18,7 +18,7 @@
             Remember Me
       %br
       .actions
-        = f.submit 'Log in'
+        = f.submit 'Log In'
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
           = link_to 'Forgot your password?', new_password_path(resource_name)
       - if flash.alert

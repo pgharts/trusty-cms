@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   self.table_name = 'admins'
 
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :two_factor_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   alias_attribute :created_by_id, :id

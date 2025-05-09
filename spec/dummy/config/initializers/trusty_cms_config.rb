@@ -13,7 +13,6 @@ Rails.application.reloader.to_prepare do
     config.define 'admin.pagination.per_page', :type => :integer, :default => 50
     config.define 'site.title', :default => "Your site title", :allow_blank => false
     config.define 'site.host', :default => "www.example.com", :allow_blank => false
-    config.define 'user.allow_password_reset?', :default => true
   end
 
   TrustyCms::Application.config do |config|
