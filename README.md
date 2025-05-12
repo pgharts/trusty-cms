@@ -26,7 +26,6 @@ TrustyCMS features:
 * An advanced plugin system
 * Asset management & searching
 * Serve multiple sites (domains) from a single instance
-* Social sharing buttons
 * Reusable bits of content (Snippets)
 * Allows Rails controllers/actions to use Trusty CMS layouts as their "layout"
 * Operates in two modes: dev and production depending on the URL
