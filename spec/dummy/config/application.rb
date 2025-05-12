@@ -53,7 +53,7 @@ module TrustyCms
     # can be used as a placeholder for all extensions not explicitly named.
 
     # An example of how to add extensions:
-    # config.extensions = [ :snippets, :clipped, :layouts, :reorder, :multi_site]
+    # config.extensions = [ :snippets, :clipped, :layouts, :reorder, :multi_site ]
 
     config.extensions = []
     config.extensions_migration_order = []
