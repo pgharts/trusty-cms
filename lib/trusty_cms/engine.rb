@@ -18,9 +18,6 @@ module TrustyCms
         ckeditor/styles.js
         ckeditor/skins/moono/editor.css
         ckeditor/lang/en.js
-        rad_social/rad_screen.css
-        rad_social/rad_email.js
-        rad_social/rad_widget.js
       )
     end
   end

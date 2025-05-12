@@ -1,5 +1,4 @@
 app/javascript/**/*.js
 app/assets/javascripts/admin/jquery.*.js
 app/assets/javascripts/admin/modernizr.js
-app/assets/javascripts/rad_social/jquery.validate.min.js
 app/assets/javascripts/admin/persist.min.js
