@@ -37,7 +37,7 @@ class Admin::SecurityController < ApplicationController
   end
 
   def disable_two_factor
-    if @user.update(otp_required_for_login: false)
+    if @user.update(otp_required_for_login: false, otp_secret: nil)
       redirect_to admin_security_path, notice: t('security_controller.two_factor_disabled')
     else
       flash[:error] = t('security_controller.two_factor_disabled_error')
