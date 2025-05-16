@@ -11,8 +11,11 @@
             %th.user== #{t('name')} / #{t('username')}
           - thead.roles_header do
             %th.roles= t('roles')
+          - thead.two_factor_header do
+            %th.two_factor
+              = t('two_factor_authentication_acronym')
           - thead.actions_header do
-            %th.actions{:style=>'width:9em'}= t('modify')
+            %th.actions= t('modify')
           - thead.last_sign_in_at_header do
             %th.last_sign_in_at= "Last Sign In"
     %tbody
@@ -24,6 +27,12 @@
                 = link_to user.name, edit_admin_user_url(user)
             - tbody.roles_cell do
               %td.roles= roles(user)
+            - tbody.two_factor_cell do
+              %td.two_factor
+                - if user.otp_required_for_login
+                  = t('enabled')
+                - else
+                  = t('disabled')
             - tbody.actions_cell do
               %td.actions
                 - if !current_user.admin?
