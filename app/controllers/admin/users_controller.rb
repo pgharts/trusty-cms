@@ -49,7 +49,7 @@ class Admin::UsersController < Admin::ResourceController
     user = User.find(params[:id])
     user.update(
       otp_required_for_login: false,
-      otp_secret: nil
+      otp_secret: nil,
     )
     redirect_to admin_users_path
   end

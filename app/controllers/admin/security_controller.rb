@@ -4,8 +4,8 @@ class Admin::SecurityController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
   before_action :set_template_names
-  before_action :ensure_otp_secret, only: [:show, :edit]
-  before_action :set_two_factor_variables, only: [:show, :edit]
+  before_action :ensure_otp_secret, only: %i[show edit]
+  before_action :set_two_factor_variables, only: %i[show edit]
 
   def show
     set_standard_body_style
