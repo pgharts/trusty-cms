@@ -47,7 +47,7 @@
           = image_tag @qr_png_data, alt: t('security_controller.qr_alt')
           %p
             = t('security_controller.manual_key_instructions')
-          %strong= current_user.otp_secret
+          %strong= @user.otp_secret
 
           .form-margin-top
             = form_with url: verify_two_factor_admin_security_path, method: :post do |form|
