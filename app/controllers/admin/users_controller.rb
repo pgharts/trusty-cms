@@ -45,6 +45,15 @@ class Admin::UsersController < Admin::ResourceController
     end
   end
 
+  def disable_2fa
+    user = User.find(params[:id])
+    user.update(
+      otp_required_for_login: false,
+      otp_secret: nil
+    )
+    redirect_to admin_users_path
+  end
+
   private
 
   def user_params

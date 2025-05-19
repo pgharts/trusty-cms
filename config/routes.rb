@@ -20,6 +20,7 @@ TrustyCms::Application.routes.draw do
     end
     resources :users do
       get 'remove', on: :member
+      patch 'disable_2fa', on: :member
     end
     resources :snippets do
       get :remove, on: :member

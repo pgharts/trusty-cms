@@ -333,7 +333,7 @@ en:
     by: 'by'
     last_updated: 'Last Updated'
   two_factor_authentication: 'Two-Factor Authentication'
-  two_factor_authentication_acronym: '2FA'
+  two_factor_authentication_status: '2FA Status'
   two_factor_controller:
     invalid_code: 'Invalid two-factor authentication code.'
     session_expired: 'Your session has expired. Please log in again.'

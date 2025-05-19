@@ -11,9 +11,12 @@
             %th.user== #{t('name')} / #{t('username')}
           - thead.roles_header do
             %th.roles= t('roles')
-          - thead.two_factor_header do
-            %th.two_factor
-              = t('two_factor_authentication_acronym')
+          - thead.two_factor_status_header do
+            %th.two_factor_status
+              = t('two_factor_authentication_status')
+          - thead.disable_two_factor_header do
+            %th.disable_two_factor
+              Disable 2FA
           - thead.actions_header do
             %th.actions= t('modify')
           - thead.last_sign_in_at_header do
@@ -27,12 +30,21 @@
                 = link_to user.name, edit_admin_user_url(user)
             - tbody.roles_cell do
               %td.roles= roles(user)
-            - tbody.two_factor_cell do
+            - tbody.two_factor_status_cell do
               %td.two_factor
                 - if user.otp_required_for_login
                   = t('enabled')
                 - else
                   = t('disabled')
+            - tbody.disable_two_factor_cell do
+              %td.actions
+                - if user.otp_required_for_login
+                  - if !current_user.admin?
+                    %span.action.disabled
+                      %i.fas.fa-minus-circle
+                      Disable
+                  - else
+                    = button_to 'Disable', disable_2fa_admin_user_path(user), method: :patch, data: { confirm: "Are you sure you want to disable 2FA for this user?" }
             - tbody.actions_cell do
               %td.actions
                 - if !current_user.admin?
