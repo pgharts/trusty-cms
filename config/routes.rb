@@ -4,8 +4,6 @@ TrustyCms::Application.routes.draw do
     controllers: { sessions: 'admin/sessions' },
     skip: :registration
   post '/page-status/refresh' => 'page_status#refresh'
-  get '/rad_social/mail' => 'social_mailer#social_mail_form', as: :rad_social_mail_form
-  post '/rad_social/mail' => 'social_mailer#create_social_mail', as: :rad_create_social_mail
   TrustyCms::Application.config.enabled_extensions.each do |ext|
   end
   namespace :admin do
