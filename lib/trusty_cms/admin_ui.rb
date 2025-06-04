@@ -191,7 +191,7 @@ module TrustyCms
       OpenStruct.new.tap do |user|
         user.preferences = RegionSet.new do |preferences|
           preferences.main.concat %w{edit_header edit_form}
-          preferences.form.concat %w{edit_first_name edit_last_name edit_email}
+          preferences.form.concat %w{edit_first_name edit_last_name edit_email edit_password}
           preferences.form_bottom.concat %w{edit_buttons}
         end
         user.security = RegionSet.new do |security|
@@ -201,7 +201,7 @@ module TrustyCms
         end
         user.edit = RegionSet.new do |edit|
           edit.main.concat %w{edit_header edit_form}
-          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_roles edit_notes}
+          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_password edit_roles edit_notes}
           edit.form_bottom.concat %w{edit_buttons edit_timestamp}
         end
         user.index = RegionSet.new do |index|
