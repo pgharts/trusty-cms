@@ -1,0 +1,28 @@
+- @page_title = 'Recent Changes - ' + default_page_title
+
+.outset
+  = render_region :top
+  %table.index#layouts
+    %thead
+      %tr
+        - render_region :thead do |thead|
+          - thead.title_header do
+            %th Title
+          - thead.actions_header do
+            %th Action
+          - thead.user_header do
+            %th User
+          - thead.updated_at_header do
+            %th Updated At
+    %tbody
+      - @recent_changes.each do |change|
+        - render_region :tbody do |tbody|
+          %tr
+            - tbody.title_cell do
+              %td= link_to change[:page_title], change[:page_url]
+            - tbody.actions_cell do
+              %td= change[:action]
+            - tbody.user_cell do
+              %td= change[:user_name]
+            - tbody.updated_at_cell do
+              %td= change[:updated_at]
