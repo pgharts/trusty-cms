@@ -241,8 +241,6 @@ module TrustyCms
       OpenStruct.new.tap do |changes|
         changes.show = RegionSet.new do |show|
           show.top.concat %w{}
-          show.thead.concat %w{title_header actions_header user_header updated_at_header}
-          show.tbody.concat %w{title_cell actions_cell user_cell updated_at_cell}
         end
       end
     end

@@ -9,6 +9,7 @@ class Admin::ResourceController < ApplicationController
   before_action :load_models, only: :index
   before_action :load_model, only: %i[new create edit update remove destroy]
   before_action :set_owner_or_editor, only: %i[new create update]
+  before_action :set_page_updated_at, only: :update
   after_action :clear_model_cache, only: %i[create update destroy]
 
   cattr_reader :paginated
@@ -142,6 +143,12 @@ class Admin::ResourceController < ApplicationController
     if model.has_attribute? :created_by_id
       model.created_by_id = current_user.id if model.id == nil
       model.updated_by_id = current_user.id
+    end
+  end
+
+  def set_page_updated_at
+    if model.class.name.include?('Page') && model.has_attribute?(:updated_at)
+      model.updated_at = Time.zone.now
     end
   end
 

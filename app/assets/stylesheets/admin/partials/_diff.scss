@@ -1,0 +1,63 @@
+.diff {
+overflow: auto;
+}
+
+.diff ul {
+background: #fff;
+overflow: auto;
+font-size: 13px;
+list-style: none;
+margin: 0;
+padding: 0;
+display: table;
+width: 100%;
+}
+
+.diff li {
+padding: 0;
+display: table-row;
+margin: 0;
+height: 1em;
+}
+
+.diff li.ins {
+background: #dfd;
+color: #080;
+}
+
+.diff li.del {
+background: #fee;
+color: #b00;
+}
+
+/* Use 'white-space: pre;' if you don't want lines to wrap */
+.diff del,
+.diff ins,
+.diff span {
+white-space: pre-wrap;
+font-family: courier;
+display: block;
+text-decoration: none;
+}
+
+.diff del strong {
+font-weight: normal;
+background: #fcc;
+}
+
+.diff ins strong {
+font-weight: normal;
+background: #9f9;
+}
+
+.diff li.diff-comment {
+display: none;
+}
+
+.diff li.diff-block-info {
+background: gray;
+}
+
+table#recent-changes tr:hover.diff-row td {
+    background: none !important;
+}

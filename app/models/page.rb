@@ -1,8 +1,7 @@
 require 'trusty_cms/taggable'
 
 class Page < ActiveRecord::Base
-  has_paper_trail
-
+  
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
       ; super
@@ -21,6 +20,8 @@ class Page < ActiveRecord::Base
   belongs_to :layout
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
+
+  has_paper_trail
 
   # Validations
   validates_presence_of :title, :slug, :breadcrumb, :status_id

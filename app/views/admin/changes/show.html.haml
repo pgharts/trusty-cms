@@ -2,27 +2,27 @@
 
 .outset
   = render_region :top
-  %table.index#layouts
+  %table#recent-changes
     %thead
       %tr
-        - render_region :thead do |thead|
-          - thead.title_header do
-            %th Title
-          - thead.actions_header do
-            %th Action
-          - thead.user_header do
-            %th User
-          - thead.updated_at_header do
-            %th Updated At
+        %th Title
+        %th Action
+        %th User
+        %th Updated At
     %tbody
-      - @recent_changes.each do |change|
-        - render_region :tbody do |tbody|
-          %tr
-            - tbody.title_cell do
-              %td= link_to change[:page_title], change[:page_url]
-            - tbody.actions_cell do
-              %td= change[:action]
-            - tbody.user_cell do
-              %td= change[:user_name]
-            - tbody.updated_at_cell do
-              %td= change[:updated_at]
+      - @recent_changes.each_with_index do |change, index|
+        %tr.change-row{ data: { toggle_target: "diff-#{index}" } }
+          %td= link_to change[:page_title], change[:page_url]
+          %td= change[:action]
+          %td= change[:user_name]
+          %td
+            = change[:updated_at]
+            - if change[:diff]
+              %br
+              %a.toggle-diff{ href: "#", data: { toggle: "diff-#{index}" } } Show Diff
+
+        - if change[:diff]
+          %tr.diff-row{id: "diff-#{index}", style: "display: none;" }
+            %td{ colspan: 4 }
+              .diff-content
+                != change[:diff]
