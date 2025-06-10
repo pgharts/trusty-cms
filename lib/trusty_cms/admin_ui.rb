@@ -70,7 +70,8 @@ module TrustyCms
       end
 
       def deprecated_add(name, url, caller)
-        ActiveSupport::Deprecation.warn("admin.tabs.add is no longer supported in TrustyCms 0.9.x.  Please update your code to use: \ntab \"Content\" do\n\tadd_item(...)\nend", caller)
+        ActiveSupport::Deprecation.warn("admin.tabs.add is no longer supported in TrustyCms 0.9.x.  Please update your code to use: \ntab \"Content\" do\n\tadd_item(...)\nend",
+                                        caller)
         NavSubItem.new(name, url)
       end
     end
@@ -206,7 +207,7 @@ module TrustyCms
         end
         user.edit = RegionSet.new do |edit|
           edit.main.concat %w{edit_header edit_form}
-          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_roles edit_notes}
+          edit.form.concat %w{edit_first_name edit_last_name edit_email edit_password edit_roles edit_notes}
           edit.form_bottom.concat %w{edit_buttons edit_timestamp}
         end
         user.index = RegionSet.new do |index|

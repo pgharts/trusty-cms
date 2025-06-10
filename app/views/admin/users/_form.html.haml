@@ -15,6 +15,9 @@
       = f.label :email, t('email_address') , :class => 'optional'
       = f.text_field 'email', :class => 'textbox', :maxlength => 255
 
+    - form.edit_password do
+      = render 'password_fields', :f => f
+
     - form.edit_roles do
       - if current_user.admin?
         %fieldset.multi_option
