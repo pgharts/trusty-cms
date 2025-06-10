@@ -1,0 +1,57 @@
+- @page_title = 'Changes - ' + default_page_title
+- single_change = params[:version_id].present?
+
+.outset
+  = render_region :top
+
+  %table#recent-changes
+    %thead
+      %tr
+        %th Version ID
+        %th Title
+        %th Action
+        %th User
+        %th Updated At
+
+    %tbody
+      - if @change_error
+        %tr
+          %td{ colspan: 5 }
+            %span.text-danger= @change_error
+
+      - elsif @changes.present?
+        - @changes.each_with_index do |change, index|
+          %tr.change-row{ data: { toggle_target: "diff-#{index}" } }
+            %td= change[:id]
+            %td= link_to change[:page_title], change[:page_url]
+            %td= change[:action]
+            %td= change[:user_name]
+            %td
+              = change[:updated_at]
+              - unless single_change
+                %br
+                %a.toggle-diff{
+                  href: "#",
+                  role: "button",
+                  tabindex: "0",
+                  aria: {
+                    expanded: "false",
+                    controls: "diff-#{index}"
+                  },
+                  data: { toggle: "diff-#{index}" }
+                } Show Diff
+
+          - diff_row_id = single_change ? nil : "diff-#{index}"
+          - diff_row_class = single_change ? 'diff-row' : 'dynamic-diff-row'
+          %tr{ id: diff_row_id, class: diff_row_class, role: "region", "aria-live" => "polite" }
+            %td{ colspan: 5 }
+              - if change[:diff].present?
+                != change[:diff]
+              - else
+                %span.text-muted No differences found.
+                %span.sr-only Diff details for version ID #{change[:id]}.
+
+      - else
+        %tr
+          %td{ colspan: 5 }
+            %span No recent changes.

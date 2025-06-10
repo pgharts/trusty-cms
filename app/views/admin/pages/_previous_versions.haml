@@ -3,31 +3,40 @@
     %h4
       %i.fas.fa-clock-rotate-left
       Previous Versions
+
     .drawer_contents#versions
       - if @versions.present?
         %section
-          %table
+          %table#versions-table
             %thead
               %tr
+                %th Version ID
                 %th Date Updated
                 %th Time Updated
                 %th Updated By
                 %th Action
-            %tbody{ :id => 'versions-table' }
+            %tbody
               - @versions.each do |version|
                 %tr
+                  %td= link_to version[:id], admin_changes_path(version_id: version[:id])
                   %td= version[:update_date]
                   %td= version[:update_time]
                   %td= version[:updated_by]
                   %td
-                    = button_to 'Restore', 
+                    = button_to 'Undo',
                       restore_version_admin_page_path(@page, version_index: version[:index]),
                       method: :put,
-                      data: { confirm: 'Are you sure you want to restore this version?' }
+                      class: 'btn btn-warning',
+                      data: { confirm: revert_confirmation_message(version) }
       - else
         %section#no-previous-versions
           %p No previous versions are available.
+
     .drawer_handle
-      %a.toggle{:href=>'#versions', :rel=>'toggle[versions]', :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+      %a.toggle{
+        href: '#versions',
+        rel: 'toggle[versions]',
+        class: (meta_errors? ? 'less' : 'more')
+      }
         = meta_label
         %i.fas.fa-angle-down
