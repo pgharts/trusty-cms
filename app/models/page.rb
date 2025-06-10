@@ -1,7 +1,7 @@
 require 'trusty_cms/taggable'
 
 class Page < ActiveRecord::Base
-  
+
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
       ; super
