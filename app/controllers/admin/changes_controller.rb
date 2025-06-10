@@ -75,10 +75,6 @@ class Admin::ChangesController < Admin::ResourceController
     "<h2>#{label.humanize.titleize}</h2>#{diff_html}"
   end
 
-  def skip_field_diff?(field, old_val, new_val)
-    ignored_fields.include?(field) || (old_val.nil? && new_val == '')
-  end
-
   def ignored_fields
     %w[
       created_at
