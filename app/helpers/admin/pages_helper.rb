@@ -25,4 +25,10 @@ module Admin::PagesHelper
     selected_page_id = page.parent_id
     options_for_select(parent_pages.map { |p| [p.title, p.id] }, selected_page_id)
   end
+
+  def revert_confirmation_message(version)
+    date = version[:update_date]
+    time = version[:update_time]
+    "Are you sure you want to revert the page to the version before the change made on #{date} at #{time}? All changes made after that will be lost."
+  end
 end
