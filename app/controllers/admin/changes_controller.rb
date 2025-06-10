@@ -57,12 +57,10 @@ class Admin::ChangesController < Admin::ResourceController
   end
 
   def diff_fields(version)
-    label = label_for_version(version)
-
     version.changeset.map do |field, (old_val, new_val)|
       next unless renderable_diff?(field, old_val, new_val)
 
-      render_field_diff(version, field, old_val, new_val, label)
+      render_field_diff(version, field, old_val, new_val)
     end
   end
 
@@ -70,10 +68,11 @@ class Admin::ChangesController < Admin::ResourceController
     !ignored_fields.include?(field) && !(old_val.nil? && new_val == '')
   end
 
-  def render_field_diff(version, field, old_val, new_val, label)
+  def render_field_diff(version, field, old_val, new_val)
     diff_html = Diffy::Diff.new(old_val, new_val, context: 1).to_s(:html)
-    display_label = version.item_type == 'Page' ? field : label
-    "<h2>#{display_label.humanize.titleize}</h2>#{diff_html}"
+
+    label = version.item_type == 'Page' ? field : label_for_version(version)
+    "<h2>#{label.humanize.titleize}</h2>#{diff_html}"
   end
 
   def skip_field_diff?(field, old_val, new_val)

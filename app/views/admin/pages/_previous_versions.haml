@@ -17,7 +17,10 @@
                 %th Action
             %tbody
               - @versions.each do |version|
-                - confirm_message = "Are you sure you want to revert the page to the version *before* the change made on #{version[:update_date]} at #{version[:update_time]}? All changes made after that will be lost."
+                - confirm_message =
+                  "Are you sure you want to revert the page to the version *before* the change " +
+                  "made on #{version[:update_date]} at #{version[:update_time]}? " +
+                  "All changes made after that will be lost."
 
                 %tr
                   %td= link_to version[:id], admin_changes_path(version_id: version[:id])
