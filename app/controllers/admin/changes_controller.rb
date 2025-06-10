@@ -26,13 +26,13 @@ class Admin::ChangesController < Admin::ResourceController
   end
 
   def fetch_recent_page_versions
-    PaperTrail::Version
-      .where(item_type: 'Page')
-      .joins('INNER JOIN pages ON pages.id = versions.item_id')
-      .where(pages: { site_id: current_site.id })
-      .where('versions.created_at >= ?', 1.month.ago)
-      .order(created_at: :desc)
-      .limit(25)
+    PaperTrail::Version.
+      where(item_type: 'Page').
+      joins('INNER JOIN pages ON pages.id = versions.item_id').
+      where(pages: { site_id: current_site.id }).
+      where('versions.created_at >= ?', 1.month.ago).
+      order(created_at: :desc).
+      limit(25)
   end
 
   def build_change_entry(version)
