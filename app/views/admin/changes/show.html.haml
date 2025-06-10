@@ -19,19 +19,18 @@
           %td= change[:user_name]
           %td
             = change[:updated_at]
-            - if change[:diff]
-              %br
-              %a.toggle-diff{
-                href: "#",
-                role: "button",
-                tabindex: "0",
-                aria: {
-                  expanded: "false",
-                  controls: "diff-#{index}"
-                },
-                data: { toggle: "diff-#{index}" }
-              }
-                Show Diff
+            %br
+            %a.toggle-diff{
+              href: "#",
+              role: "button",
+              tabindex: "0",
+              aria: {
+                expanded: "false",
+                controls: "diff-#{index}"
+              },
+              data: { toggle: "diff-#{index}" }
+            }
+              Show Diff
         %tr.diff-row{id: "diff-#{index}", role: "region", "aria-live" => "polite" }
           %td{ colspan: 5 }
             .diff-content
