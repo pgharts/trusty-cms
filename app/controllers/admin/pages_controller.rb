@@ -134,6 +134,7 @@ class Admin::PagesController < Admin::ResourceController
       .sort_by(&:created_at).reverse
       .map do |version|
       {
+        id: version&.id,
         index: version&.index,
         update_date: version&.created_at&.strftime('%B %d, %Y'),
         update_time: version&.created_at&.strftime('%I:%M %p'),

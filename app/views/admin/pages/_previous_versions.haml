@@ -9,6 +9,7 @@
           %table
             %thead
               %tr
+                %th Change ID
                 %th Date Updated
                 %th Time Updated
                 %th Updated By
@@ -16,14 +17,16 @@
             %tbody{ :id => 'versions-table' }
               - @versions.each do |version|
                 %tr
+                  %td= version[:id]
                   %td= version[:update_date]
                   %td= version[:update_time]
                   %td= version[:updated_by]
                   %td
-                    = button_to 'Restore', 
+                    = button_to 'Undo', 
                       restore_version_admin_page_path(@page, version_index: version[:index]),
                       method: :put,
-                      data: { confirm: 'Are you sure you want to restore this version?' }
+                      data: { confirm: "Are you sure you want to restore the page to the version before the #{version[:update_date]}, #{version[:update_time]} change? All changes following this version will be lost." },
+                      class: 'btn btn-warning'
       - else
         %section#no-previous-versions
           %p No previous versions are available.

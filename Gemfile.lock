@@ -23,7 +23,6 @@ PATH
       mini_racer
       mutex_m
       mysql2
-      nokogiri (= 1.18.8)
       paper_trail (~> 16.0.0)
       paper_trail-association_tracking (~> 2.2.1)
       psych (= 5.2.2)

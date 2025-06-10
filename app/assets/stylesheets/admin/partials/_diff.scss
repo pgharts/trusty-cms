@@ -58,6 +58,10 @@ display: none;
 background: gray;
 }
 
+.diff-row {
+    display: none;
+}
+
 table#recent-changes tr:hover.diff-row td {
     background: none !important;
 }

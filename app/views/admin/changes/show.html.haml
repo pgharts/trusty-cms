@@ -5,6 +5,7 @@
   %table#recent-changes
     %thead
       %tr
+        %th Change ID
         %th Title
         %th Action
         %th User
@@ -12,6 +13,7 @@
     %tbody
       - @recent_changes.each_with_index do |change, index|
         %tr.change-row{ data: { toggle_target: "diff-#{index}" } }
+          %td= change[:id]
           %td= link_to change[:page_title], change[:page_url]
           %td= change[:action]
           %td= change[:user_name]
@@ -19,10 +21,22 @@
             = change[:updated_at]
             - if change[:diff]
               %br
-              %a.toggle-diff{ href: "#", data: { toggle: "diff-#{index}" } } Show Diff
-
-        - if change[:diff]
-          %tr.diff-row{id: "diff-#{index}", style: "display: none;" }
-            %td{ colspan: 4 }
-              .diff-content
+              %a.toggle-diff{
+                href: "#",
+                role: "button",
+                tabindex: "0",
+                aria: {
+                  expanded: "false",
+                  controls: "diff-#{index}"
+                },
+                data: { toggle: "diff-#{index}" }
+              }
+                Show Diff
+        %tr.diff-row{id: "diff-#{index}", role: "region", "aria-live" => "polite" }
+          %td{ colspan: 5 }
+            .diff-content
+              - if change[:diff].present?
                 != change[:diff]
+              - else
+                %span.text-muted No differences found.
+                %span.sr-only Diff details for change ID #{change[:id]}.
