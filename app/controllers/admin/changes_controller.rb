@@ -12,6 +12,7 @@ class Admin::ChangesController < Admin::ResourceController
 
   def load_changes
     return load_single_change if params[:version_id].present?
+
     load_recent_changes
   end
 
@@ -59,13 +60,20 @@ class Admin::ChangesController < Admin::ResourceController
     label = label_for_version(version)
 
     version.changeset.map do |field, (old_val, new_val)|
-      next if skip_field_diff?(field, old_val, new_val)
+      next unless renderable_diff?(field, old_val, new_val)
 
-      diff_html = Diffy::Diff.new(old_val, new_val, context: 1).to_s(:html)
-      display_label = version.item_type == 'Page' ? field : label
-
-      "<h2>#{display_label.humanize.titleize}</h2>#{diff_html}"
+      render_field_diff(version, field, old_val, new_val, label)
     end
+  end
+
+  def renderable_diff?(field, old_val, new_val)
+    !ignored_fields.include?(field) && !(old_val.nil? && new_val == '')
+  end
+
+  def render_field_diff(version, field, old_val, new_val, label)
+    diff_html = Diffy::Diff.new(old_val, new_val, context: 1).to_s(:html)
+    display_label = version.item_type == 'Page' ? field : label
+    "<h2>#{display_label.humanize.titleize}</h2>#{diff_html}"
   end
 
   def skip_field_diff?(field, old_val, new_val)
