@@ -62,6 +62,10 @@ background: gray;
     display: none;
 }
 
+table#recent-changes td {
+    padding: 12px;
+}
+
 table#recent-changes tr:hover.diff-row td {
     background: none !important;
 }
