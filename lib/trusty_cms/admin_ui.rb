@@ -124,7 +124,7 @@ module TrustyCms
     end
 
     # Region sets
-    %w{page layout user changes configuration extension}.each do |controller|
+    %w{page layout user configuration extension}.each do |controller|
       attr_accessor controller
       alias_method "#{controller}s", controller
     end
@@ -148,10 +148,6 @@ module TrustyCms
       design << nav_item('Layouts', '/admin/layouts')
       nav << design
 
-      changes = nav_tab('Recent Changes')
-      changes << nav_item('Changes', '/admin/changes')
-      nav << changes
-
       settings = nav_tab('Settings')
       settings << nav_item('General', '/admin/configuration')
       settings << nav_item('Personal', '/admin/preferences')
@@ -164,7 +160,6 @@ module TrustyCms
     def load_default_regions
       @page = load_default_page_regions
       @layout = load_default_layout_regions
-      @changes = load_default_changes_regions
       @user = load_default_user_regions
       @configuration = load_default_configuration_regions
       @extension = load_default_extension_regions
@@ -235,14 +230,6 @@ module TrustyCms
         end
         layout.new = layout.edit
         layout.remove = layout.edit
-      end
-    end
-
-    def load_default_changes_regions
-      OpenStruct.new.tap do |changes|
-        changes.show = RegionSet.new do |show|
-          show.top.concat %w{}
-        end
       end
     end
 

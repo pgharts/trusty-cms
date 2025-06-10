@@ -43,7 +43,6 @@ TrustyCms::Application.routes.draw do
   get 'admin' => 'admin/pages#index'
 
   namespace :admin do
-    resource :changes
     resource :preferences
     resource :two_factor, only: [:show, :create], controller: 'two_factor', path: 'two-factor'
     resource :security, controller: 'security' do

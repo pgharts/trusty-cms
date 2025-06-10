@@ -21,12 +21,10 @@ class MultiSiteExtension < TrustyCms::Extension
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     Admin::ResourceController.send :helper, MultiSite::SiteChooserHelper
     Admin::PagesController.send :helper, MultiSite::SiteChooserHelper
-    Admin::ChangesController.send :helper, MultiSite::SiteChooserHelper
     admin.layouts.index.add(:before_nav, "admin/layouts/site_chooser")
     admin.pages.index.add(:before_nav, "admin/layouts/site_chooser")
     admin.snippets.index.add(:before_nav, "admin/layouts/site_chooser")
     admin.pages.search.add(:before_nav, "admin/layouts/site_chooser")
-    admin.changes.show.add(:before_nav, "admin/layouts/site_chooser")
     Layout.send :is_site_scoped
     Snippet.send :is_site_scoped
     User.send :is_site_scoped, :shareable => true

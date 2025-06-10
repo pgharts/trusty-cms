@@ -1,4 +1,4 @@
-- if current_user.scoped_site? && defined?(Site) && defined?(controller) && Site.several?
+- if current_user.scoped_site? && defined?(Site) && defined?(controller) && controller.sited_model? && Site.several?
   .site_chooser
     %ul.nav
       %li

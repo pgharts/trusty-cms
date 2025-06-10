@@ -7,6 +7,7 @@
   width: $width;
 }
 
+
 table {
   th {
     background-color: $light-gray;
@@ -50,8 +51,13 @@ table {
       color: $dark-gray;
       text-decoration: none;
 
-      &.selected,
       &:hover {
+        background: $light-gray;
+        border: 1px solid darken($light-gray, 10%);
+        margin: 0 24px 0 0;
+      }
+
+      &.selected {
         background: $light-gray;
         border: 1px solid darken($light-gray, 10%);
         margin: 0 24px 0 0;
@@ -60,11 +66,6 @@ table {
 
     span.action.disabled {
       color: #cccccc;
-    }
-
-    &.actions {
-      font-size: 85%;
-      white-space: nowrap;
     }
 
     &.empty {
@@ -82,12 +83,10 @@ table {
         text-decoration: none;
       }
     }
-  }
 
-  thead {
-    tr,
-    tr:first-child {
-      border-top: none;
+    &.actions {
+      font-size: 85%;
+      white-space: nowrap;
     }
   }
 
@@ -105,17 +104,17 @@ table {
       }
     }
   }
+
+  thead {
+    tr,
+    tr:first-child {
+      border-top: none;
+    }
+  }
 }
 
 table.index#pages {
   td.name {
-    .info {
-      color: #9eb3bf;
-      font-size: 0.90em;
-      font-style: italic;
-      font-weight: normal;
-    }
-
     .w1 {
       position: relative;
 
@@ -125,33 +124,22 @@ table.index#pages {
         position: absolute;
       }
     }
-  }
 
-  td.status {
-    font-size: 0.80em;
+    .info {
+      color: #9eb3bf;
+      font-size: 0.90em;
+      font-style: italic;
+      font-weight: normal;
+    }
   }
 
   tr.page.virtual td.name a .title {
     color: #9eb3bf;
   }
-}
 
-table.index#users {
-  td.name {
-    padding-bottom: 8px;
-    padding-top: 8px;
-
-    .login {
-      color: #9eb3bf;
-      font-size: 90%;
-      font-style: italic;
-      font-weight: normal;
-    }
+  td.status {
+    font-size: .80em;
   }
-}
-
-table#versions-table td {
-  padding: 12px;
 }
 
 .status {
@@ -166,4 +154,18 @@ table#versions-table td {
 
 .hidden_status {
   @include status-badge(#9eb3bf);
+}
+
+table.index#users {
+  td.name {
+    padding-bottom: 8px;
+    padding-top: 8px;
+
+    .login {
+      color: #9eb3bf;
+      font-size: 90%;
+      font-style: italic;
+      font-weight: normal;
+    }
+  }
 }

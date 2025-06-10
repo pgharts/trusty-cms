@@ -1,6 +1,8 @@
 require 'trusty_cms/taggable'
 
 class Page < ActiveRecord::Base
+  has_paper_trail
+
   class MissingRootPageError < StandardError
     def initialize(message = 'Database missing root page')
       ; super
@@ -20,8 +22,6 @@ class Page < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_paper_trail
-
   # Validations
   validates_presence_of :title, :slug, :breadcrumb, :status_id
 
@@ -40,7 +40,6 @@ class Page < ActiveRecord::Base
 
   annotate :description
   attr_accessor :request, :response, :pagination_parameters
-
   class_attribute :default_child
   self.default_child = self
 
@@ -265,11 +264,11 @@ class Page < ActiveRecord::Base
         @display_name = string
       else
         @display_name ||= begin
-          n = name.to_s
-          n.sub(/^(.+?)Page$/, '\1')
-          n.gsub(/([A-Z])/, ' \1')
-          n.strip
-        end
+                            n = name.to_s
+                            n.sub(/^(.+?)Page$/, '\1')
+                            n.gsub(/([A-Z])/, ' \1')
+                            n.strip
+                          end
       end
       @display_name = @display_name + ' - not installed' if missing? && @display_name !~ /not installed/
       @display_name
