@@ -7,7 +7,6 @@
   width: $width;
 }
 
-
 table {
   th {
     background-color: $light-gray;
@@ -51,13 +50,8 @@ table {
       color: $dark-gray;
       text-decoration: none;
 
+      &.selected,
       &:hover {
-        background: $light-gray;
-        border: 1px solid darken($light-gray, 10%);
-        margin: 0 24px 0 0;
-      }
-
-      &.selected {
         background: $light-gray;
         border: 1px solid darken($light-gray, 10%);
         margin: 0 24px 0 0;
@@ -66,6 +60,11 @@ table {
 
     span.action.disabled {
       color: #cccccc;
+    }
+
+    &.actions {
+      font-size: 85%;
+      white-space: nowrap;
     }
 
     &.empty {
@@ -83,10 +82,12 @@ table {
         text-decoration: none;
       }
     }
+  }
 
-    &.actions {
-      font-size: 85%;
-      white-space: nowrap;
+  thead {
+    tr,
+    tr:first-child {
+      border-top: none;
     }
   }
 
@@ -104,17 +105,17 @@ table {
       }
     }
   }
-
-  thead {
-    tr,
-    tr:first-child {
-      border-top: none;
-    }
-  }
 }
 
 table.index#pages {
   td.name {
+    .info {
+      color: #9eb3bf;
+      font-size: 0.90em;
+      font-style: italic;
+      font-weight: normal;
+    }
+
     .w1 {
       position: relative;
 
@@ -124,36 +125,15 @@ table.index#pages {
         position: absolute;
       }
     }
+  }
 
-    .info {
-      color: #9eb3bf;
-      font-size: 0.90em;
-      font-style: italic;
-      font-weight: normal;
-    }
+  td.status {
+    font-size: 0.80em;
   }
 
   tr.page.virtual td.name a .title {
     color: #9eb3bf;
   }
-
-  td.status {
-    font-size: .80em;
-  }
-}
-
-.status {
-  a {
-    @include plain-link;
-  }
-}
-
-.draft_status {
-  @include status-badge($red);
-}
-
-.hidden_status {
-  @include status-badge(#9eb3bf);
 }
 
 table.index#users {
@@ -168,4 +148,22 @@ table.index#users {
       font-weight: normal;
     }
   }
+}
+
+table#versions-table td {
+  padding: 12px;
+}
+
+.status {
+  a {
+    @include plain-link;
+  }
+}
+
+.draft_status {
+  @include status-badge($red);
+}
+
+.hidden_status {
+  @include status-badge(#9eb3bf);
 }

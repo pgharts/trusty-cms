@@ -3,34 +3,40 @@
     %h4
       %i.fas.fa-clock-rotate-left
       Previous Versions
+
     .drawer_contents#versions
       - if @versions.present?
         %section
-          %table
+          %table#versions-table
             %thead
               %tr
-                %th Change ID
+                %th Version ID
                 %th Date Updated
                 %th Time Updated
                 %th Updated By
                 %th Action
-            %tbody{ :id => 'versions-table' }
+            %tbody
               - @versions.each do |version|
                 %tr
-                  %td= version[:id]
+                  %td= link_to version[:id], admin_changes_path(version_id: version[:id])
                   %td= version[:update_date]
                   %td= version[:update_time]
                   %td= version[:updated_by]
                   %td
-                    = button_to 'Undo', 
+                    = button_to 'Undo',
                       restore_version_admin_page_path(@page, version_index: version[:index]),
                       method: :put,
-                      data: { confirm: "Are you sure you want to restore the page to the version before the #{version[:update_date]}, #{version[:update_time]} change? All changes following this version will be lost." },
-                      class: 'btn btn-warning'
+                      class: 'btn btn-warning',
+                      data: { confirm: "Are you sure you want to revert the page to the version *before* the change made on #{version[:update_date]} at #{version[:update_time]}? All changes made after that will be lost." }
       - else
         %section#no-previous-versions
           %p No previous versions are available.
+
     .drawer_handle
-      %a.toggle{:href=>'#versions', :rel=>'toggle[versions]', :class=>"#{(meta_errors? ? 'less' : 'more')}"}
+      %a.toggle{
+        href: '#versions',
+        rel: 'toggle[versions]',
+        class: (meta_errors? ? 'less' : 'more')
+      }
         = meta_label
         %i.fas.fa-angle-down

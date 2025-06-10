@@ -4,9 +4,15 @@ class Admin::ChangesController < Admin::ResourceController
   before_action :initialize_variables
 
   def show
-    @recent_changes = fetch_recent_page_versions.map do |version|
-      build_change_entry(version)
-    end
+    @changes =
+      if params[:version_id].present?
+        version = PaperTrail::Version.find_by(id: params[:version_id])
+        version ? [build_change_entry(version)] : []
+      else
+        fetch_recent_page_versions.map { |version| build_change_entry(version) }
+      end
+
+    @change_error = "Version ID not found." if params[:version_id].present? && @changes.empty?
   end
 
   private
@@ -18,16 +24,19 @@ class Admin::ChangesController < Admin::ResourceController
       .where(pages: { site_id: current_site.id })
       .where("versions.created_at >= ?", 1.month.ago)
       .order(created_at: :desc)
-      .limit(50)
+      .limit(25)
   end
 
   def build_change_entry(version)
-    page = Page.find(version.item_id)
-    user_name = User.find_by(id: version.whodunnit.to_i)&.name || 'Unknown User'
-    changes = PaperTrail::Version.where(transaction_id: version.transaction_id)
+    page = Page.find_by(id: version.item_id)
+    return {} unless page
 
-    diffs = changes.map { |v| diff_content(v) }.compact
-    diff_text = diffs.any? ? diffs.join("<br>") : nil
+    user_id = Integer(version.whodunnit, exception: false)
+    user_name = User.find_by(id: user_id)&.name || 'Unknown User'
+
+    changes = PaperTrail::Version.where(transaction_id: version.transaction_id)
+    diffs = changes.flat_map { |v| diff_content(v) }.compact
+    diff_text = diffs.any? ? diffs.join('<br />') : nil
 
     {
       action: version.event.titleize,
@@ -41,14 +50,7 @@ class Admin::ChangesController < Admin::ResourceController
   end
 
   def diff_content(version)
-    label = case version.item_type
-            when 'PagePart'
-              PagePart.find_by(id: version.item_id)&.name || 'Unknown PagePart'
-            when 'PageField'
-              PageField.find_by(id: version.item_id)&.name || 'Unknown PageField'
-            else
-              version.item_type
-            end
+    label = label_for_version(version)
 
     version.changeset.map do |field, (old_val, new_val)|
       next if ignored_field?(field)
@@ -57,12 +59,33 @@ class Admin::ChangesController < Admin::ResourceController
       diff_html = Diffy::Diff.new(old_val, new_val, context: 1).to_s(:html)
       display_label = (version.item_type == 'Page') ? field : label
 
-      "<h2>#{display_label.humanize.titleize}</h2><div class=\"diffy-output\">#{diff_html}</div>"
-    end.compact
+      "<h2>#{display_label.humanize.titleize}</h2>#{diff_html}"
+    end
+  end
+
+  def label_for_version(version)
+    case version.item_type
+    when 'PagePart'
+      PagePart.find_by(id: version.item_id)&.name || 'Unknown PagePart'
+    when 'PageField'
+      PageField.find_by(id: version.item_id)&.name || 'Unknown PageField'
+    else
+      version.item_type
+    end
   end
 
   def ignored_field?(field)
-    %w[created_at created_by_id id lock_version name page_id published_at updated_at updated_by_id].include?(field)
+    %w[
+      created_at
+      created_by_id
+      id
+      lock_version
+      name
+      page_id
+      published_at
+      updated_at
+      updated_by_id
+    ].include?(field)
   end
 
   def initialize_variables
