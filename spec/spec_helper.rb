@@ -1,11 +1,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
+# Coverage setup
 require 'simplecov'
 require 'simplecov-lcov'
-
-require 'rspec/rails'
-require 'factory_bot_rails'
 
 SimpleCov::Formatter::LcovFormatter.config do |config|
   config.report_with_single_file = true
@@ -14,13 +12,18 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-
 SimpleCov.start('rails')
-include Warden::Test::Helpers
 
+# Test framework setup
+require 'rspec/rails'
+require 'factory_bot_rails'
+
+include Warden::Test::Helpers
 Rails.backtrace_cleaner.remove_silencers!
 
+# Support files and factories
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
 FactoryBot.definition_file_paths = [File.expand_path('../factories', __FILE__)]
 FactoryBot.find_definitions
 
