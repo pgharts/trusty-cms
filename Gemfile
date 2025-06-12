@@ -29,4 +29,5 @@ group :development, :test do
   gem 'ransack'
   gem 'rspec-rails'
   gem 'simplecov'
+  gem 'simplecov-lcov'
 end
