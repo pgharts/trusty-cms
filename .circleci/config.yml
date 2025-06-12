@@ -20,11 +20,12 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # Fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
           name: Install bundler
-          command: gem install bundler -v "$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1)"
+          command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 
       - run:
           name: Install Ruby dependencies
@@ -62,7 +63,7 @@ jobs:
 
       - run:
           name: Create test results directory
-          command: mkdir -p /tmp/test-results
+          command: mkdir /tmp/test-results
 
       - run:
           name: Run tests with coverage
