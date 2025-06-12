@@ -1,10 +1,11 @@
-require 'factory_bot_rails'
-require 'rspec/rails'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
+
 require 'simplecov'
 require 'simplecov-lcov'
 
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require 'rspec/rails'
+require 'factory_bot_rails'
 
 SimpleCov::Formatter::LcovFormatter.config do |config|
   config.report_with_single_file = true
