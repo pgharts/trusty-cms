@@ -1,12 +1,14 @@
 version: 2.1
 
+orbs:
+  qlty: qltysh/qlty-orb@0.0.6
+
 jobs:
-  build:
+  test:
     docker:
       - image: cimg/ruby:3.3.1-node
         environment:
           - RAILS_ENV: test
-          - CC_TEST_REPORTER_ID: 10e89622ddc764206e253cd07c5784f83178fe45550920e0eac8ab2e020e3e93
       - image: cimg/mysql:5.7.36
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -14,57 +16,72 @@ jobs:
     working_directory: ~/trusty-cms
     steps:
       - checkout
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+
       - run:
-          name: Bundler
-          command: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+          name: Install bundler
+          command: gem install bundler -v "$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1)"
+
       - run:
-          name: Bundle Install
+          name: Install Ruby dependencies
           command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
       - restore_cache:
           keys:
             - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - yarn-cache-{{ .Branch }}
             - yarn-cache
+
       - run:
-          name: install JavaScript dependencies
+          name: Install JavaScript dependencies
           command: yarn install --modules-folder spec/dummy/node_modules
+
       - save_cache:
           key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
+
       - run:
-          name: Wait for DB
+          name: Wait for database
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
       - run:
-          name: database setup
+          name: Set up database
           command: |
             sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
             bundle exec rake app:db:migrate
 
       - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
+          name: Create test results directory
+          command: mkdir -p /tmp/test-results
 
-      - run: mkdir /tmp/test-results
       - run:
+          name: Run tests with coverage
           command: |
-            ./cc-test-reporter before-build
             bundle exec rspec --format progress -o /tmp/test-results/rspec.xml --profile 10 $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            ./cc-test-reporter after-build --coverage-input-type simplecov
           when: always
+
       - store_test_results:
           path: /tmp/test-results
+
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+      - qlty/coverage_publish:
+          files: coverage/lcov.info
+
+workflows:
+  ci:
+    jobs:
+      - test:
+          context: qlty-context
