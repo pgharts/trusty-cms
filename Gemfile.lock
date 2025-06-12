@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (7.0.32)
+    trusty-cms (7.0.33)
       RedCloth (= 4.3.3)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.3.0)
@@ -168,7 +168,7 @@ GEM
       devise (~> 4.0)
       railties (>= 7.0, < 8.1)
       rotp (~> 6.0)
-    diff-lcs (1.5.1)
+    diff-lcs (1.6.2)
     diffy (3.4.4)
     docile (1.4.1)
     drb (2.2.1)
@@ -369,15 +369,15 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 2.0)
     rqrcode_core (2.0.0)
-    rspec-core (3.13.2)
+    rspec-core (3.13.4)
       rspec-support (~> 3.13.0)
-    rspec-expectations (3.13.3)
+    rspec-expectations (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.2)
+    rspec-mocks (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (7.1.0)
+    rspec-rails (7.1.1)
       actionpack (>= 7.0)
       activesupport (>= 7.0)
       railties (>= 7.0)
@@ -385,7 +385,7 @@ GEM
       rspec-expectations (~> 3.13)
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
-    rspec-support (3.13.1)
+    rspec-support (3.13.4)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
@@ -404,6 +404,7 @@ GEM
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
+    simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -465,8 +466,9 @@ DEPENDENCIES
   psych (= 5.2.2)
   rails-observers
   ransack
-  rspec-rails
+  rspec-rails (~> 7.1.1)
   simplecov
+  simplecov-lcov
   trusty-cms!
   trustygems (~> 0.2.0)
 

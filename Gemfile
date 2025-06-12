@@ -27,6 +27,7 @@ group :development, :test do
   gem 'psych', '5.2.2'
   gem 'rails-observers'
   gem 'ransack'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 7.1.1'
   gem 'simplecov'
+  gem 'simplecov-lcov'
 end
