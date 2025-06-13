@@ -32,5 +32,6 @@ class Status
     Status.new(id: 50,  name: 'Reviewed'),
     Status.new(id: 90,  name: 'Scheduled'),
     Status.new(id: 100, name: 'Published'),
+    Status.new(id: 101, name: 'Hidden'),
   ]
 end

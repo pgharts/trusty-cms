@@ -103,7 +103,7 @@ module StandardTags
     <pre><code><r:children:each [offset="number"] [limit="number"]
      [by="published_at|updated_at|created_at|slug|title|keywords|description"]
      [order="asc|desc"]
-     [status="draft|reviewed|scheduled|published|all"]
+     [status="draft|reviewed|scheduled|published|hidden|all"]
      [paginated="true"]
      [per_page="number"]
      >
