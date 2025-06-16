@@ -8,7 +8,10 @@ class Page < ActiveRecord::Base
   end
 
   # Callbacks
-  before_save :update_virtual, :update_published_datetime, :set_allowed_children_cache
+  before_save :update_virtual,
+              :update_published_datetime,
+              :set_allowed_children_cache,
+              :handle_hidden_status
 
   # Associations
   acts_as_tree order: 'position ASC'
@@ -105,6 +108,10 @@ class Page < ActiveRecord::Base
 
   def published?
     status == Status[:published]
+  end
+
+  def hidden?
+    status == Status[:hidden]
   end
 
   def scheduled?
@@ -205,7 +212,7 @@ class Page < ActiveRecord::Base
 
     path = clean_path(path) if clean
     my_path = self.path
-    if (my_path == path) && (published? || can_view_drafts)
+    if (my_path == path) && (published? || hidden? || can_view_drafts)
       return self
     elsif path =~ /^#{Regexp.quote(my_path)}([^\/]*)/
       slug_child = children.find_by_slug($1)
@@ -243,6 +250,13 @@ class Page < ActiveRecord::Base
 
   def set_allowed_children_cache
     self.allowed_children_cache = allowed_children_lookup.collect(&:name).join(',')
+  end
+
+  def handle_hidden_status
+    return unless status_id == Status[:hidden].id
+    return unless TrustyCms::Application.config.on_hidden_callback
+
+    TrustyCms::Application.config.on_hidden_callback.call(self)
   end
 
   class << self
