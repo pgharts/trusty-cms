@@ -76,6 +76,21 @@ Steps:
 
         rspec
 
+### Hidden Page Status Configuration
+In version `7.0.34`, TrustyCMS introduces support for custom behavior when a page is marked as **Hidden**.
+
+While TrustyCMS does not include built-in fields for excluding hidden pages from calendars or search, parent applications can define this behavior using the `on_hidden_callback` configuration option.
+
+To define what should happen when a page is set to Hidden, configure the callback in your initializer (e.g., `config/initializers/trusty_cms_config.rb`):
+
+```ruby
+TrustyCms::Application.config.on_hidden_callback = ->(page) do
+  page.display_on_calendar = false
+  page.hide_from_subnav = true
+  page.indexable = false
+end
+```
+
 ### Preview Custom Page Types
 
 TrustyCMS supports a preview feature for standard page types. However, this functionality may not work out of the box for custom page types. To enable the preview feature for your custom page types, follow these steps:
