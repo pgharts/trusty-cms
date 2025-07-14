@@ -24,14 +24,12 @@ end
 module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
-    config.legacy_connection_handling = false
     config.autoload_paths += %W(#{TRUSTY_CMS_ROOT}/lib)
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/helpers)
 
     # Initialize extension paths
     config.initialize_extension_paths
-    config.active_record.legacy_connection_handling = false
 
     extension_loader = ExtensionLoader.instance { |l| l.initializer = self }
     extension_loader.paths(:load).reverse_each do |path, value|

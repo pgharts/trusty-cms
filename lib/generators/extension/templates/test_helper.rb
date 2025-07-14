@@ -18,7 +18,7 @@ class ActiveSupport::TestCase
   test_helper :extension_tags
 
   # Add the fixture directory to the fixture path
-  self.fixture_path << File.dirname(__FILE__) + '/fixtures'
+  self.fixture_paths << File.expand_path('fixtures', __dir__)
 
   # Add more helper methods to be used by all extension tests here...
 end

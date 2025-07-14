@@ -20,7 +20,6 @@ module TrustyCms
     Rails.autoloaders.log!
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.active_record.legacy_connection_handling = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
@@ -68,7 +67,6 @@ module TrustyCms
 
     # Make Active Record use UTC-base instead of local time
     config.time_zone = 'UTC'
-    config.legacy_connection_handling = false
     # Set the default field error proc
     config.action_view.field_error_proc = Proc.new do |html, instance|
       if html !~ /label/
