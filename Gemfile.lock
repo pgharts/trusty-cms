@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    trusty-cms (7.0.35)
+    trusty-cms (7.0.36)
       RedCloth (= 4.3.3)
       activestorage-validator
       acts_as_list (>= 0.9.5, < 1.3.0)
@@ -15,7 +15,7 @@ PATH
       diffy
       drb
       execjs (~> 2.7)
-      haml (>= 5.0, < 6.0)
+      haml (~> 6.3.0)
       haml-rails
       highline (>= 1.7.8, < 3.2.0)
       image_processing
@@ -202,8 +202,9 @@ GEM
       mime-types (>= 1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
       tilt
     haml-rails (2.1.0)
       actionpack (>= 5.1)
