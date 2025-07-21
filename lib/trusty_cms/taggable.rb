@@ -53,7 +53,10 @@ module TrustyCms::Taggable
     message = "Deprecated radius tag <r:#{tag_name}>"
     message << " will be removed or significantly changed in trusty #{options[:deadline]}." if options[:deadline]
     message << " Please use <r:#{options[:substitute]}> instead." if options[:substitute]
-    ActiveSupport::Deprecation.warn(message)
+
+    deprecation_horizon = options[:deadline] || '1.0'
+    deprecation = ActiveSupport::Deprecation.new(deprecation_horizon, 'trusty-cms')
+    deprecation.warn(message)
   end
 
   module ClassMethods
