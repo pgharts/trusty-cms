@@ -233,7 +233,7 @@ class Rails::Application::Configuration
   # Old gem-invocation method now deprecated
   #
   def gem(name, options = {})    
-    deprecation = ActiveSupport::Deprecation.new()
+    deprecation = ActiveSupport::Deprecation.new
     deprecation.warn('Please declare gem dependencies in your Gemfile (or for an extension, in the .gemspec file).', caller)
     super
   end
