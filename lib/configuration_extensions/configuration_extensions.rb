@@ -222,13 +222,19 @@ class Rails::Application::Configuration
   # Old extension-dependency mechanism now deprecated
   #
   def extension(ext)
-    ::ActiveSupport::Deprecation.warn("Extension dependencies have been deprecated and are no longer supported in trusty 1.0. Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.", caller)
+    deprecation = ActiveSupport::Deprecation.new('1.0', 'trusty-cms')
+    deprecation.warn(
+      'Extension dependencies have been deprecated and are no longer supported in trusty 1.0. ' +
+      'Extensions with dependencies should be packaged as gems and use the .gemspec to declare them.',
+      caller
+    )
   end
 
-  # Old gem-invogation method now deprecated
+  # Old gem-invocation method now deprecated
   #
-  def gem(name, options = {})
-    ::ActiveSupport::Deprecation.warn("Please declare gem dependencies in your Gemfile (or for an extension, in the .gemspec file).", caller)
+  def gem(name, options = {})    
+    deprecation = ActiveSupport::Deprecation.new
+    deprecation.warn('Please declare gem dependencies in your Gemfile (or for an extension, in the .gemspec file).', caller)
     super
   end
 

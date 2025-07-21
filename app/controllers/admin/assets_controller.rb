@@ -1,9 +1,6 @@
 class Admin::AssetsController < Admin::ResourceController
   paginate_models(per_page: 50)
   COMPRESS_FILE_TYPE = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'].freeze
-  before_action do
-    ActiveStorage::Current.host = request.base_url
-  end
 
   def index
     assets = Asset.order('created_at DESC')

@@ -138,7 +138,8 @@ module TrustyCms
           paths(type)
         end
         define_method("add_#{type}_paths".to_sym) do |additional_paths|
-          ::ActiveSupport::Deprecation.warn("ExtensionLoader.add_#{type}_paths is has been moved and is deprecated. Please use TrustyCms.configuration.add_#{type}_paths", caller)
+          deprecation = ActiveSupport::Deprecation.new('1.0', 'trusty-cms')
+          deprecation.warn("ExtensionLoader.add_#{type}_paths is has been moved and is deprecated. Please use TrustyCms.configuration.add_#{type}_paths", caller)
           initializer.configuration.send("add_#{type}_paths".to_sym, additional_paths)
         end
       end

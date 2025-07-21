@@ -794,7 +794,6 @@ module StandardTags
     tag.expand
     raise TagError.new("`navigation' tag must include a `normal' tag") unless hash.has_key? :normal
 
-    # ActiveSupport::Deprecation.warn("The 'urls' attribute of the r:navigation tag has been deprecated in favour of 'paths'. Please update your site.") if tag.attr['urls']
     result = []
     pairs = (tag.attr['paths'] || tag.attr['urls']).to_s.split('|').map do |pair|
       parts = pair.split(':')
@@ -835,7 +834,6 @@ module StandardTags
   end
   tag 'navigation:path' do |tag|
     hash = tag.locals.navigation
-    # ActiveSupport::Deprecation.warn("The 'r:navigation:url' tag has been deprecated in favour of 'r:navigation:path'. Please update your site.")
     hash[:path]
   end
 
