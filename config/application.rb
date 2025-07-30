@@ -11,12 +11,14 @@ require 'trustygems'
 require 'devise'
 
 if defined?(Bundler)
-  Bundler.require(*Rails.groups(assets: %w(development test)))
+  Bundler.require(*Rails.groups)
 end
 
 module TrustyCms
   class Application < Rails::Application
     include TrustyCms::Initializer
+    config.load_defaults 7.2
+
     Rails.autoloaders.log!
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -48,7 +50,6 @@ module TrustyCms
                           allow_reload: false,
                           allow_revalidate: false
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
-    config.assets.enabled = true
 
     config.filter_parameters += %i[password password_confirmation]
 

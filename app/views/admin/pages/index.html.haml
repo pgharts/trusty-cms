@@ -1,7 +1,8 @@
 - @page_title = t('pages') + ' - ' + default_page_title
 
+= render_region :top
+
 .outset
-  = render_region :top
   = render 'search_form', title: nil, show_view_all_button: false
   %table.index.tablesaw#pages{ :summary => t('page_hierarchy') }
     %thead
