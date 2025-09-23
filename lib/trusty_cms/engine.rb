@@ -1,4 +1,5 @@
 require 'ckeditor'
+require 'ckeditor5'
 require 'devise'
 require 'ransack'
 require 'paper_trail'

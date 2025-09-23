@@ -2,7 +2,8 @@
 = fields.hidden_field :parent_id
 = fields.hidden_field :class_name
 = render_region :form_top, :locals => {:f => fields}
-
+- content_for :head do
+  = ckeditor5_assets
 - render_region :form, :locals => {:f => fields} do |form|
   - form.edit_title do
     %p.title
@@ -31,7 +32,7 @@
           %a.popup{:href=> '#add_part_popup', :title=>t('add_part')}
             %i.fas.fa-plus-circle
       #pages.pages
-        = render :partial => 'admin/page_parts/page_part', :collection => @page.parts
+        = render :partial => 'admin/page_parts/page_part', :collection => @page.parts, locals: { f: fields }
     = render_region :parts_bottom, :locals => {:f => fields}
 
 .set

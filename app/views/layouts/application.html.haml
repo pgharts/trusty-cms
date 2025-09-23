@@ -42,7 +42,7 @@
       = javascript_include_tag javascript
 
     = csrf_meta_tags
-
+    = yield :head
   %body{:class=>body_classes.join(" ")}
     - if gtm_container_id
       %noscript

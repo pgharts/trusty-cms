@@ -11,4 +11,4 @@
           = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
       = render_region :part_controls, :locals => {:page_part => page_part}
     %div
-      = cktext_area :page_part, page_part.content || '', :name => "page[parts_attributes][#{page_part_counter}][content]", :value => page_part.content || '', :style => 'width: 100%', :id => "part_#{page_part.name.to_slug}_content"
+      = f.ckeditor5 :page_part, initial_data: page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", value: page_part.content || '', id: "part_#{page_part.name.to_slug}_content_ckeditor5"
