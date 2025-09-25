@@ -31,3 +31,5 @@ group :development, :test do
   gem 'simplecov'
   gem 'simplecov-lcov'
 end
+
+gem "jsbundling-rails", "~> 1.3"

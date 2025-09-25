@@ -5,3 +5,4 @@
 //= link admin/assets_admin.js
 //= link admin/custom_file_upload.js
 //= link admin/validations/scheduled_status_validation.js
+//= link trusty_cms/ckeditor5.js

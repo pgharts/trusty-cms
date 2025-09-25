@@ -41,6 +41,7 @@
     - javascript_overrides.each do |javascript|
       = javascript_include_tag javascript
 
+    = stylesheet_link_tag href="https://cdn.ckeditor.com/ckeditor5/46.1.1/ckeditor5.css"
     = csrf_meta_tags
 
   %body{:class=>body_classes.join(" ")}
@@ -84,3 +85,4 @@
 
       #popups
         = yield :popups
+    = javascript_include_tag "trusty_cms/ckeditor5", "data-turbo-track": "reload", defer: true

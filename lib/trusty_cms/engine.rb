@@ -1,4 +1,3 @@
-require 'ckeditor'
 require 'devise'
 require 'ransack'
 require 'paper_trail'
@@ -10,14 +9,12 @@ module TrustyCms
     paths['app/helpers'] = []
     initializer 'trusty_cms.assets.precompile' do |app|
       app.config.assets.paths << Rails.root.join('../trusty-cms/node_modules')
+      engine_builds = Rails.root.join("app/assets/builds")
+      app.config.assets.paths << engine_builds
       app.config.assets.precompile += %w(
-        admin/main.css admin.js
-        ckeditor/config.js
-        ckeditor/contents.css
-        ckeditor/config.js
-        ckeditor/styles.js
-        ckeditor/skins/moono/editor.css
-        ckeditor/lang/en.js
+        admin/main.css
+        admin.js
+        trusty-cms-manifest.js
       )
     end
   end

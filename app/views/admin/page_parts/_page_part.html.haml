@@ -10,5 +10,11 @@
         %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
           = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
       = render_region :part_controls, :locals => {:page_part => page_part}
-    %div
-      = cktext_area :page_part, page_part.content || '', :name => "page[parts_attributes][#{page_part_counter}][content]", :value => page_part.content || '', :style => 'width: 100%', :id => "part_#{page_part.name.to_slug}_content"
+    -# %div
+    -#   = cktext_area :page_part, page_part.content || '', :name => "page[parts_attributes][#{page_part_counter}][content]", :value => page_part.content || '', :style => 'width: 100%', :id => "part_#{page_part.name.to_slug}_content"
+    .main-container
+      .editor-container.editor-container_classic-editor.editor-container_include-style.editor-container_include-fullscreen#editor-container
+        .editor-container__editor
+          #editor
+            = raw(page_part.content || '')
+            = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", value: page_part.content || '', id: "part_#{page_part.name.to_slug}_content"
