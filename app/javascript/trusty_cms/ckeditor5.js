@@ -283,6 +283,7 @@ const editorConfig = {
             'resizeImage'
         ]
     },
+
     licenseKey: 'GPL',
     link: {
         addTargetToExternalLinks: true,
@@ -354,6 +355,12 @@ const editorConfig = {
     },
     table: {
         contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+    },
+    simpleUpload: {
+        uploadUrl: '/admin/assets/uploader',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
     }
 };
 
@@ -366,4 +373,6 @@ ClassicEditor
         editor.model.document.on('change:data', () => {
             hiddenInput.value = editor.getData();
         })
-    })
+    }).catch(error => {
+        console.error(error);
+    });

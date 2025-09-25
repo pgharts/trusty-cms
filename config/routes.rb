@@ -29,6 +29,9 @@ TrustyCms::Application.routes.draw do
       get :remove, on: :member
       get :refresh, on: :collection
       put :refresh, on: :member
+      collection do
+        post :uploader
+      end
     end
     resources :page_attachments, only: [:new] do
       get :remove, on: :member

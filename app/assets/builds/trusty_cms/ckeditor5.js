@@ -105118,6 +105118,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     },
     table: {
       contentToolbar: ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"]
+    },
+    simpleUpload: {
+      uploadUrl: "/admin/assets/uploader",
+      headers: {
+        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+      }
     }
   };
   ClassicEditor.create(document.querySelector("#editor"), editorConfig).then((editor) => {
@@ -105126,6 +105132,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     editor.model.document.on("change:data", () => {
       hiddenInput.value = editor.getData();
     });
+  }).catch((error) => {
+    console.error(error);
   });
 })();
 /*! Bundled license information:
