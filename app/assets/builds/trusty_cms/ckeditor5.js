@@ -105120,7 +105120,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       contentToolbar: ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"]
     }
   };
-  ClassicEditor.create(document.querySelector("#editor"), editorConfig);
+  ClassicEditor.create(document.querySelector("#editor"), editorConfig).then((editor) => {
+    const pagePart = document.querySelector("#editor").getAttribute("data-part");
+    const hiddenInput = document.querySelector(`#part_${pagePart}_content`);
+    editor.model.document.on("change:data", () => {
+      hiddenInput.value = editor.getData();
+    });
+  });
 })();
 /*! Bundled license information:
 

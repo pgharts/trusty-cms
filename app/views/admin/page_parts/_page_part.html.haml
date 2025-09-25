@@ -15,6 +15,6 @@
     .main-container
       .editor-container.editor-container_classic-editor.editor-container_include-style.editor-container_include-fullscreen#editor-container
         .editor-container__editor
-          #editor
+          #editor{data: {part: page_part.name.to_slug}}
             = raw(page_part.content || '')
-            = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", value: page_part.content || '', id: "part_#{page_part.name.to_slug}_content"
+          = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", id: "part_#{page_part.name.to_slug}_content"
