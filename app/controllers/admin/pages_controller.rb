@@ -2,6 +2,7 @@ class Admin::PagesController < Admin::ResourceController
   before_action :initialize_meta_rows_and_buttons, only: %i[new edit create update]
   before_action :count_deleted_pages, only: [:destroy]
   before_action :set_page, only: %i[edit restore]
+  before_action :append_editor_stylesheets, only: %i[new edit create update]
   rescue_from ActiveRecord::RecordInvalid, with: :validation_error
   include Admin::PagesHelper
   include Admin::UrlHelper
@@ -179,6 +180,14 @@ class Admin::PagesController < Admin::ResourceController
     @performed_render = true
     render template: 'site/show_page', layout: false
     raise PreviewStop
+  end
+
+  def append_editor_stylesheets
+    return unless TrustyCms.respond_to?(:editor_stylesheets)
+
+    @stylesheets ||= []
+    @stylesheets |= TrustyCms.editor_stylesheets
+    @editor_style_definitions = TrustyCms.editor_style_definitions
   end
 
   def count_deleted_pages

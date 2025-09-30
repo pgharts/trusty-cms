@@ -3,6 +3,49 @@
  * https://ckeditor.com/ckeditor-5/builder/#installation/NoJgNARCB0Ds0FYKQByxARgGwNgFlgAYsURMBOPFAZkNmvJBxHxdgQyazz3JT2QQApgDtkhMMAxgJE6fIC6kLOQwAjFUIgKgA===
  */
 
+const defaultStyleDefinitions = [
+            {
+                name: 'Article category',
+                element: 'h3',
+                classes: ['category']
+            },
+            {
+                name: 'Title',
+                element: 'h2',
+                classes: ['document-title']
+            },
+            {
+                name: 'Subtitle',
+                element: 'h3',
+                classes: ['document-subtitle']
+            },
+            {
+                name: 'Info box',
+                element: 'p',
+                classes: ['info-box']
+            },
+            {
+                name: 'CTA Link Primary',
+                element: 'a',
+                classes: ['button', 'button--green']
+            },
+            {
+                name: 'CTA Link Secondary',
+                element: 'a',
+                classes: ['button', 'button--black']
+            },
+            {
+                name: 'Marker',
+                element: 'span',
+                classes: ['marker']
+            },
+            {
+                name: 'Spoiler',
+                element: 'span',
+                classes: ['spoiler']
+            }
+        ]
+
 import {
     ClassicEditor,
     Alignment,
@@ -310,48 +353,10 @@ const editorConfig = {
     },
     placeholder: 'Type or paste your content here!',
     style: {
-        definitions: [
-            {
-                name: 'Article category',
-                element: 'h3',
-                classes: ['category']
-            },
-            {
-                name: 'Title',
-                element: 'h2',
-                classes: ['document-title']
-            },
-            {
-                name: 'Subtitle',
-                element: 'h3',
-                classes: ['document-subtitle']
-            },
-            {
-                name: 'Info box',
-                element: 'p',
-                classes: ['info-box']
-            },
-            {
-                name: 'CTA Link Primary',
-                element: 'a',
-                classes: ['button', 'button--green']
-            },
-            {
-                name: 'CTA Link Secondary',
-                element: 'a',
-                classes: ['button', 'button--black']
-            },
-            {
-                name: 'Marker',
-                element: 'span',
-                classes: ['marker']
-            },
-            {
-                name: 'Spoiler',
-                element: 'span',
-                classes: ['spoiler']
-            }
-        ]
+       definitions: 
+         window.TRUSTY_CMS_EDITOR?.styleDefinitions?.length
+        ? window.TRUSTY_CMS_EDITOR.styleDefinitions
+        : defaultStyleDefinitions,
     },
     table: {
         contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']

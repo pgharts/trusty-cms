@@ -104843,6 +104843,48 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   };
 
   // app/javascript/trusty_cms/ckeditor5.js
+  var defaultStyleDefinitions = [
+    {
+      name: "Article category",
+      element: "h3",
+      classes: ["category"]
+    },
+    {
+      name: "Title",
+      element: "h2",
+      classes: ["document-title"]
+    },
+    {
+      name: "Subtitle",
+      element: "h3",
+      classes: ["document-subtitle"]
+    },
+    {
+      name: "Info box",
+      element: "p",
+      classes: ["info-box"]
+    },
+    {
+      name: "CTA Link Primary",
+      element: "a",
+      classes: ["button", "button--green"]
+    },
+    {
+      name: "CTA Link Secondary",
+      element: "a",
+      classes: ["button", "button--black"]
+    },
+    {
+      name: "Marker",
+      element: "span",
+      classes: ["marker"]
+    },
+    {
+      name: "Spoiler",
+      element: "span",
+      classes: ["spoiler"]
+    }
+  ];
   var editorConfig = {
     toolbar: {
       items: [
@@ -105073,48 +105115,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     },
     placeholder: "Type or paste your content here!",
     style: {
-      definitions: [
-        {
-          name: "Article category",
-          element: "h3",
-          classes: ["category"]
-        },
-        {
-          name: "Title",
-          element: "h2",
-          classes: ["document-title"]
-        },
-        {
-          name: "Subtitle",
-          element: "h3",
-          classes: ["document-subtitle"]
-        },
-        {
-          name: "Info box",
-          element: "p",
-          classes: ["info-box"]
-        },
-        {
-          name: "CTA Link Primary",
-          element: "a",
-          classes: ["button", "button--green"]
-        },
-        {
-          name: "CTA Link Secondary",
-          element: "a",
-          classes: ["button", "button--black"]
-        },
-        {
-          name: "Marker",
-          element: "span",
-          classes: ["marker"]
-        },
-        {
-          name: "Spoiler",
-          element: "span",
-          classes: ["spoiler"]
-        }
-      ]
+      definitions: window.TRUSTY_CMS_EDITOR?.styleDefinitions?.length ? window.TRUSTY_CMS_EDITOR.styleDefinitions : defaultStyleDefinitions
     },
     table: {
       contentToolbar: ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"]

@@ -43,6 +43,10 @@
 
     = stylesheet_link_tag href="https://cdn.ckeditor.com/ckeditor5/46.1.1/ckeditor5.css"
     = csrf_meta_tags
+    
+    :javascript
+      window.TRUSTY_CMS_EDITOR = window.TRUSTY_CMS_EDITOR || {};
+      window.TRUSTY_CMS_EDITOR.styleDefinitions = #{(@editor_style_definitions || []).to_json.html_safe};
 
   %body{:class=>body_classes.join(" ")}
     - if gtm_container_id
