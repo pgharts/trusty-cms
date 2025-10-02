@@ -370,15 +370,23 @@ const editorConfig = {
     }
 };
 
-ClassicEditor
-    .create(document.querySelector('#editor'), editorConfig)
-    .then(editor => {
-        const pagePart = document.querySelector('#editor').getAttribute('data-part');
-        const hiddenInput = document.querySelector(`#part_${pagePart}_content`);
+const editorElements = document.querySelectorAll('[id^="editor_"]');
 
-        editor.model.document.on('change:data', () => {
-            hiddenInput.value = editor.getData();
-        })
-    }).catch(error => {
-        console.error(error);
-    });
+editorElements.forEach((editorElement) => {
+    ClassicEditor
+        .create(editorElement, editorConfig)
+        .then(editor => {
+            const pagePart = editorElement.getAttribute('data-part');
+            const hiddenInput = document.querySelector(`#part_${pagePart}_content`);
+
+            if (!hiddenInput) {
+                return;
+            }
+
+            editor.model.document.on('change:data', () => {
+                hiddenInput.value = editor.getData();
+            });
+        }).catch(error => {
+            console.error(error);
+        });
+});
