@@ -121,6 +121,7 @@ import {
 
 import "ckeditor5/ckeditor5.css";
 
+
 const editorConfig = {
     toolbar: {
         items: [
@@ -169,7 +170,7 @@ const editorConfig = {
             'outdent',
             'indent'
         ],
-        shouldNotGroupWhenFull: false
+        shouldNotGroupWhenFull: true
     },
     plugins: [
         Alignment,

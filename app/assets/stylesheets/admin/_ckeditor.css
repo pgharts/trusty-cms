@@ -14,13 +14,17 @@
 .main-container {
     font-family: var(--ck-content-font-family);
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
 }
 
 .editor-container_classic-editor .editor-container__editor {
-    min-width: 795px;
-    max-width: 795px;
+    min-width: 1300px;
+    max-width: 1300px;
+}
+
+.ck-content {
+    height: 600px;
 }
 
 .ck-content h3.category {

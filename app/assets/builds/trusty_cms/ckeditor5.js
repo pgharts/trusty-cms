@@ -104933,7 +104933,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         "outdent",
         "indent"
       ],
-      shouldNotGroupWhenFull: false
+      shouldNotGroupWhenFull: true
     },
     plugins: [
       Alignment,
