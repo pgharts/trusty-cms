@@ -64,7 +64,7 @@ class Admin::AssetsController < Admin::ResourceController
   def create
     @assets = []
     @page_attachments = []
-    asset_params["asset"]["asset"].reject(&blank?).each do |uploaded_asset|
+    asset_params["asset"]["asset"].reject(&:blank?).each do |uploaded_asset|
       if uploaded_asset.content_type == 'application/octet-stream'
         flash[:notice] = 'Please only upload assets that have a valid extension in the name.'
       else
