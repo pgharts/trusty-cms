@@ -1,6 +1,7 @@
 class Admin::AssetsController < Admin::ResourceController
   paginate_models(per_page: 50)
   COMPRESS_FILE_TYPE = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'].freeze
+  APPROVED_CONTENT_TYPES = Asset::APPROVED_CONTENT_TYPES
 
   def index
     assets = Asset.order('created_at DESC')
@@ -30,30 +31,44 @@ class Admin::AssetsController < Admin::ResourceController
 
   def uploader
     @page_attachments = []
-    @asset = Asset.create(asset: asset_params[:upload], caption: '')
+    uploaded_asset = compress(asset_params[:upload]) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(asset_params[:upload].content_type) && can_compress
+
+    unless uploaded_asset.present?
+      flash[:error] = 'No file uploaded.'
+      render json: { error: 'No file uploaded.' }, status: :unprocessable_entity
+      return
+    end
+
+    unless APPROVED_CONTENT_TYPES.include?(uploaded_asset.content_type)
+      flash[:error] = 'Unsupported file type.'
+      render json: { error: 'Unsupported file type.' }, status: :unsupported_media_type
+      return
+    end
+
+    @asset = Asset.create(asset: uploaded_asset, caption: '')
+
     if @asset.valid?
       set_owner_or_editor
       if params[:for_attachment]
         @page = Page.find_by_id(params[:page_id]) || Page.new
         @page_attachments << @page_attachment = @asset.page_attachments.build(page: @page)
       end
+      render json: { url: @asset.asset.url }
     else
       error = @asset.errors.first.message
       flash[:error] = error
+      render json: { error: error }, status: :unprocessable_entity
     end
-
-    render json: { url: @asset.asset.url }
   end
 
   def create
     @assets = []
     @page_attachments = []
-    compress = current_site.try(:compress).nil? ? true : current_site.compress
     asset_params["asset"]["asset"].reject(&blank?).each do |uploaded_asset|
       if uploaded_asset.content_type == 'application/octet-stream'
         flash[:notice] = 'Please only upload assets that have a valid extension in the name.'
       else
-        uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type) && compress
+        uploaded_asset = compress(uploaded_asset) if $kraken.api_key.present? && COMPRESS_FILE_TYPE.include?(uploaded_asset.content_type) && can_compress
         @asset = Asset.create(asset: uploaded_asset, caption: '')
         if @asset.valid?
           set_owner_or_editor
@@ -88,6 +103,10 @@ class Admin::AssetsController < Admin::ResourceController
   end
 
   private
+
+  def can_compress
+    current_site.try(:compress).nil? ? true : current_site.compress
+  end
 
   def compress(uploaded_asset)
     require 'open-uri'

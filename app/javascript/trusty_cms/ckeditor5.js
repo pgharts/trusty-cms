@@ -155,7 +155,6 @@ const editorConfig = {
             'link',
             'bookmark',
             'insertImage',
-            'insertImageViaUrl',
             'insertTable',
             'insertTableLayout',
             'highlight',

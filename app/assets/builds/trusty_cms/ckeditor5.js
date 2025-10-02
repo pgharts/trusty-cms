@@ -104918,7 +104918,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         "link",
         "bookmark",
         "insertImage",
-        "insertImageViaUrl",
         "insertTable",
         "insertTableLayout",
         "highlight",
