@@ -186,8 +186,30 @@ class Admin::PagesController < Admin::ResourceController
     return unless TrustyCms.respond_to?(:editor_stylesheets)
 
     @stylesheets ||= []
-    @stylesheets |= TrustyCms.editor_stylesheets
+    @stylesheets |= editor_stylesheets_for_current_site
     @editor_style_definitions = TrustyCms.editor_style_definitions
+  end
+
+  def editor_stylesheets_for_current_site
+    stylesheets = TrustyCms.editor_stylesheets
+    return stylesheets unless respond_to?(:current_site) && current_site.present?
+
+    stylesheets.filter_map do |entry|
+      site_key, path =
+        case entry
+        when Hash
+          [entry[:site], entry[:path]]
+        else
+          [nil, entry] # backward compatibility with plain strings
+        end
+
+      next path if site_key.blank? # global stylesheet
+      next path if site_key.to_s == identifier_for(current_site)
+    end
+  end
+
+  def identifier_for(site)
+    current_site.try(:name)&.downcase.gsub(' ', '_')
   end
 
   def count_deleted_pages
