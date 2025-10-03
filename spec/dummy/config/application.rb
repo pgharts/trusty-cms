@@ -92,6 +92,7 @@ module TrustyCms
                           :allow_revalidate => false
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
+    config.active_storage.service = :test
     config.filter_parameters += [:password, :password_confirmation]
 
     # Use the database for sessions instead of the cookie-based default,
