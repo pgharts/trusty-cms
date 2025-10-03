@@ -261,7 +261,9 @@ Include your website styles in your editor - add a stylesheet and `@import` the 
 ```
 // config/initializers/trusty_cms_editor_stylesheets.rb
 if defined?(TrustyCms) && TrustyCms.respond_to?(:editor_stylesheets)
-  TrustyCms.editor_stylesheets |= ['path/to/ck-content/stylesheets']
+  TrustyCms.editor_stylesheets |= [
+    {site: 'current_site_name_underscore', path: 'path/to/ck-content/stylesheets'}
+    ]
   TrustyCms.editor_style_definitions = [
     { name: 'Primary Button', element: 'a', classes: %w[button] },
     { name: 'Button Alt', element: 'a', classes: %w[button button-alt] },
