@@ -14,5 +14,5 @@
       .editor-container.editor-container_classic-editor.editor-container_include-style.editor-container_include-fullscreen#editor-container
         .editor-container__editor
           %div{id: "editor_#{page_part.name.to_slug}", data: {part: page_part.name.to_slug}}
-            = raw(page_part.content || '')
+            = page_part.content.to_s.html_safe # rubocop:disable Rails/OutputSafety
           = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", id: "part_#{page_part.name.to_slug}_content"
