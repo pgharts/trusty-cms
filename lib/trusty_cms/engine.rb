@@ -9,7 +9,7 @@ module TrustyCms
     paths['app/helpers'] = []
     initializer 'trusty_cms.assets.precompile' do |app|
       app.config.assets.paths << Rails.root.join('../trusty-cms/node_modules')
-      engine_builds = Rails.root.join("app/assets/builds")
+      engine_builds = Rails.root.join('app/assets/builds')
       app.config.assets.paths << engine_builds
       app.config.assets.precompile += %w(
         admin/main.css

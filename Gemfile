@@ -18,6 +18,7 @@ group :development, :test do
   gem 'devise-two-factor'
   gem 'factory_bot_rails', '6.4.4'
   gem 'file_validators'
+  gem 'jsbundling-rails', '~> 1.3'
   gem 'launchy', '~> 3.0.1'
   gem 'mysql2'
   gem 'paper_trail', '~> 16.0.0'
@@ -31,5 +32,3 @@ group :development, :test do
   gem 'simplecov'
   gem 'simplecov-lcov'
 end
-
-gem "jsbundling-rails", "~> 1.3"

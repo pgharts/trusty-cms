@@ -381,7 +381,7 @@ editorElements.forEach((editorElement) => {
             if (!hiddenInput) {
                 return;
             }
-
+            
             editor.model.document.on('change:data', () => {
                 hiddenInput.value = editor.getData();
             });

@@ -1,18 +1,18 @@
-.page{:id => "page_#{page_part.name.to_slug}", 'data-caption'=>h(page_part.name)}
-  .part{:id => "part-#{page_part.name.to_slug}"}
-    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][name]", page_part.name, :id => "part_#{page_part.name.to_slug}_name"
-    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][id]", page_part.id, :id => "part_#{page_part_counter}_id", :class => 'id_input' unless page_part.new_record?
-    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][_destroy]", page_part._destroy, :class => 'delete_input'
+.page{ :id => "page_#{ page_part.name.to_slug }", 'data-caption'=>h(page_part.name) }
+  .part{ :id => "part-#{ page_part.name.to_slug }" }
+    = hidden_field_tag "page[parts_attributes][#{ page_part_counter }][name]", page_part.name, :id => "part_#{ page_part.name.to_slug }_name"
+    = hidden_field_tag "page[parts_attributes][#{ page_part_counter }][id]", page_part.id, :id => "part_#{ page_part_counter }_id", :class => 'id_input' unless page_part.new_record?
+    = hidden_field_tag "page[parts_attributes][#{ page_part_counter }][_destroy]", page_part._destroy, :class => 'delete_input'
     .content
       %label To use HTML or Radius tags, switch to plain text view by clicking the 'Source' button.
       %span.reference_links
         = t('reference')
-        %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
+        %span{ :id => "tag_reference_link_#{ page_part.name.to_slug }" }
           = link_to t('available_tags'), admin_reference_url(:tags), id: 'tag_reference'
-      = render_region :part_controls, :locals => {:page_part => page_part}
+      = render_region :part_controls, :locals => { :page_part => page_part }
     .main-container
       .editor-container.editor-container_classic-editor.editor-container_include-style.editor-container_include-fullscreen#editor-container
         .editor-container__editor
-          %div{id: "editor_#{page_part.name.to_slug}", data: {part: page_part.name.to_slug}}
+          %div{ id: "editor_#{ page_part.name.to_slug }", data: { part: page_part.name.to_slug } }
             = page_part.content.to_s.html_safe # rubocop:disable Rails/OutputSafety
-          = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{page_part_counter}][content]", id: "part_#{page_part.name.to_slug}_content"
+          = hidden_field_tag :page_part, page_part.content || '', name: "page[parts_attributes][#{ page_part_counter }][content]", id: "part_#{ page_part.name.to_slug }_content"
