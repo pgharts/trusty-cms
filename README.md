@@ -247,6 +247,29 @@ In the AWS Lambda Configuration:
 
 Your setup is now complete, and **Scheduled Pages** will automatically update their status via the AWS Lambda and EventBridge integration.
 
+### Custom CKEditor5 Styles and Stylesheets
+
+Add your stylesheets and custom styles to CKEditor in your application.
+
+Include your website styles in your editor - add a stylesheet and `@import` the styles you want in `.ck-content`
+```
+.ck-content {
+    @import 'path/to/stylesheets';
+}
+```
+
+```
+// config/initializers/trusty_cms_editor_stylesheets.rb
+if defined?(TrustyCms) && TrustyCms.respond_to?(:editor_stylesheets)
+  TrustyCms.editor_stylesheets |= ['path/to/ck-content/stylesheets']
+  TrustyCms.editor_style_definitions = [
+    { name: 'Primary Button', element: 'a', classes: %w[button] },
+    { name: 'Button Alt', element: 'a', classes: %w[button button-alt] },
+    # etc…
+  ]
+end
+```
+
 ### Contributing to TrustyCMS
 
 When you're ready to make a change:
