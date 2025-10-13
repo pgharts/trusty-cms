@@ -22,7 +22,7 @@
     "tablesaw": "^3.1.2"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.25.0",
     "stylelint": "^13.3.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-order": "^4.0.0",
