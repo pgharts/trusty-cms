@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
-  create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2025_06_06_144908) do
+  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,13 +33,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "admins", charset: "utf8", force: :cascade do |t|
+  create_table "admins", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -67,16 +67,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.text "notes"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "otp_secret"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
   end
 
-  create_table "admins_sites", charset: "utf8", force: :cascade do |t|
+  create_table "admins_sites", charset: "utf8mb3", force: :cascade do |t|
     t.integer "admin_id", null: false
     t.integer "site_id", null: false
     t.index ["admin_id"], name: "index_admins_sites_on_admin_id"
     t.index ["site_id"], name: "index_admins_sites_on_site_id"
   end
 
-  create_table "assets", charset: "utf8", force: :cascade do |t|
+  create_table "assets", charset: "utf8mb3", force: :cascade do |t|
     t.string "caption"
     t.string "title"
     t.string "asset_file_name"
@@ -92,19 +95,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.string "original_extension"
   end
 
-  create_table "config", charset: "utf8", force: :cascade do |t|
+  create_table "config", charset: "utf8mb3", force: :cascade do |t|
     t.string "key", limit: 40, default: "", null: false
     t.string "value", default: ""
     t.index ["key"], name: "key", unique: true
   end
 
-  create_table "extension_meta", charset: "utf8", force: :cascade do |t|
+  create_table "extension_meta", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.integer "schema_version", default: 0
     t.boolean "enabled", default: true
   end
 
-  create_table "layouts", charset: "utf8", force: :cascade do |t|
+  create_table "layouts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", limit: 100
     t.text "content"
     t.datetime "created_at", precision: nil
@@ -116,20 +119,20 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.integer "site_id"
   end
 
-  create_table "page_attachments", charset: "utf8", force: :cascade do |t|
+  create_table "page_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.integer "asset_id"
     t.integer "page_id"
     t.integer "position"
   end
 
-  create_table "page_fields", charset: "utf8", force: :cascade do |t|
+  create_table "page_fields", charset: "utf8mb3", force: :cascade do |t|
     t.integer "page_id"
     t.string "name"
     t.string "content"
     t.index ["page_id", "name", "content"], name: "index_page_fields_on_page_id_and_name_and_content"
   end
 
-  create_table "page_parts", charset: "utf8", force: :cascade do |t|
+  create_table "page_parts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", limit: 100
     t.string "filter_id", limit: 25
     t.text "content", size: :medium
@@ -137,7 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["page_id", "name"], name: "parts_by_page"
   end
 
-  create_table "pages", charset: "utf8", force: :cascade do |t|
+  create_table "pages", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.string "slug", limit: 100
     t.string "breadcrumb", limit: 160
@@ -162,7 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["virtual", "status_id"], name: "pages_published"
   end
 
-  create_table "sessions", charset: "utf8", force: :cascade do |t|
+  create_table "sessions", charset: "utf8mb3", force: :cascade do |t|
     t.string "session_id"
     t.text "data"
     t.datetime "updated_at", precision: nil
@@ -170,7 +173,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "sites", charset: "utf8", force: :cascade do |t|
+  create_table "sites", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "domain"
     t.integer "homepage_id"
@@ -184,7 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.string "base_domain"
   end
 
-  create_table "snippets", charset: "utf8", force: :cascade do |t|
+  create_table "snippets", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", limit: 100, default: "", null: false
     t.string "filter_id", limit: 25
     t.text "content"
@@ -197,7 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["name", "site_id"], name: "name_site_id", unique: true
   end
 
-  create_table "users", charset: "utf8", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", limit: 100
     t.string "email"
     t.string "login", limit: 40, default: "", null: false
@@ -218,7 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.datetime "password_reset_sent_at", precision: nil
   end
 
-  create_table "version_associations", charset: "utf8", force: :cascade do |t|
+  create_table "version_associations", charset: "utf8mb3", force: :cascade do |t|
     t.integer "version_id"
     t.string "foreign_key_name", null: false
     t.integer "foreign_key_id"
@@ -227,7 +230,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.index ["version_id"], name: "index_version_associations_on_version_id"
   end
 
-  create_table "versions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "versions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "whodunnit"
     t.datetime "created_at"
     t.bigint "item_id", null: false
@@ -235,6 +238,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_191134) do
     t.string "event", null: false
     t.text "object", size: :long
     t.integer "transaction_id"
+    t.text "object_changes", size: :long
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end

@@ -1,4 +1,6 @@
 class Asset < ActiveRecord::Base
+  APPROVED_CONTENT_TYPES = %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css text/calendar].freeze
+
   has_many :page_attachments, dependent: :destroy
   has_many :pages, through: :page_attachments
   has_site if respond_to? :has_site
@@ -36,7 +38,7 @@ class Asset < ActiveRecord::Base
             presence: true,
             blob:
               {
-                content_type: %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css],
+                content_type: APPROVED_CONTENT_TYPES,
                 size_range: 1..10.megabytes,
               }
   before_save :assign_title

@@ -41,7 +41,12 @@
     - javascript_overrides.each do |javascript|
       = javascript_include_tag javascript
 
+    = stylesheet_link_tag href="trusty_cms/ckeditor5"
     = csrf_meta_tags
+    
+    :javascript
+      window.TRUSTY_CMS_EDITOR = window.TRUSTY_CMS_EDITOR || {};
+      window.TRUSTY_CMS_EDITOR.styleDefinitions = #{(@editor_style_definitions || []).to_json.html_safe};
 
   %body{:class=>body_classes.join(" ")}
     - if gtm_container_id
@@ -84,3 +89,4 @@
 
       #popups
         = yield :popups
+    = javascript_include_tag "trusty_cms/ckeditor5", "data-turbo-track": "reload", defer: true

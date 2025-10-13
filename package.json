@@ -3,12 +3,16 @@
   "version": "5.3.1",
   "description": "TrustyCMS is a branch of Radiant CMS. Its goal is to pull the Radiant framework into Rails 6 with minimal changes to its infrastructure.",
   "main": "index.js",
-  "repository": "https://github.com/pgharts/trusty-cms.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgharts/trusty-cms.git"
+  },
   "author": "Danielle Greaves <danigreaves@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "blueimp-file-upload": "^10.32.0",
+    "ckeditor5": "^46.0.3",
     "jquery": "^3.6.1",
     "jquery-treetable": "^3.2.0-1",
     "jquery-ui": "^1.13.2",
@@ -18,9 +22,23 @@
     "tablesaw": "^3.1.2"
   },
   "devDependencies": {
+    "esbuild": "^0.23.0",
     "stylelint": "^13.3.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-order": "^4.0.0",
     "stylelint-scss": "^3.17.0"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild app/javascript/trusty_cms/ckeditor5.js --bundle --sourcemap --outdir=app/assets/builds/trusty_cms --public-path=/assets",
+    "build:watch": "npm run build -- --watch"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/pgharts/trusty-cms/issues"
+  },
+  "homepage": "https://github.com/pgharts/trusty-cms#readme"
 }

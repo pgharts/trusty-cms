@@ -3,7 +3,6 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'acts_as_tree'
 require "trusty_cms"
-require 'ckeditor'
 require 'radius'
 require 'trusty_cms/extension_loader'
 require 'trusty_cms/initializer'
@@ -93,6 +92,7 @@ module TrustyCms
                           :allow_revalidate => false
     config.middleware.insert_before(Rack::ConditionalGet, Rack::Cache)
     config.assets.enabled = true
+    config.active_storage.service = :test
     config.filter_parameters += [:password, :password_confirmation]
 
     # Use the database for sessions instead of the cookie-based default,

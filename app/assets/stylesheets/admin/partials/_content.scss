@@ -32,6 +32,7 @@ body.reversed {
   right: 0;
   top: 0;
   width: 100%;
+  z-index: 5;
 }
 
 .clipped {
@@ -52,6 +53,7 @@ body.reversed {
   position: fixed;
   right: 20px;
   top: 10px;
+  z-index: 5;
 
   &:hover {
     opacity: 1;
