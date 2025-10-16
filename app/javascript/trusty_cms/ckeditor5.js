@@ -381,7 +381,12 @@ editorElements.forEach((editorElement) => {
             if (!hiddenInput) {
                 return;
             }
-            
+            editor.ui.focusTracker.on( 'change:isFocused', ( evt, name, isFocused ) => {
+                if ( !isFocused ) {
+                    editor.plugins.get( 'SourceEditing' ).updateEditorData()
+                };
+            });
+
             editor.model.document.on('change:data', () => {
                 hiddenInput.value = editor.getData();
             });
