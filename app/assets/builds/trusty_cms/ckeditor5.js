@@ -103070,6 +103070,78 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   };
 
+  // app/javascript/plugins/asset_tags/asset_tag_builder.js
+  var AssetTagBuilder = class extends Plugin {
+    init() {
+      console.log("AssetTagBuilder plugin initialized");
+      this._defineSchema();
+      this._defineConverters();
+    }
+    _defineSchema() {
+      const schema = this.editor.model.schema;
+      schema.register("assetImage", {
+        allowWhere: "$text",
+        isInline: true,
+        isObject: true,
+        allowAttributes: ["id", "size", "alt"]
+      });
+    }
+    _defineConverters() {
+      const conversion = this.editor.conversion;
+      const upcast = conversion.for("upcast");
+      const dataDowncast = conversion.for("dataDowncast");
+      const editingDowncast = conversion.for("editingDowncast");
+      upcast.elementToElement({
+        view: {
+          name: "r:asset:image"
+        },
+        model: (viewElement, { writer }) => {
+          const attrs = {};
+          const id = viewElement.getAttribute("id");
+          const size = viewElement.getAttribute("size");
+          const alt = viewElement.getAttribute("alt");
+          if (id) attrs.id = id;
+          if (size) attrs.size = size;
+          if (alt) attrs.alt = alt;
+          return writer.createElement("assetImage", attrs);
+        }
+      });
+      dataDowncast.elementToElement({
+        model: "assetImage",
+        view: (modelElement, { writer }) => {
+          const attrs = {};
+          const id = modelElement.getAttribute("id");
+          const size = modelElement.getAttribute("size");
+          const alt = modelElement.getAttribute("alt");
+          if (id) attrs.id = id;
+          if (size) attrs.size = size;
+          if (alt) attrs.alt = alt;
+          return writer.createEmptyElement("r:asset:image", attrs);
+        }
+      });
+      editingDowncast.elementToElement({
+        model: "assetImage",
+        view: (modelElement, { writer }) => {
+          const attrs = {};
+          const id = modelElement.getAttribute("id");
+          const size = modelElement.getAttribute("size");
+          const alt = modelElement.getAttribute("alt");
+          if (id) attrs.id = id;
+          if (size) attrs.size = size;
+          if (alt) attrs.alt = alt;
+          return writer.createContainerElement("r:asset:image", attrs);
+        }
+      });
+    }
+  };
+
+  // app/javascript/plugins/asset_tags/asset_tags.js
+  var AssetTags = class extends Plugin {
+    static get requires() {
+      return [AssetTagBuilder];
+    }
+  };
+
   // app/javascript/trusty_cms/ckeditor5.js
   var defaultStyleDefinitions = [
     {
@@ -103164,6 +103236,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     },
     plugins: [
       Alignment,
+      AssetTags,
       Autoformat,
       AutoImage,
       AutoLink,
@@ -103372,6 +103445,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 /*! Bundled license information:
 
 @ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-core/dist/index.js:
+@ckeditor/ckeditor5-autosave/dist/index.js:
+@ckeditor/ckeditor5-clipboard/dist/index.js:
+@ckeditor/ckeditor5-find-and-replace/dist/index.js:
+@ckeditor/ckeditor5-list/dist/index.js:
+@ckeditor/ckeditor5-style/dist/index.js:
   (**
    * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
@@ -103379,31 +103459,66 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   (* istanbul ignore next -- @preserve *)
 
 @ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
 @ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-utils/dist/index.js:
+@ckeditor/ckeditor5-engine/dist/index.js:
+@ckeditor/ckeditor5-watchdog/dist/index.js:
+@ckeditor/ckeditor5-upload/dist/index.js:
+@ckeditor/ckeditor5-adapter-ckfinder/dist/index.js:
+@ckeditor/ckeditor5-icons/dist/index.js:
+@ckeditor/ckeditor5-ui/dist/index.js:
+@ckeditor/ckeditor5-ui/dist/index.js:
+@ckeditor/ckeditor5-ui/dist/index.js:
+@ckeditor/ckeditor5-ui/dist/index.js:
+@ckeditor/ckeditor5-alignment/dist/index.js:
+@ckeditor/ckeditor5-typing/dist/index.js:
+@ckeditor/ckeditor5-autoformat/dist/index.js:
+@ckeditor/ckeditor5-basic-styles/dist/index.js:
+@ckeditor/ckeditor5-enter/dist/index.js:
+@ckeditor/ckeditor5-block-quote/dist/index.js:
+@ckeditor/ckeditor5-widget/dist/index.js:
+@ckeditor/ckeditor5-bookmark/dist/index.js:
+@ckeditor/ckeditor5-ckbox/dist/index.js:
+@ckeditor/ckeditor5-ckfinder/dist/index.js:
+@ckeditor/ckeditor5-cloud-services/dist/index.js:
+@ckeditor/ckeditor5-code-block/dist/index.js:
+@ckeditor/ckeditor5-easy-image/dist/index.js:
+@ckeditor/ckeditor5-editor-balloon/dist/index.js:
+@ckeditor/ckeditor5-editor-classic/dist/index.js:
+@ckeditor/ckeditor5-editor-decoupled/dist/index.js:
+@ckeditor/ckeditor5-editor-inline/dist/index.js:
+@ckeditor/ckeditor5-editor-multi-root/dist/index.js:
+@ckeditor/ckeditor5-select-all/dist/index.js:
+@ckeditor/ckeditor5-undo/dist/index.js:
+@ckeditor/ckeditor5-essentials/dist/index.js:
+@ckeditor/ckeditor5-font/dist/index.js:
+@ckeditor/ckeditor5-paragraph/dist/index.js:
+@ckeditor/ckeditor5-heading/dist/index.js:
+@ckeditor/ckeditor5-highlight/dist/index.js:
+@ckeditor/ckeditor5-horizontal-line/dist/index.js:
+@ckeditor/ckeditor5-html-embed/dist/index.js:
+@ckeditor/ckeditor5-image/dist/index.js:
+@ckeditor/ckeditor5-indent/dist/index.js:
+@ckeditor/ckeditor5-language/dist/index.js:
+@ckeditor/ckeditor5-link/dist/index.js:
+@ckeditor/ckeditor5-media-embed/dist/index.js:
+@ckeditor/ckeditor5-mention/dist/index.js:
+@ckeditor/ckeditor5-minimap/dist/index.js:
+@ckeditor/ckeditor5-page-break/dist/index.js:
+@ckeditor/ckeditor5-remove-format/dist/index.js:
+@ckeditor/ckeditor5-restricted-editing/dist/index.js:
+@ckeditor/ckeditor5-restricted-editing/dist/index.js:
+@ckeditor/ckeditor5-show-blocks/dist/index.js:
+@ckeditor/ckeditor5-source-editing/dist/index.js:
+@ckeditor/ckeditor5-special-characters/dist/index.js:
+@ckeditor/ckeditor5-word-count/dist/index.js:
+ckeditor5/dist/ckeditor5.js:
   (**
    * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
@@ -103415,42 +103530,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore else -- @preserve *)
-
-@ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-utils/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-engine/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
 
 @ckeditor/ckeditor5-engine/dist/index.js:
   (**
@@ -103462,222 +103541,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   (* istanbul ignore else -- @preserve *)
   (* istanbul ignore if -- @preserve *)
 
-@ckeditor/ckeditor5-watchdog/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-core/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-upload/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-upload/dist/index.js:
   (* istanbul ignore else -- @preserve *)
 
-@ckeditor/ckeditor5-adapter-ckfinder/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-icons/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-ui/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-ui/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-ui/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-ui/dist/index.js:
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-ui/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-alignment/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-typing/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-autoformat/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-autosave/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-basic-styles/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-enter/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-block-quote/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-widget/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-widget/dist/index.js:
   (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-bookmark/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-ckbox/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-ckfinder/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-clipboard/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-cloud-services/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-code-block/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-easy-image/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-editor-balloon/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-editor-classic/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-editor-decoupled/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-editor-inline/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-editor-multi-root/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-select-all/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-undo/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-essentials/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-find-and-replace/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-font/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
 
 @ckeditor/ckeditor5-fullscreen/dist/index.js:
   (**
@@ -103687,36 +103556,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   (* istanbul ignore if -- @preserve *)
   (* istanbul ignore next -- @preserve *)
 
-@ckeditor/ckeditor5-paragraph/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-heading/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-highlight/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-horizontal-line/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-html-embed/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
 @ckeditor/ckeditor5-html-support/dist/index.js:
   (**
    * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
@@ -103725,63 +103564,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   (* istanbul ignore next: paranoid check -- @preserve *)
 
 @ckeditor/ckeditor5-image/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-image/dist/index.js:
   (* istanbul ignore if: paranoid check -- @preserve *)
   (* istanbul ignore next -- @preserve *)
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-indent/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-language/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-link/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-list/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
-@ckeditor/ckeditor5-media-embed/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-mention/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-minimap/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-page-break/dist/index.js:
   (**
    * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
@@ -103795,49 +103579,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   (* istanbul ignore next -- @preserve *)
   (* istanbul ignore else -- @preserve *)
 
-@ckeditor/ckeditor5-remove-format/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-restricted-editing/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-restricted-editing/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-show-blocks/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-source-editing/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-special-characters/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-@ckeditor/ckeditor5-style/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-  (* istanbul ignore next -- @preserve *)
-
 @ckeditor/ckeditor5-table/dist/index.js:
   (**
    * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
@@ -103845,17 +103586,5 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
    *)
   (* istanbul ignore next -- @preserve *)
   (* istanbul ignore if: paranoid check -- @preserve *)
-
-@ckeditor/ckeditor5-word-count/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
-
-ckeditor5/dist/ckeditor5.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
 */
 //# sourceMappingURL=/assets/ckeditor5.js.map

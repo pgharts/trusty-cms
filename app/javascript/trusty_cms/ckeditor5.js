@@ -46,6 +46,8 @@ const defaultStyleDefinitions = [
             }
         ]
 
+import AssetTagBuilder from '../plugins/asset_tags/asset_tags';        
+
 import {
     ClassicEditor,
     Alignment,
@@ -96,13 +98,6 @@ import {
     ShowBlocks,
     SimpleUploadAdapter,
     SourceEditing,
-    SpecialCharacters,
-    SpecialCharactersArrows,
-    SpecialCharactersCurrency,
-    SpecialCharactersEssentials,
-    SpecialCharactersLatin,
-    SpecialCharactersMathematical,
-    SpecialCharactersText,
     Strikethrough,
     Style,
     Subscript,
@@ -173,6 +168,7 @@ const editorConfig = {
     },
     plugins: [
         Alignment,
+        AssetTagBuilder,
         Autoformat,
         AutoImage,
         AutoLink,
