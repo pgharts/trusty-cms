@@ -15,7 +15,7 @@ export default class AssetTagBuilder extends Plugin {
             allowWhere: '$text',
             isInline: true,
             isObject: true,
-            allowAttributes: [ 'id', 'size', 'alt' ]
+            allowAttributes: [ 'id', 'size', 'alt', 'height', 'width' ]
         } );
     }
 
@@ -35,10 +35,14 @@ export default class AssetTagBuilder extends Plugin {
                 const id = viewElement.getAttribute( 'id' );
                 const size = viewElement.getAttribute( 'size' );
                 const alt = viewElement.getAttribute( 'alt' );
+                const height = viewElement.getAttribute( 'height' );
+                const width = viewElement.getAttribute( 'width' );
 
                 if ( id ) attrs.id = id;
                 if ( size ) attrs.size = size;
                 if ( alt ) attrs.alt = alt;
+                if ( height ) attrs.height = height;
+                if ( width ) attrs.width = width;
 
                 return writer.createElement( 'assetImage', attrs );
             }
@@ -52,10 +56,14 @@ export default class AssetTagBuilder extends Plugin {
                 const id = modelElement.getAttribute( 'id' );
                 const size = modelElement.getAttribute( 'size' );
                 const alt = modelElement.getAttribute( 'alt' );
+                const height = modelElement.getAttribute( 'height' );
+                const width = modelElement.getAttribute( 'width' );
 
                 if ( id ) attrs.id = id;
                 if ( size ) attrs.size = size;
                 if ( alt ) attrs.alt = alt;
+                if ( height ) attrs.height = height;
+                if ( width ) attrs.width = width;
 
                 return writer.createEmptyElement( 'r:asset:image', attrs );
             }
@@ -69,10 +77,14 @@ export default class AssetTagBuilder extends Plugin {
                 const id = modelElement.getAttribute( 'id' );
                 const size = modelElement.getAttribute( 'size' );
                 const alt = modelElement.getAttribute( 'alt' );
+                const height = modelElement.getAttribute( 'height' );
+                const width = modelElement.getAttribute( 'width' );
 
                 if ( id ) attrs.id = id;
                 if ( size ) attrs.size = size;
                 if ( alt ) attrs.alt = alt;
+                if ( height ) attrs.height = height;
+                if ( width ) attrs.width = width;
 
                 return writer.createContainerElement( 'r:asset:image', attrs );
             }
