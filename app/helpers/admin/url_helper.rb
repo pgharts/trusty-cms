@@ -2,15 +2,16 @@ module Admin::UrlHelper
   require 'uri'
 
   def format_path(path)
-    return '' if path.to_s.empty?
+    parts = path.to_s.split('/').reject(&:empty?)
 
-    parts = path.split('/').reject(&:empty?)
-    parts_size = parts.size
-    return 'Root' if parts_size == 1
-    return '/' if parts_size == 2
-
-    formatted_path = parts[1..-2].join('/')
-    formatted_path.empty? ? '/' : "/#{formatted_path}"
+    case parts.size
+    when 0 then ''
+    when 1 then 'Root'
+    when 2 then '/'
+    else
+      subpath = parts[1..-2].to_a.join('/')
+      subpath.empty? ? '/' : "/#{subpath}"
+    end
   end
 
   def generate_page_url(url, page)
