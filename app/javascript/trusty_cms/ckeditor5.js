@@ -145,7 +145,6 @@ const editorConfig = {
             'code',
             'removeFormat',
             '|',
-            'specialCharacters',
             'horizontalLine',
             'link',
             'bookmark',

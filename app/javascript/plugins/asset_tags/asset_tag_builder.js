@@ -1,6 +1,10 @@
-import { Plugin, toWidget } from 'ckeditor5';
+import { Plugin, Widget, toWidget } from 'ckeditor5';
 
 export default class AssetTagBuilder extends Plugin {
+      static get requires() {
+        return [ Widget ];
+      }
+
     init() {
         console.log( 'AssetTagBuilder plugin initialized' );
         // Plugin logic goes here
@@ -49,6 +53,7 @@ export default class AssetTagBuilder extends Plugin {
             }
         } );
 
+    
         // Data downcast: ensure no inner whitespace like &nbsp; gets serialized.
         dataDowncast.elementToElement( {
             model: 'assetImage',
@@ -87,7 +92,33 @@ export default class AssetTagBuilder extends Plugin {
                 if ( height ) attrs.height = height;
                 if ( width ) attrs.width = width;
 
-                return writer.createContainerElement( 'span', attrs );
+                const container = writer.createContainerElement('span', {
+                    class: 'asset-image-tag',
+                    'data-asset-id': id,
+                    'data-asset-size': size
+                });
+
+                const label = writer.createUIElement(
+                    'span',
+                    { class: 'asset-image-tag__label' },
+                    function (domDocument) {
+                        const domEl = this.toDomElement(domDocument);
+                        const parts = [
+                        'Asset image',
+                        id ? `#${id}` : '',
+                        size ? `(${size})` : '',
+                        alt ? `— ${alt}` : '',
+                        height ? `height: ${height}` : '',
+                        width ? `width: ${width}` : ''
+                        ].filter(Boolean);
+
+                        domEl.textContent = parts.join(' ');
+                        return domEl;
+                    }
+                );
+
+                writer.insert(writer.createPositionAt(container, 0), label);
+                return toWidget(container, writer, { label: `Asset image ${id ? `#${id}` : ''}` });
             }            
         } );       
 

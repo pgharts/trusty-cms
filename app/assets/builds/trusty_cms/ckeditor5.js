@@ -103072,6 +103072,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 
   // app/javascript/plugins/asset_tags/asset_tag_builder.js
   var AssetTagBuilder = class extends Plugin {
+    static get requires() {
+      return [Widget];
+    }
     init() {
       console.log("AssetTagBuilder plugin initialized");
       this._defineSchema();
@@ -103142,7 +103145,30 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
           if (width) attrs.width = width;
-          return writer.createContainerElement("span", attrs);
+          const container = writer.createContainerElement("span", {
+            class: "asset-image-tag",
+            "data-asset-id": id,
+            "data-asset-size": size
+          });
+          const label = writer.createUIElement(
+            "span",
+            { class: "asset-image-tag__label" },
+            function(domDocument) {
+              const domEl = this.toDomElement(domDocument);
+              const parts = [
+                "Asset image",
+                id ? `#${id}` : "",
+                size ? `(${size})` : "",
+                alt ? `\u2014 ${alt}` : "",
+                height ? `height: ${height}` : "",
+                width ? `width: ${width}` : ""
+              ].filter(Boolean);
+              domEl.textContent = parts.join(" ");
+              return domEl;
+            }
+          );
+          writer.insert(writer.createPositionAt(container, 0), label);
+          return toWidget(container, writer, { label: `Asset image ${id ? `#${id}` : ""}` });
         }
       });
     }
@@ -103257,7 +103283,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         "code",
         "removeFormat",
         "|",
-        "specialCharacters",
         "horizontalLine",
         "link",
         "bookmark",
