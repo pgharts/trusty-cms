@@ -33,7 +33,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild app/javascript/trusty_cms/ckeditor5.js --bundle --sourcemap --outdir=app/assets/builds/trusty_cms --public-path=/assets",
+    "build": "esbuild app/javascript/trusty_cms/ckeditor5.js --bundle --sourcemap --outdir=app/assets/builds/trusty_cms --public-path=/assets --loader:.svg=text",
     "build:watch": "npm run build -- --watch"
   },
   "keywords": [],

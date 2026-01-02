@@ -103072,10 +103072,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 
   // app/javascript/plugins/asset_tags/asset_tag_builder.js
   var AssetTagBuilder = class extends Plugin {
+    static get requires() {
+      return [Widget];
+    }
     init() {
       console.log("AssetTagBuilder plugin initialized");
       this._defineSchema();
       this._defineConverters();
+      this._defineDataNormalization();
     }
     _defineSchema() {
       const schema = this.editor.model.schema;
@@ -103124,7 +103128,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
           if (width) attrs.width = width;
-          return writer.createEmptyElement("r:asset:image", attrs);
+          return writer.createContainerElement("r:asset:image", attrs);
         }
       });
       editingDowncast.elementToElement({
@@ -103141,9 +103145,63 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
           if (width) attrs.width = width;
-          return writer.createContainerElement("r:asset:image", attrs);
+          const container = writer.createContainerElement("span", {
+            class: "asset-image-tag",
+            "data-asset-id": id,
+            "data-asset-size": size
+          });
+          const label = writer.createUIElement(
+            "span",
+            { class: "asset-image-tag__label" },
+            function(domDocument) {
+              const domEl = this.toDomElement(domDocument);
+              const parts = [
+                "Asset image",
+                id ? `#${id}` : "",
+                size ? `(${size})` : "",
+                alt ? `\u2014 ${alt}` : "",
+                height ? `height: ${height}` : "",
+                width ? `width: ${width}` : ""
+              ].filter(Boolean);
+              domEl.textContent = parts.join(" ");
+              return domEl;
+            }
+          );
+          writer.insert(writer.createPositionAt(container, 0), label);
+          return toWidget(container, writer, { label: `Asset image ${id ? `#${id}` : ""}` });
         }
       });
+    }
+    _defineDataNormalization() {
+      const editor = this.editor;
+      const processor = editor.data.processor;
+      const originalToView = processor.toView.bind(processor);
+      const originalToData = processor.toData.bind(processor);
+      processor.toView = (data) => {
+        let normalized = data;
+        normalized = normalized.replace(
+          /<r:asset:image\b([^>]*?)\/>/gi,
+          "<r:asset:image$1></r:asset:image>"
+        );
+        normalized = normalized.replace(
+          /<r:asset:image\b([^>]*?)>(?!\s*<\/r:asset:image>)/gi,
+          "<r:asset:image$1></r:asset:image>"
+        );
+        return originalToView(normalized);
+      };
+      processor.toData = (viewFragment) => {
+        const html2 = originalToData(viewFragment);
+        return html2.replace(
+          /<r:asset:image\b([^>]*?)>([\s\S]*?)<\/r:asset:image>/gi,
+          (match, attrs, inner) => {
+            const cleanedInner = inner.replace(
+              /^(?:\s|&nbsp;|&#160;)+|(?:\s|&nbsp;|&#160;)+$/g,
+              ""
+            );
+            return `<r:asset:image${attrs} />${cleanedInner}`;
+          }
+        );
+      };
     }
   };
 
@@ -103225,7 +103283,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         "code",
         "removeFormat",
         "|",
-        "specialCharacters",
         "horizontalLine",
         "link",
         "bookmark",

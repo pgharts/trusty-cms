@@ -1,11 +1,16 @@
-import { Plugin } from 'ckeditor5';
+import { Plugin, Widget, toWidget } from 'ckeditor5';
 
 export default class AssetTagBuilder extends Plugin {
+      static get requires() {
+        return [ Widget ];
+      }
+
     init() {
         console.log( 'AssetTagBuilder plugin initialized' );
         // Plugin logic goes here
         this._defineSchema();
         this._defineConverters();
+        this._defineDataNormalization();
     }
 
     _defineSchema() {
@@ -48,6 +53,7 @@ export default class AssetTagBuilder extends Plugin {
             }
         } );
 
+    
         // Data downcast: ensure no inner whitespace like &nbsp; gets serialized.
         dataDowncast.elementToElement( {
             model: 'assetImage',
@@ -65,7 +71,7 @@ export default class AssetTagBuilder extends Plugin {
                 if ( height ) attrs.height = height;
                 if ( width ) attrs.width = width;
 
-                return writer.createEmptyElement( 'r:asset:image', attrs );
+                return writer.createContainerElement( 'r:asset:image', attrs );
             }
         } );
 
@@ -86,8 +92,78 @@ export default class AssetTagBuilder extends Plugin {
                 if ( height ) attrs.height = height;
                 if ( width ) attrs.width = width;
 
-                return writer.createContainerElement( 'r:asset:image', attrs );
-            }
-        } );
+                const container = writer.createContainerElement('span', {
+                    class: 'asset-image-tag',
+                    'data-asset-id': id,
+                    'data-asset-size': size
+                });
+
+                const label = writer.createUIElement(
+                    'span',
+                    { class: 'asset-image-tag__label' },
+                    function (domDocument) {
+                        const domEl = this.toDomElement(domDocument);
+                        const parts = [
+                        'Asset image',
+                        id ? `#${id}` : '',
+                        size ? `(${size})` : '',
+                        alt ? `— ${alt}` : '',
+                        height ? `height: ${height}` : '',
+                        width ? `width: ${width}` : ''
+                        ].filter(Boolean);
+
+                        domEl.textContent = parts.join(' ');
+                        return domEl;
+                    }
+                );
+
+                writer.insert(writer.createPositionAt(container, 0), label);
+                return toWidget(container, writer, { label: `Asset image ${id ? `#${id}` : ''}` });
+            }            
+        } );       
+
+    }
+
+      _defineDataNormalization() {
+        const editor = this.editor;
+        const processor = editor.data.processor;
+
+        const originalToView = processor.toView.bind( processor );
+        const originalToData = processor.toData.bind( processor );
+
+        // 1) Incoming: <r:asset:image ... /> -> <r:asset:image ...></r:asset:image>
+       processor.toView = (data) => {
+            let normalized = data;
+
+            // 1) Self-closing -> paired
+            normalized = normalized.replace(
+                /<r:asset:image\b([^>]*?)\/>/gi,
+                '<r:asset:image$1></r:asset:image>'
+            );
+
+            // 2) Bare open tag (rare, but happens) -> paired
+            normalized = normalized.replace(
+                /<r:asset:image\b([^>]*?)>(?!\s*<\/r:asset:image>)/gi,
+                '<r:asset:image$1></r:asset:image>'
+            );
+
+            return originalToView(normalized);
+            };
+
+
+        processor.toData = (viewFragment) => {
+            const html = originalToData(viewFragment);
+
+            return html.replace(
+                /<r:asset:image\b([^>]*?)>([\s\S]*?)<\/r:asset:image>/gi,
+                (match, attrs, inner) => {
+                const cleanedInner = inner.replace(
+                    /^(?:\s|&nbsp;|&#160;)+|(?:\s|&nbsp;|&#160;)+$/g,
+                    ''
+                );
+                return `<r:asset:image${attrs} />${cleanedInner}`;
+                }
+            );
+        };
     }
 }

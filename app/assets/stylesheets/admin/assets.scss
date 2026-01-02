@@ -1,3 +1,19 @@
+.ck-content .asset-image-tag {
+  background-color: #dcdcdc;
+  display: inline-flex;
+  align-items: center;
+  padding: 1em;
+  border: 1px dashed #c3c3c3;
+  opacity: 0.85;
+  user-select: none;
+}
+
+.ck-content  .asset-image-tag__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
 .search {
   display: grid;
   grid-template-columns: 1fr 1fr;
