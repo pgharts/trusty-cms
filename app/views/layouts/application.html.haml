@@ -37,11 +37,10 @@
 
     - stylesheet_overrides.each do |stylesheet|
       = stylesheet_link_tag stylesheet
-
     - javascript_overrides.each do |javascript|
       = javascript_include_tag javascript
 
-    = stylesheet_link_tag href="trusty_cms/ckeditor5"
+    = stylesheet_link_tag href="ckeditor5/dist/ckeditor5.css"
     = csrf_meta_tags
     
     :javascript
