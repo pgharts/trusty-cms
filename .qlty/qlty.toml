@@ -87,9 +87,6 @@ name = "eslint"
 version = "8.57.0"
 
 [[plugin]]
-name = "haml-lint"
-
-[[plugin]]
 name = "rubocop"
 
 [[plugin]]
