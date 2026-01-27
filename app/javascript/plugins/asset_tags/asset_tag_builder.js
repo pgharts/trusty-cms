@@ -1,4 +1,4 @@
-import { Plugin, Widget, toWidget } from 'ckeditor5/src/index.js';
+import { Plugin, Widget, toWidget } from 'ckeditor5';
 
 export default class AssetTagBuilder extends Plugin {
       static get requires() {
