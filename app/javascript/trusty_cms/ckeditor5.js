@@ -112,8 +112,9 @@ import {
     TextTransformation,
     TodoList,
     Underline
-} from 'ckeditor5/src/index.js';
+} from 'ckeditor5';
 
+import 'ckeditor5/ckeditor5.css'
 
 const editorConfig = {
     toolbar: {
