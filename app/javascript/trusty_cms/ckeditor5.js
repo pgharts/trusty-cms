@@ -46,7 +46,7 @@ const defaultStyleDefinitions = [
             }
         ]
 
-import AssetTagBuilder from '../plugins/asset_tags/asset_tags';        
+import AssetTagBuilder from '../plugins/asset_tags/asset_tag_builder';        
 
 import {
     ClassicEditor,
@@ -112,9 +112,7 @@ import {
     TextTransformation,
     TodoList,
     Underline
-} from 'ckeditor5';
-
-import "ckeditor5/ckeditor5.css";
+} from 'ckeditor5/src/index.js';
 
 
 const editorConfig = {
@@ -369,6 +367,8 @@ editorElements.forEach((editorElement) => {
             if (!hiddenInput) {
                 return;
             }
+
+            editor.setData(hiddenInput.value || '');
             editor.ui.focusTracker.on( 'change:isFocused', ( evt, name, isFocused ) => {
                 if ( !isFocused ) {
                     editor.plugins.get( 'SourceEditing' ).updateEditorData()
