@@ -12,7 +12,7 @@ Rails engine and is built to be installed into an existing Rails 7 application a
 
 CircleCI: [![CircleCI](https://circleci.com/gh/pgharts/trusty-cms/tree/master.svg?style=shield)](https://circleci.com/gh/pgharts/trusty-cms/tree/master)
 
-CodeClimate: [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+Qlty: [![Maintainability](https://qlty.sh/gh/pgharts/projects/trusty-cms/maintainability.svg)](https://qlty.sh/gh/pgharts/projects/trusty-cms)
 
 TrustyCMS features:
 
