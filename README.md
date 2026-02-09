@@ -247,6 +247,9 @@ In the AWS Lambda Configuration:
 
 Your setup is now complete, and **Scheduled Pages** will automatically update their status via the AWS Lambda and EventBridge integration.
 
+**11. Upgrading to CKEditor5**
+In version 7.0.45+ CKEditor5 has been implemented and CKEditor4 has been deprecated. Ensure your application is functioning on esbuild and jsbundler before upgrading your TrustyCMS with CKEditor5. 
+
 ### Custom CKEditor5 Styles and Stylesheets
 
 Add your stylesheets and custom styles to CKEditor in your application.
