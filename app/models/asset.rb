@@ -71,11 +71,22 @@ class Asset < ActiveRecord::Base
            to: :asset_type
 
   def thumbnail(style_name = 'original')
-    return asset.url if style_name.to_s == 'original' || render_original(style_name)
+    return rewrite_cloud_url(asset.url) if style_name.to_s == 'original' || render_original(style_name)
     variant = asset_variant(style_name.to_s)
-    return variant.processed.url if variant
+    return rewrite_cloud_url(variant.processed.url) if variant
 
     asset_type.icon(style_name.to_s)
+  end
+
+  def public_url(style_name = 'original')
+    if style_name.to_s == 'original' || render_original(style_name)
+      return rewrite_cloud_url(asset.url)
+    end
+
+    variant = asset_variant(style_name.to_s)
+    return rewrite_cloud_url(variant.processed.url) if variant
+
+    rewrite_cloud_url(asset.url)
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -241,6 +252,12 @@ class Asset < ActiveRecord::Base
 
   def assign_uuid
     self.uuid = SecureRandom.uuid unless uuid?
+  end
+
+  def rewrite_cloud_url(url)
+    return url unless defined?(TrustyCmsClippedExtension::Cloud)
+
+    TrustyCmsClippedExtension::Cloud.rewrite_url(url)
   end
 
   class << self

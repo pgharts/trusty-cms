@@ -18,5 +18,11 @@ TrustyCms.config do |config|
   # ActiveStorage configuration is handled in config/storage.yml and
   # config.active_storage.service (per environment). For S3 or other
   # cloud providers, configure the appropriate ActiveStorage service.
+  #
+  # Optional CDN host override for ActiveStorage URLs:
+  # config["assets.cdn.host"] = "https://assets.example.com"
+  #
+  # Or provide a dynamic host in an initializer:
+  # TrustyCmsClippedExtension::Cloud.host_provider = -> { AssetBucket.current&.asset_host }
 
 end
