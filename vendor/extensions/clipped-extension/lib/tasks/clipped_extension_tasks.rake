@@ -52,8 +52,11 @@ namespace :trusty do
         asset_path = File.join(Rails.root, "assets")
         mkdir_p asset_path
         Asset.find(:all).each do |asset|
-          puts "Exporting #{asset.asset_file_name}"
-          cp asset.asset.path, File.join(asset_path, asset.asset_file_name)
+          next unless asset.asset.attached?
+          puts "Exporting #{asset.filename}"
+          asset.asset.open do |file|
+            cp file.path, File.join(asset_path, asset.filename)
+          end
         end
         puts "Done."
       end
