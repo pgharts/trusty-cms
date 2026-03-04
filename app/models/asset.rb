@@ -192,17 +192,6 @@ class Asset < ActiveRecord::Base
     original_dimensions.all?(&:positive?)
   end
 
-  def refresh_variants!
-    return unless asset.attached?
-    return unless asset.variable?
-
-    active_storage_styles.each_key do |style_name|
-      next if style_name.to_s == 'original'
-      variant = asset_variant(style_name)
-      variant&.processed
-    end
-  end
-
   private
 
   def original_dimensions

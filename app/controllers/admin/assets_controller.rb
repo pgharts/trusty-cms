@@ -74,17 +74,6 @@ class Admin::AssetsController < Admin::ResourceController
     end
   end
 
-  def refresh
-    if asset_params[:id]
-      @asset = Asset.find(params[:id])
-      @asset.refresh_variants!
-      flash[:notice] = t('clipped_extension.thumbnails_refreshed')
-      redirect_to edit_admin_asset_path(@asset)
-    else
-      render
-    end
-  end
-
   private
 
   def process_uploaded_asset(uploaded_asset)
