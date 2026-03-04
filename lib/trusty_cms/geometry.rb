@@ -39,7 +39,7 @@ module TrustyCms
       when '%'
         scaled_by(other)
       when '@'
-        scaled_by(other.width * 100 / (width * height))
+        scaled_by((other.width * 100).fdiv(width * height))
       else
         scaled_to_fit(other)
       end
@@ -60,18 +60,27 @@ module TrustyCms
       elsif other.width == 0 && other.height > 0
         Geometry.new(width * other.height / height, other.height)
       else
-        ratio = Geometry.new(other.width / width, other.height / height)
-        if ratio.square?
+        product_width = other.width * height
+        product_height = other.height * width
+        if product_width == product_height
           other.without_modifier
-        elsif ratio.horizontal?
-          Geometry.new(ratio.height * width, other.height)
+        elsif product_width > product_height
+          scaled_width = (width * other.height.fdiv(height)).round
+          Geometry.new(scaled_width, other.height)
         else
-          Geometry.new(other.width, ratio.width * height)
+          scaled_height = (height * other.width.fdiv(width)).round
+          Geometry.new(other.width, scaled_height)
         end
       end
     end
 
     def scaled_by(other)
+      if other.is_a?(Numeric)
+        scaled_width = (width * other.fdiv(100)).round
+        scaled_height = (height * other.fdiv(100)).round
+        return Geometry.new(scaled_width, scaled_height)
+      end
+
       other = Geometry.new("#{other}%") unless other.is_a?(Geometry)
       if other.height > 0
         Geometry.new(width * other.width / 100, height * other.height / 100)
