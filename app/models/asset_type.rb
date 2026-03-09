@@ -29,9 +29,9 @@ class AssetType
     @mimes.each { |mimetype| @@mime_lookup[mimetype] ||= self }
 
     this = self
-    Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(content_type) end
-    Asset.send :define_class_method, "#{name}_condition".intern do this.condition; end
-    Asset.send :define_class_method, "not_#{name}_condition".intern do this.non_condition; end
+    Asset.send :define_method, "#{name}?".intern { this.mime_types.include?(content_type) }
+    Asset.send :define_class_method, "#{name}_condition".intern { this.condition; }
+    Asset.send :define_class_method, "not_#{name}_condition".intern { this.non_condition; }
     Asset.send :scope, plural.to_sym, -> { where(conditions: condition) }
     Asset.send :scope, "not_#{plural}".to_sym, -> { where(conditions: non_condition) }
 
@@ -124,7 +124,7 @@ class AssetType
     {
       icon: { geometry: '50x50#', format: :png },
       thumbnail: { geometry: '100x100#', format: :png },
-      original: { },
+      original: {},
     }
   end
 

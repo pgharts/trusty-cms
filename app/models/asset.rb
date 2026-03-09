@@ -54,16 +54,19 @@ class Asset < ActiveRecord::Base
 
   def filename
     return asset.filename.to_s if asset.attached?
+
     self[:asset_file_name]
   end
 
   def content_type
     return asset.content_type if asset.attached?
+
     self[:asset_content_type]
   end
 
   def byte_size
     return asset.blob.byte_size if asset.attached?
+
     self[:asset_file_size]
   end
 
@@ -245,6 +248,7 @@ class Asset < ActiveRecord::Base
 
   def assign_title
     return unless asset.attached?
+    
     self.title = asset.filename.base
   end
 
