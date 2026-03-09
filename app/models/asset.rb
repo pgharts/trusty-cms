@@ -70,15 +70,14 @@ class Asset < ActiveRecord::Base
   delegate :active_storage_styles, :style_dimensions, :style_format,
            to: :asset_type
 
-  def thumbnail(style_name = 'original')
-    return rewrite_cloud_url(asset.url) if style_name.to_s == 'original' || render_original(style_name)
+  def thumbnail(style_name = 'normal')
     variant = asset_variant(style_name.to_s)
     return rewrite_cloud_url(variant.processed.url) if variant
 
     asset_type.icon(style_name.to_s)
   end
 
-  def public_url(style_name = 'original')
+  def public_url(style_name = 'normal')
     if style_name.to_s == 'original' || render_original(style_name)
       return rewrite_cloud_url(asset.url)
     end
@@ -98,7 +97,6 @@ class Asset < ActiveRecord::Base
   end
 
   def asset_variant(style_name)
-    return if style_name.to_s == 'original'
     style = active_storage_styles[style_name.to_sym]
     return unless style
 
