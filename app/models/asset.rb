@@ -1,3 +1,5 @@
+require 'trusty_cms/geometry'
+
 class Asset < ActiveRecord::Base
   APPROVED_CONTENT_TYPES = %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css text/calendar].freeze
 
@@ -16,11 +18,12 @@ class Asset < ActiveRecord::Base
 
   scope :of_types, lambda { |types|
     mimes = AssetType.slice(*types).map(&:mime_types).flatten
-    Asset.select { |x| mimes.include?(x.asset_content_type) }
+    return none if mimes.empty?
+    joins(asset_attachment: :blob).where(active_storage_blobs: { content_type: mimes })
   }
 
   scope :matching, lambda { |term|
-    where(['LOWER(assets.asset_file_name) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)', { term: "%#{term.downcase}%" }])
+    joins(asset_attachment: :blob).where(['LOWER(active_storage_blobs.filename) LIKE (:term) OR LOWER(title) LIKE (:term) OR LOWER(caption) LIKE (:term)', { term: "%#{term.downcase}%" }])
   }
 
   scope :excepting, lambda { |assets|
@@ -41,6 +44,7 @@ class Asset < ActiveRecord::Base
                 content_type: APPROVED_CONTENT_TYPES,
                 size_range: 1..10.megabytes,
               }
+  before_validation :sync_attachment_metadata
   before_save :assign_title
   before_save :assign_uuid
 
@@ -48,12 +52,28 @@ class Asset < ActiveRecord::Base
     AssetType.for(asset)
   end
 
-  delegate :paperclip_processors, :paperclip_styles, :active_storage_styles, :style_dimensions, :style_format,
+  def filename
+    return asset.filename.to_s if asset.attached?
+    self[:asset_file_name]
+  end
+
+  def content_type
+    return asset.content_type if asset.attached?
+    self[:asset_content_type]
+  end
+
+  def byte_size
+    return asset.blob.byte_size if asset.attached?
+    self[:asset_file_size]
+  end
+
+  delegate :active_storage_styles, :style_dimensions, :style_format,
            to: :asset_type
 
   def thumbnail(style_name = 'original')
     return asset.url if style_name.to_s == 'original' || render_original(style_name)
-    return asset_variant(style_name.to_s).processed.url if asset.variable?
+    variant = asset_variant(style_name.to_s)
+    return variant.processed.url if variant
 
     asset_type.icon(style_name.to_s)
   end
@@ -63,42 +83,43 @@ class Asset < ActiveRecord::Base
   end
 
   def render_original(style_name)
-    style_name.to_s == 'original' && asset.key.include?('culturaldistrict')
+    style_name.to_s == 'original' && asset.attached? && asset.key.include?('culturaldistrict')
   end
 
   def asset_variant(style_name)
-    case style_name
-    when 'thumbnail'
-      asset.variant(gravity: 'Center', resize: '100x100^', crop: '100x100+0+0')
-    when 'small'
-      asset.variant(gravity: 'Center', resize: '320x320^')
-    when 'normal'
-      asset.variant(gravity: 'Center', resize_to_limit: [asset.metadata[:width], asset.metadata[:height]])
-    when 'icon'
-      asset.variant(gravity: 'Center', resize: '50x50^')
+    return if style_name.to_s == 'original'
+    style = active_storage_styles[style_name.to_sym]
+    return unless style
+
+    transformations = active_storage_transformations(style[:geometry])
+    transformations[:format] = style[:format] if style[:format]
+    if asset.variable?
+      asset.variant(transformations)
+    elsif asset.previewable?
+      asset.preview(transformations)
     end
   end
 
   def style?(style_name = 'original')
-    style_name == 'original' || paperclip_styles.keys.include?(style_name.to_sym)
+    style_name == 'original' || active_storage_styles.keys.include?(style_name.to_sym)
   end
 
   def basename
-    File.basename(asset_file_name, '.*') if asset_file_name
+    File.basename(filename, '.*') if filename
   end
 
   def extension(style_name = 'original')
     if style_name == 'original'
       original_extension
-    elsif style = paperclip_styles[style_name.to_sym]
-      style.format
+    elsif style = active_storage_styles[style_name.to_sym]
+      style[:format]
     else
       original_extension
     end
   end
 
   def original_extension
-    return asset_file_name.split('.').last.downcase if asset_file_name
+    return filename.split('.').last.downcase if filename
   end
 
   def attached_to?(page)
@@ -106,12 +127,12 @@ class Asset < ActiveRecord::Base
   end
 
   def original_geometry
-    @original_geometry ||= Paperclip::Geometry.new(original_width, original_height)
+    @original_geometry ||= TrustyCms::Geometry.new(*original_dimensions)
   end
 
   def geometry(style_name = 'original')
     unless style?(style_name)
-      raise Paperclip::StyleError,
+      raise TrustyCms::StyleError,
             "Requested style #{style_name} is not defined for this asset."
     end
 
@@ -120,11 +141,11 @@ class Asset < ActiveRecord::Base
       @geometry[style_name] ||= if style_name.to_s == 'original'
                                   original_geometry
                                 else
-                                  style = asset.styles[style_name.to_sym]
-                                  original_geometry.transformed_by(style.geometry)
+                                  style = active_storage_styles[style_name.to_sym]
+                                  original_geometry.transformed_by(style[:geometry])
                                   # this can return dimensions for fully specified style sizes but not for relative sizes when there are no original dimensions
                                 end
-    rescue Paperclip::TransformationError => e
+    rescue TrustyCms::TransformationError => e
       Rails.logger.warn "geometry transformation error: #{e}"
       original_geometry # returns a blank geometry if the real geometry cannot be calculated
     end
@@ -168,26 +189,53 @@ class Asset < ActiveRecord::Base
   end
 
   def dimensions_known?
-    original_width? && original_height?
+    original_dimensions.all?(&:positive?)
   end
 
   private
 
-  # at this point the file queue will not have been written
-  # but the upload should be in place. We read dimensions from the
-  # original file and calculate thumbnail dimensions later, on demand.
-
-  def read_dimensions
-    if image? && file = asset.queued_for_write[:original]
-      geometry = Paperclip::Geometry.from_file(file)
-      self.original_width = geometry.width
-      self.original_height = geometry.height
-      self.original_extension = File.extname(file.path)
+  def original_dimensions
+    width = original_width.presence
+    height = original_height.presence
+    if asset.attached?
+      width ||= asset.metadata[:width] || asset.metadata['width']
+      height ||= asset.metadata[:height] || asset.metadata['height']
     end
-    true
+    [width.to_i, height.to_i]
+  end
+
+  def active_storage_transformations(geometry)
+    return {} unless geometry.present?
+    parsed = TrustyCms::Geometry.parse(geometry)
+    width = parsed.width.positive? ? parsed.width : nil
+    height = parsed.height.positive? ? parsed.height : nil
+    return {} unless width && height
+
+    case parsed.modifier
+    when '#', '^', '!'
+      { resize_to_fill: [width, height].compact }
+    when '>', '<'
+      { resize_to_limit: [width, height].compact }
+    else
+      { resize_to_limit: [width, height].compact }
+    end
+  end
+
+  def sync_attachment_metadata
+    return unless asset.attached?
+
+    self.asset_file_name = asset.filename.to_s
+    self.asset_content_type = asset.content_type
+    self.asset_file_size = asset.blob.byte_size
+    self.original_extension = asset.filename.extension&.downcase
+    if asset.metadata[:width].present? && asset.metadata[:height].present?
+      self.original_width = asset.metadata[:width]
+      self.original_height = asset.metadata[:height]
+    end
   end
 
   def assign_title
+    return unless asset.attached?
     self.title = asset.filename.base
   end
 
@@ -230,7 +278,7 @@ class Asset < ActiveRecord::Base
 
   # for backwards compatibility
   def self.thumbnail_sizes
-    AssetType.find(:image).paperclip_styles
+    AssetType.find(:image).active_storage_styles
   end
 
   def self.thumbnail_names

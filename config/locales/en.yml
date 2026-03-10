@@ -109,7 +109,7 @@ en:
     remove_from_page: 'Remove from page'
     reorder: 'Reorder'
     remove: 'Remove'
-    refresh_assets_rake_task: 'For better results please log into your server and run <code>rake paperclip:refresh class=Asset</code>.'
+    refresh_assets_rake_task: 'For better results please log into your server and run <code>rake active_storage:refresh class=Asset</code>.'
     replace_file: 'Replace File'
     save_and_upload: 'Save and Upload'
     search_assets: 'Search for assets'

@@ -7,7 +7,7 @@
 %table.index#assets{:cellpadding => "0", :cellspacing => "0", :border => "0"}
   %tbody
     %tr[@asset]
-      %td.icon= image_tag @asset.thumbnail(:icon), :title => @asset.asset_file_name
+      %td.icon= image_tag @asset.thumbnail(:icon), :title => @asset.filename
       %td.name= @asset.title
 
 = form_for [:admin, @asset], :html => { :method => 'delete' } do
