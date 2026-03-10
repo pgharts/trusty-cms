@@ -7,6 +7,7 @@ module TrustyCms
 
     def self.parse(value)
       return value if value.is_a?(Geometry)
+
       match = value.to_s.strip.match(/\A(\d*)x(\d*)([%<>#^!@])?\z/)
       raise StyleError, "Unrecognized geometry: #{value.inspect}" unless match
 
@@ -29,7 +30,8 @@ module TrustyCms
     def transformed_by(other)
       other = Geometry.parse(other)
       return other.without_modifier if self =~ other || ['#', '!', '^'].include?(other.modifier)
-      raise TransformationError, "geometry is not transformable without both width and height" if height == 0 || width == 0
+
+      raise TransformationError, 'geometry is not transformable without both width and height' if height.zero? || width.zero?
 
       case other.modifier
       when '>'
@@ -55,9 +57,9 @@ module TrustyCms
     end
 
     def scaled_to_fit(other)
-      if other.width > 0 && other.height == 0
+      if other.width.positive? && other.height.zero?
         Geometry.new(other.width, height * other.width / width)
-      elsif other.width == 0 && other.height > 0
+      elsif other.width.zero? && other.height.positive?
         Geometry.new(width * other.height / height, other.height)
       else
         product_width = other.width * height

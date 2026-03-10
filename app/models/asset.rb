@@ -54,28 +54,41 @@ class Asset < ActiveRecord::Base
 
   def filename
     return asset.filename.to_s if asset.attached?
+
     self[:asset_file_name]
   end
 
   def content_type
     return asset.content_type if asset.attached?
+
     self[:asset_content_type]
   end
 
   def byte_size
     return asset.blob.byte_size if asset.attached?
+
     self[:asset_file_size]
   end
 
   delegate :active_storage_styles, :style_dimensions, :style_format,
            to: :asset_type
 
-  def thumbnail(style_name = 'original')
-    return asset.url if style_name.to_s == 'original' || render_original(style_name)
+  def thumbnail(style_name = 'normal')
     variant = asset_variant(style_name.to_s)
-    return variant.processed.url if variant
+    return rewrite_cloud_url(variant.processed.url) if variant
 
     asset_type.icon(style_name.to_s)
+  end
+
+  def public_url(style_name = 'normal')
+    if style_name.to_s == 'original' || render_original(style_name)
+      return rewrite_cloud_url(asset.url)
+    end
+
+    variant = asset_variant(style_name.to_s)
+    return rewrite_cloud_url(variant.processed.url) if variant
+
+    rewrite_cloud_url(asset.url)
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -87,7 +100,6 @@ class Asset < ActiveRecord::Base
   end
 
   def asset_variant(style_name)
-    return if style_name.to_s == 'original'
     style = active_storage_styles[style_name.to_sym]
     return unless style
 
@@ -241,6 +253,12 @@ class Asset < ActiveRecord::Base
 
   def assign_uuid
     self.uuid = SecureRandom.uuid unless uuid?
+  end
+
+  def rewrite_cloud_url(url)
+    return url unless defined?(TrustyCmsClippedExtension::Cloud)
+
+    TrustyCmsClippedExtension::Cloud.rewrite_url(url)
   end
 
   class << self

@@ -124,6 +124,7 @@ class AssetType
     {
       icon: { geometry: '50x50#', format: :png },
       thumbnail: { geometry: '100x100#', format: :png },
+      original: {},
     }
   end
 

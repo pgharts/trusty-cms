@@ -40,7 +40,7 @@ class Admin::AssetsController < Admin::ResourceController
         @page_attachments << (@page_attachment = @asset.page_attachments.build(page: @page))
       end
 
-      render json: { url: @asset.asset.url }
+      render json: { url: @asset.public_url }
     else
       flash[result.fetch(:flash_type, :error)] = result[:error]
       render json: { error: result[:error] }, status: result.fetch(:status, :unprocessable_entity)
