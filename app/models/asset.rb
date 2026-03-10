@@ -248,7 +248,6 @@ class Asset < ActiveRecord::Base
 
   def assign_title
     return unless asset.attached?
-    
     self.title = asset.filename.base
   end
 
