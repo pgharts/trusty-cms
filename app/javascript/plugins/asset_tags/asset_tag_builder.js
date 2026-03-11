@@ -37,7 +37,7 @@ export default class AssetTagBuilder extends Plugin {
             model: ( viewElement, { writer } ) => {
                 const attrs = {};
                 const id = viewElement.getAttribute( 'id' );
-                const klass = viewElement.getAttribute( 'class' )
+                const klass = viewElement.getAttribute( 'class' );
                 const size = viewElement.getAttribute( 'size' );
                 const alt = viewElement.getAttribute( 'alt' );
                 const height = viewElement.getAttribute( 'height' );
