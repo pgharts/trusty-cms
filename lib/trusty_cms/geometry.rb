@@ -84,7 +84,7 @@ module TrustyCms
       end
 
       other = Geometry.new("#{other}%") unless other.is_a?(Geometry)
-      if other.height > 0
+      if other.height.positive?
         Geometry.new(width * other.width / 100, height * other.height / 100)
       else
         Geometry.new(width * other.width / 100, height * other.width / 100)

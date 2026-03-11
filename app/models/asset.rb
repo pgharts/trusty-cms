@@ -19,6 +19,7 @@ class Asset < ActiveRecord::Base
   scope :of_types, lambda { |types|
     mimes = AssetType.slice(*types).map(&:mime_types).flatten
     return none if mimes.empty?
+    
     joins(asset_attachment: :blob).where(active_storage_blobs: { content_type: mimes })
   }
 
@@ -218,6 +219,7 @@ class Asset < ActiveRecord::Base
 
   def active_storage_transformations(geometry)
     return {} unless geometry.present?
+
     parsed = TrustyCms::Geometry.parse(geometry)
     width = parsed.width.positive? ? parsed.width : nil
     height = parsed.height.positive? ? parsed.height : nil
@@ -248,6 +250,7 @@ class Asset < ActiveRecord::Base
 
   def assign_title
     return unless asset.attached?
+    
     self.title = asset.filename.base
   end
 
