@@ -106288,7 +106288,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         allowWhere: "$text",
         isInline: true,
         isObject: true,
-        allowAttributes: ["id", "class", "size", "alt", "height", "width"]
+        allowAttributes: ["id", "class", "size", "alt", "height", "width", "linkHref"]
       });
     }
     _defineConverters() {
