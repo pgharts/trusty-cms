@@ -1,4 +1,370 @@
 (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // node_modules/es-toolkit/dist/predicate/isPlainObject.js
+  var require_isPlainObject = __commonJS({
+    "node_modules/es-toolkit/dist/predicate/isPlainObject.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      function isPlainObject3(value) {
+        if (!value || typeof value !== "object") {
+          return false;
+        }
+        const proto = Object.getPrototypeOf(value);
+        const hasObjectPrototype = proto === null || proto === Object.prototype || Object.getPrototypeOf(proto) === null;
+        if (!hasObjectPrototype) {
+          return false;
+        }
+        return Object.prototype.toString.call(value) === "[object Object]";
+      }
+      exports.isPlainObject = isPlainObject3;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/compat/_internal/getSymbols.js
+  var require_getSymbols = __commonJS({
+    "node_modules/es-toolkit/dist/compat/_internal/getSymbols.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      function getSymbols2(object) {
+        return Object.getOwnPropertySymbols(object).filter((symbol) => Object.prototype.propertyIsEnumerable.call(object, symbol));
+      }
+      exports.getSymbols = getSymbols2;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/compat/_internal/getTag.js
+  var require_getTag = __commonJS({
+    "node_modules/es-toolkit/dist/compat/_internal/getTag.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      function getTag2(value) {
+        if (value == null) {
+          return value === void 0 ? "[object Undefined]" : "[object Null]";
+        }
+        return Object.prototype.toString.call(value);
+      }
+      exports.getTag = getTag2;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/compat/_internal/tags.js
+  var require_tags = __commonJS({
+    "node_modules/es-toolkit/dist/compat/_internal/tags.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      var regexpTag2 = "[object RegExp]";
+      var stringTag2 = "[object String]";
+      var numberTag2 = "[object Number]";
+      var booleanTag2 = "[object Boolean]";
+      var argumentsTag2 = "[object Arguments]";
+      var symbolTag2 = "[object Symbol]";
+      var dateTag2 = "[object Date]";
+      var mapTag2 = "[object Map]";
+      var setTag2 = "[object Set]";
+      var arrayTag2 = "[object Array]";
+      var functionTag2 = "[object Function]";
+      var arrayBufferTag2 = "[object ArrayBuffer]";
+      var objectTag2 = "[object Object]";
+      var errorTag2 = "[object Error]";
+      var dataViewTag2 = "[object DataView]";
+      var uint8ArrayTag2 = "[object Uint8Array]";
+      var uint8ClampedArrayTag2 = "[object Uint8ClampedArray]";
+      var uint16ArrayTag2 = "[object Uint16Array]";
+      var uint32ArrayTag2 = "[object Uint32Array]";
+      var bigUint64ArrayTag2 = "[object BigUint64Array]";
+      var int8ArrayTag2 = "[object Int8Array]";
+      var int16ArrayTag2 = "[object Int16Array]";
+      var int32ArrayTag2 = "[object Int32Array]";
+      var bigInt64ArrayTag2 = "[object BigInt64Array]";
+      var float32ArrayTag2 = "[object Float32Array]";
+      var float64ArrayTag2 = "[object Float64Array]";
+      exports.argumentsTag = argumentsTag2;
+      exports.arrayBufferTag = arrayBufferTag2;
+      exports.arrayTag = arrayTag2;
+      exports.bigInt64ArrayTag = bigInt64ArrayTag2;
+      exports.bigUint64ArrayTag = bigUint64ArrayTag2;
+      exports.booleanTag = booleanTag2;
+      exports.dataViewTag = dataViewTag2;
+      exports.dateTag = dateTag2;
+      exports.errorTag = errorTag2;
+      exports.float32ArrayTag = float32ArrayTag2;
+      exports.float64ArrayTag = float64ArrayTag2;
+      exports.functionTag = functionTag2;
+      exports.int16ArrayTag = int16ArrayTag2;
+      exports.int32ArrayTag = int32ArrayTag2;
+      exports.int8ArrayTag = int8ArrayTag2;
+      exports.mapTag = mapTag2;
+      exports.numberTag = numberTag2;
+      exports.objectTag = objectTag2;
+      exports.regexpTag = regexpTag2;
+      exports.setTag = setTag2;
+      exports.stringTag = stringTag2;
+      exports.symbolTag = symbolTag2;
+      exports.uint16ArrayTag = uint16ArrayTag2;
+      exports.uint32ArrayTag = uint32ArrayTag2;
+      exports.uint8ArrayTag = uint8ArrayTag2;
+      exports.uint8ClampedArrayTag = uint8ClampedArrayTag2;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/compat/util/eq.js
+  var require_eq = __commonJS({
+    "node_modules/es-toolkit/dist/compat/util/eq.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      function eq2(value, other) {
+        return value === other || Number.isNaN(value) && Number.isNaN(other);
+      }
+      exports.eq = eq2;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/predicate/isEqualWith.js
+  var require_isEqualWith = __commonJS({
+    "node_modules/es-toolkit/dist/predicate/isEqualWith.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      var isPlainObject3 = require_isPlainObject();
+      var getSymbols2 = require_getSymbols();
+      var getTag2 = require_getTag();
+      var tags = require_tags();
+      var eq2 = require_eq();
+      function isEqualWith3(a, b, areValuesEqual) {
+        return isEqualWithImpl2(a, b, void 0, void 0, void 0, void 0, areValuesEqual);
+      }
+      function isEqualWithImpl2(a, b, property2, aParent, bParent, stack, areValuesEqual) {
+        const result = areValuesEqual(a, b, property2, aParent, bParent, stack);
+        if (result !== void 0) {
+          return result;
+        }
+        if (typeof a === typeof b) {
+          switch (typeof a) {
+            case "bigint":
+            case "string":
+            case "boolean":
+            case "symbol":
+            case "undefined": {
+              return a === b;
+            }
+            case "number": {
+              return a === b || Object.is(a, b);
+            }
+            case "function": {
+              return a === b;
+            }
+            case "object": {
+              return areObjectsEqual2(a, b, stack, areValuesEqual);
+            }
+          }
+        }
+        return areObjectsEqual2(a, b, stack, areValuesEqual);
+      }
+      function areObjectsEqual2(a, b, stack, areValuesEqual) {
+        if (Object.is(a, b)) {
+          return true;
+        }
+        let aTag = getTag2.getTag(a);
+        let bTag = getTag2.getTag(b);
+        if (aTag === tags.argumentsTag) {
+          aTag = tags.objectTag;
+        }
+        if (bTag === tags.argumentsTag) {
+          bTag = tags.objectTag;
+        }
+        if (aTag !== bTag) {
+          return false;
+        }
+        switch (aTag) {
+          case tags.stringTag:
+            return a.toString() === b.toString();
+          case tags.numberTag: {
+            const x = a.valueOf();
+            const y = b.valueOf();
+            return eq2.eq(x, y);
+          }
+          case tags.booleanTag:
+          case tags.dateTag:
+          case tags.symbolTag:
+            return Object.is(a.valueOf(), b.valueOf());
+          case tags.regexpTag: {
+            return a.source === b.source && a.flags === b.flags;
+          }
+          case tags.functionTag: {
+            return a === b;
+          }
+        }
+        stack = stack ?? /* @__PURE__ */ new Map();
+        const aStack = stack.get(a);
+        const bStack = stack.get(b);
+        if (aStack != null && bStack != null) {
+          return aStack === b;
+        }
+        stack.set(a, b);
+        stack.set(b, a);
+        try {
+          switch (aTag) {
+            case tags.mapTag: {
+              if (a.size !== b.size) {
+                return false;
+              }
+              for (const [key, value] of a.entries()) {
+                if (!b.has(key) || !isEqualWithImpl2(value, b.get(key), key, a, b, stack, areValuesEqual)) {
+                  return false;
+                }
+              }
+              return true;
+            }
+            case tags.setTag: {
+              if (a.size !== b.size) {
+                return false;
+              }
+              const aValues = Array.from(a.values());
+              const bValues = Array.from(b.values());
+              for (let i = 0; i < aValues.length; i++) {
+                const aValue = aValues[i];
+                const index = bValues.findIndex((bValue) => {
+                  return isEqualWithImpl2(aValue, bValue, void 0, a, b, stack, areValuesEqual);
+                });
+                if (index === -1) {
+                  return false;
+                }
+                bValues.splice(index, 1);
+              }
+              return true;
+            }
+            case tags.arrayTag:
+            case tags.uint8ArrayTag:
+            case tags.uint8ClampedArrayTag:
+            case tags.uint16ArrayTag:
+            case tags.uint32ArrayTag:
+            case tags.bigUint64ArrayTag:
+            case tags.int8ArrayTag:
+            case tags.int16ArrayTag:
+            case tags.int32ArrayTag:
+            case tags.bigInt64ArrayTag:
+            case tags.float32ArrayTag:
+            case tags.float64ArrayTag: {
+              if (typeof Buffer !== "undefined" && Buffer.isBuffer(a) !== Buffer.isBuffer(b)) {
+                return false;
+              }
+              if (a.length !== b.length) {
+                return false;
+              }
+              for (let i = 0; i < a.length; i++) {
+                if (!isEqualWithImpl2(a[i], b[i], i, a, b, stack, areValuesEqual)) {
+                  return false;
+                }
+              }
+              return true;
+            }
+            case tags.arrayBufferTag: {
+              if (a.byteLength !== b.byteLength) {
+                return false;
+              }
+              return areObjectsEqual2(new Uint8Array(a), new Uint8Array(b), stack, areValuesEqual);
+            }
+            case tags.dataViewTag: {
+              if (a.byteLength !== b.byteLength || a.byteOffset !== b.byteOffset) {
+                return false;
+              }
+              return areObjectsEqual2(new Uint8Array(a), new Uint8Array(b), stack, areValuesEqual);
+            }
+            case tags.errorTag: {
+              return a.name === b.name && a.message === b.message;
+            }
+            case tags.objectTag: {
+              const areEqualInstances = areObjectsEqual2(a.constructor, b.constructor, stack, areValuesEqual) || isPlainObject3.isPlainObject(a) && isPlainObject3.isPlainObject(b);
+              if (!areEqualInstances) {
+                return false;
+              }
+              const aKeys = [...Object.keys(a), ...getSymbols2.getSymbols(a)];
+              const bKeys = [...Object.keys(b), ...getSymbols2.getSymbols(b)];
+              if (aKeys.length !== bKeys.length) {
+                return false;
+              }
+              for (let i = 0; i < aKeys.length; i++) {
+                const propKey = aKeys[i];
+                const aProp = a[propKey];
+                if (!Object.hasOwn(b, propKey)) {
+                  return false;
+                }
+                const bProp = b[propKey];
+                if (!isEqualWithImpl2(aProp, bProp, propKey, a, b, stack, areValuesEqual)) {
+                  return false;
+                }
+              }
+              return true;
+            }
+            default: {
+              return false;
+            }
+          }
+        } finally {
+          stack.delete(a);
+          stack.delete(b);
+        }
+      }
+      exports.isEqualWith = isEqualWith3;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/function/noop.js
+  var require_noop = __commonJS({
+    "node_modules/es-toolkit/dist/function/noop.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      function noop2() {
+      }
+      exports.noop = noop2;
+    }
+  });
+
+  // node_modules/es-toolkit/dist/predicate/isEqual.js
+  var require_isEqual = __commonJS({
+    "node_modules/es-toolkit/dist/predicate/isEqual.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+      var isEqualWith3 = require_isEqualWith();
+      var noop2 = require_noop();
+      function isEqual3(a, b) {
+        return isEqualWith3.isEqualWith(a, b, noop2.noop);
+      }
+      exports.isEqual = isEqual3;
+    }
+  });
+
+  // node_modules/es-toolkit/compat/isEqual.js
+  var require_isEqual2 = __commonJS({
+    "node_modules/es-toolkit/compat/isEqual.js"(exports, module) {
+      module.exports = require_isEqual().isEqual;
+    }
+  });
+
   // node_modules/es-toolkit/dist/predicate/isLength.mjs
   function isLength(value) {
     return Number.isSafeInteger(value) && value >= 0;
@@ -202,9 +568,9 @@
       return isMatch(target, source2);
     }
     return isMatchWithInternal(target, source2, function doesMatch(objValue, srcValue, key, object, source3, stack) {
-      const isEqual2 = compare(objValue, srcValue, key, object, source3, stack);
-      if (isEqual2 !== void 0) {
-        return Boolean(isEqual2);
+      const isEqual3 = compare(objValue, srcValue, key, object, source3, stack);
+      if (isEqual3 !== void 0) {
+        return Boolean(isEqual3);
       }
       return isMatchWithInternal(objValue, srcValue, doesMatch, stack);
     }, /* @__PURE__ */ new Map());
@@ -273,8 +639,8 @@
         if (source2[key] === null && target[key] !== null) {
           return false;
         }
-        const isEqual2 = compare(target[key], source2[key], key, target, source2, stack);
-        if (!isEqual2) {
+        const isEqual3 = compare(target[key], source2[key], key, target, source2, stack);
+        if (!isEqual3) {
           return false;
         }
       }
@@ -294,8 +660,8 @@
     }
     for (const [key, sourceValue] of source2.entries()) {
       const targetValue = target.get(key);
-      const isEqual2 = compare(targetValue, sourceValue, key, target, source2, stack);
-      if (isEqual2 === false) {
+      const isEqual3 = compare(targetValue, sourceValue, key, target, source2, stack);
+      if (isEqual3 === false) {
         return false;
       }
     }
@@ -318,8 +684,8 @@
         }
         const targetItem = target[j];
         let matches2 = false;
-        const isEqual2 = compare(targetItem, sourceItem, i, target, source2, stack);
-        if (isEqual2) {
+        const isEqual3 = compare(targetItem, sourceItem, i, target, source2, stack);
+        if (isEqual3) {
           matches2 = true;
         }
         if (matches2) {
@@ -749,6 +1115,11 @@
   // node_modules/es-toolkit/dist/compat/predicate/isArray.mjs
   function isArray(value) {
     return Array.isArray(value);
+  }
+
+  // node_modules/es-toolkit/dist/compat/predicate/isNil.mjs
+  function isNil(x) {
+    return x == null;
   }
 
   // node_modules/es-toolkit/dist/compat/function/identity.mjs
@@ -1548,6 +1919,47 @@
     return mergeWith(object, ...sources, noop);
   }
 
+  // node_modules/es-toolkit/dist/compat/object/pick.mjs
+  function pick(obj, ...keysArr) {
+    if (isNil(obj)) {
+      return {};
+    }
+    const result = {};
+    for (let i = 0; i < keysArr.length; i++) {
+      let keys = keysArr[i];
+      switch (typeof keys) {
+        case "object": {
+          if (!Array.isArray(keys)) {
+            if (isArrayLike(keys)) {
+              keys = Array.from(keys);
+            } else {
+              keys = [keys];
+            }
+          }
+          break;
+        }
+        case "string":
+        case "symbol":
+        case "number": {
+          keys = [keys];
+          break;
+        }
+      }
+      for (const key of keys) {
+        const value = get(obj, key);
+        if (value === void 0 && !has(obj, key)) {
+          continue;
+        }
+        if (typeof key === "string" && Object.hasOwn(obj, key)) {
+          result[key] = value;
+        } else {
+          set(result, key, value);
+        }
+      }
+    }
+    return result;
+  }
+
   // node_modules/es-toolkit/dist/compat/predicate/isFunction.mjs
   function isFunction(value) {
     return typeof value === "function";
@@ -2040,8 +2452,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       documentationMessage
     ];
   }
-  var version = "46.0.3";
-  var releaseDate = new Date(2025, 8, 3);
+  var version = "47.6.0";
+  var releaseDate = new Date(2026, 2, 4);
   if (globalThis.CKEDITOR_VERSION) {
     throw new CKEditorError("ckeditor-duplicated-modules", null);
   } else {
@@ -3108,7 +3520,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   function isRange(obj) {
     return Object.prototype.toString.apply(obj) == "[object Range]";
   }
-  var rectProperties = [
+  var RECT_PROPERTIES = [
     "top",
     "right",
     "bottom",
@@ -3116,6 +3528,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     "width",
     "height"
   ];
+  var POSITIONING_VALUES = /* @__PURE__ */ new Set([
+    "relative",
+    "absolute",
+    "fixed",
+    "sticky"
+  ]);
   var Rect = class _Rect {
     /**
     * The "top" value of the rect.
@@ -3319,14 +3737,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       let child = source2;
       let parent = source2.parentNode || source2.commonAncestorContainer;
-      let absolutelyPositionedChildElement;
+      let lastPositionedChildElement;
       while (parent && !isBody(parent)) {
-        const isParentOverflowVisible = getElementOverflow(parent) === "visible";
-        if (child instanceof HTMLElement && getElementPosition(child) === "absolute") {
-          absolutelyPositionedChildElement = child;
+        const isNonClippingParent = getElementOverflow(parent) === "visible";
+        if (isPositioned(child)) {
+          lastPositionedChildElement = child;
         }
-        const parentElementPosition = getElementPosition(parent);
-        if (isParentOverflowVisible || absolutelyPositionedChildElement && (parentElementPosition === "relative" && isParentOverflowVisible || parentElementPosition !== "relative")) {
+        if (isNonClippingParent || lastPositionedChildElement && getElementPosition(lastPositionedChildElement) === "absolute" && !isPositioned(parent)) {
           child = parent;
           parent = parent.parentNode;
           continue;
@@ -3354,7 +3771,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @returns `true` when Rects are equal. `false` otherwise.
     */
     isEqual(anotherRect) {
-      for (const prop of rectProperties) {
+      for (const prop of RECT_PROPERTIES) {
         if (this[prop] !== anotherRect[prop]) {
           return false;
         }
@@ -3433,7 +3850,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const clientRects = Array.from(range.getClientRects());
       if (clientRects.length) {
         for (const rect of clientRects) {
-          rects.push(new _Rect(rect));
+          const r = new _Rect(rect);
+          r._source = range;
+          rects.push(r);
         }
       } else {
         let startContainer = range.startContainer;
@@ -3479,7 +3898,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   };
   function copyRectProperties(rect, source2) {
-    for (const p of rectProperties) {
+    for (const p of RECT_PROPERTIES) {
       rect[p] = source2[p];
     }
   }
@@ -3493,10 +3912,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     return value !== null && typeof value === "object" && value.nodeType === 1 && typeof value.getBoundingClientRect === "function";
   }
   function getElementPosition(element) {
-    return element instanceof HTMLElement ? element.ownerDocument.defaultView.getComputedStyle(element).position : "static";
+    return element.ownerDocument.defaultView.getComputedStyle(element).position;
   }
   function getElementOverflow(element) {
     return element instanceof HTMLElement ? element.ownerDocument.defaultView.getComputedStyle(element).overflow : "visible";
+  }
+  function isPositioned(node) {
+    return node instanceof HTMLElement && POSITIONING_VALUES.has(getElementPosition(node));
   }
   function shiftRectToCompensatePositionedAncestor(rect, positionedElementAncestor) {
     const ancestorPosition = new Rect(positionedElementAncestor);
@@ -3712,6 +4134,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     viewportRect.height -= viewportOffsetConfig.top;
     viewportRect.bottom -= viewportOffsetConfig.bottom;
     viewportRect.height -= viewportOffsetConfig.bottom;
+    viewportRect.left += viewportOffsetConfig.left;
+    viewportRect.right -= viewportOffsetConfig.right;
+    viewportRect.width -= viewportOffsetConfig.left + viewportOffsetConfig.right;
     return viewportRect;
   }
   function getBestPosition(positions, options) {
@@ -5471,6 +5896,27 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     const sequence = `${flagSequence}|${emoji}(?:\u200D${emoji})*`;
     return new RegExp(sequence, "ug");
   }
+  function decodeLicenseKey(licenseKey) {
+    if (!licenseKey) {
+      return null;
+    }
+    const encodedPayload = getLicenseKeyPayload(licenseKey);
+    if (!encodedPayload) {
+      return null;
+    }
+    return parseBase64EncodedObject(encodedPayload);
+  }
+  function getLicenseKeyPayload(licenseKey) {
+    const parts = licenseKey.split(".");
+    if (parts.length != 3) {
+      return null;
+    }
+    return parts[1];
+  }
+  function isFeatureBlockedByLicenseKey(licensePayload, licenseFeatureCode) {
+    const blockedFeatures = licensePayload.removeFeatures || [];
+    return blockedFeatures.includes(licenseFeatureCode);
+  }
 
   // node_modules/@ckeditor/ckeditor5-engine/dist/index.js
   var documentPlaceholders = /* @__PURE__ */ new WeakMap();
@@ -5572,6 +6018,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         continue;
       }
       const hostElement = getChildPlaceholderHostSubstitute(element);
+      if (hostElement !== config.hostElement && config.hostElement) {
+        writer.removeAttribute("data-placeholder", config.hostElement);
+        hideViewPlaceholder(writer, config.hostElement);
+        config.hostElement = null;
+        wasViewModified = true;
+      }
       if (!hostElement) {
         continue;
       }
@@ -5812,13 +6264,18 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
     }
     /**
-    * Custom toJSON method to solve child-parent circular dependencies.
+    * Converts `ViewNode` to plain object and returns it.
     *
-    * @returns Clone of this object with the parent property removed.
+    * @returns `ViewNode` converted to plain object.
     */
     toJSON() {
-      const json = clone(this);
-      delete json.parent;
+      const json = {
+        path: this.getPath(),
+        type: "Node"
+      };
+      if (this !== this.root && this.root.is("rootElement")) {
+        json.root = this.root.toJSON();
+      }
       return json;
     }
   };
@@ -5887,6 +6344,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         return false;
       }
       return this === otherNode || this.data === otherNode.data;
+    }
+    /**
+    * Converts `ViewText` instance to plain object and returns it.
+    *
+    * @returns `ViewText` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "Text";
+      json.data = this.data;
+      return json;
     }
     /**
     * Clones this node.
@@ -8158,6 +8626,26 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return this._unsafeAttributesToRender.includes(attributeName);
     }
     /**
+    * Converts `ViewElement` to plain object and returns it.
+    *
+    * @returns `ViewElement` converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.name = this.name;
+      json.type = "Element";
+      if (this._attrs.size) {
+        json.attributes = Object.fromEntries(this.getAttributes());
+      }
+      if (this._children.length > 0) {
+        json.children = [];
+        for (const node of this._children) {
+          json.children.push(node.toJSON());
+        }
+      }
+      return json;
+    }
+    /**
     * Clones provided element.
     *
     * @internal
@@ -8737,6 +9225,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       super(document2, name, attrs, children);
       this.getFillerOffset = getViewFillerOffset;
     }
+    /**
+    * Converts `ViewContainerElement` instance to plain object and returns it.
+    *
+    * @returns `ViewContainerElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "ContainerElement";
+      return json;
+    }
   };
   ViewContainerElement.prototype.is = function(type, name) {
     if (!name) {
@@ -8787,6 +9285,18 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     destroy() {
       this.stopListening();
     }
+    /**
+    * Converts `ViewEditableElement` instance to plain object and returns it.
+    *
+    * @returns `ViewEditableElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "EditableElement";
+      json.isReadOnly = this.isReadOnly;
+      json.isFocused = this.isFocused;
+      return json;
+    }
   };
   ViewEditableElement.prototype.is = function(type, name) {
     if (!name) {
@@ -8820,6 +9330,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     set rootName(rootName) {
       this._setCustomProperty(rootNameSymbol, rootName);
+    }
+    /**
+    * Converts `ViewRootEditableElement` instance to string and returns it.
+    *
+    * @returns `ViewRootEditableElement` instance converted to string.
+    */
+    toJSON() {
+      return this.rootName;
     }
     /**
     * Overrides old element name and sets new one.
@@ -9406,6 +9924,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return new _ViewPosition(this.parent, this.offset);
     }
     /**
+    * Converts `ViewPosition` instance to plain object and returns it.
+    *
+    * @returns `ViewPosition` instance converted to plain object.
+    */
+    toJSON() {
+      return {
+        parent: this.parent.toJSON(),
+        offset: this.offset
+      };
+    }
+    /**
     * Creates position at the given location. The location can be specified as:
     *
     * * a {@link module:engine/view/position~ViewPosition position},
@@ -9818,6 +10347,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     isIntersecting(otherRange) {
       return this.start.isBefore(otherRange.end) && this.end.isAfter(otherRange.start);
+    }
+    /**
+    * Converts `ViewRange` instance to plain object and returns it.
+    *
+    * @returns `ViewRange` instance converted to plain object.
+    */
+    toJSON() {
+      return {
+        start: this.start.toJSON(),
+        end: this.end.toJSON()
+      };
     }
     /**
     * Creates a range from the given parents and offsets.
@@ -10321,6 +10861,23 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this.fire("change");
     }
     /**
+    * Converts `ViewSelection` instance to plain object and returns it.
+    *
+    * @returns `ViewSelection` instance converted to plain object.
+    */
+    toJSON() {
+      const json = {
+        ranges: Array.from(this.getRanges()).map((range) => range.toJSON())
+      };
+      if (this.isBackward) {
+        json.isBackward = true;
+      }
+      if (this.isFake) {
+        json.isFake = true;
+      }
+      return json;
+    }
+    /**
     * Replaces all ranges that were added to the selection with given array of ranges. Last range of the array
     * is treated like the last added range and is used to set {@link #anchor anchor} and {@link #focus focus}.
     * Accepts a flag describing in which way the selection is made.
@@ -10541,6 +11098,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return this._selection.isSimilar(otherSelection);
     }
     /**
+    * Converts `ViewDocumentSelection` instance to plain object and returns it.
+    *
+    * @returns `ViewDocumentSelection` instance converted to plain object.
+    */
+    toJSON() {
+      return this._selection.toJSON();
+    }
+    /**
     * Sets this selection's ranges and direction to the specified location based on the given
     * {@link module:engine/view/selection~ViewSelectable selectable}.
     *
@@ -10661,49 +11226,40 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return this._currentTarget;
     }
   };
-  var contextsSymbol = Symbol("bubbling contexts");
+  var bubblingEmitterSymbol = Symbol("bubblingEmitter");
+  var callbackMapSymbol = Symbol("bubblingCallbacks");
+  var contextsSymbol = Symbol("bubblingContexts");
   function BubblingEmitterMixin(base) {
     class Mixin extends base {
       fire(eventOrInfo, ...eventArgs) {
         try {
           const eventInfo = eventOrInfo instanceof EventInfo ? eventOrInfo : new EventInfo(this, eventOrInfo);
-          const eventContexts = getBubblingContexts(this);
-          if (!eventContexts.size) {
-            return;
-          }
+          const bubblingEmitter = getBubblingEmitter(this);
+          const customContexts = getCustomContexts(this);
           updateEventInfo(eventInfo, "capturing", this);
-          if (fireListenerFor(eventContexts, "$capture", eventInfo, ...eventArgs)) {
+          if (fireListenerFor(bubblingEmitter, "$capture", eventInfo, ...eventArgs)) {
             return eventInfo.return;
           }
           const startRange = eventInfo.startRange || this.selection.getFirstRange();
           const selectedElement = startRange ? startRange.getContainedElement() : null;
-          const isCustomContext = selectedElement ? Boolean(getCustomContext(eventContexts, selectedElement)) : false;
+          const isCustomContext = selectedElement ? hasMatchingCustomContext(customContexts, selectedElement) : false;
           let node = selectedElement || getDeeperRangeParent(startRange);
           updateEventInfo(eventInfo, "atTarget", node);
           if (!isCustomContext) {
-            if (fireListenerFor(eventContexts, "$text", eventInfo, ...eventArgs)) {
+            if (fireListenerFor(bubblingEmitter, "$text", eventInfo, ...eventArgs)) {
               return eventInfo.return;
             }
             updateEventInfo(eventInfo, "bubbling", node);
           }
           while (node) {
-            if (node.is("rootElement")) {
-              if (fireListenerFor(eventContexts, "$root", eventInfo, ...eventArgs)) {
-                return eventInfo.return;
-              }
-            } else if (node.is("element")) {
-              if (fireListenerFor(eventContexts, node.name, eventInfo, ...eventArgs)) {
-                return eventInfo.return;
-              }
-            }
-            if (fireListenerFor(eventContexts, node, eventInfo, ...eventArgs)) {
+            if (node.is("element") && fireListenerFor(bubblingEmitter, node, eventInfo, ...eventArgs)) {
               return eventInfo.return;
             }
             node = node.parent;
             updateEventInfo(eventInfo, "bubbling", node);
           }
           updateEventInfo(eventInfo, "bubbling", this);
-          fireListenerFor(eventContexts, "$document", eventInfo, ...eventArgs);
+          fireListenerFor(bubblingEmitter, "$document", eventInfo, ...eventArgs);
           return eventInfo.return;
         } catch (err) {
           CKEditorError.rethrowUnexpectedError(err, this);
@@ -10711,20 +11267,24 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       _addEventListener(event, callback, options) {
         const contexts = toArray(options.context || "$document");
-        const eventContexts = getBubblingContexts(this);
+        const bubblingEmitter = getBubblingEmitter(this);
+        const callbacksMap = getCallbackMap(this);
         for (const context of contexts) {
-          let emitter = eventContexts.get(context);
-          if (!emitter) {
-            emitter = new (EmitterMixin())();
-            eventContexts.set(context, emitter);
+          if (typeof context == "function") {
+            getCustomContexts(this).add(context);
           }
-          this.listenTo(emitter, event, callback, options);
         }
+        const wrappedCallback = wrapCallback(this, contexts, callback);
+        callbacksMap.set(callback, wrappedCallback);
+        this.listenTo(bubblingEmitter, event, wrappedCallback, options);
       }
       _removeEventListener(event, callback) {
-        const eventContexts = getBubblingContexts(this);
-        for (const emitter of eventContexts.values()) {
-          this.stopListening(emitter, event, callback);
+        const bubblingEmitter = getBubblingEmitter(this);
+        const callbacksMap = getCallbackMap(this);
+        const wrappedCallback = callbacksMap.get(callback);
+        if (wrappedCallback) {
+          callbacksMap.delete(callback);
+          this.stopListening(bubblingEmitter, event, wrappedCallback);
         }
       }
     }
@@ -10736,27 +11296,66 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       eventInfo._currentTarget = currentTarget;
     }
   }
-  function fireListenerFor(eventContexts, context, eventInfo, ...eventArgs) {
-    const emitter = typeof context == "string" ? eventContexts.get(context) : getCustomContext(eventContexts, context);
-    if (!emitter) {
-      return false;
+  function fireListenerFor(emitter, currentTarget, eventInfo, ...eventArgs) {
+    emitter.fire(eventInfo, {
+      currentTarget,
+      eventArgs
+    });
+    if (eventInfo.stop.called) {
+      return true;
     }
-    emitter.fire(eventInfo, ...eventArgs);
-    return eventInfo.stop.called;
+    return false;
   }
-  function getCustomContext(eventContexts, node) {
-    for (const [context, emitter] of eventContexts) {
-      if (typeof context == "function" && context(node)) {
-        return emitter;
+  function wrapCallback(emitter, contexts, callback) {
+    return function(event, data) {
+      const { currentTarget, eventArgs } = data;
+      if (typeof currentTarget == "string") {
+        if (contexts.includes(currentTarget)) {
+          callback.call(emitter, event, ...eventArgs);
+        }
+        return;
       }
-    }
-    return null;
+      if (currentTarget.is("rootElement") && contexts.includes("$root")) {
+        callback.call(emitter, event, ...eventArgs);
+        return;
+      }
+      if (contexts.includes(currentTarget.name)) {
+        callback.call(emitter, event, ...eventArgs);
+        return;
+      }
+      for (const context of contexts) {
+        if (typeof context == "function" && context(currentTarget)) {
+          callback.call(emitter, event, ...eventArgs);
+          return;
+        }
+      }
+    };
   }
-  function getBubblingContexts(source2) {
+  function getBubblingEmitter(source2) {
+    if (!source2[bubblingEmitterSymbol]) {
+      source2[bubblingEmitterSymbol] = new (EmitterMixin())();
+    }
+    return source2[bubblingEmitterSymbol];
+  }
+  function getCallbackMap(source2) {
+    if (!source2[callbackMapSymbol]) {
+      source2[callbackMapSymbol] = /* @__PURE__ */ new Map();
+    }
+    return source2[callbackMapSymbol];
+  }
+  function getCustomContexts(source2) {
     if (!source2[contextsSymbol]) {
-      source2[contextsSymbol] = /* @__PURE__ */ new Map();
+      source2[contextsSymbol] = /* @__PURE__ */ new Set();
     }
     return source2[contextsSymbol];
+  }
+  function hasMatchingCustomContext(customContexts, element) {
+    for (const context of customContexts) {
+      if (context(element)) {
+        return true;
+      }
+    }
+    return false;
   }
   function getDeeperRangeParent(range) {
     if (!range) {
@@ -10990,6 +11589,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return super.isSimilar(otherElement) && this.priority == otherElement.priority;
     }
     /**
+    * Converts `ViewAttributeElement` instance to plain object and returns it.
+    *
+    * @returns `ViewAttributeElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "AttributeElement";
+      return json;
+    }
+    /**
     * Clones provided element with priority.
     *
     * @internal
@@ -11073,6 +11682,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     constructor(document2, name, attributes, children) {
       super(document2, name, attributes, children);
       this.getFillerOffset = getFillerOffset$2;
+    }
+    /**
+    * Converts `ViewEmptyElement` instance to plain object and returns it.
+    *
+    * @returns `ViewEmptyElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "EmptyElement";
+      return json;
     }
     /**
     * Overrides {@link module:engine/view/element~ViewElement#_insertChild} method.
@@ -11172,6 +11791,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       return domElement;
     }
+    /**
+    * Converts `ViewUIElement` instance to plain object and returns it.
+    *
+    * @returns `ViewUIElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "UIElement";
+      return json;
+    }
   };
   ViewUIElement.prototype.is = function(type, name) {
     if (!name) {
@@ -11238,6 +11867,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     constructor(document2, name, attrs, children) {
       super(document2, name, attrs, children);
       this.getFillerOffset = getFillerOffset;
+    }
+    /**
+    * Converts `ViewRawElement` instance to plain object and returns it.
+    *
+    * @returns `ViewRawElement` instance converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      json.type = "RawElement";
+      return json;
     }
     /**
     * Overrides the {@link module:engine/view/element~ViewElement#_insertChild} method.
@@ -11371,6 +12010,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     *getCustomProperties() {
       yield* this._customProperties.entries();
+    }
+    /**
+    * Converts `ViewDocumentFragment` instance to plain object and returns it.
+    * Takes care of converting all of this document fragment's children.
+    *
+    * @returns `ViewDocumentFragment` instance converted to plain object.
+    */
+    toJSON() {
+      const json = [];
+      for (const node of this._children) {
+        json.push(node.toJSON());
+      }
+      return json;
     }
     /**
     * {@link module:engine/view/documentfragment~ViewDocumentFragment#_insertChild Insert} a child node or a list of child nodes at the end
@@ -13746,7 +14398,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (attributeKey.startsWith("on")) {
         return false;
       }
-      if (attributeKey === "srcdoc" && attributeValue.match(/\bon\S+\s*=|javascript:|<\s*\/*script/i)) {
+      if (attributeKey === "srcdoc") {
         return false;
       }
       if (elementName === "img" && (attributeKey === "src" || attributeKey === "srcset")) {
@@ -13755,7 +14407,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (elementName === "source" && attributeKey === "srcset") {
         return true;
       }
-      if (attributeValue.match(/^\s*(javascript:|data:(image\/svg|text\/x?html))/i)) {
+      if (attributeValue.replace(/\s+/g, "").match(/^(javascript:|data:(image\/svg|text\/x?html))/i)) {
         return false;
       }
       return true;
@@ -14329,7 +14981,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           scrollTop
         ]);
       });
-      domEditable.focus();
+      domEditable.focus({
+        preventScroll: true
+      });
       forEachDomElementAncestor(domEditable, (node) => {
         const [scrollLeft, scrollTop] = scrollPositions.shift();
         node.scrollLeft = scrollLeft;
@@ -14780,7 +15434,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           return null;
         } else if (this._isInlineObjectElement(item)) {
           return item;
-        } else if (item.is("containerElement")) {
+        } else if (item.is("containerElement") || this._isBlockViewElement(item)) {
           return null;
         }
       }
@@ -15628,7 +16282,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         this._reportInfiniteLoop();
         return;
       }
-      if (this.selection.isSimilar(newViewSelection)) {
+      if (!isSelectionWithinRootElements(newViewSelection)) {
+        this.view.forceRender();
+      } else if (this.selection.isSimilar(newViewSelection)) {
         this.view.forceRender();
       } else {
         const data = {
@@ -15647,6 +16303,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this._loopbackCounter = 0;
     }
   };
+  function isSelectionWithinRootElements(selection) {
+    return Array.from(selection.getRanges()).flatMap((range) => [
+      range.start.root,
+      range.end.root
+    ]).every((root) => root && root.is("rootElement"));
+  }
   var CompositionObserver = class extends DomEventObserver {
     /**
     * @inheritDoc
@@ -18126,7 +18788,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     /**
     * Converts `Range` to plain object and returns it.
     *
-    * @returns `Node` converted to plain object.
+    * @returns `Range` converted to plain object.
     */
     toJSON() {
       return {
@@ -19532,11 +20194,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @param writer The view writer that should be used to modify the view document.
     */
     convertChanges(differ, markers, writer) {
-      const conversionApi = this._createConversionApi(writer, differ.getRefreshedItems());
+      const refreshedItems = differ.getRefreshedItems();
+      const conversionApi = this._createConversionApi(writer, refreshedItems);
       for (const change of differ.getMarkersToRemove()) {
         this._convertMarkerRemove(change.name, change.range, conversionApi);
       }
-      const changes = this._reduceChanges(differ.getChanges());
+      const changes = this._reduceChanges(differ.getChanges(), refreshedItems);
       for (const entry of changes) {
         if (entry.type === "insert") {
           this._convertInsert(ModelRange._createFromPositionAndShift(entry.position, entry.length), conversionApi);
@@ -19697,7 +20360,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
     }
     /**
-    * Fires re-insertion conversion (with a `reconversion` flag passed to `insert` events)
+    * Fires re-insertion conversion (with a `reconversion` flag passed to `remove` and `insert` events)
     * of a range of elements (only elements on the range depth, without children).
     *
     * For each node in the range on its depth (without children), {@link #event:insert `insert` event} is fired.
@@ -19714,6 +20377,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }));
       this._addConsumablesForInsert(conversionApi.consumable, walkerValues);
       for (const data of walkerValues.map(walkerValueToEventData)) {
+        this.fire(`remove:${data.item.is("element") ? data.item.name : "$text"}`, {
+          position: data.range.start,
+          length: data.item.offsetSize,
+          reconversion: true
+        }, conversionApi);
         this._testAndFire("insert", {
           ...data,
           reconversion: true
@@ -19782,9 +20450,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     *
     * @fires reduceChanges
     */
-    _reduceChanges(changes) {
+    _reduceChanges(changes, refreshedItems) {
       const data = {
-        changes
+        changes,
+        refreshedItems
       };
       this.fire("reduceChanges", data);
       return data.changes;
@@ -20828,6 +21497,24 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return limitStartPosition.isTouching(this.getFirstPosition()) && limitEndPosition.isTouching(this.getLastPosition());
     }
     /**
+    * Converts `Selection` to plain object and returns it.
+    *
+    * @returns `Selection` converted to plain object.
+    */
+    toJSON() {
+      const json = {
+        ranges: Array.from(this.getRanges()).map((range) => range.toJSON())
+      };
+      const attributes = Object.fromEntries(this.getAttributes());
+      if (Object.keys(attributes).length) {
+        json.attributes = attributes;
+      }
+      if (this.isBackward) {
+        json.isBackward = true;
+      }
+      return json;
+    }
+    /**
     * Adds given range to internal {@link #_ranges ranges array}. Throws an error
     * if given range is intersecting with any range that is already stored in this selection.
     */
@@ -21380,6 +22067,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this._selection.observeMarkers(prefixOrName);
     }
     /**
+    * Converts `DocumentSelection` to plain object and returns it.
+    *
+    * @returns `DocumentSelection` converted to plain object.
+    */
+    toJSON() {
+      return this._selection.toJSON();
+    }
+    /**
     * Moves {@link module:engine/model/documentselection~ModelDocumentSelection#focus} to the specified location.
     * Should be used only within the {@link module:engine/model/writer~ModelWriter#setSelectionFocus} method.
     *
@@ -21687,6 +22382,18 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (liveRange) {
         this._ranges.push(liveRange);
       }
+    }
+    /**
+    * Converts `LiveSelection` to plain object and returns it.
+    *
+    * @returns `LiveSelection` converted to plain object.
+    */
+    toJSON() {
+      const json = super.toJSON();
+      if (this.markers.length) {
+        json.markers = this.markers.map((marker2) => marker2.toJSON());
+      }
+      return json;
     }
     _validateSelectionRanges(ranges) {
       for (const range of ranges) {
@@ -23235,18 +23942,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   }
   function remove2() {
     return (evt, data, conversionApi) => {
+      if (data.reconversion) {
+        return;
+      }
       const viewStart = conversionApi.mapper.toViewPosition(data.position);
       const modelEnd = data.position.getShiftedBy(data.length);
       const viewEnd = conversionApi.mapper.toViewPosition(modelEnd, {
         isPhantom: true
       });
       const viewRange = conversionApi.writer.createRange(viewStart, viewEnd);
-      const removed = conversionApi.writer.remove(viewRange.getTrimmed());
-      for (const child of conversionApi.writer.createRangeIn(removed).getItems()) {
-        conversionApi.mapper.unbindViewElement(child, {
-          defer: true
-        });
-      }
+      removeRangeAndUnbind(viewRange.getTrimmed(), conversionApi);
     };
   }
   function createViewElementFromDowncastHighlightDescriptor(writer, descriptor) {
@@ -23346,7 +24051,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         return;
       }
       consumer(data.item, conversionApi.consumable);
-      const viewPosition = conversionApi.mapper.toViewPosition(data.range.start);
+      const viewPosition = data.reconversion && removeElementAndUnbind(data.item, conversionApi) || conversionApi.mapper.toViewPosition(data.range.start);
       conversionApi.mapper.bindElements(data.item, viewElement);
       conversionApi.writer.insert(viewPosition, viewElement);
       conversionApi.convertAttributes(data.item);
@@ -23371,7 +24076,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       validateSlotsChildren(data.item, slotsMap, conversionApi);
       consumer(data.item, conversionApi.consumable);
-      const viewPosition = conversionApi.mapper.toViewPosition(data.range.start);
+      const viewPosition = data.reconversion && removeElementAndUnbind(data.item, conversionApi) || conversionApi.mapper.toViewPosition(data.range.start);
       conversionApi.mapper.bindElements(data.item, viewElement);
       conversionApi.writer.insert(viewPosition, viewElement);
       conversionApi.convertAttributes(data.item);
@@ -23408,6 +24113,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       evt.stop();
     };
+  }
+  function removeRangeAndUnbind(viewRange, conversionApi) {
+    const removed = conversionApi.writer.remove(viewRange);
+    for (const child of conversionApi.writer.createRangeIn(removed).getItems()) {
+      conversionApi.mapper.unbindViewElement(child, {
+        defer: true
+      });
+    }
+    return viewRange.start;
+  }
+  function removeElementAndUnbind(modelElement, conversionApi) {
+    const viewElement = conversionApi.mapper.toViewElement(modelElement);
+    return viewElement && removeRangeAndUnbind(conversionApi.writer.createRangeOn(viewElement), conversionApi);
   }
   function removeUIElement() {
     return (evt, data, conversionApi) => {
@@ -23853,7 +24571,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   }
   function prepareDescriptor(highlightDescriptor, data, conversionApi) {
-    const descriptor = typeof highlightDescriptor == "function" ? highlightDescriptor(data, conversionApi) : highlightDescriptor;
+    const descriptor = typeof highlightDescriptor == "function" ? highlightDescriptor(data, conversionApi) : {
+      ...highlightDescriptor
+    };
     if (!descriptor) {
       return null;
     }
@@ -23891,9 +24611,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       for (const change of data.changes) {
         const node = change.type == "attribute" ? change.range.start.nodeAfter : change.position.parent;
-        if (!node || !shouldReplace(node, change)) {
+        if (!node || !shouldReplace(node, change) || change.type == "reinsert") {
           reducedChanges.push(change);
           continue;
+        }
+        if (change.type == "insert" && change.action == "rename") {
+          data.refreshedItems.add(change.position.nodeAfter);
         }
         if (!data.reconvertedElements.has(node)) {
           data.reconvertedElements.add(node);
@@ -23909,11 +24632,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             changeIndex = i;
           }
           reducedChanges.splice(changeIndex, 0, {
-            type: "remove",
-            name: node.name,
-            position,
-            length: 1
-          }, {
             type: "reinsert",
             name: node.name,
             position,
@@ -23982,6 +24700,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     let currentSlotNodes = null;
     for ([currentSlot, currentSlotNodes] of slotsMap) {
       reinsertOrConvertNodes(viewElement, currentSlotNodes, conversionApi, options);
+      conversionApi.writer.setCustomProperty("$structureSlotParent", true, currentSlot.parent);
       conversionApi.writer.move(conversionApi.writer.createRangeIn(currentSlot), conversionApi.writer.createPositionBefore(currentSlot));
       conversionApi.writer.remove(currentSlot);
     }
@@ -25589,12 +26308,15 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     *
     * @param ranges Ranges to be validated.
     * @param attribute The name of the attribute to check.
+    * @param options Optional configuration.
+    * @param options.includeEmptyRanges When `true`, empty ranges that allow the attribute are also included
+    * in the returned ranges.
     * @returns Ranges in which the attribute is allowed.
     */
-    *getValidRanges(ranges, attribute) {
+    *getValidRanges(ranges, attribute, options = {}) {
       ranges = convertToMinimalFlatRanges(ranges);
       for (const range of ranges) {
-        yield* this._getValidRangesForRange(range, attribute);
+        yield* this._getValidRangesForRange(range, attribute, options);
       }
     }
     /**
@@ -25838,14 +26560,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @param attribute The name of the attribute to check.
     * @returns Ranges in which the attribute is allowed.
     */
-    *_getValidRangesForRange(range, attribute) {
+    *_getValidRangesForRange(range, attribute, options) {
       let start = range.start;
       let end = range.start;
       for (const item of range.getItems({
         shallow: true
       })) {
         if (item.is("element")) {
-          yield* this._getValidRangesForRange(ModelRange._createIn(item), attribute);
+          if (options.includeEmptyRanges && item.isEmpty) {
+            const context = this.createContext(item);
+            if (this.checkChild(context, "$text") && this.checkAttribute(context.push("$text"), attribute)) {
+              yield ModelRange._createIn(item);
+            }
+          } else {
+            yield* this._getValidRangesForRange(ModelRange._createIn(item), attribute, options);
+          }
         }
         if (!this.checkAttribute(item, attribute)) {
           if (!start.isEqual(end)) {
@@ -28301,11 +29030,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         throw new CKEditorError("split-operation-position-invalid", this);
       } else if (!element.parent) {
         throw new CKEditorError("split-operation-split-in-root", this);
-      } else if (this.howMany != element.maxOffset - this.splitPosition.offset) {
+      } else if (this.howMany !== Number.NEGATIVE_INFINITY && this.howMany != element.maxOffset - this.splitPosition.offset) {
         throw new CKEditorError("split-operation-how-many-invalid", this);
       } else if (this.graveyardPosition && !this.graveyardPosition.nodeAfter) {
         throw new CKEditorError("split-operation-graveyard-position-invalid", this);
       }
+      this.howMany = this.splitPosition.parent.maxOffset - this.splitPosition.offset;
     }
     /**
     * @inheritDoc
@@ -28457,9 +29187,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         throw new CKEditorError("merge-operation-source-position-invalid", this);
       } else if (!targetElement.parent) {
         throw new CKEditorError("merge-operation-target-position-invalid", this);
-      } else if (this.howMany != sourceElement.maxOffset) {
+      } else if (this.howMany !== Number.NEGATIVE_INFINITY && this.howMany != sourceElement.maxOffset) {
         throw new CKEditorError("merge-operation-how-many-invalid", this);
       }
+      this.howMany = this.sourcePosition.parent.maxOffset;
     }
     /**
     * @inheritDoc
@@ -28860,9 +29591,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const element = this.position.nodeAfter;
       if (!(element instanceof ModelElement)) {
         throw new CKEditorError("rename-operation-wrong-position", this);
-      } else if (element.name !== this.oldName) {
+      } else if (this.oldName !== "" && element.name !== this.oldName) {
         throw new CKEditorError("rename-operation-wrong-name", this);
       }
+      this.oldName = element.name;
     }
     /**
     * @inheritDoc
@@ -30122,7 +30854,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   });
   setTransformation(RootAttributeOperation, RootAttributeOperation, (a, b, context) => {
     if (a.root === b.root && a.key === b.key) {
-      if (!context.aIsStrong || a.newValue === b.newValue) {
+      if (!context.aIsStrong) {
         return [
           new NoOperation(0)
         ];
@@ -32402,6 +33134,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return this._liveRange.toRange();
     }
     /**
+    * Converts `Marker` to plain object and returns it.
+    *
+    * @returns `Marker` converted to plain object.
+    */
+    toJSON() {
+      return {
+        name: this.name,
+        range: this._liveRange?.toJSON(),
+        usingOperations: this._managedUsingOperations,
+        affectsData: this._affectsData
+      };
+    }
+    /**
     * Binds new live range to the marker and detach the old one if is attached.
     *
     * @internal
@@ -34402,9 +35147,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _lastAutoParagraph = null;
     /**
-    * The array of nodes that should be cleaned of not allowed attributes.
+    * The array of nodes that should be cleaned of not allowed attributes and sub-nodes.
     */
-    _filterAttributesOf = [];
+    _filterAttributesAndChildrenOf = [];
     /**
     * Beginning of the affected range. See {@link module:engine/model/utils/insertcontent~Insertion#getAffectedRange}.
     */
@@ -34432,15 +35177,54 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     handleNodes(nodes) {
       for (const node of Array.from(nodes)) {
-        this._handleNode(node);
+        if (node.offsetSize > 0) {
+          this._handleNode(node);
+        }
       }
       this._insertPartialFragment();
       if (this._lastAutoParagraph) {
         this._updateLastNodeFromAutoParagraph(this._lastAutoParagraph);
       }
       this._mergeOnRight();
-      this.schema.removeDisallowedAttributes(this._filterAttributesOf, this.writer);
-      this._filterAttributesOf = [];
+      this.schema.removeDisallowedAttributes(this._filterAttributesAndChildrenOf, this.writer);
+      if (this.model._config?.get("experimentalFlags.modelInsertContentDeepSchemaVerification")) {
+        this._removeDisallowedChildren(this._filterAttributesAndChildrenOf);
+      }
+      this._filterAttributesAndChildrenOf = [];
+    }
+    /**
+    * Removes disallowed children from nodes that were inserted or modified during insertion.
+    */
+    _removeDisallowedChildren(nodes) {
+      const nodesArray = Array.from(nodes);
+      for (const node of nodesArray) {
+        if (!node.is("element")) {
+          continue;
+        }
+        const remove4 = [];
+        const unwrap = [];
+        const walker = this.writer.createRangeIn(node).getWalker({
+          ignoreElementEnd: true
+        });
+        for (const { item } of walker) {
+          const itemParent = item.parent;
+          if (!this.schema.checkChild(itemParent, item)) {
+            if (item.is("element") && !this.schema.isObject(item)) {
+              unwrap.push(item);
+              nodesArray.push(itemParent);
+            } else {
+              remove4.push(item);
+            }
+            walker.jumpTo(this.writer.createPositionAfter(item));
+          }
+        }
+        for (const item of unwrap) {
+          this.writer.unwrap(item);
+        }
+        for (const item of remove4) {
+          this.writer.remove(item);
+        }
+      }
     }
     /**
     * Updates the last node after the auto paragraphing.
@@ -34500,7 +35284,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
         return;
       }
-      this._appendToFragment(node);
+      node = this._appendToFragment(node);
       if (!this._firstNode) {
         this._firstNode = node;
       }
@@ -34549,12 +35333,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       this.writer.insert(node, this._documentFragmentPosition);
       this._documentFragmentPosition = this._documentFragmentPosition.getShiftedBy(node.offsetSize);
+      if (!node.parent) {
+        node = this._documentFragmentPosition.nodeBefore;
+      }
       if (this.schema.isObject(node) && !this.schema.checkChild(this.position, "$text")) {
         this._nodeToSelect = node;
       } else {
         this._nodeToSelect = null;
       }
-      this._filterAttributesOf.push(node);
+      this._filterAttributesAndChildrenOf.push(node);
+      return node;
     }
     /**
     * Sets `_affectedStart` and `_affectedEnd` to the given `position`. Should be used before a change is done during insertion process to
@@ -34606,7 +35394,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       this.position = livePosition.toPosition();
       livePosition.detach();
-      this._filterAttributesOf.push(this.position.parent);
+      this._filterAttributesAndChildrenOf.push(this.position.parent);
       mergePosLeft.detach();
     }
     /**
@@ -34645,7 +35433,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       this.position = livePosition.toPosition();
       livePosition.detach();
-      this._filterAttributesOf.push(this.position.parent);
+      this._filterAttributesAndChildrenOf.push(this.position.parent);
       mergePosRight.detach();
     }
     /**
@@ -34720,10 +35508,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @param childNode The node to check.
     */
     _getAllowedIn(contextElement, childNode) {
-      if (this.schema.checkChild(contextElement, childNode)) {
+      const context = this.schema.createContext(contextElement);
+      if (this.schema.checkChild(context, childNode)) {
         return contextElement;
       }
-      if (this.schema.checkChild(contextElement, "paragraph") && this.schema.checkChild("paragraph", childNode)) {
+      if (this.schema.checkChild(context, "paragraph") && this.schema.checkChild(context.push("paragraph"), childNode)) {
         return contextElement;
       }
       if (this.schema.isLimit(contextElement)) {
@@ -34756,7 +35545,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       let elementToInsert = object;
       const insertionPositionParent = insertionSelection.anchor.parent;
-      if (!model.schema.checkChild(insertionPositionParent, object) && model.schema.checkChild(insertionPositionParent, "paragraph") && model.schema.checkChild("paragraph", object)) {
+      const context = model.schema.createContext(insertionPositionParent);
+      if (!model.schema.checkChild(context, object) && model.schema.checkChild(context, "paragraph") && model.schema.checkChild(context.push("paragraph"), object)) {
         elementToInsert = writer.createElement("paragraph");
         writer.insert(object, elementToInsert);
       }
@@ -34917,6 +35707,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     schema;
     /**
+    * Stores all configurations specific to editor instance.
+    *
+    * @internal
+    */
+    _config;
+    /**
     * All callbacks added by {@link module:engine/model/model~Model#change} or
     * {@link module:engine/model/model~Model#enqueueChange} methods waiting to be executed.
     */
@@ -34927,11 +35723,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     _currentWriter;
     // @if CK_DEBUG_ENGINE // private _operationLogs: Array<string>;
     // @if CK_DEBUG_ENGINE // private _appliedOperations: Array<Operation>;
-    constructor() {
+    constructor(config) {
       super();
       this.markers = new MarkerCollection();
       this.document = new ModelDocument(this);
       this.schema = new ModelSchema();
+      this._config = config;
       this._pendingChanges = [];
       this._currentWriter = null;
       [
@@ -35752,6 +36549,22 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       "touchstart",
       "touchend",
       "touchmove"
+    ];
+    /**
+    * @inheritDoc
+    */
+    onDomEvent(domEvent) {
+      this.fire(domEvent.type, domEvent);
+    }
+  };
+  var PointerObserver = class extends DomEventObserver {
+    /**
+    * @inheritDoc
+    */
+    domEventType = [
+      "pointerdown",
+      "pointerup",
+      "pointermove"
     ];
     /**
     * @inheritDoc
@@ -38290,27 +39103,31 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     _restoreCollaborationData() {
       const parsedCommentThreads = JSON.parse(this._data.commentThreads);
       const parsedSuggestions = JSON.parse(this._data.suggestions);
-      parsedCommentThreads.forEach((commentThreadData) => {
-        const channelId = this.editor.config.get("collaboration.channelId");
+      if (this.editor.plugins.has("CommentsRepository")) {
         const commentsRepository = this.editor.plugins.get("CommentsRepository");
-        if (commentsRepository.hasCommentThread(commentThreadData.threadId)) {
-          const commentThread = commentsRepository.getCommentThread(commentThreadData.threadId);
-          commentThread.remove();
+        for (const commentThread of commentsRepository.getCommentThreads()) {
+          commentsRepository._removeCommentThread({
+            threadId: commentThread.id
+          });
         }
-        commentsRepository.addCommentThread({
-          channelId,
-          ...commentThreadData
+        parsedCommentThreads.forEach((commentThreadData) => {
+          const channelId = this.editor.config.get("collaboration.channelId");
+          const commentsRepository2 = this.editor.plugins.get("CommentsRepository");
+          commentsRepository2.addCommentThread({
+            channelId,
+            ...commentThreadData
+          });
         });
-      });
-      parsedSuggestions.forEach((suggestionData) => {
+      }
+      if (this.editor.plugins.has("TrackChangesEditing")) {
         const trackChangesEditing = this.editor.plugins.get("TrackChangesEditing");
-        if (trackChangesEditing.hasSuggestion(suggestionData.id)) {
-          const suggestion = trackChangesEditing.getSuggestion(suggestionData.id);
-          suggestion.attributes = suggestionData.attributes;
-        } else {
-          trackChangesEditing.addSuggestionData(suggestionData);
+        for (const suggestion of trackChangesEditing.getSuggestions()) {
+          trackChangesEditing._removeSuggestion(suggestion);
         }
-      });
+        parsedSuggestions.forEach((suggestionData) => {
+          trackChangesEditing.addSuggestionData(suggestionData);
+        });
+      }
     }
   };
   var mainQueueId = Symbol("MainQueueId");
@@ -38848,6 +39665,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _disableStack;
     /**
+    * `Command` class is commonly put in `config.plugins` array.
+    *
+    * This property helps with better error detection.
+    *
+    * @internal
+    */
+    static get _throwErrorWhenUsedAsAPlugin() {
+      return true;
+    }
+    /**
     * Creates a new `Command` instance.
     *
     * @param editor The editor on which this command will be used.
@@ -39247,7 +40074,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     *   * Both plugins must not depend on other plugins.
     * @returns A promise which gets resolved once all plugins are loaded and available in the collection.
     */
-    init(plugins, pluginsToRemove = [], pluginsSubstitutions = []) {
+    async init(plugins, pluginsToRemove = [], pluginsSubstitutions = []) {
       const that = this;
       const context = this._context;
       findAvailablePluginConstructors(plugins);
@@ -39258,7 +40085,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       ];
       substitutePlugins(pluginConstructors, pluginsSubstitutions);
       const pluginInstances = loadPlugins(pluginConstructors);
-      return initPlugins(pluginInstances, "init").then(() => initPlugins(pluginInstances, "afterInit")).then(() => pluginInstances);
+      await initPlugins(pluginInstances, "init");
+      await initPlugins(pluginInstances, "afterInit");
+      return pluginInstances;
       function isPluginConstructor(plugin) {
         return typeof plugin === "function";
       }
@@ -39318,10 +40147,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         plugins2.map((plugin) => {
           return isPluginConstructor(plugin) ? plugin : that._availablePlugins.get(plugin) || plugin;
         }).forEach((plugin) => {
+          checkPluginConstructor(plugin);
           checkMissingPlugin(plugin, parentPluginConstructor);
           checkContextPlugin(plugin, parentPluginConstructor);
           checkRemovedPlugin(plugin, parentPluginConstructor);
         });
+      }
+      function checkPluginConstructor(plugin) {
+        if (typeof plugin !== "function") {
+          return;
+        }
+        if (plugin._throwErrorWhenUsedAsAPlugin) {
+          throw new CKEditorError("plugincollection-plugin-invalid-constructor", context, {
+            name: plugin.name
+          });
+        }
       }
       function checkMissingPlugin(plugin, parentPluginConstructor) {
         if (isPluginConstructor(plugin)) {
@@ -39711,6 +40551,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         const context = new this(config);
         resolve(context.initPlugins().then(() => context));
       });
+    }
+    /**
+    * `Context` class is commonly put in `config.plugins` array.
+    *
+    * This property helps with better error detection.
+    *
+    * @internal
+    */
+    static get _throwErrorWhenUsedAsAPlugin() {
+      return true;
     }
   };
   var ContextPlugin = class extends (/* @__PURE__ */ ObservableMixin()) {
@@ -40412,6 +41262,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _readOnlyLocks;
     /**
+    * `Editor` class is commonly put in `config.plugins` array.
+    *
+    * This property helps with better error detection.
+    *
+    * @internal
+    */
+    static get _throwErrorWhenUsedAsAPlugin() {
+      return true;
+    }
+    /**
     * Creates a new instance of the editor class.
     *
     * Usually, not to be used directly. See the static {@link module:core/editor/editor~Editor.create `create()`} method.
@@ -40420,6 +41280,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     constructor(config = {}) {
       super();
+      if (typeof config !== "object" || Array.isArray(config)) {
+        throw new CKEditorError("editor-config-invalid-type");
+      }
       if ("sanitizeHtml" in config) {
         throw new CKEditorError("editor-config-sanitizehtml-not-supported");
       }
@@ -40449,7 +41312,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this.once("destroy", () => this.state = "destroyed", {
         priority: "high"
       });
-      this.model = new Model();
+      this.model = new Model(this.config);
       this.on("change:isReadOnly", () => {
         this.model.document.isReadOnly = this.isReadOnly;
       });
@@ -40480,16 +41343,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       function verifyLicenseKey(editor) {
         const licenseKey = editor.config.get("licenseKey");
         const distributionChannel = window[Symbol.for("cke distribution")] || "sh";
-        function blockEditor(reason) {
+        function blockEditor(reason, name) {
           editor.enableReadOnlyMode(Symbol("invalidLicense"));
-          editor._showLicenseError(reason);
-        }
-        function getPayload(licenseKey2) {
-          const parts = licenseKey2.split(".");
-          if (parts.length != 3) {
-            return null;
-          }
-          return parts[1];
+          editor._showLicenseError(reason, name);
         }
         function hasAllRequiredFields(licensePayload2) {
           const requiredFields = [
@@ -40524,12 +41380,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           }
           return;
         }
-        const encodedPayload = getPayload(licenseKey);
-        if (!encodedPayload) {
-          blockEditor("invalid");
-          return;
-        }
-        const licensePayload = parseBase64EncodedObject(encodedPayload);
+        const licensePayload = decodeLicenseKey(licenseKey);
         if (!licensePayload) {
           blockEditor("invalid");
           return;
@@ -40575,13 +41426,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             window.CKEDITOR_WARNING_SUPPRESSIONS[licenseType] = true;
           }
         }
-        if ([
-          "evaluation",
-          "trial"
-        ].includes(licensePayload.licenseType)) {
-          const licenseType = licensePayload.licenseType;
+        if (licensePayload.licenseType === "evaluation") {
           const timerId = setTimeout(() => {
-            blockEditor(`${licenseType}Limit`);
+            blockEditor("evaluationLimit");
           }, 6e5);
           editor.on("destroy", () => {
             clearTimeout(timerId);
@@ -40787,7 +41634,35 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const removePlugins = config.get("removePlugins") || [];
       const extraPlugins = config.get("extraPlugins") || [];
       const substitutePlugins = config.get("substitutePlugins") || [];
-      return this.plugins.init(plugins.concat(extraPlugins), removePlugins, substitutePlugins);
+      return this.plugins.init(plugins.concat(extraPlugins), removePlugins, substitutePlugins).then((plugins2) => {
+        checkPluginsAllowedByLicenseKey(this);
+        return plugins2;
+      });
+      function checkPluginsAllowedByLicenseKey(editor) {
+        const licenseKey = editor.config.get("licenseKey");
+        if (licenseKey === "GPL") {
+          return;
+        }
+        const decodedPayload = decodeLicenseKey(licenseKey);
+        if (!decodedPayload) {
+          return;
+        }
+        const disallowedPlugin = [
+          ...editor.plugins
+        ].map(([pluginConstructor]) => pluginConstructor).find((pluginConstructor) => {
+          if (!pluginConstructor.pluginName) {
+            return false;
+          }
+          if (!pluginConstructor.licenseFeatureCode) {
+            return false;
+          }
+          return isFeatureBlockedByLicenseKey(decodedPayload, pluginConstructor.licenseFeatureCode);
+        });
+        if (disallowedPlugin) {
+          editor.enableReadOnlyMode(Symbol("invalidLicense"));
+          editor._showLicenseError("pluginNotAllowed", disallowedPlugin.pluginName);
+        }
+      }
     }
     /**
     * Destroys the editor instance, releasing all resources used by it.
@@ -40880,7 +41755,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * Exposed as static editor field for easier access in editor builds.
     */
     static ContextWatchdog = ContextWatchdog;
-    _showLicenseError(reason, pluginName) {
+    _showLicenseError(reason, name) {
       setTimeout(() => {
         if (reason == "invalid") {
           throw new CKEditorError("invalid-license-key");
@@ -40891,9 +41766,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         if (reason == "domainLimit") {
           throw new CKEditorError("license-key-domain-limit");
         }
-        if (reason == "featureNotAllowed") {
+        if (reason == "pluginNotAllowed") {
+          const gluePluginName = name.replace(/(Editing|UI)$/, "");
+          const containsGluePlugin = this.plugins.has(gluePluginName);
           throw new CKEditorError("license-key-plugin-not-allowed", null, {
-            pluginName
+            pluginName: containsGluePlugin ? gluePluginName : name
+          });
+        }
+        if (reason == "featureNotAllowed") {
+          throw new CKEditorError("license-key-feature-not-allowed", null, {
+            featureName: name
           });
         }
         if (reason == "evaluationLimit") {
@@ -40917,7 +41799,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * This part of the code is _not_ executed in installations under the GPL license (with `config.licenseKey = 'GPL'`).
-       *
+    *
     * It is only executed when a specific license key is provided. If you are uncertain whether
     * this applies to your installation, please contact our support team.
     */
@@ -41471,8 +42353,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "SUA";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -41618,6 +42513,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   var code = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m12.5 5.7 5.2 3.9v1.3l-5.6 4c-.1.2-.3.2-.5.2-.3-.1-.6-.7-.6-1l.3-.4 4.7-3.5L11.5 7l-.2-.2c-.1-.3-.1-.6 0-.8.2-.2.5-.4.8-.4a.8.8 0 0 1 .4.1m-5.2 0L2 9.6v1.3l5.6 4c.1.2.3.2.5.2.3-.1.7-.7.6-1 0-.1 0-.3-.2-.4l-5-3.5L8.2 7l.2-.2c.1-.3.1-.6 0-.8-.2-.2-.5-.4-.8-.4a.8.8 0 0 0-.3.1"/></svg>';
   var colorPalette = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.209 18.717A8.5 8.5 0 1 1 18.686 9.6h-.008l.002.12a3 3 0 0 1-2.866 2.997h-.268l-.046-.002v.002h-4.791a2 2 0 1 0 0 4 1 1 0 1 1-.128 1.992 9 9 0 0 1-.372.008m-3.918-7.01a1.25 1.25 0 1 0-2.415-.648 1.25 1.25 0 0 0 2.415.647ZM5.723 8.18a1.25 1.25 0 1 0 .647-2.414 1.25 1.25 0 0 0-.647 2.414M9.76 6.155a1.25 1.25 0 1 0 .647-2.415 1.25 1.25 0 0 0-.647 2.415m4.028 1.759a1.25 1.25 0 1 0 .647-2.415 1.25 1.25 0 0 0-.647 2.415"/></svg>';
   var colorTileCheck = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.935 5.328a2 2 0 0 1 0 2.829l-7.778 7.778a2 2 0 0 1-2.829 0L3.5 13.107a1.999 1.999 0 1 1 2.828-2.829l.707.707a1 1 0 0 0 1.414 0l5.658-5.657a2 2 0 0 1 2.828 0" class="ck-icon__fill"/><path d="M14.814 6.035 8.448 12.4a1 1 0 0 1-1.414 0l-1.413-1.415A1 1 0 1 0 4.207 12.4l2.829 2.829a1 1 0 0 0 1.414 0l7.778-7.778a1 1 0 1 0-1.414-1.415z"/></svg>';
+  var documentOutlineToggle = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5zm.5 2.5a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5zM5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5z"/><path d="M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5z" clip-rule="evenodd"/></svg>';
   var dragHandle = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 0v1H1v3H0V.5A.5.5 0 0 1 .5 0zm8 0h3.5a.5.5 0 0 1 .5.5V4h-1V1h-3zM4 16H.5a.5.5 0 0 1-.5-.5V12h1v3h3zm8 0v-1h3v-3h1v3.5a.5.5 0 0 1-.5.5z"/><path fill-opacity=".256" d="M1 1h14v14H1z"/><g class="ck-icon__selected-indicator"><path d="M7 0h2v1H7zM0 7h1v2H0zm15 0h1v2h-1zm-8 8h2v1H7z"/><path fill-opacity=".254" d="M1 1h14v14H1z"/></g></svg>';
   var dragIndicator = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 3.25a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0m7 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0M5 10a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0m7 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0m-7 6.75a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0m7 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0"/></svg>';
   var dropdownArrow = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M.941 4.523a.75.75 0 1 1 1.06-1.06l3.006 3.005 3.005-3.005a.75.75 0 1 1 1.06 1.06l-3.549 3.55a.75.75 0 0 1-1.168-.136z"/></svg>';
@@ -41647,6 +42543,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   var listStyleSquare = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path fill-opacity=".163" d="M35 29a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/><path d="M14 27v6H8v-6zm0-9v6H8v-6zm0-9v6H8V9z"/></svg>';
   var listStyleUpperLatin = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path fill-opacity=".163" d="M35 29a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/><path d="m7.88 15 .532-1.463h2.575L11.549 15h1.415l-2.58-6.442H9.01L6.5 15zm2.69-2.549H8.811l.87-2.39.887 2.39zM14.88 15v-1.235h-1.234V15zM9.352 25q1.244-.009 1.569-.044.518-.057.872-.305.354-.249.558-.664t.205-.855q0-.558-.317-.97-.315-.414-.905-.585a1.5 1.5 0 0 0 .661-.567 1.5 1.5 0 0 0 .244-.83q0-.419-.197-.754a1.65 1.65 0 0 0-.495-.539 1.7 1.7 0 0 0-.672-.266q-.375-.063-1.14-.063H7.158V25zm.142-3.88H8.46v-1.49h.747q.918 0 1.112.022.325.04.49.226.165.188.165.486a.68.68 0 0 1-.192.503.86.86 0 0 1-.525.23 12 12 0 0 1-.944.023h.18zm.17 2.795H8.46v-1.723h1.05q.888 0 1.154.092.266.093.406.295a.84.84 0 0 1 .14.492q0 .342-.181.547a.8.8 0 0 1-.473.257q-.189.04-.892.04M14.88 25v-1.235h-1.234V25zm-5.018 9.11q1.037 0 1.711-.512t.965-1.567l-1.261-.4q-.163.708-.536 1.037-.375.33-.892.33-.704 0-1.143-.519-.44-.518-.44-1.74 0-1.15.447-1.665.445-.514 1.162-.514.52 0 .881.29.362.29.477.79l1.288-.307q-.22-.774-.66-1.187-.738-.698-1.92-.698-1.353 0-2.184.89-.83.89-.83 2.498 0 1.521.825 2.397.826.877 2.11.877M14.88 34v-1.235h-1.234V34z"/></svg>';
   var listStyleUpperRoman = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path fill-opacity=".163" d="M35 29a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/><path d="M11.916 15V8.558h-1.301V15zm2.465 0v-1.235h-1.235V15zM9.665 25v-6.442h-1.3V25zm2.5 0v-6.442h-1.3V25zm2.466 0v-1.235h-1.235V25zm-7.216 9v-6.442h-1.3V34zm2.5 0v-6.442h-1.3V34zm2.501 0v-6.442h-1.3V34zm2.465 0v-1.235h-1.235V34z"/></svg>';
+  var listStyleArabicIndic = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><path fill-opacity=".163" d="M35 29a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1zm0-9a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H18a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/><path d="M14.88 15v-1.235h-1.234V15zm0 10v-1.235h-1.234V25zm0 9v-1.235h-1.234V34z"/><text x="9" y="15" font-family="sans-serif" font-size="8" font-weight="bold" text-anchor="middle">\u0661</text><text x="9" y="25" font-family="sans-serif" font-size="8" font-weight="bold" text-anchor="middle">\u0662</text><text x="9" y="34" font-family="sans-serif" font-size="8" font-weight="bold" text-anchor="middle">\u0663</text></svg>';
   var marker = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.798 1.59 3.002 12.875l1.895 1.852 2.521 1.402 6.997-12.194z" class="ck-icon__fill"/><path d="m2.556 16.727.234-.348q-.445-.226-.498-.426-.054-.206.115-.837.14-.375.169-.595a4.5 4.5 0 0 0 0-.725q-.313-.931-.284-1.26.03-.327.475-.862l6.77-9.414q.808-1.365 3.199.18 2.39 1.549 1.784 2.686l-5.877 10.36q-.237.618-.526.782-.29.163-1.232.21-.543.196-.738.318t-.526.47q-.44.397-.632.397-.143 0-.524-.226l-.31.41zm-.279.415 1.575 1.103-.392.515H1.19zm8.1-13.656-4.953 6.9L8.75 12.57l4.247-7.574q.263-.375-1.092-1.192-1.354-.819-1.528-.32zM8.244 18.5 9.59 17h9.406v1.5z"/></svg>';
   var nextArrow = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8.537 14.813a.888.888 0 1 1-1.254-1.255L10.84 10 7.283 6.442a.888.888 0 1 1 1.254-1.255L12.74 9.39a.888.888 0 0 1-.16 1.382z"/></svg>';
   var numberedList = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 5.75c0 .414.336.75.75.75h9.5a.75.75 0 1 0 0-1.5h-9.5a.75.75 0 0 0-.75.75M3.5 3v5H2V3.7H1v-1h2.5zM.343 17.857l2.59-3.257H2.92a.6.6 0 1 0-1.04 0H.302a2 2 0 1 1 3.995 0h-.001q-.073.607-.333.988-.263.381-1.244 1.312H4.3v1h-4zM7 14.75a.75.75 0 0 1 .75-.75h9.5a.75.75 0 1 1 0 1.5h-9.5a.75.75 0 0 1-.75-.75"/></svg>';
@@ -41681,7 +42578,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   var source = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m12.5 0 5 4.5v15.003h-16V0zM3 1.5v3.25l-1.497 1-.003 8 1.5 1v3.254L7.685 18l-.001 1.504H17.5V8.002L16 9.428l-.004-4.22-4.222-3.692z"/><path d="M4.06 6.64a.75.75 0 0 1 .958 1.15l-.085.07L2.29 9.75l2.646 1.89c.302.216.4.62.232.951l-.058.095a.75.75 0 0 1-.951.232l-.095-.058-3.5-2.5V9.14zm4.194 6.22a.75.75 0 0 1-.958-1.149l.085-.07 2.643-1.89-2.646-1.89a.75.75 0 0 1-.232-.952l.058-.095a.75.75 0 0 1 .95-.232l.096.058 3.5 2.5v1.22zm7.644-.836 2.122 2.122-5.825 5.809-2.125-.005.003-2.116zm2.539-1.847 1.414 1.414a.5.5 0 0 1 0 .707l-1.06 1.06-2.122-2.12 1.061-1.061a.5.5 0 0 1 .707 0"/></svg>';
   var strikethrough = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 16.4c-.8-.4-1.5-.9-2.2-1.5a.6.6 0 0 1-.2-.5l.3-.6h1c1 1.2 2.1 1.7 3.7 1.7 1 0 1.8-.3 2.3-.6.6-.4.6-1.2.6-1.3.2-1.2-.9-2.1-.9-2.1h2.1c.3.7.4 1.2.4 1.7v.8l-.6 1.2c-.6.8-1.1 1-1.6 1.2a6 6 0 0 1-2.4.6c-1 0-1.8-.3-2.5-.6M6.8 9 6 8.3c-.4-.5-.5-.8-.5-1.6 0-.7.1-1.3.5-1.8.4-.6 1-1 1.6-1.3a6.3 6.3 0 0 1 4.7 0 4 4 0 0 1 1.7 1l.3.7c0 .1.2.4-.2.7-.4.2-.9.1-1 0a3 3 0 0 0-1.2-1c-.4-.2-1-.3-2-.4-.7 0-1.4.2-2 .6-.8.6-1 .8-1 1.5 0 .8.5 1 1.2 1.5.6.4 1.1.7 1.9 1H6.8z"/><path d="M3 10.5V9h14v1.5z"/></svg>';
   var subscript = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m7.03 10.349 3.818-3.819a.8.8 0 1 1 1.132 1.132L8.16 11.48l3.819 3.818a.8.8 0 1 1-1.132 1.132L7.03 12.61l-3.818 3.82a.8.8 0 1 1-1.132-1.132L5.9 11.48 2.08 7.662A.8.8 0 1 1 3.212 6.53zm8.147 7.829h2.549q.38 0 .58.152a.49.49 0 0 1 .201.413.54.54 0 0 1-.159.393q-.158.162-.48.162h-3.594q-.367 0-.572-.197a.62.62 0 0 1-.205-.463q0-.171.132-.453a1.6 1.6 0 0 1 .288-.444q.65-.654 1.172-1.122t.747-.615q.401-.275.667-.553t.405-.57.139-.57a1.01 1.01 0 0 0-.554-.917 1.2 1.2 0 0 0-.56-.133q-.639 0-1.005.546a2.3 2.3 0 0 0-.164.39 1.6 1.6 0 0 1-.258.488q-.144.17-.423.17a.56.56 0 0 1-.405-.156.57.57 0 0 1-.161-.427q0-.327.151-.683.152-.357.452-.646c.3-.289.454-.349.762-.467a3 3 0 0 1 1.081-.178q.747 0 1.274.228a1.92 1.92 0 0 1 1.004 1.032 1.98 1.98 0 0 1-.156 1.794q-.3.48-.613.754-.312.273-1.048.857-.735.584-1.008.906a3 3 0 0 0-.24.309z"/></svg>';
-  var superscript = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M15.677 8.678h2.549q.38 0 .58.152a.49.49 0 0 1 .201.413.54.54 0 0 1-.159.393q-.158.162-.48.162h-3.594q-.367 0-.572-.197a.62.62 0 0 1-.205-.463q0-.171.132-.453a1.6 1.6 0 0 1 .288-.444q.65-.654 1.172-1.122t.747-.615q.401-.275.667-.553.265-.278.405-.57t.139-.57a1.01 1.01 0 0 0-.554-.917 1.2 1.2 0 0 0-.56-.133q-.639 0-1.005.546a2.3 2.3 0 0 0-.164.39 1.6 1.6 0 0 1-.258.488q-.144.17-.423.17a.56.56 0 0 1-.405-.156.57.57 0 0 1-.161-.427q0-.327.151-.683.152-.357.452-.646c.3-.289.454-.349.762-.467a3 3 0 0 1 1.081-.178q.747 0 1.274.228a1.92 1.92 0 0 1 1.004 1.032 1.98 1.98 0 0 1-.156 1.794q-.3.48-.613.754-.312.273-1.048.857-.735.584-1.008.906a3 3 0 0 0-.24.309zM7.03 10.349l3.818-3.819a.8.8 0 1 1 1.132 1.132L8.16 11.48l3.819 3.818a.8.8 0 1 1-1.132 1.132L7.03 12.61l-3.818 3.82a.8.8 0 1 1-1.132-1.132L5.9 11.48 2.08 7.662A.8.8 0 1 1 3.212 6.53z"/></svg>';
+  var superscript = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="m7.184 10.353 3.818-3.819a.8.8 0 0 1 1.132 1.132l-3.82 3.818 3.82 3.818a.802.802 0 0 1-.873 1.306.8.8 0 0 1-.26-.174l-3.817-3.82-3.818 3.82a.8.8 0 0 1-1.305-.26.8.8 0 0 1 .173-.872l3.82-3.818-3.82-3.818a.8.8 0 0 1 1.132-1.132l3.818 3.82M15.68 6.88h2.549q.38 0 .58.153a.49.49 0 0 1 .201.413.54.54 0 0 1-.159.393q-.158.162-.48.162h-3.594q-.367 0-.572-.197A.62.62 0 0 1 14 7.34q0-.171.132-.453a1.6 1.6 0 0 1 .288-.444q.65-.654 1.172-1.122t.747-.615q.401-.275.667-.553.266-.277.405-.57.14-.291.139-.57a1.01 1.01 0 0 0-.554-.917 1.2 1.2 0 0 0-.56-.133q-.639 0-1.005.546a2.3 2.3 0 0 0-.164.39 1.6 1.6 0 0 1-.258.488q-.144.17-.423.17a.56.56 0 0 1-.405-.156.57.57 0 0 1-.161-.427q0-.327.151-.683.152-.357.452-.646t.762-.467A3 3 0 0 1 16.466 1q.747 0 1.274.228c.456.2.816.57 1.004 1.032a1.99 1.99 0 0 1-.156 1.794q-.3.48-.613.754-.312.273-1.048.857-.735.583-1.008.906-.131.146-.24.309z"/></svg>';
   var tableCellProperties = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m11.105 18-.17 1H2.5A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1h15A1.5 1.5 0 0 1 19 2.5v9.975l-.85-.124-.15-.302V8h-5v4h.021l-.172.351-1.916.28-.151.027c-.287.063-.54.182-.755.341L8 13v5zM2 12h5V8H2zm10-4H8v4h4zM2 2v5h5V2zm0 16h5v-5H2zM13 7h5V2h-5zM8 2v5h4V2z" opacity=".6"/><path d="m15.5 11.5 1.323 2.68 2.957.43-2.14 2.085.505 2.946L15.5 18.25l-2.645 1.39.505-2.945-2.14-2.086 2.957-.43zM13 6a1 1 0 0 1 1 1v3.172a2 2 0 0 0-.293.443l-.858 1.736-1.916.28-.151.027A1.98 1.98 0 0 0 9.315 14H7a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm-1 2H8v4h4z"/></svg>';
   var tableColumn = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.5 1h15A1.5 1.5 0 0 1 19 2.5v15a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1M2 2v16h16V2z" opacity=".6"/><path d="M18 7v1H2V7zm0 5v1H2v-1z" opacity=".6"/><path d="M14 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1m-2 1H8v4h4zm0 6H8v4h4zm0 6H8v4h4z"/></svg>';
   var tableMergeCell = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.5 1h15A1.5 1.5 0 0 1 19 2.5v15a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1M2 2v16h16V2z" opacity=".6"/><path d="M7 2h1v16H7zm5 0h1v7h-1zm6 5v1H2V7zM8 12v1H2v-1z" opacity=".6"/><path d="M7 7h12a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1m1 2v9h10V9z"/></svg>';
@@ -43710,7 +44607,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * ```ts
     * attributes: {
     * 	style: {
-    * 		color: 'red'
+    * 		color: 'red',
+    * 		'--color': 'red'
     * 	}
     * }
     * ```
@@ -43720,7 +44618,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * ```ts
     * attributes: {
     * 	style: {
-    * 		color: bind.to( ... )
+    * 		color: bind.to( ... ),
+    * 		'--color': bind.to( ... )
     * 	}
     * }
     * ```
@@ -43743,6 +44642,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             updater: getStyleUpdater(node, styleName),
             data
           });
+        } else if (isCssVariable(styleName)) {
+          node.style.setProperty(styleName, styleValue);
         } else {
           node.style[styleName] = styleValue;
         }
@@ -43994,6 +44895,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     return false;
   }
+  function isCssVariable(name) {
+    const regex = /^--[a-zA-Z_-][\w-]*$/;
+    return regex.test(name);
+  }
   function getValueSchemaValue(schema, node) {
     return schema.map((schemaItem) => {
       if (schemaItem instanceof TemplateBinding) {
@@ -44039,10 +44944,18 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   function getStyleUpdater(el, styleName) {
     return {
       set(value) {
-        el.style[styleName] = value;
+        if (isCssVariable(styleName)) {
+          el.style.setProperty(styleName, value);
+        } else {
+          el.style[styleName] = value;
+        }
       },
       remove() {
-        el.style[styleName] = null;
+        if (isCssVariable(styleName)) {
+          el.style.removeProperty(styleName);
+        } else {
+          el.style[styleName] = null;
+        }
       }
     };
   }
@@ -46261,6 +47174,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       const defaultOffset = _DialogView.defaultOffset;
       const dialogRect = this._getDialogRect();
+      if (this.position == null) {
+        return;
+      } else if (typeof this.position == "function") {
+        const coords = this.position(dialogRect, domRootRect);
+        if (coords == null) {
+          this._moveOffScreen();
+          return;
+        }
+        this._moveTo(coords.left, coords.top);
+        return;
+      }
       switch (configuredPosition) {
         case DialogViewPosition.EDITOR_TOP_SIDE: {
           if (domRootRect) {
@@ -46340,29 +47264,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * Returns a viewport `Rect` shrunk by the viewport offset config from all sides.
-    *
-    * TODO: This is a duplicate from position.ts module. It should either be exported there or land somewhere in utils.
     */
     _getViewportRect() {
       const viewportRect = new Rect(globalVar.window);
       if (this.isModal) {
         return viewportRect;
       }
-      const viewportOffset = {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        ...this._getViewportOffset()
-      };
-      viewportRect.top += viewportOffset.top;
-      viewportRect.height -= viewportOffset.top;
-      viewportRect.bottom -= viewportOffset.bottom;
-      viewportRect.height -= viewportOffset.bottom;
-      viewportRect.left += viewportOffset.left;
-      viewportRect.right -= viewportOffset.right;
-      viewportRect.width -= viewportOffset.left + viewportOffset.right;
-      return viewportRect;
+      return getConstrainedViewportRect(this._getViewportOffset());
     }
     /**
     * Collects all focusable elements inside the dialog parts
@@ -49244,7 +50152,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           // Drag and drop in the panel should not break the selection in the editor.
           // https://github.com/ckeditor/ckeditor5-ui/issues/228
           selectstart: bind.to((evt) => {
-            if (evt.target.tagName.toLocaleLowerCase() === "input") {
+            const target = evt.target;
+            if (target instanceof Element && target.tagName.toLocaleLowerCase() === "input") {
               return;
             }
             evt.preventDefault();
@@ -51119,7 +52028,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         const listItemView = new ListItemView(locale);
         let buttonView;
         if (def.type === "button") {
-          buttonView = new ListItemButtonView(locale);
+          buttonView = new ListItemButtonView(locale, def.labelView);
           buttonView.set({
             isToggleable
           });
@@ -53277,6 +54186,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           groupId: "insertInline",
           items: [
             "menuBar:link",
+            "menuBar:insertFootnote",
             "menuBar:bookmark",
             "menuBar:comment",
             "menuBar:insertMergeField",
@@ -53305,7 +54215,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         {
           groupId: "restrictedEditingException",
           items: [
-            "menuBar:restrictedEditingException"
+            "menuBar:restrictedEditingException:inline",
+            "menuBar:restrictedEditingException:block"
           ]
         }
       ]
@@ -53410,7 +54321,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           groupId: "aiTools",
           items: [
             "menuBar:aiAssistant",
-            "menuBar:aiCommands"
+            "menuBar:aiCommands",
+            "menuBar:toggleAi",
+            "menuBar:aiQuickActions"
           ]
         },
         {
@@ -56925,8 +57838,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
         let modelRanges;
         if (viewSelection) {
-          modelRanges = Array.from(viewSelection.getRanges()).map((viewRange) => mapper.toModelRange(viewRange)).map((modelRange) => tryFixingRange(modelRange, model.schema) || modelRange);
-        } else {
+          modelRanges = Array.from(viewSelection.getRanges()).filter((viewRange) => {
+            return viewRange.root.is("rootElement");
+          }).map((viewRange) => mapper.toModelRange(viewRange)).map((modelRange) => tryFixingRange(modelRange, model.schema) || modelRange);
+        }
+        if (!modelRanges || !modelRanges.length) {
           modelRanges = Array.from(modelSelection.getRanges());
         }
         let insertText2 = text2;
@@ -58440,7 +59356,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const model = this.editor.model;
       const modelSelection = model.document.selection;
       modelSelection.on("change:range", () => {
-        this.isEnabled = !modelSelection.anchor.parent.is("element", "codeBlock");
+        const anchor = modelSelection.anchor;
+        const isInCodeBlock = !!anchor && anchor.parent.is("element", "codeBlock");
+        const isInInlineCode = modelSelection.hasAttribute("code");
+        this.isEnabled = !(isInCodeBlock || isInInlineCode);
       });
       this._enableTransformationWatchers();
     }
@@ -59224,12 +60143,20 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             writer.removeSelectionAttribute(this.attributeKey);
           }
         } else {
-          const ranges = model.schema.getValidRanges(selection.getRanges(), this.attributeKey);
+          const ranges = model.schema.getValidRanges(selection.getRanges(), this.attributeKey, {
+            includeEmptyRanges: true
+          });
           for (const range of ranges) {
+            let itemOrRange = range;
+            let attributeKey = this.attributeKey;
+            if (range.isCollapsed) {
+              itemOrRange = range.start.parent;
+              attributeKey = ModelDocumentSelection._getStoreAttributeKey(this.attributeKey);
+            }
             if (value) {
-              writer.setAttribute(this.attributeKey, value, range);
+              writer.setAttribute(attributeKey, value, itemOrRange);
             } else {
-              writer.removeAttribute(this.attributeKey, range);
+              writer.removeAttribute(attributeKey, itemOrRange);
             }
           }
         }
@@ -60822,13 +61749,20 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     if (options.withAriaRole !== false) {
       writer.setAttribute("role", "textbox", editable);
     }
-    writer.setAttribute("tabindex", "-1", editable);
+    if (!editable.isReadOnly) {
+      writer.setAttribute("tabindex", "-1", editable);
+    }
     if (options.label) {
       writer.setAttribute("aria-label", options.label, editable);
     }
     writer.setAttribute("contenteditable", editable.isReadOnly ? "false" : "true", editable);
-    editable.on("change:isReadOnly", (evt, property2, is) => {
-      writer.setAttribute("contenteditable", is ? "false" : "true", editable);
+    editable.on("change:isReadOnly", (evt, property2, isReadonly) => {
+      writer.setAttribute("contenteditable", isReadonly ? "false" : "true", editable);
+      if (isReadonly) {
+        writer.removeAttribute("tabindex", editable);
+      } else {
+        writer.setAttribute("tabindex", "-1", editable);
+      }
     });
     editable.on("change:isFocused", (evt, property2, is) => {
       if (is) {
@@ -61191,6 +62125,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const modelSelection = model.document.selection;
       const schema = model.schema;
       const editingView = editor.editing.view;
+      if (domEventData.shiftKey) {
+        return;
+      }
       const keyCode = domEventData.keyCode;
       const isForward = isForwardArrowKeyCode(keyCode, editor.locale.contentLanguageDirection);
       const selectedViewElement = editingView.document.selection.getSelectedElement();
@@ -61601,9 +62538,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         return;
       }
       const isForward = arrowDownPressed;
-      if (expandSelection && selectionWillShrink(selection, isForward)) {
-        return;
-      }
       const range = findTextRangeFromSelection(editing, selection, isForward);
       if (!range) {
         return;
@@ -61635,29 +62569,27 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   function findTextRangeFromSelection(editing, selection, isForward) {
     const model = editing.model;
     if (isForward) {
-      const startPosition = selection.isCollapsed ? selection.focus : selection.getLastPosition();
+      const startPosition = selection.focus;
       const endPosition = getNearestNonInlineLimit(model, startPosition, "forward");
       if (!endPosition) {
-        return null;
+        return;
       }
       const range = model.createRange(startPosition, endPosition);
       const lastRangePosition = getNearestTextPosition(model.schema, range, "backward");
       if (lastRangePosition) {
         return model.createRange(startPosition, lastRangePosition);
       }
-      return null;
     } else {
-      const endPosition = selection.isCollapsed ? selection.focus : selection.getFirstPosition();
+      const endPosition = selection.focus;
       const startPosition = getNearestNonInlineLimit(model, endPosition, "backward");
       if (!startPosition) {
-        return null;
+        return;
       }
       const range = model.createRange(startPosition, endPosition);
       const firstRangePosition = getNearestTextPosition(model.schema, range, "forward");
       if (firstRangePosition) {
         return model.createRange(firstRangePosition, endPosition);
       }
-      return null;
     }
   }
   function getNearestNonInlineLimit(model, startPosition, direction) {
@@ -61689,7 +62621,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         return nextPosition;
       }
     }
-    return null;
   }
   function isSingleLineRange(editing, modelRange, isForward) {
     const model = editing.model;
@@ -61716,9 +62647,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       boundaryVerticalPosition = Math.max(boundaryVerticalPosition, Math.round(rect.bottom));
     }
     return true;
-  }
-  function selectionWillShrink(selection, isForward) {
-    return !selection.isCollapsed && selection.isBackward == isForward;
   }
   var Widget = class extends Plugin {
     /**
@@ -61795,7 +62723,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         priority: "low"
       });
       view.addObserver(MouseObserver);
+      view.addObserver(PointerObserver);
       this.listenTo(viewDocument, "mousedown", (...args) => this._onMousedown(...args));
+      this.listenTo(viewDocument, "pointerdown", (...args) => this._onPointerdown(...args));
       this.listenTo(viewDocument, "arrowKey", (...args) => {
         this._handleSelectionChangeOnArrowKeyPress(...args);
       }, {
@@ -61821,29 +62751,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         context: "$root"
       });
       this.listenTo(viewDocument, "tab", (evt, data) => {
-        if (evt.eventPhase != "atTarget") {
-          return;
-        }
-        if (data.shiftKey) {
-          return;
-        }
-        if (this._selectFirstNestedEditable()) {
+        if (this._selectNextEditable(data.shiftKey ? "backward" : "forward")) {
+          view.scrollToTheSelection();
           data.preventDefault();
           evt.stop();
         }
       }, {
-        context: isWidget,
-        priority: "low"
-      });
-      this.listenTo(viewDocument, "tab", (evt, data) => {
-        if (!data.shiftKey) {
-          return;
-        }
-        if (this._selectAncestorWidget()) {
-          data.preventDefault();
-          evt.stop();
-        }
-      }, {
+        context: (node) => isWidget(node) || node.is("editableElement"),
         priority: "low"
       });
       this.listenTo(viewDocument, "keydown", (evt, data) => {
@@ -61855,6 +62769,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           evt.stop();
         }
       }, {
+        context: (node) => node.is("editableElement"),
         priority: "low"
       });
       editor.accessibility.addKeystrokeInfoGroup({
@@ -61902,10 +62817,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * Handles {@link module:engine/view/document~ViewDocument#event:mousedown mousedown} events on widget elements.
     */
     _onMousedown(eventInfo, domEventData) {
-      const editor = this.editor;
-      const view = editor.editing.view;
-      const viewDocument = view.document;
-      let element = domEventData.target;
+      const element = domEventData.target;
       if (!element) {
         return;
       }
@@ -61913,6 +62825,20 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         if (this._selectBlockContent(element)) {
           domEventData.preventDefault();
         }
+      }
+    }
+    /**
+    * Handles {@link module:engine/view/document~ViewDocument#event:pointerdown pointerdown} events on widget elements.
+    */
+    _onPointerdown(eventInfo, domEventData) {
+      if (!domEventData.domEvent.isPrimary) {
+        return;
+      }
+      const editor = this.editor;
+      const view = editor.editing.view;
+      const viewDocument = view.document;
+      let element = domEventData.target;
+      if (!element) {
         return;
       }
       if (!isWidget(element)) {
@@ -61931,7 +62857,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           }
         }
       }
-      if (env.isAndroid) {
+      if (env.isAndroid || env.isiOS) {
         domEventData.preventDefault();
       }
       if (!viewDocument.isFocused) {
@@ -61975,47 +62901,60 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const model = this.editor.model;
       const schema = model.schema;
       const modelSelection = model.document.selection;
-      const objectElement = modelSelection.getSelectedElement();
+      const selectedElement = modelSelection.getSelectedElement();
       const direction = getLocalizedArrowKeyCodeDirection(keyCode, this.editor.locale.contentLanguageDirection);
       const isForward = direction == "down" || direction == "right";
       const isVerticalNavigation = direction == "up" || direction == "down";
-      if (objectElement && schema.isObject(objectElement)) {
-        const position = isForward ? modelSelection.getLastPosition() : modelSelection.getFirstPosition();
-        const newRange = schema.getNearestSelectionRange(position, isForward ? "forward" : "backward");
-        if (newRange) {
+      if (!domEventData.shiftKey && !modelSelection.isCollapsed) {
+        if (hasObjectAtEdge(modelSelection, schema)) {
+          const position = isForward ? modelSelection.getLastPosition() : modelSelection.getFirstPosition();
+          const newRange = schema.getNearestSelectionRange(position, isForward ? "forward" : "backward");
+          if (newRange) {
+            model.change((writer) => {
+              writer.setSelection(newRange);
+            });
+            domEventData.preventDefault();
+            eventInfo.stop();
+          }
+        }
+        return;
+      }
+      const originalSelection = getModelSelectionAdjusted(model, isForward);
+      const probe = model.createSelection(originalSelection);
+      model.modifySelection(probe, {
+        direction: isForward ? "forward" : "backward"
+      });
+      if (probe.isEqual(originalSelection)) {
+        return;
+      }
+      if (probe.focus.isTouching(originalSelection.focus)) {
+        model.modifySelection(probe, {
+          direction: isForward ? "forward" : "backward"
+        });
+      }
+      const lastSelectedNode = isForward ? originalSelection.focus.nodeBefore : originalSelection.focus.nodeAfter;
+      const nodeBeforeProbe = probe.focus.nodeBefore;
+      const nodeAfterProbe = probe.focus.nodeAfter;
+      const lastProbeNode = isForward ? nodeBeforeProbe : nodeAfterProbe;
+      if (domEventData.shiftKey) {
+        if (selectedElement && schema.isObject(selectedElement) || lastProbeNode && schema.isObject(lastProbeNode) || lastSelectedNode && schema.isObject(lastSelectedNode)) {
           model.change((writer) => {
-            writer.setSelection(newRange);
+            writer.setSelection(probe);
           });
           domEventData.preventDefault();
           eventInfo.stop();
         }
-        return;
-      }
-      if (!modelSelection.isCollapsed && !domEventData.shiftKey) {
-        const firstPosition = modelSelection.getFirstPosition();
-        const lastPosition = modelSelection.getLastPosition();
-        const firstSelectedNode = firstPosition.nodeAfter;
-        const lastSelectedNode = lastPosition.nodeBefore;
-        if (firstSelectedNode && schema.isObject(firstSelectedNode) || lastSelectedNode && schema.isObject(lastSelectedNode)) {
+      } else {
+        if (lastProbeNode && schema.isObject(lastProbeNode)) {
+          if (schema.isInline(lastProbeNode) && isVerticalNavigation) {
+            return;
+          }
           model.change((writer) => {
-            writer.setSelection(isForward ? lastPosition : firstPosition);
+            writer.setSelection(lastProbeNode, "on");
           });
           domEventData.preventDefault();
           eventInfo.stop();
         }
-        return;
-      }
-      if (!modelSelection.isCollapsed) {
-        return;
-      }
-      const objectElementNextToSelection = this._getObjectElementNextToSelection(isForward);
-      if (objectElementNextToSelection && schema.isObject(objectElementNextToSelection)) {
-        if (schema.isInline(objectElementNextToSelection) && isVerticalNavigation) {
-          return;
-        }
-        this._setSelectionOverElement(objectElementNextToSelection);
-        domEventData.preventDefault();
-        eventInfo.stop();
       }
     }
     /**
@@ -62093,7 +63032,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         return null;
       }
       const objectElement = forward ? probe.focus.nodeBefore : probe.focus.nodeAfter;
-      if (!!objectElement && schema.isObject(objectElement)) {
+      if (objectElement && schema.isObject(objectElement)) {
         return objectElement;
       }
       return null;
@@ -62108,27 +63047,79 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this._previouslySelected.clear();
     }
     /**
-    * Moves the document selection into the first nested editable.
+    * Moves the document selection into the next editable or block widget.
     */
-    _selectFirstNestedEditable() {
-      const editor = this.editor;
-      const view = this.editor.editing.view;
-      const viewDocument = view.document;
-      for (const item of viewDocument.selection.getFirstRange().getItems()) {
-        if (item.is("editableElement")) {
-          const modelElement = editor.editing.mapper.toModelElement(item);
-          if (!modelElement) {
-            continue;
-          }
-          const position = editor.model.createPositionAt(modelElement, 0);
-          const newRange = editor.model.schema.getNearestSelectionRange(position, "forward");
-          editor.model.change((writer) => {
-            writer.setSelection(newRange);
-          });
-          return true;
-        }
+    _selectNextEditable(direction) {
+      const editing = this.editor.editing;
+      const view = editing.view;
+      const model = this.editor.model;
+      const viewSelection = view.document.selection;
+      const modelSelection = model.document.selection;
+      let startPosition;
+      if (modelSelection.rangeCount > 1) {
+        const selectionRange = modelSelection.isBackward ? modelSelection.getFirstRange() : modelSelection.getLastRange();
+        startPosition = editing.mapper.toViewPosition(direction == "forward" ? selectionRange.end : selectionRange.start);
+      } else {
+        startPosition = direction == "forward" ? viewSelection.getFirstPosition() : viewSelection.getLastPosition();
+      }
+      const modelRange = this._findNextFocusRange(startPosition, direction);
+      if (modelRange) {
+        model.change((writer) => {
+          writer.setSelection(modelRange);
+        });
+        return true;
       }
       return false;
+    }
+    /**
+    * Looks for next focus point in the document starting from the given view position and direction.
+    * The focus point is either a block widget or an editable.
+    *
+    * @internal
+    */
+    _findNextFocusRange(startPosition, direction) {
+      const editing = this.editor.editing;
+      const view = editing.view;
+      const model = this.editor.model;
+      const viewSelection = view.document.selection;
+      const editableElement = viewSelection.editableElement;
+      const editablePath = editableElement.getPath();
+      let selectedElement = viewSelection.getSelectedElement();
+      if (selectedElement && !isWidget(selectedElement)) {
+        selectedElement = null;
+      }
+      const viewRange = direction == "forward" ? view.createRange(startPosition, view.createPositionAt(startPosition.root, "end")) : view.createRange(view.createPositionAt(startPosition.root, 0), startPosition);
+      for (const { nextPosition } of viewRange.getWalker({
+        direction
+      })) {
+        const item = nextPosition.parent;
+        if (isWidget(item) && item != selectedElement) {
+          const modelElement = editing.mapper.toModelElement(item);
+          if (!model.schema.isBlock(modelElement)) {
+            continue;
+          }
+          if (compareArrays(editablePath, item.getPath()) != "extension") {
+            return model.createRangeOn(modelElement);
+          }
+        } else if (item.is("editableElement")) {
+          if (item == editableElement && !selectedElement) {
+            continue;
+          }
+          const modelPosition = editing.mapper.toModelPosition(nextPosition);
+          const newRange = model.schema.getNearestSelectionRange(modelPosition, direction);
+          if (!newRange) {
+            continue;
+          }
+          if (item == editableElement && selectedElement) {
+            return newRange;
+          }
+          if (compareArrays(editablePath, item.getPath()) != "extension") {
+            return model.createRangeIn(model.schema.getLimitElement(newRange));
+          }
+          return newRange;
+        }
+      }
+      return null;
     }
     /**
     * Updates the document selection so that it selects first ancestor widget.
@@ -62153,6 +63144,26 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return true;
     }
   };
+  function hasObjectAtEdge(modelSelection, schema) {
+    const firstPosition = modelSelection.getFirstPosition();
+    const lastPosition = modelSelection.getLastPosition();
+    const firstSelectedNode = firstPosition.nodeAfter;
+    const lastSelectedNode = lastPosition.nodeBefore;
+    return !!firstSelectedNode && schema.isObject(firstSelectedNode) || !!lastSelectedNode && schema.isObject(lastSelectedNode);
+  }
+  function getModelSelectionAdjusted(model, isForward) {
+    const modelSelection = model.document.selection;
+    const selectedElement = modelSelection.getSelectedElement();
+    const typeAroundFakeCaretPosition = getTypeAroundFakeCaretPosition(modelSelection);
+    if (selectedElement && typeAroundFakeCaretPosition == "before") {
+      return model.createSelection(selectedElement, "before");
+    } else if (selectedElement && typeAroundFakeCaretPosition == "after") {
+      return model.createSelection(selectedElement, "after");
+    }
+    return model.createSelection(modelSelection.getRanges(), {
+      backward: !!selectedElement && model.schema.isObject(selectedElement) ? !isForward : modelSelection.isBackward
+    });
+  }
   function findClosestEditableOrWidgetAncestor(element) {
     let currentElement = element;
     while (currentElement) {
@@ -63516,8 +64527,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "BKM";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -65112,18 +66136,25 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     /**
     * Finds the drop target range and updates the drop marker.
     *
+    * @return The updated drop target range or null if no valid range was found.
     * @internal
     */
     updateDropMarker(targetViewElement, targetViewRanges, clientX, clientY, blockMode, draggedRange) {
       this.removeDropMarkerDelayed.cancel();
       const targetRange = findDropTargetRange(this.editor, targetViewElement, targetViewRanges, clientX, clientY, blockMode, draggedRange);
       if (!targetRange) {
-        return;
+        return null;
       }
       if (draggedRange && draggedRange.containsRange(targetRange)) {
-        return this.removeDropMarker();
+        this.removeDropMarker();
+        return null;
+      }
+      if (targetRange && !this.editor.model.canEditAt(targetRange)) {
+        this.removeDropMarker();
+        return null;
       }
       this._updateDropMarkerThrottled(targetRange);
+      return targetRange;
     }
     /**
     * Finds the final drop target range.
@@ -65294,7 +66325,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             const targetModelPosition = mapper.toModelPosition(targetViewPosition);
             const canDropOnPosition = !draggedRange || Array.from(draggedRange.getItems({
               shallow: true
-            })).every((item) => model.schema.checkChild(targetModelPosition, item));
+            })).some((item) => model.schema.checkChild(targetModelPosition, item));
             if (canDropOnPosition) {
               if (model.schema.checkChild(targetModelPosition, "$text")) {
                 return model.createRange(targetModelPosition);
@@ -65555,7 +66586,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this._draggingUid = "";
       this._draggableElement = null;
       view.addObserver(ClipboardObserver);
-      view.addObserver(MouseObserver);
+      view.addObserver(PointerObserver);
       this._setupDragging();
       this._setupContentInsertionIntegration();
       this._setupClipboardInputIntegration();
@@ -65611,7 +66642,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           return;
         }
         this._draggingUid = uid();
-        data.dataTransfer.effectAllowed = this.isEnabled ? "copyMove" : "copy";
+        const canEditAtDraggedRange = this.isEnabled && editor.model.canEditAt(this._draggedRange);
+        data.dataTransfer.effectAllowed = canEditAtDraggedRange ? "copyMove" : "copy";
         data.dataTransfer.setData("application/ckeditor5-dragging-uid", this._draggingUid);
         const draggedSelection = model.createSelection(this._draggedRange.toRange());
         const clipboardPipeline = this.editor.plugins.get("ClipboardPipeline");
@@ -65624,7 +66656,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           clientX
         });
         data.stopPropagation();
-        if (!this.isEnabled) {
+        if (!canEditAtDraggedRange) {
           this._draggedRange.detach();
           this._draggedRange = null;
           this._draggingUid = "";
@@ -65657,7 +66689,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           return;
         }
         const { clientX, clientY } = data.domEvent;
-        dragDropTarget.updateDropMarker(data.target, data.targetRanges, clientX, clientY, this._blockMode, this._draggedRange);
+        const targetRange = dragDropTarget.updateDropMarker(data.target, data.targetRanges, clientX, clientY, this._blockMode, this._draggedRange);
+        if (!targetRange) {
+          data.dataTransfer.dropEffect = "none";
+          return;
+        }
         if (!this._draggedRange) {
           data.dataTransfer.dropEffect = "copy";
         }
@@ -65745,7 +66781,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const editor = this.editor;
       const view = editor.editing.view;
       const viewDocument = view.document;
-      this.listenTo(viewDocument, "mousedown", (evt, data) => {
+      this.listenTo(viewDocument, "pointerdown", (evt, data) => {
         if (env.isAndroid || !data) {
           return;
         }
@@ -65764,7 +66800,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           this._draggableElement = editor.editing.mapper.toModelElement(draggableElement);
         }
       });
-      this.listenTo(viewDocument, "mouseup", () => {
+      this.listenTo(viewDocument, "pointerup", () => {
         if (!env.isAndroid) {
           this._clearDraggableAttributesDelayed();
         }
@@ -65874,17 +66910,30 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       } else if (this._previewContainer.firstElementChild) {
         this._previewContainer.removeChild(this._previewContainer.firstElementChild);
       }
-      const domRect = new Rect(domEditable);
-      if (domEditable.contains(domTarget)) {
-        return;
-      }
-      const domEditablePaddingLeft = parseFloat(computedStyle.paddingLeft);
       const preview = createElement(globalVar.document, "div");
-      preview.className = "ck ck-content";
-      preview.style.width = computedStyle.width;
-      preview.style.paddingLeft = `${domRect.left - clientX + domEditablePaddingLeft}px`;
-      if (env.isiOS) {
-        preview.style.backgroundColor = "white";
+      preview.className = "ck ck-content ck-clipboard-preview";
+      const domRect = new Rect(domEditable);
+      const domEditablePaddingLeft = parseFloat(computedStyle.paddingLeft);
+      const domEditablePaddingRight = parseFloat(computedStyle.paddingRight);
+      const editableWidth = parseFloat(computedStyle.width) - domEditablePaddingLeft - domEditablePaddingRight;
+      if (!domEditable.contains(domTarget)) {
+        if (!env.isiOS) {
+          const offsetLeft = domRect.left - clientX + domEditablePaddingLeft;
+          preview.style.width = `${editableWidth + offsetLeft}px`;
+          preview.style.paddingLeft = `${offsetLeft}px`;
+        } else {
+          preview.style.width = `${editableWidth}px`;
+          preview.style.backgroundColor = "var(--ck-color-base-background)";
+        }
+      } else if (env.isiOS) {
+        preview.style.maxWidth = `${editableWidth}px`;
+        preview.style.padding = "10px";
+        preview.style.minWidth = "200px";
+        preview.style.minHeight = "20px";
+        preview.style.boxSizing = "border-box";
+        preview.style.backgroundColor = "var(--ck-color-base-background)";
+      } else {
+        return;
       }
       view.domConverter.setContentOf(preview, dataTransfer.getData("text/html"));
       dataTransfer.setDragImage(preview, 0, 0);
@@ -66838,6 +67887,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         this._restoreSelection(item.selection.ranges, item.selection.isBackward, operations2);
         this._undo(item.batch, redoingBatch);
       });
+      this.fire("revert", item.batch, redoingBatch);
       this.refresh();
     }
   };
@@ -68251,6 +69301,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "FAR";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
       return true;
@@ -68550,12 +69613,20 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             writer.removeSelectionAttribute(this.attributeKey);
           }
         } else {
-          const ranges = model.schema.getValidRanges(selection.getRanges(), this.attributeKey);
+          const ranges = model.schema.getValidRanges(selection.getRanges(), this.attributeKey, {
+            includeEmptyRanges: true
+          });
           for (const range of ranges) {
+            let itemOrRange = range;
+            let attributeKey = this.attributeKey;
+            if (range.isCollapsed) {
+              itemOrRange = range.start.parent;
+              attributeKey = ModelDocumentSelection._getStoreAttributeKey(this.attributeKey);
+            }
             if (value) {
-              writer.setAttribute(this.attributeKey, value, range);
+              writer.setAttribute(attributeKey, value, itemOrRange);
             } else {
-              writer.removeAttribute(this.attributeKey, range);
+              writer.removeAttribute(attributeKey, itemOrRange);
             }
           }
         }
@@ -69889,6 +70960,35 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _paginationBodyCollection = null;
     /**
+    * Whether the left sidebar collapse button is created.
+    */
+    _hasLeftCollapseButton = false;
+    /**
+    * The button that toggles the visibility of the left sidebar.
+    */
+    _collapseLeftSidebarButton = null;
+    /**
+    * The resize observer that is used to adjust the visibility of the left and right sidebars dynamically.
+    */
+    _resizeObserver = null;
+    /**
+    * The width of the expanded left and right sidebars in the fullscreen mode. Necessary for logic checking if they should be visible.
+    */
+    _sidebarsWidths = {
+      left: 0,
+      right: 0
+    };
+    /**
+    * Whether the left sidebar should be kept hidden even if there is enough space for it. It's set to `true` when user
+    * collapses the left sidebar with a button. Behavior is reset when exiting the fullscreen mode.
+    */
+    _keepLeftSidebarHidden = false;
+    /**
+    * Temporary flag used to ignore the first automatic layout adjustment logic when user collapses the left sidebar with a button.
+    * It is then immediately set back to `false`.
+    */
+    _forceShowLeftSidebar = false;
+    /**
     * A callback that hides the document outline header when the source editing mode is enabled.
     * Document outline element itself is hidden by source editing plugin.
     */
@@ -69915,6 +71015,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _closeRevisionViewerCallback = null;
     /**
+    * A map of AI Tabs data that were set before entering the fullscreen mode.
+    */
+    _aiTabsData = null;
+    /**
     * @inheritDoc
     */
     constructor(editor) {
@@ -69929,6 +71033,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       editor.on("destroy", () => {
         if (this._wrapper) {
           this.destroy();
+        }
+        if (this._resizeObserver) {
+          this._resizeObserver.destroy();
         }
       });
     }
@@ -69979,6 +71086,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 						<div class="ck ck-fullscreen__pagination-view" data-ck-fullscreen="pagination-view"></div>
 					</div>
 					<div class="ck ck-fullscreen__sidebar ck-fullscreen__right-sidebar" data-ck-fullscreen="right-sidebar"></div>
+					<div class="ck ck-fullscreen__right-edge" data-ck-fullscreen="right-edge"></div>
 				</div>
 				<div class="ck ck-fullscreen__bottom-wrapper">
 					<div class="ck ck-fullscreen__body-wrapper" data-ck-fullscreen="body-wrapper"></div>
@@ -69998,14 +71106,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         this._document.body.classList.add("ck-fullscreen");
         this._document.body.parentElement.classList.add("ck-fullscreen");
       }
-      if (this._editor.plugins.has("Dialog")) {
-        this._registerFullscreenDialogPositionAdjustments();
-      }
       if (this._editor.plugins.has("PresenceListUI")) {
         this._generatePresenceListContainer();
       }
       if (this._editor.plugins.has("DocumentOutlineUI")) {
         this._generateDocumentOutlineContainer();
+      }
+      if (this._hasLeftCollapseButton) {
+        this._generateCollapseButton();
       }
       if (this._editor.plugins.has("Pagination") && this._editor.plugins.get("Pagination").isEnabled) {
         const paginationRenderer = this._editor.plugins.get("PaginationRenderer");
@@ -70027,8 +71135,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
         this._overrideRevisionHistoryCallbacks();
       }
+      if (this._editor.plugins.has("AITabs")) {
+        this._handleAITabsTransfer();
+      }
       if (this._editor.plugins.has("SourceEditing") && this._editor.plugins.has("DocumentOutlineUI")) {
         this._editor.plugins.get("SourceEditing").on("change:isSourceEditingMode", this._sourceEditingCallback);
+      }
+      if (this._editor.plugins.has("Dialog")) {
+        this._registerFullscreenDialogPositionAdjustments();
       }
       for (const element of this._editor.config.get("fullscreen.container").children) {
         if (element !== this._wrapper && !element.classList.contains("ck-body-wrapper") && !element.classList.contains("ckbox-wrapper") && // Already hidden elements are not hidden again to avoid accidentally showing them after leaving fullscreen.
@@ -70037,6 +71151,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           element.style.display = "none";
         }
       }
+      this._sidebarsWidths = {
+        left: this._wrapper.querySelector(".ck-fullscreen__left-sidebar").scrollWidth,
+        right: this._wrapper.querySelector(".ck-fullscreen__right-sidebar").scrollWidth
+      };
+      this._adjustVisibleElements();
+      this._setupResizeObserver();
       if (this._editor.config.get("fullscreen.onEnterCallback")) {
         this._editor.config.get("fullscreen.onEnterCallback")(this.getWrapper());
       }
@@ -70058,6 +71178,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
       if (this._editor.plugins.has("RevisionHistory")) {
         this._restoreRevisionHistoryCallbacks();
+      }
+      if (this._editor.plugins.has("AITabs")) {
+        this._restoreAITabs();
       }
       if (this._editor.plugins.has("SourceEditing") && this._editor.plugins.has("DocumentOutlineUI")) {
         this._editor.plugins.get("SourceEditing").off("change:isSourceEditingMode", this._sourceEditingCallback);
@@ -70087,6 +71210,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (this._editor.plugins.has("Dialog")) {
         this._unregisterFullscreenDialogPositionAdjustments();
       }
+      this._keepLeftSidebarHidden = false;
+      this._resizeObserver?.destroy();
     }
     /**
     * @inheritDoc
@@ -70147,6 +71272,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       document.querySelector('[data-ck-fullscreen="left-sidebar-sticky"]').appendChild(presenceListElement);
       const presenceListUI = this._editor.plugins.get("PresenceListUI");
       this.moveToFullscreen(presenceListUI.view.element, "presence-list");
+      this._hasLeftCollapseButton = true;
     }
     /**
     * Checks if the DocumentOutlineUI plugin is available and moves its elements to fullscreen mode.
@@ -70179,6 +71305,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const documentOutlineUI = this._editor.plugins.get("DocumentOutlineUI");
       documentOutlineUI.view.documentOutlineContainer = document.querySelector('[data-ck-fullscreen="left-sidebar"]');
       this.moveToFullscreen(documentOutlineUI.view.element, "document-outline");
+      this._hasLeftCollapseButton = true;
     }
     /**
     * Restores the default value of documentOutlineContainer, which is modified in fullscreen mode.
@@ -70189,6 +71316,34 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const documentOutlineUI = this._editor.plugins.get("DocumentOutlineUI");
       documentOutlineUI.view.documentOutlineContainer = documentOutlineUI.view.element;
     }
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _generateCollapseButton() {
+      const button = new ButtonView(this._editor.locale);
+      const leftSidebarContainer = document.querySelector(".ck-fullscreen__left-sidebar");
+      const t = this._editor.t;
+      button.set({
+        label: t("Toggle sidebar"),
+        class: "ck-fullscreen__left-sidebar-toggle-button",
+        tooltip: t("Hide left sidebar"),
+        tooltipPosition: "se",
+        icon: previousArrow
+      });
+      button.on("execute", () => {
+        if (leftSidebarContainer.classList.contains("ck-fullscreen__left-sidebar--collapsed")) {
+          this._forceShowLeftSidebar = true;
+          this._keepLeftSidebarHidden = false;
+          this._showLeftSidebar();
+        } else {
+          this._keepLeftSidebarHidden = true;
+          this._hideLeftSidebar();
+        }
+        this._editor.editing.view.focus();
+      });
+      button.render();
+      this._collapseLeftSidebarButton = button;
+      leftSidebarContainer.prepend(button.element);
+    }
     /**
     * Stores the current state of the annotations UIs to restore it when leaving fullscreen mode and switches the UI to the wide sidebar.
     */
@@ -70197,35 +71352,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     _overrideAnnotationsUIs() {
       const annotationsUIs = this._editor.plugins.get("AnnotationsUIs");
       this._annotationsUIsData = new Map(annotationsUIs.uisData);
-      const annotationsFilters = /* @__PURE__ */ new Map();
-      for (const [uiName, data] of [
-        ...this._annotationsUIsData
-      ]) {
-        if (data.filter !== annotationsUIs.defaultFilter) {
-          annotationsFilters.set(uiName, data.filter);
-        }
-      }
       annotationsUIs.deactivateAll();
       const sidebarPlugin = this._editor.plugins.get("Sidebar");
       if (!sidebarPlugin.container) {
         sidebarPlugin.setContainer(this.getWrapper().querySelector('[data-ck-fullscreen="right-sidebar"]'));
-        switchToWideSidebar();
+        this._switchAnnotationsUI("wideSidebar");
         this.moveToFullscreen(sidebarPlugin.container.firstElementChild, "right-sidebar");
       } else {
-        switchToWideSidebar();
+        this._switchAnnotationsUI("wideSidebar");
         this.moveToFullscreen(sidebarPlugin.container.firstElementChild, "right-sidebar");
         sidebarPlugin.setContainer(this.getWrapper().querySelector('[data-ck-fullscreen="right-sidebar"]'));
-      }
-      function switchToWideSidebar() {
-        if (annotationsFilters.has("wideSidebar")) {
-          annotationsUIs.activate("wideSidebar", annotationsFilters.get("wideSidebar"));
-        } else if (annotationsFilters.size) {
-          annotationsUIs.activate("wideSidebar", (annotation) => [
-            ...annotationsFilters.values()
-          ].some((filter) => filter(annotation)));
-        } else {
-          annotationsUIs.switchTo("wideSidebar");
-        }
       }
     }
     /**
@@ -70348,13 +71484,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (!dialogView || dialogView.position !== DialogViewPosition.EDITOR_TOP_SIDE) {
         return;
       }
-      const fullscreenViewContainerRect = new Rect(this._wrapper).getVisible();
+      const keepRightEdgeContainerVisible = new Rect(this._wrapper.querySelector(".ck-fullscreen__right-edge")).getVisible();
+      const relativeContainer = keepRightEdgeContainerVisible ? this._wrapper.querySelector(".ck-fullscreen__right-edge") : this._wrapper;
+      const relativeContainerRect = new Rect(relativeContainer).getVisible();
       const editorContainerRect = new Rect(document.querySelector(".ck-fullscreen__editable")).getVisible();
       const dialogRect = new Rect(dialogView.element.querySelector(".ck-dialog")).getVisible();
       const scrollOffset = new Rect(document.querySelector(".ck-fullscreen__editable-wrapper")).excludeScrollbarsAndBorders().getVisible().width - new Rect(document.querySelector(".ck-fullscreen__editable-wrapper")).getVisible().width;
-      if (fullscreenViewContainerRect && editorContainerRect && dialogRect) {
+      if (relativeContainerRect && editorContainerRect && dialogRect) {
         dialogView.position = null;
-        dialogView.moveTo(fullscreenViewContainerRect.left + fullscreenViewContainerRect.width - dialogRect.width - DIALOG_OFFSET + scrollOffset, editorContainerRect.top);
+        const leftOffset = keepRightEdgeContainerVisible ? relativeContainerRect.left - dialogRect.width - DIALOG_OFFSET : relativeContainerRect.left + relativeContainerRect.width - dialogRect.width - DIALOG_OFFSET + scrollOffset;
+        dialogView.moveTo(leftOffset, editorContainerRect.top);
       }
     }
     /**
@@ -70380,6 +71519,156 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           });
         }
         element = element.parentElement;
+      }
+    }
+    /**
+    * Stores the current state of the AI Tabs and moves it to the fullscreen mode.
+    */
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _handleAITabsTransfer() {
+      const aiTabs = this._editor.plugins.get("AITabs");
+      this._aiTabsData = {
+        side: aiTabs.side,
+        type: aiTabs.type
+      };
+      this.moveToFullscreen(aiTabs.view.element, "right-edge");
+      aiTabs.side = "right";
+      aiTabs.type = "sidebar";
+      aiTabs.view.element.addEventListener("transitionend", (evt) => this._handleAISidebarTransitions(evt));
+    }
+    /**
+    * Checks the transition event to see if it's changing the width of the AI tabs and if so, adjusts the visible fullscreen mode elements.
+    */
+    _handleAISidebarTransitions(evt) {
+      const aiTabs = this._editor.plugins.get("AITabs");
+      if (evt.target === aiTabs.view.element && evt.propertyName.includes("width")) {
+        this._adjustVisibleElements();
+      }
+    }
+    /**
+    * Restores the state of the AI Tabs to the original values.
+    */
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _restoreAITabs() {
+      const aiTabs = this._editor.plugins.get("AITabs");
+      aiTabs.side = this._aiTabsData?.side;
+      aiTabs.type = this._aiTabsData?.type;
+      this._aiTabsData = null;
+      aiTabs.view.element.removeEventListener("transitionend", this._handleAISidebarTransitions);
+    }
+    /**
+    * Adjusts the visibility of the left and right sidebars based on the available space.
+    */
+    _adjustVisibleElements() {
+      const editableWrapper = this._wrapper.querySelector(".ck-fullscreen__editable-wrapper");
+      if (this._forceShowLeftSidebar) {
+        this._forceShowLeftSidebar = false;
+        return;
+      }
+      if (editableWrapper.scrollWidth > editableWrapper.clientWidth) {
+        this._hideLeftSidebar();
+        if (editableWrapper.scrollWidth > editableWrapper.clientWidth) {
+          this._hideRightSidebar();
+        }
+      } else {
+        let actualWidth = [
+          ...editableWrapper.children
+        ].reduce((acc, child) => acc + child.scrollWidth, 0);
+        if (actualWidth + this._sidebarsWidths.right < editableWrapper.clientWidth) {
+          this._showRightSidebar();
+          actualWidth = [
+            ...editableWrapper.children
+          ].reduce((acc, child) => acc + child.scrollWidth, 0);
+        }
+        if (actualWidth + this._sidebarsWidths.left < editableWrapper.clientWidth && !this._keepLeftSidebarHidden) {
+          this._showLeftSidebar();
+        }
+      }
+    }
+    /**
+    * Switches the annotations UI to the requested one.
+    */
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _switchAnnotationsUI(uiName) {
+      const annotationsUIs = this._editor.plugins.get("AnnotationsUIs");
+      annotationsUIs.deactivateAll();
+      const annotationsFilters = /* @__PURE__ */ new Map();
+      for (const [uiName2, data] of [
+        ...this._annotationsUIsData
+      ]) {
+        if (data.filter !== annotationsUIs.defaultFilter) {
+          annotationsFilters.set(uiName2, data.filter);
+        }
+      }
+      if (annotationsFilters.has(uiName)) {
+        annotationsUIs.activate(uiName, annotationsFilters.get(uiName));
+      } else if (annotationsFilters.size) {
+        annotationsUIs.activate(uiName, (annotation) => [
+          ...annotationsFilters.values()
+        ].some((filter) => filter(annotation)));
+      } else {
+        annotationsUIs.switchTo(uiName);
+      }
+    }
+    /**
+    * Sets up a resize observer to adjust the visibility of the left and right sidebars dynamically.
+    */
+    _setupResizeObserver() {
+      const wrapper = this._wrapper.querySelector(".ck-fullscreen__editable-wrapper");
+      if (this._resizeObserver) {
+        this._resizeObserver.destroy();
+      }
+      this._resizeObserver = new ResizeObserver(wrapper, () => {
+        this._adjustVisibleElements();
+      });
+    }
+    /**
+    * Hides the left sidebar. Works only if there is anything to hide.
+    */
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _hideLeftSidebar() {
+      const t = this._editor.t;
+      if (this._collapseLeftSidebarButton) {
+        const leftSidebar = this._wrapper.querySelector(".ck-fullscreen__left-sidebar");
+        leftSidebar.classList.add("ck-fullscreen__left-sidebar--collapsed");
+        this._collapseLeftSidebarButton.icon = documentOutlineToggle;
+        this._collapseLeftSidebarButton.tooltip = t("Show left sidebar");
+      }
+    }
+    /**
+    * Shows the left sidebar. Works only if there is anything to show.
+    */
+    // Code coverage is provided in the commercial package repository as integration unit tests.
+    /* istanbul ignore next -- @preserve */
+    _showLeftSidebar() {
+      const t = this._editor.t;
+      if (this._collapseLeftSidebarButton) {
+        const leftSidebar = this._wrapper.querySelector(".ck-fullscreen__left-sidebar");
+        leftSidebar.classList.remove("ck-fullscreen__left-sidebar--collapsed");
+        this._collapseLeftSidebarButton.icon = previousArrow;
+        this._collapseLeftSidebarButton.tooltip = t("Hide left sidebar");
+      }
+    }
+    /**
+    * Hides the right sidebar. Works only if there is anything to hide.
+    */
+    _hideRightSidebar() {
+      if (this._wrapper.querySelector(".ck-fullscreen__right-sidebar").firstChild) {
+        this._switchAnnotationsUI("narrowSidebar");
+        this._wrapper.querySelector(".ck-fullscreen__right-sidebar").classList.add("ck-fullscreen__right-sidebar--collapsed");
+      }
+    }
+    /**
+    * Shows the right sidebar. Works only if there is anything to show.
+    */
+    _showRightSidebar() {
+      if (this._wrapper.querySelector(".ck-fullscreen__right-sidebar").firstChild) {
+        this._switchAnnotationsUI("wideSidebar");
+        this._wrapper.querySelector(".ck-fullscreen__right-sidebar").classList.remove("ck-fullscreen__right-sidebar--collapsed");
       }
     }
   };
@@ -71256,12 +72545,20 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             writer.setSelectionAttribute("highlight", highlighter);
           }
         } else {
-          const ranges = model.schema.getValidRanges(selection.getRanges(), "highlight");
+          const ranges = model.schema.getValidRanges(selection.getRanges(), "highlight", {
+            includeEmptyRanges: true
+          });
           for (const range of ranges) {
+            let itemOrRange = range;
+            let attributeKey = "highlight";
+            if (range.isCollapsed) {
+              itemOrRange = range.start.parent;
+              attributeKey = ModelDocumentSelection._getStoreAttributeKey("highlight");
+            }
             if (highlighter) {
-              writer.setAttribute("highlight", highlighter, range);
+              writer.setAttribute(attributeKey, highlighter, itemOrRange);
             } else {
-              writer.removeAttribute("highlight", range);
+              writer.removeAttribute(attributeKey, itemOrRange);
             }
           }
         }
@@ -71856,8 +73153,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "HE";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -72944,17 +74254,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
       },
       {
-        model: "htmlDivDl",
-        view: "div",
-        modelSchema: {
-          allowChildren: [
-            "htmlDt",
-            "htmlDd"
-          ],
-          allowIn: "htmlDl"
-        }
-      },
-      {
         model: "htmlDl",
         view: "dl",
         modelSchema: {
@@ -72962,7 +74261,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           allowChildren: [
             "htmlDt",
             "htmlDd",
-            "htmlDivDl"
+            "htmlDiv"
           ],
           isBlock: false
         }
@@ -72972,6 +74271,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         view: "dt",
         modelSchema: {
           allowChildren: "$block",
+          allowIn: "htmlDiv",
           isBlock: false
         }
       },
@@ -72980,6 +74280,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         view: "dd",
         modelSchema: {
           allowChildren: "$block",
+          allowIn: "htmlDiv",
           isBlock: false
         }
       },
@@ -75038,6 +76339,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           return;
         }
         const viewTableElement = data.viewItem;
+        conversionApi.consumable.consume(viewTableElement, {
+          classes: "table"
+        });
         preserveElementAttributes(viewTableElement, "htmlTableAttributes");
         for (const childNode of viewTableElement.getChildren()) {
           if (childNode.is("element", "thead")) {
@@ -75416,6 +76720,74 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       });
     };
   }
+  var IframeElementSupport = class extends Plugin {
+    /**
+     * @inheritDoc
+     */
+    static get requires() {
+      return [
+        DataFilter
+      ];
+    }
+    /**
+     * @inheritDoc
+     */
+    static get pluginName() {
+      return "IframeElementSupport";
+    }
+    /**
+     * @inheritDoc
+     */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+     * @inheritDoc
+     */
+    init() {
+      this.editor.config.define("htmlSupport.htmlIframeSandbox", true);
+      this._setupSandboxConversion();
+    }
+    /**
+    * Sets up the conversion to enforce the sandbox attribute on `iframe` elements.
+    */
+    _setupSandboxConversion() {
+      const { plugins, config, conversion } = this.editor;
+      const dataFilter = plugins.get(DataFilter);
+      const iframeSandboxConfig = config.get("htmlSupport.htmlIframeSandbox");
+      if (iframeSandboxConfig === false) {
+        return;
+      }
+      const allowedSandboxFlags = Array.isArray(iframeSandboxConfig) ? Array.from(iframeSandboxConfig) : [];
+      dataFilter.on("register:iframe", (_, definition) => {
+        conversion.for("editingDowncast").add((dispatcher) => {
+          dispatcher.on(`insert:${definition.model}`, (_2, data, conversionApi) => {
+            const { mapper, writer } = conversionApi;
+            const viewElement = mapper.toViewElement(data.item);
+            for (const { item } of writer.createRangeOn(viewElement)) {
+              if (!item.is("element", "iframe")) {
+                continue;
+              }
+              if (item.hasAttribute("sandbox")) {
+                const sandboxValues = /* @__PURE__ */ new Set();
+                const existingSandbox = item.getAttribute("sandbox");
+                for (const value of existingSandbox.trim().split(/\s+/)) {
+                  if (allowedSandboxFlags.includes(value)) {
+                    sandboxValues.add(value);
+                  }
+                }
+                writer.setAttribute("sandbox", Array.from(sandboxValues).join(" "), item);
+              } else {
+                writer.setAttribute("sandbox", allowedSandboxFlags.join(" "), item);
+              }
+            }
+          }, {
+            priority: "lowest"
+          });
+        });
+      });
+    }
+  };
   var CustomElementSupport = class extends Plugin {
     /**
     * @inheritDoc
@@ -75591,6 +76963,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         StyleElementSupport,
         ListElementSupport,
         HorizontalLineElementSupport,
+        IframeElementSupport,
         CustomElementSupport
       ];
     }
@@ -76037,8 +77410,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "FPH";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -76181,6 +77567,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   }
 
   // node_modules/@ckeditor/ckeditor5-image/dist/index.js
+  var import_isEqual2 = __toESM(require_isEqual2(), 1);
   function createInlineImageViewElement(writer) {
     return writer.createContainerElement("span", {
       class: "image-inline"
@@ -79290,7 +80677,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             const isInsertedInGraveyard = entry.position.root.rootName == "$graveyard";
             for (const imageElement of getImagesFromChangeItem(editor, item)) {
               const uploadId = imageElement.getAttribute("uploadId");
-              if (!uploadId) {
+              const uploadStatus = imageElement.getAttribute("uploadStatus");
+              if (!uploadId || uploadStatus == "complete") {
                 continue;
               }
               const loader = fileRepository.loaders.get(uploadId);
@@ -79917,8 +81305,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "IR";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -81320,7 +82721,43 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           conversionApi.writer.setAttribute("imageStyle", style.name, modelImageElement);
         }
       }
+      normalizeFloatToDefinitionStyle(conversionApi, viewElement, modelImageElement, styles);
     };
+  }
+  function normalizeFloatToDefinitionStyle(conversionApi, viewElement, modelElement, styles) {
+    if (!conversionApi.consumable.test(viewElement, {
+      styles: [
+        "float"
+      ]
+    })) {
+      return;
+    }
+    let floatStyleName = null;
+    switch (viewElement.getStyle("float")) {
+      case "left":
+        floatStyleName = "alignLeft";
+        break;
+      case "right":
+        floatStyleName = "alignRight";
+        break;
+    }
+    if (!floatStyleName) {
+      return;
+    }
+    const definition = getStyleDefinitionByName(floatStyleName, styles);
+    if (!definition) {
+      return;
+    }
+    const builtinDefinition = DEFAULT_OPTIONS[definition.name];
+    if (!(0, import_isEqual2.default)(definition, builtinDefinition)) {
+      return;
+    }
+    conversionApi.writer.setAttribute("imageStyle", floatStyleName, modelElement);
+    conversionApi.consumable.consume(viewElement, {
+      styles: [
+        "float"
+      ]
+    });
   }
   function getStyleDefinitionByName(name, styles) {
     for (const style of styles) {
@@ -81683,6 +83120,4598 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     return config.map((item) => isObject(item) ? item.name : item);
   }
 
+  // node_modules/@ckeditor/ckeditor5-list/dist/index.js
+  var ListWalker = class {
+    /**
+    * The start list item block element.
+    */
+    _startElement;
+    /**
+    * The reference indent. Initialized by the indent of the start block.
+    */
+    _referenceIndent;
+    /**
+    * The iterating direction.
+    */
+    _isForward;
+    /**
+    * Whether start block should be included in the result (if it's matching other criteria).
+    */
+    _includeSelf;
+    /**
+    * Additional attributes that must be the same for each block.
+    */
+    _sameAttributes;
+    /**
+    * Whether blocks with the same indent level as the start block should be included in the result.
+    */
+    _sameIndent;
+    /**
+    * Whether blocks with a lower indent level than the start block should be included in the result.
+    */
+    _lowerIndent;
+    /**
+    * Whether blocks with a higher indent level than the start block should be included in the result.
+    */
+    _higherIndent;
+    /**
+    * Creates a document list iterator.
+    *
+    * @param startElement The start list item block element.
+    * @param options.direction The iterating direction.
+    * @param options.includeSelf Whether start block should be included in the result (if it's matching other criteria).
+    * @param options.sameAttributes Additional attributes that must be the same for each block.
+    * @param options.sameIndent Whether blocks with the same indent level as the start block should be included
+    * in the result.
+    * @param options.lowerIndent Whether blocks with a lower indent level than the start block should be included
+    * in the result.
+    * @param options.higherIndent Whether blocks with a higher indent level than the start block should be included
+    * in the result.
+    */
+    constructor(startElement, options) {
+      this._startElement = startElement;
+      this._referenceIndent = startElement.getAttribute("listIndent");
+      this._isForward = options.direction == "forward";
+      this._includeSelf = !!options.includeSelf;
+      this._sameAttributes = toArray(options.sameAttributes || []);
+      this._sameIndent = !!options.sameIndent;
+      this._lowerIndent = !!options.lowerIndent;
+      this._higherIndent = !!options.higherIndent;
+    }
+    /**
+    * Performs only first step of iteration and returns the result.
+    *
+    * @param startElement The start list item block element.
+    * @param options.direction The iterating direction.
+    * @param options.includeSelf Whether start block should be included in the result (if it's matching other criteria).
+    * @param options.sameAttributes Additional attributes that must be the same for each block.
+    * @param options.sameIndent Whether blocks with the same indent level as the start block should be included
+    * in the result.
+    * @param options.lowerIndent Whether blocks with a lower indent level than the start block should be included
+    * in the result.
+    * @param options.higherIndent Whether blocks with a higher indent level than the start block should be included
+    * in the result.
+    */
+    static first(startElement, options) {
+      const walker = new this(startElement, options);
+      const iterator = walker[Symbol.iterator]();
+      return first(iterator);
+    }
+    /**
+    * Iterable interface.
+    */
+    *[Symbol.iterator]() {
+      const nestedItems = [];
+      for (const { node } of new SiblingListBlocksIterator(this._getStartNode(), this._isForward ? "forward" : "backward")) {
+        const indent2 = node.getAttribute("listIndent");
+        if (indent2 < this._referenceIndent) {
+          if (!this._lowerIndent) {
+            break;
+          }
+          this._referenceIndent = indent2;
+        } else if (indent2 > this._referenceIndent) {
+          if (!this._higherIndent) {
+            continue;
+          }
+          if (!this._isForward) {
+            nestedItems.push(node);
+            continue;
+          }
+        } else {
+          if (!this._sameIndent) {
+            if (this._higherIndent) {
+              if (nestedItems.length) {
+                yield* nestedItems;
+                nestedItems.length = 0;
+              }
+              break;
+            }
+            continue;
+          }
+          if (this._sameAttributes.some((attr) => node.getAttribute(attr) !== this._startElement.getAttribute(attr))) {
+            break;
+          }
+        }
+        if (nestedItems.length) {
+          yield* nestedItems;
+          nestedItems.length = 0;
+        }
+        yield node;
+      }
+    }
+    /**
+    * Returns the model element to start iterating.
+    */
+    _getStartNode() {
+      if (this._includeSelf) {
+        return this._startElement;
+      }
+      return this._isForward ? this._startElement.nextSibling : this._startElement.previousSibling;
+    }
+  };
+  var SiblingListBlocksIterator = class {
+    _node;
+    _isForward;
+    _previousNodesByIndent = [];
+    _previous = null;
+    _previousNodeIndent = null;
+    /**
+    * @param node The model node.
+    * @param direction Iteration direction.
+    */
+    constructor(node, direction = "forward") {
+      this._node = node;
+      this._isForward = direction === "forward";
+    }
+    [Symbol.iterator]() {
+      return this;
+    }
+    next() {
+      if (!isListItemBlock(this._node)) {
+        return {
+          done: true,
+          value: void 0
+        };
+      }
+      const nodeIndent = this._node.getAttribute("listIndent");
+      let previousNodeInList = null;
+      if (this._previous) {
+        const previousNodeIndent = this._previousNodeIndent;
+        if (nodeIndent > previousNodeIndent) {
+          this._previousNodesByIndent[previousNodeIndent] = this._previous;
+        } else if (nodeIndent < previousNodeIndent) {
+          previousNodeInList = this._previousNodesByIndent[nodeIndent] || null;
+          this._previousNodesByIndent.length = nodeIndent;
+        } else {
+          previousNodeInList = this._previous;
+        }
+      }
+      const value = {
+        node: this._node,
+        previous: this._previous,
+        previousNodeInList
+      };
+      this._previous = this._node;
+      this._previousNodeIndent = nodeIndent;
+      this._node = this._isForward ? this._node.nextSibling : this._node.previousSibling;
+      return {
+        value,
+        done: false
+      };
+    }
+  };
+  var ListBlocksIterable = class {
+    _listHead;
+    /**
+    * @param listHead The head element of a list.
+    */
+    constructor(listHead) {
+      this._listHead = listHead;
+    }
+    /**
+    * List blocks iterator.
+    *
+    * Iterates over all blocks of a list.
+    */
+    [Symbol.iterator]() {
+      return new SiblingListBlocksIterator(this._listHead);
+    }
+  };
+  var ListItemUid = class {
+    /**
+    * Returns the next ID.
+    *
+    * @internal
+    */
+    /* istanbul ignore next: static function definition -- @preserve */
+    static next() {
+      return uid();
+    }
+  };
+  function isListItemBlock(node) {
+    return !!node && node.is("element") && node.hasAttribute("listItemId");
+  }
+  function getAllListItemBlocks(listItem, options = {}) {
+    return [
+      ...getListItemBlocks(listItem, {
+        ...options,
+        direction: "backward"
+      }),
+      ...getListItemBlocks(listItem, {
+        ...options,
+        direction: "forward"
+      })
+    ];
+  }
+  function getListItemBlocks(listItem, options = {}) {
+    const isForward = options.direction == "forward";
+    const items = Array.from(new ListWalker(listItem, {
+      ...options,
+      includeSelf: isForward,
+      sameIndent: true,
+      sameAttributes: "listItemId"
+    }));
+    return isForward ? items : items.reverse();
+  }
+  function getNestedListBlocks(listItem) {
+    return Array.from(new ListWalker(listItem, {
+      direction: "forward",
+      higherIndent: true
+    }));
+  }
+  function getListItems(listItem, options) {
+    const backwardBlocks = new ListWalker(listItem, {
+      sameIndent: true,
+      sameAttributes: "listType",
+      ...options
+    });
+    const forwardBlocks = new ListWalker(listItem, {
+      sameIndent: true,
+      sameAttributes: "listType",
+      includeSelf: true,
+      direction: "forward",
+      ...options
+    });
+    return [
+      ...Array.from(backwardBlocks).reverse(),
+      ...forwardBlocks
+    ];
+  }
+  function isFirstBlockOfListItem(listBlock) {
+    const previousSibling = ListWalker.first(listBlock, {
+      sameIndent: true,
+      sameAttributes: "listItemId"
+    });
+    if (!previousSibling) {
+      return true;
+    }
+    return false;
+  }
+  function isLastBlockOfListItem(listBlock) {
+    const nextSibling = ListWalker.first(listBlock, {
+      direction: "forward",
+      sameIndent: true,
+      sameAttributes: "listItemId"
+    });
+    if (!nextSibling) {
+      return true;
+    }
+    return false;
+  }
+  function expandListBlocksToCompleteItems(blocks, options = {}) {
+    blocks = toArray(blocks);
+    const higherIndent = options.withNested !== false;
+    const allBlocks = /* @__PURE__ */ new Set();
+    for (const block of blocks) {
+      for (const itemBlock of getAllListItemBlocks(block, {
+        higherIndent
+      })) {
+        allBlocks.add(itemBlock);
+      }
+    }
+    return sortBlocks(allBlocks);
+  }
+  function expandListBlocksToCompleteList(blocks) {
+    blocks = toArray(blocks);
+    const allBlocks = /* @__PURE__ */ new Set();
+    for (const block of blocks) {
+      for (const itemBlock of getListItems(block)) {
+        allBlocks.add(itemBlock);
+      }
+    }
+    return sortBlocks(allBlocks);
+  }
+  function splitListItemBefore(listBlock, writer) {
+    const blocks = getListItemBlocks(listBlock, {
+      direction: "forward"
+    });
+    const id = ListItemUid.next();
+    for (const block of blocks) {
+      writer.setAttribute("listItemId", id, block);
+    }
+    return blocks;
+  }
+  function mergeListItemBefore(listBlock, parentBlock, writer) {
+    const attributes = {};
+    for (const [key, value] of parentBlock.getAttributes()) {
+      if (key.startsWith("list")) {
+        attributes[key] = value;
+      }
+    }
+    const blocks = getListItemBlocks(listBlock, {
+      direction: "forward"
+    });
+    for (const block of blocks) {
+      writer.setAttributes(attributes, block);
+    }
+    return blocks;
+  }
+  function indentBlocks(blocks, writer, { expand, indentBy = 1, attributeNames }) {
+    blocks = toArray(blocks);
+    const allBlocks = expand ? expandListBlocksToCompleteItems(blocks) : blocks;
+    for (const block of allBlocks) {
+      const blockIndent = block.getAttribute("listIndent") + indentBy;
+      if (blockIndent < 0) {
+        removeListAttributes(block, writer, attributeNames);
+      } else {
+        writer.setAttribute("listIndent", blockIndent, block);
+      }
+    }
+    return allBlocks;
+  }
+  function outdentBlocksWithMerge(blocks, writer, { attributeNames }) {
+    blocks = toArray(blocks);
+    const allBlocks = expandListBlocksToCompleteItems(blocks);
+    const visited = /* @__PURE__ */ new Set();
+    const referenceIndent = Math.min(...allBlocks.map((block) => block.getAttribute("listIndent")));
+    const parentBlocks = /* @__PURE__ */ new Map();
+    for (const block of allBlocks) {
+      parentBlocks.set(block, ListWalker.first(block, {
+        lowerIndent: true
+      }));
+    }
+    for (const block of allBlocks) {
+      if (visited.has(block)) {
+        continue;
+      }
+      visited.add(block);
+      const blockIndent = block.getAttribute("listIndent") - 1;
+      if (blockIndent < 0) {
+        removeListAttributes(block, writer, attributeNames);
+        continue;
+      }
+      if (block.getAttribute("listIndent") == referenceIndent) {
+        const mergedBlocks = mergeListItemIfNotLast(block, parentBlocks.get(block), writer);
+        for (const mergedBlock of mergedBlocks) {
+          visited.add(mergedBlock);
+        }
+        if (mergedBlocks.length) {
+          continue;
+        }
+      }
+      writer.setAttribute("listIndent", blockIndent, block);
+    }
+    return sortBlocks(visited);
+  }
+  function removeListAttributes(blocks, writer, attributeNames) {
+    blocks = toArray(blocks);
+    for (const block of blocks) {
+      if (block.is("element", "listItem")) {
+        writer.rename(block, "paragraph");
+      }
+    }
+    for (const block of blocks) {
+      for (const attributeKey of block.getAttributeKeys()) {
+        if (attributeNames.includes(attributeKey)) {
+          writer.removeAttribute(attributeKey, block);
+        }
+      }
+    }
+    return blocks;
+  }
+  function isSingleListItem(blocks) {
+    if (!blocks.length) {
+      return false;
+    }
+    const firstItemId = blocks[0].getAttribute("listItemId");
+    if (!firstItemId) {
+      return false;
+    }
+    return !blocks.some((item) => item.getAttribute("listItemId") != firstItemId);
+  }
+  function outdentFollowingItems(lastBlock, writer) {
+    const changedBlocks = [];
+    let currentIndent = Number.POSITIVE_INFINITY;
+    for (const { node } of new SiblingListBlocksIterator(lastBlock.nextSibling)) {
+      const indent2 = node.getAttribute("listIndent");
+      if (indent2 == 0) {
+        break;
+      }
+      if (indent2 < currentIndent) {
+        currentIndent = indent2;
+      }
+      const newIndent = indent2 - currentIndent;
+      writer.setAttribute("listIndent", newIndent, node);
+      changedBlocks.push(node);
+    }
+    return changedBlocks;
+  }
+  function sortBlocks(blocks) {
+    return Array.from(blocks).filter((block) => block.root.rootName !== "$graveyard").sort((a, b) => a.index - b.index);
+  }
+  function getSelectedBlockObject(model) {
+    const selectedElement = model.document.selection.getSelectedElement();
+    if (!selectedElement) {
+      return null;
+    }
+    if (model.schema.isObject(selectedElement) && model.schema.isBlock(selectedElement)) {
+      return selectedElement;
+    }
+    return null;
+  }
+  function canBecomeSimpleListItem(block, schema) {
+    return schema.checkChild(block.parent, "listItem") && schema.checkChild(block, "$text") && !schema.isObject(block);
+  }
+  function isNumberedListType(listType) {
+    return listType == "numbered" || listType == "customNumbered";
+  }
+  function isFirstListItemInList(listItem) {
+    const previousItem = ListWalker.first(listItem, {
+      sameIndent: true,
+      sameAttributes: "listType"
+    });
+    return !previousItem;
+  }
+  function mergeListItemIfNotLast(block, parentBlock, writer) {
+    const parentItemBlocks = getListItemBlocks(parentBlock, {
+      direction: "forward"
+    });
+    if (parentItemBlocks.pop().index > block.index) {
+      return mergeListItemBefore(block, parentBlock, writer);
+    }
+    return [];
+  }
+  var ListIndentCommand = class extends Command {
+    /**
+    * Determines by how much the command will change the list item's indent attribute.
+    */
+    _direction;
+    /**
+    * Creates an instance of the command.
+    *
+    * @param editor The editor instance.
+    * @param indentDirection The direction of indent. If it is equal to `backward`, the command
+    * will outdent a list item.
+    */
+    constructor(editor, indentDirection) {
+      super(editor);
+      this._direction = indentDirection;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.isEnabled = this._checkEnabled();
+    }
+    /**
+    * Indents or outdents (depending on the {@link #constructor}'s `indentDirection` parameter) selected list items.
+    *
+    * @fires execute
+    * @fires afterExecute
+    */
+    execute() {
+      const editor = this.editor;
+      const model = editor.model;
+      const blocks = getSelectedListBlocks(model.document.selection);
+      const listEditing = editor.plugins.get("ListEditing");
+      const attributeNames = listEditing.getListAttributeNames();
+      model.change((writer) => {
+        const changedBlocks = [];
+        if (isSingleListItem(blocks) && !isFirstBlockOfListItem(blocks[0])) {
+          if (this._direction == "forward") {
+            changedBlocks.push(...indentBlocks(blocks, writer, {
+              attributeNames
+            }));
+          }
+          changedBlocks.push(...splitListItemBefore(blocks[0], writer));
+        } else {
+          if (this._direction == "forward") {
+            changedBlocks.push(...indentBlocks(blocks, writer, {
+              expand: true,
+              attributeNames
+            }));
+          } else {
+            changedBlocks.push(...outdentBlocksWithMerge(blocks, writer, {
+              attributeNames
+            }));
+          }
+        }
+        for (const block of changedBlocks) {
+          if (!block.hasAttribute("listType")) {
+            continue;
+          }
+          const previousItemBlock = ListWalker.first(block, {
+            sameIndent: true
+          });
+          if (previousItemBlock) {
+            writer.setAttribute("listType", previousItemBlock.getAttribute("listType"), block);
+          }
+        }
+        this._fireAfterExecute(changedBlocks);
+      });
+    }
+    /**
+    * Fires the `afterExecute` event.
+    *
+    * @param changedBlocks The changed list elements.
+    */
+    _fireAfterExecute(changedBlocks) {
+      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
+    }
+    /**
+    * Checks whether the command can be enabled in the current context.
+    *
+    * @returns Whether the command should be enabled.
+    */
+    _checkEnabled() {
+      let blocks = getSelectedListBlocks(this.editor.model.document.selection);
+      let firstBlock = blocks[0];
+      if (!firstBlock) {
+        return false;
+      }
+      if (this._direction == "backward") {
+        return true;
+      }
+      if (isSingleListItem(blocks) && !isFirstBlockOfListItem(blocks[0])) {
+        return true;
+      }
+      blocks = expandListBlocksToCompleteItems(blocks);
+      firstBlock = blocks[0];
+      const siblingItem = ListWalker.first(firstBlock, {
+        sameIndent: true
+      });
+      if (!siblingItem) {
+        return false;
+      }
+      if (siblingItem.getAttribute("listType") == firstBlock.getAttribute("listType")) {
+        return true;
+      }
+      return false;
+    }
+  };
+  function getSelectedListBlocks(selection) {
+    const blocks = Array.from(selection.getSelectedBlocks());
+    const firstNonListBlockIndex = blocks.findIndex((block) => !isListItemBlock(block));
+    if (firstNonListBlockIndex != -1) {
+      blocks.length = firstNonListBlockIndex;
+    }
+    return blocks;
+  }
+  var ListCommand = class extends Command {
+    /**
+    * The type of the list created by the command.
+    */
+    type;
+    /**
+    * List Walker options that change the range of the list items to be changed when the selection is collapsed within a list item.
+    *
+    * In a multi-level list, when the selection is collapsed within a list item, instead of changing only the list items of the same list
+    * type and current indent level, the entire list structure is changed (all list items at all indent levels of any list type).
+    */
+    _listWalkerOptions;
+    /**
+    * Creates an instance of the command.
+    *
+    * @param editor The editor instance.
+    * @param type List type that will be handled by this command.
+    */
+    constructor(editor, type, options = {}) {
+      super(editor);
+      this.type = type;
+      this._listWalkerOptions = options.multiLevel ? {
+        higherIndent: true,
+        lowerIndent: true,
+        sameAttributes: []
+      } : void 0;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.value = this._getValue();
+      this.isEnabled = this._checkEnabled();
+    }
+    /**
+    * Executes the list command.
+    *
+    * @fires execute
+    * @fires afterExecute
+    * @param options Command options.
+    * @param options.forceValue If set, it will force the command behavior. If `true`, the command will try to convert the
+    * selected items and potentially the neighbor elements to the proper list items. If set to `false` it will convert selected elements
+    * to paragraphs. If not set, the command will toggle selected elements to list items or paragraphs, depending on the selection.
+    * @param options.additionalAttributes Additional attributes that are set for list items when the command is executed.
+    */
+    execute(options = {}) {
+      const model = this.editor.model;
+      const document2 = model.document;
+      const selectedBlockObject = getSelectedBlockObject(model);
+      const blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => model.schema.checkAttribute(block, "listType") || canBecomeSimpleListItem(block, model.schema));
+      const turnOff = options.forceValue !== void 0 ? !options.forceValue : this.value;
+      model.change((writer) => {
+        if (turnOff) {
+          const lastBlock = blocks[blocks.length - 1];
+          const listEditing = this.editor.plugins.get("ListEditing");
+          const attributeNames = listEditing.getListAttributeNames();
+          const itemBlocks = getListItemBlocks(lastBlock, {
+            direction: "forward"
+          });
+          const changedBlocks = [];
+          if (itemBlocks.length > 1) {
+            changedBlocks.push(...splitListItemBefore(itemBlocks[1], writer));
+          }
+          changedBlocks.push(...removeListAttributes(blocks, writer, attributeNames));
+          changedBlocks.push(...outdentFollowingItems(lastBlock, writer));
+          this._fireAfterExecute(changedBlocks);
+        } else if ((selectedBlockObject || document2.selection.isCollapsed) && isListItemBlock(blocks[0])) {
+          const changedBlocks = getListItems(selectedBlockObject || blocks[0], this._listWalkerOptions);
+          for (const block of changedBlocks) {
+            writer.setAttributes({
+              ...options.additionalAttributes,
+              listType: this.type
+            }, block);
+          }
+          this._fireAfterExecute(changedBlocks);
+        } else {
+          const changedBlocks = [];
+          for (const block of blocks) {
+            if (!block.hasAttribute("listType")) {
+              if (!block.is("element", "listItem") && canBecomeSimpleListItem(block, model.schema)) {
+                writer.rename(block, "listItem");
+              }
+              writer.setAttributes({
+                ...options.additionalAttributes,
+                listIndent: 0,
+                listItemId: ListItemUid.next(),
+                listType: this.type
+              }, block);
+              changedBlocks.push(block);
+            } else {
+              for (const node of expandListBlocksToCompleteItems(block, {
+                withNested: false
+              })) {
+                if (node.getAttribute("listType") != this.type) {
+                  writer.setAttributes({
+                    ...options.additionalAttributes,
+                    listType: this.type
+                  }, node);
+                  changedBlocks.push(node);
+                }
+              }
+            }
+          }
+          this._fireAfterExecute(changedBlocks);
+        }
+      });
+    }
+    /**
+    * Fires the `afterExecute` event.
+    *
+    * @param changedBlocks The changed list elements.
+    */
+    _fireAfterExecute(changedBlocks) {
+      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
+    }
+    /**
+    * Checks the command's {@link #value}.
+    *
+    * @returns The current value.
+    */
+    _getValue() {
+      const selection = this.editor.model.document.selection;
+      const blocks = Array.from(selection.getSelectedBlocks());
+      if (!blocks.length) {
+        return false;
+      }
+      for (const block of blocks) {
+        if (block.getAttribute("listType") != this.type) {
+          return false;
+        }
+      }
+      return true;
+    }
+    /**
+    * Checks whether the command can be enabled in the current context.
+    *
+    * @returns Whether the command should be enabled.
+    */
+    _checkEnabled() {
+      const model = this.editor.model;
+      const schema = model.schema;
+      const selection = model.document.selection;
+      const blocks = Array.from(selection.getSelectedBlocks());
+      if (!blocks.length) {
+        return false;
+      }
+      if (this.value) {
+        return true;
+      }
+      for (const block of blocks) {
+        if (schema.checkAttribute(block, "listType") || canBecomeSimpleListItem(block, schema)) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
+  var ListMergeCommand = class extends Command {
+    /**
+    * Whether list item should be merged before or after the selected block.
+    */
+    _direction;
+    /**
+    * Creates an instance of the command.
+    *
+    * @param editor The editor instance.
+    * @param direction Whether list item should be merged before or after the selected block.
+    */
+    constructor(editor, direction) {
+      super(editor);
+      this._direction = direction;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.isEnabled = this._checkEnabled();
+    }
+    /**
+    * Merges list blocks together (depending on the {@link #constructor}'s `direction` parameter).
+    *
+    * @fires execute
+    * @fires afterExecute
+    * @param options Command options.
+    * @param options.shouldMergeOnBlocksContentLevel When set `true`, merging will be performed together
+    * with {@link module:engine/model/model~Model#deleteContent} to get rid of the inline content in the selection or take advantage
+    * of the heuristics in `deleteContent()` that helps convert lists into paragraphs in certain cases.
+    */
+    execute({ shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel2 = false } = {}) {
+      const editor = this.editor;
+      const model = editor.model;
+      const selection = model.document.selection;
+      const changedBlocks = [];
+      const listEditing = editor.plugins.get("ListEditing");
+      const attributeNames = listEditing.getListAttributeNames();
+      model.change((writer) => {
+        const { firstElement, lastElement } = this._getMergeSubjectElements(selection, shouldMergeOnBlocksContentLevel2);
+        const firstIndent = firstElement.getAttribute("listIndent") || 0;
+        const lastIndent = lastElement.getAttribute("listIndent");
+        const lastElementId = lastElement.getAttribute("listItemId");
+        if (firstIndent != lastIndent) {
+          const nestedLastElementBlocks = getNestedListBlocks(lastElement);
+          changedBlocks.push(...indentBlocks([
+            lastElement,
+            ...nestedLastElementBlocks
+          ], writer, {
+            indentBy: firstIndent - lastIndent,
+            // If outdenting, the entire sub-tree that follows must be included.
+            expand: firstIndent < lastIndent,
+            attributeNames
+          }));
+        }
+        if (shouldMergeOnBlocksContentLevel2) {
+          let sel = selection;
+          if (selection.isCollapsed) {
+            sel = writer.createSelection(writer.createRange(writer.createPositionAt(firstElement, "end"), writer.createPositionAt(lastElement, 0)));
+          }
+          model.deleteContent(sel, {
+            doNotResetEntireContent: selection.isCollapsed
+          });
+          const lastElementAfterDelete = sel.getLastPosition().parent;
+          const nextSibling = lastElementAfterDelete.nextSibling;
+          changedBlocks.push(lastElementAfterDelete);
+          if (nextSibling && nextSibling !== lastElement && nextSibling.getAttribute("listItemId") == lastElementId) {
+            changedBlocks.push(...mergeListItemBefore(nextSibling, lastElementAfterDelete, writer));
+          }
+        } else {
+          changedBlocks.push(...mergeListItemBefore(lastElement, firstElement, writer));
+        }
+        this._fireAfterExecute(changedBlocks);
+      });
+    }
+    /**
+    * Fires the `afterExecute` event.
+    *
+    * @param changedBlocks The changed list elements.
+    */
+    _fireAfterExecute(changedBlocks) {
+      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
+    }
+    /**
+    * Checks whether the command can be enabled in the current context.
+    *
+    * @returns Whether the command should be enabled.
+    */
+    _checkEnabled() {
+      const model = this.editor.model;
+      const selection = model.document.selection;
+      const selectedBlockObject = getSelectedBlockObject(model);
+      if (selection.isCollapsed || selectedBlockObject) {
+        const positionParent = selectedBlockObject || selection.getFirstPosition().parent;
+        if (!isListItemBlock(positionParent)) {
+          return false;
+        }
+        const siblingNode = this._direction == "backward" ? positionParent.previousSibling : positionParent.nextSibling;
+        if (!siblingNode) {
+          return false;
+        }
+        if (isSingleListItem([
+          positionParent,
+          siblingNode
+        ])) {
+          return false;
+        }
+      } else {
+        const lastPosition = selection.getLastPosition();
+        const firstPosition = selection.getFirstPosition();
+        if (lastPosition.parent === firstPosition.parent) {
+          return false;
+        }
+        if (!isListItemBlock(lastPosition.parent)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    /**
+    * Returns the boundary elements the merge should be executed for. These are not necessarily selection's first
+    * and last position parents but sometimes sibling or even further blocks depending on the context.
+    *
+    * @param selection The selection the merge is executed for.
+    * @param shouldMergeOnBlocksContentLevel When `true`, merge is performed together with
+    * {@link module:engine/model/model~Model#deleteContent} to remove the inline content within the selection.
+    */
+    _getMergeSubjectElements(selection, shouldMergeOnBlocksContentLevel2) {
+      const model = this.editor.model;
+      const selectedBlockObject = getSelectedBlockObject(model);
+      let firstElement, lastElement;
+      if (selection.isCollapsed || selectedBlockObject) {
+        const positionParent = selectedBlockObject || selection.getFirstPosition().parent;
+        const isFirstBlock = isFirstBlockOfListItem(positionParent);
+        if (this._direction == "backward") {
+          lastElement = positionParent;
+          if (isFirstBlock && !shouldMergeOnBlocksContentLevel2) {
+            firstElement = ListWalker.first(positionParent, {
+              sameIndent: true,
+              lowerIndent: true
+            });
+          } else {
+            firstElement = positionParent.previousSibling;
+          }
+        } else {
+          firstElement = positionParent;
+          lastElement = positionParent.nextSibling;
+        }
+      } else {
+        firstElement = selection.getFirstPosition().parent;
+        lastElement = selection.getLastPosition().parent;
+      }
+      return {
+        firstElement,
+        lastElement
+      };
+    }
+  };
+  var ListSplitCommand = class extends Command {
+    /**
+    * Whether list item should be split before or after the selected block.
+    */
+    _direction;
+    /**
+    * Creates an instance of the command.
+    *
+    * @param editor The editor instance.
+    * @param direction Whether list item should be split before or after the selected block.
+    */
+    constructor(editor, direction) {
+      super(editor);
+      this._direction = direction;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.isEnabled = this._checkEnabled();
+    }
+    /**
+    * Splits the list item at the selection.
+    *
+    * @fires execute
+    * @fires afterExecute
+    */
+    execute() {
+      const editor = this.editor;
+      editor.model.change((writer) => {
+        const changedBlocks = splitListItemBefore(this._getStartBlock(), writer);
+        this._fireAfterExecute(changedBlocks);
+      });
+    }
+    /**
+    * Fires the `afterExecute` event.
+    *
+    * @param changedBlocks The changed list elements.
+    */
+    _fireAfterExecute(changedBlocks) {
+      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
+    }
+    /**
+    * Checks whether the command can be enabled in the current context.
+    *
+    * @returns Whether the command should be enabled.
+    */
+    _checkEnabled() {
+      const selection = this.editor.model.document.selection;
+      const block = this._getStartBlock();
+      return selection.isCollapsed && isListItemBlock(block) && !isFirstBlockOfListItem(block);
+    }
+    /**
+    * Returns the model element that is the main focus of the command (according to the current selection and command direction).
+    */
+    _getStartBlock() {
+      const doc = this.editor.model.document;
+      const positionParent = doc.selection.getFirstPosition().parent;
+      return this._direction == "before" ? positionParent : positionParent.nextSibling;
+    }
+  };
+  var ListItemBoldIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListItemBoldIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const ListFormatting2 = editor.plugins.get("ListFormatting");
+      const listEditing = editor.plugins.get(ListEditing);
+      if (!editor.plugins.has("BoldEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      ListFormatting2.registerFormatAttribute("bold", "listItemBold");
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemBold",
+        setAttributeOnDowncast(writer, value, viewElement, options) {
+          if (value) {
+            writer.addClass("ck-list-marker-bold", viewElement);
+            if (env.isSafari && !(options && options.dataPipeline)) {
+              writer.setStyle("--ck-content-list-marker-dummy-bold", "0", viewElement);
+            }
+          }
+        }
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      if (!editor.plugins.has("BoldEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      model.schema.extend("$listItem", {
+        allowAttributes: "listItemBold"
+      });
+      model.schema.setAttributeProperties("listItemBold", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "listItemBold");
+      editor.conversion.for("upcast").attributeToAttribute({
+        model: "listItemBold",
+        view: {
+          name: "li",
+          classes: "ck-list-marker-bold"
+        }
+      });
+    }
+  };
+  var ListItemItalicIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListItemItalicIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const ListFormatting2 = editor.plugins.get("ListFormatting");
+      const listEditing = editor.plugins.get(ListEditing);
+      if (!editor.plugins.has("ItalicEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      ListFormatting2.registerFormatAttribute("italic", "listItemItalic");
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemItalic",
+        setAttributeOnDowncast(writer, value, viewElement, options) {
+          if (value) {
+            writer.addClass("ck-list-marker-italic", viewElement);
+            if (env.isSafari && !(options && options.dataPipeline)) {
+              writer.setStyle("--ck-content-list-marker-dummy-italic", "0", viewElement);
+            }
+          }
+        }
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      if (!editor.plugins.has("ItalicEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      model.schema.extend("$listItem", {
+        allowAttributes: "listItemItalic"
+      });
+      model.schema.setAttributeProperties("listItemItalic", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "listItemItalic");
+      editor.conversion.for("upcast").attributeToAttribute({
+        model: "listItemItalic",
+        view: {
+          name: "li",
+          classes: "ck-list-marker-italic"
+        }
+      });
+    }
+  };
+  var ListItemFontSizeIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListItemFontSizeIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const ListFormatting2 = editor.plugins.get("ListFormatting");
+      const listEditing = editor.plugins.get(ListEditing);
+      if (!editor.plugins.has("FontSizeEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      const normalizedFontSizeOptions = normalizeOptions(editor.config.get("fontSize.options"));
+      ListFormatting2.registerFormatAttribute("fontSize", "listItemFontSize");
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemFontSize",
+        setAttributeOnDowncast(writer, value, viewElement, options) {
+          if (value) {
+            const fontSizeOption = normalizedFontSizeOptions.find((option) => option.model == value);
+            if (fontSizeOption && fontSizeOption.view && typeof fontSizeOption.view != "string") {
+              if (fontSizeOption.view.styles) {
+                writer.addClass("ck-list-marker-font-size", viewElement);
+                writer.setStyle("--ck-content-list-marker-font-size", fontSizeOption.view.styles["font-size"], viewElement);
+              } else if (fontSizeOption.view.classes) {
+                writer.addClass(`ck-list-marker-font-size-${value}`, viewElement);
+                if (env.isSafari && !(options && options.dataPipeline)) {
+                  writer.setStyle("--ck-content-list-marker-dummy-font-size", "0", viewElement);
+                }
+              }
+            } else {
+              writer.addClass("ck-list-marker-font-size", viewElement);
+              writer.setStyle("--ck-content-list-marker-font-size", value, viewElement);
+            }
+          }
+        }
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      if (!editor.plugins.has("FontSizeEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      model.schema.extend("$listItem", {
+        allowAttributes: "listItemFontSize"
+      });
+      model.schema.setAttributeProperties("listItemFontSize", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "listItemFontSize");
+      editor.conversion.for("upcast").elementToAttribute({
+        model: {
+          key: "listItemFontSize",
+          value: (viewElement) => viewElement.getStyle("--ck-content-list-marker-font-size")
+        },
+        view: {
+          name: "li",
+          classes: "ck-list-marker-font-size",
+          styles: {
+            "--ck-content-list-marker-font-size": /.*/
+          }
+        }
+      });
+      const fontSizeOptions = normalizeOptions(editor.config.get("fontSize.options"));
+      for (const option of fontSizeOptions) {
+        if (option.model && option.view) {
+          editor.conversion.for("upcast").elementToAttribute({
+            model: {
+              key: "listItemFontSize",
+              value: option.model
+            },
+            view: {
+              name: "li",
+              classes: `ck-list-marker-font-size-${option.model}`
+            }
+          });
+        }
+      }
+    }
+  };
+  var ListItemFontColorIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListItemFontColorIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const ListFormatting2 = editor.plugins.get("ListFormatting");
+      const listEditing = editor.plugins.get(ListEditing);
+      if (!editor.plugins.has("FontColorEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      ListFormatting2.registerFormatAttribute("fontColor", "listItemFontColor");
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemFontColor",
+        setAttributeOnDowncast(writer, value, viewElement) {
+          if (value) {
+            writer.addClass("ck-list-marker-color", viewElement);
+            writer.setStyle("--ck-content-list-marker-color", value, viewElement);
+          }
+        }
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      if (!editor.plugins.has("FontColorEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      model.schema.extend("$listItem", {
+        allowAttributes: "listItemFontColor"
+      });
+      model.schema.setAttributeProperties("listItemFontColor", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "listItemFontColor");
+      editor.conversion.for("upcast").attributeToAttribute({
+        model: {
+          key: "listItemFontColor",
+          value: (viewElement) => {
+            return viewElement.getStyle("--ck-content-list-marker-color");
+          }
+        },
+        view: {
+          name: "li",
+          classes: "ck-list-marker-color",
+          styles: {
+            "--ck-content-list-marker-color": /.*/
+          }
+        }
+      });
+    }
+  };
+  var ListItemFontFamilyIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListItemFontFamilyIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const ListFormatting2 = editor.plugins.get("ListFormatting");
+      const listEditing = editor.plugins.get(ListEditing);
+      if (!editor.plugins.has("FontFamilyEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      ListFormatting2.registerFormatAttribute("fontFamily", "listItemFontFamily");
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemFontFamily",
+        setAttributeOnDowncast(writer, value, viewElement) {
+          if (value) {
+            writer.addClass("ck-list-marker-font-family", viewElement);
+            writer.setStyle("--ck-content-list-marker-font-family", value, viewElement);
+          }
+        }
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      if (!editor.plugins.has("FontFamilyEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      model.schema.extend("$listItem", {
+        allowAttributes: "listItemFontFamily"
+      });
+      model.schema.setAttributeProperties("listItemFontFamily", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "listItemFontFamily");
+      editor.conversion.for("upcast").attributeToAttribute({
+        model: {
+          key: "listItemFontFamily",
+          value: (viewElement) => {
+            return viewElement.getStyle("--ck-content-list-marker-font-family");
+          }
+        },
+        view: {
+          name: "li",
+          classes: "ck-list-marker-font-family",
+          styles: {
+            "--ck-content-list-marker-font-family": /.*/
+          }
+        }
+      });
+    }
+  };
+  var ListFormatting = class extends Plugin {
+    /**
+    * The list of loaded formatting.
+    */
+    _loadedFormatting = {};
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListFormatting";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListItemBoldIntegration,
+        ListItemItalicIntegration,
+        ListItemFontSizeIntegration,
+        ListItemFontColorIntegration,
+        ListItemFontFamilyIntegration
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    constructor(editor) {
+      super(editor);
+      editor.config.define("list.enableListItemMarkerFormatting", true);
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      if (!this.editor.config.get("list.enableListItemMarkerFormatting")) {
+        return;
+      }
+      this._registerPostfixerForListItemFormatting();
+    }
+    /**
+    * Registers a postfixer that ensures that the list item formatting attribute is consistent with the formatting
+    * applied to the content of the list item.
+    */
+    _registerPostfixerForListItemFormatting() {
+      const model = this.editor.model;
+      model.document.registerPostFixer((writer) => {
+        const changes = model.document.differ.getChanges();
+        const modifiedListItems = /* @__PURE__ */ new Set();
+        let returnValue = false;
+        for (const entry of changes) {
+          if (entry.type === "attribute") {
+            if (entry.attributeKey == "listItemId" || entry.attributeKey == "listType" || this._isInlineOrSelectionFormatting(entry.attributeKey) || Object.values(this._loadedFormatting).includes(entry.attributeKey)) {
+              if (isListItemBlock(entry.range.start.nodeAfter)) {
+                modifiedListItems.add(entry.range.start.nodeAfter);
+              } else if (isListItemBlock(entry.range.start.parent)) {
+                modifiedListItems.add(entry.range.start.parent);
+              }
+            }
+          } else {
+            if (isListItemBlock(entry.position.nodeAfter)) {
+              modifiedListItems.add(entry.position.nodeAfter);
+            }
+            if (isListItemBlock(entry.position.nodeBefore)) {
+              modifiedListItems.add(entry.position.nodeBefore);
+            }
+            if (isListItemBlock(entry.position.parent)) {
+              modifiedListItems.add(entry.position.parent);
+            }
+            if (entry.type == "insert" && entry.name != "$text") {
+              const range = writer.createRangeIn(entry.position.nodeAfter);
+              for (const item of range.getItems()) {
+                if (isListItemBlock(item)) {
+                  modifiedListItems.add(item);
+                }
+              }
+            }
+          }
+        }
+        for (const listItem of modifiedListItems) {
+          const formats = getListItemConsistentFormat(model, listItem, Object.keys(this._loadedFormatting));
+          for (const [formatAttributeName, formatValue] of Object.entries(formats)) {
+            const listItemFormatAttributeName = this._loadedFormatting[formatAttributeName];
+            if (formatValue && setFormattingToListItem(writer, listItem, listItemFormatAttributeName, formatValue)) {
+              returnValue = true;
+            } else if (!formatValue && removeFormattingFromListItem(writer, listItem, listItemFormatAttributeName)) {
+              returnValue = true;
+            }
+          }
+        }
+        return returnValue;
+      });
+    }
+    /**
+    * Registers an integration between a default attribute (e.g., `fontFamily`) and a new attribute
+    * intended specifically for list item elements (e.g., `listItemFontFamily`).
+    *
+    * These attributes are later used by the postfixer logic to determine whether to add the new attribute
+    * to the list item element, based on whether there is a consistent default formatting attribute
+    * applied within its content.
+    */
+    registerFormatAttribute(formatAttribute, listItemFormatAttribute) {
+      this._loadedFormatting[formatAttribute] = listItemFormatAttribute;
+    }
+    /**
+    * Returns true if the given model attribute name is a supported inline formatting attribute.
+    */
+    _isInlineOrSelectionFormatting(attributeKey) {
+      return attributeKey.replace(/^selection:/, "") in this._loadedFormatting;
+    }
+  };
+  function getListItemConsistentFormat(model, listItem, attributeKeys) {
+    if (isFirstBlockOfListItem(listItem)) {
+      return getSingleListItemConsistentFormat(model, listItem, attributeKeys);
+    }
+    const listItemBlocks = getAllListItemBlocks(listItem);
+    return getSingleListItemConsistentFormat(model, listItemBlocks[0], attributeKeys);
+  }
+  function getSingleListItemConsistentFormat(model, listItem, attributeKeys) {
+    if (!isNumberedOrBulletedList(listItem) || model.schema.isLimit(listItem)) {
+      return Object.fromEntries(attributeKeys.map((attributeKey) => [
+        attributeKey
+      ]));
+    }
+    if (listItem.isEmpty) {
+      return Object.fromEntries(attributeKeys.map((attributeKey) => [
+        attributeKey,
+        listItem.getAttribute(`selection:${attributeKey}`)
+      ]));
+    }
+    const attributesToCheck = new Set(attributeKeys);
+    const valuesMap = {};
+    const range = model.createRangeIn(listItem);
+    const walker = range.getWalker({
+      ignoreElementEnd: true
+    });
+    for (const { item } of walker) {
+      for (const attributeKey of attributesToCheck) {
+        if (model.schema.checkAttribute(item, attributeKey)) {
+          const formatAttribute = item.getAttribute(attributeKey);
+          if (formatAttribute === void 0) {
+            attributesToCheck.delete(attributeKey);
+            valuesMap[attributeKey] = void 0;
+          } else if (valuesMap[attributeKey] === void 0) {
+            valuesMap[attributeKey] = formatAttribute;
+          } else if (valuesMap[attributeKey] !== formatAttribute) {
+            attributesToCheck.delete(attributeKey);
+            valuesMap[attributeKey] = void 0;
+          }
+        } else if (!(attributeKey in valuesMap)) {
+          valuesMap[attributeKey] = void 0;
+        }
+      }
+      if (!attributesToCheck.size) {
+        break;
+      }
+      if (model.schema.isLimit(item)) {
+        walker.jumpTo(model.createPositionAfter(item));
+      }
+    }
+    return valuesMap;
+  }
+  function setFormattingToListItem(writer, listItem, attributeKey, attributeValue) {
+    const listItemBlocks = getAllListItemBlocks(listItem);
+    let wasChanged = false;
+    for (const listItem2 of listItemBlocks) {
+      if (!listItem2.hasAttribute(attributeKey) || listItem2.getAttribute(attributeKey) !== attributeValue) {
+        writer.setAttribute(attributeKey, attributeValue, listItem2);
+        wasChanged = true;
+      }
+    }
+    return wasChanged;
+  }
+  function removeFormattingFromListItem(writer, listItem, attributeKey) {
+    const listItemBlocks = getAllListItemBlocks(listItem);
+    let wasChanged = false;
+    for (const listItem2 of listItemBlocks) {
+      if (listItem2.hasAttribute(attributeKey)) {
+        writer.removeAttribute(attributeKey, listItem2);
+        wasChanged = true;
+      }
+    }
+    return wasChanged;
+  }
+  function isNumberedOrBulletedList(listItem) {
+    return [
+      "numbered",
+      "bulleted",
+      "customNumbered",
+      "customBulleted"
+    ].includes(listItem.getAttribute("listType"));
+  }
+  var ListUtils = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListUtils";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * Expands the given list of selected blocks to include all the items of the lists they're in.
+    *
+    * @param blocks The list of selected blocks.
+    */
+    expandListBlocksToCompleteList(blocks) {
+      return expandListBlocksToCompleteList(blocks);
+    }
+    /**
+    * Check if the given block is the first in the list item.
+    *
+    * @param listBlock The list block element.
+    */
+    isFirstBlockOfListItem(listBlock) {
+      return isFirstBlockOfListItem(listBlock);
+    }
+    /**
+    * Returns true if the given model node is a list item block.
+    *
+    * @param node A model node.
+    */
+    isListItemBlock(node) {
+      return isListItemBlock(node);
+    }
+    /**
+    * Expands the given list of selected blocks to include the leading and tailing blocks of partially selected list items.
+    *
+    * @param blocks The list of selected blocks.
+    * @param options.withNested Whether should include nested list items.
+    */
+    expandListBlocksToCompleteItems(blocks, options = {}) {
+      return expandListBlocksToCompleteItems(blocks, options);
+    }
+    /**
+    * Returns true if listType is of type `numbered` or `customNumbered`.
+    */
+    isNumberedListType(listType) {
+      return isNumberedListType(listType);
+    }
+    /**
+    * Returns true if the given list item is the first item in the list.
+    */
+    isFirstListItemInList(listItem) {
+      return isFirstListItemInList(listItem);
+    }
+  };
+  function isListView(viewElement) {
+    return viewElement.is("element", "ol") || viewElement.is("element", "ul");
+  }
+  function isListItemView(viewElement) {
+    return viewElement.is("element", "li");
+  }
+  function getIndent$1(listItem) {
+    let indent2 = 0;
+    let parent = listItem.parent;
+    while (parent) {
+      if (isListItemView(parent)) {
+        indent2++;
+      } else {
+        const previousSibling = parent.previousSibling;
+        if (previousSibling && isListItemView(previousSibling)) {
+          indent2++;
+        }
+      }
+      parent = parent.parent;
+    }
+    return indent2;
+  }
+  function createListElement(writer, indent2, type, id = getViewElementIdForListType(type, indent2)) {
+    return writer.createAttributeElement(getViewElementNameForListType(type), null, {
+      priority: 2 * indent2 / 100 - 100,
+      id
+    });
+  }
+  function createListItemElement(writer, indent2, id) {
+    return writer.createAttributeElement("li", null, {
+      priority: (2 * indent2 + 1) / 100 - 100,
+      id
+    });
+  }
+  function getViewElementNameForListType(type) {
+    return type == "numbered" || type == "customNumbered" ? "ol" : "ul";
+  }
+  function getViewElementIdForListType(type, indent2) {
+    return `list-${type}-${indent2}`;
+  }
+  function findAndAddListHeadToMap(position, itemToListHead, visited) {
+    const previousNode = position.nodeBefore;
+    if (!isListItemBlock(previousNode)) {
+      const item = position.nodeAfter;
+      if (isListItemBlock(item)) {
+        itemToListHead.add(item);
+      }
+    } else {
+      let listHead = previousNode;
+      for (const { node } of new SiblingListBlocksIterator(listHead, "backward")) {
+        listHead = node;
+        if (visited.has(listHead)) {
+          return;
+        }
+        visited.add(listHead);
+        if (itemToListHead.has(previousNode)) {
+          return;
+        }
+      }
+      itemToListHead.add(listHead);
+    }
+  }
+  function fixListIndents(listNodes, writer) {
+    let maxIndent = 0;
+    let prevIndent = -1;
+    let fixBy = null;
+    let applied = false;
+    for (const { node } of listNodes) {
+      const itemIndent = node.getAttribute("listIndent");
+      if (itemIndent > maxIndent) {
+        let newIndent;
+        if (fixBy === null) {
+          fixBy = itemIndent - maxIndent;
+          newIndent = maxIndent;
+        } else {
+          if (fixBy > itemIndent) {
+            fixBy = itemIndent;
+          }
+          newIndent = itemIndent - fixBy;
+        }
+        if (newIndent > prevIndent + 1) {
+          newIndent = prevIndent + 1;
+        }
+        writer.setAttribute("listIndent", newIndent, node);
+        applied = true;
+        prevIndent = newIndent;
+      } else {
+        fixBy = null;
+        maxIndent = itemIndent + 1;
+        prevIndent = itemIndent;
+      }
+    }
+    return applied;
+  }
+  function fixListItemIds(listNodes, seenIds, writer) {
+    const visited = /* @__PURE__ */ new Set();
+    let applied = false;
+    for (const { node } of listNodes) {
+      if (visited.has(node)) {
+        continue;
+      }
+      let listType = node.getAttribute("listType");
+      let listItemId = node.getAttribute("listItemId");
+      if (seenIds.has(listItemId)) {
+        listItemId = ListItemUid.next();
+      }
+      seenIds.add(listItemId);
+      if (node.is("element", "listItem")) {
+        if (node.getAttribute("listItemId") != listItemId) {
+          writer.setAttribute("listItemId", listItemId, node);
+          applied = true;
+        }
+        continue;
+      }
+      for (const block of getListItemBlocks(node, {
+        direction: "forward"
+      })) {
+        visited.add(block);
+        if (block.getAttribute("listType") != listType) {
+          listItemId = ListItemUid.next();
+          listType = block.getAttribute("listType");
+        }
+        if (block.getAttribute("listItemId") != listItemId) {
+          writer.setAttribute("listItemId", listItemId, block);
+          applied = true;
+        }
+      }
+    }
+    return applied;
+  }
+  function listItemUpcastConverter() {
+    return (evt, data, conversionApi) => {
+      const { writer, schema } = conversionApi;
+      if (!data.modelRange) {
+        return;
+      }
+      const items = Array.from(data.modelRange.getItems({
+        shallow: true
+      })).filter((item) => schema.checkAttribute(item, "listItemId"));
+      if (!items.length) {
+        return;
+      }
+      const listItemId = data.viewItem.getAttribute("data-list-item-id") || ListItemUid.next();
+      conversionApi.consumable.consume(data.viewItem, {
+        attributes: "data-list-item-id"
+      });
+      const listIndent = getIndent$1(data.viewItem);
+      let listType = data.viewItem.parent && data.viewItem.parent.is("element", "ol") ? "numbered" : "bulleted";
+      const firstItemListType = items[0].getAttribute("listType");
+      if (firstItemListType) {
+        listType = firstItemListType;
+      }
+      const attributes = {
+        listItemId,
+        listIndent,
+        listType
+      };
+      for (const item of items) {
+        if (!item.hasAttribute("listItemId")) {
+          writer.setAttributes(attributes, item);
+        }
+      }
+      if (items.length > 1) {
+        if (items[1].getAttribute("listItemId") != attributes.listItemId) {
+          conversionApi.keepEmptyElement(items[0]);
+        }
+      }
+    };
+  }
+  function reconvertItemsOnDataChange(model, editing, attributeNames, listEditing) {
+    return () => {
+      const changes = model.document.differ.getChanges();
+      const itemsToRefresh = [];
+      const itemToListHead = /* @__PURE__ */ new Set();
+      const changedItems = /* @__PURE__ */ new Set();
+      const visited = /* @__PURE__ */ new Set();
+      for (const entry of changes) {
+        if (entry.type == "insert" && entry.name != "$text") {
+          findAndAddListHeadToMap(entry.position, itemToListHead, visited);
+          if (!entry.attributes.has("listItemId")) {
+            findAndAddListHeadToMap(entry.position.getShiftedBy(entry.length), itemToListHead, visited);
+          } else {
+            changedItems.add(entry.position.nodeAfter);
+          }
+        } else if (entry.type == "remove" && entry.attributes.has("listItemId")) {
+          findAndAddListHeadToMap(entry.position, itemToListHead, visited);
+        } else if (entry.type == "attribute") {
+          const item = entry.range.start.nodeAfter;
+          if (attributeNames.includes(entry.attributeKey)) {
+            findAndAddListHeadToMap(entry.range.start, itemToListHead, visited);
+            if (entry.attributeNewValue === null) {
+              findAndAddListHeadToMap(entry.range.start.getShiftedBy(1), itemToListHead, visited);
+              if (doesItemBlockRequiresRefresh(item)) {
+                itemsToRefresh.push(item);
+              }
+            } else {
+              changedItems.add(item);
+            }
+          } else if (isListItemBlock(item)) {
+            if (doesItemBlockRequiresRefresh(item)) {
+              itemsToRefresh.push(item);
+            }
+          }
+        }
+      }
+      for (const listHead of itemToListHead.values()) {
+        itemsToRefresh.push(...collectListItemsToRefresh(listHead, changedItems));
+      }
+      for (const item of new Set(itemsToRefresh)) {
+        editing.reconvertItem(item);
+      }
+    };
+    function collectListItemsToRefresh(listHead, changedItems) {
+      const itemsToRefresh = [];
+      const visited = /* @__PURE__ */ new Set();
+      const stack = [];
+      for (const { node, previous } of new SiblingListBlocksIterator(listHead)) {
+        if (visited.has(node)) {
+          continue;
+        }
+        const itemIndent = node.getAttribute("listIndent");
+        if (previous && itemIndent < previous.getAttribute("listIndent")) {
+          stack.length = itemIndent + 1;
+        }
+        stack[itemIndent] = {
+          modelAttributes: Object.fromEntries(Array.from(node.getAttributes()).filter(([key]) => attributeNames.includes(key))),
+          modelElement: node
+        };
+        const blocks = getListItemBlocks(node, {
+          direction: "forward"
+        });
+        for (const block of blocks) {
+          visited.add(block);
+          if (doesItemBlockRequiresRefresh(block, blocks)) {
+            itemsToRefresh.push(block);
+          } else if (doesItemWrappingRequiresRefresh(block, stack, changedItems)) {
+            itemsToRefresh.push(block);
+          }
+        }
+      }
+      return itemsToRefresh;
+    }
+    function doesItemBlockRequiresRefresh(item, blocks) {
+      const viewElement = editing.mapper.toViewElement(item);
+      if (!viewElement) {
+        return false;
+      }
+      if (isItemBlockInsideStructureSlot(viewElement)) {
+        return true;
+      }
+      const needsRefresh = listEditing.fire("checkElement", {
+        modelElement: item,
+        viewElement
+      });
+      if (needsRefresh) {
+        return true;
+      }
+      if (!item.is("element", "paragraph") && !item.is("element", "listItem")) {
+        return false;
+      }
+      const useBogus = shouldUseBogusParagraph(item, attributeNames, blocks);
+      if (useBogus && viewElement.is("element", "p")) {
+        return true;
+      } else if (!useBogus && viewElement.is("element", "span")) {
+        return true;
+      }
+      return false;
+    }
+    function isItemBlockInsideStructureSlot(viewElement) {
+      viewElement = viewElement.parent;
+      while (viewElement.is("attributeElement") && [
+        "ol",
+        "ul",
+        "li"
+      ].includes(viewElement.name)) {
+        viewElement = viewElement.parent;
+      }
+      if (viewElement.getCustomProperty("$structureSlotParent") && !editing.mapper.toModelElement(viewElement)) {
+        return true;
+      }
+      return false;
+    }
+    function doesItemWrappingRequiresRefresh(item, stack, changedItems) {
+      if (changedItems.has(item)) {
+        return false;
+      }
+      const viewElement = editing.mapper.toViewElement(item);
+      let indent2 = stack.length - 1;
+      for (let element = viewElement.parent; !element.is("editableElement"); element = element.parent) {
+        const isListItemElement = isListItemView(element);
+        const isListElement = isListView(element);
+        if (!isListElement && !isListItemElement) {
+          continue;
+        }
+        const eventName = `checkAttributes:${isListItemElement ? "item" : "list"}`;
+        const needsRefresh = listEditing.fire(eventName, {
+          viewElement: element,
+          modelAttributes: stack[indent2].modelAttributes,
+          modelReferenceElement: stack[indent2].modelElement
+        });
+        if (needsRefresh) {
+          break;
+        }
+        if (isListElement) {
+          indent2--;
+          if (indent2 < 0) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+  }
+  function listItemDowncastConverter(attributeNames, strategies, model, { dataPipeline } = {}) {
+    const consumer = createAttributesConsumer(attributeNames, strategies);
+    return (evt, data, conversionApi) => {
+      const { writer, mapper, consumable } = conversionApi;
+      const listItem = data.item;
+      if (!attributeNames.includes(data.attributeKey)) {
+        return;
+      }
+      if (!consumer(listItem, consumable)) {
+        return;
+      }
+      const options = {
+        ...conversionApi.options,
+        dataPipeline
+      };
+      const viewElement = findMappedViewElement(listItem, mapper, model, writer);
+      removeCustomMarkerElements(viewElement, writer, mapper);
+      unwrapListItemBlock(viewElement, writer);
+      const viewRange = insertCustomMarkerElements(listItem, viewElement, strategies, writer, options);
+      wrapListItemBlock(listItem, viewRange, strategies, writer, options);
+    };
+  }
+  function listItemDowncastRemoveConverter(schema) {
+    return (evt, data, conversionApi) => {
+      const { writer, mapper } = conversionApi;
+      const elementName = evt.name.split(":")[1];
+      if (!schema.checkAttribute(elementName, "listItemId")) {
+        return;
+      }
+      const viewStart = mapper.toViewPosition(data.position);
+      const modelEnd = data.position.getShiftedBy(data.length);
+      const viewEnd = mapper.toViewPosition(modelEnd, {
+        isPhantom: true
+      });
+      const viewRange = writer.createRange(viewStart, viewEnd).getTrimmed();
+      const viewElement = viewRange.end.nodeBefore;
+      if (!viewElement) {
+        return;
+      }
+      removeCustomMarkerElements(viewElement, writer, mapper);
+    };
+  }
+  function bogusParagraphCreator(attributeNames, { dataPipeline } = {}) {
+    return (modelElement, { writer }) => {
+      if (!shouldUseBogusParagraph(modelElement, attributeNames)) {
+        return null;
+      }
+      if (!dataPipeline) {
+        return writer.createContainerElement("span", {
+          class: "ck-list-bogus-paragraph"
+        });
+      }
+      const viewElement = writer.createContainerElement("p");
+      writer.setCustomProperty("dataPipeline:transparentRendering", true, viewElement);
+      return viewElement;
+    };
+  }
+  function findMappedViewElement(element, mapper, model, writer) {
+    const modelRange = model.createRangeOn(element);
+    const viewRange = mapper.toViewRange(modelRange).getTrimmed();
+    const viewWalker = viewRange.getWalker();
+    for (const { item } of viewWalker) {
+      if (item.is("element") && item.getCustomProperty("listItemMarker")) {
+        viewWalker.jumpTo(writer.createPositionAfter(item));
+      } else if (item.is("element") && !item.getCustomProperty("listItemWrapper")) {
+        return item;
+      }
+    }
+  }
+  function createModelToViewPositionMapper(strategies, view) {
+    return (evt, data) => {
+      if (data.modelPosition.offset > 0) {
+        return;
+      }
+      const positionParent = data.modelPosition.parent;
+      if (!isListItemBlock(positionParent)) {
+        return;
+      }
+      if (!strategies.some((strategy) => strategy.scope == "itemMarker" && strategy.canInjectMarkerIntoElement && strategy.canInjectMarkerIntoElement(positionParent))) {
+        return;
+      }
+      const viewElement = data.mapper.toViewElement(positionParent);
+      const viewRange = view.createRangeIn(viewElement);
+      const viewWalker = viewRange.getWalker();
+      let positionAfterLastMarker = viewRange.start;
+      for (const { item } of viewWalker) {
+        if (item.is("element") && data.mapper.toModelElement(item) || item.is("$textProxy")) {
+          break;
+        }
+        if (item.is("element") && item.getCustomProperty("listItemMarker")) {
+          positionAfterLastMarker = view.createPositionAfter(item);
+          viewWalker.skip(({ previousPosition }) => !previousPosition.isEqual(positionAfterLastMarker));
+        }
+      }
+      data.viewPosition = positionAfterLastMarker;
+    };
+  }
+  function removeCustomMarkerElements(viewElement, viewWriter, mapper) {
+    while (viewElement.parent.is("attributeElement") && viewElement.parent.getCustomProperty("listItemWrapper")) {
+      viewWriter.unwrap(viewWriter.createRangeOn(viewElement), viewElement.parent);
+    }
+    const markersToRemove = [];
+    collectMarkersToRemove(viewWriter.createPositionBefore(viewElement).getWalker({
+      direction: "backward"
+    }));
+    collectMarkersToRemove(viewWriter.createRangeIn(viewElement).getWalker());
+    for (const marker2 of markersToRemove) {
+      viewWriter.remove(marker2);
+    }
+    function collectMarkersToRemove(viewWalker) {
+      for (const { item } of viewWalker) {
+        if (item.is("element") && mapper.toModelElement(item)) {
+          break;
+        }
+        if (item.is("element") && item.getCustomProperty("listItemMarker")) {
+          markersToRemove.push(item);
+        }
+      }
+    }
+  }
+  function insertCustomMarkerElements(listItem, viewElement, strategies, writer, { dataPipeline }) {
+    let viewRange = writer.createRangeOn(viewElement);
+    if (!isFirstBlockOfListItem(listItem)) {
+      return viewRange;
+    }
+    for (const strategy of strategies) {
+      if (strategy.scope != "itemMarker") {
+        continue;
+      }
+      const markerElement = strategy.createElement(writer, listItem, {
+        dataPipeline
+      });
+      if (!markerElement) {
+        continue;
+      }
+      writer.setCustomProperty("listItemMarker", true, markerElement);
+      if (strategy.canInjectMarkerIntoElement && strategy.canInjectMarkerIntoElement(listItem)) {
+        writer.insert(writer.createPositionAt(viewElement, 0), markerElement);
+      } else {
+        writer.insert(viewRange.start, markerElement);
+        viewRange = writer.createRange(writer.createPositionBefore(markerElement), writer.createPositionAfter(viewElement));
+      }
+      if (!strategy.createWrapperElement || !strategy.canWrapElement) {
+        continue;
+      }
+      const wrapper = strategy.createWrapperElement(writer, listItem, {
+        dataPipeline
+      });
+      writer.setCustomProperty("listItemWrapper", true, wrapper);
+      if (strategy.canWrapElement(listItem)) {
+        viewRange = writer.wrap(viewRange, wrapper);
+      } else {
+        viewRange = writer.wrap(writer.createRangeOn(markerElement), wrapper);
+        viewRange = writer.createRange(viewRange.start, writer.createPositionAfter(viewElement));
+      }
+    }
+    return viewRange;
+  }
+  function unwrapListItemBlock(viewElement, viewWriter) {
+    let attributeElement = viewElement.parent;
+    while (attributeElement.is("attributeElement") && [
+      "ul",
+      "ol",
+      "li"
+    ].includes(attributeElement.name)) {
+      const parentElement = attributeElement.parent;
+      viewWriter.unwrap(viewWriter.createRangeOn(viewElement), attributeElement);
+      attributeElement = parentElement;
+    }
+  }
+  function wrapListItemBlock(listItem, viewRange, strategies, writer, options) {
+    if (!listItem.hasAttribute("listIndent")) {
+      return;
+    }
+    const listItemIndent = listItem.getAttribute("listIndent");
+    let currentListItem = listItem;
+    for (let indent2 = listItemIndent; indent2 >= 0; indent2--) {
+      const listItemViewElement = createListItemElement(writer, indent2, currentListItem.getAttribute("listItemId"));
+      const listViewElement = createListElement(writer, indent2, currentListItem.getAttribute("listType"));
+      for (const strategy of strategies) {
+        if ((strategy.scope == "list" || strategy.scope == "item") && currentListItem.hasAttribute(strategy.attributeName)) {
+          strategy.setAttributeOnDowncast(writer, currentListItem.getAttribute(strategy.attributeName), strategy.scope == "list" ? listViewElement : listItemViewElement, options, currentListItem);
+        }
+      }
+      viewRange = writer.wrap(viewRange, listItemViewElement);
+      viewRange = writer.wrap(viewRange, listViewElement);
+      if (indent2 == 0) {
+        break;
+      }
+      currentListItem = ListWalker.first(currentListItem, {
+        lowerIndent: true
+      });
+      if (!currentListItem) {
+        break;
+      }
+    }
+  }
+  function createAttributesConsumer(attributeNames, strategies) {
+    const nonConsumingAttributes = strategies.filter((strategy) => strategy.consume === false).map((strategy) => strategy.attributeName);
+    return (node, consumable) => {
+      const events = [];
+      for (const attributeName of attributeNames) {
+        if (node.hasAttribute(attributeName) && !nonConsumingAttributes.includes(attributeName)) {
+          events.push(`attribute:${attributeName}`);
+        }
+      }
+      if (!events.every((event) => consumable.test(node, event) !== false)) {
+        return false;
+      }
+      events.forEach((event) => consumable.consume(node, event));
+      return true;
+    };
+  }
+  function shouldUseBogusParagraph(item, attributeNames, blocks = getAllListItemBlocks(item)) {
+    if (!isListItemBlock(item)) {
+      return false;
+    }
+    for (const attributeKey of item.getAttributeKeys()) {
+      if (attributeKey.startsWith("selection:") || attributeKey == "htmlEmptyBlock") {
+        continue;
+      }
+      if (!attributeNames.includes(attributeKey)) {
+        return false;
+      }
+    }
+    return blocks.length < 2;
+  }
+  var LIST_BASE_ATTRIBUTES = [
+    "listType",
+    "listIndent",
+    "listItemId"
+  ];
+  var ListEditing = class extends Plugin {
+    /**
+    * The list of registered downcast strategies.
+    */
+    _downcastStrategies = [];
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListEditing";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        Enter,
+        Delete,
+        ListUtils,
+        ClipboardPipeline,
+        ListFormatting
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    constructor(editor) {
+      super(editor);
+      editor.config.define("list.multiBlock", true);
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const model = editor.model;
+      const multiBlock = editor.config.get("list.multiBlock");
+      if (editor.plugins.has("LegacyListEditing")) {
+        throw new CKEditorError("list-feature-conflict", this, {
+          conflictPlugin: "LegacyListEditing"
+        });
+      }
+      model.schema.register("$listItem", {
+        allowAttributes: LIST_BASE_ATTRIBUTES
+      });
+      if (multiBlock) {
+        model.schema.extend("$container", {
+          allowAttributesOf: "$listItem"
+        });
+        model.schema.extend("$block", {
+          allowAttributesOf: "$listItem"
+        });
+        model.schema.extend("$blockObject", {
+          allowAttributesOf: "$listItem"
+        });
+      } else {
+        model.schema.register("listItem", {
+          inheritAllFrom: "$block",
+          allowAttributesOf: "$listItem"
+        });
+      }
+      for (const attribute of LIST_BASE_ATTRIBUTES) {
+        model.schema.setAttributeProperties(attribute, {
+          copyOnReplace: true
+        });
+      }
+      editor.commands.add("numberedList", new ListCommand(editor, "numbered"));
+      editor.commands.add("bulletedList", new ListCommand(editor, "bulleted"));
+      editor.commands.add("customNumberedList", new ListCommand(editor, "customNumbered", {
+        multiLevel: true
+      }));
+      editor.commands.add("customBulletedList", new ListCommand(editor, "customBulleted", {
+        multiLevel: true
+      }));
+      editor.commands.add("indentList", new ListIndentCommand(editor, "forward"));
+      editor.commands.add("outdentList", new ListIndentCommand(editor, "backward"));
+      editor.commands.add("splitListItemBefore", new ListSplitCommand(editor, "before"));
+      editor.commands.add("splitListItemAfter", new ListSplitCommand(editor, "after"));
+      if (multiBlock) {
+        editor.commands.add("mergeListItemBackward", new ListMergeCommand(editor, "backward"));
+        editor.commands.add("mergeListItemForward", new ListMergeCommand(editor, "forward"));
+      }
+      this._setupDeleteIntegration();
+      this._setupEnterIntegration();
+      this._setupTabIntegration();
+      this._setupClipboardIntegration();
+      this._setupAccessibilityIntegration();
+      this._setupListItemIdConversionStrategy();
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const commands = editor.commands;
+      const indent2 = commands.get("indent");
+      const outdent2 = commands.get("outdent");
+      if (indent2) {
+        indent2.registerChildCommand(commands.get("indentList"), {
+          priority: "high"
+        });
+      }
+      if (outdent2) {
+        outdent2.registerChildCommand(commands.get("outdentList"), {
+          priority: "lowest"
+        });
+      }
+      this._setupModelPostFixing();
+      this._setupConversion();
+    }
+    /**
+    * Registers a downcast strategy.
+    *
+    * **Note**: Strategies must be registered in the `Plugin#init()` phase so that it can be applied
+    * in the `ListEditing#afterInit()`.
+    *
+    * @param strategy The downcast strategy to register.
+    */
+    registerDowncastStrategy(strategy) {
+      this._downcastStrategies.push(strategy);
+    }
+    /**
+    * Returns list of model attribute names that should affect downcast conversion.
+    */
+    getListAttributeNames() {
+      return [
+        ...LIST_BASE_ATTRIBUTES,
+        ...this._downcastStrategies.map((strategy) => strategy.attributeName)
+      ];
+    }
+    /**
+    * Attaches the listener to the {@link module:engine/view/document~ViewDocument#event:delete} event and handles backspace/delete
+    * keys in and around document lists.
+    */
+    _setupDeleteIntegration() {
+      const editor = this.editor;
+      const mergeBackwardCommand = editor.commands.get("mergeListItemBackward");
+      const mergeForwardCommand = editor.commands.get("mergeListItemForward");
+      this.listenTo(editor.editing.view.document, "delete", (evt, data) => {
+        const selection = editor.model.document.selection;
+        if (getSelectedBlockObject(editor.model)) {
+          return;
+        }
+        editor.model.change(() => {
+          const firstPosition = selection.getFirstPosition();
+          if (selection.isCollapsed && data.direction == "backward") {
+            if (!firstPosition.isAtStart) {
+              return;
+            }
+            const positionParent = firstPosition.parent;
+            if (!isListItemBlock(positionParent)) {
+              return;
+            }
+            const previousBlock = ListWalker.first(positionParent, {
+              sameAttributes: "listType",
+              sameIndent: true
+            });
+            if (!previousBlock && positionParent.getAttribute("listIndent") === 0) {
+              if (!isLastBlockOfListItem(positionParent)) {
+                editor.execute("splitListItemAfter");
+              }
+              editor.execute("outdentList");
+            } else {
+              if (!mergeBackwardCommand || !mergeBackwardCommand.isEnabled) {
+                return;
+              }
+              mergeBackwardCommand.execute({
+                shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel(editor.model, "backward")
+              });
+            }
+            data.preventDefault();
+            evt.stop();
+          } else {
+            if (selection.isCollapsed && !selection.getLastPosition().isAtEnd) {
+              return;
+            }
+            if (!mergeForwardCommand || !mergeForwardCommand.isEnabled) {
+              return;
+            }
+            mergeForwardCommand.execute({
+              shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel(editor.model, "forward")
+            });
+            data.preventDefault();
+            evt.stop();
+          }
+        });
+      }, {
+        context: "li"
+      });
+    }
+    /**
+    * Attaches a listener to the {@link module:engine/view/document~ViewDocument#event:enter} event and handles enter key press
+    * in document lists.
+    */
+    _setupEnterIntegration() {
+      const editor = this.editor;
+      const model = editor.model;
+      const commands = editor.commands;
+      const enterCommand = commands.get("enter");
+      this.listenTo(editor.editing.view.document, "enter", (evt, data) => {
+        const doc = model.document;
+        const positionParent = doc.selection.getFirstPosition().parent;
+        if (doc.selection.isCollapsed && isListItemBlock(positionParent) && positionParent.isEmpty && !data.isSoft) {
+          const isFirstBlock = isFirstBlockOfListItem(positionParent);
+          const isLastBlock = isLastBlockOfListItem(positionParent);
+          if (isFirstBlock && isLastBlock) {
+            editor.execute("outdentList");
+            data.preventDefault();
+            evt.stop();
+          } else if (isFirstBlock && !isLastBlock) {
+            editor.execute("splitListItemAfter");
+            data.preventDefault();
+            evt.stop();
+          } else if (isLastBlock) {
+            editor.execute("splitListItemBefore");
+            data.preventDefault();
+            evt.stop();
+          }
+        }
+      }, {
+        context: "li"
+      });
+      this.listenTo(enterCommand, "afterExecute", () => {
+        const splitCommand = commands.get("splitListItemBefore");
+        splitCommand.refresh();
+        if (!splitCommand.isEnabled) {
+          return;
+        }
+        const doc = editor.model.document;
+        const positionParent = doc.selection.getLastPosition().parent;
+        const listItemBlocks = getAllListItemBlocks(positionParent);
+        if (listItemBlocks.length === 2) {
+          splitCommand.execute();
+        }
+      });
+    }
+    /**
+    * Attaches a listener to the {@link module:engine/view/document~ViewDocument#event:tab} event and handles tab key and tab+shift keys
+    * presses in document lists.
+    */
+    _setupTabIntegration() {
+      const editor = this.editor;
+      this.listenTo(editor.editing.view.document, "tab", (evt, data) => {
+        const commandName = data.shiftKey ? "outdentList" : "indentList";
+        const command = this.editor.commands.get(commandName);
+        if (command.isEnabled) {
+          editor.execute(commandName);
+          data.stopPropagation();
+          data.preventDefault();
+          evt.stop();
+        }
+      }, {
+        context: "li"
+      });
+    }
+    /**
+    * Registers the conversion helpers for the document-list feature.
+    */
+    _setupConversion() {
+      const editor = this.editor;
+      const model = editor.model;
+      const attributeNames = this.getListAttributeNames();
+      const multiBlock = editor.config.get("list.multiBlock");
+      const elementName = multiBlock ? "paragraph" : "listItem";
+      editor.conversion.for("upcast").elementToElement({
+        view: "li",
+        model: (viewElement, { writer }) => writer.createElement(elementName, {
+          listType: ""
+        })
+      }).elementToElement({
+        view: "p",
+        model: (viewElement, { writer }) => {
+          if (viewElement.parent && viewElement.parent.is("element", "li")) {
+            return writer.createElement(elementName, {
+              listType: ""
+            });
+          }
+          return null;
+        },
+        converterPriority: "high"
+      }).add((dispatcher) => {
+        dispatcher.on("element:li", listItemUpcastConverter());
+      });
+      if (!multiBlock) {
+        editor.conversion.for("downcast").elementToElement({
+          model: "listItem",
+          view: "p"
+        });
+      }
+      editor.conversion.for("editingDowncast").elementToElement({
+        model: elementName,
+        view: bogusParagraphCreator(attributeNames),
+        converterPriority: "high"
+      }).add((dispatcher) => {
+        dispatcher.on("attribute", listItemDowncastConverter(attributeNames, this._downcastStrategies, model));
+        dispatcher.on("remove", listItemDowncastRemoveConverter(model.schema));
+      });
+      editor.conversion.for("dataDowncast").elementToElement({
+        model: elementName,
+        view: bogusParagraphCreator(attributeNames, {
+          dataPipeline: true
+        }),
+        converterPriority: "high"
+      }).add((dispatcher) => {
+        dispatcher.on("attribute", listItemDowncastConverter(attributeNames, this._downcastStrategies, model, {
+          dataPipeline: true
+        }));
+      });
+      const modelToViewPositionMapper = createModelToViewPositionMapper(this._downcastStrategies, editor.editing.view);
+      editor.editing.mapper.on("modelToViewPosition", modelToViewPositionMapper);
+      editor.data.mapper.on("modelToViewPosition", modelToViewPositionMapper);
+      this.listenTo(model.document, "change:data", reconvertItemsOnDataChange(model, editor.editing, attributeNames, this), {
+        priority: "high"
+      });
+      this.on("checkAttributes:item", (evt, { viewElement, modelAttributes }) => {
+        if (viewElement.id != modelAttributes.listItemId) {
+          evt.return = true;
+          evt.stop();
+        }
+      });
+      this.on("checkAttributes:list", (evt, { viewElement, modelAttributes }) => {
+        if (viewElement.name != getViewElementNameForListType(modelAttributes.listType) || viewElement.id != getViewElementIdForListType(modelAttributes.listType, modelAttributes.listIndent)) {
+          evt.return = true;
+          evt.stop();
+        }
+      });
+    }
+    /**
+    * Registers model post-fixers.
+    */
+    _setupModelPostFixing() {
+      const model = this.editor.model;
+      const attributeNames = this.getListAttributeNames();
+      model.document.registerPostFixer((writer) => modelChangePostFixer$1(model, writer, attributeNames, this));
+      this.on("postFixer", (evt, { listNodes, writer }) => {
+        evt.return = fixListIndents(listNodes, writer) || evt.return;
+      }, {
+        priority: "high"
+      });
+      this.on("postFixer", (evt, { listNodes, writer, seenIds }) => {
+        evt.return = fixListItemIds(listNodes, seenIds, writer) || evt.return;
+      }, {
+        priority: "high"
+      });
+    }
+    /**
+    * Integrates the feature with the clipboard via {@link module:engine/model/model~Model#insertContent} and
+    * {@link module:engine/model/model~Model#getSelectedContent}.
+    */
+    _setupClipboardIntegration() {
+      const model = this.editor.model;
+      const clipboardPipeline = this.editor.plugins.get("ClipboardPipeline");
+      this.listenTo(model, "insertContent", createModelIndentPasteFixer(model), {
+        priority: "high"
+      });
+      this.listenTo(clipboardPipeline, "outputTransformation", (evt, data) => {
+        model.change((writer) => {
+          const allContentChildren = Array.from(data.content.getChildren());
+          const lastItem = allContentChildren[allContentChildren.length - 1];
+          if (allContentChildren.length > 1 && lastItem.is("element") && lastItem.isEmpty) {
+            const contentChildrenExceptLastItem = allContentChildren.slice(0, -1);
+            if (contentChildrenExceptLastItem.every(isListItemBlock)) {
+              writer.remove(lastItem);
+            }
+          }
+          if (data.method == "copy" || data.method == "cut") {
+            const allChildren = Array.from(data.content.getChildren());
+            const isSingleListItemSelected = isSingleListItem(allChildren);
+            if (isSingleListItemSelected) {
+              removeListAttributes(allChildren, writer, this.getListAttributeNames());
+            }
+          }
+        });
+      });
+    }
+    /**
+    * Informs editor accessibility features about keystrokes brought by the plugin.
+    */
+    _setupAccessibilityIntegration() {
+      const editor = this.editor;
+      const t = editor.t;
+      editor.accessibility.addKeystrokeInfoGroup({
+        id: "list",
+        label: t("Keystrokes that can be used in a list"),
+        keystrokes: [
+          {
+            label: t("Increase list item indent"),
+            keystroke: "Tab"
+          },
+          {
+            label: t("Decrease list item indent"),
+            keystroke: "Shift+Tab"
+          }
+        ]
+      });
+    }
+    /**
+    * Convert `listItemId` attribute to `data-list-item-id` attribute on the view element in both downcast pipelines.
+    */
+    _setupListItemIdConversionStrategy() {
+      this.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "listItemId",
+        setAttributeOnDowncast(writer, attributeValue, viewElement, options) {
+          if (options && (options.skipListItemIds || options.isClipboardPipeline)) {
+            return;
+          }
+          writer.setAttribute("data-list-item-id", attributeValue, viewElement);
+        }
+      });
+    }
+  };
+  function modelChangePostFixer$1(model, writer, attributeNames, listEditing) {
+    const changes = model.document.differ.getChanges();
+    const visited = /* @__PURE__ */ new Set();
+    const itemToListHead = /* @__PURE__ */ new Set();
+    const multiBlock = listEditing.editor.config.get("list.multiBlock");
+    let applied = false;
+    for (const entry of changes) {
+      if (entry.type == "insert" && entry.name != "$text") {
+        const item = entry.position.nodeAfter;
+        if (!model.schema.checkAttribute(item, "listItemId")) {
+          for (const attributeName of Array.from(item.getAttributeKeys())) {
+            if (attributeNames.includes(attributeName)) {
+              writer.removeAttribute(attributeName, item);
+              applied = true;
+            }
+          }
+        }
+        findAndAddListHeadToMap(entry.position, itemToListHead, visited);
+        if (!entry.attributes.has("listItemId")) {
+          findAndAddListHeadToMap(entry.position.getShiftedBy(entry.length), itemToListHead, visited);
+        }
+        for (const { item: innerItem, previousPosition } of model.createRangeIn(item)) {
+          if (isListItemBlock(innerItem)) {
+            findAndAddListHeadToMap(previousPosition, itemToListHead, visited);
+          }
+        }
+      } else if (entry.type == "remove") {
+        findAndAddListHeadToMap(entry.position, itemToListHead, visited);
+      } else if (entry.type == "attribute" && attributeNames.includes(entry.attributeKey)) {
+        findAndAddListHeadToMap(entry.range.start, itemToListHead, visited);
+        if (entry.attributeNewValue === null) {
+          findAndAddListHeadToMap(entry.range.start.getShiftedBy(1), itemToListHead, visited);
+        }
+      }
+      if (!multiBlock && entry.type == "attribute" && LIST_BASE_ATTRIBUTES.includes(entry.attributeKey)) {
+        const element = entry.range.start.nodeAfter;
+        if (entry.attributeNewValue === null && element && element.is("element", "listItem")) {
+          writer.rename(element, "paragraph");
+          applied = true;
+        } else if (entry.attributeOldValue === null && element && element.is("element") && element.name != "listItem") {
+          writer.rename(element, "listItem");
+          applied = true;
+        }
+      }
+    }
+    const seenIds = /* @__PURE__ */ new Set();
+    for (const listHead of itemToListHead.values()) {
+      applied = listEditing.fire("postFixer", {
+        listNodes: new ListBlocksIterable(listHead),
+        listHead,
+        writer,
+        seenIds
+      }) || applied;
+    }
+    return applied;
+  }
+  function createModelIndentPasteFixer(model) {
+    return (evt, [content, selectable]) => {
+      const items = content.is("documentFragment") ? Array.from(content.getChildren()) : [
+        content
+      ];
+      if (!items.length) {
+        return;
+      }
+      const selection = selectable ? model.createSelection(selectable) : model.document.selection;
+      const position = selection.getFirstPosition();
+      let refItem;
+      if (isListItemBlock(position.parent)) {
+        refItem = position.parent;
+      } else if (isListItemBlock(position.nodeBefore) && isListItemBlock(position.nodeAfter)) {
+        refItem = position.nodeBefore;
+      } else {
+        return;
+      }
+      model.change((writer) => {
+        const refType = refItem.getAttribute("listType");
+        const refIndent = refItem.getAttribute("listIndent");
+        const firstElementIndent = items[0].getAttribute("listIndent") || 0;
+        const indentDiff = Math.max(refIndent - firstElementIndent, 0);
+        for (const item of items) {
+          const isListItem = isListItemBlock(item);
+          if (refItem.is("element", "listItem") && item.is("element", "paragraph")) {
+            writer.rename(item, "listItem");
+          }
+          writer.setAttributes({
+            listIndent: (isListItem ? item.getAttribute("listIndent") : 0) + indentDiff,
+            listItemId: isListItem ? item.getAttribute("listItemId") : ListItemUid.next(),
+            listType: refType
+          }, item);
+        }
+      });
+    };
+  }
+  function shouldMergeOnBlocksContentLevel(model, direction) {
+    const selection = model.document.selection;
+    if (!selection.isCollapsed) {
+      return !getSelectedBlockObject(model);
+    }
+    if (direction === "forward") {
+      return true;
+    }
+    const firstPosition = selection.getFirstPosition();
+    const positionParent = firstPosition.parent;
+    const previousSibling = positionParent.previousSibling;
+    if (model.schema.isObject(previousSibling)) {
+      return false;
+    }
+    if (previousSibling.isEmpty) {
+      return true;
+    }
+    return isSingleListItem([
+      positionParent,
+      previousSibling
+    ]);
+  }
+  function createUIComponents(editor, commandName, label, icon) {
+    editor.ui.componentFactory.add(commandName, () => {
+      const buttonView = _createButton(ButtonView, editor, commandName, label, icon);
+      buttonView.set({
+        tooltip: true,
+        isToggleable: true
+      });
+      return buttonView;
+    });
+    editor.ui.componentFactory.add(`menuBar:${commandName}`, () => {
+      const buttonView = _createButton(MenuBarMenuListItemButtonView, editor, commandName, label, icon);
+      buttonView.set({
+        role: "menuitemcheckbox",
+        isToggleable: true
+      });
+      return buttonView;
+    });
+  }
+  function _createButton(ButtonClass, editor, commandName, label, icon) {
+    const command = editor.commands.get(commandName);
+    const view = new ButtonClass(editor.locale);
+    view.set({
+      label,
+      icon
+    });
+    view.bind("isOn", "isEnabled").to(command, "value", "isEnabled");
+    view.on("execute", () => {
+      editor.execute(commandName);
+      editor.editing.view.focus();
+    });
+    return view;
+  }
+  var ListUI = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListUI";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const t = this.editor.t;
+      if (!this.editor.ui.componentFactory.has("numberedList")) {
+        createUIComponents(this.editor, "numberedList", t("Numbered List"), numberedList);
+      }
+      if (!this.editor.ui.componentFactory.has("bulletedList")) {
+        createUIComponents(this.editor, "bulletedList", t("Bulleted List"), bulletedList);
+      }
+    }
+  };
+  var List = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing,
+        ListUI
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "List";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+  };
+  var ListStartCommand = class extends Command {
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const value = this._getValue();
+      this.value = value;
+      this.isEnabled = value != null;
+    }
+    /**
+    * Executes the command.
+    *
+    * @fires execute
+    * @param options Execute options.
+    * @param options.startIndex The list start index.
+    */
+    execute({ startIndex = 1 } = {}) {
+      const model = this.editor.model;
+      const document2 = model.document;
+      let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => isListItemBlock(block) && isNumberedListType(block.getAttribute("listType")));
+      blocks = expandListBlocksToCompleteList(blocks);
+      model.change((writer) => {
+        for (const block of blocks) {
+          writer.setAttribute("listStart", startIndex >= 0 ? startIndex : 1, block);
+        }
+      });
+    }
+    /**
+    * Checks the command's {@link #value}.
+    *
+    * @returns The current value.
+    */
+    _getValue() {
+      const model = this.editor.model;
+      const document2 = model.document;
+      const block = first(document2.selection.getSelectedBlocks());
+      if (block && isListItemBlock(block) && isNumberedListType(block.getAttribute("listType"))) {
+        return block.getAttribute("listStart");
+      }
+      return null;
+    }
+  };
+  var LIST_STYLE_TO_LIST_TYPE = {};
+  var LIST_STYLE_TO_TYPE_ATTRIBUTE = {};
+  var TYPE_ATTRIBUTE_TO_LIST_STYLE = {};
+  var LIST_STYLE_TYPES = [
+    {
+      listStyle: "disc",
+      typeAttribute: "disc",
+      listType: "bulleted"
+    },
+    {
+      listStyle: "circle",
+      typeAttribute: "circle",
+      listType: "bulleted"
+    },
+    {
+      listStyle: "square",
+      typeAttribute: "square",
+      listType: "bulleted"
+    },
+    {
+      listStyle: "decimal",
+      typeAttribute: "1",
+      listType: "numbered"
+    },
+    {
+      listStyle: "decimal-leading-zero",
+      typeAttribute: null,
+      listType: "numbered"
+    },
+    {
+      listStyle: "lower-roman",
+      typeAttribute: "i",
+      listType: "numbered"
+    },
+    {
+      listStyle: "upper-roman",
+      typeAttribute: "I",
+      listType: "numbered"
+    },
+    {
+      listStyle: "lower-alpha",
+      typeAttribute: "a",
+      listType: "numbered"
+    },
+    {
+      listStyle: "upper-alpha",
+      typeAttribute: "A",
+      listType: "numbered"
+    },
+    {
+      listStyle: "lower-latin",
+      typeAttribute: "a",
+      listType: "numbered"
+    },
+    {
+      listStyle: "upper-latin",
+      typeAttribute: "A",
+      listType: "numbered"
+    },
+    {
+      listStyle: "arabic-indic",
+      typeAttribute: null,
+      listType: "numbered"
+    }
+  ];
+  for (const { listStyle, typeAttribute, listType } of LIST_STYLE_TYPES) {
+    LIST_STYLE_TO_LIST_TYPE[listStyle] = listType;
+    LIST_STYLE_TO_TYPE_ATTRIBUTE[listStyle] = typeAttribute;
+    if (typeAttribute) {
+      TYPE_ATTRIBUTE_TO_LIST_STYLE[typeAttribute] = listStyle;
+    }
+  }
+  function getAllSupportedStyleTypes() {
+    return LIST_STYLE_TYPES.map((x) => x.listStyle);
+  }
+  function getListTypeFromListStyleType$1(listStyleType) {
+    return LIST_STYLE_TO_LIST_TYPE[listStyleType] || null;
+  }
+  function getListStyleTypeFromTypeAttribute(value) {
+    return TYPE_ATTRIBUTE_TO_LIST_STYLE[value] || null;
+  }
+  function getTypeAttributeFromListStyleType(value) {
+    return LIST_STYLE_TO_TYPE_ATTRIBUTE[value] || null;
+  }
+  function normalizeListStyle(listStyle) {
+    switch (listStyle) {
+      case "lower-alpha":
+        return "lower-latin";
+      case "upper-alpha":
+        return "upper-latin";
+      default:
+        return listStyle;
+    }
+  }
+  var ListStyleCommand = class extends Command {
+    /**
+    * The default type of the list style.
+    */
+    defaultType;
+    /**
+    * The list of supported style types by this command.
+    */
+    _supportedTypes;
+    /**
+    * Creates an instance of the command.
+    *
+    * @param editor The editor instance.
+    * @param defaultType The list type that will be used by default if the value was not specified during
+    * the command execution.
+    * @param supportedTypes The list of supported style types by this command.
+    */
+    constructor(editor, defaultType, supportedTypes) {
+      super(editor);
+      this.defaultType = defaultType;
+      this._supportedTypes = supportedTypes;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.value = this._getValue();
+      this.isEnabled = this._checkEnabled();
+    }
+    /**
+    * Executes the command.
+    *
+    * @fires execute
+    * @param options.type The type of the list style, e.g. `'disc'` or `'square'`. If `null` is specified, the default
+    * style will be applied.
+    */
+    execute(options = {}) {
+      const model = this.editor.model;
+      const document2 = model.document;
+      model.change((writer) => {
+        this._tryToConvertItemsToList(options);
+        let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => block.hasAttribute("listType"));
+        if (!blocks.length) {
+          return;
+        }
+        blocks = expandListBlocksToCompleteList(blocks);
+        for (const block of blocks) {
+          writer.setAttribute("listStyle", options.type || this.defaultType, block);
+        }
+      });
+    }
+    /**
+    * Checks if the given style type is supported by this plugin.
+    */
+    isStyleTypeSupported(value) {
+      if (!this._supportedTypes) {
+        return true;
+      }
+      return this._supportedTypes.includes(value);
+    }
+    /**
+    * Checks the command's {@link #value}.
+    *
+    * @returns The current value.
+    */
+    _getValue() {
+      const listItem = first(this.editor.model.document.selection.getSelectedBlocks());
+      if (isListItemBlock(listItem)) {
+        return listItem.getAttribute("listStyle");
+      }
+      return null;
+    }
+    /**
+    * Checks whether the command can be enabled in the current context.
+    *
+    * @returns Whether the command should be enabled.
+    */
+    _checkEnabled() {
+      const editor = this.editor;
+      const numberedList2 = editor.commands.get("numberedList");
+      const bulletedList2 = editor.commands.get("bulletedList");
+      return numberedList2.isEnabled || bulletedList2.isEnabled;
+    }
+    /**
+     * Check if the provided list style is valid. Also change the selection to a list if it's not set yet.
+     *
+     * @param options.type The type of the list style. If `null` is specified, the function does nothing.
+    */
+    _tryToConvertItemsToList(options) {
+      if (!options.type) {
+        return;
+      }
+      const listType = getListTypeFromListStyleType$1(options.type);
+      if (!listType) {
+        return;
+      }
+      const editor = this.editor;
+      const commandName = `${listType}List`;
+      const command = editor.commands.get(commandName);
+      if (!command.value) {
+        editor.execute(commandName);
+      }
+    }
+  };
+  var ListReversedCommand = class extends Command {
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const value = this._getValue();
+      this.value = value;
+      this.isEnabled = value != null;
+    }
+    /**
+    * Executes the command.
+    *
+    * @fires execute
+    * @param options.reversed Whether the list should be reversed.
+    */
+    execute(options = {}) {
+      const model = this.editor.model;
+      const document2 = model.document;
+      let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => isListItemBlock(block) && block.getAttribute("listType") == "numbered");
+      blocks = expandListBlocksToCompleteList(blocks);
+      model.change((writer) => {
+        for (const block of blocks) {
+          writer.setAttribute("listReversed", !!options.reversed, block);
+        }
+      });
+    }
+    /**
+    * Checks the command's {@link #value}.
+    */
+    _getValue() {
+      const model = this.editor.model;
+      const document2 = model.document;
+      const block = first(document2.selection.getSelectedBlocks());
+      if (isListItemBlock(block) && block.getAttribute("listType") == "numbered") {
+        return block.getAttribute("listReversed");
+      }
+      return null;
+    }
+  };
+  function listPropertiesUpcastConverter(strategy) {
+    return (evt, data, conversionApi) => {
+      const { writer, schema, consumable } = conversionApi;
+      if (consumable.test(data.viewItem, strategy.viewConsumables) === false) {
+        return;
+      }
+      if (!data.modelRange) {
+        Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+      }
+      let applied = false;
+      for (const item of data.modelRange.getItems({
+        shallow: true
+      })) {
+        if (!schema.checkAttribute(item, strategy.attributeName)) {
+          continue;
+        }
+        if (!strategy.appliesToListItem(item)) {
+          continue;
+        }
+        if (item.hasAttribute(strategy.attributeName)) {
+          continue;
+        }
+        writer.setAttribute(strategy.attributeName, strategy.getAttributeOnUpcast(data.viewItem), item);
+        applied = true;
+      }
+      if (applied) {
+        consumable.consume(data.viewItem, strategy.viewConsumables);
+      }
+    };
+  }
+  var ListPropertiesUtils = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListPropertiesUtils";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * Gets all the style types supported by given list type.
+    */
+    getAllSupportedStyleTypes() {
+      return getAllSupportedStyleTypes();
+    }
+    /**
+    * Checks whether the given list-style-type is supported by numbered or bulleted list.
+    */
+    getListTypeFromListStyleType(listStyleType) {
+      return getListTypeFromListStyleType$1(listStyleType);
+    }
+    /**
+    * Converts `type` attribute of `<ul>` or `<ol>` elements to `list-style-type` equivalent.
+    */
+    getListStyleTypeFromTypeAttribute(value) {
+      return getListStyleTypeFromTypeAttribute(value);
+    }
+    /**
+    * Converts `list-style-type` style to `type` attribute of `<ul>` or `<ol>` elements.
+    */
+    getTypeAttributeFromListStyleType(value) {
+      return getTypeAttributeFromListStyleType(value);
+    }
+  };
+  function getNormalizedConfig(config) {
+    const { startIndex, reversed, styles } = config;
+    return {
+      styles: getNormalizedStylesConfig(styles),
+      startIndex: startIndex || false,
+      reversed: reversed || false
+    };
+  }
+  function getNormalizedStylesConfig(styles) {
+    const normalizedConfig = {
+      listTypes: [
+        "bulleted",
+        "numbered"
+      ],
+      useAttribute: false,
+      listStyleTypes: {
+        numbered: [
+          "decimal",
+          "decimal-leading-zero",
+          "lower-roman",
+          "upper-roman",
+          "lower-latin",
+          "upper-latin"
+        ],
+        bulleted: [
+          "disc",
+          "circle",
+          "square"
+        ]
+      }
+    };
+    if (styles === true) {
+      return normalizedConfig;
+    }
+    if (!styles) {
+      normalizedConfig.listTypes = [];
+      normalizedConfig.listStyleTypes = {};
+    } else if (Array.isArray(styles) || typeof styles == "string") {
+      normalizedConfig.listTypes = toArray(styles);
+      normalizedConfig.listStyleTypes = pick(normalizedConfig.listStyleTypes, normalizedConfig.listTypes);
+    } else {
+      normalizedConfig.listTypes = styles.listTypes ? toArray(styles.listTypes) : normalizedConfig.listTypes;
+      normalizedConfig.useAttribute = !!styles.useAttribute;
+      if (styles.listStyleTypes) {
+        normalizedConfig.listStyleTypes = styles.listStyleTypes;
+      } else {
+        normalizedConfig.listStyleTypes = pick(normalizedConfig.listStyleTypes, normalizedConfig.listTypes);
+      }
+    }
+    return normalizedConfig;
+  }
+  var DEFAULT_LIST_TYPE$1 = "default";
+  var ListPropertiesEditing = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing,
+        ListPropertiesUtils
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListPropertiesEditing";
+    }
+    /**
+    * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "LP";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    constructor(editor) {
+      super(editor);
+      editor.config.define("list.properties", {
+        styles: true,
+        startIndex: false,
+        reversed: false
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const model = editor.model;
+      const listEditing = editor.plugins.get(ListEditing);
+      const enabledProperties = editor.config.get("list.properties");
+      const strategies = createAttributeStrategies$1(enabledProperties);
+      for (const strategy of strategies) {
+        strategy.addCommand(editor);
+        model.schema.extend("$listItem", {
+          allowAttributes: strategy.attributeName
+        });
+        listEditing.registerDowncastStrategy({
+          scope: "list",
+          attributeName: strategy.attributeName,
+          setAttributeOnDowncast(writer, attributeValue, viewElement) {
+            strategy.setAttributeOnDowncast(writer, attributeValue, viewElement);
+          }
+        });
+      }
+      editor.conversion.for("upcast").add((dispatcher) => {
+        for (const strategy of strategies) {
+          dispatcher.on("element:ol", listPropertiesUpcastConverter(strategy));
+          dispatcher.on("element:ul", listPropertiesUpcastConverter(strategy));
+        }
+      });
+      listEditing.on("checkAttributes:list", (evt, { viewElement, modelAttributes, modelReferenceElement }) => {
+        for (const strategy of strategies) {
+          if (!strategy.appliesToListItem(modelReferenceElement)) {
+            continue;
+          }
+          if (strategy.getAttributeOnUpcast(viewElement) != modelAttributes[strategy.attributeName]) {
+            evt.return = true;
+            evt.stop();
+          }
+        }
+      });
+      this.listenTo(editor.commands.get("indentList"), "afterExecute", (evt, changedBlocks) => {
+        model.change((writer) => {
+          for (const node of changedBlocks) {
+            for (const strategy of strategies) {
+              if (strategy.appliesToListItem(node)) {
+                writer.setAttribute(strategy.attributeName, strategy.defaultValue, node);
+              }
+            }
+          }
+        });
+      });
+      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
+        for (const { node } of listNodes) {
+          for (const strategy of strategies) {
+            if (strategy.hasValidAttribute(node)) {
+              continue;
+            }
+            if (strategy.appliesToListItem(node)) {
+              writer.setAttribute(strategy.attributeName, strategy.defaultValue, node);
+            } else {
+              writer.removeAttribute(strategy.attributeName, node);
+            }
+            evt.return = true;
+          }
+        }
+      });
+      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
+        for (const { node, previousNodeInList } of listNodes) {
+          if (!previousNodeInList) {
+            continue;
+          }
+          if (previousNodeInList.getAttribute("listType") != node.getAttribute("listType")) {
+            continue;
+          }
+          for (const strategy of strategies) {
+            const { attributeName } = strategy;
+            if (!strategy.appliesToListItem(node)) {
+              continue;
+            }
+            const value = previousNodeInList.getAttribute(attributeName);
+            if (node.getAttribute(attributeName) != value) {
+              writer.setAttribute(attributeName, value, node);
+              evt.return = true;
+            }
+          }
+        }
+      });
+    }
+  };
+  function createAttributeStrategies$1(enabledProperties) {
+    const strategies = [];
+    const normalizedConfig = getNormalizedConfig(enabledProperties);
+    if (enabledProperties.styles) {
+      const useAttribute = normalizedConfig.styles.useAttribute;
+      strategies.push({
+        attributeName: "listStyle",
+        defaultValue: DEFAULT_LIST_TYPE$1,
+        viewConsumables: {
+          styles: "list-style-type"
+        },
+        addCommand(editor) {
+          let supportedTypes = getAllSupportedStyleTypes();
+          if (useAttribute) {
+            supportedTypes = supportedTypes.filter((styleType) => !!getTypeAttributeFromListStyleType(styleType));
+          }
+          editor.commands.add("listStyle", new ListStyleCommand(editor, DEFAULT_LIST_TYPE$1, supportedTypes));
+        },
+        appliesToListItem(item) {
+          return item.getAttribute("listType") == "numbered" || item.getAttribute("listType") == "bulleted";
+        },
+        hasValidAttribute(item) {
+          if (!this.appliesToListItem(item)) {
+            return !item.hasAttribute("listStyle");
+          }
+          if (!item.hasAttribute("listStyle")) {
+            return false;
+          }
+          const value = item.getAttribute("listStyle");
+          if (value == DEFAULT_LIST_TYPE$1) {
+            return true;
+          }
+          return getListTypeFromListStyleType$1(value) == item.getAttribute("listType");
+        },
+        setAttributeOnDowncast(writer, listStyle, element) {
+          if (listStyle && listStyle !== DEFAULT_LIST_TYPE$1) {
+            if (useAttribute) {
+              const value = getTypeAttributeFromListStyleType(listStyle);
+              if (value) {
+                writer.setAttribute("type", value, element);
+                return;
+              }
+            } else {
+              writer.setStyle("list-style-type", listStyle, element);
+              return;
+            }
+          }
+          writer.removeStyle("list-style-type", element);
+          writer.removeAttribute("type", element);
+        },
+        getAttributeOnUpcast(listParent) {
+          const style = listParent.getStyle("list-style-type");
+          if (style) {
+            return normalizeListStyle(style);
+          }
+          const attribute = listParent.getAttribute("type");
+          if (attribute) {
+            return getListStyleTypeFromTypeAttribute(attribute);
+          }
+          return DEFAULT_LIST_TYPE$1;
+        }
+      });
+    }
+    if (enabledProperties.reversed) {
+      strategies.push({
+        attributeName: "listReversed",
+        defaultValue: false,
+        viewConsumables: {
+          attributes: "reversed"
+        },
+        addCommand(editor) {
+          editor.commands.add("listReversed", new ListReversedCommand(editor));
+        },
+        appliesToListItem(item) {
+          return item.getAttribute("listType") == "numbered";
+        },
+        hasValidAttribute(item) {
+          return this.appliesToListItem(item) == item.hasAttribute("listReversed");
+        },
+        setAttributeOnDowncast(writer, listReversed, element) {
+          if (listReversed) {
+            writer.setAttribute("reversed", "reversed", element);
+          } else {
+            writer.removeAttribute("reversed", element);
+          }
+        },
+        getAttributeOnUpcast(listParent) {
+          return listParent.hasAttribute("reversed");
+        }
+      });
+    }
+    if (enabledProperties.startIndex) {
+      strategies.push({
+        attributeName: "listStart",
+        defaultValue: 1,
+        viewConsumables: {
+          attributes: "start"
+        },
+        addCommand(editor) {
+          editor.commands.add("listStart", new ListStartCommand(editor));
+        },
+        appliesToListItem(item) {
+          return isNumberedListType(item.getAttribute("listType"));
+        },
+        hasValidAttribute(item) {
+          return this.appliesToListItem(item) == item.hasAttribute("listStart");
+        },
+        setAttributeOnDowncast(writer, listStart, element) {
+          if (listStart == 0 || listStart > 1) {
+            writer.setAttribute("start", listStart, element);
+          } else {
+            writer.removeAttribute("start", element);
+          }
+        },
+        getAttributeOnUpcast(listParent) {
+          const startAttributeValue = listParent.getAttribute("start");
+          return startAttributeValue >= 0 ? startAttributeValue : 1;
+        }
+      });
+    }
+    return strategies;
+  }
+  var ListPropertiesView = class extends View {
+    /**
+    * A collection of the child views.
+    */
+    children;
+    /**
+    * A view that renders the grid of list styles.
+    */
+    stylesView = null;
+    /**
+    * A collapsible view that hosts additional list property fields ({@link #startIndexFieldView} and
+    * {@link #reversedSwitchButtonView}) to visually separate them from the {@link #stylesView grid of styles}.
+    *
+    * **Note**: Only present when:
+    * * the view represents **numbered** list properties,
+    * * and the {@link #stylesView} is rendered,
+    * * and either {@link #startIndexFieldView} or {@link #reversedSwitchButtonView} is rendered.
+    *
+    * @readonly
+    */
+    additionalPropertiesCollapsibleView = null;
+    /**
+    * A labeled number field allowing the user to set the start index of the list.
+    *
+    * **Note**: Only present when the view represents **numbered** list properties.
+    *
+    * @readonly
+    */
+    startIndexFieldView = null;
+    /**
+    * A switch button allowing the user to make the edited list reversed.
+    *
+    * **Note**: Only present when the view represents **numbered** list properties.
+    *
+    * @readonly
+    */
+    reversedSwitchButtonView = null;
+    /**
+    * Tracks information about the DOM focus in the view.
+    */
+    focusTracker = new FocusTracker();
+    /**
+    * An instance of the {@link module:utils/keystrokehandler~KeystrokeHandler}.
+    */
+    keystrokes = new KeystrokeHandler();
+    /**
+    * A collection of views that can be focused in the properties view.
+    */
+    focusables = new ViewCollection();
+    /**
+    * Helps cycling over {@link #focusables} in the view.
+    */
+    focusCycler;
+    /**
+    * Creates an instance of the list properties view.
+    *
+    * @param locale The {@link module:core/editor/editor~Editor#locale} instance.
+    * @param options Options of the view.
+    * @param options.enabledProperties An object containing the configuration of enabled list property names.
+    * Allows conditional rendering the sub-components of the properties view.
+    * @param options.styleButtonViews A list of style buttons to be rendered
+    * inside the styles grid. The grid will not be rendered when `enabledProperties` does not include the `'styles'` key.
+    * @param options.styleGridAriaLabel An assistive technologies label set on the grid of styles (if the grid is rendered).
+    */
+    constructor(locale, { enabledProperties, styleButtonViews, styleGridAriaLabel }) {
+      super(locale);
+      const elementCssClasses = [
+        "ck",
+        "ck-list-properties"
+      ];
+      this.children = this.createCollection();
+      this.focusCycler = new FocusCycler({
+        focusables: this.focusables,
+        focusTracker: this.focusTracker,
+        keystrokeHandler: this.keystrokes,
+        actions: {
+          // Navigate #children backwards using the <kbd>Shift</kbd> + <kbd>Tab</kbd> keystroke.
+          focusPrevious: "shift + tab",
+          // Navigate #children forwards using the <kbd>Tab</kbd> key.
+          focusNext: "tab"
+        }
+      });
+      if (styleButtonViews && styleButtonViews.length) {
+        this.stylesView = this._createStylesView(styleButtonViews, styleGridAriaLabel);
+        this.children.add(this.stylesView);
+      } else {
+        elementCssClasses.push("ck-list-properties_without-styles");
+      }
+      if (enabledProperties.startIndex || enabledProperties.reversed) {
+        this._addNumberedListPropertyViews(enabledProperties);
+        elementCssClasses.push("ck-list-properties_with-numbered-properties");
+      }
+      this.setTemplate({
+        tag: "div",
+        attributes: {
+          class: elementCssClasses
+        },
+        children: this.children
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    render() {
+      super.render();
+      if (this.stylesView) {
+        this.focusables.add(this.stylesView);
+        this.focusTracker.add(this.stylesView.element);
+        if (this.startIndexFieldView || this.reversedSwitchButtonView) {
+          this.focusables.add(this.children.last.buttonView);
+          this.focusTracker.add(this.children.last.buttonView.element);
+        }
+        for (const item of this.stylesView.children) {
+          this.stylesView.focusTracker.add(item.element);
+        }
+        addKeyboardHandlingForGrid({
+          keystrokeHandler: this.stylesView.keystrokes,
+          focusTracker: this.stylesView.focusTracker,
+          gridItems: this.stylesView.children,
+          // Note: The styles view has a different number of columns depending on whether the other properties
+          // are enabled in the dropdown or not (https://github.com/ckeditor/ckeditor5/issues/12340)
+          numberOfColumns: () => globalVar.window.getComputedStyle(this.stylesView.element).getPropertyValue("grid-template-columns").split(" ").length,
+          uiLanguageDirection: this.locale && this.locale.uiLanguageDirection
+        });
+      }
+      if (this.startIndexFieldView) {
+        this.focusables.add(this.startIndexFieldView);
+        this.focusTracker.add(this.startIndexFieldView.element);
+        const stopPropagation = (data) => data.stopPropagation();
+        this.keystrokes.set("arrowright", stopPropagation);
+        this.keystrokes.set("arrowleft", stopPropagation);
+        this.keystrokes.set("arrowup", stopPropagation);
+        this.keystrokes.set("arrowdown", stopPropagation);
+      }
+      if (this.reversedSwitchButtonView) {
+        this.focusables.add(this.reversedSwitchButtonView);
+        this.focusTracker.add(this.reversedSwitchButtonView.element);
+      }
+      this.keystrokes.listenTo(this.element);
+    }
+    /**
+    * @inheritDoc
+    */
+    focus() {
+      this.focusCycler.focusFirst();
+    }
+    /**
+    * @inheritDoc
+    */
+    focusLast() {
+      this.focusCycler.focusLast();
+    }
+    /**
+    * @inheritDoc
+    */
+    destroy() {
+      super.destroy();
+      this.focusTracker.destroy();
+      this.keystrokes.destroy();
+    }
+    /**
+    * Creates the list styles grid.
+    *
+    * @param styleButtons Buttons to be placed in the grid.
+    * @param styleGridAriaLabel The assistive technology label of the grid.
+    */
+    _createStylesView(styleButtons, styleGridAriaLabel) {
+      const stylesView = new View(this.locale);
+      stylesView.children = stylesView.createCollection();
+      stylesView.children.addMany(styleButtons);
+      stylesView.setTemplate({
+        tag: "div",
+        attributes: {
+          "aria-label": styleGridAriaLabel,
+          class: [
+            "ck",
+            "ck-list-styles-list"
+          ]
+        },
+        children: stylesView.children
+      });
+      stylesView.children.delegate("execute").to(this);
+      stylesView.focus = function() {
+        for (const child of this.children) {
+          if (child instanceof ButtonView && child.isOn) {
+            child.focus();
+            return;
+          }
+        }
+        this.children.first.focus();
+      };
+      stylesView.focusTracker = new FocusTracker();
+      stylesView.keystrokes = new KeystrokeHandler();
+      stylesView.render();
+      stylesView.keystrokes.listenTo(stylesView.element);
+      return stylesView;
+    }
+    /**
+    * Renders {@link #startIndexFieldView} and/or {@link #reversedSwitchButtonView} depending on the configuration of the properties view.
+    *
+    * @param enabledProperties An object containing the configuration of enabled list property names
+    * (see {@link #constructor}).
+    */
+    _addNumberedListPropertyViews(enabledProperties) {
+      const t = this.locale.t;
+      const numberedPropertyViews = [];
+      if (enabledProperties.startIndex) {
+        this.startIndexFieldView = this._createStartIndexField();
+        numberedPropertyViews.push(this.startIndexFieldView);
+      }
+      if (enabledProperties.reversed) {
+        this.reversedSwitchButtonView = this._createReversedSwitchButton();
+        numberedPropertyViews.push(this.reversedSwitchButtonView);
+      }
+      if (this.stylesView) {
+        this.additionalPropertiesCollapsibleView = new CollapsibleView(this.locale, numberedPropertyViews);
+        this.additionalPropertiesCollapsibleView.set({
+          label: t("List properties"),
+          isCollapsed: true
+        });
+        this.additionalPropertiesCollapsibleView.buttonView.bind("isEnabled").toMany(numberedPropertyViews, "isEnabled", (...areEnabled) => areEnabled.some((isEnabled2) => isEnabled2));
+        this.additionalPropertiesCollapsibleView.buttonView.on("change:isEnabled", (evt, data, isEnabled2) => {
+          if (!isEnabled2) {
+            this.additionalPropertiesCollapsibleView.isCollapsed = true;
+          }
+        });
+        this.children.add(this.additionalPropertiesCollapsibleView);
+      } else {
+        this.children.addMany(numberedPropertyViews);
+      }
+    }
+    /**
+    * Creates the list start index labeled field.
+    */
+    _createStartIndexField() {
+      const t = this.locale.t;
+      const startIndexFieldView = new LabeledFieldView(this.locale, createLabeledInputNumber);
+      startIndexFieldView.set({
+        label: t("Start at"),
+        class: "ck-numbered-list-properties__start-index"
+      });
+      startIndexFieldView.fieldView.set({
+        min: 0,
+        step: 1,
+        value: 1,
+        inputMode: "numeric"
+      });
+      startIndexFieldView.fieldView.on("input", () => {
+        const inputElement = startIndexFieldView.fieldView.element;
+        const startIndex = inputElement.valueAsNumber;
+        if (Number.isNaN(startIndex)) {
+          startIndexFieldView.errorText = t("Invalid start index value.");
+          return;
+        }
+        if (!inputElement.checkValidity()) {
+          startIndexFieldView.errorText = t("Start index must be greater than 0.");
+        } else {
+          this.fire("listStart", {
+            startIndex
+          });
+        }
+      });
+      return startIndexFieldView;
+    }
+    /**
+    * Creates the reversed list switch button.
+    */
+    _createReversedSwitchButton() {
+      const t = this.locale.t;
+      const reversedButtonView = new SwitchButtonView(this.locale);
+      reversedButtonView.set({
+        withText: true,
+        label: t("Reversed order"),
+        class: "ck-numbered-list-properties__reversed-order"
+      });
+      reversedButtonView.delegate("execute").to(this, "listReversed");
+      return reversedButtonView;
+    }
+  };
+  var ListPropertiesUI = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListPropertiesUI";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    init() {
+      const editor = this.editor;
+      const t = editor.locale.t;
+      const propertiesConfig = editor.config.get("list.properties");
+      const normalizedConfig = getNormalizedConfig(propertiesConfig);
+      const stylesListTypes = normalizedConfig.styles.listTypes;
+      if (stylesListTypes.includes("bulleted")) {
+        const styleDefinitions = [
+          {
+            label: t("Toggle the disc list style"),
+            tooltip: t("Disc"),
+            type: "disc",
+            icon: listStyleDisc
+          },
+          {
+            label: t("Toggle the circle list style"),
+            tooltip: t("Circle"),
+            type: "circle",
+            icon: listStyleCircle
+          },
+          {
+            label: t("Toggle the square list style"),
+            tooltip: t("Square"),
+            type: "square",
+            icon: listStyleSquare
+          }
+        ];
+        const buttonLabel = t("Bulleted List");
+        const styleGridAriaLabel = t("Bulleted list styles toolbar");
+        const commandName = "bulletedList";
+        editor.ui.componentFactory.add(commandName, getDropdownViewCreator({
+          editor,
+          normalizedConfig,
+          parentCommandName: commandName,
+          buttonLabel,
+          buttonIcon: bulletedList,
+          styleGridAriaLabel,
+          styleDefinitions
+        }));
+        editor.ui.componentFactory.add(`menuBar:${commandName}`, getMenuBarStylesMenuCreator({
+          editor,
+          normalizedConfig,
+          parentCommandName: commandName,
+          buttonLabel,
+          styleGridAriaLabel,
+          styleDefinitions
+        }));
+      }
+      if (stylesListTypes.includes("numbered") || propertiesConfig.startIndex || propertiesConfig.reversed) {
+        const styleDefinitions = [
+          {
+            label: t("Toggle the decimal list style"),
+            tooltip: t("Decimal"),
+            type: "decimal",
+            icon: listStyleDecimal
+          },
+          {
+            label: t("Toggle the decimal with leading zero list style"),
+            tooltip: t("Decimal with leading zero"),
+            type: "decimal-leading-zero",
+            icon: listStyleDecimalLeadingZero
+          },
+          {
+            label: t("Toggle the lower\u2013roman list style"),
+            tooltip: t("Lower\u2013roman"),
+            type: "lower-roman",
+            icon: listStyleLowerRoman
+          },
+          {
+            label: t("Toggle the upper\u2013roman list style"),
+            tooltip: t("Upper-roman"),
+            type: "upper-roman",
+            icon: listStyleUpperRoman
+          },
+          {
+            label: t("Toggle the lower\u2013latin list style"),
+            tooltip: t("Lower-latin"),
+            type: "lower-latin",
+            icon: listStyleLowerLatin
+          },
+          {
+            label: t("Toggle the upper\u2013latin list style"),
+            tooltip: t("Upper-latin"),
+            type: "upper-latin",
+            icon: listStyleUpperLatin
+          },
+          {
+            label: t("Toggle the arabic-indic list style"),
+            tooltip: t("Arabic-indic"),
+            type: "arabic-indic",
+            icon: listStyleArabicIndic
+          }
+        ];
+        const buttonLabel = t("Numbered List");
+        const styleGridAriaLabel = t("Numbered list styles toolbar");
+        const commandName = "numberedList";
+        editor.ui.componentFactory.add(commandName, getDropdownViewCreator({
+          editor,
+          normalizedConfig,
+          parentCommandName: commandName,
+          buttonLabel,
+          buttonIcon: numberedList,
+          styleGridAriaLabel,
+          styleDefinitions
+        }));
+        if (stylesListTypes.includes("numbered")) {
+          editor.ui.componentFactory.add(`menuBar:${commandName}`, getMenuBarStylesMenuCreator({
+            editor,
+            normalizedConfig,
+            parentCommandName: commandName,
+            buttonLabel,
+            styleGridAriaLabel,
+            styleDefinitions
+          }));
+        }
+      }
+    }
+  };
+  function getDropdownViewCreator({ editor, normalizedConfig, parentCommandName, buttonLabel, buttonIcon, styleGridAriaLabel, styleDefinitions }) {
+    const parentCommand = editor.commands.get(parentCommandName);
+    return (locale) => {
+      const dropdownView = createDropdown(locale, SplitButtonView);
+      const mainButtonView = dropdownView.buttonView;
+      dropdownView.bind("isEnabled").to(parentCommand);
+      dropdownView.class = "ck-list-styles-dropdown";
+      mainButtonView.on("execute", () => {
+        editor.execute(parentCommandName);
+        editor.editing.view.focus();
+      });
+      mainButtonView.set({
+        label: buttonLabel,
+        icon: buttonIcon,
+        tooltip: true,
+        isToggleable: true
+      });
+      mainButtonView.bind("isOn").to(parentCommand, "value", (value) => !!value);
+      dropdownView.once("change:isOpen", () => {
+        const listPropertiesView = createListPropertiesView({
+          editor,
+          normalizedConfig,
+          dropdownView,
+          parentCommandName,
+          styleGridAriaLabel,
+          styleDefinitions
+        });
+        dropdownView.panelView.children.add(listPropertiesView);
+      });
+      dropdownView.on("execute", () => {
+        editor.editing.view.focus();
+      });
+      return dropdownView;
+    };
+  }
+  function getStyleButtonCreator({ editor, listStyleCommand, parentCommandName }) {
+    const locale = editor.locale;
+    const parentCommand = editor.commands.get(parentCommandName);
+    return ({ label, type, icon, tooltip }) => {
+      const button = new ButtonView(locale);
+      button.set({
+        label,
+        icon,
+        tooltip
+      });
+      button.bind("isOn").to(listStyleCommand, "value", (value) => value === type);
+      button.on("execute", () => {
+        if (parentCommand.value) {
+          if (listStyleCommand.value === type) {
+            editor.execute(parentCommandName);
+          } else if (listStyleCommand.value !== type) {
+            editor.execute("listStyle", {
+              type
+            });
+          }
+        } else {
+          editor.model.change(() => {
+            editor.execute("listStyle", {
+              type
+            });
+          });
+        }
+      });
+      return button;
+    };
+  }
+  function createListPropertiesView({ editor, normalizedConfig, dropdownView, parentCommandName, styleDefinitions, styleGridAriaLabel }) {
+    const locale = editor.locale;
+    const enabledProperties = {
+      ...normalizedConfig,
+      ...parentCommandName != "numberedList" ? {
+        startIndex: false,
+        reversed: false
+      } : null
+    };
+    const listType = parentCommandName.replace("List", "");
+    let styleButtonViews = null;
+    if (normalizedConfig.styles.listTypes.includes(listType)) {
+      const listStyleCommand = editor.commands.get("listStyle");
+      const styleButtonCreator = getStyleButtonCreator({
+        editor,
+        parentCommandName,
+        listStyleCommand
+      });
+      const configuredListStylesTypes = normalizedConfig.styles.listStyleTypes;
+      let filteredDefinitions = styleDefinitions;
+      if (configuredListStylesTypes) {
+        const allowedTypes2 = configuredListStylesTypes[listType];
+        if (allowedTypes2) {
+          filteredDefinitions = styleDefinitions.filter((def) => allowedTypes2.includes(def.type));
+        }
+      }
+      const isStyleTypeSupported = getStyleTypeSupportChecker(listStyleCommand);
+      styleButtonViews = filteredDefinitions.filter(isStyleTypeSupported).map(styleButtonCreator);
+    }
+    const listPropertiesView = new ListPropertiesView(locale, {
+      styleGridAriaLabel,
+      enabledProperties,
+      styleButtonViews
+    });
+    if (normalizedConfig.styles.listTypes.includes(listType)) {
+      focusChildOnDropdownOpen(dropdownView, () => {
+        return listPropertiesView.stylesView.children.find((child) => child.isOn);
+      });
+    }
+    if (enabledProperties.startIndex) {
+      const listStartCommand = editor.commands.get("listStart");
+      listPropertiesView.startIndexFieldView.bind("isEnabled").to(listStartCommand);
+      listPropertiesView.startIndexFieldView.fieldView.bind("value").to(listStartCommand);
+      listPropertiesView.on("listStart", (evt, data) => editor.execute("listStart", data));
+    }
+    if (enabledProperties.reversed) {
+      const listReversedCommand = editor.commands.get("listReversed");
+      listPropertiesView.reversedSwitchButtonView.bind("isEnabled").to(listReversedCommand);
+      listPropertiesView.reversedSwitchButtonView.bind("isOn").to(listReversedCommand, "value", (value) => !!value);
+      listPropertiesView.on("listReversed", () => {
+        const isReversed = listReversedCommand.value;
+        editor.execute("listReversed", {
+          reversed: !isReversed
+        });
+      });
+    }
+    listPropertiesView.delegate("execute").to(dropdownView);
+    return listPropertiesView;
+  }
+  function getMenuBarStylesMenuCreator({ editor, normalizedConfig, parentCommandName, buttonLabel, styleGridAriaLabel, styleDefinitions }) {
+    return (locale) => {
+      const menuView = new MenuBarMenuView(locale);
+      const listCommand = editor.commands.get(parentCommandName);
+      const listStyleCommand = editor.commands.get("listStyle");
+      const isStyleTypeSupported = getStyleTypeSupportChecker(listStyleCommand);
+      const styleButtonCreator = getStyleButtonCreator({
+        editor,
+        parentCommandName,
+        listStyleCommand
+      });
+      const configuredListStylesTypes = normalizedConfig.styles.listStyleTypes;
+      let filteredDefinitions = styleDefinitions;
+      if (configuredListStylesTypes) {
+        const listType = listCommand.type;
+        const allowedTypes2 = configuredListStylesTypes[listType];
+        if (allowedTypes2) {
+          filteredDefinitions = styleDefinitions.filter((def) => allowedTypes2.includes(def.type));
+        }
+      }
+      const styleButtonViews = filteredDefinitions.filter(isStyleTypeSupported).map(styleButtonCreator);
+      const listPropertiesView = new ListPropertiesView(locale, {
+        styleGridAriaLabel,
+        enabledProperties: {
+          ...normalizedConfig,
+          // Disable list start index and reversed in the menu bar.
+          startIndex: false,
+          reversed: false
+        },
+        styleButtonViews
+      });
+      listPropertiesView.delegate("execute").to(menuView);
+      menuView.buttonView.set({
+        label: buttonLabel,
+        icon: parentCommandName === "bulletedList" ? bulletedList : numberedList
+      });
+      menuView.panelView.children.add(listPropertiesView);
+      menuView.bind("isEnabled").to(listCommand, "isEnabled");
+      menuView.on("execute", () => {
+        editor.editing.view.focus();
+      });
+      return menuView;
+    };
+  }
+  function getStyleTypeSupportChecker(listStyleCommand) {
+    if (typeof listStyleCommand.isStyleTypeSupported == "function") {
+      return (styleDefinition) => listStyleCommand.isStyleTypeSupported(styleDefinition.type);
+    } else {
+      return () => true;
+    }
+  }
+  var ListProperties = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListPropertiesEditing,
+        ListPropertiesUI
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "ListProperties";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+  };
+  var CheckTodoListCommand = class extends Command {
+    /**
+    * @inheritDoc
+    */
+    constructor(editor) {
+      super(editor);
+      this.on("execute", () => {
+        this.refresh();
+      }, {
+        priority: "highest"
+      });
+    }
+    /**
+    * Updates the command's {@link #value} and {@link #isEnabled} properties based on the current selection.
+    */
+    refresh() {
+      const selectedElements = this._getSelectedItems();
+      this.value = this._getValue(selectedElements);
+      this.isEnabled = !!selectedElements.length;
+    }
+    /**
+    * Executes the command.
+    *
+    * @param options.forceValue If set, it will force the command behavior. If `true`, the command will apply
+    * the attribute. Otherwise, the command will remove the attribute. If not set, the command will look for its current
+    * value to decide what it should do.
+    */
+    execute(options = {}) {
+      this.editor.model.change((writer) => {
+        const selectedElements = this._getSelectedItems();
+        const value = options.forceValue === void 0 ? !this._getValue(selectedElements) : options.forceValue;
+        for (const element of selectedElements) {
+          if (value) {
+            writer.setAttribute("todoListChecked", true, element);
+          } else {
+            writer.removeAttribute("todoListChecked", element);
+          }
+        }
+      });
+    }
+    /**
+    * Returns a value for the command.
+    */
+    _getValue(selectedElements) {
+      return selectedElements.every((element) => element.getAttribute("todoListChecked"));
+    }
+    /**
+    * Gets all to-do list items selected by the {@link module:engine/model/selection~ModelSelection}.
+    */
+    _getSelectedItems() {
+      const model = this.editor.model;
+      const schema = model.schema;
+      const selectionRange = model.document.selection.getFirstRange();
+      const startElement = selectionRange.start.parent;
+      const elements = [];
+      if (schema.checkAttribute(startElement, "todoListChecked")) {
+        elements.push(...getAllListItemBlocks(startElement));
+      }
+      for (const item of selectionRange.getItems({
+        shallow: true
+      })) {
+        if (schema.checkAttribute(item, "todoListChecked") && !elements.includes(item)) {
+          elements.push(...getAllListItemBlocks(item));
+        }
+      }
+      return elements;
+    }
+  };
+  var TodoCheckboxChangeObserver = class extends DomEventObserver {
+    /**
+    * @inheritDoc
+    */
+    domEventType = [
+      "change"
+    ];
+    /**
+    * @inheritDoc
+    */
+    onDomEvent(domEvent) {
+      if (domEvent.target) {
+        const viewTarget = this.view.domConverter.mapDomToView(domEvent.target);
+        if (viewTarget && viewTarget.is("element", "input") && viewTarget.getAttribute("type") == "checkbox" && viewTarget.findAncestor({
+          classes: "todo-list__label"
+        })) {
+          this.fire("todoCheckboxChange", domEvent);
+        }
+      }
+    }
+  };
+  var ITEM_TOGGLE_KEYSTROKE$1 = /* @__PURE__ */ parseKeystroke("Ctrl+Enter");
+  var TodoListEditing = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "TodoListEditing";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        ListEditing
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      const model = editor.model;
+      const editing = editor.editing;
+      const listEditing = editor.plugins.get(ListEditing);
+      const multiBlock = editor.config.get("list.multiBlock");
+      const elementName = multiBlock ? "paragraph" : "listItem";
+      editor.commands.add("todoList", new ListCommand(editor, "todo"));
+      editor.commands.add("checkTodoList", new CheckTodoListCommand(editor));
+      editing.view.addObserver(TodoCheckboxChangeObserver);
+      model.schema.extend("$listItem", {
+        allowAttributes: "todoListChecked"
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId") || item.getAttribute("listType") != "todo") {
+          return false;
+        }
+      }, "todoListChecked");
+      editor.conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on("element:input", todoItemInputConverter());
+        dispatcher.on("element:li", todoListItemUpcastConverter(), {
+          priority: "low"
+        });
+        dispatcher.on("element:label", elementUpcastConsumingConverter({
+          name: "label",
+          classes: "todo-list__label"
+        }));
+        dispatcher.on("element:label", elementUpcastConsumingConverter({
+          name: "label",
+          classes: [
+            "todo-list__label",
+            "todo-list__label_without-description"
+          ]
+        }));
+        dispatcher.on("element:span", elementUpcastConsumingConverter({
+          name: "span",
+          classes: "todo-list__label__description"
+        }));
+        dispatcher.on("element:ul", attributeUpcastConsumingConverter({
+          name: "ul",
+          classes: "todo-list"
+        }));
+      });
+      editor.conversion.for("downcast").elementToElement({
+        model: elementName,
+        view: (element, { writer }) => {
+          if (isDescriptionBlock(element, listEditing.getListAttributeNames())) {
+            return writer.createContainerElement("span", {
+              class: "todo-list__label__description"
+            });
+          }
+        },
+        converterPriority: "highest"
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "list",
+        attributeName: "listType",
+        setAttributeOnDowncast(writer, value, element) {
+          if (value == "todo") {
+            writer.addClass("todo-list", element);
+          } else {
+            writer.removeClass("todo-list", element);
+          }
+        }
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "itemMarker",
+        attributeName: "todoListChecked",
+        createElement(writer, modelElement, { dataPipeline }) {
+          if (modelElement.getAttribute("listType") != "todo") {
+            return null;
+          }
+          const viewElement = writer.createUIElement("input", {
+            type: "checkbox",
+            ...modelElement.getAttribute("todoListChecked") ? {
+              checked: "checked"
+            } : null,
+            ...dataPipeline ? {
+              disabled: "disabled"
+            } : {
+              tabindex: "-1"
+            }
+          });
+          if (dataPipeline) {
+            return viewElement;
+          }
+          const wrapper = writer.createContainerElement("span", {
+            contenteditable: "false"
+          }, viewElement);
+          wrapper.getFillerOffset = () => null;
+          return wrapper;
+        },
+        canWrapElement(modelElement) {
+          return isDescriptionBlock(modelElement, listEditing.getListAttributeNames());
+        },
+        createWrapperElement(writer, modelElement, { dataPipeline }) {
+          const classes = [
+            "todo-list__label"
+          ];
+          if (!isDescriptionBlock(modelElement, listEditing.getListAttributeNames())) {
+            classes.push("todo-list__label_without-description");
+          }
+          return writer.createAttributeElement(dataPipeline ? "label" : "span", {
+            class: classes.join(" ")
+          });
+        }
+      });
+      listEditing.on("checkElement", (evt, { modelElement, viewElement }) => {
+        const isFirstTodoModelParagraphBlock = isDescriptionBlock(modelElement, listEditing.getListAttributeNames());
+        const hasViewClass = viewElement.hasClass("todo-list__label__description");
+        if (hasViewClass != isFirstTodoModelParagraphBlock) {
+          evt.return = true;
+          evt.stop();
+        }
+      });
+      listEditing.on("checkElement", (evt, { modelElement, viewElement }) => {
+        const isFirstTodoModelItemBlock = modelElement.getAttribute("listType") == "todo" && isFirstBlockOfListItem(modelElement);
+        let hasViewItemMarker = false;
+        const viewWalker = editor.editing.view.createPositionBefore(viewElement).getWalker({
+          direction: "backward"
+        });
+        for (const { item } of viewWalker) {
+          if (item.is("element") && editor.editing.mapper.toModelElement(item)) {
+            break;
+          }
+          if (item.is("element", "input") && item.getAttribute("type") == "checkbox") {
+            hasViewItemMarker = true;
+          }
+        }
+        if (hasViewItemMarker != isFirstTodoModelItemBlock) {
+          evt.return = true;
+          evt.stop();
+        }
+      });
+      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
+        for (const { node, previousNodeInList } of listNodes) {
+          if (!previousNodeInList) {
+            continue;
+          }
+          if (previousNodeInList.getAttribute("listItemId") != node.getAttribute("listItemId")) {
+            continue;
+          }
+          const previousHasAttribute = previousNodeInList.hasAttribute("todoListChecked");
+          const nodeHasAttribute = node.hasAttribute("todoListChecked");
+          if (nodeHasAttribute && !previousHasAttribute) {
+            writer.removeAttribute("todoListChecked", node);
+            evt.return = true;
+          } else if (!nodeHasAttribute && previousHasAttribute) {
+            writer.setAttribute("todoListChecked", true, node);
+            evt.return = true;
+          }
+        }
+      });
+      model.document.registerPostFixer((writer) => {
+        const changes = model.document.differ.getChanges();
+        let wasFixed = false;
+        for (const change of changes) {
+          if (change.type == "attribute" && change.attributeKey == "listType") {
+            const element = change.range.start.nodeAfter;
+            if (change.attributeOldValue == "todo" && element.hasAttribute("todoListChecked")) {
+              writer.removeAttribute("todoListChecked", element);
+              wasFixed = true;
+            }
+          } else if (change.type == "insert" && change.name != "$text") {
+            for (const { item } of writer.createRangeOn(change.position.nodeAfter)) {
+              if (item.is("element") && item.getAttribute("listType") != "todo" && item.hasAttribute("todoListChecked")) {
+                writer.removeAttribute("todoListChecked", item);
+                wasFixed = true;
+              }
+            }
+          }
+        }
+        return wasFixed;
+      });
+      this.listenTo(editing.view.document, "keydown", (evt, data) => {
+        if (getCode(data) === ITEM_TOGGLE_KEYSTROKE$1) {
+          editor.execute("checkTodoList");
+          evt.stop();
+        }
+      }, {
+        priority: "high"
+      });
+      this.listenTo(editing.view.document, "todoCheckboxChange", (evt, data) => {
+        const viewTarget = data.target;
+        if (!viewTarget || !viewTarget.is("element", "input")) {
+          return;
+        }
+        const viewPositionAfter = editing.view.createPositionAfter(viewTarget);
+        const modelPositionAfter = editing.mapper.toModelPosition(viewPositionAfter);
+        const modelElement = modelPositionAfter.parent;
+        if (modelElement && isListItemBlock(modelElement) && modelElement.getAttribute("listType") == "todo") {
+          this._handleCheckmarkChange(modelElement);
+        }
+      });
+      this.listenTo(editing.view.document, "arrowKey", jumpOverCheckmarkOnSideArrowKeyPress$1(model, editor.locale), {
+        context: "$text"
+      });
+      this.listenTo(editing.mapper, "viewToModelPosition", (evt, data) => {
+        const viewParent = data.viewPosition.parent;
+        const isStartOfListItem = viewParent.is("attributeElement", "li") && data.viewPosition.offset == 0;
+        const isStartOfListLabel = isLabelElement(viewParent) && data.viewPosition.offset <= 1;
+        const isInInputWrapper = viewParent.is("element", "span") && viewParent.getAttribute("contenteditable") == "false" && isLabelElement(viewParent.parent);
+        if (!isStartOfListItem && !isStartOfListLabel && !isInInputWrapper) {
+          return;
+        }
+        const nodeAfter = data.modelPosition.nodeAfter;
+        if (nodeAfter && nodeAfter.getAttribute("listType") == "todo") {
+          data.modelPosition = model.createPositionAt(nodeAfter, 0);
+        }
+      }, {
+        priority: "low"
+      });
+      this._initAriaAnnouncements();
+    }
+    /**
+    * Handles the checkbox element change, moves the selection to the corresponding model item to make it possible
+    * to toggle the `todoListChecked` attribute using the command, and restores the selection position.
+    *
+    * Some say it's a hack :) Moving the selection only for executing the command on a certain node and restoring it after,
+    * is not a clear solution. We need to design an API for using commands beyond the selection range.
+    * See https://github.com/ckeditor/ckeditor5/issues/1954.
+    */
+    _handleCheckmarkChange(listItem) {
+      const editor = this.editor;
+      const model = editor.model;
+      const previousSelectionRanges = Array.from(model.document.selection.getRanges());
+      model.change((writer) => {
+        writer.setSelection(listItem, "end");
+        editor.execute("checkTodoList");
+        writer.setSelection(previousSelectionRanges);
+      });
+    }
+    /**
+    * Observe when user enters or leaves todo list and set proper aria value in global live announcer.
+    * This allows screen readers to indicate when the user has entered and left the specified todo list.
+    *
+    * @internal
+    */
+    _initAriaAnnouncements() {
+      const { model, ui, t } = this.editor;
+      let lastFocusedCodeBlock = null;
+      if (!ui) {
+        return;
+      }
+      model.document.selection.on("change:range", () => {
+        const focusParent = model.document.selection.focus.parent;
+        const lastElementIsTodoList = isTodoListItemElement(lastFocusedCodeBlock);
+        const currentElementIsTodoList = isTodoListItemElement(focusParent);
+        if (lastElementIsTodoList && !currentElementIsTodoList) {
+          ui.ariaLiveAnnouncer.announce(t("Leaving a to-do list"));
+        } else if (!lastElementIsTodoList && currentElementIsTodoList) {
+          ui.ariaLiveAnnouncer.announce(t("Entering a to-do list"));
+        }
+        lastFocusedCodeBlock = focusParent;
+      });
+    }
+  };
+  function todoListItemUpcastConverter() {
+    return (evt, data, conversionApi) => {
+      const { writer, schema } = conversionApi;
+      if (!data.modelRange) {
+        return;
+      }
+      const groupedItems = Array.from(data.modelRange.getItems({
+        shallow: true
+      })).filter((item) => item.getAttribute("listType") === "todo" && schema.checkAttribute(item, "listItemId")).reduce((acc, item) => {
+        const listItemId = item.getAttribute("listItemId");
+        if (!acc.has(listItemId)) {
+          acc.set(listItemId, getAllListItemBlocks(item));
+        }
+        return acc;
+      }, /* @__PURE__ */ new Map());
+      for (const [, items] of groupedItems.entries()) {
+        if (items.some((item) => item.getAttribute("todoListChecked"))) {
+          for (const item of items) {
+            writer.setAttribute("todoListChecked", true, item);
+          }
+        }
+      }
+    };
+  }
+  function todoItemInputConverter() {
+    return (evt, data, conversionApi) => {
+      const modelCursor = data.modelCursor;
+      const modelItem = modelCursor.parent;
+      const viewItem = data.viewItem;
+      if (!conversionApi.consumable.test(viewItem, {
+        name: true
+      })) {
+        return;
+      }
+      if (viewItem.getAttribute("type") != "checkbox" || !modelCursor.isAtStart || !modelItem.hasAttribute("listType")) {
+        return;
+      }
+      conversionApi.consumable.consume(viewItem, {
+        name: true
+      });
+      const writer = conversionApi.writer;
+      writer.setAttribute("listType", "todo", modelItem);
+      if (data.viewItem.hasAttribute("checked")) {
+        writer.setAttribute("todoListChecked", true, modelItem);
+      }
+      data.modelRange = writer.createRange(modelCursor);
+    };
+  }
+  function elementUpcastConsumingConverter(matcherPattern) {
+    const matcher = new Matcher(matcherPattern);
+    return (evt, data, conversionApi) => {
+      const matcherResult = matcher.match(data.viewItem);
+      if (!matcherResult) {
+        return;
+      }
+      if (!conversionApi.consumable.consume(data.viewItem, matcherResult.match)) {
+        return;
+      }
+      Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+    };
+  }
+  function attributeUpcastConsumingConverter(matcherPattern) {
+    const matcher = new Matcher(matcherPattern);
+    return (evt, data, conversionApi) => {
+      const matcherResult = matcher.match(data.viewItem);
+      if (!matcherResult) {
+        return;
+      }
+      const match = matcherResult.match;
+      match.name = false;
+      conversionApi.consumable.consume(data.viewItem, match);
+    };
+  }
+  function isDescriptionBlock(modelElement, listAttributeNames) {
+    return (modelElement.is("element", "paragraph") || modelElement.is("element", "listItem")) && modelElement.getAttribute("listType") == "todo" && isFirstBlockOfListItem(modelElement) && hasOnlyListAttributes(modelElement, listAttributeNames);
+  }
+  function hasOnlyListAttributes(modelElement, attributeNames) {
+    for (const attributeKey of modelElement.getAttributeKeys()) {
+      if (attributeKey.startsWith("selection:")) {
+        continue;
+      }
+      if (!attributeNames.includes(attributeKey)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function jumpOverCheckmarkOnSideArrowKeyPress$1(model, locale) {
+    return (eventInfo, domEventData) => {
+      const direction = getLocalizedArrowKeyCodeDirection(domEventData.keyCode, locale.contentLanguageDirection);
+      const schema = model.schema;
+      const selection = model.document.selection;
+      if (!selection.isCollapsed) {
+        return;
+      }
+      const position = selection.getFirstPosition();
+      const parent = position.parent;
+      if (direction == "right" && position.isAtEnd) {
+        const newRange = schema.getNearestSelectionRange(model.createPositionAfter(parent), "forward");
+        if (!newRange) {
+          return;
+        }
+        const newRangeParent = newRange.start.parent;
+        if (newRangeParent && isListItemBlock(newRangeParent) && newRangeParent.getAttribute("listType") == "todo") {
+          model.change((writer) => writer.setSelection(newRange));
+          domEventData.preventDefault();
+          domEventData.stopPropagation();
+          eventInfo.stop();
+        }
+      } else if (direction == "left" && position.isAtStart && isListItemBlock(parent) && parent.getAttribute("listType") == "todo") {
+        const newRange = schema.getNearestSelectionRange(model.createPositionBefore(parent), "backward");
+        if (!newRange) {
+          return;
+        }
+        model.change((writer) => writer.setSelection(newRange));
+        domEventData.preventDefault();
+        domEventData.stopPropagation();
+        eventInfo.stop();
+      }
+    };
+  }
+  function isLabelElement(viewElement) {
+    return !!viewElement && viewElement.is("attributeElement") && viewElement.hasClass("todo-list__label");
+  }
+  function isTodoListItemElement(element) {
+    if (!element) {
+      return false;
+    }
+    if (!element.is("element", "paragraph") && !element.is("element", "listItem")) {
+      return false;
+    }
+    return element.getAttribute("listType") == "todo";
+  }
+  var TodoListUI = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "TodoListUI";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const t = this.editor.t;
+      createUIComponents(this.editor, "todoList", t("To-do List"), todoList);
+    }
+  };
+  var TodoList = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        TodoListEditing,
+        TodoListUI
+      ];
+    }
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "TodoList";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+  };
+
   // node_modules/@ckeditor/ckeditor5-indent/dist/index.js
   var IndentEditing = class extends Plugin {
     /**
@@ -81900,6 +87929,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     getNextIndent(indentAttributeValue) {
       const currentOffset = parseFloat(indentAttributeValue || "0");
       const isSameUnit = !indentAttributeValue || indentAttributeValue.endsWith(this.unit);
+      if (currentOffset < 0) {
+        return;
+      }
       if (!isSameUnit) {
         return this.isForward ? this.offset + this.unit : void 0;
       }
@@ -81944,9 +87976,477 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     getNextIndent(indentAttributeValue) {
       const currentIndex = this.classes.indexOf(indentAttributeValue);
       const indexStep = this.isForward ? 1 : -1;
-      return this.classes[currentIndex + indexStep];
+      const nextIndex = currentIndex + indexStep;
+      const nextIndexClamped = Math.min(nextIndex, this.classes.length - 1);
+      return this.classes[nextIndexClamped];
     }
   };
+  var IndentBlockListCommand = class extends Command {
+    /**
+    * The command's indentation behavior.
+    */
+    _indentBehavior;
+    /**
+    * Creates an instance of the command.
+    */
+    constructor(editor, indentBehavior) {
+      super(editor);
+      this._indentBehavior = indentBehavior;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const listItem = this._getFirstListItemIfSelectionIsAtListStart(this.editor.model.document.selection);
+      this.isEnabled = !!listItem && this._indentBehavior.checkEnabled(listItem.getAttribute("blockIndentList"));
+    }
+    /**
+    * Executes the command.
+    *
+    * @fires execute
+    * @param options Command options.
+    * @param options.firstListOnly When `true`, indentation is applied only to the first list at the beginning of the selection.
+    * When `false` or omitted, indentation is applied to all lists of the selection.
+    */
+    execute(options = {}) {
+      const editor = this.editor;
+      const model = editor.model;
+      const selection = model.document.selection;
+      model.change((writer) => {
+        const listItem = this._getFirstListItemIfSelectionIsAtListStart(selection);
+        const listItems = [];
+        if (!options.firstListOnly) {
+          const blocks = Array.from(selection.getSelectedBlocks());
+          for (const block of blocks) {
+            if (isListItemBlock(block) && block.getAttribute("listIndent") === 0 && model.schema.checkAttribute(block, "blockIndentList")) {
+              listItems.push(block);
+            }
+          }
+        } else {
+          listItems.push(listItem);
+        }
+        for (const item of listItems) {
+          const currentIndent = item.getAttribute("blockIndentList");
+          const nextIndent = this._indentBehavior.getNextIndent(currentIndent);
+          if (nextIndent) {
+            writer.setAttribute("blockIndentList", nextIndent, item);
+          } else {
+            writer.removeAttribute("blockIndentList", item);
+          }
+        }
+      });
+    }
+    /**
+    * Returns the list item at the beginning of the current selection if it is the first top–level list item in the list.
+    * Otherwise, returns `null`.
+    */
+    _getFirstListItemIfSelectionIsAtListStart(selection) {
+      const position = selection.getFirstPosition();
+      const listUtils = this.editor.plugins.get("ListUtils");
+      const parent = position.parent;
+      const schema = this.editor.model.schema;
+      if (position.isAtStart && isListItemBlock(parent) && parent.getAttribute("listIndent") == 0 && schema.checkAttribute(parent, "blockIndentList") && listUtils.isFirstListItemInList(parent)) {
+        return parent;
+      }
+      return null;
+    }
+  };
+  var IndentBlockListItemCommand = class extends Command {
+    /**
+    * The command's indentation behavior.
+    */
+    _indentBehavior;
+    /**
+    * Creates an instance of the command.
+    */
+    constructor(editor, indentBehavior) {
+      super(editor);
+      this._indentBehavior = indentBehavior;
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      this.isEnabled = this._getAffectedListItems().length > 0;
+    }
+    /**
+    * @inheritDoc
+    */
+    execute() {
+      const editor = this.editor;
+      const model = editor.model;
+      model.change((writer) => {
+        for (const block of this._getAffectedListItems()) {
+          writer.removeAttribute("blockIndentListItem", block);
+        }
+      });
+    }
+    /**
+    * Returns an array of list items which block indentation should be changed.
+    */
+    _getAffectedListItems() {
+      const model = this.editor.model;
+      const selection = model.document.selection;
+      const listUtils = this.editor.plugins.get("ListUtils");
+      const blocksInSelection = Array.from(selection.getSelectedBlocks());
+      const expandedBlocks = listUtils.expandListBlocksToCompleteItems(blocksInSelection);
+      return expandedBlocks.filter((block) => this._isIndentationChangeAllowed(block));
+    }
+    /**
+    * Returns `true` if changing the block indentation is allowed for the given list item.
+    *
+    * Indentation of a list item is only allowed if it moves toward zero. This means that:
+    * - when currentIndent = 0, the command should be disabled
+    * - when currentIndent < 0, only forward indentation should be allowed
+    * - when currentIndent > 0, only backward indentation should be allowed
+    *
+    * For classes-based indentation, the command should be enabled if there is a class to be removed.
+    */
+    _isIndentationChangeAllowed(element) {
+      if (!element.hasAttribute("blockIndentListItem")) {
+        return false;
+      }
+      const currentIndent = parseFloat(element.getAttribute("blockIndentListItem"));
+      if (isNaN(currentIndent)) {
+        return !this._indentBehavior.isForward;
+      }
+      return this._indentBehavior.isForward && currentIndent < 0 || !this._indentBehavior.isForward && currentIndent > 0;
+    }
+  };
+  var IndentBlockListIntegration = class extends Plugin {
+    /**
+    * @inheritDoc
+    */
+    static get pluginName() {
+      return "IndentBlockListIntegration";
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    init() {
+      const editor = this.editor;
+      if (!this.editor.plugins.has("ListEditing")) {
+        return;
+      }
+      const config = editor.config.get("indentBlock");
+      if (config.classes && config.classes.length) {
+        this._setupConversionUsingClassesForListBlock(config.classes);
+        this._setupConversionUsingClassesForListItemBlock(config.classes);
+        editor.commands.add("indentBlockList", new IndentBlockListCommand(editor, new IndentUsingClasses({
+          direction: "forward",
+          classes: config.classes
+        })));
+        editor.commands.add("outdentBlockList", new IndentBlockListCommand(editor, new IndentUsingClasses({
+          direction: "backward",
+          classes: config.classes
+        })));
+        editor.commands.add("indentBlockListItem", new IndentBlockListItemCommand(editor, new IndentUsingClasses({
+          direction: "forward",
+          classes: config.classes
+        })));
+        editor.commands.add("outdentBlockListItem", new IndentBlockListItemCommand(editor, new IndentUsingClasses({
+          direction: "backward",
+          classes: config.classes
+        })));
+      } else {
+        editor.data.addStyleProcessorRules(addMarginStylesRules);
+        this._setupConversionUsingOffsetForListBlock();
+        this._setupConversionUsingOffsetForListItemBlock();
+        editor.commands.add("indentBlockList", new IndentBlockListCommand(editor, new IndentUsingOffset({
+          direction: "forward",
+          offset: config.offset,
+          unit: config.unit
+        })));
+        editor.commands.add("outdentBlockList", new IndentBlockListCommand(editor, new IndentUsingOffset({
+          direction: "backward",
+          offset: config.offset,
+          unit: config.unit
+        })));
+        editor.commands.add("indentBlockListItem", new IndentBlockListItemCommand(editor, new IndentUsingOffset({
+          direction: "forward",
+          offset: config.offset,
+          unit: config.unit
+        })));
+        editor.commands.add("outdentBlockListItem", new IndentBlockListItemCommand(editor, new IndentUsingOffset({
+          direction: "backward",
+          offset: config.offset,
+          unit: config.unit
+        })));
+      }
+      const listEditing = editor.plugins.get("ListEditing");
+      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
+        for (const { node, previousNodeInList } of listNodes) {
+          if (!previousNodeInList) {
+            continue;
+          }
+          if (previousNodeInList.getAttribute("listType") != node.getAttribute("listType")) {
+            continue;
+          }
+          if (ensureIndentValuesConsistency("blockIndentList", node, previousNodeInList, writer)) {
+            evt.return = true;
+          }
+          if (previousNodeInList.getAttribute("listItemId") != node.getAttribute("listItemId")) {
+            continue;
+          }
+          if (ensureIndentValuesConsistency("blockIndentListItem", node, previousNodeInList, writer)) {
+            evt.return = true;
+          }
+        }
+      });
+      this.listenTo(editor.editing.view.document, "tab", (evt, data) => {
+        const commandName = data.shiftKey ? "outdentBlockList" : "indentBlockList";
+        const command = this.editor.commands.get(commandName);
+        if (command.isEnabled) {
+          editor.execute(commandName, {
+            firstListOnly: true
+          });
+          data.stopPropagation();
+          data.preventDefault();
+          evt.stop();
+        }
+      }, {
+        context: "li",
+        priority: "high"
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    afterInit() {
+      const editor = this.editor;
+      const model = editor.model;
+      const schema = model.schema;
+      if (!editor.plugins.has("ListEditing")) {
+        return;
+      }
+      schema.extend("$listItem", {
+        allowAttributes: [
+          "blockIndentList",
+          "blockIndentListItem"
+        ]
+      });
+      schema.setAttributeProperties("blockIndentList", {
+        isFormatting: true
+      });
+      schema.setAttributeProperties("blockIndentListItem", {
+        isFormatting: true
+      });
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "blockIndentList");
+      model.schema.addAttributeCheck((context) => {
+        const item = context.last;
+        if (!item.getAttribute("listItemId")) {
+          return false;
+        }
+      }, "blockIndentListItem");
+      const clearBlockIndentAttributesOnListIndentChange = (_evt, changedBlocks) => {
+        editor.model.change((writer) => {
+          for (const node of changedBlocks) {
+            if (node.hasAttribute("listItemId")) {
+              if (node.hasAttribute("blockIndentList")) {
+                writer.removeAttribute("blockIndentList", node);
+              }
+              if (node.hasAttribute("blockIndentListItem")) {
+                writer.removeAttribute("blockIndentListItem", node);
+              }
+            }
+          }
+        });
+      };
+      const indentListCommand = editor.commands.get("indentList");
+      const outdentListCommand = editor.commands.get("outdentList");
+      if (indentListCommand) {
+        this.listenTo(indentListCommand, "afterExecute", clearBlockIndentAttributesOnListIndentChange);
+      }
+      if (outdentListCommand) {
+        this.listenTo(outdentListCommand, "afterExecute", clearBlockIndentAttributesOnListIndentChange);
+      }
+      const indentCommand = editor.commands.get("indent");
+      const outdentCommand = editor.commands.get("outdent");
+      indentCommand.registerChildCommand(editor.commands.get("indentBlockList"));
+      outdentCommand.registerChildCommand(editor.commands.get("outdentBlockList"));
+      indentCommand.registerChildCommand(editor.commands.get("indentBlockListItem"));
+      outdentCommand.registerChildCommand(editor.commands.get("outdentBlockListItem"));
+    }
+    /**
+    * Setups conversion for list block indent using offset indents.
+    */
+    _setupConversionUsingOffsetForListBlock() {
+      const editor = this.editor;
+      const conversion = editor.conversion;
+      const locale = editor.locale;
+      const marginProperty = locale.contentLanguageDirection === "rtl" ? "margin-right" : "margin-left";
+      const listEditing = editor.plugins.get("ListEditing");
+      conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on("element:ol", listBlockIndentUpcastConverter("blockIndentList", marginProperty));
+        dispatcher.on("element:ul", listBlockIndentUpcastConverter("blockIndentList", marginProperty));
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "list",
+        attributeName: "blockIndentList",
+        setAttributeOnDowncast(writer, value, element) {
+          if (value) {
+            writer.setStyle(marginProperty, value, element);
+          }
+        }
+      });
+    }
+    /**
+    * Setups conversion for list item block indent using offset indents.
+    */
+    _setupConversionUsingOffsetForListItemBlock() {
+      const editor = this.editor;
+      const locale = editor.locale;
+      const conversion = editor.conversion;
+      const marginProperty = locale.contentLanguageDirection === "rtl" ? "margin-right" : "margin-left";
+      const listEditing = editor.plugins.get("ListEditing");
+      conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on("element:li", listBlockIndentUpcastConverter("blockIndentListItem", marginProperty), {
+          priority: "low"
+        });
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "blockIndentListItem",
+        setAttributeOnDowncast(writer, value, element) {
+          if (value) {
+            writer.setStyle(marginProperty, value, element);
+          }
+        }
+      });
+    }
+    /**
+    * Setups conversion for list block indent using classes.
+    */
+    _setupConversionUsingClassesForListBlock(classes) {
+      const editor = this.editor;
+      const conversion = editor.conversion;
+      const listEditing = editor.plugins.get("ListEditing");
+      conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on("element:ol", listBlockIndentUpcastConverterUsingClasses("blockIndentList", classes));
+        dispatcher.on("element:ul", listBlockIndentUpcastConverterUsingClasses("blockIndentList", classes));
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "list",
+        attributeName: "blockIndentList",
+        setAttributeOnDowncast(writer, value, element) {
+          if (value) {
+            writer.addClass(value, element);
+          }
+        }
+      });
+    }
+    /**
+    * Setups conversion for list item block indent using classes.
+    */
+    _setupConversionUsingClassesForListItemBlock(classes) {
+      const editor = this.editor;
+      const conversion = editor.conversion;
+      const listEditing = editor.plugins.get("ListEditing");
+      conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on("element:li", listBlockIndentUpcastConverterUsingClasses("blockIndentListItem", classes), {
+          priority: "low"
+        });
+      });
+      listEditing.registerDowncastStrategy({
+        scope: "item",
+        attributeName: "blockIndentListItem",
+        setAttributeOnDowncast(writer, value, element) {
+          if (value) {
+            writer.addClass(value, element);
+          }
+        }
+      });
+    }
+  };
+  function listBlockIndentUpcastConverterUsingClasses(attributeName, classes) {
+    return (evt, data, conversionApi) => {
+      const { writer, consumable } = conversionApi;
+      if (!data.modelRange) {
+        Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+      }
+      const viewClasses = Array.from(data.viewItem.getClassNames());
+      const matchedClass = classes.find((cls) => viewClasses.includes(cls));
+      if (matchedClass === void 0) {
+        return;
+      }
+      let applied = false;
+      let indentLevel;
+      for (const item of data.modelRange.getItems({
+        shallow: true
+      })) {
+        if (indentLevel === void 0) {
+          indentLevel = item.getAttribute("listIndent");
+        }
+        if (item.hasAttribute(attributeName)) {
+          continue;
+        }
+        if (item.getAttribute("listIndent") !== indentLevel) {
+          continue;
+        }
+        writer.setAttribute(attributeName, matchedClass, item);
+        applied = true;
+      }
+      if (applied) {
+        consumable.consume(data.viewItem, {
+          classes: matchedClass
+        });
+      }
+    };
+  }
+  function listBlockIndentUpcastConverter(attributeName, marginProperty) {
+    return (evt, data, conversionApi) => {
+      const { writer, consumable } = conversionApi;
+      if (!data.modelRange) {
+        Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+      }
+      const marginValue = data.viewItem.getStyle(marginProperty);
+      let applied = false;
+      let indentLevel;
+      for (const item of data.modelRange.getItems({
+        shallow: true
+      })) {
+        if (indentLevel === void 0) {
+          indentLevel = item.getAttribute("listIndent");
+        }
+        if (item.hasAttribute(attributeName)) {
+          continue;
+        }
+        if (item.getAttribute("listIndent") !== indentLevel) {
+          continue;
+        }
+        writer.setAttribute(attributeName, marginValue, item);
+        applied = true;
+      }
+      if (applied) {
+        consumable.consume(data.viewItem, {
+          styles: marginProperty
+        });
+      }
+    };
+  }
+  function ensureIndentValuesConsistency(attributeName, node, previousNodeInList, writer) {
+    const prevNodeIndentListValue = previousNodeInList.getAttribute(attributeName);
+    if (node.getAttribute(attributeName) === prevNodeIndentListValue) {
+      return false;
+    }
+    if (prevNodeIndentListValue) {
+      writer.setAttribute(attributeName, prevNodeIndentListValue, node);
+    } else {
+      writer.removeAttribute(attributeName, node);
+    }
+    return true;
+  }
   var DEFAULT_ELEMENTS = [
     "paragraph",
     "heading1",
@@ -81978,6 +88478,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     static get isOfficialPlugin() {
       return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get requires() {
+      return [
+        IndentBlockListIntegration
+      ];
     }
     /**
     * @inheritDoc
@@ -82100,11 +88608,24 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     _definitions = /* @__PURE__ */ new Set();
     /**
+    * A callback that checks if a decorator can be applied to a given element.
+    * Returns `true` if there is a conflict preventing the decorator from being applied.
+    */
+    _conflictChecker;
+    /**
     * Gives information about the number of decorators stored in the {@link module:link/utils/automaticdecorators~AutomaticLinkDecorators}
     * instance.
     */
     get length() {
       return this._definitions.size;
+    }
+    /**
+    * Sets a callback that checks if a decorator can be applied to a given element.
+    *
+    * @param checker A function that returns `true` if there is a conflict preventing the decorator from being applied.
+    */
+    setConflictChecker(checker) {
+      this._conflictChecker = checker;
     }
     /**
     * Adds automatic decorator objects or an array with them to be used during downcasting.
@@ -82125,38 +88646,48 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     getDispatcher() {
       return (dispatcher) => {
-        dispatcher.on("attribute:linkHref", (evt, data, conversionApi) => {
-          if (!conversionApi.consumable.test(data.item, "attribute:linkHref")) {
-            return;
+        const elementCreator = (item, viewWriter) => {
+          const viewElement = viewWriter.createAttributeElement("a", item.attributes, {
+            priority: 5
+          });
+          if (item.classes) {
+            viewWriter.addClass(item.classes, viewElement);
           }
-          if (!(data.item.is("selection") || conversionApi.schema.isInline(data.item))) {
-            return;
+          for (const key in item.styles) {
+            viewWriter.setStyle(key, item.styles[key], viewElement);
           }
-          const viewWriter = conversionApi.writer;
-          const viewSelection = viewWriter.document.selection;
-          for (const item of this._definitions) {
-            const viewElement = viewWriter.createAttributeElement("a", item.attributes, {
-              priority: 5
-            });
-            if (item.classes) {
-              viewWriter.addClass(item.classes, viewElement);
+          viewWriter.setCustomProperty("link", true, viewElement);
+          return viewElement;
+        };
+        const createConverter = (isApplyingConverter) => {
+          return (evt, data, conversionApi) => {
+            if (!data.attributeKey.startsWith("link")) {
+              return;
             }
-            for (const key in item.styles) {
-              viewWriter.setStyle(key, item.styles[key], viewElement);
+            if (data.attributeKey == "linkHref" && !conversionApi.consumable.test(data.item, "attribute:linkHref")) {
+              return;
             }
-            viewWriter.setCustomProperty("link", true, viewElement);
-            if (item.callback(data.attributeNewValue)) {
-              if (data.item.is("selection")) {
-                viewWriter.wrap(viewSelection.getFirstRange(), viewElement);
+            if (!data.item.is("selection") && !conversionApi.schema.isInline(data.item)) {
+              return;
+            }
+            for (const decorator of this._definitions) {
+              if (decorator.callback(data.item.getAttribute("linkHref")) && !this._conflictChecker?.(decorator, data.item) && isApplyingConverter) {
+                if (data.item.is("selection")) {
+                  conversionApi.writer.wrap(conversionApi.writer.document.selection.getFirstRange(), elementCreator(decorator, conversionApi.writer));
+                } else {
+                  conversionApi.writer.wrap(conversionApi.mapper.toViewRange(data.range), elementCreator(decorator, conversionApi.writer));
+                }
               } else {
-                viewWriter.wrap(conversionApi.mapper.toViewRange(data.range), viewElement);
+                conversionApi.writer.unwrap(conversionApi.mapper.toViewRange(data.range), elementCreator(decorator, conversionApi.writer));
               }
-            } else {
-              viewWriter.unwrap(conversionApi.mapper.toViewRange(data.range), viewElement);
             }
-          }
-        }, {
-          priority: "high"
+          };
+        };
+        dispatcher.on("attribute", createConverter(false), {
+          priority: priorities.high - 1
+        });
+        dispatcher.on("attribute", createConverter(true), {
+          priority: priorities.high - 2
         });
       };
     }
@@ -82168,44 +88699,55 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     getDispatcherForLinkedImage() {
       return (dispatcher) => {
-        dispatcher.on("attribute:linkHref:imageBlock", (evt, data, { writer, mapper }) => {
-          const viewFigure = mapper.toViewElement(data.item);
-          const linkInImage = Array.from(viewFigure.getChildren()).find((child) => child.is("element", "a"));
-          if (!linkInImage) {
-            return;
-          }
-          for (const item of this._definitions) {
-            const attributes = toMap(item.attributes);
-            if (item.callback(data.attributeNewValue)) {
-              for (const [key, val] of attributes) {
-                if (key === "class") {
-                  writer.addClass(val, linkInImage);
-                } else {
-                  writer.setAttribute(key, val, linkInImage);
+        const createConverter = (isApplyingConverter) => {
+          return (evt, data, { writer, mapper }) => {
+            if (!data.item.is("element", "imageBlock") || !data.attributeKey.startsWith("link")) {
+              return;
+            }
+            const viewFigure = mapper.toViewElement(data.item);
+            const linkInImage = Array.from(viewFigure.getChildren()).find((child) => child.is("element", "a"));
+            if (!linkInImage) {
+              return;
+            }
+            for (const decorator of this._definitions) {
+              const attributes = toMap(decorator.attributes);
+              if (decorator.callback(data.item.getAttribute("linkHref")) && !this._conflictChecker?.(decorator, data.item) && isApplyingConverter) {
+                for (const [key, val] of attributes) {
+                  if (key === "class") {
+                    writer.addClass(val, linkInImage);
+                  } else {
+                    writer.setAttribute(key, val, false, linkInImage);
+                  }
                 }
-              }
-              if (item.classes) {
-                writer.addClass(item.classes, linkInImage);
-              }
-              for (const key in item.styles) {
-                writer.setStyle(key, item.styles[key], linkInImage);
-              }
-            } else {
-              for (const [key, val] of attributes) {
-                if (key === "class") {
-                  writer.removeClass(val, linkInImage);
-                } else {
-                  writer.removeAttribute(key, linkInImage);
+                if (decorator.classes) {
+                  writer.addClass(decorator.classes, linkInImage);
                 }
-              }
-              if (item.classes) {
-                writer.removeClass(item.classes, linkInImage);
-              }
-              for (const key in item.styles) {
-                writer.removeStyle(key, linkInImage);
+                for (const key in decorator.styles) {
+                  writer.setStyle(key, decorator.styles[key], linkInImage);
+                }
+              } else {
+                for (const [key, val] of attributes) {
+                  if (key === "class") {
+                    writer.removeClass(val, linkInImage);
+                  } else {
+                    writer.removeAttribute(key, val, linkInImage);
+                  }
+                }
+                if (decorator.classes) {
+                  writer.removeClass(decorator.classes, linkInImage);
+                }
+                for (const key in decorator.styles) {
+                  writer.removeStyle(key, linkInImage);
+                }
               }
             }
-          }
+          };
+        };
+        dispatcher.on("attribute", createConverter(false), {
+          priority: priorities.high - 1
+        });
+        dispatcher.on("attribute", createConverter(true), {
+          priority: priorities.high - 2
         });
       };
     }
@@ -82296,6 +88838,48 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       text2 += item.data;
     }
     return text2;
+  }
+  function areDecoratorsConflicting(a, b) {
+    if (a.attributes && b.attributes) {
+      const hasConflict = Object.keys(a.attributes).some((key) => !isMergeableAttribute(key) && key in b.attributes);
+      if (hasConflict) {
+        return true;
+      }
+    }
+    if (a.styles && b.styles) {
+      const hasConflict = Object.keys(a.styles).some((key) => key in b.styles);
+      if (hasConflict) {
+        return true;
+      }
+    }
+    return false;
+    function isMergeableAttribute(key) {
+      return key === "class" || key === "style" || key === "rel";
+    }
+  }
+  function resolveConflictingDecorators({ decoratorStates, allDecorators }) {
+    const resolved = {
+      ...decoratorStates
+    };
+    for (const name in decoratorStates) {
+      if (decoratorStates[name] && isNewlyAddedDecorator(name)) {
+        const conflicts = getConflictingManualDecorators(name, allDecorators);
+        for (const conflict of conflicts) {
+          resolved[conflict] = false;
+        }
+      }
+    }
+    function isNewlyAddedDecorator(name) {
+      return allDecorators.some((item) => item.id === name && !item.value);
+    }
+    return resolved;
+  }
+  function getConflictingManualDecorators(decoratorId, manualDecorators) {
+    const decorator = manualDecorators.find((item) => item.id === decoratorId);
+    if (!decorator) {
+      return [];
+    }
+    return manualDecorators.filter((otherDecorator) => otherDecorator.id !== decoratorId && areDecoratorsConflicting(decorator, otherDecorator)).map((item) => item.id);
   }
   var LinkCommand = class extends Command {
     /**
@@ -82420,10 +89004,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     execute(href, manualDecoratorIds = {}, displayedText) {
       const model = this.editor.model;
       const selection = model.document.selection;
+      const resolvedDecoratorsIds = resolveConflictingDecorators({
+        allDecorators: Array.from(this.manualDecorators),
+        decoratorStates: manualDecoratorIds
+      });
       const truthyManualDecorators = [];
       const falsyManualDecorators = [];
-      for (const name in manualDecoratorIds) {
-        if (manualDecoratorIds[name]) {
+      for (const name in resolvedDecoratorsIds) {
+        if (resolvedDecoratorsIds[name]) {
           truthyManualDecorators.push(name);
         } else {
           falsyManualDecorators.push(name);
@@ -82445,19 +89033,27 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             newText = linkHref && linkHref == linkText ? href : linkText;
           }
           if (newText != linkText) {
+            const fragment = writer.createDocumentFragment();
+            for (const item of range.getItems()) {
+              const text2 = item;
+              writer.append(writer.createText(text2.data, text2.getAttributes()), fragment);
+            }
+            const fragRange = writer.createRangeIn(fragment);
             const changes = findChanges(linkText, newText);
             let insertsLength = 0;
             for (const { offset, actual, expected } of changes) {
               const updatedOffset = offset + insertsLength;
-              const subRange = writer.createRange(range.start.getShiftedBy(updatedOffset), range.start.getShiftedBy(updatedOffset + actual.length));
-              const textNode = getLinkPartTextNode(subRange, range);
+              const subRange = writer.createRange(fragRange.start.getShiftedBy(updatedOffset), fragRange.start.getShiftedBy(updatedOffset + actual.length));
+              const textNode = getLinkPartTextNode(subRange, fragRange);
               const attributes = textNode.getAttributes();
               const formattingAttributes = Array.from(attributes).filter(([key]) => model.schema.getAttributeProperties(key).isFormatting);
               const newTextNode = writer.createText(expected, formattingAttributes);
               updateLinkAttributes(newTextNode);
-              model.insertContent(newTextNode, subRange);
+              writer.remove(subRange);
+              writer.insert(newTextNode, subRange.start);
               insertsLength += expected.length;
             }
+            model.insertContent(fragment, range);
             return writer.createRange(range.start, range.start.getShiftedBy(newText.length));
           }
         };
@@ -82528,6 +89124,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           }));
         }
       });
+      this.restoreManualDecoratorStates();
     }
     /**
     * Provides information whether a decorator with a given name is present in the currently processed selection.
@@ -82799,6 +89396,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this._enableLinkOpen();
       this._enableSelectionAttributesFixer();
       this._enableClipboardIntegration();
+      this._enableDecoratorConflictPostfixer();
     }
     /**
     * Registers a function that opens links in a new browser tab.
@@ -82834,6 +89432,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         });
       }
       automaticDecorators.add(automaticDecoratorDefinitions);
+      automaticDecorators.setConflictChecker((automaticDecorator, modelItem) => {
+        for (const manualDecorator of command.manualDecorators) {
+          if (!modelItem.hasAttribute(manualDecorator.id)) {
+            continue;
+          }
+          if (areDecoratorsConflicting(automaticDecorator, manualDecorator)) {
+            return true;
+          }
+        }
+      });
       if (automaticDecorators.length) {
         editor.conversion.for("downcast").add(automaticDecorators.getDispatcher());
       }
@@ -82860,26 +89468,49 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         });
         const decorator = new LinkManualDecorator(decoratorDefinition);
         manualDecorators.add(decorator);
-        editor.conversion.for("downcast").attributeToElement({
-          model: decorator.id,
-          view: (manualDecoratorValue, { writer, schema }, { item }) => {
-            if (!(item.is("selection") || schema.isInline(item))) {
-              return;
+        editor.conversion.for("downcast").add((dispatcher) => {
+          const elementCreator = (writer) => {
+            const element = writer.createAttributeElement("a", decorator.attributes, {
+              priority: 5
+            });
+            if (decorator.classes) {
+              writer.addClass(decorator.classes, element);
             }
-            if (manualDecoratorValue) {
-              const element = writer.createAttributeElement("a", decorator.attributes, {
-                priority: 5
-              });
-              if (decorator.classes) {
-                writer.addClass(decorator.classes, element);
-              }
-              for (const key in decorator.styles) {
-                writer.setStyle(key, decorator.styles[key], element);
-              }
-              writer.setCustomProperty("link", true, element);
-              return element;
+            for (const key in decorator.styles) {
+              writer.setStyle(key, decorator.styles[key], element);
             }
-          }
+            writer.setCustomProperty("link", true, element);
+            return element;
+          };
+          const createConverter = (isApplyingConverter) => {
+            return (evt, data, conversionApi) => {
+              if (!data.item.is("selection") && !conversionApi.schema.isInline(data.item)) {
+                return;
+              }
+              if (!isApplyingConverter && data.attributeOldValue) {
+                if (!conversionApi.consumable.test(data.item, evt.name)) {
+                  return;
+                }
+                conversionApi.writer.unwrap(conversionApi.mapper.toViewRange(data.range), elementCreator(conversionApi.writer));
+              }
+              if (isApplyingConverter && data.attributeNewValue) {
+                if (!conversionApi.consumable.consume(data.item, evt.name)) {
+                  return;
+                }
+                if (data.item.is("selection")) {
+                  conversionApi.writer.wrap(conversionApi.writer.document.selection.getFirstRange(), elementCreator(conversionApi.writer));
+                } else {
+                  conversionApi.writer.wrap(conversionApi.mapper.toViewRange(data.range), elementCreator(conversionApi.writer));
+                }
+              }
+            };
+          };
+          dispatcher.on(`attribute:${decorator.id}`, createConverter(false), {
+            priority: priorities.high - 1
+          });
+          dispatcher.on(`attribute:${decorator.id}`, createConverter(true), {
+            priority: priorities.high - 2
+          });
         });
         editor.conversion.for("upcast").elementToAttribute({
           view: {
@@ -82976,6 +89607,53 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             }
           }
         });
+      });
+    }
+    /**
+    * Registers a postfixer that resolves conflicting decorator attributes on elements.
+    */
+    _enableDecoratorConflictPostfixer() {
+      const editor = this.editor;
+      const model = editor.model;
+      const linkCommand = editor.commands.get("link");
+      model.document.registerPostFixer((writer) => {
+        let hasChanged = false;
+        const changes = model.document.differ.getChanges();
+        const elementsToCheck = /* @__PURE__ */ new Set();
+        const manualDecoratorAttributeKeys = new Set(linkCommand.manualDecorators.map((decorator) => decorator.id));
+        for (const change of changes) {
+          if (change.type === "attribute") {
+            if (change.attributeKey !== "linkHref" && !manualDecoratorAttributeKeys.has(change.attributeKey)) {
+              continue;
+            }
+            for (const item of change.range.getItems()) {
+              if (item.hasAttribute("linkHref")) {
+                elementsToCheck.add(item);
+              }
+            }
+          }
+          if (change.type === "insert" && change.attributes.has("linkHref") && change.position.nodeAfter) {
+            elementsToCheck.add(change.position.nodeAfter);
+          }
+        }
+        for (const item of elementsToCheck) {
+          const appliedDecorators = [];
+          for (const manualDecorator of linkCommand.manualDecorators) {
+            if (!item.hasAttribute(manualDecorator.id)) {
+              continue;
+            }
+            for (let i = appliedDecorators.length - 1; i >= 0; i--) {
+              const appliedDecorator = appliedDecorators[i];
+              if (areDecoratorsConflicting(appliedDecorator, manualDecorator)) {
+                writer.removeAttribute(appliedDecorator.id, item);
+                appliedDecorators.splice(i, 1);
+                hasChanged = true;
+              }
+            }
+            appliedDecorators.push(manualDecorator);
+          }
+        }
+        return hasChanged;
       });
     }
   };
@@ -83950,8 +90628,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           return commandValue === void 0 && decoratorValue === void 0 ? !!manualDecorator.defaultValue : !!decoratorValue;
         });
         button.on("execute", () => {
-          manualDecorator.set("value", !button.isOn);
-          editor.execute("link", linkCommand.value, this._getDecoratorSwitchesState());
+          editor.execute("link", linkCommand.value, {
+            ...this._getDecoratorSwitchesState(),
+            [manualDecorator.id]: !button.isOn
+          });
         });
         return button;
       });
@@ -84976,22 +91656,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             "href"
           ]
         };
-        if (!conversionApi.consumable.consume(viewLink, consumableAttributes)) {
+        if (!conversionApi.consumable.test(viewLink, consumableAttributes)) {
           return;
         }
         const linkHref = viewLink.getAttribute("href");
-        if (!linkHref) {
-          return;
-        }
-        let modelElement = data.modelCursor.parent;
-        if (!modelElement.is("element", "imageBlock")) {
-          const conversionResult = conversionApi.convertItem(imageInLink, data.modelCursor);
-          data.modelRange = conversionResult.modelRange;
-          data.modelCursor = conversionResult.modelCursor;
-          modelElement = data.modelCursor.nodeBefore;
-        }
-        if (modelElement && modelElement.is("element", "imageBlock")) {
+        const modelElement = data.modelCursor.parent;
+        if (modelElement.is("element", "imageBlock")) {
           conversionApi.writer.setAttribute("linkHref", linkHref, modelElement);
+          conversionApi.consumable.consume(viewLink, consumableAttributes);
         }
       }, {
         priority: "high"
@@ -85031,33 +91703,42 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   }
   function downcastImageLinkManualDecorator(decorator) {
     return (dispatcher) => {
-      dispatcher.on(`attribute:${decorator.id}:imageBlock`, (evt, data, conversionApi) => {
-        const viewFigure = conversionApi.mapper.toViewElement(data.item);
-        const linkInImage = Array.from(viewFigure.getChildren()).find((child) => child.is("element", "a"));
-        if (!linkInImage) {
-          return;
-        }
-        if (decorator.value === void 0) {
-          for (const key in decorator.attributes) {
-            conversionApi.writer.removeAttribute(key, linkInImage);
+      const createConverter = (isApplyingConverter) => {
+        return (evt, data, conversionApi) => {
+          const viewFigure = conversionApi.mapper.toViewElement(data.item);
+          const linkInImage = Array.from(viewFigure.getChildren()).find((child) => child.is("element", "a"));
+          if (!linkInImage) {
+            return;
           }
-          if (decorator.classes) {
-            conversionApi.writer.removeClass(decorator.classes, linkInImage);
+          if (!isApplyingConverter && data.attributeOldValue) {
+            for (const [key, val] of toMap(decorator.attributes)) {
+              conversionApi.writer.removeAttribute(key, val, linkInImage);
+            }
+            if (decorator.classes) {
+              conversionApi.writer.removeClass(decorator.classes, linkInImage);
+            }
+            for (const key in decorator.styles) {
+              conversionApi.writer.removeStyle(key, linkInImage);
+            }
           }
-          for (const key in decorator.styles) {
-            conversionApi.writer.removeStyle(key, linkInImage);
+          if (isApplyingConverter && data.attributeNewValue) {
+            for (const [key, val] of toMap(decorator.attributes)) {
+              conversionApi.writer.setAttribute(key, val, false, linkInImage);
+            }
+            if (decorator.classes) {
+              conversionApi.writer.addClass(decorator.classes, linkInImage);
+            }
+            for (const key in decorator.styles) {
+              conversionApi.writer.setStyle(key, decorator.styles[key], linkInImage);
+            }
           }
-          return;
-        }
-        for (const [key, val] of toMap(decorator.attributes)) {
-          conversionApi.writer.setAttribute(key, val, linkInImage);
-        }
-        if (decorator.classes) {
-          conversionApi.writer.addClass(decorator.classes, linkInImage);
-        }
-        for (const key in decorator.styles) {
-          conversionApi.writer.setStyle(key, decorator.styles[key], linkInImage);
-        }
+        };
+      };
+      dispatcher.on(`attribute:${decorator.id}:imageBlock`, createConverter(false), {
+        priority: priorities.high - 1
+      });
+      dispatcher.on(`attribute:${decorator.id}:imageBlock`, createConverter(true), {
+        priority: priorities.high - 2
       });
     };
   }
@@ -85080,11 +91761,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         if (!result) {
           return;
         }
-        if (!conversionApi.consumable.consume(viewLink, result.match)) {
+        if (!conversionApi.consumable.test(viewLink, result.match)) {
           return;
         }
-        const modelElement = data.modelCursor.nodeBefore || data.modelCursor.parent;
-        conversionApi.writer.setAttribute(decorator.id, true, modelElement);
+        const modelElement = data.modelCursor.parent;
+        if (modelElement?.is("element", "imageBlock")) {
+          conversionApi.writer.setAttribute(decorator.id, true, modelElement);
+          conversionApi.consumable.consume(viewLink, result.match);
+        }
       }, {
         priority: "high"
       });
@@ -85197,4503 +91881,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   };
 
-  // node_modules/@ckeditor/ckeditor5-list/dist/index.js
-  var ListWalker = class {
-    /**
-    * The start list item block element.
-    */
-    _startElement;
-    /**
-    * The reference indent. Initialized by the indent of the start block.
-    */
-    _referenceIndent;
-    /**
-    * The iterating direction.
-    */
-    _isForward;
-    /**
-    * Whether start block should be included in the result (if it's matching other criteria).
-    */
-    _includeSelf;
-    /**
-    * Additional attributes that must be the same for each block.
-    */
-    _sameAttributes;
-    /**
-    * Whether blocks with the same indent level as the start block should be included in the result.
-    */
-    _sameIndent;
-    /**
-    * Whether blocks with a lower indent level than the start block should be included in the result.
-    */
-    _lowerIndent;
-    /**
-    * Whether blocks with a higher indent level than the start block should be included in the result.
-    */
-    _higherIndent;
-    /**
-    * Creates a document list iterator.
-    *
-    * @param startElement The start list item block element.
-    * @param options.direction The iterating direction.
-    * @param options.includeSelf Whether start block should be included in the result (if it's matching other criteria).
-    * @param options.sameAttributes Additional attributes that must be the same for each block.
-    * @param options.sameIndent Whether blocks with the same indent level as the start block should be included
-    * in the result.
-    * @param options.lowerIndent Whether blocks with a lower indent level than the start block should be included
-    * in the result.
-    * @param options.higherIndent Whether blocks with a higher indent level than the start block should be included
-    * in the result.
-    */
-    constructor(startElement, options) {
-      this._startElement = startElement;
-      this._referenceIndent = startElement.getAttribute("listIndent");
-      this._isForward = options.direction == "forward";
-      this._includeSelf = !!options.includeSelf;
-      this._sameAttributes = toArray(options.sameAttributes || []);
-      this._sameIndent = !!options.sameIndent;
-      this._lowerIndent = !!options.lowerIndent;
-      this._higherIndent = !!options.higherIndent;
-    }
-    /**
-    * Performs only first step of iteration and returns the result.
-    *
-    * @param startElement The start list item block element.
-    * @param options.direction The iterating direction.
-    * @param options.includeSelf Whether start block should be included in the result (if it's matching other criteria).
-    * @param options.sameAttributes Additional attributes that must be the same for each block.
-    * @param options.sameIndent Whether blocks with the same indent level as the start block should be included
-    * in the result.
-    * @param options.lowerIndent Whether blocks with a lower indent level than the start block should be included
-    * in the result.
-    * @param options.higherIndent Whether blocks with a higher indent level than the start block should be included
-    * in the result.
-    */
-    static first(startElement, options) {
-      const walker = new this(startElement, options);
-      const iterator = walker[Symbol.iterator]();
-      return first(iterator);
-    }
-    /**
-    * Iterable interface.
-    */
-    *[Symbol.iterator]() {
-      const nestedItems = [];
-      for (const { node } of new SiblingListBlocksIterator(this._getStartNode(), this._isForward ? "forward" : "backward")) {
-        const indent2 = node.getAttribute("listIndent");
-        if (indent2 < this._referenceIndent) {
-          if (!this._lowerIndent) {
-            break;
-          }
-          this._referenceIndent = indent2;
-        } else if (indent2 > this._referenceIndent) {
-          if (!this._higherIndent) {
-            continue;
-          }
-          if (!this._isForward) {
-            nestedItems.push(node);
-            continue;
-          }
-        } else {
-          if (!this._sameIndent) {
-            if (this._higherIndent) {
-              if (nestedItems.length) {
-                yield* nestedItems;
-                nestedItems.length = 0;
-              }
-              break;
-            }
-            continue;
-          }
-          if (this._sameAttributes.some((attr) => node.getAttribute(attr) !== this._startElement.getAttribute(attr))) {
-            break;
-          }
-        }
-        if (nestedItems.length) {
-          yield* nestedItems;
-          nestedItems.length = 0;
-        }
-        yield node;
-      }
-    }
-    /**
-    * Returns the model element to start iterating.
-    */
-    _getStartNode() {
-      if (this._includeSelf) {
-        return this._startElement;
-      }
-      return this._isForward ? this._startElement.nextSibling : this._startElement.previousSibling;
-    }
-  };
-  var SiblingListBlocksIterator = class {
-    _node;
-    _isForward;
-    _previousNodesByIndent = [];
-    _previous = null;
-    _previousNodeIndent = null;
-    /**
-    * @param node The model node.
-    * @param direction Iteration direction.
-    */
-    constructor(node, direction = "forward") {
-      this._node = node;
-      this._isForward = direction === "forward";
-    }
-    [Symbol.iterator]() {
-      return this;
-    }
-    next() {
-      if (!isListItemBlock(this._node)) {
-        return {
-          done: true,
-          value: void 0
-        };
-      }
-      const nodeIndent = this._node.getAttribute("listIndent");
-      let previousNodeInList = null;
-      if (this._previous) {
-        const previousNodeIndent = this._previousNodeIndent;
-        if (nodeIndent > previousNodeIndent) {
-          this._previousNodesByIndent[previousNodeIndent] = this._previous;
-        } else if (nodeIndent < previousNodeIndent) {
-          previousNodeInList = this._previousNodesByIndent[nodeIndent] || null;
-          this._previousNodesByIndent.length = nodeIndent;
-        } else {
-          previousNodeInList = this._previous;
-        }
-      }
-      const value = {
-        node: this._node,
-        previous: this._previous,
-        previousNodeInList
-      };
-      this._previous = this._node;
-      this._previousNodeIndent = nodeIndent;
-      this._node = this._isForward ? this._node.nextSibling : this._node.previousSibling;
-      return {
-        value,
-        done: false
-      };
-    }
-  };
-  var ListBlocksIterable = class {
-    _listHead;
-    /**
-    * @param listHead The head element of a list.
-    */
-    constructor(listHead) {
-      this._listHead = listHead;
-    }
-    /**
-    * List blocks iterator.
-    *
-    * Iterates over all blocks of a list.
-    */
-    [Symbol.iterator]() {
-      return new SiblingListBlocksIterator(this._listHead);
-    }
-  };
-  var ListItemUid = class {
-    /**
-    * Returns the next ID.
-    *
-    * @internal
-    */
-    /* istanbul ignore next: static function definition -- @preserve */
-    static next() {
-      return uid();
-    }
-  };
-  function isListItemBlock(node) {
-    return !!node && node.is("element") && node.hasAttribute("listItemId");
-  }
-  function getAllListItemBlocks(listItem, options = {}) {
-    return [
-      ...getListItemBlocks(listItem, {
-        ...options,
-        direction: "backward"
-      }),
-      ...getListItemBlocks(listItem, {
-        ...options,
-        direction: "forward"
-      })
-    ];
-  }
-  function getListItemBlocks(listItem, options = {}) {
-    const isForward = options.direction == "forward";
-    const items = Array.from(new ListWalker(listItem, {
-      ...options,
-      includeSelf: isForward,
-      sameIndent: true,
-      sameAttributes: "listItemId"
-    }));
-    return isForward ? items : items.reverse();
-  }
-  function getNestedListBlocks(listItem) {
-    return Array.from(new ListWalker(listItem, {
-      direction: "forward",
-      higherIndent: true
-    }));
-  }
-  function getListItems(listItem, options) {
-    const backwardBlocks = new ListWalker(listItem, {
-      sameIndent: true,
-      sameAttributes: "listType",
-      ...options
-    });
-    const forwardBlocks = new ListWalker(listItem, {
-      sameIndent: true,
-      sameAttributes: "listType",
-      includeSelf: true,
-      direction: "forward",
-      ...options
-    });
-    return [
-      ...Array.from(backwardBlocks).reverse(),
-      ...forwardBlocks
-    ];
-  }
-  function isFirstBlockOfListItem(listBlock) {
-    const previousSibling = ListWalker.first(listBlock, {
-      sameIndent: true,
-      sameAttributes: "listItemId"
-    });
-    if (!previousSibling) {
-      return true;
-    }
-    return false;
-  }
-  function isLastBlockOfListItem(listBlock) {
-    const nextSibling = ListWalker.first(listBlock, {
-      direction: "forward",
-      sameIndent: true,
-      sameAttributes: "listItemId"
-    });
-    if (!nextSibling) {
-      return true;
-    }
-    return false;
-  }
-  function expandListBlocksToCompleteItems(blocks, options = {}) {
-    blocks = toArray(blocks);
-    const higherIndent = options.withNested !== false;
-    const allBlocks = /* @__PURE__ */ new Set();
-    for (const block of blocks) {
-      for (const itemBlock of getAllListItemBlocks(block, {
-        higherIndent
-      })) {
-        allBlocks.add(itemBlock);
-      }
-    }
-    return sortBlocks(allBlocks);
-  }
-  function expandListBlocksToCompleteList(blocks) {
-    blocks = toArray(blocks);
-    const allBlocks = /* @__PURE__ */ new Set();
-    for (const block of blocks) {
-      for (const itemBlock of getListItems(block)) {
-        allBlocks.add(itemBlock);
-      }
-    }
-    return sortBlocks(allBlocks);
-  }
-  function splitListItemBefore(listBlock, writer) {
-    const blocks = getListItemBlocks(listBlock, {
-      direction: "forward"
-    });
-    const id = ListItemUid.next();
-    for (const block of blocks) {
-      writer.setAttribute("listItemId", id, block);
-    }
-    return blocks;
-  }
-  function mergeListItemBefore(listBlock, parentBlock, writer) {
-    const attributes = {};
-    for (const [key, value] of parentBlock.getAttributes()) {
-      if (key.startsWith("list")) {
-        attributes[key] = value;
-      }
-    }
-    const blocks = getListItemBlocks(listBlock, {
-      direction: "forward"
-    });
-    for (const block of blocks) {
-      writer.setAttributes(attributes, block);
-    }
-    return blocks;
-  }
-  function indentBlocks(blocks, writer, { expand, indentBy = 1 } = {}) {
-    blocks = toArray(blocks);
-    const allBlocks = expand ? expandListBlocksToCompleteItems(blocks) : blocks;
-    for (const block of allBlocks) {
-      const blockIndent = block.getAttribute("listIndent") + indentBy;
-      if (blockIndent < 0) {
-        removeListAttributes(block, writer);
-      } else {
-        writer.setAttribute("listIndent", blockIndent, block);
-      }
-    }
-    return allBlocks;
-  }
-  function outdentBlocksWithMerge(blocks, writer) {
-    blocks = toArray(blocks);
-    const allBlocks = expandListBlocksToCompleteItems(blocks);
-    const visited = /* @__PURE__ */ new Set();
-    const referenceIndent = Math.min(...allBlocks.map((block) => block.getAttribute("listIndent")));
-    const parentBlocks = /* @__PURE__ */ new Map();
-    for (const block of allBlocks) {
-      parentBlocks.set(block, ListWalker.first(block, {
-        lowerIndent: true
-      }));
-    }
-    for (const block of allBlocks) {
-      if (visited.has(block)) {
-        continue;
-      }
-      visited.add(block);
-      const blockIndent = block.getAttribute("listIndent") - 1;
-      if (blockIndent < 0) {
-        removeListAttributes(block, writer);
-        continue;
-      }
-      if (block.getAttribute("listIndent") == referenceIndent) {
-        const mergedBlocks = mergeListItemIfNotLast(block, parentBlocks.get(block), writer);
-        for (const mergedBlock of mergedBlocks) {
-          visited.add(mergedBlock);
-        }
-        if (mergedBlocks.length) {
-          continue;
-        }
-      }
-      writer.setAttribute("listIndent", blockIndent, block);
-    }
-    return sortBlocks(visited);
-  }
-  function removeListAttributes(blocks, writer) {
-    blocks = toArray(blocks);
-    for (const block of blocks) {
-      if (block.is("element", "listItem")) {
-        writer.rename(block, "paragraph");
-      }
-    }
-    for (const block of blocks) {
-      for (const attributeKey of block.getAttributeKeys()) {
-        if (attributeKey.startsWith("list")) {
-          writer.removeAttribute(attributeKey, block);
-        }
-      }
-    }
-    return blocks;
-  }
-  function isSingleListItem(blocks) {
-    if (!blocks.length) {
-      return false;
-    }
-    const firstItemId = blocks[0].getAttribute("listItemId");
-    if (!firstItemId) {
-      return false;
-    }
-    return !blocks.some((item) => item.getAttribute("listItemId") != firstItemId);
-  }
-  function outdentFollowingItems(lastBlock, writer) {
-    const changedBlocks = [];
-    let currentIndent = Number.POSITIVE_INFINITY;
-    for (const { node } of new SiblingListBlocksIterator(lastBlock.nextSibling)) {
-      const indent2 = node.getAttribute("listIndent");
-      if (indent2 == 0) {
-        break;
-      }
-      if (indent2 < currentIndent) {
-        currentIndent = indent2;
-      }
-      const newIndent = indent2 - currentIndent;
-      writer.setAttribute("listIndent", newIndent, node);
-      changedBlocks.push(node);
-    }
-    return changedBlocks;
-  }
-  function sortBlocks(blocks) {
-    return Array.from(blocks).filter((block) => block.root.rootName !== "$graveyard").sort((a, b) => a.index - b.index);
-  }
-  function getSelectedBlockObject(model) {
-    const selectedElement = model.document.selection.getSelectedElement();
-    if (!selectedElement) {
-      return null;
-    }
-    if (model.schema.isObject(selectedElement) && model.schema.isBlock(selectedElement)) {
-      return selectedElement;
-    }
-    return null;
-  }
-  function canBecomeSimpleListItem(block, schema) {
-    return schema.checkChild(block.parent, "listItem") && schema.checkChild(block, "$text") && !schema.isObject(block);
-  }
-  function isNumberedListType(listType) {
-    return listType == "numbered" || listType == "customNumbered";
-  }
-  function mergeListItemIfNotLast(block, parentBlock, writer) {
-    const parentItemBlocks = getListItemBlocks(parentBlock, {
-      direction: "forward"
-    });
-    if (parentItemBlocks.pop().index > block.index) {
-      return mergeListItemBefore(block, parentBlock, writer);
-    }
-    return [];
-  }
-  var ListIndentCommand = class extends Command {
-    /**
-    * Determines by how much the command will change the list item's indent attribute.
-    */
-    _direction;
-    /**
-    * Creates an instance of the command.
-    *
-    * @param editor The editor instance.
-    * @param indentDirection The direction of indent. If it is equal to `backward`, the command
-    * will outdent a list item.
-    */
-    constructor(editor, indentDirection) {
-      super(editor);
-      this._direction = indentDirection;
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      this.isEnabled = this._checkEnabled();
-    }
-    /**
-    * Indents or outdents (depending on the {@link #constructor}'s `indentDirection` parameter) selected list items.
-    *
-    * @fires execute
-    * @fires afterExecute
-    */
-    execute() {
-      const model = this.editor.model;
-      const blocks = getSelectedListBlocks(model.document.selection);
-      model.change((writer) => {
-        const changedBlocks = [];
-        if (isSingleListItem(blocks) && !isFirstBlockOfListItem(blocks[0])) {
-          if (this._direction == "forward") {
-            changedBlocks.push(...indentBlocks(blocks, writer));
-          }
-          changedBlocks.push(...splitListItemBefore(blocks[0], writer));
-        } else {
-          if (this._direction == "forward") {
-            changedBlocks.push(...indentBlocks(blocks, writer, {
-              expand: true
-            }));
-          } else {
-            changedBlocks.push(...outdentBlocksWithMerge(blocks, writer));
-          }
-        }
-        for (const block of changedBlocks) {
-          if (!block.hasAttribute("listType")) {
-            continue;
-          }
-          const previousItemBlock = ListWalker.first(block, {
-            sameIndent: true
-          });
-          if (previousItemBlock) {
-            writer.setAttribute("listType", previousItemBlock.getAttribute("listType"), block);
-          }
-        }
-        this._fireAfterExecute(changedBlocks);
-      });
-    }
-    /**
-    * Fires the `afterExecute` event.
-    *
-    * @param changedBlocks The changed list elements.
-    */
-    _fireAfterExecute(changedBlocks) {
-      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
-    }
-    /**
-    * Checks whether the command can be enabled in the current context.
-    *
-    * @returns Whether the command should be enabled.
-    */
-    _checkEnabled() {
-      let blocks = getSelectedListBlocks(this.editor.model.document.selection);
-      let firstBlock = blocks[0];
-      if (!firstBlock) {
-        return false;
-      }
-      if (this._direction == "backward") {
-        return true;
-      }
-      if (isSingleListItem(blocks) && !isFirstBlockOfListItem(blocks[0])) {
-        return true;
-      }
-      blocks = expandListBlocksToCompleteItems(blocks);
-      firstBlock = blocks[0];
-      const siblingItem = ListWalker.first(firstBlock, {
-        sameIndent: true
-      });
-      if (!siblingItem) {
-        return false;
-      }
-      if (siblingItem.getAttribute("listType") == firstBlock.getAttribute("listType")) {
-        return true;
-      }
-      return false;
-    }
-  };
-  function getSelectedListBlocks(selection) {
-    const blocks = Array.from(selection.getSelectedBlocks());
-    const firstNonListBlockIndex = blocks.findIndex((block) => !isListItemBlock(block));
-    if (firstNonListBlockIndex != -1) {
-      blocks.length = firstNonListBlockIndex;
-    }
-    return blocks;
-  }
-  var ListCommand = class extends Command {
-    /**
-    * The type of the list created by the command.
-    */
-    type;
-    /**
-    * List Walker options that change the range of the list items to be changed when the selection is collapsed within a list item.
-    *
-    * In a multi-level list, when the selection is collapsed within a list item, instead of changing only the list items of the same list
-    * type and current indent level, the entire list structure is changed (all list items at all indent levels of any list type).
-    */
-    _listWalkerOptions;
-    /**
-    * Creates an instance of the command.
-    *
-    * @param editor The editor instance.
-    * @param type List type that will be handled by this command.
-    */
-    constructor(editor, type, options = {}) {
-      super(editor);
-      this.type = type;
-      this._listWalkerOptions = options.multiLevel ? {
-        higherIndent: true,
-        lowerIndent: true,
-        sameAttributes: []
-      } : void 0;
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      this.value = this._getValue();
-      this.isEnabled = this._checkEnabled();
-    }
-    /**
-    * Executes the list command.
-    *
-    * @fires execute
-    * @fires afterExecute
-    * @param options Command options.
-    * @param options.forceValue If set, it will force the command behavior. If `true`, the command will try to convert the
-    * selected items and potentially the neighbor elements to the proper list items. If set to `false` it will convert selected elements
-    * to paragraphs. If not set, the command will toggle selected elements to list items or paragraphs, depending on the selection.
-    * @param options.additionalAttributes Additional attributes that are set for list items when the command is executed.
-    */
-    execute(options = {}) {
-      const model = this.editor.model;
-      const document2 = model.document;
-      const selectedBlockObject = getSelectedBlockObject(model);
-      const blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => model.schema.checkAttribute(block, "listType") || canBecomeSimpleListItem(block, model.schema));
-      const turnOff = options.forceValue !== void 0 ? !options.forceValue : this.value;
-      model.change((writer) => {
-        if (turnOff) {
-          const lastBlock = blocks[blocks.length - 1];
-          const itemBlocks = getListItemBlocks(lastBlock, {
-            direction: "forward"
-          });
-          const changedBlocks = [];
-          if (itemBlocks.length > 1) {
-            changedBlocks.push(...splitListItemBefore(itemBlocks[1], writer));
-          }
-          changedBlocks.push(...removeListAttributes(blocks, writer));
-          changedBlocks.push(...outdentFollowingItems(lastBlock, writer));
-          this._fireAfterExecute(changedBlocks);
-        } else if ((selectedBlockObject || document2.selection.isCollapsed) && isListItemBlock(blocks[0])) {
-          const changedBlocks = getListItems(selectedBlockObject || blocks[0], this._listWalkerOptions);
-          for (const block of changedBlocks) {
-            writer.setAttributes({
-              ...options.additionalAttributes,
-              listType: this.type
-            }, block);
-          }
-          this._fireAfterExecute(changedBlocks);
-        } else {
-          const changedBlocks = [];
-          for (const block of blocks) {
-            if (!block.hasAttribute("listType")) {
-              if (!block.is("element", "listItem") && canBecomeSimpleListItem(block, model.schema)) {
-                writer.rename(block, "listItem");
-              }
-              writer.setAttributes({
-                ...options.additionalAttributes,
-                listIndent: 0,
-                listItemId: ListItemUid.next(),
-                listType: this.type
-              }, block);
-              changedBlocks.push(block);
-            } else {
-              for (const node of expandListBlocksToCompleteItems(block, {
-                withNested: false
-              })) {
-                if (node.getAttribute("listType") != this.type) {
-                  writer.setAttributes({
-                    ...options.additionalAttributes,
-                    listType: this.type
-                  }, node);
-                  changedBlocks.push(node);
-                }
-              }
-            }
-          }
-          this._fireAfterExecute(changedBlocks);
-        }
-      });
-    }
-    /**
-    * Fires the `afterExecute` event.
-    *
-    * @param changedBlocks The changed list elements.
-    */
-    _fireAfterExecute(changedBlocks) {
-      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
-    }
-    /**
-    * Checks the command's {@link #value}.
-    *
-    * @returns The current value.
-    */
-    _getValue() {
-      const selection = this.editor.model.document.selection;
-      const blocks = Array.from(selection.getSelectedBlocks());
-      if (!blocks.length) {
-        return false;
-      }
-      for (const block of blocks) {
-        if (block.getAttribute("listType") != this.type) {
-          return false;
-        }
-      }
-      return true;
-    }
-    /**
-    * Checks whether the command can be enabled in the current context.
-    *
-    * @returns Whether the command should be enabled.
-    */
-    _checkEnabled() {
-      const model = this.editor.model;
-      const schema = model.schema;
-      const selection = model.document.selection;
-      const blocks = Array.from(selection.getSelectedBlocks());
-      if (!blocks.length) {
-        return false;
-      }
-      if (this.value) {
-        return true;
-      }
-      for (const block of blocks) {
-        if (schema.checkAttribute(block, "listType") || canBecomeSimpleListItem(block, schema)) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
-  var ListMergeCommand = class extends Command {
-    /**
-    * Whether list item should be merged before or after the selected block.
-    */
-    _direction;
-    /**
-    * Creates an instance of the command.
-    *
-    * @param editor The editor instance.
-    * @param direction Whether list item should be merged before or after the selected block.
-    */
-    constructor(editor, direction) {
-      super(editor);
-      this._direction = direction;
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      this.isEnabled = this._checkEnabled();
-    }
-    /**
-    * Merges list blocks together (depending on the {@link #constructor}'s `direction` parameter).
-    *
-    * @fires execute
-    * @fires afterExecute
-    * @param options Command options.
-    * @param options.shouldMergeOnBlocksContentLevel When set `true`, merging will be performed together
-    * with {@link module:engine/model/model~Model#deleteContent} to get rid of the inline content in the selection or take advantage
-    * of the heuristics in `deleteContent()` that helps convert lists into paragraphs in certain cases.
-    */
-    execute({ shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel2 = false } = {}) {
-      const model = this.editor.model;
-      const selection = model.document.selection;
-      const changedBlocks = [];
-      model.change((writer) => {
-        const { firstElement, lastElement } = this._getMergeSubjectElements(selection, shouldMergeOnBlocksContentLevel2);
-        const firstIndent = firstElement.getAttribute("listIndent") || 0;
-        const lastIndent = lastElement.getAttribute("listIndent");
-        const lastElementId = lastElement.getAttribute("listItemId");
-        if (firstIndent != lastIndent) {
-          const nestedLastElementBlocks = getNestedListBlocks(lastElement);
-          changedBlocks.push(...indentBlocks([
-            lastElement,
-            ...nestedLastElementBlocks
-          ], writer, {
-            indentBy: firstIndent - lastIndent,
-            // If outdenting, the entire sub-tree that follows must be included.
-            expand: firstIndent < lastIndent
-          }));
-        }
-        if (shouldMergeOnBlocksContentLevel2) {
-          let sel = selection;
-          if (selection.isCollapsed) {
-            sel = writer.createSelection(writer.createRange(writer.createPositionAt(firstElement, "end"), writer.createPositionAt(lastElement, 0)));
-          }
-          model.deleteContent(sel, {
-            doNotResetEntireContent: selection.isCollapsed
-          });
-          const lastElementAfterDelete = sel.getLastPosition().parent;
-          const nextSibling = lastElementAfterDelete.nextSibling;
-          changedBlocks.push(lastElementAfterDelete);
-          if (nextSibling && nextSibling !== lastElement && nextSibling.getAttribute("listItemId") == lastElementId) {
-            changedBlocks.push(...mergeListItemBefore(nextSibling, lastElementAfterDelete, writer));
-          }
-        } else {
-          changedBlocks.push(...mergeListItemBefore(lastElement, firstElement, writer));
-        }
-        this._fireAfterExecute(changedBlocks);
-      });
-    }
-    /**
-    * Fires the `afterExecute` event.
-    *
-    * @param changedBlocks The changed list elements.
-    */
-    _fireAfterExecute(changedBlocks) {
-      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
-    }
-    /**
-    * Checks whether the command can be enabled in the current context.
-    *
-    * @returns Whether the command should be enabled.
-    */
-    _checkEnabled() {
-      const model = this.editor.model;
-      const selection = model.document.selection;
-      const selectedBlockObject = getSelectedBlockObject(model);
-      if (selection.isCollapsed || selectedBlockObject) {
-        const positionParent = selectedBlockObject || selection.getFirstPosition().parent;
-        if (!isListItemBlock(positionParent)) {
-          return false;
-        }
-        const siblingNode = this._direction == "backward" ? positionParent.previousSibling : positionParent.nextSibling;
-        if (!siblingNode) {
-          return false;
-        }
-        if (isSingleListItem([
-          positionParent,
-          siblingNode
-        ])) {
-          return false;
-        }
-      } else {
-        const lastPosition = selection.getLastPosition();
-        const firstPosition = selection.getFirstPosition();
-        if (lastPosition.parent === firstPosition.parent) {
-          return false;
-        }
-        if (!isListItemBlock(lastPosition.parent)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    /**
-    * Returns the boundary elements the merge should be executed for. These are not necessarily selection's first
-    * and last position parents but sometimes sibling or even further blocks depending on the context.
-    *
-    * @param selection The selection the merge is executed for.
-    * @param shouldMergeOnBlocksContentLevel When `true`, merge is performed together with
-    * {@link module:engine/model/model~Model#deleteContent} to remove the inline content within the selection.
-    */
-    _getMergeSubjectElements(selection, shouldMergeOnBlocksContentLevel2) {
-      const model = this.editor.model;
-      const selectedBlockObject = getSelectedBlockObject(model);
-      let firstElement, lastElement;
-      if (selection.isCollapsed || selectedBlockObject) {
-        const positionParent = selectedBlockObject || selection.getFirstPosition().parent;
-        const isFirstBlock = isFirstBlockOfListItem(positionParent);
-        if (this._direction == "backward") {
-          lastElement = positionParent;
-          if (isFirstBlock && !shouldMergeOnBlocksContentLevel2) {
-            firstElement = ListWalker.first(positionParent, {
-              sameIndent: true,
-              lowerIndent: true
-            });
-          } else {
-            firstElement = positionParent.previousSibling;
-          }
-        } else {
-          firstElement = positionParent;
-          lastElement = positionParent.nextSibling;
-        }
-      } else {
-        firstElement = selection.getFirstPosition().parent;
-        lastElement = selection.getLastPosition().parent;
-      }
-      return {
-        firstElement,
-        lastElement
-      };
-    }
-  };
-  var ListSplitCommand = class extends Command {
-    /**
-    * Whether list item should be split before or after the selected block.
-    */
-    _direction;
-    /**
-    * Creates an instance of the command.
-    *
-    * @param editor The editor instance.
-    * @param direction Whether list item should be split before or after the selected block.
-    */
-    constructor(editor, direction) {
-      super(editor);
-      this._direction = direction;
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      this.isEnabled = this._checkEnabled();
-    }
-    /**
-    * Splits the list item at the selection.
-    *
-    * @fires execute
-    * @fires afterExecute
-    */
-    execute() {
-      const editor = this.editor;
-      editor.model.change((writer) => {
-        const changedBlocks = splitListItemBefore(this._getStartBlock(), writer);
-        this._fireAfterExecute(changedBlocks);
-      });
-    }
-    /**
-    * Fires the `afterExecute` event.
-    *
-    * @param changedBlocks The changed list elements.
-    */
-    _fireAfterExecute(changedBlocks) {
-      this.fire("afterExecute", sortBlocks(new Set(changedBlocks)));
-    }
-    /**
-    * Checks whether the command can be enabled in the current context.
-    *
-    * @returns Whether the command should be enabled.
-    */
-    _checkEnabled() {
-      const selection = this.editor.model.document.selection;
-      const block = this._getStartBlock();
-      return selection.isCollapsed && isListItemBlock(block) && !isFirstBlockOfListItem(block);
-    }
-    /**
-    * Returns the model element that is the main focus of the command (according to the current selection and command direction).
-    */
-    _getStartBlock() {
-      const doc = this.editor.model.document;
-      const positionParent = doc.selection.getFirstPosition().parent;
-      return this._direction == "before" ? positionParent : positionParent.nextSibling;
-    }
-  };
-  var ListItemBoldIntegration = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListItemBoldIntegration";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const ListFormatting2 = editor.plugins.get("ListFormatting");
-      const listEditing = editor.plugins.get(ListEditing);
-      if (!editor.plugins.has("BoldEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      ListFormatting2.registerFormatAttribute("bold", "listItemBold");
-      listEditing.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemBold",
-        setAttributeOnDowncast(writer, value, viewElement, options) {
-          if (value) {
-            writer.addClass("ck-list-marker-bold", viewElement);
-            if (env.isSafari && !(options && options.dataPipeline)) {
-              writer.setStyle("--ck-content-list-marker-dummy-bold", "0", viewElement);
-            }
-          }
-        }
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const model = editor.model;
-      if (!editor.plugins.has("BoldEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      model.schema.extend("$listItem", {
-        allowAttributes: "listItemBold"
-      });
-      model.schema.setAttributeProperties("listItemBold", {
-        isFormatting: true
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId")) {
-          return false;
-        }
-      }, "listItemBold");
-      editor.conversion.for("upcast").attributeToAttribute({
-        model: "listItemBold",
-        view: {
-          name: "li",
-          classes: "ck-list-marker-bold"
-        }
-      });
-    }
-  };
-  var ListItemItalicIntegration = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListItemItalicIntegration";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const ListFormatting2 = editor.plugins.get("ListFormatting");
-      const listEditing = editor.plugins.get(ListEditing);
-      if (!editor.plugins.has("ItalicEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      ListFormatting2.registerFormatAttribute("italic", "listItemItalic");
-      listEditing.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemItalic",
-        setAttributeOnDowncast(writer, value, viewElement, options) {
-          if (value) {
-            writer.addClass("ck-list-marker-italic", viewElement);
-            if (env.isSafari && !(options && options.dataPipeline)) {
-              writer.setStyle("--ck-content-list-marker-dummy-italic", "0", viewElement);
-            }
-          }
-        }
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const model = editor.model;
-      if (!editor.plugins.has("ItalicEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      model.schema.extend("$listItem", {
-        allowAttributes: "listItemItalic"
-      });
-      model.schema.setAttributeProperties("listItemItalic", {
-        isFormatting: true
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId")) {
-          return false;
-        }
-      }, "listItemItalic");
-      editor.conversion.for("upcast").attributeToAttribute({
-        model: "listItemItalic",
-        view: {
-          name: "li",
-          classes: "ck-list-marker-italic"
-        }
-      });
-    }
-  };
-  var ListItemFontSizeIntegration = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListItemFontSizeIntegration";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const ListFormatting2 = editor.plugins.get("ListFormatting");
-      const listEditing = editor.plugins.get(ListEditing);
-      if (!editor.plugins.has("FontSizeEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      const normalizedFontSizeOptions = normalizeOptions(editor.config.get("fontSize.options"));
-      ListFormatting2.registerFormatAttribute("fontSize", "listItemFontSize");
-      listEditing.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemFontSize",
-        setAttributeOnDowncast(writer, value, viewElement, options) {
-          if (value) {
-            const fontSizeOption = normalizedFontSizeOptions.find((option) => option.model == value);
-            if (fontSizeOption && fontSizeOption.view && typeof fontSizeOption.view != "string") {
-              if (fontSizeOption.view.styles) {
-                writer.addClass("ck-list-marker-font-size", viewElement);
-                writer.setStyle("--ck-content-list-marker-font-size", fontSizeOption.view.styles["font-size"], viewElement);
-              } else if (fontSizeOption.view.classes) {
-                writer.addClass(`ck-list-marker-font-size-${value}`, viewElement);
-                if (env.isSafari && !(options && options.dataPipeline)) {
-                  writer.setStyle("--ck-content-list-marker-dummy-font-size", "0", viewElement);
-                }
-              }
-            } else {
-              writer.addClass("ck-list-marker-font-size", viewElement);
-              writer.setStyle("--ck-content-list-marker-font-size", value, viewElement);
-            }
-          }
-        }
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const model = editor.model;
-      if (!editor.plugins.has("FontSizeEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      model.schema.extend("$listItem", {
-        allowAttributes: "listItemFontSize"
-      });
-      model.schema.setAttributeProperties("listItemFontSize", {
-        isFormatting: true
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId")) {
-          return false;
-        }
-      }, "listItemFontSize");
-      editor.conversion.for("upcast").elementToAttribute({
-        model: {
-          key: "listItemFontSize",
-          value: (viewElement) => viewElement.getStyle("--ck-content-list-marker-font-size")
-        },
-        view: {
-          name: "li",
-          classes: "ck-list-marker-font-size",
-          styles: {
-            "--ck-content-list-marker-font-size": /.*/
-          }
-        }
-      });
-      const fontSizeOptions = normalizeOptions(editor.config.get("fontSize.options"));
-      for (const option of fontSizeOptions) {
-        if (option.model && option.view) {
-          editor.conversion.for("upcast").elementToAttribute({
-            model: {
-              key: "listItemFontSize",
-              value: option.model
-            },
-            view: {
-              name: "li",
-              classes: `ck-list-marker-font-size-${option.model}`
-            }
-          });
-        }
-      }
-    }
-  };
-  var ListItemFontColorIntegration = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListItemFontColorIntegration";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const ListFormatting2 = editor.plugins.get("ListFormatting");
-      const listEditing = editor.plugins.get(ListEditing);
-      if (!editor.plugins.has("FontColorEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      ListFormatting2.registerFormatAttribute("fontColor", "listItemFontColor");
-      listEditing.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemFontColor",
-        setAttributeOnDowncast(writer, value, viewElement) {
-          if (value) {
-            writer.addClass("ck-list-marker-color", viewElement);
-            writer.setStyle("--ck-content-list-marker-color", value, viewElement);
-          }
-        }
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const model = editor.model;
-      if (!editor.plugins.has("FontColorEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      model.schema.extend("$listItem", {
-        allowAttributes: "listItemFontColor"
-      });
-      model.schema.setAttributeProperties("listItemFontColor", {
-        isFormatting: true
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId")) {
-          return false;
-        }
-      }, "listItemFontColor");
-      editor.conversion.for("upcast").attributeToAttribute({
-        model: {
-          key: "listItemFontColor",
-          value: (viewElement) => {
-            return viewElement.getStyle("--ck-content-list-marker-color");
-          }
-        },
-        view: {
-          name: "li",
-          classes: "ck-list-marker-color",
-          styles: {
-            "--ck-content-list-marker-color": /.*/
-          }
-        }
-      });
-    }
-  };
-  var ListItemFontFamilyIntegration = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListItemFontFamilyIntegration";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const ListFormatting2 = editor.plugins.get("ListFormatting");
-      const listEditing = editor.plugins.get(ListEditing);
-      if (!editor.plugins.has("FontFamilyEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      ListFormatting2.registerFormatAttribute("fontFamily", "listItemFontFamily");
-      listEditing.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemFontFamily",
-        setAttributeOnDowncast(writer, value, viewElement) {
-          if (value) {
-            writer.addClass("ck-list-marker-font-family", viewElement);
-            writer.setStyle("--ck-content-list-marker-font-family", value, viewElement);
-          }
-        }
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const model = editor.model;
-      if (!editor.plugins.has("FontFamilyEditing") || !this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      model.schema.extend("$listItem", {
-        allowAttributes: "listItemFontFamily"
-      });
-      model.schema.setAttributeProperties("listItemFontFamily", {
-        isFormatting: true
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId")) {
-          return false;
-        }
-      }, "listItemFontFamily");
-      editor.conversion.for("upcast").attributeToAttribute({
-        model: {
-          key: "listItemFontFamily",
-          value: (viewElement) => {
-            return viewElement.getStyle("--ck-content-list-marker-font-family");
-          }
-        },
-        view: {
-          name: "li",
-          classes: "ck-list-marker-font-family",
-          styles: {
-            "--ck-content-list-marker-font-family": /.*/
-          }
-        }
-      });
-    }
-  };
-  var ListFormatting = class extends Plugin {
-    /**
-    * The list of loaded formatting.
-    */
-    _loadedFormatting = {};
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListFormatting";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListItemBoldIntegration,
-        ListItemItalicIntegration,
-        ListItemFontSizeIntegration,
-        ListItemFontColorIntegration,
-        ListItemFontFamilyIntegration
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    constructor(editor) {
-      super(editor);
-      editor.config.define("list.enableListItemMarkerFormatting", true);
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      if (!this.editor.config.get("list.enableListItemMarkerFormatting")) {
-        return;
-      }
-      this._registerPostfixerForListItemFormatting();
-    }
-    /**
-    * Registers a postfixer that ensures that the list item formatting attribute is consistent with the formatting
-    * applied to the content of the list item.
-    */
-    _registerPostfixerForListItemFormatting() {
-      const model = this.editor.model;
-      model.document.registerPostFixer((writer) => {
-        const changes = model.document.differ.getChanges();
-        const modifiedListItems = /* @__PURE__ */ new Set();
-        let returnValue = false;
-        for (const entry of changes) {
-          if (entry.type === "attribute") {
-            if (entry.attributeKey == "listItemId" || entry.attributeKey == "listType" || this._isInlineOrSelectionFormatting(entry.attributeKey) || Object.values(this._loadedFormatting).includes(entry.attributeKey)) {
-              if (isListItemBlock(entry.range.start.nodeAfter)) {
-                modifiedListItems.add(entry.range.start.nodeAfter);
-              } else if (isListItemBlock(entry.range.start.parent)) {
-                modifiedListItems.add(entry.range.start.parent);
-              }
-            }
-          } else {
-            if (isListItemBlock(entry.position.nodeAfter)) {
-              modifiedListItems.add(entry.position.nodeAfter);
-            }
-            if (isListItemBlock(entry.position.nodeBefore)) {
-              modifiedListItems.add(entry.position.nodeBefore);
-            }
-            if (isListItemBlock(entry.position.parent)) {
-              modifiedListItems.add(entry.position.parent);
-            }
-            if (entry.type == "insert" && entry.name != "$text") {
-              const range = writer.createRangeIn(entry.position.nodeAfter);
-              for (const item of range.getItems()) {
-                if (isListItemBlock(item)) {
-                  modifiedListItems.add(item);
-                }
-              }
-            }
-          }
-        }
-        for (const listItem of modifiedListItems) {
-          const formats = getListItemConsistentFormat(model, listItem, Object.keys(this._loadedFormatting));
-          for (const [formatAttributeName, formatValue] of Object.entries(formats)) {
-            const listItemFormatAttributeName = this._loadedFormatting[formatAttributeName];
-            if (formatValue && setFormattingToListItem(writer, listItem, listItemFormatAttributeName, formatValue)) {
-              returnValue = true;
-            } else if (!formatValue && removeFormattingFromListItem(writer, listItem, listItemFormatAttributeName)) {
-              returnValue = true;
-            }
-          }
-        }
-        return returnValue;
-      });
-    }
-    /**
-    * Registers an integration between a default attribute (e.g., `fontFamily`) and a new attribute
-    * intended specifically for list item elements (e.g., `listItemFontFamily`).
-    *
-    * These attributes are later used by the postfixer logic to determine whether to add the new attribute
-    * to the list item element, based on whether there is a consistent default formatting attribute
-    * applied within its content.
-    */
-    registerFormatAttribute(formatAttribute, listItemFormatAttribute) {
-      this._loadedFormatting[formatAttribute] = listItemFormatAttribute;
-    }
-    /**
-    * Returns true if the given model attribute name is a supported inline formatting attribute.
-    */
-    _isInlineOrSelectionFormatting(attributeKey) {
-      return attributeKey.replace(/^selection:/, "") in this._loadedFormatting;
-    }
-  };
-  function getListItemConsistentFormat(model, listItem, attributeKeys) {
-    if (isFirstBlockOfListItem(listItem)) {
-      return getSingleListItemConsistentFormat(model, listItem, attributeKeys);
-    }
-    const listItemBlocks = getAllListItemBlocks(listItem);
-    return getSingleListItemConsistentFormat(model, listItemBlocks[0], attributeKeys);
-  }
-  function getSingleListItemConsistentFormat(model, listItem, attributeKeys) {
-    if (!isNumberedOrBulletedList(listItem) || model.schema.isLimit(listItem)) {
-      return Object.fromEntries(attributeKeys.map((attributeKey) => [
-        attributeKey
-      ]));
-    }
-    if (listItem.isEmpty) {
-      return Object.fromEntries(attributeKeys.map((attributeKey) => [
-        attributeKey,
-        listItem.getAttribute(`selection:${attributeKey}`)
-      ]));
-    }
-    const attributesToCheck = new Set(attributeKeys);
-    const valuesMap = {};
-    const range = model.createRangeIn(listItem);
-    const walker = range.getWalker({
-      ignoreElementEnd: true
-    });
-    for (const { item } of walker) {
-      for (const attributeKey of attributesToCheck) {
-        if (model.schema.checkAttribute(item, attributeKey)) {
-          const formatAttribute = item.getAttribute(attributeKey);
-          if (formatAttribute === void 0) {
-            attributesToCheck.delete(attributeKey);
-            valuesMap[attributeKey] = void 0;
-          } else if (valuesMap[attributeKey] === void 0) {
-            valuesMap[attributeKey] = formatAttribute;
-          } else if (valuesMap[attributeKey] !== formatAttribute) {
-            attributesToCheck.delete(attributeKey);
-            valuesMap[attributeKey] = void 0;
-          }
-        } else if (!(attributeKey in valuesMap)) {
-          valuesMap[attributeKey] = void 0;
-        }
-      }
-      if (!attributesToCheck.size) {
-        break;
-      }
-      if (model.schema.isLimit(item)) {
-        walker.jumpTo(model.createPositionAfter(item));
-      }
-    }
-    return valuesMap;
-  }
-  function setFormattingToListItem(writer, listItem, attributeKey, attributeValue) {
-    const listItemBlocks = getAllListItemBlocks(listItem);
-    let wasChanged = false;
-    for (const listItem2 of listItemBlocks) {
-      if (!listItem2.hasAttribute(attributeKey) || listItem2.getAttribute(attributeKey) !== attributeValue) {
-        writer.setAttribute(attributeKey, attributeValue, listItem2);
-        wasChanged = true;
-      }
-    }
-    return wasChanged;
-  }
-  function removeFormattingFromListItem(writer, listItem, attributeKey) {
-    const listItemBlocks = getAllListItemBlocks(listItem);
-    let wasChanged = false;
-    for (const listItem2 of listItemBlocks) {
-      if (listItem2.hasAttribute(attributeKey)) {
-        writer.removeAttribute(attributeKey, listItem2);
-        wasChanged = true;
-      }
-    }
-    return wasChanged;
-  }
-  function isNumberedOrBulletedList(listItem) {
-    return [
-      "numbered",
-      "bulleted",
-      "customNumbered",
-      "customBulleted"
-    ].includes(listItem.getAttribute("listType"));
-  }
-  var ListUtils = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListUtils";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * Expands the given list of selected blocks to include all the items of the lists they're in.
-    *
-    * @param blocks The list of selected blocks.
-    */
-    expandListBlocksToCompleteList(blocks) {
-      return expandListBlocksToCompleteList(blocks);
-    }
-    /**
-    * Check if the given block is the first in the list item.
-    *
-    * @param listBlock The list block element.
-    */
-    isFirstBlockOfListItem(listBlock) {
-      return isFirstBlockOfListItem(listBlock);
-    }
-    /**
-    * Returns true if the given model node is a list item block.
-    *
-    * @param node A model node.
-    */
-    isListItemBlock(node) {
-      return isListItemBlock(node);
-    }
-    /**
-    * Expands the given list of selected blocks to include the leading and tailing blocks of partially selected list items.
-    *
-    * @param blocks The list of selected blocks.
-    * @param options.withNested Whether should include nested list items.
-    */
-    expandListBlocksToCompleteItems(blocks, options = {}) {
-      return expandListBlocksToCompleteItems(blocks, options);
-    }
-    /**
-    * Returns true if listType is of type `numbered` or `customNumbered`.
-    */
-    isNumberedListType(listType) {
-      return isNumberedListType(listType);
-    }
-  };
-  function isListView(viewElement) {
-    return viewElement.is("element", "ol") || viewElement.is("element", "ul");
-  }
-  function isListItemView(viewElement) {
-    return viewElement.is("element", "li");
-  }
-  function getIndent$1(listItem) {
-    let indent2 = 0;
-    let parent = listItem.parent;
-    while (parent) {
-      if (isListItemView(parent)) {
-        indent2++;
-      } else {
-        const previousSibling = parent.previousSibling;
-        if (previousSibling && isListItemView(previousSibling)) {
-          indent2++;
-        }
-      }
-      parent = parent.parent;
-    }
-    return indent2;
-  }
-  function createListElement(writer, indent2, type, id = getViewElementIdForListType(type, indent2)) {
-    return writer.createAttributeElement(getViewElementNameForListType(type), null, {
-      priority: 2 * indent2 / 100 - 100,
-      id
-    });
-  }
-  function createListItemElement(writer, indent2, id) {
-    return writer.createAttributeElement("li", null, {
-      priority: (2 * indent2 + 1) / 100 - 100,
-      id
-    });
-  }
-  function getViewElementNameForListType(type) {
-    return type == "numbered" || type == "customNumbered" ? "ol" : "ul";
-  }
-  function getViewElementIdForListType(type, indent2) {
-    return `list-${type}-${indent2}`;
-  }
-  function findAndAddListHeadToMap(position, itemToListHead, visited) {
-    const previousNode = position.nodeBefore;
-    if (!isListItemBlock(previousNode)) {
-      const item = position.nodeAfter;
-      if (isListItemBlock(item)) {
-        itemToListHead.add(item);
-      }
-    } else {
-      let listHead = previousNode;
-      for (const { node } of new SiblingListBlocksIterator(listHead, "backward")) {
-        listHead = node;
-        if (visited.has(listHead)) {
-          return;
-        }
-        visited.add(listHead);
-        if (itemToListHead.has(previousNode)) {
-          return;
-        }
-      }
-      itemToListHead.add(listHead);
-    }
-  }
-  function fixListIndents(listNodes, writer) {
-    let maxIndent = 0;
-    let prevIndent = -1;
-    let fixBy = null;
-    let applied = false;
-    for (const { node } of listNodes) {
-      const itemIndent = node.getAttribute("listIndent");
-      if (itemIndent > maxIndent) {
-        let newIndent;
-        if (fixBy === null) {
-          fixBy = itemIndent - maxIndent;
-          newIndent = maxIndent;
-        } else {
-          if (fixBy > itemIndent) {
-            fixBy = itemIndent;
-          }
-          newIndent = itemIndent - fixBy;
-        }
-        if (newIndent > prevIndent + 1) {
-          newIndent = prevIndent + 1;
-        }
-        writer.setAttribute("listIndent", newIndent, node);
-        applied = true;
-        prevIndent = newIndent;
-      } else {
-        fixBy = null;
-        maxIndent = itemIndent + 1;
-        prevIndent = itemIndent;
-      }
-    }
-    return applied;
-  }
-  function fixListItemIds(listNodes, seenIds, writer) {
-    const visited = /* @__PURE__ */ new Set();
-    let applied = false;
-    for (const { node } of listNodes) {
-      if (visited.has(node)) {
-        continue;
-      }
-      let listType = node.getAttribute("listType");
-      let listItemId = node.getAttribute("listItemId");
-      if (seenIds.has(listItemId)) {
-        listItemId = ListItemUid.next();
-      }
-      seenIds.add(listItemId);
-      if (node.is("element", "listItem")) {
-        if (node.getAttribute("listItemId") != listItemId) {
-          writer.setAttribute("listItemId", listItemId, node);
-          applied = true;
-        }
-        continue;
-      }
-      for (const block of getListItemBlocks(node, {
-        direction: "forward"
-      })) {
-        visited.add(block);
-        if (block.getAttribute("listType") != listType) {
-          listItemId = ListItemUid.next();
-          listType = block.getAttribute("listType");
-        }
-        if (block.getAttribute("listItemId") != listItemId) {
-          writer.setAttribute("listItemId", listItemId, block);
-          applied = true;
-        }
-      }
-    }
-    return applied;
-  }
-  function listItemUpcastConverter() {
-    return (evt, data, conversionApi) => {
-      const { writer, schema } = conversionApi;
-      if (!data.modelRange) {
-        return;
-      }
-      const items = Array.from(data.modelRange.getItems({
-        shallow: true
-      })).filter((item) => schema.checkAttribute(item, "listItemId"));
-      if (!items.length) {
-        return;
-      }
-      const listItemId = data.viewItem.getAttribute("data-list-item-id") || ListItemUid.next();
-      conversionApi.consumable.consume(data.viewItem, {
-        attributes: "data-list-item-id"
-      });
-      const listIndent = getIndent$1(data.viewItem);
-      let listType = data.viewItem.parent && data.viewItem.parent.is("element", "ol") ? "numbered" : "bulleted";
-      const firstItemListType = items[0].getAttribute("listType");
-      if (firstItemListType) {
-        listType = firstItemListType;
-      }
-      const attributes = {
-        listItemId,
-        listIndent,
-        listType
-      };
-      for (const item of items) {
-        if (!item.hasAttribute("listItemId")) {
-          writer.setAttributes(attributes, item);
-        }
-      }
-      if (items.length > 1) {
-        if (items[1].getAttribute("listItemId") != attributes.listItemId) {
-          conversionApi.keepEmptyElement(items[0]);
-        }
-      }
-    };
-  }
-  function reconvertItemsOnDataChange(model, editing, attributeNames, listEditing) {
-    return () => {
-      const changes = model.document.differ.getChanges();
-      const itemsToRefresh = [];
-      const itemToListHead = /* @__PURE__ */ new Set();
-      const changedItems = /* @__PURE__ */ new Set();
-      const visited = /* @__PURE__ */ new Set();
-      for (const entry of changes) {
-        if (entry.type == "insert" && entry.name != "$text") {
-          findAndAddListHeadToMap(entry.position, itemToListHead, visited);
-          if (!entry.attributes.has("listItemId")) {
-            findAndAddListHeadToMap(entry.position.getShiftedBy(entry.length), itemToListHead, visited);
-          } else {
-            changedItems.add(entry.position.nodeAfter);
-          }
-        } else if (entry.type == "remove" && entry.attributes.has("listItemId")) {
-          findAndAddListHeadToMap(entry.position, itemToListHead, visited);
-        } else if (entry.type == "attribute") {
-          const item = entry.range.start.nodeAfter;
-          if (attributeNames.includes(entry.attributeKey)) {
-            findAndAddListHeadToMap(entry.range.start, itemToListHead, visited);
-            if (entry.attributeNewValue === null) {
-              findAndAddListHeadToMap(entry.range.start.getShiftedBy(1), itemToListHead, visited);
-              if (doesItemBlockRequiresRefresh(item)) {
-                itemsToRefresh.push(item);
-              }
-            } else {
-              changedItems.add(item);
-            }
-          } else if (isListItemBlock(item)) {
-            if (doesItemBlockRequiresRefresh(item)) {
-              itemsToRefresh.push(item);
-            }
-          }
-        }
-      }
-      for (const listHead of itemToListHead.values()) {
-        itemsToRefresh.push(...collectListItemsToRefresh(listHead, changedItems));
-      }
-      for (const item of new Set(itemsToRefresh)) {
-        editing.reconvertItem(item);
-      }
-    };
-    function collectListItemsToRefresh(listHead, changedItems) {
-      const itemsToRefresh = [];
-      const visited = /* @__PURE__ */ new Set();
-      const stack = [];
-      for (const { node, previous } of new SiblingListBlocksIterator(listHead)) {
-        if (visited.has(node)) {
-          continue;
-        }
-        const itemIndent = node.getAttribute("listIndent");
-        if (previous && itemIndent < previous.getAttribute("listIndent")) {
-          stack.length = itemIndent + 1;
-        }
-        stack[itemIndent] = {
-          modelAttributes: Object.fromEntries(Array.from(node.getAttributes()).filter(([key]) => attributeNames.includes(key))),
-          modelElement: node
-        };
-        const blocks = getListItemBlocks(node, {
-          direction: "forward"
-        });
-        for (const block of blocks) {
-          visited.add(block);
-          if (doesItemBlockRequiresRefresh(block, blocks)) {
-            itemsToRefresh.push(block);
-          } else if (doesItemWrappingRequiresRefresh(block, stack, changedItems)) {
-            itemsToRefresh.push(block);
-          }
-        }
-      }
-      return itemsToRefresh;
-    }
-    function doesItemBlockRequiresRefresh(item, blocks) {
-      const viewElement = editing.mapper.toViewElement(item);
-      if (!viewElement) {
-        return false;
-      }
-      const needsRefresh = listEditing.fire("checkElement", {
-        modelElement: item,
-        viewElement
-      });
-      if (needsRefresh) {
-        return true;
-      }
-      if (!item.is("element", "paragraph") && !item.is("element", "listItem")) {
-        return false;
-      }
-      const useBogus = shouldUseBogusParagraph(item, attributeNames, blocks);
-      if (useBogus && viewElement.is("element", "p")) {
-        return true;
-      } else if (!useBogus && viewElement.is("element", "span")) {
-        return true;
-      }
-      return false;
-    }
-    function doesItemWrappingRequiresRefresh(item, stack, changedItems) {
-      if (changedItems.has(item)) {
-        return false;
-      }
-      const viewElement = editing.mapper.toViewElement(item);
-      let indent2 = stack.length - 1;
-      for (let element = viewElement.parent; !element.is("editableElement"); element = element.parent) {
-        const isListItemElement = isListItemView(element);
-        const isListElement = isListView(element);
-        if (!isListElement && !isListItemElement) {
-          continue;
-        }
-        const eventName = `checkAttributes:${isListItemElement ? "item" : "list"}`;
-        const needsRefresh = listEditing.fire(eventName, {
-          viewElement: element,
-          modelAttributes: stack[indent2].modelAttributes,
-          modelReferenceElement: stack[indent2].modelElement
-        });
-        if (needsRefresh) {
-          break;
-        }
-        if (isListElement) {
-          indent2--;
-          if (indent2 < 0) {
-            return false;
-          }
-        }
-      }
-      return true;
-    }
-  }
-  function listItemDowncastConverter(attributeNames, strategies, model, { dataPipeline } = {}) {
-    const consumer = createAttributesConsumer(attributeNames);
-    return (evt, data, conversionApi) => {
-      const { writer, mapper, consumable } = conversionApi;
-      const listItem = data.item;
-      if (!attributeNames.includes(data.attributeKey)) {
-        return;
-      }
-      if (!consumer(listItem, consumable)) {
-        return;
-      }
-      const options = {
-        ...conversionApi.options,
-        dataPipeline
-      };
-      const viewElement = findMappedViewElement(listItem, mapper, model);
-      removeCustomMarkerElements(viewElement, writer, mapper);
-      unwrapListItemBlock(viewElement, writer);
-      const viewRange = insertCustomMarkerElements(listItem, viewElement, strategies, writer, options);
-      wrapListItemBlock(listItem, viewRange, strategies, writer, options);
-    };
-  }
-  function listItemDowncastRemoveConverter(schema) {
-    return (evt, data, conversionApi) => {
-      const { writer, mapper } = conversionApi;
-      const elementName = evt.name.split(":")[1];
-      if (!schema.checkAttribute(elementName, "listItemId")) {
-        return;
-      }
-      const viewStart = mapper.toViewPosition(data.position);
-      const modelEnd = data.position.getShiftedBy(data.length);
-      const viewEnd = mapper.toViewPosition(modelEnd, {
-        isPhantom: true
-      });
-      const viewRange = writer.createRange(viewStart, viewEnd).getTrimmed();
-      const viewElement = viewRange.end.nodeBefore;
-      if (!viewElement) {
-        return;
-      }
-      removeCustomMarkerElements(viewElement, writer, mapper);
-    };
-  }
-  function bogusParagraphCreator(attributeNames, { dataPipeline } = {}) {
-    return (modelElement, { writer }) => {
-      if (!shouldUseBogusParagraph(modelElement, attributeNames)) {
-        return null;
-      }
-      if (!dataPipeline) {
-        return writer.createContainerElement("span", {
-          class: "ck-list-bogus-paragraph"
-        });
-      }
-      const viewElement = writer.createContainerElement("p");
-      writer.setCustomProperty("dataPipeline:transparentRendering", true, viewElement);
-      return viewElement;
-    };
-  }
-  function findMappedViewElement(element, mapper, model) {
-    const modelRange = model.createRangeOn(element);
-    const viewRange = mapper.toViewRange(modelRange).getTrimmed();
-    return viewRange.end.nodeBefore;
-  }
-  function createModelToViewPositionMapper(strategies, view) {
-    return (evt, data) => {
-      if (data.modelPosition.offset > 0) {
-        return;
-      }
-      const positionParent = data.modelPosition.parent;
-      if (!isListItemBlock(positionParent)) {
-        return;
-      }
-      if (!strategies.some((strategy) => strategy.scope == "itemMarker" && strategy.canInjectMarkerIntoElement && strategy.canInjectMarkerIntoElement(positionParent))) {
-        return;
-      }
-      const viewElement = data.mapper.toViewElement(positionParent);
-      const viewRange = view.createRangeIn(viewElement);
-      const viewWalker = viewRange.getWalker();
-      let positionAfterLastMarker = viewRange.start;
-      for (const { item } of viewWalker) {
-        if (item.is("element") && data.mapper.toModelElement(item) || item.is("$textProxy")) {
-          break;
-        }
-        if (item.is("element") && item.getCustomProperty("listItemMarker")) {
-          positionAfterLastMarker = view.createPositionAfter(item);
-          viewWalker.skip(({ previousPosition }) => !previousPosition.isEqual(positionAfterLastMarker));
-        }
-      }
-      data.viewPosition = positionAfterLastMarker;
-    };
-  }
-  function removeCustomMarkerElements(viewElement, viewWriter, mapper) {
-    while (viewElement.parent.is("attributeElement") && viewElement.parent.getCustomProperty("listItemWrapper")) {
-      viewWriter.unwrap(viewWriter.createRangeOn(viewElement), viewElement.parent);
-    }
-    const markersToRemove = [];
-    collectMarkersToRemove(viewWriter.createPositionBefore(viewElement).getWalker({
-      direction: "backward"
-    }));
-    collectMarkersToRemove(viewWriter.createRangeIn(viewElement).getWalker());
-    for (const marker2 of markersToRemove) {
-      viewWriter.remove(marker2);
-    }
-    function collectMarkersToRemove(viewWalker) {
-      for (const { item } of viewWalker) {
-        if (item.is("element") && mapper.toModelElement(item)) {
-          break;
-        }
-        if (item.is("element") && item.getCustomProperty("listItemMarker")) {
-          markersToRemove.push(item);
-        }
-      }
-    }
-  }
-  function insertCustomMarkerElements(listItem, viewElement, strategies, writer, { dataPipeline }) {
-    let viewRange = writer.createRangeOn(viewElement);
-    if (!isFirstBlockOfListItem(listItem)) {
-      return viewRange;
-    }
-    for (const strategy of strategies) {
-      if (strategy.scope != "itemMarker") {
-        continue;
-      }
-      const markerElement = strategy.createElement(writer, listItem, {
-        dataPipeline
-      });
-      if (!markerElement) {
-        continue;
-      }
-      writer.setCustomProperty("listItemMarker", true, markerElement);
-      if (strategy.canInjectMarkerIntoElement && strategy.canInjectMarkerIntoElement(listItem)) {
-        writer.insert(writer.createPositionAt(viewElement, 0), markerElement);
-      } else {
-        writer.insert(viewRange.start, markerElement);
-        viewRange = writer.createRange(writer.createPositionBefore(markerElement), writer.createPositionAfter(viewElement));
-      }
-      if (!strategy.createWrapperElement || !strategy.canWrapElement) {
-        continue;
-      }
-      const wrapper = strategy.createWrapperElement(writer, listItem, {
-        dataPipeline
-      });
-      writer.setCustomProperty("listItemWrapper", true, wrapper);
-      if (strategy.canWrapElement(listItem)) {
-        viewRange = writer.wrap(viewRange, wrapper);
-      } else {
-        viewRange = writer.wrap(writer.createRangeOn(markerElement), wrapper);
-        viewRange = writer.createRange(viewRange.start, writer.createPositionAfter(viewElement));
-      }
-    }
-    return viewRange;
-  }
-  function unwrapListItemBlock(viewElement, viewWriter) {
-    let attributeElement = viewElement.parent;
-    while (attributeElement.is("attributeElement") && [
-      "ul",
-      "ol",
-      "li"
-    ].includes(attributeElement.name)) {
-      const parentElement = attributeElement.parent;
-      viewWriter.unwrap(viewWriter.createRangeOn(viewElement), attributeElement);
-      attributeElement = parentElement;
-    }
-  }
-  function wrapListItemBlock(listItem, viewRange, strategies, writer, options) {
-    if (!listItem.hasAttribute("listIndent")) {
-      return;
-    }
-    const listItemIndent = listItem.getAttribute("listIndent");
-    let currentListItem = listItem;
-    for (let indent2 = listItemIndent; indent2 >= 0; indent2--) {
-      const listItemViewElement = createListItemElement(writer, indent2, currentListItem.getAttribute("listItemId"));
-      const listViewElement = createListElement(writer, indent2, currentListItem.getAttribute("listType"));
-      for (const strategy of strategies) {
-        if ((strategy.scope == "list" || strategy.scope == "item") && currentListItem.hasAttribute(strategy.attributeName)) {
-          strategy.setAttributeOnDowncast(writer, currentListItem.getAttribute(strategy.attributeName), strategy.scope == "list" ? listViewElement : listItemViewElement, options);
-        }
-      }
-      viewRange = writer.wrap(viewRange, listItemViewElement);
-      viewRange = writer.wrap(viewRange, listViewElement);
-      if (indent2 == 0) {
-        break;
-      }
-      currentListItem = ListWalker.first(currentListItem, {
-        lowerIndent: true
-      });
-      if (!currentListItem) {
-        break;
-      }
-    }
-  }
-  function createAttributesConsumer(attributeNames) {
-    return (node, consumable) => {
-      const events = [];
-      for (const attributeName of attributeNames) {
-        if (node.hasAttribute(attributeName)) {
-          events.push(`attribute:${attributeName}`);
-        }
-      }
-      if (!events.every((event) => consumable.test(node, event) !== false)) {
-        return false;
-      }
-      events.forEach((event) => consumable.consume(node, event));
-      return true;
-    };
-  }
-  function shouldUseBogusParagraph(item, attributeNames, blocks = getAllListItemBlocks(item)) {
-    if (!isListItemBlock(item)) {
-      return false;
-    }
-    for (const attributeKey of item.getAttributeKeys()) {
-      if (attributeKey.startsWith("selection:") || attributeKey == "htmlEmptyBlock") {
-        continue;
-      }
-      if (!attributeNames.includes(attributeKey)) {
-        return false;
-      }
-    }
-    return blocks.length < 2;
-  }
-  var LIST_BASE_ATTRIBUTES = [
-    "listType",
-    "listIndent",
-    "listItemId"
-  ];
-  var ListEditing = class extends Plugin {
-    /**
-    * The list of registered downcast strategies.
-    */
-    _downcastStrategies = [];
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListEditing";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        Enter,
-        Delete,
-        ListUtils,
-        ClipboardPipeline,
-        ListFormatting
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    constructor(editor) {
-      super(editor);
-      editor.config.define("list.multiBlock", true);
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const model = editor.model;
-      const multiBlock = editor.config.get("list.multiBlock");
-      if (editor.plugins.has("LegacyListEditing")) {
-        throw new CKEditorError("list-feature-conflict", this, {
-          conflictPlugin: "LegacyListEditing"
-        });
-      }
-      model.schema.register("$listItem", {
-        allowAttributes: LIST_BASE_ATTRIBUTES
-      });
-      if (multiBlock) {
-        model.schema.extend("$container", {
-          allowAttributesOf: "$listItem"
-        });
-        model.schema.extend("$block", {
-          allowAttributesOf: "$listItem"
-        });
-        model.schema.extend("$blockObject", {
-          allowAttributesOf: "$listItem"
-        });
-      } else {
-        model.schema.register("listItem", {
-          inheritAllFrom: "$block",
-          allowAttributesOf: "$listItem"
-        });
-      }
-      for (const attribute of LIST_BASE_ATTRIBUTES) {
-        model.schema.setAttributeProperties(attribute, {
-          copyOnReplace: true
-        });
-      }
-      editor.commands.add("numberedList", new ListCommand(editor, "numbered"));
-      editor.commands.add("bulletedList", new ListCommand(editor, "bulleted"));
-      editor.commands.add("customNumberedList", new ListCommand(editor, "customNumbered", {
-        multiLevel: true
-      }));
-      editor.commands.add("customBulletedList", new ListCommand(editor, "customBulleted", {
-        multiLevel: true
-      }));
-      editor.commands.add("indentList", new ListIndentCommand(editor, "forward"));
-      editor.commands.add("outdentList", new ListIndentCommand(editor, "backward"));
-      editor.commands.add("splitListItemBefore", new ListSplitCommand(editor, "before"));
-      editor.commands.add("splitListItemAfter", new ListSplitCommand(editor, "after"));
-      if (multiBlock) {
-        editor.commands.add("mergeListItemBackward", new ListMergeCommand(editor, "backward"));
-        editor.commands.add("mergeListItemForward", new ListMergeCommand(editor, "forward"));
-      }
-      this._setupDeleteIntegration();
-      this._setupEnterIntegration();
-      this._setupTabIntegration();
-      this._setupClipboardIntegration();
-      this._setupAccessibilityIntegration();
-      this._setupListItemIdConversionStrategy();
-    }
-    /**
-    * @inheritDoc
-    */
-    afterInit() {
-      const editor = this.editor;
-      const commands = editor.commands;
-      const indent2 = commands.get("indent");
-      const outdent2 = commands.get("outdent");
-      if (indent2) {
-        indent2.registerChildCommand(commands.get("indentList"), {
-          priority: "high"
-        });
-      }
-      if (outdent2) {
-        outdent2.registerChildCommand(commands.get("outdentList"), {
-          priority: "lowest"
-        });
-      }
-      this._setupModelPostFixing();
-      this._setupConversion();
-    }
-    /**
-    * Registers a downcast strategy.
-    *
-    * **Note**: Strategies must be registered in the `Plugin#init()` phase so that it can be applied
-    * in the `ListEditing#afterInit()`.
-    *
-    * @param strategy The downcast strategy to register.
-    */
-    registerDowncastStrategy(strategy) {
-      this._downcastStrategies.push(strategy);
-    }
-    /**
-    * Returns list of model attribute names that should affect downcast conversion.
-    */
-    getListAttributeNames() {
-      return [
-        ...LIST_BASE_ATTRIBUTES,
-        ...this._downcastStrategies.map((strategy) => strategy.attributeName)
-      ];
-    }
-    /**
-    * Attaches the listener to the {@link module:engine/view/document~ViewDocument#event:delete} event and handles backspace/delete
-    * keys in and around document lists.
-    */
-    _setupDeleteIntegration() {
-      const editor = this.editor;
-      const mergeBackwardCommand = editor.commands.get("mergeListItemBackward");
-      const mergeForwardCommand = editor.commands.get("mergeListItemForward");
-      this.listenTo(editor.editing.view.document, "delete", (evt, data) => {
-        const selection = editor.model.document.selection;
-        if (getSelectedBlockObject(editor.model)) {
-          return;
-        }
-        editor.model.change(() => {
-          const firstPosition = selection.getFirstPosition();
-          if (selection.isCollapsed && data.direction == "backward") {
-            if (!firstPosition.isAtStart) {
-              return;
-            }
-            const positionParent = firstPosition.parent;
-            if (!isListItemBlock(positionParent)) {
-              return;
-            }
-            const previousBlock = ListWalker.first(positionParent, {
-              sameAttributes: "listType",
-              sameIndent: true
-            });
-            if (!previousBlock && positionParent.getAttribute("listIndent") === 0) {
-              if (!isLastBlockOfListItem(positionParent)) {
-                editor.execute("splitListItemAfter");
-              }
-              editor.execute("outdentList");
-            } else {
-              if (!mergeBackwardCommand || !mergeBackwardCommand.isEnabled) {
-                return;
-              }
-              mergeBackwardCommand.execute({
-                shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel(editor.model, "backward")
-              });
-            }
-            data.preventDefault();
-            evt.stop();
-          } else {
-            if (selection.isCollapsed && !selection.getLastPosition().isAtEnd) {
-              return;
-            }
-            if (!mergeForwardCommand || !mergeForwardCommand.isEnabled) {
-              return;
-            }
-            mergeForwardCommand.execute({
-              shouldMergeOnBlocksContentLevel: shouldMergeOnBlocksContentLevel(editor.model, "forward")
-            });
-            data.preventDefault();
-            evt.stop();
-          }
-        });
-      }, {
-        context: "li"
-      });
-    }
-    /**
-    * Attaches a listener to the {@link module:engine/view/document~ViewDocument#event:enter} event and handles enter key press
-    * in document lists.
-    */
-    _setupEnterIntegration() {
-      const editor = this.editor;
-      const model = editor.model;
-      const commands = editor.commands;
-      const enterCommand = commands.get("enter");
-      this.listenTo(editor.editing.view.document, "enter", (evt, data) => {
-        const doc = model.document;
-        const positionParent = doc.selection.getFirstPosition().parent;
-        if (doc.selection.isCollapsed && isListItemBlock(positionParent) && positionParent.isEmpty && !data.isSoft) {
-          const isFirstBlock = isFirstBlockOfListItem(positionParent);
-          const isLastBlock = isLastBlockOfListItem(positionParent);
-          if (isFirstBlock && isLastBlock) {
-            editor.execute("outdentList");
-            data.preventDefault();
-            evt.stop();
-          } else if (isFirstBlock && !isLastBlock) {
-            editor.execute("splitListItemAfter");
-            data.preventDefault();
-            evt.stop();
-          } else if (isLastBlock) {
-            editor.execute("splitListItemBefore");
-            data.preventDefault();
-            evt.stop();
-          }
-        }
-      }, {
-        context: "li"
-      });
-      this.listenTo(enterCommand, "afterExecute", () => {
-        const splitCommand = commands.get("splitListItemBefore");
-        splitCommand.refresh();
-        if (!splitCommand.isEnabled) {
-          return;
-        }
-        const doc = editor.model.document;
-        const positionParent = doc.selection.getLastPosition().parent;
-        const listItemBlocks = getAllListItemBlocks(positionParent);
-        if (listItemBlocks.length === 2) {
-          splitCommand.execute();
-        }
-      });
-    }
-    /**
-    * Attaches a listener to the {@link module:engine/view/document~ViewDocument#event:tab} event and handles tab key and tab+shift keys
-    * presses in document lists.
-    */
-    _setupTabIntegration() {
-      const editor = this.editor;
-      this.listenTo(editor.editing.view.document, "tab", (evt, data) => {
-        const commandName = data.shiftKey ? "outdentList" : "indentList";
-        const command = this.editor.commands.get(commandName);
-        if (command.isEnabled) {
-          editor.execute(commandName);
-          data.stopPropagation();
-          data.preventDefault();
-          evt.stop();
-        }
-      }, {
-        context: "li"
-      });
-    }
-    /**
-    * Registers the conversion helpers for the document-list feature.
-    */
-    _setupConversion() {
-      const editor = this.editor;
-      const model = editor.model;
-      const attributeNames = this.getListAttributeNames();
-      const multiBlock = editor.config.get("list.multiBlock");
-      const elementName = multiBlock ? "paragraph" : "listItem";
-      editor.conversion.for("upcast").elementToElement({
-        view: "li",
-        model: (viewElement, { writer }) => writer.createElement(elementName, {
-          listType: ""
-        })
-      }).elementToElement({
-        view: "p",
-        model: (viewElement, { writer }) => {
-          if (viewElement.parent && viewElement.parent.is("element", "li")) {
-            return writer.createElement(elementName, {
-              listType: ""
-            });
-          }
-          return null;
-        },
-        converterPriority: "high"
-      }).add((dispatcher) => {
-        dispatcher.on("element:li", listItemUpcastConverter());
-      });
-      if (!multiBlock) {
-        editor.conversion.for("downcast").elementToElement({
-          model: "listItem",
-          view: "p"
-        });
-      }
-      editor.conversion.for("editingDowncast").elementToElement({
-        model: elementName,
-        view: bogusParagraphCreator(attributeNames),
-        converterPriority: "high"
-      }).add((dispatcher) => {
-        dispatcher.on("attribute", listItemDowncastConverter(attributeNames, this._downcastStrategies, model));
-        dispatcher.on("remove", listItemDowncastRemoveConverter(model.schema));
-      });
-      editor.conversion.for("dataDowncast").elementToElement({
-        model: elementName,
-        view: bogusParagraphCreator(attributeNames, {
-          dataPipeline: true
-        }),
-        converterPriority: "high"
-      }).add((dispatcher) => {
-        dispatcher.on("attribute", listItemDowncastConverter(attributeNames, this._downcastStrategies, model, {
-          dataPipeline: true
-        }));
-      });
-      const modelToViewPositionMapper = createModelToViewPositionMapper(this._downcastStrategies, editor.editing.view);
-      editor.editing.mapper.on("modelToViewPosition", modelToViewPositionMapper);
-      editor.data.mapper.on("modelToViewPosition", modelToViewPositionMapper);
-      this.listenTo(model.document, "change:data", reconvertItemsOnDataChange(model, editor.editing, attributeNames, this), {
-        priority: "high"
-      });
-      this.on("checkAttributes:item", (evt, { viewElement, modelAttributes }) => {
-        if (viewElement.id != modelAttributes.listItemId) {
-          evt.return = true;
-          evt.stop();
-        }
-      });
-      this.on("checkAttributes:list", (evt, { viewElement, modelAttributes }) => {
-        if (viewElement.name != getViewElementNameForListType(modelAttributes.listType) || viewElement.id != getViewElementIdForListType(modelAttributes.listType, modelAttributes.listIndent)) {
-          evt.return = true;
-          evt.stop();
-        }
-      });
-    }
-    /**
-    * Registers model post-fixers.
-    */
-    _setupModelPostFixing() {
-      const model = this.editor.model;
-      const attributeNames = this.getListAttributeNames();
-      model.document.registerPostFixer((writer) => modelChangePostFixer$1(model, writer, attributeNames, this));
-      this.on("postFixer", (evt, { listNodes, writer }) => {
-        evt.return = fixListIndents(listNodes, writer) || evt.return;
-      }, {
-        priority: "high"
-      });
-      this.on("postFixer", (evt, { listNodes, writer, seenIds }) => {
-        evt.return = fixListItemIds(listNodes, seenIds, writer) || evt.return;
-      }, {
-        priority: "high"
-      });
-    }
-    /**
-    * Integrates the feature with the clipboard via {@link module:engine/model/model~Model#insertContent} and
-    * {@link module:engine/model/model~Model#getSelectedContent}.
-    */
-    _setupClipboardIntegration() {
-      const model = this.editor.model;
-      const clipboardPipeline = this.editor.plugins.get("ClipboardPipeline");
-      this.listenTo(model, "insertContent", createModelIndentPasteFixer(model), {
-        priority: "high"
-      });
-      this.listenTo(clipboardPipeline, "outputTransformation", (evt, data) => {
-        model.change((writer) => {
-          const allContentChildren = Array.from(data.content.getChildren());
-          const lastItem = allContentChildren[allContentChildren.length - 1];
-          if (allContentChildren.length > 1 && lastItem.is("element") && lastItem.isEmpty) {
-            const contentChildrenExceptLastItem = allContentChildren.slice(0, -1);
-            if (contentChildrenExceptLastItem.every(isListItemBlock)) {
-              writer.remove(lastItem);
-            }
-          }
-          if (data.method == "copy" || data.method == "cut") {
-            const allChildren = Array.from(data.content.getChildren());
-            const isSingleListItemSelected = isSingleListItem(allChildren);
-            if (isSingleListItemSelected) {
-              removeListAttributes(allChildren, writer);
-            }
-          }
-        });
-      });
-    }
-    /**
-    * Informs editor accessibility features about keystrokes brought by the plugin.
-    */
-    _setupAccessibilityIntegration() {
-      const editor = this.editor;
-      const t = editor.t;
-      editor.accessibility.addKeystrokeInfoGroup({
-        id: "list",
-        label: t("Keystrokes that can be used in a list"),
-        keystrokes: [
-          {
-            label: t("Increase list item indent"),
-            keystroke: "Tab"
-          },
-          {
-            label: t("Decrease list item indent"),
-            keystroke: "Shift+Tab"
-          }
-        ]
-      });
-    }
-    /**
-    * Convert `listItemId` attribute to `data-list-item-id` attribute on the view element in both downcast pipelines.
-    */
-    _setupListItemIdConversionStrategy() {
-      this.registerDowncastStrategy({
-        scope: "item",
-        attributeName: "listItemId",
-        setAttributeOnDowncast(writer, attributeValue, viewElement, options) {
-          if (options && (options.skipListItemIds || options.isClipboardPipeline)) {
-            return;
-          }
-          writer.setAttribute("data-list-item-id", attributeValue, viewElement);
-        }
-      });
-    }
-  };
-  function modelChangePostFixer$1(model, writer, attributeNames, listEditing) {
-    const changes = model.document.differ.getChanges();
-    const visited = /* @__PURE__ */ new Set();
-    const itemToListHead = /* @__PURE__ */ new Set();
-    const multiBlock = listEditing.editor.config.get("list.multiBlock");
-    let applied = false;
-    for (const entry of changes) {
-      if (entry.type == "insert" && entry.name != "$text") {
-        const item = entry.position.nodeAfter;
-        if (!model.schema.checkAttribute(item, "listItemId")) {
-          for (const attributeName of Array.from(item.getAttributeKeys())) {
-            if (attributeNames.includes(attributeName)) {
-              writer.removeAttribute(attributeName, item);
-              applied = true;
-            }
-          }
-        }
-        findAndAddListHeadToMap(entry.position, itemToListHead, visited);
-        if (!entry.attributes.has("listItemId")) {
-          findAndAddListHeadToMap(entry.position.getShiftedBy(entry.length), itemToListHead, visited);
-        }
-        for (const { item: innerItem, previousPosition } of model.createRangeIn(item)) {
-          if (isListItemBlock(innerItem)) {
-            findAndAddListHeadToMap(previousPosition, itemToListHead, visited);
-          }
-        }
-      } else if (entry.type == "remove") {
-        findAndAddListHeadToMap(entry.position, itemToListHead, visited);
-      } else if (entry.type == "attribute" && attributeNames.includes(entry.attributeKey)) {
-        findAndAddListHeadToMap(entry.range.start, itemToListHead, visited);
-        if (entry.attributeNewValue === null) {
-          findAndAddListHeadToMap(entry.range.start.getShiftedBy(1), itemToListHead, visited);
-        }
-      }
-      if (!multiBlock && entry.type == "attribute" && LIST_BASE_ATTRIBUTES.includes(entry.attributeKey)) {
-        const element = entry.range.start.nodeAfter;
-        if (entry.attributeNewValue === null && element && element.is("element", "listItem")) {
-          writer.rename(element, "paragraph");
-          applied = true;
-        } else if (entry.attributeOldValue === null && element && element.is("element") && element.name != "listItem") {
-          writer.rename(element, "listItem");
-          applied = true;
-        }
-      }
-    }
-    const seenIds = /* @__PURE__ */ new Set();
-    for (const listHead of itemToListHead.values()) {
-      applied = listEditing.fire("postFixer", {
-        listNodes: new ListBlocksIterable(listHead),
-        listHead,
-        writer,
-        seenIds
-      }) || applied;
-    }
-    return applied;
-  }
-  function createModelIndentPasteFixer(model) {
-    return (evt, [content, selectable]) => {
-      const items = content.is("documentFragment") ? Array.from(content.getChildren()) : [
-        content
-      ];
-      if (!items.length) {
-        return;
-      }
-      const selection = selectable ? model.createSelection(selectable) : model.document.selection;
-      const position = selection.getFirstPosition();
-      let refItem;
-      if (isListItemBlock(position.parent)) {
-        refItem = position.parent;
-      } else if (isListItemBlock(position.nodeBefore) && isListItemBlock(position.nodeAfter)) {
-        refItem = position.nodeBefore;
-      } else {
-        return;
-      }
-      model.change((writer) => {
-        const refType = refItem.getAttribute("listType");
-        const refIndent = refItem.getAttribute("listIndent");
-        const firstElementIndent = items[0].getAttribute("listIndent") || 0;
-        const indentDiff = Math.max(refIndent - firstElementIndent, 0);
-        for (const item of items) {
-          const isListItem = isListItemBlock(item);
-          if (refItem.is("element", "listItem") && item.is("element", "paragraph")) {
-            writer.rename(item, "listItem");
-          }
-          writer.setAttributes({
-            listIndent: (isListItem ? item.getAttribute("listIndent") : 0) + indentDiff,
-            listItemId: isListItem ? item.getAttribute("listItemId") : ListItemUid.next(),
-            listType: refType
-          }, item);
-        }
-      });
-    };
-  }
-  function shouldMergeOnBlocksContentLevel(model, direction) {
-    const selection = model.document.selection;
-    if (!selection.isCollapsed) {
-      return !getSelectedBlockObject(model);
-    }
-    if (direction === "forward") {
-      return true;
-    }
-    const firstPosition = selection.getFirstPosition();
-    const positionParent = firstPosition.parent;
-    const previousSibling = positionParent.previousSibling;
-    if (model.schema.isObject(previousSibling)) {
-      return false;
-    }
-    if (previousSibling.isEmpty) {
-      return true;
-    }
-    return isSingleListItem([
-      positionParent,
-      previousSibling
-    ]);
-  }
-  function createUIComponents(editor, commandName, label, icon) {
-    editor.ui.componentFactory.add(commandName, () => {
-      const buttonView = _createButton(ButtonView, editor, commandName, label, icon);
-      buttonView.set({
-        tooltip: true,
-        isToggleable: true
-      });
-      return buttonView;
-    });
-    editor.ui.componentFactory.add(`menuBar:${commandName}`, () => {
-      const buttonView = _createButton(MenuBarMenuListItemButtonView, editor, commandName, label, icon);
-      buttonView.set({
-        role: "menuitemcheckbox",
-        isToggleable: true
-      });
-      return buttonView;
-    });
-  }
-  function _createButton(ButtonClass, editor, commandName, label, icon) {
-    const command = editor.commands.get(commandName);
-    const view = new ButtonClass(editor.locale);
-    view.set({
-      label,
-      icon
-    });
-    view.bind("isOn", "isEnabled").to(command, "value", "isEnabled");
-    view.on("execute", () => {
-      editor.execute(commandName);
-      editor.editing.view.focus();
-    });
-    return view;
-  }
-  var ListUI = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListUI";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const t = this.editor.t;
-      if (!this.editor.ui.componentFactory.has("numberedList")) {
-        createUIComponents(this.editor, "numberedList", t("Numbered List"), numberedList);
-      }
-      if (!this.editor.ui.componentFactory.has("bulletedList")) {
-        createUIComponents(this.editor, "bulletedList", t("Bulleted List"), bulletedList);
-      }
-    }
-  };
-  var List = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing,
-        ListUI
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "List";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-  };
-  var ListStartCommand = class extends Command {
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const value = this._getValue();
-      this.value = value;
-      this.isEnabled = value != null;
-    }
-    /**
-    * Executes the command.
-    *
-    * @fires execute
-    * @param options Execute options.
-    * @param options.startIndex The list start index.
-    */
-    execute({ startIndex = 1 } = {}) {
-      const model = this.editor.model;
-      const document2 = model.document;
-      let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => isListItemBlock(block) && isNumberedListType(block.getAttribute("listType")));
-      blocks = expandListBlocksToCompleteList(blocks);
-      model.change((writer) => {
-        for (const block of blocks) {
-          writer.setAttribute("listStart", startIndex >= 0 ? startIndex : 1, block);
-        }
-      });
-    }
-    /**
-    * Checks the command's {@link #value}.
-    *
-    * @returns The current value.
-    */
-    _getValue() {
-      const model = this.editor.model;
-      const document2 = model.document;
-      const block = first(document2.selection.getSelectedBlocks());
-      if (block && isListItemBlock(block) && isNumberedListType(block.getAttribute("listType"))) {
-        return block.getAttribute("listStart");
-      }
-      return null;
-    }
-  };
-  var LIST_STYLE_TO_LIST_TYPE = {};
-  var LIST_STYLE_TO_TYPE_ATTRIBUTE = {};
-  var TYPE_ATTRIBUTE_TO_LIST_STYLE = {};
-  var LIST_STYLE_TYPES = [
-    {
-      listStyle: "disc",
-      typeAttribute: "disc",
-      listType: "bulleted"
-    },
-    {
-      listStyle: "circle",
-      typeAttribute: "circle",
-      listType: "bulleted"
-    },
-    {
-      listStyle: "square",
-      typeAttribute: "square",
-      listType: "bulleted"
-    },
-    {
-      listStyle: "decimal",
-      typeAttribute: "1",
-      listType: "numbered"
-    },
-    {
-      listStyle: "decimal-leading-zero",
-      typeAttribute: null,
-      listType: "numbered"
-    },
-    {
-      listStyle: "lower-roman",
-      typeAttribute: "i",
-      listType: "numbered"
-    },
-    {
-      listStyle: "upper-roman",
-      typeAttribute: "I",
-      listType: "numbered"
-    },
-    {
-      listStyle: "lower-alpha",
-      typeAttribute: "a",
-      listType: "numbered"
-    },
-    {
-      listStyle: "upper-alpha",
-      typeAttribute: "A",
-      listType: "numbered"
-    },
-    {
-      listStyle: "lower-latin",
-      typeAttribute: "a",
-      listType: "numbered"
-    },
-    {
-      listStyle: "upper-latin",
-      typeAttribute: "A",
-      listType: "numbered"
-    }
-  ];
-  for (const { listStyle, typeAttribute, listType } of LIST_STYLE_TYPES) {
-    LIST_STYLE_TO_LIST_TYPE[listStyle] = listType;
-    LIST_STYLE_TO_TYPE_ATTRIBUTE[listStyle] = typeAttribute;
-    if (typeAttribute) {
-      TYPE_ATTRIBUTE_TO_LIST_STYLE[typeAttribute] = listStyle;
-    }
-  }
-  function getAllSupportedStyleTypes() {
-    return LIST_STYLE_TYPES.map((x) => x.listStyle);
-  }
-  function getListTypeFromListStyleType$1(listStyleType) {
-    return LIST_STYLE_TO_LIST_TYPE[listStyleType] || null;
-  }
-  function getListStyleTypeFromTypeAttribute(value) {
-    return TYPE_ATTRIBUTE_TO_LIST_STYLE[value] || null;
-  }
-  function getTypeAttributeFromListStyleType(value) {
-    return LIST_STYLE_TO_TYPE_ATTRIBUTE[value] || null;
-  }
-  function normalizeListStyle(listStyle) {
-    switch (listStyle) {
-      case "lower-alpha":
-        return "lower-latin";
-      case "upper-alpha":
-        return "upper-latin";
-      default:
-        return listStyle;
-    }
-  }
-  var ListStyleCommand = class extends Command {
-    /**
-    * The default type of the list style.
-    */
-    defaultType;
-    /**
-    * The list of supported style types by this command.
-    */
-    _supportedTypes;
-    /**
-    * Creates an instance of the command.
-    *
-    * @param editor The editor instance.
-    * @param defaultType The list type that will be used by default if the value was not specified during
-    * the command execution.
-    * @param supportedTypes The list of supported style types by this command.
-    */
-    constructor(editor, defaultType, supportedTypes) {
-      super(editor);
-      this.defaultType = defaultType;
-      this._supportedTypes = supportedTypes;
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      this.value = this._getValue();
-      this.isEnabled = this._checkEnabled();
-    }
-    /**
-    * Executes the command.
-    *
-    * @fires execute
-    * @param options.type The type of the list style, e.g. `'disc'` or `'square'`. If `null` is specified, the default
-    * style will be applied.
-    */
-    execute(options = {}) {
-      const model = this.editor.model;
-      const document2 = model.document;
-      model.change((writer) => {
-        this._tryToConvertItemsToList(options);
-        let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => block.hasAttribute("listType"));
-        if (!blocks.length) {
-          return;
-        }
-        blocks = expandListBlocksToCompleteList(blocks);
-        for (const block of blocks) {
-          writer.setAttribute("listStyle", options.type || this.defaultType, block);
-        }
-      });
-    }
-    /**
-    * Checks if the given style type is supported by this plugin.
-    */
-    isStyleTypeSupported(value) {
-      if (!this._supportedTypes) {
-        return true;
-      }
-      return this._supportedTypes.includes(value);
-    }
-    /**
-    * Checks the command's {@link #value}.
-    *
-    * @returns The current value.
-    */
-    _getValue() {
-      const listItem = first(this.editor.model.document.selection.getSelectedBlocks());
-      if (isListItemBlock(listItem)) {
-        return listItem.getAttribute("listStyle");
-      }
-      return null;
-    }
-    /**
-    * Checks whether the command can be enabled in the current context.
-    *
-    * @returns Whether the command should be enabled.
-    */
-    _checkEnabled() {
-      const editor = this.editor;
-      const numberedList2 = editor.commands.get("numberedList");
-      const bulletedList2 = editor.commands.get("bulletedList");
-      return numberedList2.isEnabled || bulletedList2.isEnabled;
-    }
-    /**
-     * Check if the provided list style is valid. Also change the selection to a list if it's not set yet.
-     *
-     * @param options.type The type of the list style. If `null` is specified, the function does nothing.
-    */
-    _tryToConvertItemsToList(options) {
-      if (!options.type) {
-        return;
-      }
-      const listType = getListTypeFromListStyleType$1(options.type);
-      if (!listType) {
-        return;
-      }
-      const editor = this.editor;
-      const commandName = `${listType}List`;
-      const command = editor.commands.get(commandName);
-      if (!command.value) {
-        editor.execute(commandName);
-      }
-    }
-  };
-  var ListReversedCommand = class extends Command {
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const value = this._getValue();
-      this.value = value;
-      this.isEnabled = value != null;
-    }
-    /**
-    * Executes the command.
-    *
-    * @fires execute
-    * @param options.reversed Whether the list should be reversed.
-    */
-    execute(options = {}) {
-      const model = this.editor.model;
-      const document2 = model.document;
-      let blocks = Array.from(document2.selection.getSelectedBlocks()).filter((block) => isListItemBlock(block) && block.getAttribute("listType") == "numbered");
-      blocks = expandListBlocksToCompleteList(blocks);
-      model.change((writer) => {
-        for (const block of blocks) {
-          writer.setAttribute("listReversed", !!options.reversed, block);
-        }
-      });
-    }
-    /**
-    * Checks the command's {@link #value}.
-    */
-    _getValue() {
-      const model = this.editor.model;
-      const document2 = model.document;
-      const block = first(document2.selection.getSelectedBlocks());
-      if (isListItemBlock(block) && block.getAttribute("listType") == "numbered") {
-        return block.getAttribute("listReversed");
-      }
-      return null;
-    }
-  };
-  function listPropertiesUpcastConverter(strategy) {
-    return (evt, data, conversionApi) => {
-      const { writer, schema, consumable } = conversionApi;
-      if (consumable.test(data.viewItem, strategy.viewConsumables) === false) {
-        return;
-      }
-      if (!data.modelRange) {
-        Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
-      }
-      let applied = false;
-      for (const item of data.modelRange.getItems({
-        shallow: true
-      })) {
-        if (!schema.checkAttribute(item, strategy.attributeName)) {
-          continue;
-        }
-        if (!strategy.appliesToListItem(item)) {
-          continue;
-        }
-        if (item.hasAttribute(strategy.attributeName)) {
-          continue;
-        }
-        writer.setAttribute(strategy.attributeName, strategy.getAttributeOnUpcast(data.viewItem), item);
-        applied = true;
-      }
-      if (applied) {
-        consumable.consume(data.viewItem, strategy.viewConsumables);
-      }
-    };
-  }
-  var ListPropertiesUtils = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListPropertiesUtils";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * Gets all the style types supported by given list type.
-    */
-    getAllSupportedStyleTypes() {
-      return getAllSupportedStyleTypes();
-    }
-    /**
-    * Checks whether the given list-style-type is supported by numbered or bulleted list.
-    */
-    getListTypeFromListStyleType(listStyleType) {
-      return getListTypeFromListStyleType$1(listStyleType);
-    }
-    /**
-    * Converts `type` attribute of `<ul>` or `<ol>` elements to `list-style-type` equivalent.
-    */
-    getListStyleTypeFromTypeAttribute(value) {
-      return getListStyleTypeFromTypeAttribute(value);
-    }
-    /**
-    * Converts `list-style-type` style to `type` attribute of `<ul>` or `<ol>` elements.
-    */
-    getTypeAttributeFromListStyleType(value) {
-      return getTypeAttributeFromListStyleType(value);
-    }
-  };
-  function getNormalizedConfig(config) {
-    const { startIndex, reversed, styles } = config;
-    return {
-      styles: getNormalizedStylesConfig(styles),
-      startIndex: startIndex || false,
-      reversed: reversed || false
-    };
-  }
-  function getNormalizedStylesConfig(styles) {
-    const normalizedConfig = {
-      listTypes: [
-        "bulleted",
-        "numbered"
-      ],
-      useAttribute: false
-    };
-    if (styles === true) {
-      return normalizedConfig;
-    }
-    if (!styles) {
-      normalizedConfig.listTypes = [];
-    } else if (Array.isArray(styles) || typeof styles == "string") {
-      normalizedConfig.listTypes = toArray(styles);
-    } else {
-      normalizedConfig.listTypes = styles.listTypes ? toArray(styles.listTypes) : normalizedConfig.listTypes;
-      normalizedConfig.useAttribute = !!styles.useAttribute;
-      if (styles.listStyleTypes) {
-        normalizedConfig.listStyleTypes = styles.listStyleTypes;
-      }
-    }
-    return normalizedConfig;
-  }
-  var DEFAULT_LIST_TYPE$1 = "default";
-  var ListPropertiesEditing = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing,
-        ListPropertiesUtils
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListPropertiesEditing";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    constructor(editor) {
-      super(editor);
-      editor.config.define("list.properties", {
-        styles: true,
-        startIndex: false,
-        reversed: false
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const model = editor.model;
-      const listEditing = editor.plugins.get(ListEditing);
-      const enabledProperties = editor.config.get("list.properties");
-      const strategies = createAttributeStrategies$1(enabledProperties);
-      for (const strategy of strategies) {
-        strategy.addCommand(editor);
-        model.schema.extend("$listItem", {
-          allowAttributes: strategy.attributeName
-        });
-        listEditing.registerDowncastStrategy({
-          scope: "list",
-          attributeName: strategy.attributeName,
-          setAttributeOnDowncast(writer, attributeValue, viewElement) {
-            strategy.setAttributeOnDowncast(writer, attributeValue, viewElement);
-          }
-        });
-      }
-      editor.conversion.for("upcast").add((dispatcher) => {
-        for (const strategy of strategies) {
-          dispatcher.on("element:ol", listPropertiesUpcastConverter(strategy));
-          dispatcher.on("element:ul", listPropertiesUpcastConverter(strategy));
-        }
-      });
-      listEditing.on("checkAttributes:list", (evt, { viewElement, modelAttributes, modelReferenceElement }) => {
-        for (const strategy of strategies) {
-          if (!strategy.appliesToListItem(modelReferenceElement)) {
-            continue;
-          }
-          if (strategy.getAttributeOnUpcast(viewElement) != modelAttributes[strategy.attributeName]) {
-            evt.return = true;
-            evt.stop();
-          }
-        }
-      });
-      this.listenTo(editor.commands.get("indentList"), "afterExecute", (evt, changedBlocks) => {
-        model.change((writer) => {
-          for (const node of changedBlocks) {
-            for (const strategy of strategies) {
-              if (strategy.appliesToListItem(node)) {
-                writer.setAttribute(strategy.attributeName, strategy.defaultValue, node);
-              }
-            }
-          }
-        });
-      });
-      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
-        for (const { node } of listNodes) {
-          for (const strategy of strategies) {
-            if (strategy.hasValidAttribute(node)) {
-              continue;
-            }
-            if (strategy.appliesToListItem(node)) {
-              writer.setAttribute(strategy.attributeName, strategy.defaultValue, node);
-            } else {
-              writer.removeAttribute(strategy.attributeName, node);
-            }
-            evt.return = true;
-          }
-        }
-      });
-      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
-        for (const { node, previousNodeInList } of listNodes) {
-          if (!previousNodeInList) {
-            continue;
-          }
-          if (previousNodeInList.getAttribute("listType") != node.getAttribute("listType")) {
-            continue;
-          }
-          for (const strategy of strategies) {
-            const { attributeName } = strategy;
-            if (!strategy.appliesToListItem(node)) {
-              continue;
-            }
-            const value = previousNodeInList.getAttribute(attributeName);
-            if (node.getAttribute(attributeName) != value) {
-              writer.setAttribute(attributeName, value, node);
-              evt.return = true;
-            }
-          }
-        }
-      });
-    }
-  };
-  function createAttributeStrategies$1(enabledProperties) {
-    const strategies = [];
-    const normalizedConfig = getNormalizedConfig(enabledProperties);
-    if (enabledProperties.styles) {
-      const useAttribute = normalizedConfig.styles.useAttribute;
-      strategies.push({
-        attributeName: "listStyle",
-        defaultValue: DEFAULT_LIST_TYPE$1,
-        viewConsumables: {
-          styles: "list-style-type"
-        },
-        addCommand(editor) {
-          let supportedTypes = getAllSupportedStyleTypes();
-          if (useAttribute) {
-            supportedTypes = supportedTypes.filter((styleType) => !!getTypeAttributeFromListStyleType(styleType));
-          }
-          editor.commands.add("listStyle", new ListStyleCommand(editor, DEFAULT_LIST_TYPE$1, supportedTypes));
-        },
-        appliesToListItem(item) {
-          return item.getAttribute("listType") == "numbered" || item.getAttribute("listType") == "bulleted";
-        },
-        hasValidAttribute(item) {
-          if (!this.appliesToListItem(item)) {
-            return !item.hasAttribute("listStyle");
-          }
-          if (!item.hasAttribute("listStyle")) {
-            return false;
-          }
-          const value = item.getAttribute("listStyle");
-          if (value == DEFAULT_LIST_TYPE$1) {
-            return true;
-          }
-          return getListTypeFromListStyleType$1(value) == item.getAttribute("listType");
-        },
-        setAttributeOnDowncast(writer, listStyle, element) {
-          if (listStyle && listStyle !== DEFAULT_LIST_TYPE$1) {
-            if (useAttribute) {
-              const value = getTypeAttributeFromListStyleType(listStyle);
-              if (value) {
-                writer.setAttribute("type", value, element);
-                return;
-              }
-            } else {
-              writer.setStyle("list-style-type", listStyle, element);
-              return;
-            }
-          }
-          writer.removeStyle("list-style-type", element);
-          writer.removeAttribute("type", element);
-        },
-        getAttributeOnUpcast(listParent) {
-          const style = listParent.getStyle("list-style-type");
-          if (style) {
-            return normalizeListStyle(style);
-          }
-          const attribute = listParent.getAttribute("type");
-          if (attribute) {
-            return getListStyleTypeFromTypeAttribute(attribute);
-          }
-          return DEFAULT_LIST_TYPE$1;
-        }
-      });
-    }
-    if (enabledProperties.reversed) {
-      strategies.push({
-        attributeName: "listReversed",
-        defaultValue: false,
-        viewConsumables: {
-          attributes: "reversed"
-        },
-        addCommand(editor) {
-          editor.commands.add("listReversed", new ListReversedCommand(editor));
-        },
-        appliesToListItem(item) {
-          return item.getAttribute("listType") == "numbered";
-        },
-        hasValidAttribute(item) {
-          return this.appliesToListItem(item) == item.hasAttribute("listReversed");
-        },
-        setAttributeOnDowncast(writer, listReversed, element) {
-          if (listReversed) {
-            writer.setAttribute("reversed", "reversed", element);
-          } else {
-            writer.removeAttribute("reversed", element);
-          }
-        },
-        getAttributeOnUpcast(listParent) {
-          return listParent.hasAttribute("reversed");
-        }
-      });
-    }
-    if (enabledProperties.startIndex) {
-      strategies.push({
-        attributeName: "listStart",
-        defaultValue: 1,
-        viewConsumables: {
-          attributes: "start"
-        },
-        addCommand(editor) {
-          editor.commands.add("listStart", new ListStartCommand(editor));
-        },
-        appliesToListItem(item) {
-          return isNumberedListType(item.getAttribute("listType"));
-        },
-        hasValidAttribute(item) {
-          return this.appliesToListItem(item) == item.hasAttribute("listStart");
-        },
-        setAttributeOnDowncast(writer, listStart, element) {
-          if (listStart == 0 || listStart > 1) {
-            writer.setAttribute("start", listStart, element);
-          } else {
-            writer.removeAttribute("start", element);
-          }
-        },
-        getAttributeOnUpcast(listParent) {
-          const startAttributeValue = listParent.getAttribute("start");
-          return startAttributeValue >= 0 ? startAttributeValue : 1;
-        }
-      });
-    }
-    return strategies;
-  }
-  var ListPropertiesView = class extends View {
-    /**
-    * A collection of the child views.
-    */
-    children;
-    /**
-    * A view that renders the grid of list styles.
-    */
-    stylesView = null;
-    /**
-    * A collapsible view that hosts additional list property fields ({@link #startIndexFieldView} and
-    * {@link #reversedSwitchButtonView}) to visually separate them from the {@link #stylesView grid of styles}.
-    *
-    * **Note**: Only present when:
-    * * the view represents **numbered** list properties,
-    * * and the {@link #stylesView} is rendered,
-    * * and either {@link #startIndexFieldView} or {@link #reversedSwitchButtonView} is rendered.
-    *
-    * @readonly
-    */
-    additionalPropertiesCollapsibleView = null;
-    /**
-    * A labeled number field allowing the user to set the start index of the list.
-    *
-    * **Note**: Only present when the view represents **numbered** list properties.
-    *
-    * @readonly
-    */
-    startIndexFieldView = null;
-    /**
-    * A switch button allowing the user to make the edited list reversed.
-    *
-    * **Note**: Only present when the view represents **numbered** list properties.
-    *
-    * @readonly
-    */
-    reversedSwitchButtonView = null;
-    /**
-    * Tracks information about the DOM focus in the view.
-    */
-    focusTracker = new FocusTracker();
-    /**
-    * An instance of the {@link module:utils/keystrokehandler~KeystrokeHandler}.
-    */
-    keystrokes = new KeystrokeHandler();
-    /**
-    * A collection of views that can be focused in the properties view.
-    */
-    focusables = new ViewCollection();
-    /**
-    * Helps cycling over {@link #focusables} in the view.
-    */
-    focusCycler;
-    /**
-    * Creates an instance of the list properties view.
-    *
-    * @param locale The {@link module:core/editor/editor~Editor#locale} instance.
-    * @param options Options of the view.
-    * @param options.enabledProperties An object containing the configuration of enabled list property names.
-    * Allows conditional rendering the sub-components of the properties view.
-    * @param options.styleButtonViews A list of style buttons to be rendered
-    * inside the styles grid. The grid will not be rendered when `enabledProperties` does not include the `'styles'` key.
-    * @param options.styleGridAriaLabel An assistive technologies label set on the grid of styles (if the grid is rendered).
-    */
-    constructor(locale, { enabledProperties, styleButtonViews, styleGridAriaLabel }) {
-      super(locale);
-      const elementCssClasses = [
-        "ck",
-        "ck-list-properties"
-      ];
-      this.children = this.createCollection();
-      this.focusCycler = new FocusCycler({
-        focusables: this.focusables,
-        focusTracker: this.focusTracker,
-        keystrokeHandler: this.keystrokes,
-        actions: {
-          // Navigate #children backwards using the <kbd>Shift</kbd> + <kbd>Tab</kbd> keystroke.
-          focusPrevious: "shift + tab",
-          // Navigate #children forwards using the <kbd>Tab</kbd> key.
-          focusNext: "tab"
-        }
-      });
-      if (styleButtonViews && styleButtonViews.length) {
-        this.stylesView = this._createStylesView(styleButtonViews, styleGridAriaLabel);
-        this.children.add(this.stylesView);
-      } else {
-        elementCssClasses.push("ck-list-properties_without-styles");
-      }
-      if (enabledProperties.startIndex || enabledProperties.reversed) {
-        this._addNumberedListPropertyViews(enabledProperties);
-        elementCssClasses.push("ck-list-properties_with-numbered-properties");
-      }
-      this.setTemplate({
-        tag: "div",
-        attributes: {
-          class: elementCssClasses
-        },
-        children: this.children
-      });
-    }
-    /**
-    * @inheritDoc
-    */
-    render() {
-      super.render();
-      if (this.stylesView) {
-        this.focusables.add(this.stylesView);
-        this.focusTracker.add(this.stylesView.element);
-        if (this.startIndexFieldView || this.reversedSwitchButtonView) {
-          this.focusables.add(this.children.last.buttonView);
-          this.focusTracker.add(this.children.last.buttonView.element);
-        }
-        for (const item of this.stylesView.children) {
-          this.stylesView.focusTracker.add(item.element);
-        }
-        addKeyboardHandlingForGrid({
-          keystrokeHandler: this.stylesView.keystrokes,
-          focusTracker: this.stylesView.focusTracker,
-          gridItems: this.stylesView.children,
-          // Note: The styles view has a different number of columns depending on whether the other properties
-          // are enabled in the dropdown or not (https://github.com/ckeditor/ckeditor5/issues/12340)
-          numberOfColumns: () => globalVar.window.getComputedStyle(this.stylesView.element).getPropertyValue("grid-template-columns").split(" ").length,
-          uiLanguageDirection: this.locale && this.locale.uiLanguageDirection
-        });
-      }
-      if (this.startIndexFieldView) {
-        this.focusables.add(this.startIndexFieldView);
-        this.focusTracker.add(this.startIndexFieldView.element);
-        const stopPropagation = (data) => data.stopPropagation();
-        this.keystrokes.set("arrowright", stopPropagation);
-        this.keystrokes.set("arrowleft", stopPropagation);
-        this.keystrokes.set("arrowup", stopPropagation);
-        this.keystrokes.set("arrowdown", stopPropagation);
-      }
-      if (this.reversedSwitchButtonView) {
-        this.focusables.add(this.reversedSwitchButtonView);
-        this.focusTracker.add(this.reversedSwitchButtonView.element);
-      }
-      this.keystrokes.listenTo(this.element);
-    }
-    /**
-    * @inheritDoc
-    */
-    focus() {
-      this.focusCycler.focusFirst();
-    }
-    /**
-    * @inheritDoc
-    */
-    focusLast() {
-      this.focusCycler.focusLast();
-    }
-    /**
-    * @inheritDoc
-    */
-    destroy() {
-      super.destroy();
-      this.focusTracker.destroy();
-      this.keystrokes.destroy();
-    }
-    /**
-    * Creates the list styles grid.
-    *
-    * @param styleButtons Buttons to be placed in the grid.
-    * @param styleGridAriaLabel The assistive technology label of the grid.
-    */
-    _createStylesView(styleButtons, styleGridAriaLabel) {
-      const stylesView = new View(this.locale);
-      stylesView.children = stylesView.createCollection();
-      stylesView.children.addMany(styleButtons);
-      stylesView.setTemplate({
-        tag: "div",
-        attributes: {
-          "aria-label": styleGridAriaLabel,
-          class: [
-            "ck",
-            "ck-list-styles-list"
-          ]
-        },
-        children: stylesView.children
-      });
-      stylesView.children.delegate("execute").to(this);
-      stylesView.focus = function() {
-        for (const child of this.children) {
-          if (child instanceof ButtonView && child.isOn) {
-            child.focus();
-            return;
-          }
-        }
-        this.children.first.focus();
-      };
-      stylesView.focusTracker = new FocusTracker();
-      stylesView.keystrokes = new KeystrokeHandler();
-      stylesView.render();
-      stylesView.keystrokes.listenTo(stylesView.element);
-      return stylesView;
-    }
-    /**
-    * Renders {@link #startIndexFieldView} and/or {@link #reversedSwitchButtonView} depending on the configuration of the properties view.
-    *
-    * @param enabledProperties An object containing the configuration of enabled list property names
-    * (see {@link #constructor}).
-    */
-    _addNumberedListPropertyViews(enabledProperties) {
-      const t = this.locale.t;
-      const numberedPropertyViews = [];
-      if (enabledProperties.startIndex) {
-        this.startIndexFieldView = this._createStartIndexField();
-        numberedPropertyViews.push(this.startIndexFieldView);
-      }
-      if (enabledProperties.reversed) {
-        this.reversedSwitchButtonView = this._createReversedSwitchButton();
-        numberedPropertyViews.push(this.reversedSwitchButtonView);
-      }
-      if (this.stylesView) {
-        this.additionalPropertiesCollapsibleView = new CollapsibleView(this.locale, numberedPropertyViews);
-        this.additionalPropertiesCollapsibleView.set({
-          label: t("List properties"),
-          isCollapsed: true
-        });
-        this.additionalPropertiesCollapsibleView.buttonView.bind("isEnabled").toMany(numberedPropertyViews, "isEnabled", (...areEnabled) => areEnabled.some((isEnabled2) => isEnabled2));
-        this.additionalPropertiesCollapsibleView.buttonView.on("change:isEnabled", (evt, data, isEnabled2) => {
-          if (!isEnabled2) {
-            this.additionalPropertiesCollapsibleView.isCollapsed = true;
-          }
-        });
-        this.children.add(this.additionalPropertiesCollapsibleView);
-      } else {
-        this.children.addMany(numberedPropertyViews);
-      }
-    }
-    /**
-    * Creates the list start index labeled field.
-    */
-    _createStartIndexField() {
-      const t = this.locale.t;
-      const startIndexFieldView = new LabeledFieldView(this.locale, createLabeledInputNumber);
-      startIndexFieldView.set({
-        label: t("Start at"),
-        class: "ck-numbered-list-properties__start-index"
-      });
-      startIndexFieldView.fieldView.set({
-        min: 0,
-        step: 1,
-        value: 1,
-        inputMode: "numeric"
-      });
-      startIndexFieldView.fieldView.on("input", () => {
-        const inputElement = startIndexFieldView.fieldView.element;
-        const startIndex = inputElement.valueAsNumber;
-        if (Number.isNaN(startIndex)) {
-          startIndexFieldView.errorText = t("Invalid start index value.");
-          return;
-        }
-        if (!inputElement.checkValidity()) {
-          startIndexFieldView.errorText = t("Start index must be greater than 0.");
-        } else {
-          this.fire("listStart", {
-            startIndex
-          });
-        }
-      });
-      return startIndexFieldView;
-    }
-    /**
-    * Creates the reversed list switch button.
-    */
-    _createReversedSwitchButton() {
-      const t = this.locale.t;
-      const reversedButtonView = new SwitchButtonView(this.locale);
-      reversedButtonView.set({
-        withText: true,
-        label: t("Reversed order"),
-        class: "ck-numbered-list-properties__reversed-order"
-      });
-      reversedButtonView.delegate("execute").to(this, "listReversed");
-      return reversedButtonView;
-    }
-  };
-  var ListPropertiesUI = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListPropertiesUI";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    init() {
-      const editor = this.editor;
-      const t = editor.locale.t;
-      const propertiesConfig = editor.config.get("list.properties");
-      const normalizedConfig = getNormalizedConfig(propertiesConfig);
-      const stylesListTypes = normalizedConfig.styles.listTypes;
-      if (stylesListTypes.includes("bulleted")) {
-        const styleDefinitions = [
-          {
-            label: t("Toggle the disc list style"),
-            tooltip: t("Disc"),
-            type: "disc",
-            icon: listStyleDisc
-          },
-          {
-            label: t("Toggle the circle list style"),
-            tooltip: t("Circle"),
-            type: "circle",
-            icon: listStyleCircle
-          },
-          {
-            label: t("Toggle the square list style"),
-            tooltip: t("Square"),
-            type: "square",
-            icon: listStyleSquare
-          }
-        ];
-        const buttonLabel = t("Bulleted List");
-        const styleGridAriaLabel = t("Bulleted list styles toolbar");
-        const commandName = "bulletedList";
-        editor.ui.componentFactory.add(commandName, getDropdownViewCreator({
-          editor,
-          normalizedConfig,
-          parentCommandName: commandName,
-          buttonLabel,
-          buttonIcon: bulletedList,
-          styleGridAriaLabel,
-          styleDefinitions
-        }));
-        editor.ui.componentFactory.add(`menuBar:${commandName}`, getMenuBarStylesMenuCreator({
-          editor,
-          normalizedConfig,
-          parentCommandName: commandName,
-          buttonLabel,
-          styleGridAriaLabel,
-          styleDefinitions
-        }));
-      }
-      if (stylesListTypes.includes("numbered") || propertiesConfig.startIndex || propertiesConfig.reversed) {
-        const styleDefinitions = [
-          {
-            label: t("Toggle the decimal list style"),
-            tooltip: t("Decimal"),
-            type: "decimal",
-            icon: listStyleDecimal
-          },
-          {
-            label: t("Toggle the decimal with leading zero list style"),
-            tooltip: t("Decimal with leading zero"),
-            type: "decimal-leading-zero",
-            icon: listStyleDecimalLeadingZero
-          },
-          {
-            label: t("Toggle the lower\u2013roman list style"),
-            tooltip: t("Lower\u2013roman"),
-            type: "lower-roman",
-            icon: listStyleLowerRoman
-          },
-          {
-            label: t("Toggle the upper\u2013roman list style"),
-            tooltip: t("Upper-roman"),
-            type: "upper-roman",
-            icon: listStyleUpperRoman
-          },
-          {
-            label: t("Toggle the lower\u2013latin list style"),
-            tooltip: t("Lower-latin"),
-            type: "lower-latin",
-            icon: listStyleLowerLatin
-          },
-          {
-            label: t("Toggle the upper\u2013latin list style"),
-            tooltip: t("Upper-latin"),
-            type: "upper-latin",
-            icon: listStyleUpperLatin
-          }
-        ];
-        const buttonLabel = t("Numbered List");
-        const styleGridAriaLabel = t("Numbered list styles toolbar");
-        const commandName = "numberedList";
-        editor.ui.componentFactory.add(commandName, getDropdownViewCreator({
-          editor,
-          normalizedConfig,
-          parentCommandName: commandName,
-          buttonLabel,
-          buttonIcon: numberedList,
-          styleGridAriaLabel,
-          styleDefinitions
-        }));
-        if (stylesListTypes.includes("numbered")) {
-          editor.ui.componentFactory.add(`menuBar:${commandName}`, getMenuBarStylesMenuCreator({
-            editor,
-            normalizedConfig,
-            parentCommandName: commandName,
-            buttonLabel,
-            styleGridAriaLabel,
-            styleDefinitions
-          }));
-        }
-      }
-    }
-  };
-  function getDropdownViewCreator({ editor, normalizedConfig, parentCommandName, buttonLabel, buttonIcon, styleGridAriaLabel, styleDefinitions }) {
-    const parentCommand = editor.commands.get(parentCommandName);
-    return (locale) => {
-      const dropdownView = createDropdown(locale, SplitButtonView);
-      const mainButtonView = dropdownView.buttonView;
-      dropdownView.bind("isEnabled").to(parentCommand);
-      dropdownView.class = "ck-list-styles-dropdown";
-      mainButtonView.on("execute", () => {
-        editor.execute(parentCommandName);
-        editor.editing.view.focus();
-      });
-      mainButtonView.set({
-        label: buttonLabel,
-        icon: buttonIcon,
-        tooltip: true,
-        isToggleable: true
-      });
-      mainButtonView.bind("isOn").to(parentCommand, "value", (value) => !!value);
-      dropdownView.once("change:isOpen", () => {
-        const listPropertiesView = createListPropertiesView({
-          editor,
-          normalizedConfig,
-          dropdownView,
-          parentCommandName,
-          styleGridAriaLabel,
-          styleDefinitions
-        });
-        dropdownView.panelView.children.add(listPropertiesView);
-      });
-      dropdownView.on("execute", () => {
-        editor.editing.view.focus();
-      });
-      return dropdownView;
-    };
-  }
-  function getStyleButtonCreator({ editor, listStyleCommand, parentCommandName }) {
-    const locale = editor.locale;
-    const parentCommand = editor.commands.get(parentCommandName);
-    return ({ label, type, icon, tooltip }) => {
-      const button = new ButtonView(locale);
-      button.set({
-        label,
-        icon,
-        tooltip
-      });
-      button.bind("isOn").to(listStyleCommand, "value", (value) => value === type);
-      button.on("execute", () => {
-        if (parentCommand.value) {
-          if (listStyleCommand.value === type) {
-            editor.execute(parentCommandName);
-          } else if (listStyleCommand.value !== type) {
-            editor.execute("listStyle", {
-              type
-            });
-          }
-        } else {
-          editor.model.change(() => {
-            editor.execute("listStyle", {
-              type
-            });
-          });
-        }
-      });
-      return button;
-    };
-  }
-  function createListPropertiesView({ editor, normalizedConfig, dropdownView, parentCommandName, styleDefinitions, styleGridAriaLabel }) {
-    const locale = editor.locale;
-    const enabledProperties = {
-      ...normalizedConfig,
-      ...parentCommandName != "numberedList" ? {
-        startIndex: false,
-        reversed: false
-      } : null
-    };
-    const listType = parentCommandName.replace("List", "");
-    let styleButtonViews = null;
-    if (normalizedConfig.styles.listTypes.includes(listType)) {
-      const listStyleCommand = editor.commands.get("listStyle");
-      const styleButtonCreator = getStyleButtonCreator({
-        editor,
-        parentCommandName,
-        listStyleCommand
-      });
-      const configuredListStylesTypes = normalizedConfig.styles.listStyleTypes;
-      let filteredDefinitions = styleDefinitions;
-      if (configuredListStylesTypes) {
-        const allowedTypes2 = configuredListStylesTypes[listType];
-        if (allowedTypes2) {
-          filteredDefinitions = styleDefinitions.filter((def) => allowedTypes2.includes(def.type));
-        }
-      }
-      const isStyleTypeSupported = getStyleTypeSupportChecker(listStyleCommand);
-      styleButtonViews = filteredDefinitions.filter(isStyleTypeSupported).map(styleButtonCreator);
-    }
-    const listPropertiesView = new ListPropertiesView(locale, {
-      styleGridAriaLabel,
-      enabledProperties,
-      styleButtonViews
-    });
-    if (normalizedConfig.styles.listTypes.includes(listType)) {
-      focusChildOnDropdownOpen(dropdownView, () => {
-        return listPropertiesView.stylesView.children.find((child) => child.isOn);
-      });
-    }
-    if (enabledProperties.startIndex) {
-      const listStartCommand = editor.commands.get("listStart");
-      listPropertiesView.startIndexFieldView.bind("isEnabled").to(listStartCommand);
-      listPropertiesView.startIndexFieldView.fieldView.bind("value").to(listStartCommand);
-      listPropertiesView.on("listStart", (evt, data) => editor.execute("listStart", data));
-    }
-    if (enabledProperties.reversed) {
-      const listReversedCommand = editor.commands.get("listReversed");
-      listPropertiesView.reversedSwitchButtonView.bind("isEnabled").to(listReversedCommand);
-      listPropertiesView.reversedSwitchButtonView.bind("isOn").to(listReversedCommand, "value", (value) => !!value);
-      listPropertiesView.on("listReversed", () => {
-        const isReversed = listReversedCommand.value;
-        editor.execute("listReversed", {
-          reversed: !isReversed
-        });
-      });
-    }
-    listPropertiesView.delegate("execute").to(dropdownView);
-    return listPropertiesView;
-  }
-  function getMenuBarStylesMenuCreator({ editor, normalizedConfig, parentCommandName, buttonLabel, styleGridAriaLabel, styleDefinitions }) {
-    return (locale) => {
-      const menuView = new MenuBarMenuView(locale);
-      const listCommand = editor.commands.get(parentCommandName);
-      const listStyleCommand = editor.commands.get("listStyle");
-      const isStyleTypeSupported = getStyleTypeSupportChecker(listStyleCommand);
-      const styleButtonCreator = getStyleButtonCreator({
-        editor,
-        parentCommandName,
-        listStyleCommand
-      });
-      const configuredListStylesTypes = normalizedConfig.styles.listStyleTypes;
-      let filteredDefinitions = styleDefinitions;
-      if (configuredListStylesTypes) {
-        const listType = listCommand.type;
-        const allowedTypes2 = configuredListStylesTypes[listType];
-        if (allowedTypes2) {
-          filteredDefinitions = styleDefinitions.filter((def) => allowedTypes2.includes(def.type));
-        }
-      }
-      const styleButtonViews = filteredDefinitions.filter(isStyleTypeSupported).map(styleButtonCreator);
-      const listPropertiesView = new ListPropertiesView(locale, {
-        styleGridAriaLabel,
-        enabledProperties: {
-          ...normalizedConfig,
-          // Disable list start index and reversed in the menu bar.
-          startIndex: false,
-          reversed: false
-        },
-        styleButtonViews
-      });
-      listPropertiesView.delegate("execute").to(menuView);
-      menuView.buttonView.set({
-        label: buttonLabel,
-        icon: parentCommandName === "bulletedList" ? bulletedList : numberedList
-      });
-      menuView.panelView.children.add(listPropertiesView);
-      menuView.bind("isEnabled").to(listCommand, "isEnabled");
-      menuView.on("execute", () => {
-        editor.editing.view.focus();
-      });
-      return menuView;
-    };
-  }
-  function getStyleTypeSupportChecker(listStyleCommand) {
-    if (typeof listStyleCommand.isStyleTypeSupported == "function") {
-      return (styleDefinition) => listStyleCommand.isStyleTypeSupported(styleDefinition.type);
-    } else {
-      return () => true;
-    }
-  }
-  var ListProperties = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListPropertiesEditing,
-        ListPropertiesUI
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "ListProperties";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-  };
-  var CheckTodoListCommand = class extends Command {
-    /**
-    * @inheritDoc
-    */
-    constructor(editor) {
-      super(editor);
-      this.on("execute", () => {
-        this.refresh();
-      }, {
-        priority: "highest"
-      });
-    }
-    /**
-    * Updates the command's {@link #value} and {@link #isEnabled} properties based on the current selection.
-    */
-    refresh() {
-      const selectedElements = this._getSelectedItems();
-      this.value = this._getValue(selectedElements);
-      this.isEnabled = !!selectedElements.length;
-    }
-    /**
-    * Executes the command.
-    *
-    * @param options.forceValue If set, it will force the command behavior. If `true`, the command will apply
-    * the attribute. Otherwise, the command will remove the attribute. If not set, the command will look for its current
-    * value to decide what it should do.
-    */
-    execute(options = {}) {
-      this.editor.model.change((writer) => {
-        const selectedElements = this._getSelectedItems();
-        const value = options.forceValue === void 0 ? !this._getValue(selectedElements) : options.forceValue;
-        for (const element of selectedElements) {
-          if (value) {
-            writer.setAttribute("todoListChecked", true, element);
-          } else {
-            writer.removeAttribute("todoListChecked", element);
-          }
-        }
-      });
-    }
-    /**
-    * Returns a value for the command.
-    */
-    _getValue(selectedElements) {
-      return selectedElements.every((element) => element.getAttribute("todoListChecked"));
-    }
-    /**
-    * Gets all to-do list items selected by the {@link module:engine/model/selection~ModelSelection}.
-    */
-    _getSelectedItems() {
-      const model = this.editor.model;
-      const schema = model.schema;
-      const selectionRange = model.document.selection.getFirstRange();
-      const startElement = selectionRange.start.parent;
-      const elements = [];
-      if (schema.checkAttribute(startElement, "todoListChecked")) {
-        elements.push(...getAllListItemBlocks(startElement));
-      }
-      for (const item of selectionRange.getItems({
-        shallow: true
-      })) {
-        if (schema.checkAttribute(item, "todoListChecked") && !elements.includes(item)) {
-          elements.push(...getAllListItemBlocks(item));
-        }
-      }
-      return elements;
-    }
-  };
-  var TodoCheckboxChangeObserver = class extends DomEventObserver {
-    /**
-    * @inheritDoc
-    */
-    domEventType = [
-      "change"
-    ];
-    /**
-    * @inheritDoc
-    */
-    onDomEvent(domEvent) {
-      if (domEvent.target) {
-        const viewTarget = this.view.domConverter.mapDomToView(domEvent.target);
-        if (viewTarget && viewTarget.is("element", "input") && viewTarget.getAttribute("type") == "checkbox" && viewTarget.findAncestor({
-          classes: "todo-list__label"
-        })) {
-          this.fire("todoCheckboxChange", domEvent);
-        }
-      }
-    }
-  };
-  var ITEM_TOGGLE_KEYSTROKE$1 = /* @__PURE__ */ parseKeystroke("Ctrl+Enter");
-  var TodoListEditing = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "TodoListEditing";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        ListEditing
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      const model = editor.model;
-      const editing = editor.editing;
-      const listEditing = editor.plugins.get(ListEditing);
-      const multiBlock = editor.config.get("list.multiBlock");
-      const elementName = multiBlock ? "paragraph" : "listItem";
-      editor.commands.add("todoList", new ListCommand(editor, "todo"));
-      editor.commands.add("checkTodoList", new CheckTodoListCommand(editor));
-      editing.view.addObserver(TodoCheckboxChangeObserver);
-      model.schema.extend("$listItem", {
-        allowAttributes: "todoListChecked"
-      });
-      model.schema.addAttributeCheck((context) => {
-        const item = context.last;
-        if (!item.getAttribute("listItemId") || item.getAttribute("listType") != "todo") {
-          return false;
-        }
-      }, "todoListChecked");
-      editor.conversion.for("upcast").add((dispatcher) => {
-        dispatcher.on("element:input", todoItemInputConverter());
-        dispatcher.on("element:li", todoListItemUpcastConverter(), {
-          priority: "low"
-        });
-        dispatcher.on("element:label", elementUpcastConsumingConverter({
-          name: "label",
-          classes: "todo-list__label"
-        }));
-        dispatcher.on("element:label", elementUpcastConsumingConverter({
-          name: "label",
-          classes: [
-            "todo-list__label",
-            "todo-list__label_without-description"
-          ]
-        }));
-        dispatcher.on("element:span", elementUpcastConsumingConverter({
-          name: "span",
-          classes: "todo-list__label__description"
-        }));
-        dispatcher.on("element:ul", attributeUpcastConsumingConverter({
-          name: "ul",
-          classes: "todo-list"
-        }));
-      });
-      editor.conversion.for("downcast").elementToElement({
-        model: elementName,
-        view: (element, { writer }) => {
-          if (isDescriptionBlock(element, listEditing.getListAttributeNames())) {
-            return writer.createContainerElement("span", {
-              class: "todo-list__label__description"
-            });
-          }
-        },
-        converterPriority: "highest"
-      });
-      listEditing.registerDowncastStrategy({
-        scope: "list",
-        attributeName: "listType",
-        setAttributeOnDowncast(writer, value, element) {
-          if (value == "todo") {
-            writer.addClass("todo-list", element);
-          } else {
-            writer.removeClass("todo-list", element);
-          }
-        }
-      });
-      listEditing.registerDowncastStrategy({
-        scope: "itemMarker",
-        attributeName: "todoListChecked",
-        createElement(writer, modelElement, { dataPipeline }) {
-          if (modelElement.getAttribute("listType") != "todo") {
-            return null;
-          }
-          const viewElement = writer.createUIElement("input", {
-            type: "checkbox",
-            ...modelElement.getAttribute("todoListChecked") ? {
-              checked: "checked"
-            } : null,
-            ...dataPipeline ? {
-              disabled: "disabled"
-            } : {
-              tabindex: "-1"
-            }
-          });
-          if (dataPipeline) {
-            return viewElement;
-          }
-          const wrapper = writer.createContainerElement("span", {
-            contenteditable: "false"
-          }, viewElement);
-          wrapper.getFillerOffset = () => null;
-          return wrapper;
-        },
-        canWrapElement(modelElement) {
-          return isDescriptionBlock(modelElement, listEditing.getListAttributeNames());
-        },
-        createWrapperElement(writer, modelElement, { dataPipeline }) {
-          const classes = [
-            "todo-list__label"
-          ];
-          if (!isDescriptionBlock(modelElement, listEditing.getListAttributeNames())) {
-            classes.push("todo-list__label_without-description");
-          }
-          return writer.createAttributeElement(dataPipeline ? "label" : "span", {
-            class: classes.join(" ")
-          });
-        }
-      });
-      listEditing.on("checkElement", (evt, { modelElement, viewElement }) => {
-        const isFirstTodoModelParagraphBlock = isDescriptionBlock(modelElement, listEditing.getListAttributeNames());
-        const hasViewClass = viewElement.hasClass("todo-list__label__description");
-        if (hasViewClass != isFirstTodoModelParagraphBlock) {
-          evt.return = true;
-          evt.stop();
-        }
-      });
-      listEditing.on("checkElement", (evt, { modelElement, viewElement }) => {
-        const isFirstTodoModelItemBlock = modelElement.getAttribute("listType") == "todo" && isFirstBlockOfListItem(modelElement);
-        let hasViewItemMarker = false;
-        const viewWalker = editor.editing.view.createPositionBefore(viewElement).getWalker({
-          direction: "backward"
-        });
-        for (const { item } of viewWalker) {
-          if (item.is("element") && editor.editing.mapper.toModelElement(item)) {
-            break;
-          }
-          if (item.is("element", "input") && item.getAttribute("type") == "checkbox") {
-            hasViewItemMarker = true;
-          }
-        }
-        if (hasViewItemMarker != isFirstTodoModelItemBlock) {
-          evt.return = true;
-          evt.stop();
-        }
-      });
-      listEditing.on("postFixer", (evt, { listNodes, writer }) => {
-        for (const { node, previousNodeInList } of listNodes) {
-          if (!previousNodeInList) {
-            continue;
-          }
-          if (previousNodeInList.getAttribute("listItemId") != node.getAttribute("listItemId")) {
-            continue;
-          }
-          const previousHasAttribute = previousNodeInList.hasAttribute("todoListChecked");
-          const nodeHasAttribute = node.hasAttribute("todoListChecked");
-          if (nodeHasAttribute && !previousHasAttribute) {
-            writer.removeAttribute("todoListChecked", node);
-            evt.return = true;
-          } else if (!nodeHasAttribute && previousHasAttribute) {
-            writer.setAttribute("todoListChecked", true, node);
-            evt.return = true;
-          }
-        }
-      });
-      model.document.registerPostFixer((writer) => {
-        const changes = model.document.differ.getChanges();
-        let wasFixed = false;
-        for (const change of changes) {
-          if (change.type == "attribute" && change.attributeKey == "listType") {
-            const element = change.range.start.nodeAfter;
-            if (change.attributeOldValue == "todo" && element.hasAttribute("todoListChecked")) {
-              writer.removeAttribute("todoListChecked", element);
-              wasFixed = true;
-            }
-          } else if (change.type == "insert" && change.name != "$text") {
-            for (const { item } of writer.createRangeOn(change.position.nodeAfter)) {
-              if (item.is("element") && item.getAttribute("listType") != "todo" && item.hasAttribute("todoListChecked")) {
-                writer.removeAttribute("todoListChecked", item);
-                wasFixed = true;
-              }
-            }
-          }
-        }
-        return wasFixed;
-      });
-      this.listenTo(editing.view.document, "keydown", (evt, data) => {
-        if (getCode(data) === ITEM_TOGGLE_KEYSTROKE$1) {
-          editor.execute("checkTodoList");
-          evt.stop();
-        }
-      }, {
-        priority: "high"
-      });
-      this.listenTo(editing.view.document, "todoCheckboxChange", (evt, data) => {
-        const viewTarget = data.target;
-        if (!viewTarget || !viewTarget.is("element", "input")) {
-          return;
-        }
-        const viewPositionAfter = editing.view.createPositionAfter(viewTarget);
-        const modelPositionAfter = editing.mapper.toModelPosition(viewPositionAfter);
-        const modelElement = modelPositionAfter.parent;
-        if (modelElement && isListItemBlock(modelElement) && modelElement.getAttribute("listType") == "todo") {
-          this._handleCheckmarkChange(modelElement);
-        }
-      });
-      this.listenTo(editing.view.document, "arrowKey", jumpOverCheckmarkOnSideArrowKeyPress$1(model, editor.locale), {
-        context: "$text"
-      });
-      this.listenTo(editing.mapper, "viewToModelPosition", (evt, data) => {
-        const viewParent = data.viewPosition.parent;
-        const isStartOfListItem = viewParent.is("attributeElement", "li") && data.viewPosition.offset == 0;
-        const isStartOfListLabel = isLabelElement(viewParent) && data.viewPosition.offset <= 1;
-        const isInInputWrapper = viewParent.is("element", "span") && viewParent.getAttribute("contenteditable") == "false" && isLabelElement(viewParent.parent);
-        if (!isStartOfListItem && !isStartOfListLabel && !isInInputWrapper) {
-          return;
-        }
-        const nodeAfter = data.modelPosition.nodeAfter;
-        if (nodeAfter && nodeAfter.getAttribute("listType") == "todo") {
-          data.modelPosition = model.createPositionAt(nodeAfter, 0);
-        }
-      }, {
-        priority: "low"
-      });
-      this._initAriaAnnouncements();
-    }
-    /**
-    * Handles the checkbox element change, moves the selection to the corresponding model item to make it possible
-    * to toggle the `todoListChecked` attribute using the command, and restores the selection position.
-    *
-    * Some say it's a hack :) Moving the selection only for executing the command on a certain node and restoring it after,
-    * is not a clear solution. We need to design an API for using commands beyond the selection range.
-    * See https://github.com/ckeditor/ckeditor5/issues/1954.
-    */
-    _handleCheckmarkChange(listItem) {
-      const editor = this.editor;
-      const model = editor.model;
-      const previousSelectionRanges = Array.from(model.document.selection.getRanges());
-      model.change((writer) => {
-        writer.setSelection(listItem, "end");
-        editor.execute("checkTodoList");
-        writer.setSelection(previousSelectionRanges);
-      });
-    }
-    /**
-    * Observe when user enters or leaves todo list and set proper aria value in global live announcer.
-    * This allows screen readers to indicate when the user has entered and left the specified todo list.
-    *
-    * @internal
-    */
-    _initAriaAnnouncements() {
-      const { model, ui, t } = this.editor;
-      let lastFocusedCodeBlock = null;
-      if (!ui) {
-        return;
-      }
-      model.document.selection.on("change:range", () => {
-        const focusParent = model.document.selection.focus.parent;
-        const lastElementIsTodoList = isTodoListItemElement(lastFocusedCodeBlock);
-        const currentElementIsTodoList = isTodoListItemElement(focusParent);
-        if (lastElementIsTodoList && !currentElementIsTodoList) {
-          ui.ariaLiveAnnouncer.announce(t("Leaving a to-do list"));
-        } else if (!lastElementIsTodoList && currentElementIsTodoList) {
-          ui.ariaLiveAnnouncer.announce(t("Entering a to-do list"));
-        }
-        lastFocusedCodeBlock = focusParent;
-      });
-    }
-  };
-  function todoListItemUpcastConverter() {
-    return (evt, data, conversionApi) => {
-      const { writer, schema } = conversionApi;
-      if (!data.modelRange) {
-        return;
-      }
-      const groupedItems = Array.from(data.modelRange.getItems({
-        shallow: true
-      })).filter((item) => item.getAttribute("listType") === "todo" && schema.checkAttribute(item, "listItemId")).reduce((acc, item) => {
-        const listItemId = item.getAttribute("listItemId");
-        if (!acc.has(listItemId)) {
-          acc.set(listItemId, getAllListItemBlocks(item));
-        }
-        return acc;
-      }, /* @__PURE__ */ new Map());
-      for (const [, items] of groupedItems.entries()) {
-        if (items.some((item) => item.getAttribute("todoListChecked"))) {
-          for (const item of items) {
-            writer.setAttribute("todoListChecked", true, item);
-          }
-        }
-      }
-    };
-  }
-  function todoItemInputConverter() {
-    return (evt, data, conversionApi) => {
-      const modelCursor = data.modelCursor;
-      const modelItem = modelCursor.parent;
-      const viewItem = data.viewItem;
-      if (!conversionApi.consumable.test(viewItem, {
-        name: true
-      })) {
-        return;
-      }
-      if (viewItem.getAttribute("type") != "checkbox" || !modelCursor.isAtStart || !modelItem.hasAttribute("listType")) {
-        return;
-      }
-      conversionApi.consumable.consume(viewItem, {
-        name: true
-      });
-      const writer = conversionApi.writer;
-      writer.setAttribute("listType", "todo", modelItem);
-      if (data.viewItem.hasAttribute("checked")) {
-        writer.setAttribute("todoListChecked", true, modelItem);
-      }
-      data.modelRange = writer.createRange(modelCursor);
-    };
-  }
-  function elementUpcastConsumingConverter(matcherPattern) {
-    const matcher = new Matcher(matcherPattern);
-    return (evt, data, conversionApi) => {
-      const matcherResult = matcher.match(data.viewItem);
-      if (!matcherResult) {
-        return;
-      }
-      if (!conversionApi.consumable.consume(data.viewItem, matcherResult.match)) {
-        return;
-      }
-      Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
-    };
-  }
-  function attributeUpcastConsumingConverter(matcherPattern) {
-    const matcher = new Matcher(matcherPattern);
-    return (evt, data, conversionApi) => {
-      const matcherResult = matcher.match(data.viewItem);
-      if (!matcherResult) {
-        return;
-      }
-      const match = matcherResult.match;
-      match.name = false;
-      conversionApi.consumable.consume(data.viewItem, match);
-    };
-  }
-  function isDescriptionBlock(modelElement, listAttributeNames) {
-    return (modelElement.is("element", "paragraph") || modelElement.is("element", "listItem")) && modelElement.getAttribute("listType") == "todo" && isFirstBlockOfListItem(modelElement) && hasOnlyListAttributes(modelElement, listAttributeNames);
-  }
-  function hasOnlyListAttributes(modelElement, attributeNames) {
-    for (const attributeKey of modelElement.getAttributeKeys()) {
-      if (attributeKey.startsWith("selection:")) {
-        continue;
-      }
-      if (!attributeNames.includes(attributeKey)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  function jumpOverCheckmarkOnSideArrowKeyPress$1(model, locale) {
-    return (eventInfo, domEventData) => {
-      const direction = getLocalizedArrowKeyCodeDirection(domEventData.keyCode, locale.contentLanguageDirection);
-      const schema = model.schema;
-      const selection = model.document.selection;
-      if (!selection.isCollapsed) {
-        return;
-      }
-      const position = selection.getFirstPosition();
-      const parent = position.parent;
-      if (direction == "right" && position.isAtEnd) {
-        const newRange = schema.getNearestSelectionRange(model.createPositionAfter(parent), "forward");
-        if (!newRange) {
-          return;
-        }
-        const newRangeParent = newRange.start.parent;
-        if (newRangeParent && isListItemBlock(newRangeParent) && newRangeParent.getAttribute("listType") == "todo") {
-          model.change((writer) => writer.setSelection(newRange));
-          domEventData.preventDefault();
-          domEventData.stopPropagation();
-          eventInfo.stop();
-        }
-      } else if (direction == "left" && position.isAtStart && isListItemBlock(parent) && parent.getAttribute("listType") == "todo") {
-        const newRange = schema.getNearestSelectionRange(model.createPositionBefore(parent), "backward");
-        if (!newRange) {
-          return;
-        }
-        model.change((writer) => writer.setSelection(newRange));
-        domEventData.preventDefault();
-        domEventData.stopPropagation();
-        eventInfo.stop();
-      }
-    };
-  }
-  function isLabelElement(viewElement) {
-    return !!viewElement && viewElement.is("attributeElement") && viewElement.hasClass("todo-list__label");
-  }
-  function isTodoListItemElement(element) {
-    if (!element) {
-      return false;
-    }
-    if (!element.is("element", "paragraph") && !element.is("element", "listItem")) {
-      return false;
-    }
-    return element.getAttribute("listType") == "todo";
-  }
-  var TodoListUI = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "TodoListUI";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const t = this.editor.t;
-      createUIComponents(this.editor, "todoList", t("To-do List"), todoList);
-    }
-  };
-  var TodoList = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        TodoListEditing,
-        TodoListUI
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "TodoList";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-  };
-
   // node_modules/@ckeditor/ckeditor5-mention/dist/index.js
   var defaultHandledKeyCodes = [
     keyCodes.arrowup,
@@ -89735,9 +91922,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     return value;
   }
-  function isPx(value) {
-    return value !== void 0 && value.endsWith("px");
-  }
   function toPx2(value) {
     return Math.round(value) + "px";
   }
@@ -89752,9 +91936,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     const encounteredLists = {};
     const stack = [];
+    let topLevelListInfo = createTopLevelListInfo();
     for (const itemLikeElement of itemLikeElements) {
       if (itemLikeElement.indent !== void 0) {
         if (!isListContinuation(itemLikeElement)) {
+          applyIndentationToTopLevelList(writer, stack, topLevelListInfo);
+          topLevelListInfo = createTopLevelListInfo();
           stack.length = 0;
         }
         const originalListId = `${itemLikeElement.id}:${itemLikeElement.indent}`;
@@ -89771,13 +91958,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
               listStyle.startIndex = encounteredLists[originalListId];
             }
             const listElement = createNewEmptyList(listStyle, writer, hasMultiLevelListPlugin);
-            if (isPx(itemLikeElement.marginLeft) && (indent2 == 0 || isPx(stack[indent2 - 1].marginLeft))) {
-              let marginLeft = itemLikeElement.marginLeft;
-              if (indent2 > 0) {
-                marginLeft = toPx2(parseFloat(marginLeft) - parseFloat(stack[indent2 - 1].marginLeft));
-              }
-              writer.setStyle("padding-left", marginLeft, listElement);
-            }
             if (stack.length == 0) {
               const parent = itemLikeElement.element.parent;
               const index = parent.getChildIndex(itemLikeElement.element) + 1;
@@ -89797,6 +91977,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           }
         }
         const listItem = itemLikeElement.element.name == "li" ? itemLikeElement.element : writer.createElement("li");
+        applyListItemMarginLeftAndUpdateTopLevelInfo(writer, stack, topLevelListInfo, itemLikeElement, listItem, indent2);
         writer.appendChild(listItem, stack[indent2].listElement);
         stack[indent2].listItemElements.push(listItem);
         if (indent2 == 0 && itemLikeElement.id !== void 0) {
@@ -89817,6 +91998,56 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         } else {
           stack.length = 0;
         }
+      }
+    }
+    applyIndentationToTopLevelList(writer, stack, topLevelListInfo);
+  }
+  function applyListItemMarginLeftAndUpdateTopLevelInfo(writer, stack, topLevelListInfo, itemLikeElement, listItem, indent2) {
+    if (itemLikeElement.marginLeft === void 0) {
+      if (indent2 == 0) {
+        topLevelListInfo.canApplyMarginOnList = false;
+      }
+      return;
+    }
+    const listItemBlockMarginLeft = parseFloat(itemLikeElement.marginLeft);
+    let currentListBlockIndent = 0;
+    if (stack.length > 1) {
+      const prevStackLevelItems = stack[stack.length - 2].listItemElements;
+      if (prevStackLevelItems.length > 0) {
+        const lastItemMargin = prevStackLevelItems[prevStackLevelItems.length - 1].getStyle("margin-left");
+        if (lastItemMargin !== void 0) {
+          currentListBlockIndent += parseFloat(lastItemMargin);
+        }
+      }
+    }
+    currentListBlockIndent += stack.length * 40;
+    const adjustedListItemIndent = listItemBlockMarginLeft - currentListBlockIndent;
+    const listItemBlockMarginLeftPx = adjustedListItemIndent !== 0 ? toPx2(adjustedListItemIndent) : void 0;
+    if (listItemBlockMarginLeftPx) {
+      writer.setStyle("margin-left", listItemBlockMarginLeftPx, listItem);
+      if (indent2 == 0 && topLevelListInfo.canApplyMarginOnList) {
+        if (topLevelListInfo.marginLeft === void 0) {
+          topLevelListInfo.marginLeft = listItemBlockMarginLeftPx;
+        }
+        if (listItemBlockMarginLeftPx !== topLevelListInfo.marginLeft) {
+          topLevelListInfo.canApplyMarginOnList = false;
+        }
+        topLevelListInfo.topLevelListItemElements.push(listItem);
+      }
+    }
+  }
+  function createTopLevelListInfo() {
+    return {
+      marginLeft: void 0,
+      canApplyMarginOnList: true,
+      topLevelListItemElements: []
+    };
+  }
+  function applyIndentationToTopLevelList(writer, stack, topLevelListInfo) {
+    if (topLevelListInfo.canApplyMarginOnList && topLevelListInfo.marginLeft && topLevelListInfo.topLevelListItemElements.length > 0) {
+      writer.setStyle("margin-left", topLevelListInfo.marginLeft, stack[0].listElement);
+      for (const topLevelListItem of topLevelListInfo.topLevelListItemElements) {
+        writer.removeStyle("margin-left", topLevelListItem);
       }
     }
   }
@@ -89843,7 +92074,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (marginLeft !== void 0 && parseFloat(marginLeft) == 0 && !Array.from(item.getClassNames()).find((className) => className.startsWith("MsoList"))) {
         marginLeft = void 0;
       }
-      if (item.hasStyle("mso-list") || marginLeft !== void 0 && foundMargins.has(marginLeft)) {
+      if (item.hasStyle("mso-list") && item.getStyle("mso-list") !== "none" || marginLeft !== void 0 && foundMargins.has(marginLeft)) {
         const itemData = getListItemData(item);
         itemLikeElements.push({
           element: item,
@@ -90235,10 +92466,25 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       writer.remove(item);
     }
   }
-  function transformTables(documentFragment, writer) {
+  function transformTables(documentFragment, writer, hasTablePropertiesPlugin = false, hasExtendedTableBlockAlignment = false) {
     for (const item of writer.createRangeIn(documentFragment).getItems()) {
       if (!item.is("element", "table") && !item.is("element", "td") && !item.is("element", "th")) {
         continue;
+      }
+      if (hasTablePropertiesPlugin && hasExtendedTableBlockAlignment && item.is("element", "table")) {
+        const directParent = item.parent?.is("element", "div") ? item.parent : null;
+        const grandParent = item.parent?.parent?.is("element", "div") ? item.parent.parent : null;
+        const divParent = directParent ?? grandParent;
+        if (divParent && divParent.getAttribute("align") === "center" && !item.getAttribute("align")) {
+          writer.setStyle("margin-left", "auto", item);
+          writer.setStyle("margin-right", "auto", item);
+        } else if (divParent && divParent.getAttribute("align") === "right" && !item.getAttribute("align")) {
+          writer.setStyle("margin-left", "auto", item);
+          writer.setStyle("margin-right", "0", item);
+        } else if (!divParent && !item.getAttribute("align")) {
+          writer.setStyle("margin-left", "0", item);
+          writer.setStyle("margin-right", "auto", item);
+        }
       }
       const sides = [
         "left",
@@ -90280,19 +92526,135 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
     }
   }
+  function replaceMSFootnotes(documentFragment, writer) {
+    const msFootnotesRefs = /* @__PURE__ */ new Map();
+    const msFootnotesDefs = /* @__PURE__ */ new Map();
+    let msFootnotesDefinitionsList = null;
+    for (const { item } of writer.createRangeIn(documentFragment)) {
+      if (!item.is("element")) {
+        continue;
+      }
+      if (item.getStyle("mso-element") === "footnote-list") {
+        msFootnotesDefinitionsList = item;
+        continue;
+      }
+      if (item.hasStyle("mso-footnote-id")) {
+        const msFootnoteDef = item.findAncestor("element", (el) => el.getStyle("mso-element") === "footnote");
+        if (msFootnoteDef) {
+          const msFootnoteDefId = msFootnoteDef.getAttribute("id");
+          msFootnotesDefs.set(msFootnoteDefId, msFootnoteDef);
+        } else {
+          const msFootnoteRefId = item.getStyle("mso-footnote-id");
+          msFootnotesRefs.set(msFootnoteRefId, item);
+        }
+        continue;
+      }
+    }
+    if (!msFootnotesRefs.size || !msFootnotesDefinitionsList) {
+      return;
+    }
+    const footnotesDefinitionsList = createFootnotesListViewElement(writer);
+    writer.replace(msFootnotesDefinitionsList, footnotesDefinitionsList);
+    for (const [footnoteId, msFootnoteRef] of msFootnotesRefs) {
+      const msFootnoteDef = msFootnotesDefs.get(footnoteId);
+      if (!msFootnoteDef) {
+        continue;
+      }
+      writer.replace(msFootnoteRef, createFootnoteRefViewElement(writer, footnoteId));
+      const defElements = createFootnoteDefViewElement(writer, footnoteId);
+      removeMSReferences(writer, msFootnoteDef);
+      for (const child of msFootnoteDef.getChildren()) {
+        let clonedChild = child;
+        if (child.is("element")) {
+          clonedChild = writer.clone(child, true);
+        }
+        writer.appendChild(clonedChild, defElements.content);
+      }
+      writer.appendChild(defElements.listItem, footnotesDefinitionsList);
+    }
+  }
+  function removeMSReferences(writer, element) {
+    const elementsToRemove = [];
+    const textNodesToTrim = [];
+    for (const { item } of writer.createRangeIn(element)) {
+      if (item.is("element") && item.getStyle("mso-footnote-id")) {
+        elementsToRemove.unshift(item);
+        const { nextSibling } = item;
+        if (nextSibling?.is("$text") && nextSibling.data.startsWith(" ")) {
+          textNodesToTrim.unshift(nextSibling);
+        }
+      }
+    }
+    for (const element2 of elementsToRemove) {
+      writer.remove(element2);
+    }
+    for (const textNode of textNodesToTrim) {
+      const trimmedData = textNode.data.substring(1);
+      if (trimmedData.length > 0) {
+        const parent = textNode.parent;
+        const index = parent.getChildIndex(textNode);
+        const newTextNode = writer.createText(trimmedData);
+        writer.remove(textNode);
+        writer.insertChild(index, newTextNode, parent);
+      } else {
+        writer.remove(textNode);
+      }
+    }
+    return element;
+  }
+  function createFootnotesListViewElement(writer) {
+    return writer.createElement("ol", {
+      class: "footnotes"
+    });
+  }
+  function createFootnoteRefViewElement(writer, footnoteId) {
+    const sup = writer.createElement("sup", {
+      class: "footnote"
+    });
+    const link3 = writer.createElement("a", {
+      id: `ref-${footnoteId}`,
+      href: `#${footnoteId}`
+    });
+    writer.appendChild(link3, sup);
+    return sup;
+  }
+  function createFootnoteDefViewElement(writer, footnoteId) {
+    const listItem = writer.createElement("li", {
+      id: footnoteId,
+      class: "footnote-definition"
+    });
+    const backLink = writer.createElement("a", {
+      href: `#ref-${footnoteId}`,
+      class: "footnote-backlink"
+    });
+    const content = writer.createElement("div", {
+      class: "footnote-content"
+    });
+    writer.appendChild(writer.createText("^"), backLink);
+    writer.appendChild(backLink, listItem);
+    writer.appendChild(content, listItem);
+    return {
+      listItem,
+      content
+    };
+  }
   var msWordMatch1 = /<meta\s*name="?generator"?\s*content="?microsoft\s*word\s*\d+"?\/?>/i;
   var msWordMatch2 = /xmlns:o="urn:schemas-microsoft-com/i;
   var PasteFromOfficeMSWordNormalizer = class {
     document;
     hasMultiLevelListPlugin;
+    hasTablePropertiesPlugin;
+    hasExtendedTableBlockAlignment;
     /**
     * Creates a new `PasteFromOfficeMSWordNormalizer` instance.
     *
     * @param document View document.
     */
-    constructor(document2, hasMultiLevelListPlugin = false) {
+    constructor(document2, hasMultiLevelListPlugin = false, hasTablePropertiesPlugin = false, hasExtendedTableBlockAlignment = false) {
       this.document = document2;
       this.hasMultiLevelListPlugin = hasMultiLevelListPlugin;
+      this.hasTablePropertiesPlugin = hasTablePropertiesPlugin;
+      this.hasExtendedTableBlockAlignment = hasExtendedTableBlockAlignment;
     }
     /**
     * @inheritDoc
@@ -90309,8 +92671,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       transformBookmarks(documentFragment, writer);
       transformListItemLikeElementsIntoLists(documentFragment, stylesString, this.hasMultiLevelListPlugin);
       replaceImagesSourceWithBase64(documentFragment, data.dataTransfer.getData("text/rtf"));
-      transformTables(documentFragment, writer);
+      transformTables(documentFragment, writer, this.hasTablePropertiesPlugin, this.hasExtendedTableBlockAlignment);
       removeInvalidTableWidth(documentFragment, writer);
+      replaceMSFootnotes(documentFragment, writer);
       removeMSAttributes(documentFragment);
       data.content = documentFragment;
     }
@@ -90368,6 +92731,40 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   function isBlockViewElement(node, blockElements) {
     return !!node && node.is("element") && blockElements.includes(node.name);
   }
+  function replaceTabsWithinPreWithSpaces(documentFragment, writer, tabWidth) {
+    const textNodesToReplace = /* @__PURE__ */ new Set();
+    for (const child of writer.createRangeIn(documentFragment).getItems()) {
+      if (!child.is("view:$textProxy") || !child.data.includes("	")) {
+        continue;
+      }
+      if (hasPreWrapParent(child.parent)) {
+        textNodesToReplace.add(child.textNode);
+      }
+    }
+    for (const textNode of textNodesToReplace) {
+      replaceTabsInTextNode(textNode, writer, tabWidth);
+    }
+  }
+  function hasPreWrapParent(element) {
+    let parent = element;
+    while (parent) {
+      if (parent.is("element")) {
+        const whiteSpace = parent.getStyle?.("white-space");
+        if (whiteSpace === "pre-wrap") {
+          return true;
+        }
+      }
+      parent = parent.parent;
+    }
+    return false;
+  }
+  function replaceTabsInTextNode(textNode, writer, tabWidth) {
+    const { parent, data } = textNode;
+    const replacedData = data.replaceAll("	", " ".repeat(tabWidth));
+    const index = parent.getChildIndex(textNode);
+    writer.remove(textNode);
+    writer.insertChild(index, writer.createText(replacedData), parent);
+  }
   var googleDocsMatch = /id=("|')docs-internal-guid-[-0-9a-f]+("|')/i;
   var GoogleDocsNormalizer = class {
     document;
@@ -90394,6 +92791,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       removeBoldWrapper(documentFragment, writer);
       unwrapParagraphInListItem(documentFragment, writer);
       transformBlockBrsToParagraphs(documentFragment, writer);
+      replaceTabsWithinPreWithSpaces(documentFragment, writer, 8);
       data.content = documentFragment;
     }
   };
@@ -90530,8 +92928,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "PFO";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -90550,8 +92961,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const clipboardPipeline = editor.plugins.get("ClipboardPipeline");
       const viewDocument = editor.editing.view.document;
       const normalizers = [];
-      const hasMultiLevelListPlugin = this.editor.plugins.has("MultiLevelList");
-      normalizers.push(new PasteFromOfficeMSWordNormalizer(viewDocument, hasMultiLevelListPlugin));
+      const hasMultiLevelListPlugin = this.editor.plugins.has("MultiLevelListEditing");
+      const hasTablePropertiesPlugin = this.editor.plugins.has("TablePropertiesEditing");
+      const hasExtendedTableBlockAlignment = !!this.editor.config.get("experimentalFlags.useExtendedTableBlockAlignment");
+      normalizers.push(new PasteFromOfficeMSWordNormalizer(viewDocument, hasMultiLevelListPlugin, hasTablePropertiesPlugin, hasExtendedTableBlockAlignment));
       normalizers.push(new GoogleDocsNormalizer(viewDocument));
       normalizers.push(new GoogleSheetsNormalizer(viewDocument));
       clipboardPipeline.on("inputTransformation", (evt, data) => {
@@ -90745,8 +93158,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "RF";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -92526,6 +94952,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
   };
 
   // node_modules/@ckeditor/ckeditor5-table/dist/index.js
+  var ALIGN_VALUES_REG_EXP$1 = /^(left|center|right)$/;
+  var FLOAT_VALUES_REG_EXP = /^(left|none|right)$/;
   function upcastStyleToAttribute(conversion, options) {
     const { modelAttribute, styleName, attributeName, attributeType, viewElement, defaultValue, shouldUpcast = () => true, reduceBoxSides = false } = options;
     conversion.for("upcast").attributeToAttribute({
@@ -92569,8 +94997,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             }
             const localDefaultValue = getDefaultValueAdjusted(defaultValue, "", data);
             let value = viewElement2.getAttribute(attributeName);
-            if (value && attributeType == "length" && !value.endsWith("px")) {
-              value += "px";
+            if (value && attributeType == "length") {
+              const parsedValue = parseFloat(value);
+              if (isNaN(parsedValue)) {
+                value = localDefaultValue;
+              } else {
+                value = parsedValue + (value.includes("%") ? "%" : "px");
+              }
             }
             if (localDefaultValue !== value) {
               return value;
@@ -92583,7 +95016,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       });
     }
   }
-  function upcastBorderStyles(conversion, viewElementName, modelAttributes, defaultBorder) {
+  function upcastBorderStyles(editor, viewElementName, modelAttributes, defaultBorder) {
+    const { conversion } = editor;
     conversion.for("upcast").add((dispatcher) => dispatcher.on("element:" + viewElementName, (evt, data, conversionApi) => {
       if (!data.modelRange) {
         return;
@@ -92648,6 +95082,32 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         conversionApi.writer.setAttribute(modelAttributes.width, reducedBorder.width, modelElement);
       }
     }));
+    if (editor.config.get("experimentalFlags.upcastTableBorderZeroAttributes")) {
+      conversion.for("upcast").add((dispatcher) => {
+        dispatcher.on(`element:${viewElementName}`, (evt, data, conversionApi) => {
+          const { modelRange, viewItem } = data;
+          const viewTable = viewItem.is("element", "table") ? viewItem : viewItem.findAncestor("table");
+          if (!conversionApi.consumable.test(viewTable, {
+            attributes: "border"
+          })) {
+            return;
+          }
+          if (viewTable.getAttribute("border") !== "0") {
+            return;
+          }
+          const modelElement = modelRange?.start?.nodeAfter;
+          if (!modelElement || Object.values(modelAttributes).some((attributeName) => modelElement.hasAttribute(attributeName))) {
+            return;
+          }
+          conversionApi.writer.setAttribute(modelAttributes.style, "none", modelElement);
+          if (viewItem.is("element", "table")) {
+            conversionApi.consumable.consume(viewItem, {
+              attributes: "border"
+            });
+          }
+        });
+      });
+    }
   }
   function downcastAttributeToStyle(conversion, options) {
     const { modelElement, modelAttribute, styleName } = options;
@@ -92715,217 +95175,224 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     return topSideStyle;
   }
-  function updateNumericAttribute(key, value, item, writer, defaultValue = 1) {
-    if (value !== void 0 && value !== null && defaultValue !== void 0 && defaultValue !== null && value > defaultValue) {
-      writer.setAttribute(key, value, item);
-    } else {
-      writer.removeAttribute(key, item);
+  var DEFAULT_TABLE_ALIGNMENT_OPTIONS = {
+    left: {
+      className: "table-style-align-left"
+    },
+    center: {
+      className: "table-style-align-center"
+    },
+    right: {
+      className: "table-style-align-right"
+    },
+    blockLeft: {
+      className: "table-style-block-align-left"
+    },
+    blockRight: {
+      className: "table-style-block-align-right"
     }
-  }
-  function createEmptyTableCell(writer, insertPosition, attributes = {}) {
-    const tableCell = writer.createElement("tableCell", attributes);
-    writer.insertElement("paragraph", tableCell);
-    writer.insert(tableCell, insertPosition);
-    return tableCell;
-  }
-  function isHeadingColumnCell(tableUtils, tableCell) {
-    const table2 = tableCell.parent.parent;
-    const headingColumns = parseInt(table2.getAttribute("headingColumns") || "0");
-    const { column } = tableUtils.getCellLocation(tableCell);
-    return !!headingColumns && column < headingColumns;
-  }
-  function enableProperty$1(schema, conversion, options) {
-    const { modelAttribute } = options;
-    schema.extend("tableCell", {
-      allowAttributes: [
-        modelAttribute
-      ]
-    });
-    schema.setAttributeProperties(modelAttribute, {
-      isFormatting: true
-    });
-    upcastStyleToAttribute(conversion, {
-      viewElement: /^(td|th)$/,
-      ...options
-    });
-    downcastAttributeToStyle(conversion, {
-      modelElement: "tableCell",
-      ...options
-    });
-  }
-  function getSelectionAffectedTable(selection) {
-    const selectedElement = selection.getSelectedElement();
-    if (selectedElement && selectedElement.is("element", "table")) {
-      return selectedElement;
-    }
-    return selection.getFirstPosition().findAncestor("table");
-  }
-  function upcastTableFigure() {
-    return (dispatcher) => {
-      dispatcher.on("element:figure", (evt, data, conversionApi) => {
-        if (!conversionApi.consumable.test(data.viewItem, {
-          name: true,
-          classes: "table"
-        })) {
-          return;
+  };
+  var upcastTableAlignmentConfig = [
+    // Support for the `float:*;` CSS definition for the table alignment.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        styles: {
+          float: FLOAT_VALUES_REG_EXP
         }
-        const viewTable = getViewTableFromFigure(data.viewItem);
-        if (!viewTable || !conversionApi.consumable.test(viewTable, {
-          name: true
-        })) {
-          return;
+      },
+      getAlign: (viewElement) => {
+        let align = viewElement.getStyle("float");
+        if (align === "none") {
+          align = "center";
         }
-        conversionApi.consumable.consume(data.viewItem, {
-          name: true,
-          classes: "table"
-        });
-        const conversionResult = conversionApi.convertItem(viewTable, data.modelCursor);
-        const modelTable = first(conversionResult.modelRange.getItems());
-        if (!modelTable) {
-          conversionApi.consumable.revert(data.viewItem, {
-            name: true,
-            classes: "table"
-          });
-          return;
+        return align;
+      },
+      getConsumables(viewElement) {
+        const float = viewElement.getStyle("float");
+        const styles = [
+          "float"
+        ];
+        if (float === "left" && viewElement.hasStyle("margin-right")) {
+          styles.push("margin-right");
+        } else if (float === "right" && viewElement.hasStyle("margin-left")) {
+          styles.push("margin-left");
         }
-        conversionApi.convertChildren(data.viewItem, conversionApi.writer.createPositionAt(modelTable, "end"));
-        conversionApi.updateConversionResult(modelTable, data);
-      });
-    };
-  }
-  function upcastTable() {
-    return (dispatcher) => {
-      dispatcher.on("element:table", (evt, data, conversionApi) => {
-        const viewTable = data.viewItem;
-        if (!conversionApi.consumable.test(viewTable, {
-          name: true
-        })) {
-          return;
+        return {
+          styles
+        };
+      }
+    },
+    // Support for the `margin-left:auto; margin-right:auto;` CSS definition for the table alignment.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        styles: {
+          "margin-left": "auto",
+          "margin-right": "auto"
         }
-        const { rows, headingRows, headingColumns } = scanTable(viewTable);
-        const attributes = {};
-        if (headingColumns) {
-          attributes.headingColumns = headingColumns;
+      },
+      getAlign: () => "center",
+      getConsumables: () => {
+        return {
+          styles: [
+            "margin-left",
+            "margin-right"
+          ]
+        };
+      }
+    },
+    // Support for the left alignment using CSS classes.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        key: "class",
+        value: "table-style-align-left"
+      },
+      getAlign: () => "left",
+      getConsumables() {
+        return {
+          classes: DEFAULT_TABLE_ALIGNMENT_OPTIONS.left.className
+        };
+      }
+    },
+    // Support for the right alignment using CSS classes.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        key: "class",
+        value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.right.className
+      },
+      getAlign: () => "right",
+      getConsumables() {
+        return {
+          classes: DEFAULT_TABLE_ALIGNMENT_OPTIONS.right.className
+        };
+      }
+    },
+    // Support for the center alignment using CSS classes.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        key: "class",
+        value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.center.className
+      },
+      getAlign: () => "center",
+      getConsumables() {
+        return {
+          classes: DEFAULT_TABLE_ALIGNMENT_OPTIONS.center.className
+        };
+      }
+    },
+    // Support for the block alignment left using CSS classes.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        key: "class",
+        value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockLeft.className
+      },
+      getAlign: () => "blockLeft",
+      getConsumables() {
+        return {
+          classes: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockLeft.className
+        };
+      }
+    },
+    // Support for the block alignment right using CSS classes.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        key: "class",
+        value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockRight.className
+      },
+      getAlign: () => "blockRight",
+      getConsumables() {
+        return {
+          classes: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockRight.className
+        };
+      }
+    },
+    // Support for the block alignment left using margin CSS styles.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        styles: {
+          "margin-left": "0",
+          "margin-right": "auto"
         }
-        if (headingRows) {
-          attributes.headingRows = headingRows;
+      },
+      getAlign: () => "blockLeft",
+      getConsumables() {
+        return {
+          styles: [
+            "margin-left",
+            "margin-right"
+          ]
+        };
+      }
+    },
+    // Support for the block alignment right using margin CSS styles.
+    {
+      view: {
+        name: /^(table|figure)$/,
+        styles: {
+          "margin-left": "auto",
+          "margin-right": "0"
         }
-        const table2 = conversionApi.writer.createElement("table", attributes);
-        if (!conversionApi.safeInsert(table2, data.modelCursor)) {
-          return;
+      },
+      getAlign: () => "blockRight",
+      getConsumables() {
+        return {
+          styles: [
+            "margin-left",
+            "margin-right"
+          ]
+        };
+      }
+    },
+    // Support for the `align` attribute as the backward compatibility while pasting from other sources.
+    {
+      view: {
+        name: "table",
+        attributes: {
+          align: ALIGN_VALUES_REG_EXP$1
         }
-        conversionApi.consumable.consume(viewTable, {
-          name: true
-        });
-        rows.forEach((row) => conversionApi.convertItem(row, conversionApi.writer.createPositionAt(table2, "end")));
-        conversionApi.convertChildren(viewTable, conversionApi.writer.createPositionAt(table2, "end"));
-        if (table2.isEmpty) {
-          const row = conversionApi.writer.createElement("tableRow");
-          conversionApi.writer.insert(row, conversionApi.writer.createPositionAt(table2, "end"));
-          createEmptyTableCell(conversionApi.writer, conversionApi.writer.createPositionAt(row, "end"));
-        }
-        conversionApi.updateConversionResult(table2, data);
-      });
-    };
-  }
-  function skipEmptyTableRow() {
-    return (dispatcher) => {
-      dispatcher.on("element:tr", (evt, data) => {
-        if (data.viewItem.isEmpty && data.modelCursor.index == 0) {
-          evt.stop();
-        }
-      }, {
-        priority: "high"
-      });
-    };
-  }
-  function ensureParagraphInTableCell(elementName) {
-    return (dispatcher) => {
-      dispatcher.on(`element:${elementName}`, (evt, data, { writer }) => {
-        if (!data.modelRange) {
-          return;
-        }
-        const tableCell = data.modelRange.start.nodeAfter;
-        const modelCursor = writer.createPositionAt(tableCell, 0);
-        if (data.viewItem.isEmpty) {
-          writer.insertElement("paragraph", modelCursor);
-          return;
-        }
-        const childNodes = Array.from(tableCell.getChildren());
-        if (childNodes.every((node) => node.is("element", "$marker"))) {
-          const paragraph2 = writer.createElement("paragraph");
-          writer.insert(paragraph2, writer.createPositionAt(tableCell, 0));
-          for (const node of childNodes) {
-            writer.move(writer.createRangeOn(node), writer.createPositionAt(paragraph2, "end"));
-          }
-        }
-      }, {
-        priority: "low"
-      });
-    };
-  }
-  function getViewTableFromFigure(figureView) {
-    for (const figureChild of figureView.getChildren()) {
-      if (figureChild.is("element", "table")) {
-        return figureChild;
+      },
+      getAlign: (viewElement) => viewElement.getAttribute("align"),
+      getConsumables() {
+        return {
+          attributes: "align"
+        };
       }
     }
-  }
-  function scanTable(viewTable) {
-    let headingRows = 0;
-    let headingColumns = void 0;
-    const headRows = [];
-    const bodyRows = [];
-    let firstTheadElement;
-    for (const tableChild of Array.from(viewTable.getChildren())) {
-      if (tableChild.name !== "tbody" && tableChild.name !== "thead" && tableChild.name !== "tfoot") {
-        continue;
-      }
-      if (tableChild.name === "thead" && !firstTheadElement) {
-        firstTheadElement = tableChild;
-      }
-      const trs = Array.from(tableChild.getChildren()).filter((el) => el.is("element", "tr"));
-      let maxPrevColumns = null;
-      for (const tr of trs) {
-        const trColumns = Array.from(tr.getChildren()).filter((el) => el.is("element", "td") || el.is("element", "th"));
-        if (firstTheadElement && tableChild === firstTheadElement || tableChild.name === "tbody" && trColumns.length > 0 && // These conditions handles the case when the first column is a <th> element and it's the only column in the row.
-        // This case is problematic because it's not clear if this row should be a heading row or not, as it may be result
-        // of the cell span from the previous row.
-        // Issue: https://github.com/ckeditor/ckeditor5/issues/17556
-        (maxPrevColumns === null || trColumns.length === maxPrevColumns) && trColumns.every((e) => e.is("element", "th"))) {
-          headingRows++;
-          headRows.push(tr);
-        } else {
-          bodyRows.push(tr);
-          const headingCols = scanRowForHeadingColumns(tr);
-          if (!headingColumns || headingCols < headingColumns) {
-            headingColumns = headingCols;
-          }
-        }
-        maxPrevColumns = Math.max(maxPrevColumns || 0, trColumns.length);
-      }
+  ];
+  var downcastTableAlignmentConfig = {
+    center: {
+      align: "center",
+      style: "margin-left: auto; margin-right: auto;",
+      className: "table-style-align-center"
+    },
+    left: {
+      align: "left",
+      style: "float: left;",
+      className: "table-style-align-left"
+    },
+    right: {
+      align: "right",
+      style: "float: right;",
+      className: "table-style-align-right"
+    },
+    blockLeft: {
+      align: void 0,
+      style: "margin-left: 0; margin-right: auto;",
+      className: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockLeft.className
+    },
+    blockRight: {
+      align: void 0,
+      style: "margin-left: auto; margin-right: 0;",
+      className: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockRight.className
     }
-    return {
-      headingRows,
-      headingColumns: headingColumns || 0,
-      rows: [
-        ...headRows,
-        ...bodyRows
-      ]
-    };
-  }
-  function scanRowForHeadingColumns(tr) {
-    let headingColumns = 0;
-    let index = 0;
-    const children = Array.from(tr.getChildren()).filter((child) => child.name === "th" || child.name === "td");
-    while (index < children.length && children[index].name === "th") {
-      const th = children[index];
-      const colspan = parseInt(th.getAttribute("colspan") || "1");
-      headingColumns = headingColumns + colspan;
-      index++;
-    }
-    return headingColumns;
-  }
+  };
   var TableWalker = class {
     /**
     * The walker's table element.
@@ -93382,284 +95849,79 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return model.createPositionAt(this._table.getChild(this.row), this._cellIndex);
     }
   };
-  function downcastTable(tableUtils, options) {
-    return (table2, { writer }) => {
-      const headingRows = table2.getAttribute("headingRows") || 0;
-      const tableElement = writer.createContainerElement("table", null, []);
-      const figureElement = writer.createContainerElement("figure", {
-        class: "table"
-      }, tableElement);
-      if (headingRows > 0) {
-        writer.insert(writer.createPositionAt(tableElement, "end"), writer.createContainerElement("thead", null, writer.createSlot((element) => element.is("element", "tableRow") && element.index < headingRows)));
-      }
-      if (headingRows < tableUtils.getRows(table2)) {
-        writer.insert(writer.createPositionAt(tableElement, "end"), writer.createContainerElement("tbody", null, writer.createSlot((element) => element.is("element", "tableRow") && element.index >= headingRows)));
-      }
-      for (const { positionOffset, filter } of options.additionalSlots) {
-        writer.insert(writer.createPositionAt(tableElement, positionOffset), writer.createSlot(filter));
-      }
-      writer.insert(writer.createPositionAt(tableElement, "after"), writer.createSlot((element) => {
-        if (element.is("element", "tableRow")) {
-          return false;
-        }
-        return !options.additionalSlots.some(({ filter }) => filter(element));
-      }));
-      return options.asWidget ? toTableWidget(figureElement, writer) : figureElement;
-    };
+  function updateNumericAttribute(key, value, item, writer, defaultValue = 1) {
+    if (value !== void 0 && value !== null && defaultValue !== void 0 && defaultValue !== null && value > defaultValue) {
+      writer.setAttribute(key, value, item);
+    } else {
+      writer.removeAttribute(key, item);
+    }
   }
-  function downcastRow() {
-    return (tableRow2, { writer }) => {
-      return tableRow2.isEmpty ? writer.createEmptyElement("tr") : writer.createContainerElement("tr");
-    };
+  function createEmptyTableCell(writer, insertPosition, attributes = {}) {
+    const tableCell = writer.createElement("tableCell", attributes);
+    writer.insertElement("paragraph", tableCell);
+    writer.insert(tableCell, insertPosition);
+    return tableCell;
   }
-  function downcastCell(options = {}) {
-    return (tableCell, { writer }) => {
-      const tableRow2 = tableCell.parent;
-      const table2 = tableRow2.parent;
-      const rowIndex = table2.getChildIndex(tableRow2);
-      const tableWalker = new TableWalker(table2, {
-        row: rowIndex
-      });
-      const headingRows = table2.getAttribute("headingRows") || 0;
-      const headingColumns = table2.getAttribute("headingColumns") || 0;
-      let result = null;
-      for (const tableSlot of tableWalker) {
-        if (tableSlot.cell == tableCell) {
-          const isHeading = tableSlot.row < headingRows || tableSlot.column < headingColumns;
-          const cellElementName = isHeading ? "th" : "td";
-          result = options.asWidget ? toWidgetEditable(writer.createEditableElement(cellElementName), writer, {
-            withAriaRole: false
-          }) : writer.createContainerElement(cellElementName);
-          break;
-        }
-      }
-      return result;
-    };
+  function isHeadingColumnCell(tableUtils, tableCell) {
+    const table2 = tableCell.parent.parent;
+    const headingColumns = parseInt(table2.getAttribute("headingColumns") || "0");
+    const { column } = tableUtils.getCellLocation(tableCell);
+    return !!headingColumns && column < headingColumns;
   }
-  function convertParagraphInTableCell(options = {}) {
-    return (modelElement, { writer }) => {
-      if (!modelElement.parent.is("element", "tableCell")) {
-        return null;
-      }
-      if (!isSingleParagraphWithoutAttributes(modelElement)) {
-        return null;
-      }
-      if (options.asWidget) {
-        return writer.createContainerElement("span", {
-          class: "ck-table-bogus-paragraph"
-        });
-      } else {
-        const viewElement = writer.createContainerElement("p");
-        writer.setCustomProperty("dataPipeline:transparentRendering", true, viewElement);
-        return viewElement;
-      }
-    };
-  }
-  function isSingleParagraphWithoutAttributes(modelElement) {
-    const tableCell = modelElement.parent;
-    const isSingleParagraph = tableCell.childCount == 1;
-    return isSingleParagraph && !hasAnyAttribute2(modelElement);
-  }
-  function toTableWidget(viewElement, writer) {
-    writer.setCustomProperty("table", true, viewElement);
-    return toWidget(viewElement, writer, {
-      hasSelectionHandle: true
+  function enableProperty$1(schema, conversion, options) {
+    const { modelAttribute } = options;
+    schema.extend("tableCell", {
+      allowAttributes: [
+        modelAttribute
+      ]
+    });
+    schema.setAttributeProperties(modelAttribute, {
+      isFormatting: true
+    });
+    upcastStyleToAttribute(conversion, {
+      viewElement: /^(td|th)$/,
+      ...options
+    });
+    downcastAttributeToStyle(conversion, {
+      modelElement: "tableCell",
+      ...options
     });
   }
-  function hasAnyAttribute2(element) {
-    for (const attributeKey of element.getAttributeKeys()) {
-      if (attributeKey.startsWith("selection:") || attributeKey == "htmlEmptyBlock") {
-        continue;
-      }
-      return true;
+  function getSelectionAffectedTable(selection) {
+    const selectedElement = selection.getSelectedElement();
+    if (selectedElement && selectedElement.is("element", "table")) {
+      return selectedElement;
     }
-    return false;
+    return selection.getFirstPosition().findAncestor("table");
   }
-  var InsertTableCommand = class extends Command {
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const model = this.editor.model;
-      const selection = model.document.selection;
-      const schema = model.schema;
-      this.isEnabled = isAllowedInParent$1(selection, schema);
-    }
-    /**
-    * Executes the command.
-    *
-    * Inserts a table with the given number of rows and columns into the editor.
-    *
-    * @param options.rows The number of rows to create in the inserted table. Default value is 2.
-    * @param options.columns The number of columns to create in the inserted table. Default value is 2.
-    * @param options.headingRows The number of heading rows. If not provided it will default to
-    * {@link module:table/tableconfig~TableConfig#defaultHeadings `config.table.defaultHeadings.rows`} table config.
-    * @param options.headingColumns The number of heading columns. If not provided it will default to
-    * {@link module:table/tableconfig~TableConfig#defaultHeadings `config.table.defaultHeadings.columns`} table config.
-    * @fires execute
-    */
-    execute(options = {}) {
-      const editor = this.editor;
-      const model = editor.model;
-      const tableUtils = editor.plugins.get("TableUtils");
-      const defaultRows = editor.config.get("table.defaultHeadings.rows");
-      const defaultColumns = editor.config.get("table.defaultHeadings.columns");
-      if (options.headingRows === void 0 && defaultRows) {
-        options.headingRows = defaultRows;
+  function groupCellsByTable(tableCells) {
+    const tableMap = /* @__PURE__ */ new Map();
+    for (const tableCell of tableCells) {
+      const table2 = tableCell.findAncestor("table");
+      if (!tableMap.has(table2)) {
+        tableMap.set(table2, []);
       }
-      if (options.headingColumns === void 0 && defaultColumns) {
-        options.headingColumns = defaultColumns;
-      }
-      model.change((writer) => {
-        const table2 = tableUtils.createTable(writer, options);
-        model.insertObject(table2, null, null, {
-          findOptimalPosition: "auto"
-        });
-        writer.setSelection(writer.createPositionAt(table2.getNodeByPath([
-          0,
-          0,
-          0
-        ]), 0));
-      });
+      tableMap.get(table2).push(tableCell);
     }
-  };
-  function isAllowedInParent$1(selection, schema) {
-    const positionParent = selection.getFirstPosition().parent;
-    const validParent = positionParent === positionParent.root ? positionParent : positionParent.parent;
-    return schema.checkChild(validParent, "table");
+    return tableMap;
   }
-  var InsertRowCommand = class extends Command {
-    /**
-    * The order of insertion relative to the row in which the caret is located.
-    */
-    order;
-    /**
-    * Creates a new `InsertRowCommand` instance.
-    *
-    * @param editor The editor on which this command will be used.
-    * @param options.order The order of insertion relative to the row in which the caret is located.
-    * Possible values: `"above"` and `"below"`. Default value is "below"
-    */
-    constructor(editor, options = {}) {
-      super(editor);
-      this.order = options.order || "below";
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const selection = this.editor.model.document.selection;
-      const tableUtils = this.editor.plugins.get("TableUtils");
-      const isAnyCellSelected = !!tableUtils.getSelectionAffectedTableCells(selection).length;
-      this.isEnabled = isAnyCellSelected;
-    }
-    /**
-    * Executes the command.
-    *
-    * Depending on the command's {@link #order} value, it inserts a row `'below'` or `'above'` the row in which selection is set.
-    *
-    * @fires execute
-    */
-    execute() {
-      const editor = this.editor;
-      const selection = editor.model.document.selection;
-      const tableUtils = editor.plugins.get("TableUtils");
-      const insertAbove = this.order === "above";
-      const affectedTableCells = tableUtils.getSelectionAffectedTableCells(selection);
-      const rowIndexes = tableUtils.getRowIndexes(affectedTableCells);
-      const row = insertAbove ? rowIndexes.first : rowIndexes.last;
-      const table2 = affectedTableCells[0].findAncestor("table");
-      tableUtils.insertRows(table2, {
-        at: insertAbove ? row : row + 1,
-        copyStructureFromAbove: !insertAbove
-      });
-    }
-  };
-  var InsertColumnCommand = class extends Command {
-    /**
-    * The order of insertion relative to the column in which the caret is located.
-    */
-    order;
-    /**
-    * Creates a new `InsertColumnCommand` instance.
-    *
-    * @param editor An editor on which this command will be used.
-    * @param options.order The order of insertion relative to the column in which the caret is located.
-    * Possible values: `"left"` and `"right"`. Default value is "right".
-    */
-    constructor(editor, options = {}) {
-      super(editor);
-      this.order = options.order || "right";
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const selection = this.editor.model.document.selection;
-      const tableUtils = this.editor.plugins.get("TableUtils");
-      const isAnyCellSelected = !!tableUtils.getSelectionAffectedTableCells(selection).length;
-      this.isEnabled = isAnyCellSelected;
-    }
-    /**
-    * Executes the command.
-    *
-    * Depending on the command's {@link #order} value, it inserts a column to the `'left'` or `'right'` of the column
-    * in which the selection is set.
-    *
-    * @fires execute
-    */
-    execute() {
-      const editor = this.editor;
-      const selection = editor.model.document.selection;
-      const tableUtils = editor.plugins.get("TableUtils");
-      const insertBefore = this.order === "left";
-      const affectedTableCells = tableUtils.getSelectionAffectedTableCells(selection);
-      const columnIndexes = tableUtils.getColumnIndexes(affectedTableCells);
-      const column = insertBefore ? columnIndexes.first : columnIndexes.last;
-      const table2 = affectedTableCells[0].findAncestor("table");
-      tableUtils.insertColumns(table2, {
-        columns: 1,
-        at: insertBefore ? column : column + 1
-      });
-    }
-  };
-  var SplitCellCommand = class extends Command {
-    /**
-    * The direction that indicates which cell will be split.
-    */
-    direction;
-    /**
-    * Creates a new `SplitCellCommand` instance.
-    *
-    * @param editor The editor on which this command will be used.
-    * @param options.direction Indicates whether the command should split cells `'horizontally'` or `'vertically'`.
-    */
-    constructor(editor, options = {}) {
-      super(editor);
-      this.direction = options.direction || "horizontally";
-    }
-    /**
-    * @inheritDoc
-    */
-    refresh() {
-      const tableUtils = this.editor.plugins.get("TableUtils");
-      const selectedCells = tableUtils.getSelectionAffectedTableCells(this.editor.model.document.selection);
-      this.isEnabled = selectedCells.length === 1;
-    }
-    /**
-    * @inheritDoc
-    */
-    execute() {
-      const tableUtils = this.editor.plugins.get("TableUtils");
-      const tableCell = tableUtils.getSelectionAffectedTableCells(this.editor.model.document.selection)[0];
-      const isHorizontal = this.direction === "horizontally";
-      if (isHorizontal) {
-        tableUtils.splitCellHorizontally(tableCell, 2);
-      } else {
-        tableUtils.splitCellVertically(tableCell, 2);
+  function isEntireCellsLineHeader({ table: table2, row, column }) {
+    const tableWalker = new TableWalker(table2, {
+      row,
+      column
+    });
+    for (const { cell } of tableWalker) {
+      const cellType = cell.getAttribute("tableCellType");
+      if (cellType !== "header") {
+        return false;
       }
     }
-  };
+    return true;
+  }
+  function isTableCellTypeEnabled(editor) {
+    const { model, config } = editor;
+    return model.schema.checkAttribute("tableCell", "tableCellType") && config.get("experimentalFlags.tableCellTypeSupport") === true;
+  }
   function cropTableToDimensions(sourceTable, cropDimensions, writer) {
     const { startRow, startColumn, endRow, endColumn } = cropDimensions;
     const croppedTable = writer.createElement("table");
@@ -93874,6 +96136,682 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     const colspanAdjustment = lastColumnMap[0].cellWidth - 1;
     return dimensions.lastColumn + colspanAdjustment;
   }
+  function getViewTableFromWrapper(wrapperView) {
+    for (const wrapperChild of wrapperView.getChildren()) {
+      if (wrapperChild.is("element", "table")) {
+        return wrapperChild;
+      }
+    }
+  }
+  function upcastTableFigure() {
+    return (dispatcher) => {
+      dispatcher.on("element:figure", (evt, data, conversionApi) => {
+        if (!conversionApi.consumable.test(data.viewItem, {
+          name: true,
+          classes: "table"
+        })) {
+          return;
+        }
+        const viewTable = getViewTableFromWrapper(data.viewItem);
+        if (!viewTable || !conversionApi.consumable.test(viewTable, {
+          name: true
+        })) {
+          return;
+        }
+        conversionApi.consumable.consume(data.viewItem, {
+          name: true,
+          classes: "table"
+        });
+        const conversionResult = conversionApi.convertItem(viewTable, data.modelCursor);
+        const modelTable = first(conversionResult.modelRange.getItems());
+        if (!modelTable || !modelTable.is("element", "table")) {
+          conversionApi.consumable.revert(data.viewItem, {
+            name: true,
+            classes: "table"
+          });
+          if (conversionResult.modelRange && !conversionResult.modelRange.isCollapsed) {
+            data.modelRange = conversionResult.modelRange;
+            data.modelCursor = conversionResult.modelCursor;
+          }
+          return;
+        }
+        conversionApi.convertChildren(data.viewItem, conversionApi.writer.createPositionAt(modelTable, "end"));
+        conversionApi.updateConversionResult(modelTable, data);
+      });
+    };
+  }
+  function upcastTable() {
+    return (dispatcher) => {
+      dispatcher.on("element:table", (evt, data, conversionApi) => {
+        const viewTable = data.viewItem;
+        if (!conversionApi.consumable.test(viewTable, {
+          name: true
+        })) {
+          return;
+        }
+        const { rows, headingRows, headingColumns } = scanTable(viewTable);
+        const attributes = {};
+        if (headingColumns) {
+          attributes.headingColumns = headingColumns;
+        }
+        if (headingRows) {
+          attributes.headingRows = headingRows;
+        }
+        const table2 = conversionApi.writer.createElement("table", attributes);
+        if (!conversionApi.safeInsert(table2, data.modelCursor)) {
+          return;
+        }
+        conversionApi.consumable.consume(viewTable, {
+          name: true
+        });
+        rows.forEach((row) => conversionApi.convertItem(row, conversionApi.writer.createPositionAt(table2, "end")));
+        conversionApi.convertChildren(viewTable, conversionApi.writer.createPositionAt(table2, "end"));
+        if (table2.isEmpty) {
+          const row = conversionApi.writer.createElement("tableRow");
+          conversionApi.writer.insert(row, conversionApi.writer.createPositionAt(table2, "end"));
+          createEmptyTableCell(conversionApi.writer, conversionApi.writer.createPositionAt(row, "end"));
+        }
+        conversionApi.updateConversionResult(table2, data);
+      });
+    };
+  }
+  function skipEmptyTableRow() {
+    return (dispatcher) => {
+      dispatcher.on("element:tr", (evt, data) => {
+        if (data.viewItem.isEmpty && data.modelCursor.index == 0) {
+          evt.stop();
+        }
+      }, {
+        priority: "high"
+      });
+    };
+  }
+  function ensureParagraphInTableCell(elementName) {
+    return (dispatcher) => {
+      dispatcher.on(`element:${elementName}`, (evt, data, { writer }) => {
+        if (!data.modelRange) {
+          return;
+        }
+        const tableCell = data.modelRange.start.nodeAfter;
+        const modelCursor = writer.createPositionAt(tableCell, 0);
+        if (data.viewItem.isEmpty) {
+          writer.insertElement("paragraph", modelCursor);
+          return;
+        }
+        const childNodes = Array.from(tableCell.getChildren());
+        if (childNodes.every((node) => node.is("element", "$marker"))) {
+          const paragraph2 = writer.createElement("paragraph");
+          writer.insert(paragraph2, writer.createPositionAt(tableCell, 0));
+          for (const node of childNodes) {
+            writer.move(writer.createRangeOn(node), writer.createPositionAt(paragraph2, "end"));
+          }
+        }
+      }, {
+        priority: "low"
+      });
+    };
+  }
+  function scanTable(viewTable) {
+    let headingColumns = void 0;
+    let shouldAccumulateHeadingRows = true;
+    const headRows = [];
+    const bodyRows = [];
+    let firstTheadElement;
+    for (const tableChild of Array.from(viewTable.getChildren())) {
+      if (tableChild.name !== "tbody" && tableChild.name !== "thead" && tableChild.name !== "tfoot") {
+        continue;
+      }
+      if (tableChild.name === "thead" && !firstTheadElement) {
+        shouldAccumulateHeadingRows = true;
+        firstTheadElement = tableChild;
+      }
+      const trs = Array.from(tableChild.getChildren()).filter((el) => el.is("element", "tr"));
+      let maxPrevColumns = null;
+      for (const tr of trs) {
+        const trColumns = Array.from(tr.getChildren()).filter((el) => el.is("element", "td") || el.is("element", "th"));
+        if (firstTheadElement && tableChild === firstTheadElement || tableChild.name === "tbody" && trColumns.length > 0 && // These conditions handles the case when the first column is a <th> element and it's the only column in the row.
+        // This case is problematic because it's not clear if this row should be a heading row or not, as it may be result
+        // of the cell span from the previous row.
+        // Issue: https://github.com/ckeditor/ckeditor5/issues/17556
+        (maxPrevColumns === null || trColumns.length === maxPrevColumns) && trColumns.every((e) => e.is("element", "th")) && // If there is at least one "normal" table row between heading rows, then stop accumulating heading rows.
+        shouldAccumulateHeadingRows) {
+          headRows.push(tr);
+          shouldAccumulateHeadingRows = true;
+        } else {
+          bodyRows.push(tr);
+          shouldAccumulateHeadingRows = false;
+        }
+        maxPrevColumns = Math.max(maxPrevColumns || 0, trColumns.length);
+      }
+    }
+    const bodyMatrix = generateCellMatrix(bodyRows);
+    for (const rowSlots of bodyMatrix) {
+      let index = 0;
+      while (index < rowSlots.length) {
+        if (rowSlots[index]?.name !== "th") {
+          break;
+        }
+        index += 1;
+      }
+      if (headingColumns === void 0 || index < headingColumns) {
+        headingColumns = index;
+      }
+    }
+    return {
+      headingRows: headRows.length,
+      headingColumns: headingColumns || 0,
+      rows: [
+        ...headRows,
+        ...bodyRows
+      ]
+    };
+  }
+  function generateCellMatrix(trs) {
+    let prevRowspans = /* @__PURE__ */ new Map();
+    let maxColumns = 0;
+    const slots = trs.map((tr) => {
+      const curSlots = [];
+      const children = Array.from(tr.getChildren()).filter((child) => child.name === "th" || child.name === "td");
+      const curRowspans = /* @__PURE__ */ new Map();
+      while (children.length || curSlots.length < maxColumns) {
+        const rowSpan = prevRowspans.get(curSlots.length);
+        if (rowSpan && rowSpan.remaining > 0) {
+          curSlots.push(rowSpan.cell);
+        } else {
+          const cell = children.shift();
+          if (cell) {
+            const colspan = parseInt(cell.getAttribute("colspan") || "1");
+            const rowspan = parseInt(cell.getAttribute("rowspan") || "1");
+            for (let i = 0; i < colspan; i++) {
+              if (rowspan > 1) {
+                curRowspans.set(curSlots.length, {
+                  cell,
+                  remaining: rowspan - 1
+                });
+              }
+              curSlots.push(cell);
+            }
+          } else {
+            curSlots.push(null);
+            continue;
+          }
+        }
+      }
+      for (const [index, entry] of prevRowspans.entries()) {
+        entry.remaining -= 1;
+        if (entry.remaining > 0 && !curRowspans.has(index)) {
+          curRowspans.set(index, entry);
+        }
+      }
+      prevRowspans = curRowspans;
+      maxColumns = Math.max(maxColumns, curSlots.length);
+      return curSlots;
+    });
+    for (const rowSlots of slots) {
+      while (rowSlots.length < maxColumns) {
+        rowSlots.push(null);
+      }
+    }
+    return slots;
+  }
+  function getSingleValue(objectOrString) {
+    if (!objectOrString || !isObject(objectOrString)) {
+      return objectOrString;
+    }
+    const { top, right, bottom, left } = objectOrString;
+    if (top == right && right == bottom && bottom == left) {
+      return top;
+    }
+  }
+  function addDefaultUnitToNumericValue(value, defaultUnit) {
+    const numericValue = parseFloat(value);
+    if (Number.isNaN(numericValue)) {
+      return value;
+    }
+    if (String(numericValue) !== String(value)) {
+      return value;
+    }
+    return `${numericValue}${defaultUnit}`;
+  }
+  function getNormalizedDefaultProperties(config, options = {}) {
+    const normalizedConfig = {
+      borderStyle: "none",
+      borderWidth: "",
+      borderColor: "",
+      backgroundColor: "",
+      width: "",
+      height: "",
+      ...config
+    };
+    if (options.includeAlignmentProperty && !normalizedConfig.alignment) {
+      normalizedConfig.alignment = "center";
+    }
+    if (options.includePaddingProperty && !normalizedConfig.padding) {
+      normalizedConfig.padding = "";
+    }
+    if (options.includeVerticalAlignmentProperty && !normalizedConfig.verticalAlignment) {
+      normalizedConfig.verticalAlignment = "middle";
+    }
+    if (options.includeHorizontalAlignmentProperty && !normalizedConfig.horizontalAlignment) {
+      normalizedConfig.horizontalAlignment = options.isRightToLeftContent ? "right" : "left";
+    }
+    return normalizedConfig;
+  }
+  function getNormalizedDefaultTableProperties(config, options) {
+    return getNormalizedDefaultProperties({
+      // It adds support for border none in the table element, keep it in sync with the content styles
+      // See more: https://github.com/ckeditor/ckeditor5/issues/6841#issuecomment-1959195608
+      borderStyle: "double",
+      borderColor: "hsl(0, 0%, 70%)",
+      borderWidth: "1px",
+      ...config
+    }, options);
+  }
+  function getNormalizedDefaultCellProperties(config, options) {
+    return getNormalizedDefaultProperties({
+      // It adds support for border none in the table element, keep it in sync with the content styles
+      // See more: https://github.com/ckeditor/ckeditor5/issues/6841#issuecomment-1959195608
+      borderStyle: "solid",
+      borderColor: "hsl(0, 0%, 75%)",
+      borderWidth: "1px",
+      ...config
+    }, options);
+  }
+  function downcastTable(tableUtils, options) {
+    return (table2, { writer }) => {
+      const headingRows = table2.getAttribute("headingRows") || 0;
+      const tableElement = writer.createContainerElement("table", null, []);
+      const figureElement = writer.createContainerElement("figure", {
+        class: "table"
+      }, tableElement);
+      if (headingRows > 0) {
+        writer.insert(writer.createPositionAt(tableElement, "end"), writer.createContainerElement("thead", null, writer.createSlot((element) => element.is("element", "tableRow") && element.index < headingRows)));
+      }
+      if (headingRows < tableUtils.getRows(table2)) {
+        writer.insert(writer.createPositionAt(tableElement, "end"), writer.createContainerElement("tbody", null, writer.createSlot((element) => element.is("element", "tableRow") && element.index >= headingRows)));
+      }
+      for (const { positionOffset, filter } of options.additionalSlots) {
+        writer.insert(writer.createPositionAt(tableElement, positionOffset), writer.createSlot(filter));
+      }
+      writer.insert(writer.createPositionAt(tableElement, "after"), writer.createSlot((element) => {
+        if (element.is("element", "tableRow")) {
+          return false;
+        }
+        return !options.additionalSlots.some(({ filter }) => filter(element));
+      }));
+      return options.asWidget ? toTableWidget(figureElement, writer) : figureElement;
+    };
+  }
+  function downcastRow() {
+    return (tableRow2, { writer }) => {
+      return tableRow2.isEmpty ? writer.createEmptyElement("tr") : writer.createContainerElement("tr");
+    };
+  }
+  function downcastCell(options) {
+    return (tableCell, { writer }) => {
+      if (options.cellTypeEnabled?.()) {
+        const cellElementName = tableCell.getAttribute("tableCellType") === "header" ? "th" : "td";
+        return createCellElement(writer, cellElementName);
+      }
+      const tableRow2 = tableCell.parent;
+      const table2 = tableRow2.parent;
+      const rowIndex = table2.getChildIndex(tableRow2);
+      const tableWalker = new TableWalker(table2, {
+        row: rowIndex
+      });
+      const headingRows = table2.getAttribute("headingRows") || 0;
+      const headingColumns = table2.getAttribute("headingColumns") || 0;
+      let result = null;
+      for (const tableSlot of tableWalker) {
+        if (tableSlot.cell == tableCell) {
+          const isHeading = tableSlot.row < headingRows || tableSlot.column < headingColumns;
+          result = createCellElement(writer, isHeading ? "th" : "td");
+          break;
+        }
+      }
+      return result;
+    };
+    function createCellElement(writer, name) {
+      return options.asWidget ? toWidgetEditable(writer.createEditableElement(name), writer, {
+        withAriaRole: false
+      }) : writer.createContainerElement(name);
+    }
+  }
+  function convertParagraphInTableCell(options = {}) {
+    return (modelElement, { writer }) => {
+      if (!modelElement.parent.is("element", "tableCell")) {
+        return null;
+      }
+      if (!isSingleParagraphWithoutAttributes(modelElement)) {
+        return null;
+      }
+      if (options.asWidget) {
+        return writer.createContainerElement("span", {
+          class: "ck-table-bogus-paragraph"
+        });
+      } else {
+        const viewElement = writer.createContainerElement("p");
+        writer.setCustomProperty("dataPipeline:transparentRendering", true, viewElement);
+        return viewElement;
+      }
+    };
+  }
+  function isSingleParagraphWithoutAttributes(modelElement) {
+    const tableCell = modelElement.parent;
+    const isSingleParagraph = tableCell.childCount == 1;
+    return isSingleParagraph && !hasAnyAttribute2(modelElement);
+  }
+  function toTableWidget(viewElement, writer) {
+    writer.setCustomProperty("table", true, viewElement);
+    return toWidget(viewElement, writer, {
+      hasSelectionHandle: true
+    });
+  }
+  function hasAnyAttribute2(element) {
+    for (const attributeKey of element.getAttributeKeys()) {
+      if (attributeKey.startsWith("selection:") || attributeKey == "htmlEmptyBlock") {
+        continue;
+      }
+      return true;
+    }
+    return false;
+  }
+  function convertPlainTable(editor) {
+    return (table2, conversionApi) => {
+      const hasPlainTableOutput = editor.plugins.has("PlainTableOutput");
+      const isClipboardPipeline = conversionApi.options.isClipboardPipeline;
+      const useExtendedAlignment = editor.config.get("experimentalFlags.useExtendedTableBlockAlignment");
+      const stripFigureTagWithLayoutTable = shouldStripFigureTagWithLayoutTable(editor, table2);
+      if (hasPlainTableOutput || stripFigureTagWithLayoutTable || useExtendedAlignment && isClipboardPipeline) {
+        return downcastPlainTable(table2, conversionApi, editor);
+      }
+      return null;
+    };
+  }
+  function convertPlainTableCaption(editor) {
+    return (modelElement, { writer, options }) => {
+      const hasPlainTableOutput = editor.plugins.has("PlainTableOutput");
+      const isClipboardPipeline = options.isClipboardPipeline;
+      const useExtendedAlignment = editor.config.get("experimentalFlags.useExtendedTableBlockAlignment");
+      const stripFigureTagWithLayoutTable = shouldStripFigureTagWithLayoutTable(editor, modelElement);
+      if (!(hasPlainTableOutput || stripFigureTagWithLayoutTable || useExtendedAlignment && isClipboardPipeline)) {
+        return null;
+      }
+      if (modelElement.parent.name === "table") {
+        return writer.createContainerElement("caption");
+      }
+      return null;
+    };
+  }
+  function downcastPlainTable(table2, conversionApi, editor) {
+    const writer = conversionApi.writer;
+    const headingRows = table2.getAttribute("headingRows") || 0;
+    const headRowsSlot = writer.createSlot((element) => element.is("element", "tableRow") && element.index < headingRows);
+    const bodyRowsSlot = writer.createSlot((element) => element.is("element", "tableRow") && element.index >= headingRows);
+    const childrenSlot = writer.createSlot((element) => !element.is("element", "tableRow"));
+    const theadElement = writer.createContainerElement("thead", null, headRowsSlot);
+    const tbodyElement = writer.createContainerElement("tbody", null, bodyRowsSlot);
+    const tableContentElements = [];
+    if (headingRows) {
+      tableContentElements.push(theadElement);
+    }
+    if (headingRows < table2.childCount) {
+      tableContentElements.push(tbodyElement);
+    }
+    const tableAttributes = {
+      class: "table"
+    };
+    if (editor.plugins.has("TablePropertiesEditing") && conversionApi.options.isClipboardPipeline) {
+      const defaultTableProperties = getNormalizedDefaultTableProperties(editor.config.get("table.tableProperties.defaultProperties"), {
+        includeAlignmentProperty: true
+      });
+      const tableAlignment = table2.getAttribute("tableAlignment");
+      let localDefaultValue = defaultTableProperties.alignment;
+      if (table2.getAttribute("tableType") === "layout") {
+        localDefaultValue = "";
+      }
+      const tableAlignmentValue = tableAlignment || localDefaultValue;
+      if (tableAlignmentValue) {
+        tableAttributes.class += " " + downcastTableAlignmentConfig[tableAlignmentValue].className;
+        tableAttributes.style = downcastTableAlignmentConfig[tableAlignmentValue].style;
+        if (downcastTableAlignmentConfig[tableAlignmentValue].align !== void 0) {
+          tableAttributes.align = downcastTableAlignmentConfig[tableAlignmentValue].align;
+        }
+      }
+    }
+    return writer.createContainerElement("table", tableAttributes, [
+      childrenSlot,
+      ...tableContentElements
+    ]);
+  }
+  function downcastTableBorderAndBackgroundAttributes(editor) {
+    const modelAttributes = {
+      "border-width": "tableBorderWidth",
+      "border-color": "tableBorderColor",
+      "border-style": "tableBorderStyle",
+      "background-color": "tableBackgroundColor"
+    };
+    for (const [styleName, modelAttribute] of Object.entries(modelAttributes)) {
+      editor.conversion.for("dataDowncast").add((dispatcher) => {
+        return dispatcher.on(`attribute:${modelAttribute}:table`, (evt, data, conversionApi) => {
+          const { item, attributeNewValue } = data;
+          const { mapper, writer } = conversionApi;
+          const hasPlainTableOutput = editor.plugins.has("PlainTableOutput");
+          const isClipboardPipeline = conversionApi.options.isClipboardPipeline;
+          const useExtendedAlignment = editor.config.get("experimentalFlags.useExtendedTableBlockAlignment");
+          const stripFigureTagWithLayoutTable = shouldStripFigureTagWithLayoutTable(editor, item);
+          if (!(hasPlainTableOutput || stripFigureTagWithLayoutTable || useExtendedAlignment && isClipboardPipeline)) {
+            return;
+          }
+          if (!conversionApi.consumable.consume(item, evt.name)) {
+            return;
+          }
+          const table2 = mapper.toViewElement(item);
+          if (attributeNewValue) {
+            writer.setStyle(styleName, attributeNewValue, table2);
+          } else {
+            writer.removeStyle(styleName, table2);
+          }
+        }, {
+          priority: "high"
+        });
+      });
+    }
+  }
+  function shouldStripFigureTagWithLayoutTable(editor, modelElement) {
+    const hasTableLayout = editor.plugins.has("TableLayoutEditing");
+    const stripFigureFromContentTable = editor.config.get("table.tableLayout.stripFigureFromContentTable") ?? true;
+    const tableModelElement = modelElement.findAncestor("table", {
+      includeSelf: true
+    });
+    const tableType = tableModelElement?.getAttribute("tableType");
+    return hasTableLayout && (stripFigureFromContentTable || tableType === "layout");
+  }
+  var InsertTableCommand = class extends Command {
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const model = this.editor.model;
+      const selection = model.document.selection;
+      const schema = model.schema;
+      this.isEnabled = isAllowedInParent$1(selection, schema);
+    }
+    /**
+    * Executes the command.
+    *
+    * Inserts a table with the given number of rows and columns into the editor.
+    *
+    * @param options.rows The number of rows to create in the inserted table. Default value is 2.
+    * @param options.columns The number of columns to create in the inserted table. Default value is 2.
+    * @param options.headingRows The number of heading rows. If not provided it will default to
+    * {@link module:table/tableconfig~TableConfig#defaultHeadings `config.table.defaultHeadings.rows`} table config.
+    * @param options.headingColumns The number of heading columns. If not provided it will default to
+    * {@link module:table/tableconfig~TableConfig#defaultHeadings `config.table.defaultHeadings.columns`} table config.
+    * @fires execute
+    */
+    execute(options = {}) {
+      const editor = this.editor;
+      const model = editor.model;
+      const tableUtils = editor.plugins.get("TableUtils");
+      const defaultRows = editor.config.get("table.defaultHeadings.rows");
+      const defaultColumns = editor.config.get("table.defaultHeadings.columns");
+      if (options.headingRows === void 0 && defaultRows) {
+        options.headingRows = defaultRows;
+      }
+      if (options.headingColumns === void 0 && defaultColumns) {
+        options.headingColumns = defaultColumns;
+      }
+      model.change((writer) => {
+        const table2 = tableUtils.createTable(writer, options);
+        model.insertObject(table2, null, null, {
+          findOptimalPosition: "auto"
+        });
+        writer.setSelection(writer.createPositionAt(table2.getNodeByPath([
+          0,
+          0,
+          0
+        ]), 0));
+      });
+    }
+  };
+  function isAllowedInParent$1(selection, schema) {
+    const positionParent = selection.getFirstPosition().parent;
+    const validParent = positionParent === positionParent.root ? positionParent : positionParent.parent;
+    return schema.checkChild(validParent, "table");
+  }
+  var InsertRowCommand = class extends Command {
+    /**
+    * The order of insertion relative to the row in which the caret is located.
+    */
+    order;
+    /**
+    * Creates a new `InsertRowCommand` instance.
+    *
+    * @param editor The editor on which this command will be used.
+    * @param options.order The order of insertion relative to the row in which the caret is located.
+    * Possible values: `"above"` and `"below"`. Default value is "below"
+    */
+    constructor(editor, options = {}) {
+      super(editor);
+      this.order = options.order || "below";
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const selection = this.editor.model.document.selection;
+      const tableUtils = this.editor.plugins.get("TableUtils");
+      const isAnyCellSelected = !!tableUtils.getSelectionAffectedTableCells(selection).length;
+      this.isEnabled = isAnyCellSelected;
+    }
+    /**
+    * Executes the command.
+    *
+    * Depending on the command's {@link #order} value, it inserts a row `'below'` or `'above'` the row in which selection is set.
+    *
+    * @fires execute
+    */
+    execute() {
+      const editor = this.editor;
+      const selection = editor.model.document.selection;
+      const tableUtils = editor.plugins.get("TableUtils");
+      const insertAbove = this.order === "above";
+      const affectedTableCells = tableUtils.getSelectionAffectedTableCells(selection);
+      const rowIndexes = tableUtils.getRowIndexes(affectedTableCells);
+      const row = insertAbove ? rowIndexes.first : rowIndexes.last;
+      const table2 = affectedTableCells[0].findAncestor("table");
+      tableUtils.insertRows(table2, {
+        at: insertAbove ? row : row + 1,
+        copyStructureFromAbove: !insertAbove
+      });
+    }
+  };
+  var InsertColumnCommand = class extends Command {
+    /**
+    * The order of insertion relative to the column in which the caret is located.
+    */
+    order;
+    /**
+    * Creates a new `InsertColumnCommand` instance.
+    *
+    * @param editor An editor on which this command will be used.
+    * @param options.order The order of insertion relative to the column in which the caret is located.
+    * Possible values: `"left"` and `"right"`. Default value is "right".
+    */
+    constructor(editor, options = {}) {
+      super(editor);
+      this.order = options.order || "right";
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const selection = this.editor.model.document.selection;
+      const tableUtils = this.editor.plugins.get("TableUtils");
+      const isAnyCellSelected = !!tableUtils.getSelectionAffectedTableCells(selection).length;
+      this.isEnabled = isAnyCellSelected;
+    }
+    /**
+    * Executes the command.
+    *
+    * Depending on the command's {@link #order} value, it inserts a column to the `'left'` or `'right'` of the column
+    * in which the selection is set.
+    *
+    * @fires execute
+    */
+    execute() {
+      const editor = this.editor;
+      const selection = editor.model.document.selection;
+      const tableUtils = editor.plugins.get("TableUtils");
+      const insertBefore = this.order === "left";
+      const affectedTableCells = tableUtils.getSelectionAffectedTableCells(selection);
+      const columnIndexes = tableUtils.getColumnIndexes(affectedTableCells);
+      const column = insertBefore ? columnIndexes.first : columnIndexes.last;
+      const table2 = affectedTableCells[0].findAncestor("table");
+      tableUtils.insertColumns(table2, {
+        columns: 1,
+        at: insertBefore ? column : column + 1
+      });
+    }
+  };
+  var SplitCellCommand = class extends Command {
+    /**
+    * The direction that indicates which cell will be split.
+    */
+    direction;
+    /**
+    * Creates a new `SplitCellCommand` instance.
+    *
+    * @param editor The editor on which this command will be used.
+    * @param options.direction Indicates whether the command should split cells `'horizontally'` or `'vertically'`.
+    */
+    constructor(editor, options = {}) {
+      super(editor);
+      this.direction = options.direction || "horizontally";
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      const tableUtils = this.editor.plugins.get("TableUtils");
+      const selectedCells = tableUtils.getSelectionAffectedTableCells(this.editor.model.document.selection);
+      this.isEnabled = selectedCells.length === 1;
+    }
+    /**
+    * @inheritDoc
+    */
+    execute() {
+      const tableUtils = this.editor.plugins.get("TableUtils");
+      const tableCell = tableUtils.getSelectionAffectedTableCells(this.editor.model.document.selection)[0];
+      const isHorizontal = this.direction === "horizontally";
+      if (isHorizontal) {
+        tableUtils.splitCellHorizontally(tableCell, 2);
+      } else {
+        tableUtils.splitCellVertically(tableCell, 2);
+      }
+    }
+  };
   var MergeCellCommand = class extends Command {
     /**
     * The direction that indicates which cell will be merged with the currently selected one.
@@ -94196,7 +97134,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             splitHorizontally(cell, headingRowsToSet, writer);
           }
         }
-        updateNumericAttribute("headingRows", headingRowsToSet, table2, writer, 0);
+        tableUtils.setHeadingRowsCount(writer, table2, headingRowsToSet);
       });
     }
     /**
@@ -94252,7 +97190,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             splitVertically(cell, column, headingColumnsToSet, writer);
           }
         }
-        updateNumericAttribute("headingColumns", headingColumnsToSet, table2, writer, 0);
+        tableUtils.setHeadingColumnsCount(writer, table2, headingColumnsToSet);
       });
     }
   };
@@ -94535,10 +97473,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const columns = options.columns || 2;
       createEmptyRows(writer, table2, 0, rows, columns);
       if (options.headingRows) {
-        updateNumericAttribute("headingRows", Math.min(options.headingRows, rows), table2, writer, 0);
+        this.setHeadingRowsCount(writer, table2, Math.min(options.headingRows, rows));
       }
       if (options.headingColumns) {
-        updateNumericAttribute("headingColumns", Math.min(options.headingColumns, columns), table2, writer, 0);
+        this.setHeadingColumnsCount(writer, table2, Math.min(options.headingColumns, columns));
       }
       return table2;
     }
@@ -94576,6 +97514,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const rowsToInsert = options.rows || 1;
       const isCopyStructure = options.copyStructureFromAbove !== void 0;
       const copyStructureFrom = options.copyStructureFromAbove ? insertAt2 - 1 : insertAt2;
+      const cellTypeEnabled = isTableCellTypeEnabled(this.editor);
       const rows = this.getRows(table2);
       const columns = this.getColumns(table2);
       if (insertAt2 > rows) {
@@ -94584,12 +97523,27 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         });
       }
       model.change((writer) => {
-        const headingRows = table2.getAttribute("headingRows") || 0;
+        let headingRows = table2.getAttribute("headingRows") || 0;
+        const headingColumns = table2.getAttribute("headingColumns") || 0;
         if (headingRows > insertAt2) {
-          updateNumericAttribute("headingRows", headingRows + rowsToInsert, table2, writer, 0);
+          headingRows += rowsToInsert;
+          this.setHeadingRowsCount(writer, table2, headingRows, {
+            shallow: true
+          });
         }
         if (!isCopyStructure && (insertAt2 === 0 || insertAt2 === rows)) {
-          createEmptyRows(writer, table2, insertAt2, rowsToInsert, columns);
+          const rows2 = createEmptyRows(writer, table2, insertAt2, rowsToInsert, columns);
+          if (cellTypeEnabled) {
+            for (let rowOffset = 0; rowOffset < rows2.length; rowOffset++) {
+              const row = rows2[rowOffset];
+              for (let columnIndex = 0; columnIndex < columns; columnIndex++) {
+                const cell = row[columnIndex];
+                if (insertAt2 + rowOffset < headingRows || columnIndex < headingColumns) {
+                  writer.setAttribute("tableCellType", "header", cell);
+                }
+              }
+            }
+          }
           return;
         }
         const walkerEndRow = isCopyStructure ? Math.max(insertAt2, copyStructureFrom) : insertAt2;
@@ -94615,9 +97569,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             const colspan = rowColSpansMap[cellIndex];
             const insertPosition = writer.createPositionAt(tableRow2, "end");
             if (colspan > 0) {
-              createEmptyTableCell(writer, insertPosition, colspan > 1 ? {
+              const insertedCells = createEmptyTableCell(writer, insertPosition, colspan > 1 ? {
                 colspan
               } : void 0);
+              if (cellTypeEnabled && (insertAt2 + rowIndex < headingRows || cellIndex < headingColumns)) {
+                writer.setAttribute("tableCellType", "header", insertedCells);
+              }
             }
             cellIndex += Math.abs(colspan) - 1;
           }
@@ -94655,18 +97612,32 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const model = this.editor.model;
       const insertAt2 = options.at || 0;
       const columnsToInsert = options.columns || 1;
+      const cellTypeEnabled = isTableCellTypeEnabled(this.editor);
       model.change((writer) => {
-        const headingColumns = table2.getAttribute("headingColumns");
+        const headingRows = table2.getAttribute("headingRows") || 0;
+        let headingColumns = table2.getAttribute("headingColumns");
         if (insertAt2 < headingColumns) {
-          writer.setAttribute("headingColumns", headingColumns + columnsToInsert, table2);
+          headingColumns += columnsToInsert;
+          this.setHeadingColumnsCount(writer, table2, headingColumns, {
+            shallow: true
+          });
         }
         const tableColumns = this.getColumns(table2);
         if (insertAt2 === 0 || tableColumns === insertAt2) {
+          let rowIndex = 0;
           for (const tableRow2 of table2.getChildren()) {
             if (!tableRow2.is("element", "tableRow")) {
               continue;
             }
-            createCells(columnsToInsert, writer, writer.createPositionAt(tableRow2, insertAt2 ? "end" : 0));
+            const insertedCells = createCells(columnsToInsert, writer, writer.createPositionAt(tableRow2, insertAt2 ? "end" : 0));
+            if (cellTypeEnabled) {
+              for (let columnOffset = 0; columnOffset < insertedCells.length; columnOffset++) {
+                if (insertAt2 + columnOffset < headingColumns || rowIndex < headingRows) {
+                  writer.setAttribute("tableCellType", "header", insertedCells[columnOffset]);
+                }
+              }
+            }
+            rowIndex++;
           }
           return;
         }
@@ -94683,7 +97654,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
               tableWalker.skipRow(i);
             }
           } else {
-            createCells(columnsToInsert, writer, tableSlot.getPositionBefore());
+            const insertedCells = createCells(columnsToInsert, writer, tableSlot.getPositionBefore());
+            if (cellTypeEnabled) {
+              for (let columnOffset = 0; columnOffset < insertedCells.length; columnOffset++) {
+                if (insertAt2 + columnOffset < headingColumns || row < headingRows) {
+                  writer.setAttribute("tableCellType", "header", insertedCells[columnOffset]);
+                }
+              }
+            }
           }
         }
       });
@@ -94748,6 +97726,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         if (!removeEmptyColumns(table2, this)) {
           removeEmptyRows(table2, this);
         }
+        if (isTableCellTypeEnabled(this.editor)) {
+          let headingRows = table2.getAttribute("headingRows") || 0;
+          const totalRows = this.getRows(table2);
+          while (headingRows < totalRows && isEntireCellsLineHeader({
+            table: table2,
+            row: headingRows
+          })) {
+            headingRows++;
+          }
+          this.setHeadingRowsCount(writer, table2, headingRows, {
+            shallow: true
+          });
+        }
       });
     }
     /**
@@ -94810,6 +97801,19 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
         if (!removeEmptyRows(table2, this)) {
           removeEmptyColumns(table2, this);
+        }
+        if (isTableCellTypeEnabled(this.editor)) {
+          let headingColumns = table2.getAttribute("headingColumns") || 0;
+          const totalColumns = this.getColumns(table2);
+          while (headingColumns < totalColumns && isEntireCellsLineHeader({
+            table: table2,
+            column: headingColumns
+          })) {
+            headingColumns++;
+          }
+          this.setHeadingColumnsCount(writer, table2, headingColumns, {
+            shallow: true
+          });
         }
       });
     }
@@ -95084,6 +98088,140 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return cells;
     }
     /**
+    * Sets the number of heading rows for the given `table`.
+    *
+    * @param writer The model writer.
+    * @param table The table model element.
+    * @param headingRows The number of heading rows to set.
+    * @param options Additional options.
+    * @param options.shallow If set to `true` it will only update the `headingRows` attribute
+    * without updating the cell types in the table. Default is `false`.
+    * @param options.resetFormerHeadingCells If set to `true`, it will check if the rows that are no longer in the heading section
+    * should be updated to body cells. Default is `true`.
+    * @param options.autoExpand If set to `true`, it will check if the following rows look like a header and expand the heading section.
+    * Default is `true`.
+    */
+    setHeadingRowsCount(writer, table2, headingRows, options = {}) {
+      const { shallow, resetFormerHeadingCells = true, autoExpand = true } = options;
+      const oldHeadingRows = table2.getAttribute("headingRows") || 0;
+      if (headingRows === oldHeadingRows) {
+        return;
+      }
+      updateNumericAttribute("headingRows", headingRows, table2, writer, 0);
+      if (shallow || !isTableCellTypeEnabled(this.editor)) {
+        return;
+      }
+      for (const { cell, row, column } of new TableWalker(table2, {
+        endRow: headingRows - 1
+      })) {
+        updateTableCellType({
+          table: table2,
+          writer,
+          cell,
+          row,
+          column
+        });
+      }
+      if (resetFormerHeadingCells && headingRows < oldHeadingRows) {
+        for (let row = headingRows; row < oldHeadingRows; row++) {
+          if (!isEntireCellsLineHeader({
+            table: table2,
+            row
+          })) {
+            break;
+          }
+          for (const { cell, row: cellRow, column } of new TableWalker(table2, {
+            row
+          })) {
+            updateTableCellType({
+              table: table2,
+              writer,
+              cell,
+              row: cellRow,
+              column
+            });
+          }
+        }
+      }
+      if (autoExpand && headingRows > oldHeadingRows) {
+        const totalRows = this.getRows(table2);
+        while (headingRows < totalRows && isEntireCellsLineHeader({
+          table: table2,
+          row: headingRows
+        })) {
+          headingRows++;
+        }
+        updateNumericAttribute("headingRows", headingRows, table2, writer, 0);
+      }
+    }
+    /**
+    * Sets the number of heading columns for the given `table`.
+    *
+    * @param writer The model writer to use.
+    * @param table The table model element.
+    * @param headingColumns The number of heading columns to set.
+    * @param options Additional options.
+    * @param options.shallow If set to `true` it will only update the `headingColumns` attribute
+    * without updating the cell types in the table. Default is `false`.
+    * @param options.resetFormerHeadingCells If set to `true`, it will check if the columns that are no longer in the heading section
+    * should be updated to body cells. Default is `true`.
+    * @param options.autoExpand If set to `true`, it will check if the following columns look like a header and expand the heading section.
+    * Default is `true`.
+    */
+    setHeadingColumnsCount(writer, table2, headingColumns, options = {}) {
+      const { shallow, resetFormerHeadingCells = true, autoExpand = true } = options;
+      const oldHeadingColumns = table2.getAttribute("headingColumns") || 0;
+      if (headingColumns === oldHeadingColumns) {
+        return;
+      }
+      updateNumericAttribute("headingColumns", headingColumns, table2, writer, 0);
+      if (shallow || !isTableCellTypeEnabled(this.editor)) {
+        return;
+      }
+      for (const { cell, row, column } of new TableWalker(table2, {
+        endColumn: headingColumns - 1
+      })) {
+        updateTableCellType({
+          table: table2,
+          writer,
+          cell,
+          row,
+          column
+        });
+      }
+      if (resetFormerHeadingCells && headingColumns < oldHeadingColumns) {
+        for (let column = headingColumns; column < oldHeadingColumns; column++) {
+          if (!isEntireCellsLineHeader({
+            table: table2,
+            column
+          })) {
+            break;
+          }
+          for (const { cell, row, column: cellColumn } of new TableWalker(table2, {
+            column
+          })) {
+            updateTableCellType({
+              table: table2,
+              writer,
+              cell,
+              row,
+              column: cellColumn
+            });
+          }
+        }
+      }
+      if (autoExpand && headingColumns > oldHeadingColumns) {
+        const totalColumns = this.getColumns(table2);
+        while (headingColumns < totalColumns && isEntireCellsLineHeader({
+          table: table2,
+          column: headingColumns
+        })) {
+          headingColumns++;
+        }
+        updateNumericAttribute("headingColumns", headingColumns, table2, writer, 0);
+      }
+    }
+    /**
     * Returns all model table cells that the provided model selection's ranges
     * {@link module:engine/model/range~ModelRange#start} inside.
     *
@@ -95255,16 +98393,23 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   };
   function createEmptyRows(writer, table2, insertAt2, rows, tableCellToInsert, attributes = {}) {
+    const insertedRows = [];
     for (let i = 0; i < rows; i++) {
       const tableRow2 = writer.createElement("tableRow");
       writer.insert(tableRow2, table2, insertAt2);
-      createCells(tableCellToInsert, writer, writer.createPositionAt(tableRow2, "end"), attributes);
+      insertedRows.push(createCells(tableCellToInsert, writer, writer.createPositionAt(tableRow2, "end"), attributes));
     }
+    return insertedRows;
   }
   function createCells(cells, writer, insertPosition, attributes = {}) {
+    const createdCells = [];
+    let currentPosition = insertPosition;
     for (let i = 0; i < cells; i++) {
-      createEmptyTableCell(writer, insertPosition, attributes);
+      const cell = createEmptyTableCell(writer, currentPosition, attributes);
+      createdCells.push(cell);
+      currentPosition = writer.createPositionAfter(cell);
     }
+    return createdCells;
   }
   function breakSpanEvenly(span, numberOfCells) {
     if (span < numberOfCells) {
@@ -95364,6 +98509,15 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     const lastColumn = Math.max(...columnIndexes);
     const firstColumn = Math.min(...columnIndexes);
     return (lastRow - firstRow + 1) * (lastColumn - firstColumn + 1);
+  }
+  function updateTableCellType({ writer, table: table2, row, column, cell }) {
+    const headingRows = table2.getAttribute("headingRows") || 0;
+    const headingColumns = table2.getAttribute("headingColumns") || 0;
+    if (row >= headingRows && column >= headingColumns) {
+      writer.removeAttribute("tableCellType", cell);
+    } else {
+      writer.setAttribute("tableCellType", "header", cell);
+    }
   }
   var MergeCellsCommand = class extends Command {
     /**
@@ -95839,12 +98993,15 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       conversion.for("editingDowncast").elementToElement({
         model: "tableCell",
         view: downcastCell({
-          asWidget: true
+          asWidget: true,
+          cellTypeEnabled: () => isTableCellTypeEnabled(this.editor)
         })
       });
       conversion.for("dataDowncast").elementToElement({
         model: "tableCell",
-        view: downcastCell()
+        view: downcastCell({
+          cellTypeEnabled: () => isTableCellTypeEnabled(this.editor)
+        })
       });
       conversion.for("editingDowncast").elementToElement({
         model: "paragraph",
@@ -95880,8 +99037,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         },
         view: "rowspan"
       });
+      this._addPlainTableOutputConverters();
       editor.config.define("table.defaultHeadings.rows", 0);
       editor.config.define("table.defaultHeadings.columns", 0);
+      editor.config.define("table.showHiddenBorders", true);
+      if (editor.config.get("table.showHiddenBorders")) {
+        editor.editing.view.change((writer) => {
+          for (const root of editor.editing.view.document.roots) {
+            writer.addClass("ck-table-show-hidden-borders", root);
+          }
+        });
+      }
       editor.commands.add("insertTable", new InsertTableCommand(editor));
       editor.commands.add("insertTableRowAbove", new InsertRowCommand(editor, {
         order: "above"
@@ -95923,7 +99089,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       injectTableLayoutPostFixer(model);
       injectTableCellParagraphPostFixer(model);
       this.listenTo(model.document, "change:data", () => {
-        tableHeadingsRefreshHandler(model, editor.editing);
+        if (!isTableCellTypeEnabled(editor)) {
+          tableHeadingsRefreshHandler(model, editor.editing);
+        }
         tableCellRefreshHandler(model, editor.editing);
       });
     }
@@ -95932,6 +99100,28 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     registerAdditionalSlot(slotHandler) {
       this._additionalSlots.push(slotHandler);
+    }
+    /**
+    * Adds converters for plain table output. These converters are used either when the `PlainTableOutput` plugin is loaded
+    * or when content is processed by the clipboard pipeline, ensuring that pasted tables are not wrapped in a <figure> element.
+    */
+    _addPlainTableOutputConverters() {
+      const editor = this.editor;
+      editor.conversion.for("dataDowncast").elementToStructure({
+        model: "table",
+        view: convertPlainTable(editor),
+        converterPriority: "high"
+      });
+      if (editor.plugins.has("TableCaptionEditing")) {
+        editor.conversion.for("dataDowncast").elementToElement({
+          model: "caption",
+          view: convertPlainTableCaption(editor),
+          converterPriority: "high"
+        });
+      }
+      if (editor.plugins.has("TablePropertiesEditing")) {
+        downcastTableBorderAndBackgroundAttributes(editor);
+      }
     }
   };
   function upcastCellSpan(type) {
@@ -97160,12 +100350,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (!selectedElement || !selectedElement.is("element", "table")) {
         return;
       }
-      domEventData.preventDefault();
       domEventData.stopPropagation();
-      bubblingEventInfo.stop();
-      editor.model.change((writer) => {
-        writer.setSelection(writer.createRangeIn(selectedElement.getChild(0).getChild(0)));
-      });
     }
     /**
     * Handles {@link module:engine/view/document~ViewDocument#event:tab tab} events for the <kbd>Tab</kbd> key executed
@@ -97184,44 +100369,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (!tableCell) {
         return;
       }
-      domEventData.preventDefault();
       domEventData.stopPropagation();
-      bubblingEventInfo.stop();
       const tableRow2 = tableCell.parent;
       const table2 = tableRow2.parent;
       const currentRowIndex = table2.getChildIndex(tableRow2);
       const currentCellIndex = tableRow2.getChildIndex(tableCell);
-      const isFirstCellInRow = currentCellIndex === 0;
-      if (!isForward && isFirstCellInRow && currentRowIndex === 0) {
-        editor.model.change((writer) => {
-          writer.setSelection(writer.createRangeOn(table2));
-        });
-        return;
-      }
       const isLastCellInRow = currentCellIndex === tableRow2.childCount - 1;
       const isLastRow = currentRowIndex === tableUtils.getRows(table2) - 1;
       if (isForward && isLastRow && isLastCellInRow) {
         editor.execute("insertTableRowBelow");
-        if (currentRowIndex === tableUtils.getRows(table2) - 1) {
-          editor.model.change((writer) => {
-            writer.setSelection(writer.createRangeOn(table2));
-          });
-          return;
-        }
       }
-      let cellToFocus;
-      if (isForward && isLastCellInRow) {
-        const nextRow = table2.getChild(currentRowIndex + 1);
-        cellToFocus = nextRow.getChild(0);
-      } else if (!isForward && isFirstCellInRow) {
-        const previousRow = table2.getChild(currentRowIndex - 1);
-        cellToFocus = previousRow.getChild(previousRow.childCount - 1);
-      } else {
-        cellToFocus = tableRow2.getChild(currentCellIndex + (isForward ? 1 : -1));
-      }
-      editor.model.change((writer) => {
-        writer.setSelection(writer.createRangeIn(cellToFocus));
-      });
     }
     /**
     * Handles {@link module:engine/view/document~ViewDocument#event:keydown keydown} events.
@@ -97558,108 +100715,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return true;
     }
   };
-  var PlainTableOutput = class extends Plugin {
-    /**
-    * @inheritDoc
-    */
-    static get pluginName() {
-      return "PlainTableOutput";
-    }
-    /**
-    * @inheritDoc
-    */
-    static get isOfficialPlugin() {
-      return true;
-    }
-    /**
-    * @inheritDoc
-    */
-    static get requires() {
-      return [
-        Table
-      ];
-    }
-    /**
-    * @inheritDoc
-    */
-    init() {
-      const editor = this.editor;
-      editor.conversion.for("dataDowncast").elementToStructure({
-        model: "table",
-        view: downcastTableElement,
-        converterPriority: "high"
-      });
-      if (editor.plugins.has("TableCaption")) {
-        editor.conversion.for("dataDowncast").elementToElement({
-          model: "caption",
-          view: (modelElement, { writer }) => {
-            if (modelElement.parent.name === "table") {
-              return writer.createContainerElement("caption");
-            }
-          },
-          converterPriority: "high"
-        });
-      }
-      if (editor.plugins.has("TableProperties")) {
-        downcastTableBorderAndBackgroundAttributes(editor);
-      }
-      editor.conversion.for("upcast").add((dispatcher) => {
-        dispatcher.on("element:table", (evt, data, conversionApi) => {
-          conversionApi.consumable.consume(data.viewItem, {
-            classes: "table"
-          });
-        });
-      });
-    }
-  };
-  function downcastTableElement(table2, { writer }) {
-    const headingRows = table2.getAttribute("headingRows") || 0;
-    const headRowsSlot = writer.createSlot((element) => element.is("element", "tableRow") && element.index < headingRows);
-    const bodyRowsSlot = writer.createSlot((element) => element.is("element", "tableRow") && element.index >= headingRows);
-    const childrenSlot = writer.createSlot((element) => !element.is("element", "tableRow"));
-    const theadElement = writer.createContainerElement("thead", null, headRowsSlot);
-    const tbodyElement = writer.createContainerElement("tbody", null, bodyRowsSlot);
-    const tableContentElements = [];
-    if (headingRows) {
-      tableContentElements.push(theadElement);
-    }
-    if (headingRows < table2.childCount) {
-      tableContentElements.push(tbodyElement);
-    }
-    return writer.createContainerElement("table", {
-      class: "table"
-    }, [
-      childrenSlot,
-      ...tableContentElements
-    ]);
-  }
-  function downcastTableBorderAndBackgroundAttributes(editor) {
-    const modelAttributes = {
-      "border-width": "tableBorderWidth",
-      "border-color": "tableBorderColor",
-      "border-style": "tableBorderStyle",
-      "background-color": "tableBackgroundColor"
-    };
-    for (const [styleName, modelAttribute] of Object.entries(modelAttributes)) {
-      editor.conversion.for("dataDowncast").add((dispatcher) => {
-        return dispatcher.on(`attribute:${modelAttribute}:table`, (evt, data, conversionApi) => {
-          const { item, attributeNewValue } = data;
-          const { mapper, writer } = conversionApi;
-          if (!conversionApi.consumable.consume(item, evt.name)) {
-            return;
-          }
-          const table2 = mapper.toViewElement(item);
-          if (attributeNewValue) {
-            writer.setStyle(styleName, attributeNewValue, table2);
-          } else {
-            writer.removeStyle(styleName, table2);
-          }
-        }, {
-          priority: "high"
-        });
-      });
-    }
-  }
   function getSelectionAffectedTableWidget(selection) {
     const selectedTable = getSelectedTableWidget(selection);
     if (selectedTable) {
@@ -97688,8 +100743,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     return null;
   }
-  function isTableWidget(viewElement) {
-    return !!viewElement.getCustomProperty("table") && isWidget(viewElement);
+  function isTableWidget(viewNode) {
+    return viewNode.is("element") && !!viewNode.getCustomProperty("table") && isWidget(viewNode);
   }
   var TableToolbar = class extends Plugin {
     /**
@@ -98003,7 +101058,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     return colorString.replace(/([(,])\s+/g, "$1").replace(/^\s+|\s+(?=[),\s]|$)/g, "").replace(/,|\s/g, " ");
   }
   var isEmpty = (val) => val === "";
-  function getBorderStyleLabels(t) {
+  function getBorderStyleLabels$1(t) {
     return {
       none: t("None"),
       solid: t("Solid"),
@@ -98034,9 +101089,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     value = value.trim();
     return isEmpty(value) || isNumberString(value) || isLengthStyleValue(value);
   }
-  function getBorderStyleDefinitions(view, defaultStyle) {
+  function getBorderStyleDefinitions$1(view, defaultStyle) {
     const itemDefinitions = new Collection();
-    const styleLabels = getBorderStyleLabels(view.t);
+    const styleLabels = getBorderStyleLabels$1(view.t);
     for (const style in styleLabels) {
       const definition = {
         type: "button",
@@ -98063,7 +101118,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     return itemDefinitions;
   }
-  function fillToolbar(options) {
+  function fillToolbar$1(options) {
     const { view, icons, toolbar, labels, propertyName, nameToValue, defaultValue } = options;
     for (const name in labels) {
       const button = new ButtonView(view.locale);
@@ -98155,10 +101210,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       label: "Purple"
     }
   ];
-  function getLabeledColorInputCreator(options) {
+  function getLabeledColorInputCreator$1(options) {
     return (labeledFieldView, viewUid, statusUid) => {
       const colorInputView = new ColorInputView(labeledFieldView.locale, {
-        colorDefinitions: colorConfigToColorGridDefinitions(options.colorConfig),
+        colorDefinitions: colorConfigToColorGridDefinitions$1(options.colorConfig),
         columns: options.columns,
         defaultColorValue: options.defaultColorValue,
         colorPickerConfig: options.colorPickerConfig
@@ -98180,7 +101235,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     const parsedValue = parseFloat(value);
     return !Number.isNaN(parsedValue) && value === String(parsedValue);
   }
-  function colorConfigToColorGridDefinitions(colorConfig) {
+  function colorConfigToColorGridDefinitions$1(colorConfig) {
     return colorConfig.map((item) => ({
       color: item.model,
       label: item.label,
@@ -98446,7 +101501,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         width: defaultTableCellProperties.borderWidth,
         color: defaultTableCellProperties.borderColor
       };
-      const colorInputCreator = getLabeledColorInputCreator({
+      const colorInputCreator = getLabeledColorInputCreator$1({
         colorConfig: this.options.borderColors,
         columns: 5,
         defaultColorValue: defaultBorder.color,
@@ -98457,7 +101512,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const accessibleLabel = t("Style");
       const borderRowLabel = new LabelView(locale);
       borderRowLabel.text = t("Border");
-      const styleLabels = getBorderStyleLabels(t);
+      const styleLabels = getBorderStyleLabels$1(t);
       const borderStyleDropdown = new LabeledFieldView(locale, createLabeledDropdown);
       borderStyleDropdown.set({
         label: accessibleLabel,
@@ -98477,7 +101532,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         this.borderStyle = evt.source._borderStyleValue;
       });
       borderStyleDropdown.bind("isEmpty").to(this, "borderStyle", (value) => !value);
-      addListToDropdown(borderStyleDropdown.fieldView, getBorderStyleDefinitions(this, defaultBorder.style), {
+      addListToDropdown(borderStyleDropdown.fieldView, getBorderStyleDefinitions$1(this, defaultBorder.style), {
         role: "menu",
         ariaLabel: accessibleLabel
       });
@@ -98487,7 +101542,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         class: "ck-table-form__border-width"
       });
       borderWidthInput.fieldView.bind("value").to(this, "borderWidth");
-      borderWidthInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$1);
+      borderWidthInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$3);
       borderWidthInput.fieldView.on("input", () => {
         this.borderWidth = borderWidthInput.fieldView.element.value;
       });
@@ -98497,16 +101552,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         class: "ck-table-form__border-color"
       });
       borderColorInput.fieldView.bind("value").to(this, "borderColor");
-      borderColorInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$1);
+      borderColorInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$3);
       borderColorInput.fieldView.on("input", () => {
         this.borderColor = borderColorInput.fieldView.value;
       });
       this.on("change:borderStyle", (evt, name, newValue, oldValue) => {
-        if (!isBorderStyleSet$1(newValue)) {
+        if (!isBorderStyleSet$3(newValue)) {
           this.borderColor = "";
           this.borderWidth = "";
         }
-        if (!isBorderStyleSet$1(oldValue)) {
+        if (!isBorderStyleSet$3(oldValue)) {
           this.borderColor = defaultBorder.color;
           this.borderWidth = defaultBorder.width;
         }
@@ -98528,7 +101583,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const t = this.t;
       const backgroundRowLabel = new LabelView(locale);
       backgroundRowLabel.text = t("Background");
-      const colorInputCreator = getLabeledColorInputCreator({
+      const colorInputCreator = getLabeledColorInputCreator$1({
         colorConfig: this.options.backgroundColors,
         columns: 5,
         defaultColorValue: this.options.defaultTableCellProperties.backgroundColor,
@@ -98644,7 +101699,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         role: "radiogroup",
         ariaLabel: t("Horizontal text alignment toolbar")
       });
-      fillToolbar({
+      fillToolbar$1({
         view: this,
         icons: ALIGNMENT_ICONS,
         toolbar: horizontalAlignmentToolbar,
@@ -98668,7 +101723,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         role: "radiogroup",
         ariaLabel: t("Vertical text alignment toolbar")
       });
-      fillToolbar({
+      fillToolbar$1({
         view: this,
         icons: ALIGNMENT_ICONS,
         toolbar: verticalAlignmentToolbar,
@@ -98759,7 +101814,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       };
     }
   };
-  function isBorderStyleSet$1(value) {
+  function isBorderStyleSet$3(value) {
     return value !== "none";
   }
   var BALLOON_POSITIONS = /* @__PURE__ */ (() => [
@@ -98826,71 +101881,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     });
     return Rect.getBoundingRect(rects);
   }
-  function getSingleValue(objectOrString) {
-    if (!objectOrString || !isObject(objectOrString)) {
-      return objectOrString;
-    }
-    const { top, right, bottom, left } = objectOrString;
-    if (top == right && right == bottom && bottom == left) {
-      return top;
-    }
-  }
-  function addDefaultUnitToNumericValue(value, defaultUnit) {
-    const numericValue = parseFloat(value);
-    if (Number.isNaN(numericValue)) {
-      return value;
-    }
-    if (String(numericValue) !== String(value)) {
-      return value;
-    }
-    return `${numericValue}${defaultUnit}`;
-  }
-  function getNormalizedDefaultProperties(config, options = {}) {
-    const normalizedConfig = {
-      borderStyle: "none",
-      borderWidth: "",
-      borderColor: "",
-      backgroundColor: "",
-      width: "",
-      height: "",
-      ...config
-    };
-    if (options.includeAlignmentProperty && !normalizedConfig.alignment) {
-      normalizedConfig.alignment = "center";
-    }
-    if (options.includePaddingProperty && !normalizedConfig.padding) {
-      normalizedConfig.padding = "";
-    }
-    if (options.includeVerticalAlignmentProperty && !normalizedConfig.verticalAlignment) {
-      normalizedConfig.verticalAlignment = "middle";
-    }
-    if (options.includeHorizontalAlignmentProperty && !normalizedConfig.horizontalAlignment) {
-      normalizedConfig.horizontalAlignment = options.isRightToLeftContent ? "right" : "left";
-    }
-    return normalizedConfig;
-  }
-  function getNormalizedDefaultTableProperties(config, options) {
-    return getNormalizedDefaultProperties({
-      // It adds support for border none in the table element, keep it in sync with the content styles
-      // See more: https://github.com/ckeditor/ckeditor5/issues/6841#issuecomment-1959195608
-      borderStyle: "double",
-      borderColor: "hsl(0, 0%, 70%)",
-      borderWidth: "1px",
-      ...config
-    }, options);
-  }
-  function getNormalizedDefaultCellProperties(config, options) {
-    return getNormalizedDefaultProperties({
-      // It adds support for border none in the table element, keep it in sync with the content styles
-      // See more: https://github.com/ckeditor/ckeditor5/issues/6841#issuecomment-1959195608
-      borderStyle: "solid",
-      borderColor: "hsl(0, 0%, 75%)",
-      borderWidth: "1px",
-      ...config
-    }, options);
-  }
-  var ERROR_TEXT_TIMEOUT$1 = 500;
-  var propertyToCommandMap$1 = {
+  var ERROR_TEXT_TIMEOUT$3 = 500;
+  var propertyToCommandMap$3 = {
     borderStyle: "tableCellBorderStyle",
     borderColor: "tableCellBorderColor",
     borderWidth: "tableCellBorderWidth",
@@ -98994,7 +101986,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           tooltip: true
         });
         this.listenTo(view, "execute", () => this._showView());
-        const commands = Object.values(propertyToCommandMap$1).map((commandName) => editor.commands.get(commandName));
+        const commands = Object.values(propertyToCommandMap$3).map((commandName) => editor.commands.get(commandName));
         view.bind("isEnabled").toMany(commands, "isEnabled", (...areEnabled) => areEnabled.some((isCommandEnabled) => isCommandEnabled));
         return view;
       });
@@ -99104,7 +102096,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     _fillViewFormFromCommandValues() {
       const commands = this.editor.commands;
       const borderStyleCommand = commands.get("tableCellBorderStyle");
-      Object.entries(propertyToCommandMap$1).map(([property2, commandName]) => {
+      Object.entries(propertyToCommandMap$3).map(([property2, commandName]) => {
         const propertyKey = property2;
         const defaultValue = this.view === this._viewWithContentTableDefaults ? this._defaultContentTableCellProperties[propertyKey] || "" : this._defaultLayoutTableCellProperties[propertyKey] || "";
         return [
@@ -99209,7 +102201,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const { commandName, viewField, validator, errorText } = options;
       const setErrorTextDebounced = debounce2(() => {
         viewField.errorText = errorText;
-      }, ERROR_TEXT_TIMEOUT$1);
+      }, ERROR_TEXT_TIMEOUT$3);
       return (evt, propertyName, newValue) => {
         setErrorTextDebounced.cancel();
         if (!this._isReady) {
@@ -99258,6 +102250,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       this.attributeName = attributeName;
       this._defaultContentTableValue = defaultValue;
       switch (attributeName) {
+        case "tableCellType":
+          this._defaultLayoutTableValue = "data";
+          break;
         case "tableCellBorderStyle":
           this._defaultLayoutTableValue = "none";
           break;
@@ -99305,6 +102300,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         } else {
           tableCells.forEach((tableCell) => writer.removeAttribute(this.attributeName, tableCell));
         }
+        this.fire("afterExecute", {
+          writer,
+          tableCells,
+          valueToSet
+        });
       });
     }
     /**
@@ -99567,8 +102567,104 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return newValue;
     }
   };
+  var TableCellTypeCommand = class extends TableCellPropertyCommand {
+    /**
+    * Creates a new `TableCellTypeCommand` instance.
+    *
+    * @param editor An editor in which this command will be used.
+    */
+    constructor(editor) {
+      super(editor, "tableCellType", "data");
+      this.on("afterExecute", (_, data) => {
+        const { writer, tableCells } = data;
+        const tableUtils = this.editor.plugins.get(TableUtils);
+        const tablesMap = groupCellsByTable(tableCells);
+        updateTablesHeadingAttributes(tableUtils, writer, tablesMap.keys());
+      });
+    }
+    /**
+    * @inheritDoc
+    */
+    refresh() {
+      super.refresh();
+      const table2 = getSelectionAffectedTable(this.editor.model.document.selection);
+      if (this.isEnabled && table2 && table2.getAttribute("tableType") === "layout") {
+        this.isEnabled = false;
+      }
+    }
+    /**
+    * Returns the attribute value for a table cell.
+    */
+    _getAttribute(tableCell) {
+      return tableCell?.getAttribute(this.attributeName) || "data";
+    }
+  };
+  function updateTablesHeadingAttributes(tableUtils, writer, tables) {
+    let changed = false;
+    for (const table2 of tables) {
+      let headingRows = table2.getAttribute("headingRows") || 0;
+      let headingColumns = table2.getAttribute("headingColumns") || 0;
+      const processColumnsFirst = headingColumns > headingRows;
+      if (processColumnsFirst) {
+        const newHeadingColumns = getAdjustedHeadingSectionSize(tableUtils, table2, "column", headingColumns, headingRows);
+        if (newHeadingColumns !== headingColumns) {
+          tableUtils.setHeadingColumnsCount(writer, table2, newHeadingColumns, {
+            shallow: true
+          });
+          headingColumns = newHeadingColumns;
+          changed = true;
+        }
+      }
+      const newHeadingRows = getAdjustedHeadingSectionSize(tableUtils, table2, "row", headingRows, headingColumns);
+      if (newHeadingRows !== headingRows) {
+        tableUtils.setHeadingRowsCount(writer, table2, newHeadingRows, {
+          shallow: true
+        });
+        headingRows = newHeadingRows;
+        changed = true;
+      }
+      if (!processColumnsFirst) {
+        const newHeadingColumns = getAdjustedHeadingSectionSize(tableUtils, table2, "column", headingColumns, headingRows);
+        if (newHeadingColumns !== headingColumns) {
+          tableUtils.setHeadingColumnsCount(writer, table2, newHeadingColumns, {
+            shallow: true
+          });
+          changed = true;
+        }
+      }
+    }
+    return changed;
+  }
+  function getAdjustedHeadingSectionSize(tableUtils, table2, mode, currentSize, perpendicularHeadingSize) {
+    const totalRowsOrColumns = mode === "row" ? tableUtils.getRows(table2) : tableUtils.getColumns(table2);
+    let size = currentSize;
+    for (let currentIndex = 0; currentIndex < totalRowsOrColumns; currentIndex++) {
+      const walker = new TableWalker(table2, {
+        [mode]: currentIndex
+      });
+      let allCellsAreHeaders = true;
+      let hasHeaderOutsidePerpendicularSection = false;
+      for (const { cell, row, column } of walker) {
+        if (cell.getAttribute("tableCellType") !== "header") {
+          allCellsAreHeaders = false;
+          break;
+        }
+        const perpendicularIndex = mode === "row" ? column : row;
+        if (perpendicularIndex >= perpendicularHeadingSize) {
+          hasHeaderOutsidePerpendicularSection = true;
+        }
+      }
+      if (!allCellsAreHeaders) {
+        return Math.min(size, currentIndex);
+      }
+      if (hasHeaderOutsidePerpendicularSection) {
+        size = Math.max(size, currentIndex + 1);
+      }
+    }
+    return Math.min(size, totalRowsOrColumns);
+  }
   var VALIGN_VALUES_REG_EXP = /^(top|middle|bottom)$/;
-  var ALIGN_VALUES_REG_EXP$1 = /^(left|center|right|justify)$/;
+  var ALIGN_VALUES_REG_EXP = /^(left|center|right|justify)$/;
   var TableCellPropertiesEditing = class extends Plugin {
     /**
     * @inheritDoc
@@ -99578,8 +102674,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "TCP";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -99606,7 +102715,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         isRightToLeftContent: editor.locale.contentLanguageDirection === "rtl"
       });
       editor.data.addStyleProcessorRules(addBorderStylesRules);
-      enableBorderProperties$1(schema, conversion, {
+      enableBorderProperties$1(editor, {
         color: defaultTableCellProperties.borderColor,
         style: defaultTableCellProperties.borderStyle,
         width: defaultTableCellProperties.borderWidth
@@ -99643,9 +102752,15 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       editor.commands.add("tableCellHorizontalAlignment", new TableCellHorizontalAlignmentCommand(editor, defaultTableCellProperties.horizontalAlignment));
       enableVerticalAlignmentProperty(schema, conversion, defaultTableCellProperties.verticalAlignment);
       editor.commands.add("tableCellVerticalAlignment", new TableCellVerticalAlignmentCommand(editor, defaultTableCellProperties.verticalAlignment));
+      if (editor.config.get("experimentalFlags.tableCellTypeSupport")) {
+        enableCellTypeProperty(editor);
+        editor.commands.add("tableCellType", new TableCellTypeCommand(editor));
+      }
     }
   };
-  function enableBorderProperties$1(schema, conversion, defaultBorder) {
+  function enableBorderProperties$1(editor, defaultBorder) {
+    const { conversion } = editor;
+    const { schema } = editor.model;
     const modelAttributes = {
       width: "tableCellBorderWidth",
       color: "tableCellBorderColor",
@@ -99659,8 +102774,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         isFormatting: true
       });
     }
-    upcastBorderStyles(conversion, "td", modelAttributes, defaultBorder);
-    upcastBorderStyles(conversion, "th", modelAttributes, defaultBorder);
+    upcastBorderStyles(editor, "td", modelAttributes, defaultBorder);
+    upcastBorderStyles(editor, "th", modelAttributes, defaultBorder);
     downcastAttributeToStyle(conversion, {
       modelElement: "tableCell",
       modelAttribute: modelAttributes.style,
@@ -99702,7 +102817,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       view: {
         name: /^(td|th)$/,
         styles: {
-          "text-align": ALIGN_VALUES_REG_EXP$1
+          "text-align": ALIGN_VALUES_REG_EXP
         }
       },
       model: {
@@ -99722,7 +102837,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       view: {
         name: /^(td|th)$/,
         attributes: {
-          align: ALIGN_VALUES_REG_EXP$1
+          align: ALIGN_VALUES_REG_EXP
         }
       },
       model: {
@@ -99799,6 +102914,102 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           conversionApi.consumable.consume(viewElement, {
             attributes: "valign"
           });
+        }
+      }
+    });
+  }
+  function enableCellTypeProperty(editor) {
+    const { model, conversion, editing } = editor;
+    const { schema } = model;
+    const tableUtils = editor.plugins.get(TableUtils);
+    schema.extend("tableCell", {
+      allowAttributes: [
+        "tableCellType"
+      ]
+    });
+    schema.setAttributeProperties("tableCellType", {
+      isFormatting: true
+    });
+    schema.addAttributeCheck((context) => {
+      const nearestTable = Array.from(context).reverse().find((item) => item.name === "table");
+      if (nearestTable?.getAttribute("tableType") === "layout") {
+        return false;
+      }
+    }, "tableCellType");
+    conversion.for("upcast").add((dispatcher) => {
+      dispatcher.on("element:th", (evt, data, conversionApi) => {
+        const { writer } = conversionApi;
+        const { modelRange } = data;
+        const modelElement = modelRange?.start.nodeAfter;
+        if (modelElement?.is("element", "tableCell")) {
+          writer.setAttribute("tableCellType", "header", modelElement);
+        }
+      });
+      dispatcher.on("element:table", (evt, data, conversionApi) => {
+        const { writer } = conversionApi;
+        const { modelRange } = data;
+        const modelElement = modelRange?.start.nodeAfter;
+        if (modelElement?.is("element", "table") && modelElement.getAttribute("tableType") === "layout") {
+          for (const { cell } of new TableWalker(modelElement)) {
+            if (cell.getAttribute("tableCellType") === "header") {
+              writer.setAttribute("tableType", "content", modelElement);
+              break;
+            }
+          }
+        }
+      }, {
+        priority: priorities.low - 1
+      });
+    });
+    model.document.registerPostFixer((writer) => {
+      const changes = model.document.differ.getChanges();
+      const tablesToCheck = /* @__PURE__ */ new Set();
+      for (const change of changes) {
+        if (change.type === "attribute" && (change.attributeKey === "headingRows" || change.attributeKey === "headingColumns")) {
+          const table2 = change.range.start.nodeAfter;
+          if (table2?.is("element", "table") && table2.root.rootName !== "$graveyard") {
+            tablesToCheck.add(table2);
+          }
+        }
+        if (change.type === "attribute" && change.attributeKey === "tableCellType") {
+          const cell = change.range.start.nodeAfter;
+          if (cell?.is("element", "tableCell") && cell.root.rootName !== "$graveyard") {
+            const table2 = cell.findAncestor("table");
+            if (table2) {
+              tablesToCheck.add(table2);
+            }
+          }
+        }
+        if (change.type === "insert" && change.position.nodeAfter) {
+          for (const { item } of model.createRangeOn(change.position.nodeAfter)) {
+            if (item.is("element", "tableCell") && item.getAttribute("tableCellType") && item.root.rootName !== "$graveyard") {
+              const table2 = item.findAncestor("table");
+              if (table2) {
+                tablesToCheck.add(table2);
+              }
+            }
+          }
+        }
+      }
+      return updateTablesHeadingAttributes(tableUtils, writer, tablesToCheck);
+    });
+    model.document.on("change:data", () => {
+      const { differ } = model.document;
+      const cellsToReconvert = /* @__PURE__ */ new Set();
+      for (const change of differ.getChanges()) {
+        if (change.type === "attribute" && change.attributeKey === "tableCellType") {
+          const tableCell = change.range.start.nodeAfter;
+          if (tableCell.is("element", "tableCell")) {
+            cellsToReconvert.add(tableCell);
+          }
+        }
+      }
+      for (const tableCell of cellsToReconvert) {
+        const viewElement = editing.mapper.toViewElement(tableCell);
+        const cellType = tableCell.getAttribute("tableCellType");
+        const expectedElementName = cellType === "header" ? "th" : "td";
+        if (viewElement?.name !== expectedElementName) {
+          editing.reconvertItem(tableCell);
         }
       }
     });
@@ -99913,12 +103124,17 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @inheritDoc
     */
     afterInit() {
-      const editor = this.editor;
-      if (!editor.plugins.has("TablePropertiesUI")) {
+      const { editor } = this;
+      const { ui, plugins } = editor;
+      let tablePropertiesUI;
+      if (plugins.has("TablePropertiesUIExperimental")) {
+        tablePropertiesUI = plugins.get("TablePropertiesUIExperimental");
+      } else if (plugins.has("TablePropertiesUI")) {
+        tablePropertiesUI = plugins.get("TablePropertiesUI");
+      } else {
         return;
       }
-      const tablePropertiesUI = editor.plugins.get("TablePropertiesUI");
-      editor.ui.componentFactory.add("tableProperties", (locale) => {
+      ui.componentFactory.add("tableProperties", (locale) => {
         const baseButton = tablePropertiesUI._createTablePropertiesButton();
         const splitButtonView = new SplitButtonView(locale, baseButton);
         return createTableTypeDropdown(editor, splitButtonView);
@@ -100147,8 +103363,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "TCR";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -100693,9 +103922,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const modelTable = modelLeftCell.findAncestor("table");
       const leftColumnIndex = getColumnEdgesIndexes(modelLeftCell, this._tableUtilsPlugin).rightEdge;
       const lastColumnIndex = this._tableUtilsPlugin.getColumns(modelTable) - 1;
+      let tableAlignment = modelTable.getAttribute("tableAlignment");
+      if (modelTable.getAttribute("tableType") !== "layout") {
+        tableAlignment ||= editor.config.get("table.tableProperties.defaultProperties.alignment");
+        tableAlignment ||= "center";
+      }
       const isRightEdge = leftColumnIndex === lastColumnIndex;
-      const isTableCentered = !modelTable.hasAttribute("tableAlignment");
       const isLtrContent = editor.locale.contentLanguageDirection !== "rtl";
+      const isTableCentered = tableAlignment === "center";
       const viewTable = viewLeftCell.findAncestor("table");
       const viewFigure = viewTable.findAncestor("figure");
       const viewColgroup = [
@@ -100833,6 +104067,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "TL";
+    }
+    /**
+    * @inheritDoc
     */
     static get requires() {
       return [
@@ -100843,6 +104084,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -100875,7 +104122,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const { editor } = this;
       const { conversion } = editor;
       const preferredExternalTableType = editor.config.get("table.tableLayout.preferredExternalTableType");
-      conversion.for("upcast").add(upcastLayoutTable(preferredExternalTableType));
+      conversion.for("upcast").add(upcastLayoutTable(editor, preferredExternalTableType));
       conversion.for("dataDowncast").add(dataDowncastLayoutTable());
       conversion.for("editingDowncast").attributeToAttribute({
         model: {
@@ -100970,7 +104217,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       });
     }
   };
-  function upcastLayoutTable(preferredExternalTableType) {
+  function upcastLayoutTable(editor, preferredExternalTableType) {
     return (dispatcher) => {
       dispatcher.on("element:table", (evt, data, conversionApi) => {
         const viewTable = data.viewItem;
@@ -101002,6 +104249,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
             "layout-table"
           ]
         });
+        if (editor.config.get("experimentalFlags.upcastTableBorderZeroAttributes") && viewTable.getAttribute("border") === "0") {
+          conversionApi.consumable.consume(viewTable, {
+            attributes: [
+              "border"
+            ]
+          });
+        }
         for (const tableChild of viewTable.getChildren()) {
           if (tableChild.is("element")) {
             for (const row of tableChild.getChildren()) {
@@ -101097,7 +104351,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     */
     static get requires() {
       return [
-        PlainTableOutput,
         TableColumnResize,
         TableLayoutEditing,
         TableLayoutUI
@@ -101339,8 +104592,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       super(editor, "tableAlignment", defaultValue);
     }
   };
-  var ALIGN_VALUES_REG_EXP = /^(left|center|right)$/;
-  var FLOAT_VALUES_REG_EXP = /^(left|none|right)$/;
   var TablePropertiesEditing = class extends Plugin {
     /**
     * @inheritDoc
@@ -101350,8 +104601,21 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
     /**
     * @inheritDoc
+    * @internal
+    */
+    static get licenseFeatureCode() {
+      return "TCP";
+    }
+    /**
+    * @inheritDoc
     */
     static get isOfficialPlugin() {
+      return true;
+    }
+    /**
+    * @inheritDoc
+    */
+    static get isPremiumPlugin() {
       return true;
     }
     /**
@@ -101373,8 +104637,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const defaultTableProperties = getNormalizedDefaultTableProperties(editor.config.get("table.tableProperties.defaultProperties"), {
         includeAlignmentProperty: true
       });
+      const useInlineStyles = editor.config.get("table.tableProperties.alignment.useInlineStyles") !== false;
+      editor.data.addStyleProcessorRules(addMarginStylesRules);
       editor.data.addStyleProcessorRules(addBorderStylesRules);
-      enableBorderProperties(schema, conversion, {
+      enableBorderProperties(editor, {
         color: defaultTableProperties.borderColor,
         style: defaultTableProperties.borderStyle,
         width: defaultTableProperties.borderWidth
@@ -101382,7 +104648,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       editor.commands.add("tableBorderColor", new TableBorderColorCommand(editor, defaultTableProperties.borderColor));
       editor.commands.add("tableBorderStyle", new TableBorderStyleCommand(editor, defaultTableProperties.borderStyle));
       editor.commands.add("tableBorderWidth", new TableBorderWidthCommand(editor, defaultTableProperties.borderWidth));
-      enableAlignmentProperty(schema, conversion, defaultTableProperties.alignment);
+      if (editor.config.get("experimentalFlags.useExtendedTableBlockAlignment")) {
+        enableExtendedAlignmentProperty(schema, conversion, defaultTableProperties.alignment, useInlineStyles);
+      } else {
+        enableAlignmentProperty(schema, conversion, defaultTableProperties.alignment);
+      }
       editor.commands.add("tableAlignment", new TableAlignmentCommand(editor, defaultTableProperties.alignment));
       enableTableToFigureProperty(schema, conversion, {
         modelAttribute: "tableWidth",
@@ -101409,9 +104679,51 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         defaultValue: defaultTableProperties.backgroundColor
       });
       editor.commands.add("tableBackgroundColor", new TableBackgroundColorCommand(editor, defaultTableProperties.backgroundColor));
+      if (editor.config.get("experimentalFlags.useExtendedTableBlockAlignment")) {
+        const viewDoc = editor.editing.view.document;
+        this.listenTo(viewDoc, "clipboardOutput", (evt, data) => {
+          editor.editing.view.change((writer) => {
+            for (const { item } of writer.createRangeIn(data.content)) {
+              wrapInDivIfNeeded(item, writer);
+            }
+            data.dataTransfer.setData("text/html", this.editor.data.htmlProcessor.toData(data.content));
+          });
+        }, {
+          priority: "lowest"
+        });
+      }
     }
   };
-  function enableBorderProperties(schema, conversion, defaultBorder) {
+  function wrapInDivIfNeeded(viewItem, writer) {
+    if (!viewItem.is("element", "table")) {
+      return;
+    }
+    const alignAttribute = viewItem.getAttribute("align");
+    const floatAttribute = viewItem.getStyle("float");
+    const marginLeft = viewItem.getStyle("margin-left");
+    const marginRight = viewItem.getStyle("margin-right");
+    if (
+      // Align center.
+      alignAttribute && alignAttribute === "center" || // Align right with text wrapping.
+      floatAttribute && floatAttribute === "right" && alignAttribute && alignAttribute === "right"
+    ) {
+      insertWrapperWithAlignment(writer, alignAttribute, viewItem);
+      return;
+    }
+    if (floatAttribute === void 0 && marginLeft === "auto" && marginRight === "0") {
+      insertWrapperWithAlignment(writer, "right", viewItem);
+    }
+  }
+  function insertWrapperWithAlignment(writer, align, table2) {
+    const position = writer.createPositionBefore(table2);
+    const wrapper = writer.createContainerElement("div", {
+      align
+    }, table2);
+    writer.insert(position, wrapper);
+  }
+  function enableBorderProperties(editor, defaultBorder) {
+    const { conversion } = editor;
+    const { schema } = editor.model;
     const modelAttributes = {
       width: "tableBorderWidth",
       color: "tableBorderColor",
@@ -101425,7 +104737,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         isFormatting: true
       });
     }
-    upcastBorderStyles(conversion, "table", modelAttributes, defaultBorder);
+    upcastBorderStyles(editor, "table", modelAttributes, defaultBorder);
     downcastTableAttribute(conversion, {
       modelAttribute: modelAttributes.color,
       styleName: "border-color"
@@ -101439,7 +104751,106 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       styleName: "border-width"
     });
   }
+  function enableExtendedAlignmentProperty(schema, conversion, defaultValue, useInlineStyles) {
+    schema.extend("table", {
+      allowAttributes: [
+        "tableAlignment"
+      ]
+    });
+    schema.setAttributeProperties("tableAlignment", {
+      isFormatting: true
+    });
+    conversion.for("downcast").attributeToAttribute({
+      model: {
+        name: "table",
+        key: "tableAlignment",
+        values: [
+          "left",
+          "center",
+          "right",
+          "blockLeft",
+          "blockRight"
+        ]
+      },
+      view: {
+        left: useInlineStyles ? {
+          key: "style",
+          value: {
+            float: "left",
+            "margin-right": "var(--ck-content-table-style-spacing, 1.5em)"
+          }
+        } : {
+          key: "class",
+          value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.left.className
+        },
+        right: useInlineStyles ? {
+          key: "style",
+          value: {
+            float: "right",
+            "margin-left": "var(--ck-content-table-style-spacing, 1.5em)"
+          }
+        } : {
+          key: "class",
+          value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.right.className
+        },
+        center: useInlineStyles ? {
+          key: "style",
+          value: {
+            "margin-left": "auto",
+            "margin-right": "auto"
+          }
+        } : {
+          key: "class",
+          value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.center.className
+        },
+        blockLeft: useInlineStyles ? {
+          key: "style",
+          value: {
+            "margin-left": "0",
+            "margin-right": "auto"
+          }
+        } : {
+          key: "class",
+          value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockLeft.className
+        },
+        blockRight: useInlineStyles ? {
+          key: "style",
+          value: {
+            "margin-left": "auto",
+            "margin-right": "0"
+          }
+        } : {
+          key: "class",
+          value: DEFAULT_TABLE_ALIGNMENT_OPTIONS.blockRight.className
+        }
+      },
+      converterPriority: "high"
+    });
+    upcastTableAlignmentConfig.forEach((config) => {
+      conversion.for("upcast").attributeToAttribute({
+        view: config.view,
+        model: {
+          key: "tableAlignment",
+          value: (viewElement, conversionApi, data) => {
+            if (isNonTableFigureElement(viewElement)) {
+              return;
+            }
+            const localDefaultValue = getDefaultValueAdjusted(defaultValue, "", data);
+            const align = config.getAlign(viewElement);
+            const consumables = config.getConsumables(viewElement);
+            conversionApi.consumable.consume(viewElement, consumables);
+            if (align !== localDefaultValue) {
+              return align;
+            }
+          }
+        }
+      });
+    });
+    conversion.for("upcast").add(upcastTableAlignedDiv(defaultValue));
+  }
   function enableAlignmentProperty(schema, conversion, defaultValue) {
+    const ALIGN_VALUES_REG_EXP2 = /^(left|center|right)$/;
+    const FLOAT_VALUES_REG_EXP2 = /^(left|none|right)$/;
     schema.extend("table", {
       allowAttributes: [
         "tableAlignment"
@@ -101491,7 +104902,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       view: {
         name: /^(table|figure)$/,
         styles: {
-          float: FLOAT_VALUES_REG_EXP
+          float: FLOAT_VALUES_REG_EXP2
         }
       },
       model: {
@@ -101544,7 +104955,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       view: {
         name: "table",
         attributes: {
-          align: ALIGN_VALUES_REG_EXP
+          align: ALIGN_VALUES_REG_EXP2
         }
       },
       model: {
@@ -101561,6 +104972,71 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         }
       }
     });
+  }
+  function upcastTableAlignedDiv(defaultValue) {
+    return (dispatcher) => {
+      dispatcher.on("element:div", (evt, data, conversionApi) => {
+        if (!conversionApi.consumable.test(data.viewItem, {
+          name: true,
+          attributes: "align"
+        })) {
+          return;
+        }
+        const viewTable = getViewTableFromWrapper(data.viewItem);
+        if (!viewTable || !conversionApi.consumable.test(viewTable, {
+          name: true
+        })) {
+          return;
+        }
+        conversionApi.consumable.consume(data.viewItem, {
+          name: true,
+          attributes: "align"
+        });
+        const conversionResult = conversionApi.convertItem(viewTable, data.modelCursor);
+        const modelTable = first(conversionResult.modelRange.getItems());
+        if (!modelTable || !modelTable.is("element", "table")) {
+          conversionApi.consumable.revert(data.viewItem, {
+            name: true,
+            attributes: "align"
+          });
+          if (conversionResult.modelRange && !conversionResult.modelRange.isCollapsed) {
+            data.modelRange = conversionResult.modelRange;
+            data.modelCursor = conversionResult.modelCursor;
+          }
+          return;
+        }
+        const alignAttributeFromDiv = data.viewItem.getAttribute("align");
+        const alignAttributeFromTable = viewTable.getAttribute("align");
+        const localDefaultValue = getDefaultValueAdjusted(defaultValue, "", data);
+        const align = convertToTableAlignment(alignAttributeFromDiv, alignAttributeFromTable, localDefaultValue);
+        if (align) {
+          conversionApi.writer.setAttribute("tableAlignment", align, modelTable);
+        }
+        conversionApi.convertChildren(data.viewItem, conversionApi.writer.createPositionAt(modelTable, "end"));
+        conversionApi.updateConversionResult(modelTable, data);
+      });
+    };
+  }
+  function convertToTableAlignment(divAlign, tableAlign, defaultValue) {
+    if (divAlign) {
+      switch (divAlign) {
+        case "right":
+          if (tableAlign === "right") {
+            return "right";
+          } else if (tableAlign === "left") {
+            return "left";
+          } else {
+            return "blockRight";
+          }
+        case "center":
+          return "center";
+        case "left":
+          return tableAlign === void 0 ? "blockLeft" : "left";
+        default:
+          return defaultValue;
+      }
+    }
+    return void 0;
   }
   function enableProperty(schema, conversion, options) {
     const { modelAttribute } = options;
@@ -101597,6 +105073,9 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       modelElement: "table",
       ...options
     });
+  }
+  function isNonTableFigureElement(viewElement) {
+    return viewElement.name == "figure" && !viewElement.hasClass("table");
   }
   var TablePropertiesView = class extends View {
     /**
@@ -101829,7 +105308,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         width: defaultTableProperties.borderWidth,
         color: defaultTableProperties.borderColor
       };
-      const colorInputCreator = getLabeledColorInputCreator({
+      const colorInputCreator = getLabeledColorInputCreator$1({
         colorConfig: this.options.borderColors,
         columns: 5,
         defaultColorValue: defaultBorder.color,
@@ -101840,7 +105319,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const accessibleLabel = t("Style");
       const borderRowLabel = new LabelView(locale);
       borderRowLabel.text = t("Border");
-      const styleLabels = getBorderStyleLabels(t);
+      const styleLabels = getBorderStyleLabels$1(t);
       const borderStyleDropdown = new LabeledFieldView(locale, createLabeledDropdown);
       borderStyleDropdown.set({
         label: accessibleLabel,
@@ -101860,7 +105339,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         this.borderStyle = evt.source._borderStyleValue;
       });
       borderStyleDropdown.bind("isEmpty").to(this, "borderStyle", (value) => !value);
-      addListToDropdown(borderStyleDropdown.fieldView, getBorderStyleDefinitions(this, defaultBorder.style), {
+      addListToDropdown(borderStyleDropdown.fieldView, getBorderStyleDefinitions$1(this, defaultBorder.style), {
         role: "menu",
         ariaLabel: accessibleLabel
       });
@@ -101870,7 +105349,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         class: "ck-table-form__border-width"
       });
       borderWidthInput.fieldView.bind("value").to(this, "borderWidth");
-      borderWidthInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet);
+      borderWidthInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$2);
       borderWidthInput.fieldView.on("input", () => {
         this.borderWidth = borderWidthInput.fieldView.element.value;
       });
@@ -101880,16 +105359,16 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         class: "ck-table-form__border-color"
       });
       borderColorInput.fieldView.bind("value").to(this, "borderColor");
-      borderColorInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet);
+      borderColorInput.bind("isEnabled").to(this, "borderStyle", isBorderStyleSet$2);
       borderColorInput.fieldView.on("input", () => {
         this.borderColor = borderColorInput.fieldView.value;
       });
       this.on("change:borderStyle", (evt, name, newValue, oldValue) => {
-        if (!isBorderStyleSet(newValue)) {
+        if (!isBorderStyleSet$2(newValue)) {
           this.borderColor = "";
           this.borderWidth = "";
         }
-        if (!isBorderStyleSet(oldValue)) {
+        if (!isBorderStyleSet$2(oldValue)) {
           this.borderColor = defaultBorder.color;
           this.borderWidth = defaultBorder.width;
         }
@@ -101911,7 +105390,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const t = this.t;
       const backgroundRowLabel = new LabelView(locale);
       backgroundRowLabel.text = t("Background");
-      const backgroundInputCreator = getLabeledColorInputCreator({
+      const backgroundInputCreator = getLabeledColorInputCreator$1({
         colorConfig: this.options.backgroundColors,
         columns: 5,
         defaultColorValue: this.options.defaultTableProperties.backgroundColor,
@@ -101997,7 +105476,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         isCompact: true,
         ariaLabel: t("Table alignment toolbar")
       });
-      fillToolbar({
+      fillToolbar$1({
         view: this,
         icons: {
           left: objectInlineLeft,
@@ -102078,11 +105557,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
     }
   };
-  function isBorderStyleSet(value) {
+  function isBorderStyleSet$2(value) {
     return value !== "none";
   }
-  var ERROR_TEXT_TIMEOUT = 500;
-  var propertyToCommandMap = {
+  var ERROR_TEXT_TIMEOUT$2 = 500;
+  var propertyToCommandMap$2 = {
     borderStyle: "tableBorderStyle",
     borderColor: "tableBorderColor",
     borderWidth: "tableBorderWidth",
@@ -102183,7 +105662,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         tooltip: true
       });
       this.listenTo(view, "execute", () => this._showView());
-      const commands = Object.values(propertyToCommandMap).map((commandName) => editor.commands.get(commandName));
+      const commands = Object.values(propertyToCommandMap$2).map((commandName) => editor.commands.get(commandName));
       view.bind("isEnabled").toMany(commands, "isEnabled", (...areEnabled) => areEnabled.some((isCommandEnabled) => isCommandEnabled));
       return view;
     }
@@ -102285,7 +105764,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     _fillViewFormFromCommandValues() {
       const commands = this.editor.commands;
       const borderStyleCommand = commands.get("tableBorderStyle");
-      Object.entries(propertyToCommandMap).map(([property2, commandName]) => {
+      Object.entries(propertyToCommandMap$2).map(([property2, commandName]) => {
         const propertyKey = property2;
         const defaultValue = this.view === this._viewWithContentTableDefaults ? this._defaultContentTableProperties[propertyKey] || "" : this._defaultLayoutTableProperties[propertyKey] || "";
         return [
@@ -102392,7 +105871,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       const { commandName, viewField, validator, errorText } = options;
       const setErrorTextDebounced = debounce2(() => {
         viewField.errorText = errorText;
-      }, ERROR_TEXT_TIMEOUT);
+      }, ERROR_TEXT_TIMEOUT$2);
       return (evt, propertyName, newValue) => {
         setErrorTextDebounced.cancel();
         if (!this._isReady) {
@@ -102571,7 +106050,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     *
     * To learn more about this system, see {@link #_saveCaption}.
     */
-    _savedCaptionsMap;
+    _savedCaptionsMap = /* @__PURE__ */ new WeakMap();
+    /**
+    * A map that keeps generated ids for table captions to reuse them if the same caption is rendered again.
+    */
+    _captionIdsMapping = /* @__PURE__ */ new WeakMap();
     /**
     * @inheritDoc
     */
@@ -102587,18 +106070,12 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     /**
     * @inheritDoc
     */
-    constructor(editor) {
-      super(editor);
-      this._savedCaptionsMap = /* @__PURE__ */ new WeakMap();
-    }
-    /**
-    * @inheritDoc
-    */
     init() {
       const editor = this.editor;
       const schema = editor.model.schema;
       const view = editor.editing.view;
       const t = editor.t;
+      const useCaptionElement = editor.config.get("table.tableCaption.useCaptionElement");
       if (!schema.isRegistered("caption")) {
         schema.register("caption", {
           allowIn: "table",
@@ -102611,6 +106088,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         });
       }
       editor.commands.add("toggleTableCaption", new ToggleTableCaptionCommand(this.editor));
+      if (useCaptionElement) {
+        const tableEditing = editor.plugins.get("TableEditing");
+        tableEditing.registerAdditionalSlot({
+          filter: (element) => element.is("element", "caption"),
+          positionOffset: "end"
+        });
+      }
       editor.conversion.for("upcast").elementToElement({
         view: matchTableCaptionViewElement,
         model: "caption"
@@ -102621,7 +106105,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           if (!isTable(modelElement.parent)) {
             return null;
           }
-          return writer.createContainerElement("figcaption");
+          return writer.createContainerElement(useCaptionElement ? "caption" : "figcaption");
         }
       });
       editor.conversion.for("editingDowncast").elementToElement({
@@ -102630,16 +106114,49 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
           if (!isTable(modelElement.parent)) {
             return null;
           }
-          const figcaptionElement = writer.createEditableElement("figcaption");
-          writer.setCustomProperty("tableCaption", true, figcaptionElement);
-          figcaptionElement.placeholder = t("Enter table caption");
+          const captionElement = writer.createEditableElement(useCaptionElement ? "caption" : "figcaption");
+          writer.setCustomProperty("tableCaption", true, captionElement);
+          captionElement.placeholder = t("Enter table caption");
           enableViewPlaceholder({
             view,
-            element: figcaptionElement,
+            element: captionElement,
             keepOnFocus: true
           });
-          return toWidgetEditable(figcaptionElement, writer);
+          return toWidgetEditable(captionElement, writer);
         }
+      });
+      editor.conversion.for("editingDowncast").add((dispatcher) => {
+        dispatcher.on("insert:table", (evt, data, { writer, mapper }) => {
+          const modelTable = data.item;
+          const viewFigure = mapper.toViewElement(modelTable);
+          if (!viewFigure) {
+            return;
+          }
+          const viewTable = Array.from(viewFigure.getChildren()).find((child) => child.is("element", "table"));
+          if (!viewTable) {
+            return;
+          }
+          const modelCaption = getCaptionFromTableModelElement(modelTable);
+          if (!modelCaption) {
+            writer.removeAttribute("aria-labelledby", viewTable);
+            return;
+          }
+          const viewCaption = mapper.toViewElement(modelCaption);
+          if (!viewCaption) {
+            return;
+          }
+          let captionId;
+          if (viewCaption.hasAttribute("id")) {
+            captionId = viewCaption.getAttribute("id");
+          } else {
+            captionId = this._captionIdsMapping.get(modelCaption) ?? `ck-editor__caption_${uid()}`;
+          }
+          this._captionIdsMapping.set(modelCaption, captionId);
+          writer.setAttribute("id", captionId, viewCaption);
+          writer.setAttribute("aria-labelledby", captionId, viewTable);
+        }, {
+          priority: "low"
+        });
       });
       injectTableCaptionPostFixer(editor.model);
     }
@@ -102771,7 +106288,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         allowWhere: "$text",
         isInline: true,
         isObject: true,
-        allowAttributes: ["id", "size", "alt", "height", "width"]
+        allowAttributes: ["id", "class", "size", "alt", "height", "width"]
       });
     }
     _defineConverters() {
@@ -102786,11 +106303,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         model: (viewElement, { writer }) => {
           const attrs = {};
           const id = viewElement.getAttribute("id");
+          const klass = viewElement.getAttribute("class");
           const size = viewElement.getAttribute("size");
           const alt = viewElement.getAttribute("alt");
           const height = viewElement.getAttribute("height");
           const width = viewElement.getAttribute("width");
           if (id) attrs.id = id;
+          if (klass) attrs.class = klass;
           if (size) attrs.size = size;
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
@@ -102803,11 +106322,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         view: (modelElement, { writer }) => {
           const attrs = {};
           const id = modelElement.getAttribute("id");
+          const klass = modelElement.getAttribute("class");
           const size = modelElement.getAttribute("size");
           const alt = modelElement.getAttribute("alt");
           const height = modelElement.getAttribute("height");
           const width = modelElement.getAttribute("width");
           if (id) attrs.id = id;
+          if (klass) attrs.class = klass;
           if (size) attrs.size = size;
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
@@ -102820,11 +106341,13 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         view: (modelElement, { writer }) => {
           const attrs = {};
           const id = modelElement.getAttribute("id");
+          const klass = modelElement.getAttribute("class");
           const size = modelElement.getAttribute("size");
           const alt = modelElement.getAttribute("alt");
           const height = modelElement.getAttribute("height");
           const width = modelElement.getAttribute("width");
           if (id) attrs.id = id;
+          if (klass) attrs.class = klass;
           if (size) attrs.size = size;
           if (alt) attrs.alt = alt;
           if (height) attrs.height = height;
@@ -103198,9 +106721,10 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 @ckeditor/ckeditor5-clipboard/dist/index.js:
 @ckeditor/ckeditor5-find-and-replace/dist/index.js:
 @ckeditor/ckeditor5-list/dist/index.js:
+@ckeditor/ckeditor5-link/dist/index.js:
 @ckeditor/ckeditor5-style/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore next -- @preserve *)
@@ -103253,34 +106777,34 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
 @ckeditor/ckeditor5-image/dist/index.js:
 @ckeditor/ckeditor5-indent/dist/index.js:
 @ckeditor/ckeditor5-language/dist/index.js:
-@ckeditor/ckeditor5-link/dist/index.js:
 @ckeditor/ckeditor5-media-embed/dist/index.js:
 @ckeditor/ckeditor5-mention/dist/index.js:
 @ckeditor/ckeditor5-minimap/dist/index.js:
 @ckeditor/ckeditor5-page-break/dist/index.js:
+@ckeditor/ckeditor5-paste-from-office/dist/index.js:
 @ckeditor/ckeditor5-remove-format/dist/index.js:
-@ckeditor/ckeditor5-restricted-editing/dist/index.js:
 @ckeditor/ckeditor5-restricted-editing/dist/index.js:
 @ckeditor/ckeditor5-show-blocks/dist/index.js:
 @ckeditor/ckeditor5-source-editing/dist/index.js:
 @ckeditor/ckeditor5-special-characters/dist/index.js:
+@ckeditor/ckeditor5-table/dist/index.js:
 @ckeditor/ckeditor5-word-count/dist/index.js:
 ckeditor5/dist/ckeditor5.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
 
 @ckeditor/ckeditor5-utils/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore else -- @preserve *)
 
 @ckeditor/ckeditor5-engine/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore next -- @preserve *)
@@ -103297,7 +106821,7 @@ ckeditor5/dist/ckeditor5.js:
 
 @ckeditor/ckeditor5-fullscreen/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore if -- @preserve *)
@@ -103305,30 +106829,31 @@ ckeditor5/dist/ckeditor5.js:
 
 @ckeditor/ckeditor5-html-support/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore next: paranoid check -- @preserve *)
+  (* istanbul ignore next -- @preserve *)
 
 @ckeditor/ckeditor5-image/dist/index.js:
   (* istanbul ignore if: paranoid check -- @preserve *)
   (* istanbul ignore next -- @preserve *)
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
 
 @ckeditor/ckeditor5-paste-from-office/dist/index.js:
-  (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
-   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
-   *)
   (* istanbul ignore next -- @preserve *)
   (* istanbul ignore else -- @preserve *)
+  (**
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+   * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+   *)
 
 @ckeditor/ckeditor5-table/dist/index.js:
   (**
-   * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+   * @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
    * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
    *)
   (* istanbul ignore next -- @preserve *)
