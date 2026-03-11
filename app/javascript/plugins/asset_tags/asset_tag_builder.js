@@ -20,7 +20,7 @@ export default class AssetTagBuilder extends Plugin {
             allowWhere: '$text',
             isInline: true,
             isObject: true,
-            allowAttributes: [ 'id', 'class', 'size', 'alt', 'height', 'width', 'linkHref', '' ]
+            allowAttributes: [ 'id', 'title', 'class', 'size', 'alt', 'height', 'width', 'linkHref', 'linkTarget', 'linkRel' ]
         } );
     }
 
