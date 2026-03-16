@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'rack/test'
 require 'base64'
+require 'stringio'
 
 RSpec.describe Asset, type: :model do
   let(:fixtures_path) { TrustyCms::Engine.root.join('spec', 'fixtures', 'files') }
