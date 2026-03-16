@@ -27,8 +27,6 @@ TrustyCms::Application.routes.draw do
 
     resources :assets do
       get :remove, on: :member
-      get :refresh, on: :collection
-      put :refresh, on: :member
       collection do
         post :uploader
       end
