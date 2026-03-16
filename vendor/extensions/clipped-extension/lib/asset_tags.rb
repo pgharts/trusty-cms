@@ -181,9 +181,15 @@ module AssetTags
     options = tag.attr.dup
     # XXX build_regexp_for comes from StandardTags
     regexp = build_regexp_for(tag, options)
-    asset_content_type = tag.locals.asset.asset_content_type
+    asset_content_type = tag.locals.asset.content_type
     tag.expand unless asset_content_type.match(regexp).nil?
   end
+
+  attribute_mappings = {
+    asset_file_name: :filename,
+    asset_content_type: :content_type,
+    asset_file_size: :byte_size,
+  }
 
   [:title, :caption, :asset_file_name, :extension, :asset_content_type, :asset_file_size, :id].each do |method|
     desc %{
@@ -191,7 +197,8 @@ module AssetTags
     }
     tag "asset:#{method.to_s}" do |tag|
       asset, options = asset_and_options(tag)
-      asset.send(method) rescue nil
+      mapped = attribute_mappings.fetch(method, method)
+      asset.send(mapped) rescue nil
     end
   end
 
@@ -201,7 +208,7 @@ module AssetTags
 
   tag 'asset:filename' do |tag|
     asset, options = asset_and_options(tag)
-    asset.asset_file_name rescue nil
+    asset.filename rescue nil
   end
 
   desc %{
@@ -308,4 +315,3 @@ module AssetTags
     }
   end
 end
-

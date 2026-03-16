@@ -14,10 +14,10 @@
         %div.content
           %fieldset
             %label.filename
-              = "#{t("clipped_extension.filename")}: #{@asset.asset_file_name unless @asset.new_record?}"
+              = "#{t("clipped_extension.filename")}: #{@asset.filename unless @asset.new_record?}"
             %br
             %label.url
-              = "#{t("clipped_extension.asset_url")}: #{image_path @asset.asset.url unless @asset.new_record?}"
+              = "#{t("clipped_extension.asset_url")}: #{@asset.public_url unless @asset.new_record?}"
             %br
             %label.id
               = "#{t("clipped_extension.asset_id")}: #{@asset.id unless @asset.new_record?}"

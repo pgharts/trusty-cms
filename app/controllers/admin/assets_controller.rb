@@ -40,7 +40,7 @@ class Admin::AssetsController < Admin::ResourceController
         @page_attachments << (@page_attachment = @asset.page_attachments.build(page: @page))
       end
 
-      render json: { url: @asset.asset.url }
+      render json: { url: @asset.public_url }
     else
       flash[result.fetch(:flash_type, :error)] = result[:error]
       render json: { error: result[:error] }, status: result.fetch(:status, :unprocessable_entity)
@@ -71,17 +71,6 @@ class Admin::AssetsController < Admin::ResourceController
       render partial: 'admin/page_attachments/attachment', collection: @page_attachments
     else
       response_for :create
-    end
-  end
-
-  def refresh
-    if asset_params[:id]
-      @asset = Asset.find(params[:id])
-      @asset.asset.reprocess!
-      flash[:notice] = t('clipped_extension.thumbnails_refreshed')
-      redirect_to edit_admin_asset_path(@asset)
-    else
-      render
     end
   end
 

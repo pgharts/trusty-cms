@@ -3,8 +3,7 @@ class AssetType
   # Conventionally this would a sensible category like 'image' or 'video'
   # that should be processed and presented in a particular way.
   # An AssetType currently provides:
-  #   * processor definitions for paperclip
-  #   * styles definitions for paperclip
+  #   * processing and variant definitions for ActiveStorage
   #   * mime type list for file recognition
   #   * selectors and scopes for retrieving this (or not this) category of asset
   #   * radius tags for those subsets of assets (temporarily removed pending discussion of interface)
@@ -30,7 +29,7 @@ class AssetType
     @mimes.each { |mimetype| @@mime_lookup[mimetype] ||= self }
 
     this = self
-    Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(asset_content_type) end
+    Asset.send :define_method, "#{name}?".intern do this.mime_types.include?(content_type) end
     Asset.send :define_class_method, "#{name}_condition".intern do this.condition; end
     Asset.send :define_class_method, "not_#{name}_condition".intern do this.non_condition; end
     Asset.send :scope, plural.to_sym, -> { where(conditions: condition) }
@@ -85,27 +84,22 @@ class AssetType
     @mimes
   end
 
-  def paperclip_processors
-    TrustyCms.config["assets.create_#{name}_thumbnails?"] ? processors : []
+  def processing_enabled?
+    TrustyCms.config["assets.create_#{name}_thumbnails?"]
   end
 
-  # Parses and combines the various ways in which paperclip styles can be defined, and normalises them into
-  # the format that paperclip expects. Note that :styles => :standard has already been replaced with the
+  # Parses and combines the various ways in which ActiveStorage styles can be defined, and normalises them into
+  # the format that ActiveStorage expects. Note that :styles => :standard has already been replaced with the
   # results of a call to standard_styles.
-  # Styles are passed to paperclip as a hash and arbitrary keys can be passed through from configuration.
+  # Styles are passed as a hash and arbitrary keys can be passed through from configuration.
   #
-  def paperclip_styles
-    # Styles are not relevant if processors are not defined.
-    @paperclip_styles ||= if paperclip_processors.any?
-                            normalize_style_rules(configured_styles.merge(styles))
-                          else
-                            {}
-    end
-    @paperclip_styles
-  end
-
   def active_storage_styles
-    @active_storage_styles ||= normalize_style_rules(configured_styles.merge(styles))
+    @active_storage_styles ||= if processing_enabled?
+                                 normalize_style_rules(configured_styles.merge(styles))
+                               else
+                                 {}
+    end
+    @active_storage_styles
   end
 
   # Takes a motley collection of differently-defined styles and renders them into the standard hash-of-hashes format.
@@ -128,13 +122,15 @@ class AssetType
 
   def standard_styles
     {
+      icon: { geometry: '50x50#', format: :png },
       thumbnail: { geometry: '100x100#', format: :png },
+      original: {},
     }
   end
 
-  # Paperclip styles are defined in the config entry `assets.thumbnails.asset_type`, with the format:
+  # ActiveStorage styles are defined in the config entry `assets.thumbnails.asset_type`, with the format:
   # foo:key-x,key=y,key=z|bar:key-x,key=y,key=z
-  # where 'key' can be any parameter understood by your paperclip processors. Usually they include :geometry and :format.
+  # where 'key' can be any parameter understood by your variant processor. Usually they include :geometry and :format.
   # A typical entry would be:
   #
   #   standard:geometry=640x640>,format=jpg
@@ -153,8 +149,14 @@ class AssetType
   end
 
   def style_dimensions(style_name)
-    if style = paperclip_styles[style_name.to_sym]
-      style[:size]
+    if style = active_storage_styles[style_name.to_sym]
+      style[:geometry]
+    end
+  end
+
+  def style_format(style_name)
+    if style = active_storage_styles[style_name.to_sym]
+      style[:format]
     end
   end
 
@@ -173,8 +175,10 @@ class AssetType
   # class methods
 
   def self.for(attachment)
-    extension = attachment.record.original_extension
-    from_extension(extension) || from_mimetype(attachment.content_type) || catchall
+    return catchall unless attachment&.attached?
+
+    extension = attachment.blob&.filename&.extension&.downcase || attachment.record.original_extension
+    from_extension(extension) || from_mimetype(attachment.blob&.content_type) || catchall
   end
 
   def self.from_extension(extension)
