@@ -3,7 +3,8 @@ TrustyCms.config do |config|
   # Uncomment and change the settings below to customize the Clipped extension
 
   # The default settings
-  # config["assets.max_asset_size"] = 5 # megabytes
+  # config["assets.max_asset_size"] = 10 # megabytes
+  # config["assets.max_video_size"] = 50 # megabytes
   # config["assets.display_size"] = "normal"
   # config["assets.insertion_size"] = "normal"
   # config["assets.create_image_thumbnails?"] = true

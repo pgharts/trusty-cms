@@ -29,7 +29,8 @@ Rails.application.reloader.to_prepare do
         thumbs.define 'pdf', default: 'normal:size=640x640>,format=jpg|small:size=320x320>,format=jpg'
       end
 
-      assets.define 'max_asset_size', default: 5, type: :integer, units: 'MB'
+      assets.define 'max_asset_size', default: 10, type: :integer, units: 'MB'
+      assets.define 'max_video_size', default: 50, type: :integer, units: 'MB'
       assets.define 'display_size', default: 'normal', allow_blank: true
       assets.define 'insertion_size', default: 'normal', allow_blank: true
     end

@@ -11,30 +11,86 @@ RSpec.describe Asset, type: :model do
   end
 
   describe 'validations' do
+    before do
+      AssetType.new :image, icon: 'image', styles: :standard, extensions: %w[jpg jpeg png gif], mime_types: %w[image/png image/x-png image/jpeg image/pjpeg image/jpg image/gif] unless AssetType.known?(:image)
+      AssetType.new :video, icon: 'video', mime_types: %w[video/mp4 video/mpeg video/quicktime video/webm] unless AssetType.known?(:video)
+      AssetType.new :document, icon: 'document', mime_types: %w[application/msword application/rtf text/plain text/html] unless AssetType.known?(:document)
+    end
+
     it 'is valid when the content type is approved' do
-      asset = described_class.new(asset: upload_fixture('sample.ics', 'text/calendar'))
+      asset = described_class.new(asset: upload_fixture('sample.txt', 'text/plain'))
 
       expect(asset).to be_valid
     end
 
     it 'is invalid when the content type is not approved' do
-      asset = described_class.new(asset: upload_fixture('sample.txt', 'text/plain'))
+      asset = described_class.new(asset: upload_fixture('sample.txt', 'application/x-unsupported'))
 
       expect(asset).not_to be_valid
       expect(asset.errors[:asset]).to include(a_string_matching(/file format/i))
     end
 
-    it 'is invalid when the file exceeds the maximum size' do
+    it 'is invalid when a non-video file exceeds the maximum asset size' do
+      max_size = TrustyCms.config['assets.max_asset_size'].to_i
+
       Tempfile.open(['large', '.png']) do |tempfile|
         tempfile.binmode
-        tempfile.write('0' * (10.megabytes + 1))
+        tempfile.write('0' * (max_size.megabytes + 1))
         tempfile.rewind
 
         uploaded = Rack::Test::UploadedFile.new(tempfile.path, 'image/png')
         asset = described_class.new(asset: uploaded)
 
         expect(asset).not_to be_valid
-        expect(asset.errors[:asset]).to include(a_string_matching(/10 MB/))
+        expect(asset.errors[:asset]).to include(a_string_matching(/#{max_size} MB/))
+      end
+    end
+
+    it 'is invalid when a video file exceeds the maximum video size' do
+      max_size = TrustyCms.config['assets.max_video_size'].to_i
+
+      Tempfile.open(['large', '.mp4']) do |tempfile|
+        tempfile.binmode
+        tempfile.write('0' * (max_size.megabytes + 1))
+        tempfile.rewind
+
+        uploaded = Rack::Test::UploadedFile.new(tempfile.path, 'video/mp4')
+        asset = described_class.new(asset: uploaded)
+
+        expect(asset).not_to be_valid
+        expect(asset.errors[:asset]).to include(a_string_matching(/#{max_size} MB/))
+      end
+    end
+
+    it 'allows a video file that exceeds the asset size limit but is within the video size limit' do
+      asset_limit = TrustyCms.config['assets.max_asset_size'].to_i
+      video_limit = TrustyCms.config['assets.max_video_size'].to_i
+      size = asset_limit.megabytes + 1.megabyte
+
+      skip 'video limit must be larger than asset limit for this test to be meaningful' unless video_limit > asset_limit
+
+      Tempfile.open(['video', '.mp4']) do |tempfile|
+        tempfile.binmode
+        tempfile.write('0' * size)
+        tempfile.rewind
+
+        uploaded = Rack::Test::UploadedFile.new(tempfile.path, 'video/mp4')
+        asset = described_class.new(asset: uploaded)
+
+        expect(asset).to be_valid
+      end
+    end
+
+    it 'allows a video file within the maximum video size' do
+      Tempfile.open(['video', '.mp4']) do |tempfile|
+        tempfile.binmode
+        tempfile.write('0' * 1.megabyte)
+        tempfile.rewind
+
+        uploaded = Rack::Test::UploadedFile.new(tempfile.path, 'video/mp4')
+        asset = described_class.new(asset: uploaded)
+
+        expect(asset).to be_valid
       end
     end
   end

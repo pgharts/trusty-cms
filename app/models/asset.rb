@@ -41,7 +41,8 @@ class Asset < ActiveRecord::Base
 
   has_one_attached :asset
   validates :asset, presence: true
-  validates :asset, blob: { size_range: 1..10.megabytes }, if: -> { asset.attached? }
+  validates :asset, blob: { size_range: 1..TrustyCms.config['assets.max_asset_size'].to_i.megabytes }, if: -> { asset.attached? && !video_content_type? }
+  validates :asset, blob: { size_range: 1..TrustyCms.config['assets.max_video_size'].to_i.megabytes }, if: -> { asset.attached? && video_content_type? }
   validate :approved_content_type, if: -> { asset.attached? }
   before_validation :sync_attachment_metadata
   before_save :assign_title
@@ -231,6 +232,10 @@ class Asset < ActiveRecord::Base
     else
       { resize_to_limit: [width, height].compact }
     end
+  end
+
+  def video_content_type?
+    AssetType.known?(:video) && AssetType.find(:video).mime_types.include?(content_type)
   end
 
   def approved_content_type
