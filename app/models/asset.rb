@@ -1,8 +1,6 @@
 require 'trusty_cms/geometry'
 
 class Asset < ActiveRecord::Base
-  APPROVED_CONTENT_TYPES = %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css text/calendar].freeze
-
   has_many :page_attachments, dependent: :destroy
   has_many :pages, through: :page_attachments
   has_site if respond_to? :has_site
@@ -37,14 +35,14 @@ class Asset < ActiveRecord::Base
     end
   }
 
+  def self.approved_content_types
+    AssetType.known_mimetypes
+  end
+
   has_one_attached :asset
-  validates :asset,
-            presence: true,
-            blob:
-              {
-                content_type: APPROVED_CONTENT_TYPES,
-                size_range: 1..10.megabytes,
-              }
+  validates :asset, presence: true
+  validates :asset, blob: { size_range: 1..10.megabytes }, if: -> { asset.attached? }
+  validate :approved_content_type, if: -> { asset.attached? }
   before_validation :sync_attachment_metadata
   before_save :assign_title
   before_save :assign_uuid
@@ -233,6 +231,12 @@ class Asset < ActiveRecord::Base
     else
       { resize_to_limit: [width, height].compact }
     end
+  end
+
+  def approved_content_type
+    return if Asset.approved_content_types.include?(asset.content_type)
+
+    errors.add(:asset, :content_type, filename: asset.filename.to_s)
   end
 
   def sync_attachment_metadata
