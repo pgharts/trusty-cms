@@ -18,8 +18,8 @@ en:
             asset:
               blank: 'You must choose a file to upload!'
               content_type: '%{filename} is not a supported file type.'
-              max_size_error: '%{filename} is too large (maximum is %{max_size}).'
-              min_size_error: '%{filename} must be larger than %{min_size}.'
+              max_size_error: 'File is too large (maximum is %{max_size}).'
+              min_size_error: 'File is too small (minimum is %{min_size}).'
         page:
           attributes:
             slug:

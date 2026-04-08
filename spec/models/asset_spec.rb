@@ -27,7 +27,7 @@ RSpec.describe Asset, type: :model do
       asset = described_class.new(asset: upload_fixture('sample.txt', 'application/x-unsupported'))
 
       expect(asset).not_to be_valid
-      expect(asset.errors[:asset]).to include(a_string_matching(/file format/i))
+      expect(asset.errors[:asset]).to include(a_string_matching(/file type/i))
     end
 
     it 'is invalid when a non-video file exceeds the maximum asset size' do
