@@ -51,6 +51,7 @@ class Admin::AssetsController < Admin::ResourceController
     @page_attachments = []
     uploads = Array(asset_params.dig('asset', 'asset')).reject(&:blank?)
 
+
     uploads.each do |uploaded_asset|
       result = process_uploaded_asset(uploaded_asset)
 
@@ -63,13 +64,15 @@ class Admin::AssetsController < Admin::ResourceController
         @assets << @asset
       else
         flash[result.fetch(:flash_type, :error)] = result[:error]
+        @error = result[:error]
       end
     end
 
     if asset_params[:for_attachment]
       render partial: 'admin/page_attachments/attachment', collection: @page_attachments
-    else
-      response_for :create
+    elsif @error.present?
+      flash[:error] = @error
+      redirect_to new_admin_asset_path
     end
   end
 
