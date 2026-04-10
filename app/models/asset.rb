@@ -48,7 +48,6 @@ class Asset < ActiveRecord::Base
   before_save :assign_uuid
 
   def asset_within_configured_size
-    binding.pry
     limit_mb =
       if video_content_type?
         TrustyCms.config['assets.max_video_size'].to_i
