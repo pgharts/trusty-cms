@@ -115,7 +115,7 @@ class Admin::AssetsController < Admin::ResourceController
   end
 
   def failure_response(message, status, flash_type)
-    @errors = { error: message, status: status, flash_type: flash_type }
+    { error: message, status: status, flash_type: flash_type }
   end
 
   def compress(uploaded_asset)
