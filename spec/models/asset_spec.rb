@@ -12,7 +12,9 @@ RSpec.describe Asset, type: :model do
 
   describe 'validations' do
     before do
-      expect(AssetType.known_mimetypes).to include('image/png', 'video/mp4', 'text/plain')
+      AssetType.new :image, icon: 'image', styles: :standard, extensions: %w[jpg jpeg png gif], mime_types: %w[image/png image/x-png image/jpeg image/pjpeg image/jpg image/gif] unless AssetType.known?(:image)
+      AssetType.new :video, icon: 'video', mime_types: %w[video/mp4 video/mpeg video/quicktime video/webm] unless AssetType.known?(:video)
+      AssetType.new :document, icon: 'document', mime_types: %w[application/msword application/rtf text/plain text/html] unless AssetType.known?(:document)
     end
 
     it 'is valid when the content type is approved' do
