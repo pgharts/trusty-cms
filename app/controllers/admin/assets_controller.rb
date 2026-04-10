@@ -64,15 +64,17 @@ class Admin::AssetsController < Admin::ResourceController
         @assets << @asset
       else
         flash[result.fetch(:flash_type, :error)] = result[:error]
-        @error = result[:error]
+        @errors = result[:error]
       end
     end
 
     if asset_params[:for_attachment]
       render partial: 'admin/page_attachments/attachment', collection: @page_attachments
-    elsif @error.present?
-      flash[:error] = @error
+    elsif @errors.present?
+      flash[:error] = @errors
       redirect_to new_admin_asset_path
+    else
+      response_for :create
     end
   end
 
@@ -113,7 +115,7 @@ class Admin::AssetsController < Admin::ResourceController
   end
 
   def failure_response(message, status, flash_type)
-    { error: message, status: status, flash_type: flash_type }
+    @errors = { error: message, status: status, flash_type: flash_type }
   end
 
   def compress(uploaded_asset)

@@ -41,12 +41,26 @@ class Asset < ActiveRecord::Base
 
   has_one_attached :asset
   validates :asset, presence: true
-  validates :asset, blob: { size_range: 1..TrustyCms.config['assets.max_asset_size'].to_i.megabytes }, if: -> { asset.attached? && !video_content_type? }
-  validates :asset, blob: { size_range: 1..TrustyCms.config['assets.max_video_size'].to_i.megabytes }, if: -> { asset.attached? && video_content_type? }
+  validate :asset_within_configured_size, if: -> { asset.attached? }
   validate :approved_content_type, if: -> { asset.attached? }
   before_validation :sync_attachment_metadata
   before_save :assign_title
   before_save :assign_uuid
+
+  def asset_within_configured_size
+    binding.pry
+    limit_mb =
+      if video_content_type?
+        TrustyCms.config['assets.max_video_size'].to_i
+      else
+        TrustyCms.config['assets.max_asset_size'].to_i
+      end
+
+    limit_bytes = limit_mb.megabytes
+    return if asset.blob.byte_size.between?(1, limit_bytes)
+
+    errors.add(:asset, :wrong_size_error, limit_mb: limit_mb)
+  end
 
   def asset_type
     AssetType.for(asset)

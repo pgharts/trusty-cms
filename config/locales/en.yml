@@ -20,6 +20,7 @@ en:
               content_type: '%{filename} is not a supported file type.'
               max_size_error: 'File is too large (maximum is %{max_size}).'
               min_size_error: 'File is too small (minimum is %{min_size}).'
+              wrong_size_error: 'File size must be between 1 byte and %{limit_mb} MB'
         page:
           attributes:
             slug:
@@ -137,6 +138,7 @@ en:
       display_size: 'Display Size'
       insertion_size: 'Insertion Size'
       max_asset_size: 'Max Asset Size'
+      max_video_size: 'Max Video Size'
       path: 'Path'
       s3:
         bucket: 'Bucket'
