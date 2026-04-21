@@ -1,7 +1,6 @@
 class Admin::AssetsController < Admin::ResourceController
   paginate_models(per_page: 50)
   COMPRESS_FILE_TYPE = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'].freeze
-  APPROVED_CONTENT_TYPES = Asset::APPROVED_CONTENT_TYPES
 
   def index
     assets = Asset.order('created_at DESC')
@@ -52,6 +51,7 @@ class Admin::AssetsController < Admin::ResourceController
     @page_attachments = []
     uploads = Array(asset_params.dig('asset', 'asset')).reject(&:blank?)
 
+
     uploads.each do |uploaded_asset|
       result = process_uploaded_asset(uploaded_asset)
 
@@ -64,11 +64,15 @@ class Admin::AssetsController < Admin::ResourceController
         @assets << @asset
       else
         flash[result.fetch(:flash_type, :error)] = result[:error]
+        @errors = result[:error]
       end
     end
 
     if asset_params[:for_attachment]
       render partial: 'admin/page_attachments/attachment', collection: @page_attachments
+    elsif @errors.present?
+      flash[:error] = @errors
+      redirect_to new_admin_asset_path
     else
       response_for :create
     end
@@ -83,7 +87,7 @@ class Admin::AssetsController < Admin::ResourceController
       return failure_response('Please only upload assets that have a valid extension in the name.', :unprocessable_entity, :notice)
     end
 
-    unless APPROVED_CONTENT_TYPES.include?(uploaded_asset.content_type)
+    unless Asset.approved_content_types.include?(uploaded_asset.content_type)
       return failure_response('Unsupported file type.', :unsupported_media_type, :error)
     end
 
