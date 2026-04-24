@@ -26,7 +26,7 @@ jobs:
           bundler-cache: true
 
       - name: Configure RubyGems credentials
-        uses: rubygems/configure-rubygems-credentials@main
+        uses: rubygems/configure-rubygems-credentials@v1.0.0
 
       - name: Build gem
         run: |
