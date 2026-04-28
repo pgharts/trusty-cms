@@ -9,27 +9,36 @@ jobs:
   build:
     name: Build + Publish
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: read
-      packages: write
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby 3.0.5
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Set up Ruby 3.3.4
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0.5'
+          ruby-version: '3.3.4'
+          bundler-cache: true
 
-      - name: Publish to RubyGems
+      - name: Configure RubyGems credentials
+        uses: rubygems/configure-rubygems-credentials@v1.0.0
+
+      - name: Build gem
         run: |
-          mkdir -p $HOME/.gem
-          touch $HOME/.gem/credentials
-          chmod 0600 $HOME/.gem/credentials
-          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-          gem build *.gemspec
-          gem push *.gem
-        env:
-          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+          echo "GEM_FILE=$(ruby -e 'spec = Gem::Specification.load(\"trusty_cms.gemspec\"); print \"#{spec.name}-#{spec.version}.gem\"')" >> "$GITHUB_ENV"
+          gem build trusty_cms.gemspec
+
+      - name: Publish gem
+        run: gem push "$GEM_FILE"
 
       - name: Remove gem build file
-        run: rm *.gem
+        if: always()
+        run: |
+          if [ -n "${GEM_FILE:-}" ]; then
+            rm -f "$GEM_FILE"
+          fi

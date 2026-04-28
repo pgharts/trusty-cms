@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/ruby:3.3.1-node
+      - image: cimg/ruby:3.3.4-node
         environment:
           - RAILS_ENV: test
       - image: cimg/mysql:5.7.36
