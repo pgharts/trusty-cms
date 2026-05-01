@@ -99,7 +99,10 @@ class Asset < ActiveRecord::Base
   end
 
   def render_original(_style_name)
-    asset.attached? && asset.key.include?('culturaldistrict')
+    return false unless asset.attached?
+
+    prefix = TrustyCms::Config['assets.storage.prefix'].presence
+    prefix ? asset.key.start_with?(prefix) : asset.key.include?('/')
   end
 
   def asset_variant(style_name)

@@ -106,11 +106,11 @@ RSpec.describe Asset, type: :model do
       asset = described_class.new(caption: '')
       allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
       allow(asset).to receive(:content_type).and_return('application/pdf')
-      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/culturaldistrict/system/assets/20260501/doc-abc123.pdf')
+      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/doc-abc123.pdf')
       allow(asset).to receive(:rewrite_cloud_url) { |url| url }
 
       expect(asset).not_to receive(:asset_variant)
-      expect(asset.thumbnail('normal')).to eq('https://s3.amazonaws.com/bucket/culturaldistrict/system/assets/20260501/doc-abc123.pdf')
+      expect(asset.thumbnail('normal')).to eq('https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/doc-abc123.pdf')
     end
 
     it 'returns the asset type icon when nothing is attached' do
@@ -124,20 +124,31 @@ RSpec.describe Asset, type: :model do
   end
 
   describe '#render_original' do
-    it 'returns true for any style when the asset key includes culturaldistrict' do
+    it 'returns true for any style when the asset key starts with the configured prefix' do
       asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return('myprefix')
       allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
-      allow(asset).to receive_message_chain(:asset, :key).and_return('culturaldistrict/system/assets/20260501/image-abc123.jpg')
+      allow(asset).to receive_message_chain(:asset, :key).and_return('myprefix/system/assets/20260501/image-abc123.jpg')
 
       expect(asset.render_original('normal')).to be(true)
       expect(asset.render_original('thumbnail')).to be(true)
       expect(asset.render_original('original')).to be(true)
     end
 
-    it 'returns false when the asset key does not include culturaldistrict' do
+    it 'returns true when no prefix is configured but the key contains a path separator' do
       asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return(nil)
       allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
-      allow(asset).to receive_message_chain(:asset, :key).and_return('tsiv1vf6ythpr2waibv99r01d6zq')
+      allow(asset).to receive_message_chain(:asset, :key).and_return('system/assets/20260501/image-abc123.jpg')
+
+      expect(asset.render_original('normal')).to be(true)
+    end
+
+    it 'returns false when the key does not start with the configured prefix' do
+      asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return('myprefix')
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
+      allow(asset).to receive_message_chain(:asset, :key).and_return('randomlegacykey')
 
       expect(asset.render_original('normal')).to be(false)
     end
@@ -151,7 +162,7 @@ RSpec.describe Asset, type: :model do
   end
 
   describe '#public_url' do
-    let(:original_url) { 'https://s3.amazonaws.com/bucket/culturaldistrict/system/assets/20260501/image-abc123.jpg' }
+    let(:original_url) { 'https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/image-abc123.jpg' }
     let(:variant_url)  { 'https://s3.amazonaws.com/bucket/variants/abc/xyz.jpg' }
 
     it 'returns the original url for new-style assets regardless of style' do
@@ -188,10 +199,10 @@ RSpec.describe Asset, type: :model do
       asset = described_class.new
       allow(asset).to receive(:render_original).and_return(false)
       allow(asset).to receive(:asset_variant).and_return(nil)
-      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/tsiv1vf6ythpr2waibv99r01d6zq')
+      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/randomlegacykey')
       allow(asset).to receive(:rewrite_cloud_url) { |url| url }
 
-      expect(asset.public_url('normal')).to eq('https://s3.amazonaws.com/bucket/tsiv1vf6ythpr2waibv99r01d6zq')
+      expect(asset.public_url('normal')).to eq('https://s3.amazonaws.com/bucket/randomlegacykey')
     end
   end
 end
