@@ -155,5 +155,108 @@ RSpec.describe Asset, type: :model do
 
       expect(asset.thumbnail('thumbnail')).to eq('/rails/active_storage/variant/test')
     end
+
+    it 'returns the direct asset url for pdfs without variant processing' do
+      asset = described_class.new(caption: '')
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
+      allow(asset).to receive(:content_type).and_return('application/pdf')
+      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/doc-abc123.pdf')
+      allow(asset).to receive(:rewrite_cloud_url) { |url| url }
+
+      expect(asset).not_to receive(:asset_variant)
+      expect(asset.thumbnail('normal')).to eq('https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/doc-abc123.pdf')
+    end
+
+    it 'returns the asset type icon when nothing is attached' do
+      asset = described_class.new(caption: '')
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(false)
+      allow(asset).to receive(:asset_variant).and_return(nil)
+      allow(asset).to receive_message_chain(:asset_type, :icon).with('normal').and_return('/assets/admin/image_icon.png')
+
+      expect(asset.thumbnail('normal')).to eq('/assets/admin/image_icon.png')
+    end
+  end
+
+  describe '#render_original' do
+    it 'returns true for any style when the asset key starts with the configured prefix' do
+      asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return('myprefix')
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
+      allow(asset).to receive_message_chain(:asset, :key).and_return('myprefix/system/assets/20260501/image-abc123.jpg')
+
+      expect(asset.render_original('normal')).to be(true)
+      expect(asset.render_original('thumbnail')).to be(true)
+      expect(asset.render_original('original')).to be(true)
+    end
+
+    it 'returns true when no prefix is configured but the key contains a path separator' do
+      asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return(nil)
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
+      allow(asset).to receive_message_chain(:asset, :key).and_return('system/assets/20260501/image-abc123.jpg')
+
+      expect(asset.render_original('normal')).to be(true)
+    end
+
+    it 'returns false when the key does not start with the configured prefix' do
+      asset = described_class.new
+      allow(TrustyCms::Config).to receive(:[]).with('assets.storage.prefix').and_return('myprefix')
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(true)
+      allow(asset).to receive_message_chain(:asset, :key).and_return('randomlegacykey')
+
+      expect(asset.render_original('normal')).to be(false)
+    end
+
+    it 'returns false when no asset is attached' do
+      asset = described_class.new
+      allow(asset).to receive_message_chain(:asset, :attached?).and_return(false)
+
+      expect(asset.render_original('normal')).to be(false)
+    end
+  end
+
+  describe '#public_url' do
+    let(:original_url) { 'https://s3.amazonaws.com/bucket/myprefix/system/assets/20260501/image-abc123.jpg' }
+    let(:variant_url)  { 'https://s3.amazonaws.com/bucket/variants/abc/xyz.jpg' }
+
+    it 'returns the original url for new-style assets regardless of style' do
+      asset = described_class.new
+      allow(asset).to receive(:render_original).and_return(true)
+      allow(asset).to receive_message_chain(:asset, :url).and_return(original_url)
+      allow(asset).to receive(:rewrite_cloud_url) { |url| url }
+
+      expect(asset.public_url('normal')).to eq(original_url)
+      expect(asset.public_url('thumbnail')).to eq(original_url)
+    end
+
+    it 'returns the original url when style_name is original' do
+      asset = described_class.new
+      allow(asset).to receive(:render_original).and_return(false)
+      allow(asset).to receive_message_chain(:asset, :url).and_return(original_url)
+      allow(asset).to receive(:rewrite_cloud_url) { |url| url }
+
+      expect(asset.public_url('original')).to eq(original_url)
+    end
+
+    it 'returns a variant url for old-style assets' do
+      asset = described_class.new
+      allow(asset).to receive(:render_original).and_return(false)
+      processed = instance_double(ActiveStorage::Variant, url: variant_url)
+      variant   = instance_double(ActiveStorage::Variant, processed: processed)
+      allow(asset).to receive(:asset_variant).and_return(variant)
+      allow(asset).to receive(:rewrite_cloud_url) { |url| url }
+
+      expect(asset.public_url('normal')).to eq(variant_url)
+    end
+
+    it 'falls back to the asset url when no variant exists for an old-style asset' do
+      asset = described_class.new
+      allow(asset).to receive(:render_original).and_return(false)
+      allow(asset).to receive(:asset_variant).and_return(nil)
+      allow(asset).to receive_message_chain(:asset, :url).and_return('https://s3.amazonaws.com/bucket/randomlegacykey')
+      allow(asset).to receive(:rewrite_cloud_url) { |url| url }
+
+      expect(asset.public_url('normal')).to eq('https://s3.amazonaws.com/bucket/randomlegacykey')
+    end
   end
 end

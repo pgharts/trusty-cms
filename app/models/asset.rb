@@ -87,6 +87,8 @@ class Asset < ActiveRecord::Base
            to: :asset_type
 
   def thumbnail(style_name = 'normal')
+    return rewrite_cloud_url(asset.url) if asset.attached? && content_type == 'application/pdf'
+
     variant = asset_variant(style_name.to_s)
     return rewrite_cloud_url(variant.processed.url) if variant
 
@@ -108,8 +110,11 @@ class Asset < ActiveRecord::Base
     %w[asset_content_type asset_file_name asset_file_size caption created_at created_by_id id original_extension original_height original_width title updated_at updated_by_id uuid]
   end
 
-  def render_original(style_name)
-    style_name.to_s == 'original' && asset.attached? && asset.key.include?('culturaldistrict')
+  def render_original(_style_name)
+    return false unless asset.attached?
+
+    prefix = TrustyCms::Config['assets.storage.prefix'].presence
+    prefix ? asset.key.start_with?(prefix) : asset.key.include?('/')
   end
 
   def asset_variant(style_name)
