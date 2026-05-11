@@ -1,8 +1,6 @@
 require 'trusty_cms/geometry'
 
 class Asset < ActiveRecord::Base
-  APPROVED_CONTENT_TYPES = %w[application/zip image/jpg image/jpeg image/png image/gif application/pdf text/css text/calendar].freeze
-
   has_many :page_attachments, dependent: :destroy
   has_many :pages, through: :page_attachments
   has_site if respond_to? :has_site
@@ -37,17 +35,31 @@ class Asset < ActiveRecord::Base
     end
   }
 
+  def self.approved_content_types
+    AssetType.known_mimetypes
+  end
+
   has_one_attached :asset
-  validates :asset,
-            presence: true,
-            blob:
-              {
-                content_type: APPROVED_CONTENT_TYPES,
-                size_range: 1..10.megabytes,
-              }
+  validates :asset, presence: true
+  validate :asset_within_configured_size, if: -> { asset.attached? }
+  validate :approved_content_type, if: -> { asset.attached? }
   before_validation :sync_attachment_metadata
   before_save :assign_title
   before_save :assign_uuid
+
+  def asset_within_configured_size
+    limit_mb =
+      if video_content_type?
+        TrustyCms.config['assets.max_video_size'].to_i
+      else
+        TrustyCms.config['assets.max_asset_size'].to_i
+      end
+
+    limit_bytes = limit_mb.megabytes
+    return if asset.blob.byte_size.between?(1, limit_bytes)
+
+    errors.add(:asset, :wrong_size_error, limit_mb: limit_mb)
+  end
 
   def asset_type
     AssetType.for(asset)
@@ -75,6 +87,8 @@ class Asset < ActiveRecord::Base
            to: :asset_type
 
   def thumbnail(style_name = 'normal')
+    return rewrite_cloud_url(asset.url) if asset.attached? && content_type == 'application/pdf'
+
     variant = asset_variant(style_name.to_s)
     return rewrite_cloud_url(variant.processed.url) if variant
 
@@ -96,8 +110,11 @@ class Asset < ActiveRecord::Base
     %w[asset_content_type asset_file_name asset_file_size caption created_at created_by_id id original_extension original_height original_width title updated_at updated_by_id uuid]
   end
 
-  def render_original(style_name)
-    style_name.to_s == 'original' && asset.attached? && asset.key.include?('culturaldistrict')
+  def render_original(_style_name)
+    return false unless asset.attached?
+
+    prefix = TrustyCms::Config['assets.storage.prefix'].presence
+    prefix ? asset.key.start_with?(prefix) : asset.key.include?('/')
   end
 
   def asset_variant(style_name)
@@ -233,6 +250,16 @@ class Asset < ActiveRecord::Base
     else
       { resize_to_limit: [width, height].compact }
     end
+  end
+
+  def video_content_type?
+    AssetType.known?(:video) && AssetType.find(:video).mime_types.include?(content_type)
+  end
+
+  def approved_content_type
+    return if Asset.approved_content_types.include?(asset.content_type)
+
+    errors.add(:asset, :content_type, filename: asset.filename.to_s)
   end
 
   def sync_attachment_metadata
