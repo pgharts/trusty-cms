@@ -18,7 +18,7 @@
     "jquery-ui": "^1.13.2",
     "jquery-ujs": "^1.2.2",
     "jquery-validation": "^1.20.0",
-    "js-cookie": "^3.0.1",
+    "js-cookie": "^3.0.7",
     "tablesaw": "^3.1.2"
   },
   "devDependencies": {
