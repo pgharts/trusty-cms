@@ -6,7 +6,6 @@ export default class AssetTagBuilder extends Plugin {
       }
 
     init() {
-        console.log( 'AssetTagBuilder plugin initialized' );
         // Plugin logic goes here
         this._defineSchema();
         this._defineConverters();

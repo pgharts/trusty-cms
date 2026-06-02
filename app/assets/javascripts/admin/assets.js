@@ -96,14 +96,7 @@ Assets = {
     },
 
     insertAtCursor: function (part_id, insertion) {
-        if (CKEDITOR.instances[part_id].mode == 'wysiwyg') {
-            CKEDITOR.instances[part_id].insertText(insertion);
-        } else {
-            var textbox = $("textarea.cke_source[title~=" + part_id + "]");
-            var caretPos = textbox[0].selectionStart;
-            var textAreaTxt = textbox.val();
-            textbox.val(textAreaTxt.substring(0, caretPos) + insertion + textAreaTxt.substring(caretPos));
-        }
+        window.insertAtCursor(part_id, insertion);
     },
     filterAssets: function () {
         var url = $("#filesearchform").attr('action');

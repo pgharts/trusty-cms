@@ -2452,8 +2452,8 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       documentationMessage
     ];
   }
-  var version = "47.6.0";
-  var releaseDate = new Date(2026, 2, 4);
+  var version = "47.6.1";
+  var releaseDate = new Date(2026, 2, 11);
   if (globalThis.CKEDITOR_VERSION) {
     throw new CKEditorError("ckeditor-duplicated-modules", null);
   } else {
@@ -30199,7 +30199,11 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
         });
       } else {
         if (op.newRange) {
-          markerOps.get(op.name).ranges.push(op.newRange);
+          const partialRanges = markerOps.get(op.name).ranges;
+          const refRange = partialRanges[0];
+          if (!refRange.containsRange(op.newRange, true)) {
+            partialRanges.push(op.newRange);
+          }
         }
         operations2.splice(i, 1);
         i--;
@@ -62927,7 +62931,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       if (probe.isEqual(originalSelection)) {
         return;
       }
-      if (probe.focus.isTouching(originalSelection.focus)) {
+      if (probe.focus.isTouching(originalSelection.focus) && schema.checkChild(probe.focus.parent, "$text") && (isForward ? !probe.focus.isAtEnd : !probe.focus.isAtStart)) {
         model.modifySelection(probe, {
           direction: isForward ? "forward" : "backward"
         });
@@ -106277,7 +106281,6 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       return [Widget];
     }
     init() {
-      console.log("AssetTagBuilder plugin initialized");
       this._defineSchema();
       this._defineConverters();
       this._defineDataNormalization();
@@ -106412,6 +106415,130 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     }
   };
 
+  // app/javascript/plugins/asset_tags/asset_link_tag_builder.js
+  var AssetLinkTagBuilder = class extends Plugin {
+    static get requires() {
+      return [Widget];
+    }
+    init() {
+      this._defineSchema();
+      this._defineConverters();
+      this._defineDataNormalization();
+    }
+    _defineSchema() {
+      const schema = this.editor.model.schema;
+      schema.register("assetLink", {
+        allowWhere: "$text",
+        isInline: true,
+        isObject: true,
+        allowAttributes: ["id", "size", "text", "anchor", "class"]
+      });
+    }
+    _defineConverters() {
+      const conversion = this.editor.conversion;
+      const upcast = conversion.for("upcast");
+      const dataDowncast = conversion.for("dataDowncast");
+      const editingDowncast = conversion.for("editingDowncast");
+      upcast.elementToElement({
+        view: {
+          name: "r:asset:link"
+        },
+        model: (viewElement, { writer }) => {
+          const attrs = {};
+          const id = viewElement.getAttribute("id");
+          const size = viewElement.getAttribute("size");
+          const text2 = viewElement.getAttribute("text");
+          const anchor = viewElement.getAttribute("anchor");
+          const klass = viewElement.getAttribute("class");
+          if (id) attrs.id = id;
+          if (size) attrs.size = size;
+          if (text2) attrs.text = text2;
+          if (anchor) attrs.anchor = anchor;
+          if (klass) attrs.class = klass;
+          return writer.createElement("assetLink", attrs);
+        }
+      });
+      dataDowncast.elementToElement({
+        model: "assetLink",
+        view: (modelElement, { writer }) => {
+          const attrs = {};
+          const id = modelElement.getAttribute("id");
+          const size = modelElement.getAttribute("size");
+          const text2 = modelElement.getAttribute("text");
+          const anchor = modelElement.getAttribute("anchor");
+          const klass = modelElement.getAttribute("class");
+          if (id) attrs.id = id;
+          if (size) attrs.size = size;
+          if (text2) attrs.text = text2;
+          if (anchor) attrs.anchor = anchor;
+          if (klass) attrs.class = klass;
+          return writer.createContainerElement("r:asset:link", attrs);
+        }
+      });
+      editingDowncast.elementToElement({
+        model: "assetLink",
+        view: (modelElement, { writer }) => {
+          const id = modelElement.getAttribute("id");
+          const size = modelElement.getAttribute("size");
+          const text2 = modelElement.getAttribute("text");
+          const container = writer.createContainerElement("span", {
+            class: "asset-link-tag",
+            "data-asset-id": id,
+            "data-asset-size": size
+          });
+          const label = writer.createUIElement(
+            "span",
+            { class: "asset-link-tag__label" },
+            function(domDocument) {
+              const domEl = this.toDomElement(domDocument);
+              const parts = [
+                "Asset link",
+                id ? `#${id}` : "",
+                size ? `(${size})` : "",
+                text2 ? `\u2014 ${text2}` : ""
+              ].filter(Boolean);
+              domEl.textContent = parts.join(" ");
+              return domEl;
+            }
+          );
+          writer.insert(writer.createPositionAt(container, 0), label);
+          return toWidget(container, writer, { label: `Asset link ${id ? `#${id}` : ""}` });
+        }
+      });
+    }
+    _defineDataNormalization() {
+      const editor = this.editor;
+      const processor = editor.data.processor;
+      const originalToView = processor.toView.bind(processor);
+      const originalToData = processor.toData.bind(processor);
+      processor.toView = (data) => {
+        let normalized = data;
+        normalized = normalized.replace(
+          /<r:asset:link\b([^>]*?)\/>/gi,
+          "<r:asset:link$1></r:asset:link>"
+        );
+        normalized = normalized.replace(
+          /<r:asset:link\b([^>]*?)>(?!\s*<\/r:asset:link>)/gi,
+          "<r:asset:link$1></r:asset:link>"
+        );
+        return originalToView(normalized);
+      };
+      processor.toData = (viewFragment) => {
+        const html2 = originalToData(viewFragment);
+        return html2.replace(
+          /<r:asset:link\b([^>]*?)>([\s\S]*?)<\/r:asset:link>/gi,
+          (match, attrs, inner) => {
+            const cleanedInner = inner.replace(
+              /^(?:\s|&nbsp;|&#160;)+|(?:\s|&nbsp;|&#160;)+$/g,
+              ""
+            );
+            return `<r:asset:link${attrs} />${cleanedInner}`;
+          }
+        );
+      };
+    }
+  };
+
   // app/javascript/trusty_cms/ckeditor5.js
   var defaultStyleDefinitions = [
     {
@@ -106506,6 +106633,7 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
     plugins: [
       Alignment,
       AssetTagBuilder,
+      AssetLinkTagBuilder,
       Autoformat,
       AutoImage,
       AutoLink,
@@ -106689,11 +106817,47 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       }
     }
   };
+  var editorInstances = {};
+  window.insertAtCursor = function(part_id, insertion) {
+    const editor = editorInstances[part_id];
+    if (!editor) return;
+    const sourceEditing = editor.plugins.get("SourceEditing");
+    if (sourceEditing && sourceEditing.isSourceEditingMode) {
+      const textbox = editor.ui.view.element.querySelector("textarea");
+      if (textbox) {
+        const caretPos = textbox.selectionStart;
+        const textAreaTxt = textbox.value;
+        textbox.value = textAreaTxt.substring(0, caretPos) + insertion + textAreaTxt.substring(caretPos);
+        textbox.dispatchEvent(new Event("input"));
+      }
+    } else {
+      const linkMatch = insertion.match(/<r:asset:link\b([^>]*?)\/>/i);
+      const imageMatch = insertion.match(/<r:asset:image\b([^>]*?)\/>/i);
+      if (linkMatch || imageMatch) {
+        const attrString = (linkMatch || imageMatch)[1];
+        const attrs = {};
+        let m;
+        const attrRe = /(\w+)="([^"]*)"/g;
+        while ((m = attrRe.exec(attrString)) !== null) {
+          attrs[m[1]] = m[2];
+        }
+        editor.model.change(function(writer) {
+          const element = writer.createElement(linkMatch ? "assetLink" : "assetImage", attrs);
+          editor.model.insertObject(element, null, null, { setSelection: "after" });
+        });
+      } else {
+        editor.model.change(function(writer) {
+          writer.insertText(insertion, editor.model.document.selection.getFirstPosition());
+        });
+      }
+    }
+  };
   var editorElements = document.querySelectorAll('[id^="editor_"]');
   editorElements.forEach((editorElement) => {
     ClassicEditor.create(editorElement, editorConfig).then((editor) => {
       const pagePart = editorElement.getAttribute("data-part");
       const hiddenInput = document.querySelector(`#part_${pagePart}_content`);
+      editorInstances[`part_${pagePart}_content`] = editor;
       if (!hiddenInput) {
         return;
       }
