@@ -106390,6 +106390,14 @@ Original error: ${originalError.name}: ${originalError.message}` : "";
       processor.toView = (data) => {
         let normalized = data;
         normalized = normalized.replace(
+          /<r:assets:image\b([^>]*?)>([\s\S]*?)<\/r:assets:image>/gi,
+          "<r:asset:image$1 />"
+        );
+        normalized = normalized.replace(
+          /<r:assets:image\b([^>]*?)\/>/gi,
+          "<r:asset:image$1 />"
+        );
+        normalized = normalized.replace(
           /<r:asset:image\b([^>]*?)\/>/gi,
           "<r:asset:image$1></r:asset:image>"
         );

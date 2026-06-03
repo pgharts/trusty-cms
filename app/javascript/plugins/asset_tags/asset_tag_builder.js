@@ -139,6 +139,18 @@ export default class AssetTagBuilder extends Plugin {
        processor.toView = (data) => {
             let normalized = data;
 
+            // 0) Correct deprecated r:assets:image -> r:asset:image
+            // With inner content: strip the inner content, just keep the image attrs
+            normalized = normalized.replace(
+                /<r:assets:image\b([^>]*?)>([\s\S]*?)<\/r:assets:image>/gi,
+                '<r:asset:image$1 />'
+            );
+            // Self-closing variant
+            normalized = normalized.replace(
+                /<r:assets:image\b([^>]*?)\/>/gi,
+                '<r:asset:image$1 />'
+            );
+
             // 1) Self-closing -> paired
             normalized = normalized.replace(
                 /<r:asset:image\b([^>]*?)\/>/gi,
