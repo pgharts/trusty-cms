@@ -86,12 +86,17 @@ class Asset < ActiveRecord::Base
   delegate :active_storage_styles, :style_dimensions, :style_format,
            to: :asset_type
 
+  def pdf?
+    content_type == 'application/pdf'
+  end
+
   def thumbnail(style_name = 'normal')
-    return rewrite_cloud_url(asset.url) if asset.attached? && content_type == 'application/pdf'
+    if asset.attached? && pdf?
+      return style_name.to_s == 'thumbnail' ? asset_type.icon('thumbnail') : rewrite_cloud_url(asset.url)
+    end
 
     variant = asset_variant(style_name.to_s)
     return rewrite_cloud_url(variant.processed.url) if variant
-
     asset_type.icon(style_name.to_s)
   end
 
