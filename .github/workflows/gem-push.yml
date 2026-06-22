@@ -15,7 +15,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -25,7 +25,7 @@ jobs:
           ruby-version: '3.3.4'
 
       - name: Configure RubyGems credentials
-        uses: rubygems/configure-rubygems-credentials@v1.0.0
+        uses: rubygems/configure-rubygems-credentials@v2.1.0
 
       - name: Build gem
         run: |
