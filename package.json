@@ -12,13 +12,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "blueimp-file-upload": "^10.32.0",
-    "ckeditor5": "47.6.0",
+    "ckeditor5": "48.1.0",
     "jquery": "^3.6.1",
     "jquery-treetable": "^3.2.0-1",
     "jquery-ui": "^1.13.2",
     "jquery-ujs": "^1.2.2",
     "jquery-validation": "^1.20.0",
-    "js-cookie": "^3.0.1",
+    "js-cookie": "^3.0.7",
     "tablesaw": "^3.1.2"
   },
   "devDependencies": {

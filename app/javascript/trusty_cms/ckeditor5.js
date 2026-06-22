@@ -46,7 +46,8 @@ const defaultStyleDefinitions = [
             }
         ]
 
-import AssetTagBuilder from '../plugins/asset_tags/asset_tag_builder';        
+import AssetTagBuilder from '../plugins/asset_tags/asset_tag_builder';
+import AssetLinkTagBuilder from '../plugins/asset_tags/asset_link_tag_builder';
 
 import {
     ClassicEditor,
@@ -167,6 +168,7 @@ const editorConfig = {
     plugins: [
         Alignment,
         AssetTagBuilder,
+        AssetLinkTagBuilder,
         Autoformat,
         AutoImage,
         AutoLink,
@@ -356,6 +358,46 @@ const editorConfig = {
     }
 };
 
+const editorInstances = {};
+
+window.insertAtCursor = function (part_id, insertion) {
+    const editor = editorInstances[part_id];
+    if (!editor) return;
+
+    const sourceEditing = editor.plugins.get('SourceEditing');
+    if (sourceEditing && sourceEditing.isSourceEditingMode) {
+        const textbox = editor.ui.view.element.querySelector('textarea');
+        if (textbox) {
+            const caretPos = textbox.selectionStart;
+            const textAreaTxt = textbox.value;
+            textbox.value = textAreaTxt.substring(0, caretPos) + insertion + textAreaTxt.substring(caretPos);
+            textbox.dispatchEvent(new Event('input'));
+        }
+    } else {
+        const linkMatch = insertion.match(/<r:asset:link\b([^>]*?)\/>/i);
+        const imageMatch = insertion.match(/<r:asset:image\b([^>]*?)\/>/i);
+
+        if (linkMatch || imageMatch) {
+            const attrString = (linkMatch || imageMatch)[1];
+            const attrs = {};
+            let m;
+            const attrRe = /(\w+)="([^"]*)"/g;
+            while ((m = attrRe.exec(attrString)) !== null) {
+                attrs[m[1]] = m[2];
+            }
+
+            editor.model.change(function (writer) {
+                const element = writer.createElement(linkMatch ? 'assetLink' : 'assetImage', attrs);
+                editor.model.insertObject(element, null, null, { setSelection: 'after' });
+            });
+        } else {
+            editor.model.change(function (writer) {
+                writer.insertText(insertion, editor.model.document.selection.getFirstPosition());
+            });
+        }
+    }
+};
+
 const editorElements = document.querySelectorAll('[id^="editor_"]');
 
 editorElements.forEach((editorElement) => {
@@ -364,6 +406,7 @@ editorElements.forEach((editorElement) => {
         .then(editor => {
             const pagePart = editorElement.getAttribute('data-part');
             const hiddenInput = document.querySelector(`#part_${pagePart}_content`);
+            editorInstances[`part_${pagePart}_content`] = editor;
 
             if (!hiddenInput) {
                 return;
