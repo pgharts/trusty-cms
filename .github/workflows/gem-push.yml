@@ -29,8 +29,8 @@ jobs:
 
       - name: Build gem
         run: |
-          echo "GEM_FILE=$(ruby -e 'spec = Gem::Specification.load(\"trusty_cms.gemspec\"); print \"#{spec.name}-#{spec.version}.gem\"')" >> "$GITHUB_ENV"
           gem build trusty_cms.gemspec
+          echo "GEM_FILE=$(ls trusty-cms-*.gem)" >> "$GITHUB_ENV"
 
       - name: Publish gem
         run: gem push "$GEM_FILE"
