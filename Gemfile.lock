@@ -32,7 +32,7 @@ PATH
       rails (~> 7.2.2.1)
       rake (< 14.0)
       ransack (~> 4.2.1)
-      rdoc (>= 5.1, < 7.0)
+      rdoc (>= 5.1, < 9.0)
       roadie-rails
       rqrcode
       sass-rails
@@ -375,9 +375,14 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rdoc (6.17.0)
+    rbs (4.0.3)
+      logger
+      prism (>= 1.6.0)
+      tsort
+    rdoc (8.0.0)
       erb
-      psych (>= 4.0.0)
+      prism (>= 1.6.0)
+      rbs (>= 4.0.0)
       tsort
     regexp_parser (2.9.2)
     reline (0.6.3)
