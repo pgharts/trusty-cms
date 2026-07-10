@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
-# Coverage setup
+# Coverage setup — MUST run before any application code is loaded,
+# otherwise Ruby's Coverage library never sees files loaded at boot.
 require 'simplecov'
 require 'simplecov-lcov'
 
@@ -11,8 +11,14 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   config.lcov_file_name = 'lcov.info'
 end
 
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::LcovFormatter,
+  SimpleCov::Formatter::HTMLFormatter
+])
 SimpleCov.start('rails')
+
+# Now load the application — everything required below is tracked.
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 # Test framework setup
 require 'rspec/rails'
