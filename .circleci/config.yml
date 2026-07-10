@@ -71,6 +71,7 @@ jobs:
             bundle exec rspec --profile 10 \
               --format progress \
               --format RspecJunitFormatter --out /tmp/test-results/rspec.xml \
+              --format html --out /tmp/test-results/rspec.html \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
           when: always
 
