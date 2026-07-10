@@ -68,7 +68,10 @@ jobs:
       - run:
           name: Run tests with coverage
           command: |
-            bundle exec rspec --format progress -o /tmp/test-results/rspec.xml --profile 10 $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            bundle exec rspec --profile 10 \
+              --format progress \
+              --format RspecJunitFormatter --out /tmp/test-results/rspec.xml \
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
           when: always
 
       - store_test_results:
