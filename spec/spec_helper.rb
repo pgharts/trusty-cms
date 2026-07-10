@@ -11,6 +11,12 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
   config.lcov_file_name = 'lcov.info'
 end
 
+SimpleCov.configure do
+  add_filter %r{^/lib/generators/}
+  add_filter 'lib/trusty_cms/setup.rb'
+  add_filter %r{/templates/}   # generated-app boilerplate
+end
+
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::LcovFormatter,
   SimpleCov::Formatter::HTMLFormatter
