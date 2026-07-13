@@ -25,7 +25,7 @@ group :development, :test do
   gem 'paper_trail-association_tracking', '~> 2.2.1'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
-  gem 'psych', '5.2.2'
+  gem 'psych', '5.4.0'
   gem 'rails-observers'
   gem 'ransack'
   gem 'rspec_junit_formatter'
