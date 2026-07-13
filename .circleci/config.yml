@@ -82,8 +82,8 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
-      - qlty/coverage_publish:
-          files: coverage/lcov.info
+      - qlty-orb/coverage_publish:
+          files: coverage/coverage.json
 
 workflows:
   ci:
