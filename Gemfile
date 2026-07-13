@@ -22,7 +22,7 @@ group :development, :test do
   gem 'launchy', '~> 3.0.1'
   gem 'mysql2'
   gem 'paper_trail', '~> 16.0.0'
-  gem 'paper_trail-association_tracking', '~> 2.2.1'
+  gem 'paper_trail-association_tracking', '~> 2.3.0'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
   gem 'psych', '5.4.0'
