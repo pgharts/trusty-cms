@@ -16,7 +16,7 @@ group :development, :test do
   gem 'acts_as_list'
   gem 'database_cleaner'
   gem 'devise-two-factor'
-  gem 'factory_bot_rails', '6.4.4'
+  gem 'factory_bot_rails', '6.5.1'
   gem 'file_validators'
   gem 'jsbundling-rails', '~> 1.3'
   gem 'launchy', '~> 3.0.1'
