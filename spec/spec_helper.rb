@@ -4,6 +4,7 @@ ENV['RAILS_ENV'] ||= 'test'
 # otherwise Ruby's Coverage library never sees files loaded at boot.
 require 'simplecov'
 require 'simplecov-lcov'
+require 'simplecov_json_formatter'
 
 SimpleCov::Formatter::LcovFormatter.config do |config|
   config.report_with_single_file = true
@@ -18,6 +19,7 @@ SimpleCov.configure do
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::JSONFormatter,   # coverage/coverage.json — consumed by qlty
   SimpleCov::Formatter::LcovFormatter,
   SimpleCov::Formatter::HTMLFormatter
 ])
