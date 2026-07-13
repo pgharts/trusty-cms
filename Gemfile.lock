@@ -415,6 +415,8 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.4)
+    rspec_junit_formatter (0.6.0)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
@@ -499,6 +501,7 @@ DEPENDENCIES
   rails-observers
   ransack
   rspec-rails (~> 7.1.1)
+  rspec_junit_formatter
   simplecov
   simplecov-lcov
   trusty-cms!
