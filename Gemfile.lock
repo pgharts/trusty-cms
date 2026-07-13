@@ -24,7 +24,7 @@ PATH
       mutex_m
       mysql2
       paper_trail (~> 16.0.0)
-      paper_trail-association_tracking (~> 2.2.1)
+      paper_trail-association_tracking (>= 2.2.1, < 2.4.0)
       psych (= 5.4.0)
       rack (>= 2.0.1, < 3.2.0)
       rack-cache (~> 1.7)
@@ -216,7 +216,7 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.8)
+    i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
       mini_magick (>= 4.9.5, < 5)
@@ -307,7 +307,7 @@ GEM
     paper_trail (16.0.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
-    paper_trail-association_tracking (2.2.1)
+    paper_trail-association_tracking (2.3.0)
       paper_trail (>= 12.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -494,7 +494,7 @@ DEPENDENCIES
   launchy (~> 3.0.1)
   mysql2
   paper_trail (~> 16.0.0)
-  paper_trail-association_tracking (~> 2.2.1)
+  paper_trail-association_tracking (~> 2.3.0)
   poltergeist (~> 1.18.1)
   pry-byebug
   psych (= 5.4.0)
