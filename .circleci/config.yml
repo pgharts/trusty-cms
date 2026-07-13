@@ -82,7 +82,7 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
-      - qlty-orb/coverage_publish:
+      - qlty/coverage_publish:
           files: coverage/coverage.json
 
 workflows:
