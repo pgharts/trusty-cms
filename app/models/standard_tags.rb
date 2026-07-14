@@ -52,8 +52,7 @@ module StandardTags
   }
   tag 'children:count' do |tag|
     options = children_find_options(tag)
-    options.delete(:order) # Order is irrelevant
-    tag.locals.children.count(options)
+    tag.locals.children.where(options[:conditions]).count
   end
 
   desc %{
@@ -66,7 +65,7 @@ module StandardTags
   }
   tag 'children:first' do |tag|
     options = children_find_options(tag)
-    children = tag.locals.children.where(options)
+    children = tag.locals.children.where(options[:conditions]).order(options[:order])
     if first = children.first
       tag.locals.page = first
       tag.expand
@@ -83,7 +82,7 @@ module StandardTags
   }
   tag 'children:last' do |tag|
     options = children_find_options(tag)
-    children = tag.locals.children.where(options)
+    children = tag.locals.children.where(options[:conditions]).order(options[:order])
     if last = children.last
       tag.locals.page = last
       tag.expand
@@ -942,7 +941,14 @@ module StandardTags
     paging = pagination_find_options(tag)
     result = []
     tag.locals.previous_headers = {}
-    displayed_children = paging ? findable.paginate(options.merge(paging)) : findable.all.where(options[:conditions]).order(options[:order])
+    scoped = findable.where(options[:conditions]).order(options[:order])
+    if paging
+      displayed_children = scoped.paginate(paging)
+    else
+      scoped = scoped.limit(options[:limit]) if options[:limit]
+      scoped = scoped.offset(options[:offset]) if options[:offset]
+      displayed_children = scoped
+    end
     displayed_children.each_with_index do |item, i|
       tag.locals.child = item
       tag.locals.page = item
@@ -989,13 +995,13 @@ module StandardTags
 
     status = attr[:status]
     if status == 'all'
-      options[:conditions] = ['virtual = ?', false]
+      options[:conditions] = ['`virtual` = ?', false]
     else
       stat = Status[status]
       if stat.nil?
         raise TagError.new(%{`status' attribute of `each' tag must be set to a valid status})
       else
-        options[:conditions] = ['(virtual = ?) and (status_id = ?)', false, stat.id]
+        options[:conditions] = ['(`virtual` = ?) and (status_id = ?)', false, stat.id]
       end
     end
     options
