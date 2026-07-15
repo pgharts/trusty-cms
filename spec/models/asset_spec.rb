@@ -439,11 +439,38 @@ RSpec.describe Asset, type: :model do
       expect(described_class.thumbnail_names).to eq(described_class.thumbnail_sizes.keys)
     end
 
-    # NOTE: .thumbnail_options is currently broken for the standard hash-style
-    # styles — it does `description << v` where v is the style Hash, which
-    # raises TypeError. Documenting the bug here rather than asserting success.
-    it 'raises when building thumbnail options from hash-style styles (known bug)' do
-      expect { described_class.thumbnail_options }.to raise_error(TypeError)
+    it 'builds thumbnail options with an Original entry first' do
+      expect(described_class.thumbnail_options.first).to eq(['Original (as uploaded)', 'original'])
+    end
+
+    it 'describes each hash-style thumbnail as "id: geometry as format"' do
+      options = described_class.thumbnail_options
+
+      expect(options).to include(['icon: 50x50# as png', :icon])
+      # Every option is a [description, id] pair with a string description.
+      expect(options).to all(satisfy { |desc, _id| desc.is_a?(String) })
+    end
+  end
+
+  describe '.describe_style' do
+    it 'renders a hash style as geometry and format' do
+      expect(described_class.describe_style(geometry: '100x100#', format: :png)).to eq('100x100# as png')
+    end
+
+    it 'omits a missing format' do
+      expect(described_class.describe_style(geometry: '640x640>')).to eq('640x640>')
+    end
+
+    it 'renders an empty hash as a blank string' do
+      expect(described_class.describe_style({})).to eq('')
+    end
+
+    it 'joins an array style with " as "' do
+      expect(described_class.describe_style(['100x100', 'png'])).to eq('100x100 as png')
+    end
+
+    it 'stringifies a plain style' do
+      expect(described_class.describe_style('100x100#')).to eq('100x100#')
     end
   end
 end
