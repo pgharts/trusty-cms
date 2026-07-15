@@ -4,7 +4,14 @@ describe UserActionObserver do
   let(:observer) { UserActionObserver.instance }
   let(:user) { User.new }
 
-  after { Thread.current[:current_user] = nil }
+  # Restore the original thread-local rather than clobbering it with nil, so
+  # the spec stays isolated and order-independent.
+  around do |example|
+    original = Thread.current[:current_user]
+    example.run
+  ensure
+    Thread.current[:current_user] = original
+  end
 
   describe 'current_user' do
     it 'stores the current user on the class in thread-local storage' do

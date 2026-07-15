@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe SnippetTags do
-  # In production the snippets extension mixes SnippetTags into Page. Mirror
-  # that here so the snippet/yield tags are available through Page#parse.
-  before(:all) { Page.include(SnippetTags) unless Page.include?(SnippetTags) }
-
-  let(:page) { Page.new(title: 'Host') }
+  # In production the snippets extension mixes SnippetTags in. Extend a single
+  # page instance (as MenuRenderer is used) so the snippet/yield tags are
+  # available through Page#parse without mutating the global Page class.
+  let(:page) { Page.new(title: 'Host').tap { |p| p.extend(SnippetTags) } }
 
   def render(input)
     page.send(:parse, input)
