@@ -1,49 +1,55 @@
 require 'spec_helper'
 
 describe TrustyCms::Config do
-  # The config table is excluded from DatabaseCleaner truncation, so these
-  # examples only exercise unsaved instances to avoid leaking rows.
+  # The custom #value= setter calls save!, and the config table is exempt from
+  # DatabaseCleaner truncation, so a saved row would leak across examples and
+  # collide on the unique key index. Build unsaved instances and assign the raw
+  # attribute with self[:value]= (write_attribute) to bypass the setter.
+  def config(key, value = nil)
+    TrustyCms::Config.new(key: key).tap do |c|
+      c[:value] = value unless value.nil?
+    end
+  end
 
   describe '#boolean?' do
     it 'is true when the key ends with a question mark' do
-      expect(TrustyCms::Config.new(key: 'feature.enabled?').boolean?).to be(true)
+      expect(config('feature.enabled?').boolean?).to be(true)
     end
 
     it 'is false for an ordinary key with no definition' do
-      expect(TrustyCms::Config.new(key: 'feature.name').boolean?).to be(false)
+      expect(config('feature.name').boolean?).to be(false)
     end
   end
 
   describe '#checked?' do
     it 'is true for a boolean setting whose value is "true"' do
-      expect(TrustyCms::Config.new(key: 'x?', value: 'true').checked?).to be(true)
+      expect(config('x?', 'true').checked?).to be(true)
     end
 
     it 'is false for a boolean setting whose value is not "true"' do
-      expect(TrustyCms::Config.new(key: 'x?', value: 'false').checked?).to be(false)
+      expect(config('x?', 'false').checked?).to be(false)
     end
   end
 
   describe '#value' do
     it 'returns a boolean for a boolean setting' do
-      expect(TrustyCms::Config.new(key: 'x?', value: 'true').value).to be(true)
+      expect(config('x?', 'true').value).to be(true)
     end
 
     it 'returns the raw string for a non-boolean setting' do
-      expect(TrustyCms::Config.new(key: 'plain', value: 'hello').value).to eq('hello')
+      expect(config('plain', 'hello').value).to eq('hello')
     end
   end
 
   describe '#selector?' do
     it 'is false when the definition does not restrict the value' do
-      expect(TrustyCms::Config.new(key: 'plain').selector?).to be(false)
+      expect(config('plain').selector?).to be(false)
     end
   end
 
   describe '#definition' do
     it 'returns a Definition even when none was declared' do
-      expect(TrustyCms::Config.new(key: 'undeclared').definition)
-        .to be_a(TrustyCms::Config::Definition)
+      expect(config('undeclared').definition).to be_a(TrustyCms::Config::Definition)
     end
   end
 
