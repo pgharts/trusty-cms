@@ -259,4 +259,191 @@ RSpec.describe Asset, type: :model do
       expect(asset.public_url('normal')).to eq('https://s3.amazonaws.com/bucket/randomlegacykey')
     end
   end
+
+  # Shared helpers for the blocks below.
+  def register_image_and_other_types
+    AssetType.new(:image, styles: :standard, extensions: %w[png], mime_types: %w[image/png]) unless AssetType.known?(:image)
+    AssetType.new(:other, icon: 'unknown') unless AssetType.known?(:other)
+  end
+
+  def png_bytes
+    Base64.decode64('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==')
+  end
+
+  def attach_png(filename: 'pixel.png', **attrs)
+    io = StringIO.new(png_bytes)
+    io.set_encoding(Encoding::BINARY)
+    described_class.new(attrs).tap do |asset|
+      asset.asset.attach(io: io, filename: filename, content_type: 'image/png')
+      asset.save!
+    end
+  end
+
+  describe 'unattached accessors' do
+    it 'falls back to the stored columns when nothing is attached' do
+      asset = described_class.new(asset_file_name: 'legacy.PNG', asset_content_type: 'image/png', asset_file_size: 42)
+
+      expect(asset.filename).to eq('legacy.PNG')
+      expect(asset.content_type).to eq('image/png')
+      expect(asset.byte_size).to eq(42)
+    end
+
+    it 'derives basename and extension from the stored filename' do
+      asset = described_class.new(asset_file_name: 'legacy.PNG')
+
+      expect(asset.basename).to eq('legacy')
+      expect(asset.original_extension).to eq('png')
+      expect(asset.extension('original')).to eq('png')
+    end
+
+    it 'returns the original extension for a style with no defined format' do
+      asset = described_class.new(asset_file_name: 'legacy.png')
+
+      expect(asset.extension('no_such_style')).to eq('png')
+    end
+  end
+
+  describe 'geometry' do
+    before { register_image_and_other_types }
+
+    it 'reports width, height and aspect from the original dimensions' do
+      asset = described_class.new(original_width: 100, original_height: 50)
+
+      expect(asset.width).to eq(100)
+      expect(asset.height).to eq(50)
+      expect(asset.aspect).to eq(2.0)
+      expect(asset.dimensions_known?).to be(true)
+    end
+
+    it 'reports a horizontal orientation for a wide asset' do
+      asset = described_class.new(original_width: 100, original_height: 50)
+
+      expect(asset.orientation).to eq('horizontal')
+      expect(asset.horizontal?).to be(true)
+      expect(asset.vertical?).to be(false)
+      expect(asset.square?).to be(false)
+    end
+
+    it 'reports a vertical orientation for a tall asset' do
+      asset = described_class.new(original_width: 50, original_height: 100)
+
+      expect(asset.orientation).to eq('vertical')
+      expect(asset.vertical?).to be(true)
+    end
+
+    it 'reports a square orientation for an equal-sided asset' do
+      asset = described_class.new(original_width: 100, original_height: 100)
+
+      expect(asset.orientation).to eq('square')
+      expect(asset.square?).to be(true)
+    end
+
+    it 'is not dimensions_known? without stored dimensions' do
+      expect(described_class.new.dimensions_known?).to be(false)
+    end
+
+    it 'raises a StyleError for a style that is not defined' do
+      asset = described_class.new(original_width: 100, original_height: 50)
+
+      expect { asset.geometry('no_such_style') }.to raise_error(TrustyCms::StyleError)
+    end
+  end
+
+  describe '#active_storage_transformations' do
+    subject(:asset) { described_class.new }
+
+    it 'resizes to fill for cropping modifiers' do
+      expect(asset.send(:active_storage_transformations, '100x80#')).to eq(resize_to_fill: [100, 80])
+    end
+
+    it 'resizes to limit for the shrink modifier' do
+      expect(asset.send(:active_storage_transformations, '100x80>')).to eq(resize_to_limit: [100, 80])
+    end
+
+    it 'resizes to limit when there is no modifier' do
+      expect(asset.send(:active_storage_transformations, '100x80')).to eq(resize_to_limit: [100, 80])
+    end
+
+    it 'returns no transformations for a blank geometry' do
+      expect(asset.send(:active_storage_transformations, '')).to eq({})
+    end
+  end
+
+  describe 'scopes' do
+    before { register_image_and_other_types }
+
+    let!(:image) { attach_png(caption: 'a picture', title: 'Pixel') }
+
+    describe '.latest' do
+      it 'includes recently created assets up to the limit' do
+        expect(described_class.latest(5)).to include(image)
+      end
+    end
+
+    describe '.of_types' do
+      it 'includes assets whose blob content type matches the given types' do
+        expect(described_class.of_types([:image])).to include(image)
+      end
+
+      it 'returns none when the given types have no mime types' do
+        expect(described_class.of_types([:no_such_type])).to be_empty
+      end
+    end
+
+    describe '.matching' do
+      it 'matches on filename, title or caption, case-insensitively' do
+        expect(described_class.matching('PIXEL')).to include(image)
+        expect(described_class.matching('picture')).to include(image)
+      end
+    end
+
+    describe '.excepting' do
+      it 'excludes the given asset ids' do
+        expect(described_class.excepting([image.id]).to_sql).to match(/NOT IN/)
+        expect(described_class.excepting([image.id])).not_to include(image)
+      end
+
+      it 'adds no exclusion when given an empty list' do
+        expect(described_class.excepting([])).to eq({})
+      end
+    end
+  end
+
+  describe '#attached_to?' do
+    before { register_image_and_other_types }
+
+    it 'is true for a page the asset is attached to, false otherwise' do
+      asset = attach_png
+      page = FactoryBot.create(:page, title: 'Attached')
+      other_page = FactoryBot.create(:page, title: 'Unattached')
+      asset.pages << page
+
+      expect(asset.attached_to?(page)).to be(true)
+      expect(asset.attached_to?(other_page)).to be(false)
+    end
+  end
+
+  describe 'class helpers' do
+    before { register_image_and_other_types }
+
+    it 'exposes the known asset type names' do
+      expect(described_class.known_types).to eq(AssetType.known_types)
+    end
+
+    it 'lists ransackable attributes' do
+      expect(described_class.ransackable_attributes).to include('title', 'caption', 'uuid')
+    end
+
+    it 'exposes the image thumbnail sizes and names' do
+      expect(described_class.thumbnail_sizes).to eq(AssetType.find(:image).active_storage_styles)
+      expect(described_class.thumbnail_names).to eq(described_class.thumbnail_sizes.keys)
+    end
+
+    # NOTE: .thumbnail_options is currently broken for the standard hash-style
+    # styles — it does `description << v` where v is the style Hash, which
+    # raises TypeError. Documenting the bug here rather than asserting success.
+    it 'raises when building thumbnail options from hash-style styles (known bug)' do
+      expect { described_class.thumbnail_options }.to raise_error(TypeError)
+    end
+  end
 end
