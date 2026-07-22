@@ -1,12 +1,20 @@
 require 'spec_helper'
 
 # The cache layer of TrustyCms::Config leans on Rails.cache and File.mtime,
-# both of which can shift across Rails upgrades. Pin the round-trip. These
-# examples are read-only with respect to the config table (which is exempt
-# from truncation), so they never persist rows.
+# both of which can shift across Rails upgrades. Pin the round-trip.
 describe TrustyCms::Config, 'caching' do
-  # Leave the cache in a good state for whatever runs next.
-  after { TrustyCms::Config.initialize_cache }
+  # Seed a known key so the read/round-trip assertions can't pass vacuously on
+  # an empty config table. The config table is exempt from truncation, so this
+  # probe row is removed explicitly after each example.
+  let(:probe_key) { 'spec.cache_probe' }
+  let(:probe_value) { 'probe-value' }
+
+  before { TrustyCms::Config[probe_key] = probe_value }
+
+  after do
+    TrustyCms::Config.where(key: probe_key).delete_all
+    TrustyCms::Config.initialize_cache # leave the cache good for whatever runs next
+  end
 
   describe '.ensure_cache_file' do
     it 'creates the cache file' do
@@ -39,24 +47,23 @@ describe TrustyCms::Config, 'caching' do
   describe '.[]' do
     it 'reads a value through the cache' do
       TrustyCms::Config.initialize_cache
-      key = TrustyCms::Config.to_hash.keys.first
-      expect(TrustyCms::Config[key]).to eq(TrustyCms::Config.to_hash[key])
+      expect(TrustyCms::Config[probe_key]).to eq(probe_value)
     end
 
     it 'rebuilds a stale cache before returning a value' do
       TrustyCms::Config.initialize_cache
-      key = TrustyCms::Config.to_hash.keys.first
       Rails.cache.write('TrustyCms.cache_mtime', Time.at(0)) # force staleness
 
-      expect(TrustyCms::Config[key]).to eq(TrustyCms::Config.to_hash[key])
+      expect(TrustyCms::Config[probe_key]).to eq(probe_value)
       expect(TrustyCms::Config.stale_cache?).to be(false)
     end
   end
 
   describe '.to_hash' do
-    it 'returns a hash keyed by config key' do
+    it 'returns a hash keyed by config key, including seeded entries' do
       hash = TrustyCms::Config.to_hash
       expect(hash).to be_a(Hash)
+      expect(hash).to include(probe_key => probe_value)
       expect(hash.keys).to all(be_a(String))
     end
   end

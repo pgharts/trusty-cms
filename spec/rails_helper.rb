@@ -50,6 +50,7 @@ RSpec.configure do |config|
   # up.)
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers, type: :feature
+  config.before(:each, type: :feature) { Warden.test_mode! }
   config.after(:each, type: :feature) { Warden.test_reset! }
 
   config.before(:suite) do

@@ -11,7 +11,7 @@ RSpec.describe 'Admin::Snippets requests', type: :request do
   describe 'authentication' do
     it 'redirects an unauthenticated HTML request to sign-in' do
       get '/admin/snippets'
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'returns 401 for an unauthenticated JSON request' do
