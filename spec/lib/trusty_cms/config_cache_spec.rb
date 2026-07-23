@@ -17,11 +17,14 @@ describe TrustyCms::Config, 'caching' do
   end
 
   describe '.ensure_cache_file' do
-    it 'creates the cache file' do
-      TrustyCms::Config.ensure_cache_file
-      expect(TrustyCms::Config.cache_file_exists?).to be(true)
-      expect(File.file?(TrustyCms::Config.cache_file)).to be(true)
-    end
+it 'creates the cache file' do
+  File.delete(TrustyCms::Config.cache_file) if File.exist?(TrustyCms::Config.cache_file)
+  expect(TrustyCms::Config.cache_file_exists?).to be(false)
+
+  TrustyCms::Config.ensure_cache_file
+  expect(TrustyCms::Config.cache_file_exists?).to be(true)
+  expect(File.file?(TrustyCms::Config.cache_file)).to be(true)
+end
   end
 
   describe '.initialize_cache' do

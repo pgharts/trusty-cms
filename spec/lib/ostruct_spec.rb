@@ -5,10 +5,10 @@ require 'ostruct'
 # shadows the stdlib version via the load path. This is exactly the kind of
 # patch a Ruby/Rails upgrade can break, so pin the behaviour we rely on.
 describe 'OpenStruct patch' do
-  it 'is the project patch, not the stdlib implementation' do
-    expect(OpenStruct.instance_method(:initialize).source_location.first)
-      .to end_with('lib/ostruct.rb')
-  end
+it 'is the project patch, not the stdlib implementation' do
+  expect(OpenStruct.instance_method(:initialize).source_location.first)
+    .to eq(File.expand_path('../../lib/ostruct.rb', __dir__))
+end
 
   it 'builds accessors from a hash, symbolizing string keys' do
     os = OpenStruct.new('a' => 1, :b => 2)
