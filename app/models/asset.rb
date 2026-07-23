@@ -340,13 +340,28 @@ class Asset < ActiveRecord::Base
 
   # this is a convenience for image-pickers
   def self.thumbnail_options
-    asset_sizes = thumbnail_sizes.map do |k, v|
+    # The :original style is represented by the explicit entry prepended below,
+    # so skip it here to avoid a duplicate (and blank) "original" option.
+    asset_sizes = thumbnail_sizes.reject { |k, _| k.to_sym == :original }.map do |k, v|
       size_id = k
-      size_description = "#{k}: "
-      size_description << (v.is_a?(Array) ? v.join(' as ') : v)
+      size_description = "#{k}: #{describe_style(v)}"
       [size_description, size_id]
     end.sort_by { |pair| pair.last.to_s }
     asset_sizes.unshift ['Original (as uploaded)', 'original']
     asset_sizes
+  end
+
+  # Renders a style definition into a short human-readable description for a
+  # picker. ActiveStorage styles are hashes (e.g. {geometry: '100x100#',
+  # format: :png}); older definitions may be arrays or plain strings.
+  def self.describe_style(style)
+    case style
+    when Hash
+      [style[:geometry], style[:format]].compact.join(' as ')
+    when Array
+      style.join(' as ')
+    else
+      style.to_s
+    end
   end
 end
