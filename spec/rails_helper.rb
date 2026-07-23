@@ -3,12 +3,11 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 60)
-end
+# JS-driven system/feature tests use headless Chrome via Selenium. Poltergeist
+# (PhantomJS) was removed: it is unmaintained and does not run on modern
+# Ruby/Rails. The driver is registered lazily by Capybara, so this line does
+# not require selenium-webdriver unless a :js example actually runs.
+Capybara.javascript_driver = :selenium_chrome_headless
 
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation, {except: %w[config]}
@@ -45,6 +44,14 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  # Devise/Warden test helpers: sign_in for request specs, login_as for feature
+  # specs. (Previously the feature specs called login_as with no helper wired
+  # up.)
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Warden::Test::Helpers, type: :feature
+  config.before(:each, type: :feature) { Warden.test_mode! }
+  config.after(:each, type: :feature) { Warden.test_reset! }
 
   config.before(:suite) do
     TrustyCms::Config.initialize_cache
