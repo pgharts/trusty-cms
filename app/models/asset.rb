@@ -340,7 +340,9 @@ class Asset < ActiveRecord::Base
 
   # this is a convenience for image-pickers
   def self.thumbnail_options
-    asset_sizes = thumbnail_sizes.map do |k, v|
+    # The :original style is represented by the explicit entry prepended below,
+    # so skip it here to avoid a duplicate (and blank) "original" option.
+    asset_sizes = thumbnail_sizes.reject { |k, _| k.to_sym == :original }.map do |k, v|
       size_id = k
       size_description = "#{k}: #{describe_style(v)}"
       [size_description, size_id]

@@ -443,12 +443,20 @@ RSpec.describe Asset, type: :model do
       expect(described_class.thumbnail_options.first).to eq(['Original (as uploaded)', 'original'])
     end
 
-    it 'describes each hash-style thumbnail as "id: geometry as format"' do
+    it 'describes hash-style thumbnails as "id: geometry as format"' do
       options = described_class.thumbnail_options
 
       expect(options).to include(['icon: 50x50# as png', :icon])
       # Every option is a [description, id] pair with a string description.
       expect(options).to all(satisfy { |desc, _id| desc.is_a?(String) })
+    end
+
+    it 'represents "original" only once, via the explicit entry (no blank :original option)' do
+      ids = described_class.thumbnail_options.map(&:last)
+
+      expect(ids).to include('original')          # the explicit "Original (as uploaded)" entry
+      expect(ids).not_to include(:original)        # not the blank one built from the :original style
+      expect(ids.count { |id| id.to_s == 'original' }).to eq(1)
     end
   end
 
