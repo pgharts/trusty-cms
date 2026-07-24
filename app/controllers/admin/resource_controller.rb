@@ -42,7 +42,7 @@ class Admin::ResourceController < ApplicationController
     r.update.publish(:xml, :json) { head :ok }
     r.update.default { redirect_to redirect_url }
 
-    r.destroy.publish(:xml, :json) { head :deleted }
+    r.destroy.publish(:xml, :json) { head :ok }
     r.destroy.default { redirect_to redirect_url }
   end
 
