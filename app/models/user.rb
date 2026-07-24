@@ -78,4 +78,19 @@ class User < ActiveRecord::Base
     errors.add :password, 'Complexity requirement not met. Length should be 12 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character.'
   end
 
+  # Authentication must never be site-scoped. The multi_site extension gives User
+  # a site-based default_scope (INNER JOIN admins_sites for Page.current_site).
+  # Because current_site is process-global mutable state and a single process
+  # serves many sites, that scope can point at the wrong site when Devise
+  # deserializes the session user, excluding the row and logging the user out.
+  # Run every auth lookup unscoped so identity is independent of the current site.
+  def self.serialize_from_session(key, salt)
+    record = unscoped { to_adapter.get(key) }
+    record if record && record.authenticatable_salt == salt
+  end
+
+  def self.find_first_by_auth_conditions(tainted_conditions, opts = {})
+    unscoped { super }
+  end
+
 end

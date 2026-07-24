@@ -25,7 +25,8 @@ class Admin::TwoFactorController < ApplicationController
       redirect_to after_sign_in_path_for(current_user) and return
     end
 
-    @user = User.find_by(id: session[:pre_2fa_user_id])
+    # Unscoped: authentication must not be site-scoped (see User auth overrides).
+    @user = User.unscoped.find_by(id: session[:pre_2fa_user_id])
 
     if !@user&.otp_required_for_login || session_expired?
       reset_session
