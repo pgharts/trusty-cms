@@ -59,18 +59,23 @@ RSpec.describe 'Admin::Snippets requests', type: :request do
       expect(snippet.reload.content).to eq('new')
     end
 
-    # NOTE: destroy DOES remove the record, but the JSON/XML responder in
-    # Admin::ResourceController calls `head :deleted`, and :deleted is not a
-    # valid Rack status symbol, so the response is a 500. Characterizing the
-    # current behavior; the record removal is correct, only the status is wrong.
-    it 'destroys the record but returns 500 from head :deleted (latent bug)' do
+    it 'destroys the record via JSON' do
       snippet = FactoryBot.create(:snippet, name: 'goner')
 
       expect {
         delete "/admin/snippets/#{snippet.id}.json"
       }.to change(Snippet, :count).by(-1)
 
-      expect(response).to have_http_status(:internal_server_error)
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to be_empty
+    end
+
+    it 'destroys the record and redirects (HTML)' do
+      snippet = FactoryBot.create(:snippet, name: 'goner-html')
+      expect {
+        delete "/admin/snippets/#{snippet.id}"
+      }.to change(Snippet, :count).by(-1)
+      expect(response).to redirect_to(admin_snippets_path)
     end
   end
 end
