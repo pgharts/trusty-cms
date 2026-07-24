@@ -6,6 +6,7 @@ class Admin::ResourceController < ApplicationController
   helper_method :model, :current_object, :models, :current_objects, :model_symbol, :plural_model_symbol, :model_class, :model_name, :plural_model_name
   before_action :populate_format
   before_action :never_cache
+  before_action :require_access_to_current_site
   before_action :load_models, only: :index
   before_action :load_model, only: %i[new create edit update remove destroy]
   before_action :set_owner_or_editor, only: %i[new create update]
@@ -261,5 +262,35 @@ class Admin::ResourceController < ApplicationController
       params[symbol].permit!
     end
     params
+  end
+
+  # Multi-site authorization. Authentication is intentionally global (see the
+  # unscoped overrides on User), so a signed-in user is always correctly
+  # identified regardless of the current site. This check enforces the separate
+  # concern of *authorization*: a non-admin user may only reach the admin of a
+  # site they are assigned to. It replaces the old behaviour where a site
+  # mismatch made the User lookup return nil and silently logged the user out
+  # (and, under the current_site race, briefly exposed another site's data).
+  #
+  # No-op unless the multi_site extension is active (current_site is defined by
+  # MultiSite::ApplicationControllerExtensions).
+  def require_access_to_current_site
+    return unless respond_to?(:current_site)
+    return if site_access_permitted?(current_user, current_site)
+
+    @denied_site = current_site
+    @accessible_sites = current_user&.sites&.to_a || []
+    render 'admin/site_access_denied', status: :forbidden, layout: false
+  end
+
+  # Pure authorization predicate (no request state), so it is unit-testable
+  # without activating the multi_site extension. A nil user is "permitted" here
+  # because authenticate_user! has already handled the unauthenticated case.
+  def site_access_permitted?(user, site)
+    return true if user.nil?
+    return true if user.admin?
+    return true unless site.is_a?(Site)
+
+    user.sites.exists?(id: site.id)
   end
 end

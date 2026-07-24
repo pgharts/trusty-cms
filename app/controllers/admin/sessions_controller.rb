@@ -12,7 +12,8 @@ class Admin::SessionsController < Devise::SessionsController
   private
 
   def find_user
-    User.find_by(email: params[:user][:email])
+    # Unscoped: authentication must not be site-scoped (see User auth overrides).
+    User.unscoped.find_by(email: params[:user][:email])
   end
 
   def authenticated?(user)

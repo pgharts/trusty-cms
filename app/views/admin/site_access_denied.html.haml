@@ -1,0 +1,31 @@
+!!!
+%html{ lang: "en" }
+  %head
+    %meta{ charset: "utf-8" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
+    %title Access denied
+    :css
+      body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f4f5f7; color: #2f3337; margin: 0; padding: 4rem 1rem; }
+      .box { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e2e4e8; border-radius: 10px; padding: 2rem 2.25rem; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+      h1 { margin: 0 0 .75rem; font-size: 1.35rem; }
+      p { line-height: 1.5; }
+      ul { padding-left: 1.25rem; }
+      .actions { margin-top: 1.5rem; }
+      a { color: #0a58ca; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+  %body
+    .box
+      %h1 Access denied
+      %p
+        You don't have access to the
+        %strong= @denied_site.try(:name).presence || "requested"
+        site.
+      - if @accessible_sites.present?
+        %p You can manage the following #{'site'.pluralize(@accessible_sites.size)}:
+        %ul
+          - @accessible_sites.each do |site|
+            %li= site.name
+      - else
+        %p Your account isn't assigned to any site yet. Please contact an administrator.
+      .actions
+        = link_to "Log out", destroy_user_session_path
