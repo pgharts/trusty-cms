@@ -83,8 +83,17 @@ class Asset < ActiveRecord::Base
     self[:asset_file_size]
   end
 
-  delegate :active_storage_styles, :style_dimensions, :style_format,
-           to: :asset_type
+  def active_storage_styles
+    asset_type&.active_storage_styles || {}
+  end
+
+  def style_dimensions(style_name)
+    asset_type&.style_dimensions(style_name)
+  end
+
+  def style_format(style_name)
+    asset_type&.style_format(style_name)
+  end
 
   def pdf?
     content_type == 'application/pdf'

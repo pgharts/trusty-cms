@@ -280,6 +280,8 @@ RSpec.describe Asset, type: :model do
   end
 
   describe 'unattached accessors' do
+    before { register_image_and_other_types }
+
     it 'falls back to the stored columns when nothing is attached' do
       asset = described_class.new(asset_file_name: 'legacy.PNG', asset_content_type: 'image/png', asset_file_size: 42)
 
