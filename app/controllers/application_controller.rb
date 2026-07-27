@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   prepend_view_path("#{TRUSTY_CMS_ROOT}/app/views")
 
   protect_from_forgery with: :exception
+  # Capture the request host before authentication runs so the site-scope logout
+  # telemetry (issue #1040) can compare the host's site to the (global) current
+  # site. Thread.current is per-thread and safe across concurrent requests —
+  # unlike the class-level Page.current_site the telemetry is investigating.
+  prepend_before_action { Thread.current[:trusty_request_host] = request.host }
+  after_action { Thread.current[:trusty_request_host] = nil }
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_timezone

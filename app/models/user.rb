@@ -1,3 +1,5 @@
+require 'trusty_cms/site_scope_auth_reporter'
+
 class User < ActiveRecord::Base
   has_many :pages, foreign_key: :created_by_id
   self.table_name = 'admins'
@@ -76,6 +78,17 @@ class User < ActiveRecord::Base
     return false if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
 
     errors.add :password, 'Complexity requirement not met. Length should be 12 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character.'
+  end
+
+  # Observe-only instrument for the intermittent logout bug (issue #1040). This
+  # keeps Devise's exact (site-scoped) behavior — it returns the scoped lookup
+  # unchanged, so a mismatch still logs the user out exactly as before — and only
+  # reports when a valid user was excluded by the site scope. See
+  # TrustyCms::SiteScopeAuthReporter. The behavior-change fix is separate (PR #1041).
+  def self.serialize_from_session(key, salt)
+    record = to_adapter.get(key)
+    TrustyCms::SiteScopeAuthReporter.report_miss(key) if record.nil?
+    record if record && record.authenticatable_salt == salt
   end
 
 end
