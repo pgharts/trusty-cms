@@ -155,7 +155,7 @@ GEM
       ssrf_filter (~> 1.5)
     csso-rails (0.9.0)
       execjs (>= 1)
-    csv (3.3.0)
+    csv (3.3.6)
     database_cleaner (2.1.0)
       database_cleaner-active_record (>= 2, < 3)
     database_cleaner-active_record (2.2.0)
@@ -214,7 +214,7 @@ GEM
       railties (>= 5.1)
     highline (3.1.2)
       reline
-    httparty (0.22.0)
+    httparty (0.24.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
