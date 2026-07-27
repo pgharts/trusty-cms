@@ -85,15 +85,24 @@ module TrustyCms
 
     # Mirrors Site.find_for_host's matching but WITHOUT the Site.default /
     # catchall fallback, so telemetry never creates a record and returns nil when
-    # the host matches no site.
+    # the host matches no site (which is what drives the host_unmatched
+    # classification). A blank domain compiles to a regexp that matches every
+    # host, so blank domains are matched only by exact base_domain, never by the
+    # regexp.
     def expected_site_for(host)
       return nil if host.blank?
 
-      Site.where.not(domain: nil).detect do |site|
-        host == site.base_domain || host =~ Regexp.compile(site.domain.to_s)
+      Site.all.detect do |site|
+        host == site.base_domain || domain_regexp_match?(site, host)
       end
+    end
+
+    def domain_regexp_match?(site, host)
+      return false if site.domain.blank?
+
+      !(host =~ Regexp.compile(site.domain)).nil?
     rescue RegexpError
-      nil
+      false
     end
   end
 end

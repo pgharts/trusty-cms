@@ -25,12 +25,17 @@ describe 'User.serialize_from_session telemetry (issue #1040)', type: :model do
     unless User.singleton_class.include?(MultiSite::ScopedModel::ScopedClassMethods)
       User.extend(MultiSite::ScopedModel::ScopedClassMethods)
     end
+    # `extend` above can't be undone, so pin is_site_scoped? explicitly per
+    # example (true here, false in ensure) to keep the telemetry from leaking on
+    # into unrelated specs after this group runs.
+    User.define_singleton_method(:is_site_scoped?) { true }
     User.class_eval { default_scope { joins(user_scope_condition) } }
 
     begin
       example.run
     ensure
       User.default_scopes = original_default_scopes
+      User.define_singleton_method(:is_site_scoped?) { false }
       if added_page_accessor
         Page.singleton_class.send(:remove_method, :current_site)
         Page.singleton_class.send(:remove_method, :current_site=)
@@ -78,6 +83,13 @@ describe 'User.serialize_from_session telemetry (issue #1040)', type: :model do
       Thread.current[:trusty_request_host] = site_b.base_domain # host they do NOT belong to
       ctx = TrustyCms::SiteScopeAuthReporter.build_context(editor)
       expect(ctx[:classification]).to eq('genuine_cross_site')
+    end
+
+    it 'classifies a request host that matches no site as host_unmatched' do
+      Thread.current[:trusty_request_host] = 'nomatch.invalid'
+      ctx = TrustyCms::SiteScopeAuthReporter.build_context(editor)
+      expect(ctx[:expected_site_id]).to be_nil
+      expect(ctx[:classification]).to eq('host_unmatched')
     end
   end
 
