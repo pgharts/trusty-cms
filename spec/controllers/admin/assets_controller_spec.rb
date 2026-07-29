@@ -21,10 +21,15 @@ RSpec.describe Admin::AssetsController, type: :controller do
 
     # public_url generation needs a host; controller specs don't set one on the
     # Disk service the way a real request would.
+    @previous_active_storage_url_options = ActiveStorage::Current.url_options
     ActiveStorage::Current.url_options = { host: 'test.host', protocol: 'http' }
 
     allow(controller).to receive(:authenticate_user!).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
+  end
+
+  after do
+    ActiveStorage::Current.url_options = @previous_active_storage_url_options
   end
 
   # A plain stub (not an rspec double) so it can be assigned in an `around`
