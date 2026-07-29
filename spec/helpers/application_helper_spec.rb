@@ -132,14 +132,18 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe '#image' do
-    it 'builds an admin image tag, defaulting the extension to .png' do
-      html = helper.image('foo', alt: 'Foo')
-      expect(html).to include('admin/foo.png')
-      expect(html).to include('alt="Foo"')
+    # Stub image_tag so the test exercises the path-building logic without doing
+    # a real asset-pipeline lookup (which warns for assets not in the pipeline).
+    before { allow(helper).to receive(:image_tag) { |path, _opts| path } }
+
+    it 'builds an admin image path, defaulting the extension to .png' do
+      helper.image('foo', alt: 'Foo')
+      expect(helper).to have_received(:image_tag).with('admin/foo.png', { alt: 'Foo' })
     end
 
     it 'keeps an explicit extension' do
-      expect(helper.image('bar.gif')).to include('admin/bar.gif')
+      helper.image('bar.gif')
+      expect(helper).to have_received(:image_tag).with('admin/bar.gif', {})
     end
   end
 
