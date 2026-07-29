@@ -99,4 +99,115 @@ describe ApplicationHelper, type: :helper do
       expect(helper.body_classes).to eq(['reversed'])
     end
   end
+
+  describe '#onsubmit_status' do
+    it 'reports a creating status for a new record' do
+      expect(helper.onsubmit_status(Snippet.new)).to match(/creat/i)
+    end
+
+    it 'reports a saving status for a persisted record' do
+      snippet = FactoryBot.create(:snippet, name: 'saved')
+      expect(helper.onsubmit_status(snippet)).to match(/saving/i)
+    end
+  end
+
+  describe '#save_model_button' do
+    it 'labels the button Create for a new record' do
+      html = helper.save_model_button(Snippet.new)
+      expect(html).to include('type="submit"')
+      expect(html).to match(/Create/)
+    end
+
+    it 'labels the button Save Changes for a persisted record' do
+      snippet = FactoryBot.create(:snippet, name: 'persisted')
+      expect(helper.save_model_button(snippet)).to match(/Save Changes/)
+    end
+  end
+
+  describe '#save_model_and_continue_editing_button' do
+    it 'renders a continue submit button' do
+      html = helper.save_model_and_continue_editing_button(Snippet.new)
+      expect(html).to include('name="continue"')
+    end
+  end
+
+  describe '#image' do
+    it 'builds an admin image tag, defaulting the extension to .png' do
+      html = helper.image('foo', alt: 'Foo')
+      expect(html).to include('admin/foo.png')
+      expect(html).to include('alt="Foo"')
+    end
+
+    it 'keeps an explicit extension' do
+      expect(helper.image('bar.gif')).to include('admin/bar.gif')
+    end
+  end
+
+  describe '#timestamp' do
+    it 'localizes the time with the :timestamp format' do
+      time = Time.zone.local(2026, 7, 29, 10, 0, 0)
+      expect(helper.timestamp(time)).to eq(I18n.localize(time, format: :timestamp))
+    end
+  end
+
+  describe '#updated_stamp' do
+    it 'returns nil for a new record' do
+      expect(helper.updated_stamp(Snippet.new)).to be_nil
+    end
+
+    it 'renders an updated line for a persisted record' do
+      snippet = FactoryBot.create(:snippet, name: 'stamped')
+      html = helper.updated_stamp(snippet)
+      expect(html).to include('updated_line')
+    end
+  end
+
+  describe 'asset overrides' do
+    it 'returns no stylesheet overrides when the override files are absent' do
+      expect(helper.stylesheet_overrides).to eq([])
+    end
+
+    it 'returns no javascript overrides when the override file is absent' do
+      expect(helper.javascript_overrides).to eq([])
+    end
+
+    it 'includes the stylesheet override when the file exists' do
+      allow(File).to receive(:exist?).and_return(true)
+      expect(helper.stylesheet_overrides).to eq(['admin/overrides'])
+    end
+
+    it 'includes the javascript override when the file exists' do
+      allow(File).to receive(:exist?).and_return(true)
+      expect(helper.javascript_overrides).to eq(['admin/overrides'])
+    end
+  end
+
+  describe '#current_url?' do
+    it 'matches the current request path' do
+      allow(helper.request).to receive(:original_fullpath).and_return('/admin/pages/1/edit')
+      expect(helper.current_url?('/admin/pages')).to be_truthy
+    end
+
+    it 'does not match an unrelated path' do
+      allow(helper.request).to receive(:original_fullpath).and_return('/admin/snippets')
+      expect(helper.current_url?('/admin/pages')).to be_falsey
+    end
+  end
+
+  describe '#current_tab?' do
+    it 'is true for a tab containing the current url and memoizes it' do
+      item = double('NavItem', relative_url: '/admin/pages')
+      tab = [item]
+      allow(helper).to receive(:current_url?).with('/admin/pages').and_return(true)
+
+      expect(helper.current_tab?(tab)).to be(true)
+      expect(helper.instance_variable_get(:@current_tab)).to eq(tab)
+    end
+  end
+
+  describe '#pagination_for' do
+    it 'returns nil for a collection that is not paginatable' do
+      expect(helper.pagination_for(%w[a b c])).to be_nil
+    end
+  end
 end
