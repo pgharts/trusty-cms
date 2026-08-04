@@ -16,7 +16,7 @@ PATH
       drb
       execjs (~> 2.7)
       haml (~> 6.3.0)
-      haml-rails (~> 2.1)
+      haml-rails (>= 2.1, < 4.0)
       highline (>= 1.7.8, < 3.2.0)
       image_processing
       kraken-io
@@ -206,11 +206,11 @@ GEM
       mime-types (>= 1.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    haml (6.3.0)
+    haml (6.3.1)
       temple (>= 0.8.2)
       thor
       tilt
-    haml-rails (2.1.0)
+    haml-rails (3.1.0)
       actionpack (>= 5.1)
       activesupport (>= 5.1)
       haml (>= 4.0.6)
@@ -382,7 +382,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rbs (4.1.0)
+    rbs (4.1.2)
       logger
       prism (>= 1.6.0)
       tsort
@@ -460,9 +460,9 @@ GEM
     ssrf_filter (1.5.0)
     stringex (2.8.6)
     stringio (3.2.0)
-    temple (0.10.3)
+    temple (0.10.4)
     thor (1.5.0)
-    tilt (2.4.0)
+    tilt (2.8.0)
     timeout (0.6.1)
     trustygems (0.2.1)
       rake
@@ -482,7 +482,7 @@ GEM
     will_paginate (4.0.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux
