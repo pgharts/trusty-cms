@@ -14,8 +14,10 @@ class String
   end
 
   unless methods.include?('parameterize')
-    def parameterize(sep = '-')
-      remove_formatting.downcase.replace_whitespace(sep).collapse(sep)
+    def parameterize(separator = '-', preserve_case: false, locale: nil)
+      separator = '-' unless separator.is_a?(String)
+      slug = remove_formatting.replace_whitespace(separator).collapse(separator)
+      preserve_case ? slug : slug.downcase
     end
   end
 

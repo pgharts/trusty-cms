@@ -44,5 +44,46 @@ describe 'String extensions' do
       expect('Hello World'.slugify).to eq('hello-world')
       expect('Hello World'.slugerize).to eq('hello-world')
     end
+
+    it 'downcases by default' do
+      expect('Hello World'.parameterize).to eq('hello-world')
+    end
+
+    it 'preserves case when preserve_case: true' do
+      expect('Hello World'.parameterize(preserve_case: true)).to eq('Hello-World')
+    end
+
+    it 'uses a custom string separator' do
+      expect('Hello World'.parameterize('_')).to eq('hello_world')
+    end
+
+    it 'honours the separator and preserve_case together' do
+      expect('Hello World'.parameterize('_', preserve_case: true)).to eq('Hello_World')
+    end
+
+    # The upgrade added the guard `separator = '-' unless separator.is_a?(String)`
+    # so that Rails internals passing a non-String (e.g. a Symbol or nil)
+    # fall back to the default rather than blowing up.
+    it 'falls back to a dash when the separator is not a String' do
+      expect('Hello World'.parameterize(:_)).to eq('hello-world')
+      expect('Hello World'.parameterize(nil)).to eq('hello-world')
+    end
+
+    # `locale:` is part of the ActiveSupport-compatible signature; accepted and ignored.
+    it 'accepts a locale keyword without raising' do
+      expect('Hello World'.parameterize(locale: :en)).to eq('hello-world')
+    end
+
+    it 'transliterates accented characters before downcasing' do
+      expect('Café Déjà Vu'.parameterize).to eq('cafe-deja-vu')
+    end
+
+    it 'collapses repeated whitespace into a single separator' do
+      expect('Hello   World'.parameterize).to eq('hello-world')
+    end
+
+    it 'returns an empty string for an empty string' do
+      expect(''.parameterize).to eq('')
+    end
   end
 end
