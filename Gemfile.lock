@@ -15,7 +15,7 @@ PATH
       diffy
       drb
       execjs (~> 2.7)
-      haml (~> 6.3.0)
+      haml (>= 6.3, < 7.3)
       haml-rails (~> 2.1)
       highline (>= 1.7.8, < 3.2.0)
       image_processing
@@ -203,7 +203,7 @@ GEM
       mime-types (>= 1.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    haml (6.3.1)
+    haml (7.2.2)
       temple (>= 0.8.2)
       thor
       tilt
@@ -451,7 +451,7 @@ GEM
     ssrf_filter (1.5.0)
     stringex (2.8.6)
     stringio (3.2.0)
-    temple (0.10.4)
+    temple (0.10.6)
     thor (1.5.0)
     tilt (2.8.0)
     timeout (0.6.1)
