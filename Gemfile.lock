@@ -235,9 +235,10 @@ GEM
       httparty
       json
       multipart-post
-    launchy (3.0.1)
+    launchy (3.1.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
+      logger (~> 1.6)
     libv8-node (24.12.0.1)
     libv8-node (24.12.0.1-aarch64-linux)
     libv8-node (24.12.0.1-aarch64-linux-musl)
@@ -495,7 +496,7 @@ DEPENDENCIES
   factory_bot_rails (= 6.5.1)
   file_validators
   jsbundling-rails (~> 1.3)
-  launchy (~> 3.0.1)
+  launchy (~> 3.1.1)
   mysql2
   paper_trail (~> 16.0.0)
   paper_trail-association_tracking (~> 2.3.0)

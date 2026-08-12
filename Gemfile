@@ -19,7 +19,7 @@ group :development, :test do
   gem 'factory_bot_rails', '6.5.1'
   gem 'file_validators'
   gem 'jsbundling-rails', '~> 1.3'
-  gem 'launchy', '~> 3.0.1'
+  gem 'launchy', '~> 3.1.1'
   gem 'mysql2'
   gem 'paper_trail', '~> 16.0.0'
   gem 'paper_trail-association_tracking', '~> 2.3.0'
