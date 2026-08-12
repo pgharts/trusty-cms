@@ -16,7 +16,7 @@ PATH
       drb
       execjs (~> 2.7)
       haml (~> 6.3.0)
-      haml-rails (~> 2.1)
+      haml-rails (>= 2.1, < 4.0)
       highline (>= 1.7.8, < 3.2.0)
       image_processing
       kraken-io
@@ -207,7 +207,7 @@ GEM
       temple (>= 0.8.2)
       thor
       tilt
-    haml-rails (2.1.0)
+    haml-rails (3.1.0)
       actionpack (>= 5.1)
       activesupport (>= 5.1)
       haml (>= 4.0.6)
