@@ -79,8 +79,7 @@ describe Admin::PagesHelper, type: :helper do
       allow(Page).to receive(:parent_pages).with(home.id).and_return([home])
 
       html = helper.parent_page_options(current_site, home)
-
-      expect(html).to include('<option value="">&lt;none&gt;</option>')
+      expect(html).to include('<option selected="selected" value="">&lt;none&gt;</option>')
     end
 
     it 'never lists the root page as a candidate for its own parent' do
