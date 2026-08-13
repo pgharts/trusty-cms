@@ -24,12 +24,13 @@ module Admin::PagesHelper
     # A page can never be its own parent. For a site's root page this would
     # otherwise set parent_id to itself and create an infinite loop in the tree.
     parent_pages.reject! { |p| p.id == page.id }
-    options = parent_pages.map { |p| [p.title, p.id] }
     # The root (top) page of a site must have no parent, so give it a blank
     # option. Without one the browser submits the first option on save, which
     # gives the root page a parent and breaks the whole site.
-    options.unshift([t('select.none'), '']) if root_page?(current_site, page)
-    options_for_select(options, page.parent_id)
+    return options_for_select([[t('select.none'), '']], '') if root_page?(current_site, page)
+
+    options = parent_pages.map { |p| [p.title, p.id] }
+    options_for_select(options, page.parent.id)
   end
 
   def root_page?(current_site, page)
