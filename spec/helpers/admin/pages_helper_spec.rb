@@ -72,6 +72,36 @@ describe Admin::PagesHelper, type: :helper do
       expect(html).to include('Home')
       expect(html).to include("value=\"#{home.id}\"")
     end
+
+    it 'offers a blank parent option for the site root page' do
+      home = FactoryBot.create(:home, title: 'Home')
+      current_site = double('Site', homepage_id: home.id)
+      allow(Page).to receive(:parent_pages).with(home.id).and_return([home])
+
+      html = helper.parent_page_options(current_site, home)
+      expect(html).to include('<option selected="selected" value="">&lt;none&gt;</option>')
+    end
+
+    it 'never lists the root page as a candidate for its own parent' do
+      home = FactoryBot.create(:home, title: 'Home')
+      current_site = double('Site', homepage_id: home.id)
+      allow(Page).to receive(:parent_pages).with(home.id).and_return([home])
+
+      html = helper.parent_page_options(current_site, home)
+
+      expect(html).not_to include("value=\"#{home.id}\"")
+    end
+
+    it 'does not offer a blank parent option for non-root pages' do
+      home = FactoryBot.create(:home, title: 'Home')
+      child = FactoryBot.create(:page, title: 'Child', slug: 'child', parent: home)
+      current_site = double('Site', homepage_id: home.id)
+      allow(Page).to receive(:parent_pages).with(home.id).and_return([home])
+
+      html = helper.parent_page_options(current_site, child)
+
+      expect(html).not_to include('<option value="">')
+    end
   end
 
   describe '#revert_confirmation_message' do

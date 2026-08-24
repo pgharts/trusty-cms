@@ -19,11 +19,22 @@ module Admin::PagesHelper
   end
 
   def parent_page_options(current_site, page)
-    parent_pages = []
-    parent_pages.concat(Page.parent_pages(current_site.homepage_id))
-    parent_pages << page.parent if page.parent
-    selected_page_id = page.parent_id
-    options_for_select(parent_pages.map { |p| [p.title, p.id] }, selected_page_id)
+    parent_pages = Page.parent_pages(current_site.homepage_id).to_a
+    parent_pages << page.parent if page.parent && parent_pages.exclude?(page.parent)
+    # A page can never be its own parent. For a site's root page this would
+    # otherwise set parent_id to itself and create an infinite loop in the tree.
+    parent_pages.reject! { |p| p.id == page.id }
+    # The root (top) page of a site must have no parent, so give it a blank
+    # option. Without one the browser submits the first option on save, which
+    # gives the root page a parent and breaks the whole site.
+    return options_for_select([[t('select.none'), '']], '') if root_page?(current_site, page)
+
+    options = parent_pages.map { |p| [p.title, p.id] }
+    options_for_select(options, page.parent.id)
+  end
+
+  def root_page?(current_site, page)
+    page.id.present? && page.id == current_site.homepage_id
   end
 
   def revert_confirmation_message(version)
