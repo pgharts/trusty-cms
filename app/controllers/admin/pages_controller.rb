@@ -32,7 +32,7 @@ class Admin::PagesController < Admin::ResourceController
   end
 
   def search
-    @site_id = params[:site_id] || Page.current_site&.id
+    @site_id = params[:site_id] || Page.current_site.id
     @q = initialize_search
 
     @pages = fetch_search_results if search_query_present?

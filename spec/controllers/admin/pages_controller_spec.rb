@@ -116,18 +116,27 @@ RSpec.describe Admin::PagesController, type: :controller do
   end
 
   describe 'GET #search' do
-    it 'returns matching pages when a query is present' do
-      create(:page, title: 'Findable', slug: 'findable', parent: home)
+    # The suite-wide stub returns nil, which the real Page.current_site can't do:
+    # the multi-site extension defines it as `@current_site ||= Site.default`, and
+    # Site.default ends in a catchall it creates. #search is the one action that
+    # reads it, so stub it faithfully here and let the fallback actually run.
+    let(:site) { create(:site) }
 
-      get :search, params: { site_id: '', search: { query: 'Findable' } }
+    before { allow(Page).to receive(:current_site).and_return(site) }
+
+    it 'falls back to the current site when no site_id is given' do
+      create(:page, title: 'Findable', slug: 'findable', parent: home, site_id: site.id)
+
+      get :search, params: { search: { query: 'Findable' } }
 
       expect(response).to have_http_status(:ok)
+      expect(controller.instance_variable_get(:@site_id)).to eq(site.id)
       titles = controller.instance_variable_get(:@pages).map(&:title)
       expect(titles).to include('Findable')
     end
 
     it 'does not run a query when none is given' do
-      get :search, params: { site_id: '' }
+      get :search
       expect(controller.instance_variable_get(:@pages)).to be_nil
     end
   end
