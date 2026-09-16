@@ -26,7 +26,7 @@ PATH
       mysql2
       paper_trail (~> 17.0.0)
       paper_trail-association_tracking (>= 2.2.1, < 2.4.0)
-      psych (= 5.4.0)
+      psych (= 5.5.0)
       rack (>= 2.0.1, < 3.2.0)
       rack-cache (~> 1.7)
       radius (~> 0.8)
@@ -331,7 +331,7 @@ GEM
     pry-byebug (3.12.0)
       byebug (~> 13.0)
       pry (>= 0.13, < 0.17)
-    psych (5.4.0)
+    psych (5.5.0)
       date
       stringio
     public_suffix (7.0.5)
@@ -505,7 +505,7 @@ DEPENDENCIES
   paper_trail-association_tracking (~> 2.3.0)
   poltergeist (~> 1.18.1)
   pry-byebug
-  psych (= 5.4.0)
+  psych (= 5.5.0)
   rails-observers
   ransack
   rspec-rails (~> 7.1.1)
