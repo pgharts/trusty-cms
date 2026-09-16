@@ -442,7 +442,7 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    simplecov (1.0.3)
+    simplecov (1.1.1)
     simplecov-lcov (0.9.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
