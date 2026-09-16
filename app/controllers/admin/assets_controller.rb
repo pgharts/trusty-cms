@@ -4,7 +4,7 @@ class Admin::AssetsController < Admin::ResourceController
 
   def index
     assets = Asset.order('created_at DESC')
-    @page = Page.find(params[:page_id]) if params[:page_id]
+    @page = Page.find_by_id(params[:page_id]) if params[:page_id]
     @term = assets.ransack(params[:search] || '')
     assets = @term.result(distinct: true)
 
@@ -132,6 +132,10 @@ class Admin::AssetsController < Admin::ResourceController
     asset.created_by_id = current_user.id
     asset.updated_by_id = current_user.id
     asset.save! if asset.id.present?
+  end
+
+  def load_model
+    self.model = params[:id] ? Asset.where(id: params[:id]).first || Asset.new : Asset.new
   end
 
   def asset_params
