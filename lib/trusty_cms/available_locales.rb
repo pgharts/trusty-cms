@@ -5,7 +5,7 @@ module TrustyCms::AvailableLocales
     available_locales = {}
     TrustyCms.configuration.i18n.load_path.each do |path|
       if File.exist?(path) && path !~ /_available_tags/
-        locale_yaml = YAML.load_file(path)
+        locale_yaml = YAML.load_file(path, aliases: true)
         stem = File.basename(path, '.yml')
         if locale_yaml[stem] && lang = locale_yaml[stem]['this_file_language']
           available_locales[lang] = stem

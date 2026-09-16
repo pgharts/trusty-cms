@@ -19,10 +19,6 @@ module TrustyCms
     include TrustyCms::Initializer
     config.load_defaults 8.0
 
-    # Rails 8.1 will make `to_time` always preserve the receiver's timezone.
-    # Opt in now to silence the deprecation and get the new behavior.
-    config.active_support.to_time_preserves_timezone = :zone
-
     Rails.autoloaders.log!
     # Enable the asset pipeline
     config.assets.enabled = true

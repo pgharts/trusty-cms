@@ -41,8 +41,7 @@ module TrustyCms
 
     config.encoding = 'utf-8'
     config.time_zone = 'UTC'
-    # Rails 8.1 will make `to_time` always preserve the receiver's timezone.
-    config.active_support.to_time_preserves_timezone = :zone
+
     # Skip frameworks you're not going to use (only works if using vendor/rails).
     # To use Rails without a database, you must remove the Active Record framework
     # config.frameworks -= [ :action_mailer ]
@@ -120,6 +119,11 @@ module TrustyCms
         html
       end
     end
+
+    config.active_record.yaml_column_permitted_classes = [
+      Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone,
+      ActiveSupport::HashWithIndifferentAccess, BigDecimal
+    ]
 
     config.to_prepare do
       extension_loader.deactivate_extensions

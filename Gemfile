@@ -21,7 +21,7 @@ group :development, :test do
   gem 'jsbundling-rails', '~> 1.3'
   gem 'launchy', '~> 3.1.1'
   gem 'mysql2'
-  gem 'paper_trail', '~> 16.0.0'
+  gem 'paper_trail', '~> 17.0.0'
   gem 'paper_trail-association_tracking', '~> 2.3.0'
   gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'

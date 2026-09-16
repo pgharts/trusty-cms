@@ -145,7 +145,7 @@ module TrustyCms
     end
 
     def load_template_file(filename)
-      YAML.load_file(filename)
+      YAML.load_file(filename, aliases: true)
     end
 
     def create_records(template)

@@ -116,18 +116,27 @@ RSpec.describe Admin::PagesController, type: :controller do
   end
 
   describe 'GET #search' do
-    it 'returns matching pages when a query is present' do
-      create(:page, title: 'Findable', slug: 'findable', parent: home)
+    # The suite-wide stub returns nil, which the real Page.current_site can't do:
+    # the multi-site extension defines it as `@current_site ||= Site.default`, and
+    # Site.default ends in a catchall it creates. #search is the one action that
+    # reads it, so stub it faithfully here and let the fallback actually run.
+    let(:site) { create(:site) }
 
-      get :search, params: { site_id: nil, search: { query: 'Findable' } }
+    before { allow(Page).to receive(:current_site).and_return(site) }
+
+    it 'falls back to the current site when no site_id is given' do
+      create(:page, title: 'Findable', slug: 'findable', parent: home, site_id: site.id)
+
+      get :search, params: { search: { query: 'Findable' } }
 
       expect(response).to have_http_status(:ok)
+      expect(controller.instance_variable_get(:@site_id)).to eq(site.id)
       titles = controller.instance_variable_get(:@pages).map(&:title)
       expect(titles).to include('Findable')
     end
 
     it 'does not run a query when none is given' do
-      get :search, params: { site_id: '' }
+      get :search
       expect(controller.instance_variable_get(:@pages)).to be_nil
     end
   end
@@ -142,21 +151,17 @@ RSpec.describe Admin::PagesController, type: :controller do
   end
 
   describe 'PUT #restore' do
-    # NOTE: latent bug / Rails 8 upgrade blocker — restore_page_version calls
-    # PaperTrail's `reify`, which YAML-loads the stored version. Under Psych 4+
-    # (psych 5.4 is pinned) safe-loading rejects ActiveSupport::TimeWithZone
-    # because no permitted classes are configured, so restoring any page that has
-    # a timestamp in its versioned state raises Psych::DisallowedClass. Page
-    # restore is effectively broken until paper_trail's serializer is configured
-    # with permitted classes (e.g. via ActiveRecord::Base.yaml_column_permitted_classes
-    # or a custom serializer). Characterizing current behavior.
-    it 'currently fails to reify a versioned page (Psych safe-load blocker)' do
+    # reify YAML-loads the stored version under Psych 4+ safe-load, which needs
+    # ActiveSupport::TimeWithZone (and friends) in
+    # ActiveRecord.yaml_column_permitted_classes — configured in the dummy app.
+    it 'reifies the prior version and redirects to edit' do
       page = create(:page, title: 'V1', parent: home)
       PaperTrail.request(whodunnit: admin.id.to_s) { page.update!(title: 'V2') }
 
-      expect {
-        put :restore, params: { id: page.id, version_index: 1 }
-      }.to raise_error(Psych::DisallowedClass, /TimeWithZone/)
+      put :restore, params: { id: page.id, version_index: 1 }
+
+      expect(response).to redirect_to(edit_admin_page_path(page))
+      expect(page.reload.title).to eq('V1')
     end
   end
 end

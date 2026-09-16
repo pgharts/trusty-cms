@@ -13,9 +13,9 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
 end
 
 SimpleCov.configure do
-  add_filter %r{^/lib/generators/}
-  add_filter 'lib/trusty_cms/setup.rb'
-  add_filter %r{/templates/}   # generated-app boilerplate
+  skip %r{^/lib/generators/}
+  skip 'lib/trusty_cms/setup.rb'
+  skip %r{/templates/}   # generated-app boilerplate
 end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([

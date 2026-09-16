@@ -3,7 +3,7 @@ module TrustyCms
     class << self
       def establish_connection
         unless ActiveRecord::Base.connected?
-          connection_hash = YAML.load_file("#{Rails.root}/config/database.yml").to_hash
+          connection_hash = YAML.load_file("#{Rails.root}/config/database.yml", aliases: true).to_hash
           env_connection = connection_hash[Rails.env]
           ActiveRecord::Base.establish_connection(env_connection)
         end
@@ -23,7 +23,7 @@ module TrustyCms
           begin
             TrustyCms::Config.transaction do
               TrustyCms::Config.delete_all if clear
-              configs = YAML.load(YAML.load_file(path))
+              configs = YAML.load(YAML.load_file(path), aliases: true)
               configs.each do |key, value|
                 c = TrustyCms::Config.find_or_initialize_by_key(key)
                 c.value = value
