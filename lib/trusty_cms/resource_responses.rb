@@ -53,13 +53,6 @@ module TrustyCms
         super
         @table = Hash.new { |h, k| h[k] = Response.new }
       end
-
-      def initialize_copy(orig)
-        super
-        @table.keys.each do |key|
-          @table[key] = orig.send(key).dup
-        end
-      end
     end
 
     class Response
