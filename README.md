@@ -53,11 +53,10 @@ See the INSTALL.md file for more instructions.
 Prerequisites:
 
 * A Github account and Git ([Github has some really good instructions](https://help.github.com/articles/set-up-git))
-* Ruby 3.1 or higher
-* A Rails application (currently supports version 7.0)
+* Ruby 4 or higher
+* A Rails application (currently supports version 8.1)
 * Bundler
 * MySQL
-* [PhantomJS >= 1.8.1](https://github.com/teampoltergeist/poltergeist/tree/v1.5.0#installing-phantomjs)
 
 Steps:
 
