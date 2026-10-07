@@ -53,7 +53,7 @@ See the INSTALL.md file for more instructions.
 Prerequisites:
 
 * A Github account and Git ([Github has some really good instructions](https://help.github.com/articles/set-up-git))
-* Ruby 4 or higher
+* Ruby 3.3 or higher
 * A Rails application (currently supports version 8.1)
 * Bundler
 * MySQL

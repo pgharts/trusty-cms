@@ -2,7 +2,7 @@
 
 From within the directory containing your TrustyCMS instance:
 
-1. Create a new Rails 7.0+ application (i.e. `rails new [project_name]`)
+1. Create a new Rails 8.0+ application (i.e. `rails new [project_name]`)
 
 2. Add the following gems to your Gemfile:
 
