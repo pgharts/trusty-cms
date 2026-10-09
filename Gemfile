@@ -14,6 +14,7 @@ gemspec
 group :development, :test do
   gem 'activestorage-validator'
   gem 'acts_as_list'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'devise-two-factor'
   gem 'factory_bot_rails', '6.5.1'
@@ -23,7 +24,6 @@ group :development, :test do
   gem 'mysql2'
   gem 'paper_trail', '~> 17.0.0'
   gem 'paper_trail-association_tracking', '~> 2.3.0'
-  gem 'poltergeist', '~> 1.18.1'
   gem 'pry-byebug'
   gem 'psych', '5.4.0'
   gem 'rails-observers'

@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/ruby:3.3.4-node
+      - image: cimg/ruby:4.0.6-node
         environment:
           - RAILS_ENV: test
       - image: cimg/mysql:5.7.36
@@ -29,7 +29,9 @@ jobs:
 
       - run:
           name: Install Ruby dependencies
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: |
+            bundle config set --local path vendor/bundle
+            bundle install --jobs=4 --retry=3
 
       - save_cache:
           paths:

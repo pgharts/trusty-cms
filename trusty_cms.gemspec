@@ -21,7 +21,6 @@ a general purpose content management system--not merely a blogging engine.'
   s.rdoc_options = ['--title', 'TrustyCms -- Content Management You Can Trust', '--line-numbers', '--main', 'README', '--exclude', 'app', '--exclude', 'bin', '--exclude',
                     'config', '--exclude', 'db', '--exclude', 'features', '--exclude', 'lib', '--exclude', 'log', '--exclude', 'pkg', '--exclude', 'public', '--exclude', 'script', '--exclude', 'spec', '--exclude', 'test', '--exclude', 'tmp', '--exclude', 'vendor']
   s.require_paths = ['lib']
-  s.rubygems_version = '1.3.7'
   s.summary = 'A no-fluff content management system designed for small teams.'
   s.license = 'MIT'
   s.test_files = Dir['spec/**/*']
@@ -46,6 +45,7 @@ a general purpose content management system--not merely a blogging engine.'
   s.add_dependency 'mini_racer'
   s.add_dependency 'mutex_m'
   s.add_dependency 'mysql2'
+  s.add_dependency 'ostruct'
   s.add_dependency 'paper_trail', '~> 17.0.0'
   s.add_dependency 'paper_trail-association_tracking', '>= 2.2.1', '< 2.4.0'
   s.add_dependency 'psych', '5.4.0'
