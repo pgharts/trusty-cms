@@ -8,7 +8,7 @@ PATH
       acts_as_tree (~> 2.9.1)
       base64
       bigdecimal
-      csso-rails (~> 0.1)
+      csso-rails (>= 0.1, < 2.0)
       delocalize (>= 0.2, < 2.0)
       devise
       devise-two-factor
@@ -156,7 +156,7 @@ GEM
     css_parser (3.0.0)
       addressable
       ssrf_filter (~> 1.5)
-    csso-rails (0.9.0)
+    csso-rails (1.0.0)
       execjs (>= 1)
     csv (3.3.6)
     database_cleaner (2.1.0)
@@ -184,7 +184,8 @@ GEM
     drb (2.2.3)
     erb (6.0.7)
     erubi (1.13.1)
-    execjs (2.10.1)
+    execjs (2.10.2)
+      json (>= 2)
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
