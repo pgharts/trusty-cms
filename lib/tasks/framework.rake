@@ -38,17 +38,17 @@ unless File.directory? "#{Rails.root}/app"
         trusty_git = 'git://github.com/pgharts/trusty-cms.git'
 
         if File.exist?('vendor/trusty_cms/.git/HEAD')
-          cd('vendor/trusty') { system 'git checkout master'; system 'git pull origin master' }
+          cd('vendor/trusty') { system 'git', 'checkout', 'master'; system 'git', 'pull', 'origin', 'master' }
         else
-          system "git clone #{trusty_git} vendor/trusty"
+          system 'git', 'clone', trusty_git, 'vendor/trusty'
         end
 
         if ENV['TAG']
-          cd('vendor/trusty') { system "git checkout -b v#{ENV['TAG']} #{ENV['TAG']}" }
+          cd('vendor/trusty') { system 'git', 'checkout', '-b', "v#{ENV['TAG']}", ENV['TAG'] }
         elsif ENV['BRANCH']
-          cd('vendor/trusty') { system "git checkout --track -b #{ENV['BRANCH']} origin/#{ENV['BRANCH']}" }
+          cd('vendor/trusty') { system 'git', 'checkout', '--track', '-b', ENV['BRANCH'], "origin/#{ENV['BRANCH']}" }
         elsif ENV['REVISION']
-          cd('vendor/trusty') { system "git checkout -b REV_#{ENV['REVISION']} #{ENV['REVISION']}" }
+          cd('vendor/trusty') { system 'git', 'checkout', '-b', "REV_#{ENV['REVISION']}", ENV['REVISION'] }
         end
 
         cd('vendor/trusty') { system 'git submodule update --init' }
