@@ -29,7 +29,7 @@ group :development, :test do
   gem 'rails-observers'
   gem 'ransack'
   gem 'rspec_junit_formatter'
-  gem 'rspec-rails', '~> 7.1.1'
+  gem 'rspec-rails', '~> 8.0.4'
   gem 'simplecov'
   gem 'simplecov-lcov'
 end
