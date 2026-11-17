@@ -90,6 +90,12 @@ RSpec.describe Admin::PagesController, type: :controller do
 
       expect(flash[:error]).to be_present
     end
+
+    it 'loads the asset search so the re-rendered form can build its search popup' do
+      post :create, params: { page: { title: 'Pasted Title', slug: '', breadcrumb: '', parent_id: home.id } }
+
+      expect(controller.instance_variable_get(:@term)).to be_a(Ransack::Search)
+    end
   end
 
   describe 'PUT #update' do
@@ -100,6 +106,15 @@ RSpec.describe Admin::PagesController, type: :controller do
 
       expect(response).to be_redirect
       expect(page.reload.title).to eq('After')
+    end
+
+    it 'loads the asset search when re-rendering after a validation failure' do
+      page = create(:page, title: 'Before', parent: home)
+
+      put :update, params: { id: page.id, page: { slug: '', breadcrumb: '' } }
+
+      expect(flash[:error]).to be_present
+      expect(controller.instance_variable_get(:@term)).to be_a(Ransack::Search)
     end
   end
 

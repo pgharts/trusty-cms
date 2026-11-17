@@ -7,7 +7,7 @@
 
       AutopopulateBreadcrumb.oldTitle = $(input).val();
 
-      $(input).on('keyup', function(event) {
+      $(input).on('input', function(event) {
         var title = $(this).val();
         var $slug = $('#page_slug');
         var $breadcrumb = $('#page_breadcrumb');
@@ -20,7 +20,7 @@
         if (AutopopulateBreadcrumb.oldTitle == $breadcrumb.val()) {
           $breadcrumb.val(title);
         }
-        // The current title becomes the old title for next keyup.
+        // The current title becomes the old title for the next input event.
         AutopopulateBreadcrumb.oldTitle = title;
       });
     }

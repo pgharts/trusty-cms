@@ -118,6 +118,7 @@ class Admin::PagesController < Admin::ResourceController
 
   def validation_error(e)
     flash[:error] = e.message
+    load_assets
     render :new
   end
 
