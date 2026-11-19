@@ -24,11 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Customize the ruby version depending on your needs
+      # Read the Ruby version from .ruby-version.
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '4.0.6'
 
       - name: Setup Brakeman
         env:

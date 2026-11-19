@@ -19,10 +19,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Ruby 4.0.6
+      # Read the Ruby version from .ruby-version.
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '4.0.6'
 
       - name: Configure RubyGems credentials
         uses: rubygems/configure-rubygems-credentials@v2.1.0
