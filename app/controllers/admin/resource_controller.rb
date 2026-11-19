@@ -30,7 +30,7 @@ class Admin::ResourceController < ApplicationController
     r.not_found.publish(:xml, :json) { head :not_found }
     r.not_found.default { announce_not_found; redirect_to action: 'index' }
 
-    r.invalid.publish(:xml, :json) { render format_symbol => model.errors, :status => :unprocessable_entity }
+    r.invalid.publish(:xml, :json) { render format_symbol => model.errors, :status => :unprocessable_content }
     r.invalid.default { announce_validation_errors; render action: template_name }
 
     r.stale.publish(:xml, :json) { head :conflict }
