@@ -77,7 +77,7 @@ RSpec.describe Admin::AssetsController, type: :controller do
     it 'rejects the generic octet-stream content type with a notice' do
       post :uploader, params: { upload: upload('sample.txt', 'application/octet-stream') }, format: :json
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(JSON.parse(response.body)['error']).to match(/valid extension/)
       expect(flash[:notice]).to match(/valid extension/)
     end
@@ -85,7 +85,7 @@ RSpec.describe Admin::AssetsController, type: :controller do
     it 'returns unprocessable entity when no file is provided' do
       post :uploader, params: {}, format: :json
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(JSON.parse(response.body)['error']).to eq('No file uploaded.')
       expect(flash[:error]).to eq('No file uploaded.')
     end
